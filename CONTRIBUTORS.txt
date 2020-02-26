@@ -1,3 +1,8 @@
+<<<<<<< HEAD
 ich will ändlich mi name do ha
 Manuela
 
+
+Manuela
+Rohan
+>>>>>>> c939baa59908f6f404efdf6e2c49ffbb8aa40f18

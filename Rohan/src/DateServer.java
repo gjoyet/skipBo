@@ -6,7 +6,7 @@ import java.net.*;
 public class DateServer {
     private static volatile boolean status = true;
     public static void main(String [] args) throws IOException{
-        int port = 59090;
+        int port = 59090 ;
         try(ServerSocket reader = new ServerSocket(port)){
             System.out.println("Server is running now...");
             while (status==true){

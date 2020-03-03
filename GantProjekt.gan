@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Programmierprojekt" company="" webLink="http://" view-date="2020-03-04" view-index="0" gantt-divider-location="529" resource-divider-location="300" version="2.8.10" locale="de">
+<?xml version="1.0" encoding="UTF-8"?><project name="Programmierprojekt" company="" webLink="http://" view-date="2020-04-19" view-index="0" gantt-divider-location="529" resource-divider-location="300" version="2.8.10" locale="de">
     <description/>
-    <view zooming-state="default:1" id="gantt-chart">
-        <field id="tpd3" name="Vorgang" width="149" order="0"/>
-        <field id="tpd4" name="Anfang" width="106" order="1"/>
-        <field id="tpd5" name="Ende" width="106" order="2"/>
-        <field id="tpd8" name="Verantwortlich" width="162" order="3"/>
+    <view zooming-state="default:7" id="gantt-chart">
+        <field id="tpd3" name="Vorgang" width="145" order="0"/>
+        <field id="tpd4" name="Anfang" width="103" order="1"/>
+        <field id="tpd5" name="Ende" width="103" order="2"/>
+        <field id="tpd8" name="Verantwortlich" width="157" order="3"/>
         <option id="taskLabelUp" value="coordinator"/>
         <option id="taskLabelDown" value="name"/>
         <option id="color.recent">
-            <![CDATA[#ff0066 #66ffff #0099ff #00cc33 #996600 #ff9900 #cc0066]]>
+            <![CDATA[#cc0066 #9999ff #ff0066 #66ffff #0099ff #00cc33 #996600 #ff9900]]>
         </option>
     </view>
     <view id="resource-table">
@@ -21,7 +21,7 @@
             <day-type id="0"/>
             <day-type id="1"/>
             <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
-            <only-show-weekends value="false"/>
+            <only-show-weekends value="true"/>
             <overriden-day-types/>
             <days/>
         </day-types>
@@ -39,32 +39,131 @@
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
-        <task id="0" name="Meilenstein 1" color="#ff0066" meeting="true" start="2020-03-12" duration="0" complete="0" thirdDate="2020-03-03" thirdDate-constraint="0" expand="true">
+        <task id="15" name="Powerpoint erstellen" color="#cc0066" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2020-03-03" duration="7" complete="0" thirdDate="2020-03-06" thirdDate-constraint="0" expand="true">
+            <depend id="36" type="2" difference="0" hardness="Strong"/>
+            <task id="111" name="Einleitung/Organisation" color="#ff9900" meeting="false" start="2020-03-03" duration="7" complete="0" thirdDate="2020-03-02" thirdDate-constraint="0" expand="true">
+                <depend id="36" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="112" name="Einleitung/Organisation" color="#00cc33" meeting="false" start="2020-03-03" duration="7" complete="0" thirdDate="2020-03-02" thirdDate-constraint="0" expand="true">
+                <depend id="36" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="114" name="Server/Network" color="#996600" meeting="false" start="2020-03-03" duration="7" complete="0" thirdDate="2020-03-02" thirdDate-constraint="0" expand="true">
+                <depend id="36" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="116" name="Spielregeln" color="#0099ff" meeting="false" start="2020-03-03" duration="7" complete="0" thirdDate="2020-03-02" thirdDate-constraint="0" expand="true">
+                <depend id="36" type="2" difference="0" hardness="Strong"/>
+            </task>
+        </task>
+        <task id="43" name="Server/Network Architektur" color="#cc0066" meeting="false" start="2020-03-05" duration="11" complete="0" thirdDate="2020-03-04" thirdDate-constraint="0" expand="true">
             <notes>
-                <![CDATA[Test]]>
+                <![CDATA[Grundaufbau Server / Client Struktur
+Teamwork]]>
+            </notes>
+            <depend id="48" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="36" name="Präsentation Üben" color="#cc0066" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2020-03-10" duration="1" complete="0" thirdDate="2020-03-03" thirdDate-constraint="0" expand="true"/>
+        <task id="55" name="Übungsstunde 02" color="#9999ff" meeting="false" start="2020-03-11" duration="1" complete="0" thirdDate="2020-03-11" thirdDate-constraint="0" expand="true">
+            <notes>
+                <![CDATA[Client/Server Verbindung ?
+Networkprotocoll ?
+Ping-messages ?
+Login ?]]>
             </notes>
         </task>
-        <task id="15" name="Powerpoint erstellen" color="#cc0066" shape="1,0,1,0,0,1,0,1,1,0,1,0,0,1,0,1" meeting="false" start="2020-03-03" duration="5" complete="20" thirdDate="2020-03-06" thirdDate-constraint="0" expand="true"/>
-        <task id="25" name="Einleitung/Organisation" color="#ff9900" meeting="false" start="2020-03-03" duration="5" complete="0" thirdDate="2020-03-02" thirdDate-constraint="0" expand="true"/>
-        <task id="27" name="Anforderungen" color="#00cc33" meeting="false" start="2020-03-03" duration="5" complete="0" thirdDate="2020-03-02" thirdDate-constraint="0" expand="true"/>
-        <task id="30" name="Server/Network" color="#996600" meeting="false" start="2020-03-03" duration="5" complete="0" thirdDate="2020-03-02" thirdDate-constraint="0" expand="true"/>
-        <task id="34" name="Spielregeln" color="#0099ff" meeting="false" start="2020-03-03" duration="5" complete="0" thirdDate="2020-03-02" thirdDate-constraint="0" expand="true"/>
-        <task id="3" name="Meilenstein 2" color="#ff0066" meeting="true" start="2020-03-25" duration="0" complete="0" thirdDate="2020-03-02" thirdDate-constraint="0" expand="true"/>
-        <task id="5" name="Meilenstein 3" color="#ff0066" meeting="true" start="2020-04-16" duration="0" complete="0" thirdDate="2020-03-02" thirdDate-constraint="0" expand="true"/>
-        <task id="7" name="Meilenstein 4" color="#ff0066" meeting="true" start="2020-04-29" duration="0" complete="0" thirdDate="2020-03-02" thirdDate-constraint="0" expand="true"/>
-        <task id="9" name="Meilenstein 5" color="#ff0066" meeting="true" start="2020-05-14" duration="0" complete="100" thirdDate="2020-03-02" thirdDate-constraint="0" expand="true"/>
+        <task id="0" name="Meilenstein 1" color="#ff0066" meeting="true" start="2020-03-12" duration="0" complete="0" thirdDate="2020-03-03" thirdDate-constraint="0" expand="true">
+            <notes>
+                <![CDATA[Präsentation MS 1 ]]>
+            </notes>
+        </task>
+        <task id="48" name="Server/Client Communication" color="#cc0066" meeting="false" start="2020-03-16" duration="8" complete="0" thirdDate="2020-03-10" thirdDate-constraint="0" expand="true">
+            <notes>
+                <![CDATA[- Chat 
+- LogIn
+- Server events
+]]>
+            </notes>
+        </task>
+        <task id="98" name="Übungsstunde 03" color="#9999ff" meeting="false" start="2020-03-18" duration="1" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true"/>
+        <task id="3" name="Meilenstein 2" color="#ff0066" meeting="true" start="2020-03-25" duration="0" complete="0" thirdDate="2020-03-02" thirdDate-constraint="0" expand="true">
+            <notes>
+                <![CDATA[Client/Server
+Chat/Login (protocol? ping message?)
+Server events (win, start, player left)
+]]>
+            </notes>
+        </task>
+        <task id="73" name="game logic" color="#cc0066" meeting="false" start="2020-03-26" duration="15" complete="0" thirdDate="2020-03-20" thirdDate-constraint="0" expand="true">
+            <notes>
+                <![CDATA[Class: Game
+ - start()
+ - Nr. of players()
+ - termination()
+ - winner()
+Class: Player
+ - draw()
+ - put()
+Class: Card 
+ - get()
+Class: Pile
+ - shuffle()
+
+]]>
+            </notes>
+        </task>
+        <task id="105" name="Basic GUI" color="#cc0066" meeting="false" start="2020-04-09" duration="6" complete="0" thirdDate="2020-03-26" thirdDate-constraint="0" expand="true">
+            <notes>
+                <![CDATA[Karten designen
+Spielfeld designen
+Lounge designen
+]]>
+            </notes>
+        </task>
+        <task id="110" name="Testing" color="#cc0066" meeting="false" start="2020-04-23" duration="3" complete="0" thirdDate="2020-04-15" thirdDate-constraint="0" expand="true"/>
+        <task id="5" name="Meilenstein 3" color="#ff0066" meeting="true" start="2020-04-16" duration="0" complete="0" thirdDate="2020-03-02" thirdDate-constraint="0" expand="true">
+            <notes>
+                <![CDATA[- GUI
+- game logic (class Game, class Player, class Card)
+- NW Protocol complete
+- Basic GUI: Spielfeld mit Stapeln etc.
+- Basic Testing
+]]>
+            </notes>
+        </task>
+        <task id="108" name="Full GUI" color="#8cb6ce" meeting="false" start="2020-04-17" duration="12" complete="0" thirdDate="2020-04-06" thirdDate-constraint="0" expand="true">
+            <notes>
+                <![CDATA[Verfeinerung Design
+Drag n Drop
+Geometrie (Perspektive)]]>
+            </notes>
+        </task>
+        <task id="7" name="Meilenstein 4" color="#ff0066" meeting="true" start="2020-04-29" duration="0" complete="0" thirdDate="2020-03-02" thirdDate-constraint="0" expand="true">
+            <notes>
+                <![CDATA[Full GUI: Card Design, Spielfeld design, Animationen, Drag & Drop methods, geometry, Chatroom verschönern]]>
+            </notes>
+        </task>
+        <task id="124" name="Gradle Tests" color="#cc0066" meeting="false" start="2020-04-29" duration="8" complete="0" thirdDate="2020-02-01" thirdDate-constraint="0" expand="true"/>
+        <task id="126" name="Feinschliff" color="#cc0066" meeting="false" start="2020-05-07" duration="7" complete="0" thirdDate="2020-02-01" thirdDate-constraint="0" expand="true"/>
+        <task id="9" name="Meilenstein 5" color="#ff0066" meeting="true" start="2020-05-14" duration="0" complete="100" thirdDate="2020-03-02" thirdDate-constraint="0" expand="true">
+            <notes>
+                <![CDATA[Feinschliff]]>
+            </notes>
+        </task>
     </tasks>
     <resources>
         <resource id="0" name="Janni" function="Default:1" contacts="" phone=""/>
         <resource id="1" name="Guillaume" function="Default:0" contacts="" phone=""/>
         <resource id="2" name="Rohan" function="Default:1" contacts="" phone=""/>
         <resource id="3" name="Manuela" function="Default:1" contacts="" phone=""/>
+        <resource id="4" name="Alle" function="Default:1" contacts="" phone=""/>
     </resources>
     <allocations>
-        <allocation task-id="25" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="27" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="30" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="34" resource-id="3" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="111" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="112" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="114" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="116" resource-id="3" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="15" resource-id="4" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="55" resource-id="4" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="98" resource-id="4" function="Default:1" responsible="true" load="100.0"/>
     </allocations>
     <vacations/>
     <previous/>

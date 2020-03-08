@@ -25,7 +25,7 @@ import javax.swing.JPanel;
  * Server -> Client WELCOME <char> VALID_MOVE OTHER_PLAYER_MOVED <n>
  * OTHER_PLAYER_LEFT VICTORY DEFEAT TIE MESSAGE <text>
  */
-public class DerClient {
+public class DerClientGegner{
 
     private JFrame frame = new JFrame("Tic Tac Toe");
     private JLabel messageLabel = new JLabel("...");
@@ -37,7 +37,7 @@ public class DerClient {
     private Scanner in;
     private PrintWriter out;
 
-    public DerClient(String serverAddress) throws Exception {
+    public DerClientGegner(String serverAddress) throws Exception {
 
         socket = new Socket(serverAddress, 58901);
         in = new Scanner(socket.getInputStream());
@@ -72,7 +72,6 @@ public class DerClient {
      * game. If the answer is no, the loop is exited and the server is sent a "QUIT"
      * message.
      */
-
     public void play() throws Exception {
         try {
             var response = in.nextLine();
@@ -136,7 +135,7 @@ public class DerClient {
             System.err.println("Pass the server IP as the sole command line argument");
             return;
         }
-        DerClient client = new DerClient(args[0]);
+        DerClientGegner client = new DerClientGegner(args[0]);
         client.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         client.frame.setSize(320, 320);
         client.frame.setVisible(true);

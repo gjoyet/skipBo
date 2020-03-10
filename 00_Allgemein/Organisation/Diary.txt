@@ -1,0 +1,13 @@
+Programmierprojekt - Diary
+
+28. Februar:
+Entscheid für das Spiel: Skip-Bo. Lesen der Regeln, erste und sehr abstrakte Überlegungen dazu, was zu implementieren ist.
+
+3. März:
+Erstes Treffen, um Zeitplan festzulegen und Aufgaben zu verteilen. Probleme mit git über Intellij. Erarbeiten eines Grundverständnisses für Server-Client Architekturen. Konkretere Überlegungen zu benötigten Klassen und Reihenfolge der Implementierung. Grundriss von GanttProject erstellt.
+
+3. März - 10. März:
+Arbeiten an der Präsentation. Jedes Gruppenmitglied macht seinen Teil der PowerPoint. Erstes individuelles Experimentieren, um selbst einen einfachen Server und Client mit Java zu programmieren. Erster Versuch, einen simplen Chat zu programmieren.
+
+10. März:
+Erstellen eines genauen Zeitplans. Genaue Überlegungen zu Softwarearchitektur, inklusive erstellen einer Grafik dazu.

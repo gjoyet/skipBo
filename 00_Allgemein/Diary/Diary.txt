@@ -11,4 +11,4 @@ Arbeiten an der Präsentation. Jedes Gruppenmitglied macht seinen Teil der Power
 
 10. März:
 Erstellen eines genauen Zeitplans inklusive Verteilung der Aufgaben. Genaue Überlegungen zu Softwarearchitektur, inklusive Erstellen einer Grafik dazu. Beenden von Mock-up und diversen anderen Vorbereitungen für die Präsentation am Donnerstag. Grosse Probleme mit Git: Synchronisation klappt bei einem Mitglied nicht.
-Schreiben von erstem nützlichen Programmteil, einem Chat, welcher die Nachrichten auf dem Server die Nachrichten ausgibt.
+Schreiben von erstem nützlichen Programmteil, einem Chat, welcher die Nachrichten auf dem Server ausgibt.

@@ -1,3 +1,5 @@
+package ch.unibas.dmi.dbis.cs108.example.chat;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 

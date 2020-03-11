@@ -11,7 +11,7 @@ import java.io.*;
 public class ChatServer {
     public static void main(String[] args) {
         try {
-            System.out.println("Waiting for port 63001..."); // Opening ServerSocket
+            System.out.println("Waiting for port 63001...");
             ServerSocket chatServerSocket = new ServerSocket(63001);
 
 

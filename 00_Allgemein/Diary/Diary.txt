@@ -24,3 +24,10 @@ First meeting to create a timetable and distribute tasks. Problems with git via 
 
 March 3 - March 10:
 Work on presentation. Every group member makes his own part of the PowerPoint presentation. Individual experimenting to implement a simple server and client with Java. First try to implement a simple chat.
+
+10 March:
+Updated and specified timetable inclusively distribution of tasks. Concrete thoughts about software architecture, inclusively creating of graphic. Finished mock-up and diverse other preparations for the presentation on Thursday. Problems with Git: synchronisation not working for one team member.
+Writing of first useful part of program, a chat, which outputs the messages on the server.
+
+March 11:
+Chat is working. Thoughts about how to integrate it in the game. Finishing presentation.

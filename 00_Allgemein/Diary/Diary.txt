@@ -12,3 +12,12 @@ Arbeiten an der Präsentation. Jedes Gruppenmitglied macht seinen Teil der Power
 10. März:
 Erstellen eines genauen Zeitplans inklusive Verteilung der Aufgaben. Genaue Überlegungen zu Softwarearchitektur, inklusive Erstellen einer Grafik dazu. Beenden von Mock-up und diversen anderen Vorbereitungen für die Präsentation am Donnerstag. Grosse Probleme mit Git: Synchronisation klappt bei einem Mitglied nicht.
 Schreiben von erstem nützlichen Programmteil, einem Chat, welcher die Nachrichten auf dem Server ausgibt.
+
+28 February:
+Decision for game: Skip-Bo. Read rules, initial and and very abstract thoughts, what has to be implemented.
+
+3 March:
+First meeting to create a timetable and distribute tasks. Problems with git via IntelliJ. Elaborate a basic understanding for server-client architecture. More concrete thoughts about classes and order of implementation. Created outline of GanttProject.
+
+March 3 - March 10:
+Work on presentation. Every group member makes his own part of the PowerPoint presentation. Individual experimenting to implement a simple server and client with Java. First try to implement a simple chat.

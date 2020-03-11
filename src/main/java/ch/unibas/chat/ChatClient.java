@@ -11,7 +11,7 @@ import java.io.*;
 public class ChatClient {
     public static void main(String[] args) {
         try {
-            System.out.println("Connecting to port 63001..."); // Connection
+            System.out.println("Connecting to port 63001...");
             Socket sock = new Socket(args[0], 63001);
 
             Scanner scanner = new Scanner(System.in); // Establishing communication

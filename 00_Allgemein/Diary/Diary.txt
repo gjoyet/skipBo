@@ -15,3 +15,12 @@ Schreiben von erstem nützlichen Programmteil, einem Chat, welcher die Nachricht
 
 11. März:
 Chat läuft. Überlegungen dazu, wie er in unser Endprogramm eingebaut werden wird. Feinschliff der Präsentation.
+
+28 February:
+Decision for game: Skip-Bo. Read rules, initial and and very abstract thoughts, what has to be implemented.
+
+3 March:
+First meeting to create a timetable and distribute tasks. Problems with git via IntelliJ. Elaborate a basic understanding for server-client architecture. More concrete thoughts about classes and order of implementation. Created outline of GanttProject.
+
+March 3 - March 10:
+Work on presentation. Every group member makes his own part of the PowerPoint presentation. Individual experimenting to implement a simple server and client with Java. First try to implement a simple chat.

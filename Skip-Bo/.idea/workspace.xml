@@ -55,7 +55,7 @@
       <option name="presentableId" value="Default" />
       <updated>1583749202520</updated>
       <workItem from="1583749206951" duration="3066000" />
-      <workItem from="1583854611996" duration="821000" />
+      <workItem from="1583854611996" duration="1065000" />
     </task>
     <task id="LOCAL-00001" summary="TCTCLient refresh">
       <created>1583846867131</created>
@@ -75,6 +75,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="TCTCLient refresh" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="92" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1583914228875">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="92" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1583914228875" />
     <state x="117" y="0" key="CommitChangelistDialog2" timestamp="1583846866309">
       <screen x="0" y="0" width="1280" height="680" />
     </state>

@@ -3,6 +3,9 @@ package ch.unibas.chat;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+/**
+ * Thread expecting messages from socket, printing them on terminal. The thread terminates when user writes "quit".
+ */
 public class ChatServerReader implements Runnable {
     BufferedReader chatBR;
     String name;

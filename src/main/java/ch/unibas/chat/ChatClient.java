@@ -1,4 +1,4 @@
-package ch.unibas.dmi.dbis.cs108.example.chat;
+package ch.unibas.chat;
 
 import java.net.*;
 import java.util.Scanner;
@@ -11,7 +11,7 @@ public class ChatClient {
             Socket sock = new Socket(args[0], 63001);
 
             Scanner scanner = new Scanner(System.in);
-            String line = new String("");
+            String line;
             PrintWriter pw = new PrintWriter(sock.getOutputStream(), true);
             BufferedReader br = new BufferedReader(new InputStreamReader(sock.getInputStream()));
 
@@ -29,8 +29,8 @@ public class ChatClient {
             scanner.close();
             sock.close();
 
-        } catch(IOException ioe) {
-            System.out.println(ioe.toString());
+        } catch(Exception e) {
+            System.out.println(e.toString());
         }
     } 
 }

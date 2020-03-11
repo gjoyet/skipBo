@@ -1,4 +1,4 @@
-package ch.unibas.dmi.dbis.cs108.example.chat;
+package ch.unibas.chat;
 
 import java.net.*;
 import java.io.*;
@@ -25,8 +25,6 @@ public class ChatServer {
                 reader.start();
             }
 
-        } catch(IOException ioe) {
-            System.out.println(ioe.toString());
         } catch(Exception e) {
             System.out.println(e.toString());
         }

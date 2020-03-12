@@ -15,3 +15,6 @@ Schreiben von erstem nützlichen Programmteil, einem Chat, welcher die Nachricht
 
 11. März:
 Chat läuft. Überlegungen dazu, wie er in unser Endprogramm eingebaut werden wird. Feinschliff der Präsentation.
+
+12. März:
+Aufnahme der Meilenstein 1 Präsentation.

@@ -9,6 +9,6 @@ public class PlayerMaster {
     public static int minPlayers = 0;
 
     public static int newPlayer(String name, InetAddress ip, int port){
-        
+        return 0;
     }
 }

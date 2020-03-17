@@ -7,25 +7,31 @@ public class Pile {
     private int numOfCards;
     private int size;
 
-    Pile (ArrayList<Card> deck, int numOfCards){
+    Pile(ArrayList<Card> deck, int numOfCards) {
         ArrayList<Card> buildPile = new ArrayList<Card>();
         this.deck = deck;
         this.numOfCards = numOfCards;
     }
 
-    public Card getTopCard(){
+    public Card getTopCard() {
         return deck.get(0);
     }
 
-    public int getNumOfCards(){
+    public int getNumOfCards() {
         return numOfCards;
     }
 
-    public void removeTopCard(){
+    public void removeTopCard() {
         Card topCard = getTopCard();
         topCard = deck.get(1);
-        int size =deck.size();
+        int size = deck.size();
         size--;
     }
+
+    //public void setUpGame(){}
+    //public void start(){}
+    //public void dealCards(){}
+    //public void cardOperation(){}
+    //public void endGame(){}
 }
 

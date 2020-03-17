@@ -18,3 +18,6 @@ Chat läuft. Überlegungen dazu, wie er in unser Endprogramm eingebaut werden wi
 
 12. März:
 Aufnahme der Meilenstein 1 Präsentation.
+
+17. März:
+Skype-Konferenz. Bestimmen der Struktur des Netzwerkprotokolls. Überlegungen zu nötigen Befehlen. Klären gewisser Fragen und Unsicherheiten innerhalb der Gruppe. Besprechen des weiteren Vorgehens.

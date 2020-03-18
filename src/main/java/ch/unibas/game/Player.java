@@ -3,6 +3,10 @@
 import java.util.*;
 import java.net.*;
 
+/**
+ * Class Player constructs a Player object with defined parameter
+ */
+
 public class Player {
     private String name; //name of the user
 
@@ -27,6 +31,10 @@ public class Player {
 
     public String getName() { // returns the name of the Player object
         return name;
+    }
+
+    public int getId(){ //returns the id number of the player object
+        return id;
     }
 
 //    public Pile getHandpile (){

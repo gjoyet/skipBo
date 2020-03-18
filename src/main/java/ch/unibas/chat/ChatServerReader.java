@@ -1,4 +1,4 @@
-package ch.unibas.chat;
+//package ch.unibas.chat;
 
 import java.io.BufferedReader;
 import java.io.IOException;

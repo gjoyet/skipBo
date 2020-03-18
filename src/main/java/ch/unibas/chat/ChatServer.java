@@ -1,4 +1,4 @@
-package ch.unibas.chat;
+//package ch.unibas.chat;
 
 import java.net.*;
 import java.io.*;

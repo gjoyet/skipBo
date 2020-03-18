@@ -1,4 +1,4 @@
-package ch.unibas.game;
+
 import java.lang.reflect.Array;
 import java.util.*;
 
@@ -7,17 +7,19 @@ public class Pile {
     private int numOfCards;
     private int size;
 
-    Pile(ArrayList<Card> deck, int numOfCards) {
-        ArrayList<Card> buildPile = new ArrayList<Card>();
+    public Pile(ArrayList<Card> deck, int numOfCards) {
+        ArrayList<Card> deck2 = new ArrayList<Card>(numOfCards);
         this.deck = deck;
         this.numOfCards = numOfCards;
     }
 
     public Card getTopCard() {
+
         return deck.get(0);
     }
 
     public int getNumOfCards() {
+
         return numOfCards;
     }
 
@@ -28,10 +30,13 @@ public class Pile {
         size--;
     }
 
-    //public void setUpGame(){}
-    //public void start(){}
-    //public void dealCards(){}
-    //public void cardOperation(){}
-    //public void endGame(){}
+
+    /**
+     * switch (Input)
+     *      case LOGIN:
+     *      // ()
+     *      case CHAT_MSG:
+     *      // ()
+     */
 }
 

@@ -1,60 +1,64 @@
-
-import java.awt.Color;
-import java.util.*;
-
+import java.awt.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Game {
-    public ArrayList<ArrayList<Card>> buildDeck; // ArrayList for the 4 build decks in the middle
-    public ArrayList<Card> drawDeck = new ArrayList<Card>(); // 1 draw pile
-    public ArrayList<Card> discardDeck;
 
-    public int buildDeckNum;
-    public int drawDeckNum;
-    public int discardDeckNum;
 
-    private Player player;
+    public Object[] players;
+    public Pile piles;
+    private Player winner, whosTurn;
     private boolean gameRunning, turnFinished;
-
-    int colourcount;        // Indexing through colours-Array
-
+    Random random = new Random();
     /**
      * Constructor for Object Game, where the main Game and Game rules
      * will be implemented.
      */
-    public Game (){
-        this.buildDeck = buildDeck;
-        this.drawDeck = drawDeck;
-        this.discardDeck = discardDeck;
+    public Game (Object[] players){
 
-        this.buildDeckNum = buildDeckNum;
-        this.drawDeckNum = drawDeckNum;
-        this.discardDeckNum = discardDeckNum;
-
-        this.player = player;
-        this. gameRunning = false;
-        this. turnFinished = false;
+        this.whosTurn = whosTurn;
+        this.players = players;
+        this.piles = new Pile();
+        this.gameRunning = gameRunning;
+        this.turnFinished = turnFinished;
+        this.winner = winner;
     }
 
-    public void setUpGame(){
+    public ArrayList<Card> getDrawPile(){
+        return this.piles.drawPile;
+    }
 
-        ArrayList<Color> colours = new ArrayList<Color>();
-                colours.add(Color.yellow);
-                colours.add(Color.orange);
-                colours.add(Color.green);
-                colours.add(Color.yellow);
+    public void setUpGame() {
 
-        // Create 12 Decks, coloured in 4 different colours
-        for (int j=0;j<12;j++){
+        this.piles.gamePiles();   // Game gets complete set of cards
 
-            for (int i=0;i<12;i++){
-            Card card = new Card(i+1, colours.get(colourcount));
-            drawDeck.add(card);
+        for(int i=0; i < players.length; i++) {     // Players getting their cards
+
+            for (int j = 0; j < 5 ;j++){    // Draw hand-cards for each player
+                        Card c = (Card) this.getDrawPile().get(random.nextInt(this.getDrawPile().size()));
+                        Player tempPlayer = (Player) this.players[i];
+                        tempPlayer.getStockPile().add(c);
+                        this.players[i] = (Player) tempPlayer;
             }
-            colourcount++;
-            if(colourcount == 3) colourcount=0;
+            for (int j = 0; j < 15 ;j++){    // Draw Stock-Pile cards
+                        Card c = (Card) this.getDrawPile().get(random.nextInt(this.getDrawPile().size()));
+                        Player tempPlayer = (Player) this.players[i];
+                        tempPlayer.getHandCards() .add(c);
+                        this.players[i] = (Player) tempPlayer;
+            }
+
+            //   Print Array (ONLY TESTING PURPOSE)
+            Player tempPlayer = (Player) this.players[i];
+            Object[] tempHandCards = tempPlayer.getHandCards().toArray();
+            System.out.println(tempPlayer.getName());
+            for(int t = 1 ; t<tempHandCards.length;t++) {
+                Card karte = (Card) tempHandCards[t];
+                System.out.println(karte.number + " " + karte.col);
+            }
         }
-        Arrays.toString(this.drawDeck.toArray());
     }
+
 
     //public void startTurn(){}
     //public void dealCards(){}
@@ -62,8 +66,16 @@ public class Game {
     //public void endGame(){}
 
     public static void main(String[] args){
-        Game spiel = new Game();
-    spiel.setUpGame();
 
+        Object[] players = new Object[3];
+        Player sp1 = new Player(1, "Manfred");
+        Player sp2 = new Player(2, "Franz Ferdinandt");
+        Player sp3 = new Player(3, "Peter");
+        players[0] = sp1;
+        players[1] = sp2;
+        players[2] = sp3;
+
+        Game spiel = new Game(players);
+        spiel.setUpGame();
     }
 }

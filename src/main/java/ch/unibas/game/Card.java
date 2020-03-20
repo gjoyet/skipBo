@@ -4,27 +4,20 @@ import java.awt.Color;
 
 public class Card {
 
-    private int number;
-    private int specCard;
-    Color col;
+    public int number;
+    public Color col;
+    public String special;
 
     Card (int num, Color col){ // Constructor for a normal card with enum color, and a number
         number = num;
         this.col = col;
     }
 
-    Card (int num, int specCard){ // Constructor for the special card (Skip Bo)
-        number = num;
-        this.specCard = specCard;
+    Card (Color col){ // Constructor for the special card (Skip Bo)
+        this.number = 13;
+        this.col = col;
     }
 
-    public int getNum(){
-        if (number == 13 && specCard > 0){
-            return specCard;
-        }else{
-            return number;
-        }
-    }
 
 
 }

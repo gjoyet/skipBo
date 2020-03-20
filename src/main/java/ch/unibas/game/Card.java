@@ -1,15 +1,14 @@
 //package ch.unibas;
-
+import java.awt.Color;
 //import
 
 public class Card {
 
     private int number;
     private int specCard;
-    private String colour;
-    CardColor col;
+    Color col;
 
-    Card (int num, CardColor col){ // Constructor for a normal card with enum color, and a number
+    Card (int num, Color col){ // Constructor for a normal card with enum color, and a number
         number = num;
         this.col = col;
     }

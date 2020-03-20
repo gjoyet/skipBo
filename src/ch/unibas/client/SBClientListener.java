@@ -1,5 +1,7 @@
 package ch.unibas.client;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 import java.net.Socket;
 
@@ -13,7 +15,7 @@ class SBClientListener {
     /**
      *Creates a SBClientListener with a Socket
      */
-    SBClientListener(Socket sock) {
+    SBClientListener(Socket sock) throws IOException {
         this.sock = sock;
         pw = new PrintWriter(sock.getOutputStream(),true);
     }

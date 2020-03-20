@@ -1,4 +1,4 @@
-//package ch.unibas.enums;
+package ch.unibas.enums;//package ch.unibas.enums;
 
 public enum CardOperation {
         DRAW_TO_HAND,

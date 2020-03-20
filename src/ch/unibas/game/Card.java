@@ -1,4 +1,4 @@
-//package ch.unibas;
+package ch.unibas.game;//package ch.unibas;
 import java.awt.Color;
 //import
 

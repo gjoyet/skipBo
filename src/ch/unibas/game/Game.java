@@ -1,5 +1,5 @@
-import java.awt.*;
-import java.lang.reflect.Array;
+package ch.unibas.game;
+
 import java.util.ArrayList;
 import java.util.Random;
 

@@ -1,4 +1,6 @@
-//package ch.unibas.game;
+package ch.unibas.game;//package ch.unibas.game;
+
+import ch.unibas.enums.ServerResponse;
 
 import java.net.Socket;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-//package ch.unibas.game;
+package ch.unibas.game;//package ch.unibas.game;
 //import ch.unibas.game.Pile;
 import java.util.*;
 import java.net.*;

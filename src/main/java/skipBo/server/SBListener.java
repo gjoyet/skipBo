@@ -23,7 +23,7 @@ public class SBListener implements Runnable {
     SBListener(Socket sock, int id) {
         this.sock = sock;
         try {
-            this.pw = new PrintWriter(sock.getOutputStream());
+            this.pw = new PrintWriter(sock.getOutputStream(), true);
             this.br = new BufferedReader(new InputStreamReader(sock.getInputStream()));
         } catch (IOException e) {
             e.printStackTrace();

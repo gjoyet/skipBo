@@ -71,11 +71,11 @@ public class SBServerListener implements Runnable {
     }
 
     /**
-     * Changes client name.
+     * Sends status message after changing name.
      * @param command:String array according to network protocol with command, option and arguments.
      */
     //TODO
     void changeTo(String[] command) {
-
+        System.out.println(command[2]);
     }
 }

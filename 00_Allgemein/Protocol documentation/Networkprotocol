@@ -18,4 +18,7 @@ Lobby 		CHNGE		Nickname	String nickname 			changes nickname of player sending th
 
 
 Chat		CHATM		Global		String message				sends ‚message‘ to write on the global chat
-				
+
+
+
+Logout		LGOUT		?		?					disconnects client				

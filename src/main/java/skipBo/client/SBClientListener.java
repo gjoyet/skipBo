@@ -31,7 +31,9 @@ class SBClientListener implements Runnable {
     public void run() {
         String input;
 
+        System.out.println("Connection successful");
         //Client has to set name
+        System.out.println("Commands:\n/change name [name]\n/quit"); //List of Commands
         System.out.println("Please enter your name: ");
         String name = scanner.nextLine();
         pw.println("SETTO§Nickname§" + name);
@@ -41,7 +43,7 @@ class SBClientListener implements Runnable {
             try {
                 forward(input);
             } catch (IndexOutOfBoundsException | NoCommandException e) {
-                System.out.println("Please enter a valid command.");
+                System.out.println("Please enter a valid command");
             }
         }
     }
@@ -52,32 +54,55 @@ class SBClientListener implements Runnable {
      */
     void forward(String input) throws NoCommandException {
 
-        Protocol networkCommand;
-        String networkOption;
-        String networkArgument;
+        String protocolString;
 
         //It's a chat message
         if (!(input.startsWith("/"))) {
-            networkCommand = Protocol.CHATM;
-            networkOption = "Global";
-            networkArgument = input;
-            pw.println(networkCommand + "§" + networkOption + "§" + networkArgument);
+            protocolString = Protocol.CHATM + "§Global§" + input;
+            pw.println(protocolString);
             return;
         }
 
         //It's not a chat message
         int pos = input.indexOf(" ");
-        String command = input.substring(0, pos);
+        String command;
+        if (pos < 0) {
+            command = input;
+        } else {
+            command = input.substring(0, pos);
+        }
+
 
         switch (command) {
             case "/change":
-                networkCommand = Protocol.CHNGE;
+                protocolString = getChangeString(input);
+                break;
+            case "/quit":
+                protocolString = Protocol.LGOUT + "";
+                break;
             default:
                 throw new NoCommandException();
         }
-
+        pw.println(protocolString);
     }
 
-    //TODO: check if command has right amount of option/argument
+    /**
+     * builds network protocol string for the "change"-command
+     * @return: network protocol string for the "change"-command
+     */
+    String getChangeString(String input) throws NoCommandException {
+
+        int pos = input.indexOf(" ",8);
+        String option = input.substring(8,pos);
+        String argument;
+
+        if (option.equalsIgnoreCase("name")) {
+            argument = input.substring(13);
+            return Protocol.CHNGE + "§name§" + argument;
+        } else {
+            throw new NoCommandException();
+        }
+
+    }
 
 }

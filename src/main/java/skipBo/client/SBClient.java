@@ -20,8 +20,13 @@ public class SBClient {
 
             //Start SBClientListener Thread
             SBClientListener clientListener = new SBClientListener(sock);
-            Thread listener = new Thread(clientListener);
-            listener.start();
+            Thread cListener = new Thread(clientListener);
+            cListener.start();
+
+            //Start SBServerListener Thread
+            SBServerListener serverListener = new SBServerListener(sock);
+            Thread sListener = new Thread(serverListener);
+            //sListener.start(); //TODO delete comment
 
         } catch (IOException e) {
             e.printStackTrace();

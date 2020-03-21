@@ -56,6 +56,7 @@ public class SBListener implements Runnable {
     private void analyze(String[] input, int id, SBListener sbL) {
         switch(input[0]) {
             case "SETTO": setTo(input, id, sbL);
+                System.out.println("Got into setTo method.");
                 break;
             case "CHNGE": changeTo(input, id, sbL);
                 break;

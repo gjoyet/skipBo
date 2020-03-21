@@ -1,4 +1,4 @@
-package main.java.skipBo.client;
+package skipBo.client;
 
 import java.io.IOException;
 import java.net.Socket;

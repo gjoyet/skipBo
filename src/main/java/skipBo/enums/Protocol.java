@@ -1,4 +1,4 @@
-package main.java.skipBo.enums;
+package skipBo.enums;
 
 public enum Protocol {
     PRINT,

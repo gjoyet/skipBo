@@ -1,4 +1,4 @@
-package main.java.skipBo.userExceptions;
+package skipBo.userExceptions;
 
 public class NoCommandException extends Exception {
 }

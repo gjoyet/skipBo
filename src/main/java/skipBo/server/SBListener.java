@@ -13,14 +13,14 @@ import static skipBo.server.ProtocolExecution.*;
 /**
  * Thread waiting for any action from client.
  */
-public class SBServerListener implements Runnable {
+public class SBListener implements Runnable {
     Socket sock;
     PrintWriter pw;
     BufferedReader br;
     int id;
     Player player;
 
-    SBServerListener(Socket sock, int id) {
+    SBListener(Socket sock, int id) {
         this.sock = sock;
         try {
             this.pw = new PrintWriter(sock.getOutputStream());
@@ -53,7 +53,7 @@ public class SBServerListener implements Runnable {
      * First branching out for protocol execution. Triggers required method depending on input protocol command.
      * @param input: Sliced input from client.
      */
-    private void analyze(String[] input, int id, SBServerListener sbL) {
+    private void analyze(String[] input, int id, SBListener sbL) {
         switch(input[0]) {
             case "SETTO": setTo(input, id, sbL);
                 break;

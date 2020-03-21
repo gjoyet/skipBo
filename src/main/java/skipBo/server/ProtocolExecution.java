@@ -13,7 +13,7 @@ public class ProtocolExecution {
     /**
      * Method for command "SETTO".
      */
-    static void setTo(String[] input, int id, SBServerListener sbL) {
+    static void setTo(String[] input, int id, SBListener sbL) {
         try {
             if (input[1].equals("Nickname")) {
                 String name = input[2];
@@ -39,7 +39,7 @@ public class ProtocolExecution {
     /**
      * Method for command "CHNGE".
      */
-    static void changeTo(String[] input, int id, SBServerListener sbL) {
+    static void changeTo(String[] input, int id, SBListener sbL) {
         try {
             if(input[1].equals("Nickname")) {
                 String name = input[2];
@@ -61,11 +61,11 @@ public class ProtocolExecution {
     /**
      * Method for command "CHATM".
      */
-    static void chatMessage(String[] input, int id, SBServerListener sbL) {
+    static void chatMessage(String[] input, int id, SBListener sbL) {
         try {
             if(input[1].equals("Global")) {
                 String message = input[2];
-                for(SBServerListener el : allListeners) {
+                for(SBListener el : allListeners) {
                     if(!el.equals(sbL)) {
                         el.pw.println("CHATM§Global§" + sbL.player.name + ": " + message);
                     }

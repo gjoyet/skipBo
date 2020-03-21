@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class SBServer {
     static int playerCounter = 0;
-    static ArrayList<SBServerListener> allListeners;
+    static ArrayList<SBListener> allListeners;
 
     public static void main(String[] args) {
         ServerSocket sbServerSocket = null;
@@ -41,7 +41,7 @@ public class SBServer {
         try {
             Socket sock = serverSo.accept();
 
-            SBServerListener sbListen = new SBServerListener(sock, ++playerCounter);
+            SBListener sbListen = new SBListener(sock, ++playerCounter);
             Thread sbListenT = new Thread(sbListen); sbListenT.start();
             allListeners.add(sbListen);
 

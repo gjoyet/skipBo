@@ -33,10 +33,10 @@ public class SBLobby {
      * Checks if name is valid.
      */
     public static boolean nameIsValid(String name) {
+        if(name.length() > 13 || name.length() == 0) return false;
         for(int i=0; i < name.length(); i++) {
             if(!Character.isLetterOrDigit(name.charAt(i))) return false;
         }
-        if(name.length() > 13) return false;
 
         return true;
     }

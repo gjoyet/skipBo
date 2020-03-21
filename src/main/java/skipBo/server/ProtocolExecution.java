@@ -23,7 +23,7 @@ public class ProtocolExecution {
                 } else if(nameIsTaken(name)) {
                     throw new NameTakenException(name);
                 } else if(!nameIsValid(name)) {
-                    sbL.pw.println("PRINT§Terminal§Refused: Name contains invalid symbols. Name set to system username.");
+                    sbL.pw.println("PRINT§Terminal§Invalid name. Name set to system username.");
                     sbL.player = new Player(id, System.getProperty("user.name"), sbL);
                     SBLobby.addPlayer(sbL.player);
                 }

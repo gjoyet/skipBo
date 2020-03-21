@@ -45,9 +45,7 @@ public class SBServer {
             Thread sbListenT = new Thread(sbListen); sbListenT.start();
             allListeners.add(sbListen);
 
-        } catch (IOException e) {
-            System.out.println("Issue with opening socket.");
-        }
+        } finally {}
     }
 }
 

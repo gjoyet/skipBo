@@ -26,6 +26,7 @@ public class SBLobby {
      * Checks if the name is already in use.
      */
     public static boolean nameIsTaken(String name){
+        if(playerLobby.isEmpty()) return false;
         return playerLobby.stream().anyMatch(pl -> pl.getName().equals(name));
     }
 

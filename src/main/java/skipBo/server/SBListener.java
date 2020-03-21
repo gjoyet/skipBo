@@ -70,7 +70,8 @@ public class SBListener implements Runnable {
                 /*
                    TODO: Handle logout, players which have not given name yet don't get messages until
                     they have given a name, message to all when someone logs in, make name change possible (Manuela
-                    has 'name' as option, I have 'nickname')
+                    has 'name' as option, I have 'nickname'), comment protocol enums, Guillaume should use protocol enums
+                    and not just "CHATM"
                  */
 
         }

@@ -36,7 +36,8 @@ public class SBLobby {
     }
 
     /**
-     * Checks if name is valid.
+     * Checks if name is valid. Only letters and digits are allowed, name can neither
+     * be empty nor be longer than 13 characters.
      */
     public boolean nameIsValid(String name) {
         if(name.length() > 13 || name.length() == 0) return false;

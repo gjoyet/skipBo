@@ -66,6 +66,13 @@ public class SBListener implements Runnable {
                 break;
             case "LGOUT": logout(input, id, sbL);
                 //System.out.println("LOG: Got into logout method.");
+
+                /*
+                   TODO: Handle logout, players which have not given name yet don't get messages until
+                    they have given a name, message to all when someone logs in, make name change possible (Manuela
+                    has 'name' as option, I have 'nickname')
+                 */
+
         }
 
     }

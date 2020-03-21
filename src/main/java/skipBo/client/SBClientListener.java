@@ -62,6 +62,7 @@ class SBClientListener implements Runnable {
         //It's a chat message
         if (!(input.startsWith("/"))) {
             protocolString = Protocol.CHATM + "§Global§" + input;
+            System.out.println("Client sends this protocol string to server: " + protocolString);
             pw.println(protocolString);
             return;
         }

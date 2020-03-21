@@ -6,7 +6,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 /**
- * Server for Skip-Bo: manages lobby, chat, starts game. This server accepts players while starting
+ * Server for Skip-Bo: manages a lobby, chat, starts game. This server accepts players while starting
  * a listener for every new player and is the highest instance of the program.
  */
 public class SBServer {
@@ -21,7 +21,7 @@ public class SBServer {
             sbServerSocket = new ServerSocket(Integer.parseInt(args[0]));
             System.out.println("Waiting for port " + args[0]);
         } catch(IOException ioe) {
-            System.out.println("Issue with opening Serversocket. Try with another port.");
+            System.out.println("Issue with opening ServerSocket. Try with another port.");
         }
 
         while(true) {
@@ -35,7 +35,7 @@ public class SBServer {
     }
 
     /**
-     * Accepts new socket and starts a SBListener thread.
+     * Accepts a new socket and starts a SBListener thread.
      * @param serverSo
      */
     private static void login(ServerSocket serverSo) throws IOException {

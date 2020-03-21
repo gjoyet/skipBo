@@ -12,6 +12,7 @@ public class Game {
     private boolean gameRunning, turnFinished;
     int sizeOfStockPile;
 
+
     /**
      * Constructor for Object Game, where the main Game and Game rules
      * will be implemented.
@@ -93,7 +94,7 @@ public class Game {
 //        players[1] = sp2;
 //        players[2] = sp3;
 //        players[3] = sp4;
-
+//
 //        Game spiel = new Game(players);
 //        spiel.setUpGame();
     }

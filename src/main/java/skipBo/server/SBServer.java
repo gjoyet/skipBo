@@ -1,5 +1,7 @@
 package skipBo.server;
 
+import skipBo.userExceptions.NoNameException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -32,9 +34,14 @@ public class SBServer {
             PrintWriter pw = new PrintWriter(sock.getOutputStream());
             BufferedReader br = new BufferedReader(new InputStreamReader(sock.getInputStream()));
 
+            String[] input = br.readLine().split("§");
+
         } catch (IOException e) {
             System.out.println("Issue with opening socket.");
         }
+    }
+
+
     }
 
 }

@@ -2,6 +2,7 @@ package skipBo.server;
 
 import skipBo.enums.Protocol;
 import skipBo.userExceptions.NoNameException;
+import skipBo.userExceptions.NoProtocolException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,24 +25,10 @@ public class SBListener implements Runnable {
 
     }
 
-    String takeName() {
-        String name;
+    public void analyze(String[] input) {
 
-        try {
-            this.pw.println("PRINT§Terminal§Please enter nickname:");
-            String[] input = this.br.readLine().split("§");
-
-            if(input[0].equals("NICKN"))
-
-
-
-        } catch(NoNameException nne) {
-
-        } catch(IOException ioe) {
-            System.out.println(ioe);
-        }
-
-        return name;
     }
+
+
 
 }

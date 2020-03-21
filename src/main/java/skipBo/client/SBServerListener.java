@@ -55,6 +55,8 @@ public class SBServerListener implements Runnable {
             case "CHNGE":
                 changeTo(command);
                 break;
+            case "LGOUT":
+                logOut(command);
             default:
                 throw new NoCommandException();
         }
@@ -74,8 +76,12 @@ public class SBServerListener implements Runnable {
      * Sends status message after changing name.
      * @param command:String array according to network protocol with command, option and arguments.
      */
-    //TODO
     void changeTo(String[] command) {
         System.out.println(command[2]);
+    }
+
+    void logOut(String[] command) {
+        //TODO end threads SBClientListener and SBServerListener
+
     }
 }

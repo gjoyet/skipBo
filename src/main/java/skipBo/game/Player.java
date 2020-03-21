@@ -1,9 +1,8 @@
 package skipBo.game;//package ch.unibas.game;
 //import ch.unibas.game.Pile;
-import skipBo.server.SBListener;
+import skipBo.server.SBServerListener;
 
 import java.util.*;
-import java.net.*;
 
 /**
  * Class Player constructs a Player object with defined parameter
@@ -13,7 +12,7 @@ public class Player {
 
     public String name; //name of the user, has to be public so it can be changed
     private int id;
-    private SBListener sbListen;
+    private SBServerListener sbListen;
     // private InetAddress ip;
     // private Socket sock;
     private int port;
@@ -25,7 +24,7 @@ public class Player {
      * @param name
      * @param sbListen
      */
-    public Player (int id, String name, SBListener sbListen) {
+    public Player (int id, String name, SBServerListener sbListen) {
         this.id = id;
         this.name = name;
         this.sbListen = sbListen;

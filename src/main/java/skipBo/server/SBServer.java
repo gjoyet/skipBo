@@ -1,11 +1,6 @@
 package skipBo.server;
 
-import skipBo.userExceptions.NoNameException;
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -16,7 +11,7 @@ import java.util.ArrayList;
  */
 public class SBServer {
     static int playerCounter = 0;
-    static ArrayList<SBListener> allListeners;
+    static ArrayList<SBServerListener> allListeners;
 
     public static void main(String[] args) {
         ServerSocket sbServerSocket = null;
@@ -46,7 +41,7 @@ public class SBServer {
         try {
             Socket sock = serverSo.accept();
 
-            SBListener sbListen = new SBListener(sock, ++playerCounter);
+            SBServerListener sbListen = new SBServerListener(sock, ++playerCounter);
             Thread sbListenT = new Thread(sbListen); sbListenT.start();
             allListeners.add(sbListen);
 

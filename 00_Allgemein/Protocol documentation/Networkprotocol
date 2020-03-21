@@ -1,7 +1,7 @@
 
 Basic Structure: XXXXX§Option§Arguments
 Example: PRINT§Terminal§Please enter nickname:	Action: Prints ‚Please enter nickname:‘ on terminal of client
-Example: CHNGE§Nickname§3§Destroyer			Action: Changes nickname of Player with playerId ‚3‘ to ‚Destroyer‘
+Example: CHNGE§Nickname§Destroyer			Action: Changes nickname of Player sending request to ‚Destroyer‘
 
 Section		Command		Option		Arguments				Comments
 
@@ -13,10 +13,9 @@ Login		SETTO		Nickname	String nickname				sets nickname of new player to ‚nick
 
 
 
-Lobby 		CHNGE		Nickname	String nickname, 			changes nickname of player sending the request to ‚nickname‘
+Lobby 		CHNGE		Nickname	String nickname 			changes nickname of player sending the request to ‚nickname‘
 
 
 
-Chat		CHATM		Send		String message				sends ‚message‘ to write on the global chat
-				Receive		String message				sends ,message, to client to write on terminal
-
+Chat		CHATM		Global		String message				sends ‚message‘ to write on the global chat
+				

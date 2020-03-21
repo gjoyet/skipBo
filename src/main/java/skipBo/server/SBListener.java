@@ -1,5 +1,6 @@
 package skipBo.server;
 
+import skipBo.enums.Protocol;
 import skipBo.game.Player;
 import skipBo.userExceptions.*;
 
@@ -120,15 +121,13 @@ public class SBListener implements Runnable {
      */
     private void chatMessage(String[] input, int id, SBListener sbL) {
         try {
-            if(input[1].equals("Send")) {
+            if(input[1].equals("Global")) {
                 String message = input[2];
                 for(SBListener el : allListeners) {
                     if(!el.equals(sbL)) {
-                        el.pw.println("CHATM§Recieve§" + message);
+                        el.pw.println("CHATM§Global§" + sbL.player.name + ": " + message);
                     }
                 }
-            } else if(input[1].equals("Recieve")) {
-                // ignore
             } else throw new NoCommandException();
         } catch (NoCommandException nce) {
             System.out.println(input[1] + ": no option for CHNGE command.");

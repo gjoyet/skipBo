@@ -2,9 +2,13 @@ package skipBo.server;
 
 import skipBo.game.Player;
 
+import java.util.ArrayList;
+
 /**
- * Stores new players and eventually starts game.
+ * Stores all new players and eventually starts game.
  */
 public class SBLobby {
-    Player[] playerLobby;
+    ArrayList<Player> playerLobby;
+
+    void addPlayer()
 }

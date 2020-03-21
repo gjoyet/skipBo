@@ -14,6 +14,8 @@ import java.net.Socket;
  * a listener for every new player and is the highest instance of the program.
  */
 public class SBServer {
+    static int playerCounter = 0;
+
     public static void main(String[] args) {
         ServerSocket sbServerSocket = null;
 
@@ -24,17 +26,26 @@ public class SBServer {
             System.out.println("Issue with opening Serversocket. Try with another port.");
         }
 
+        while(true) {
+            try {
+                login(sbServerSocket);
+            } catch (IOException e) {
+                System.out.println("Issue with login.");
+            }
+        }
 
     }
 
-    static void login(ServerSocket servSo) {
+    /**
+     * Accepts new socket and starts a SBListener thread.
+     * @param serverSo
+     */
+    static void login(ServerSocket serverSo) throws IOException {
         try {
-            Socket sock = servSo.accept();
+            Socket sock = serverSo.accept();
 
-            PrintWriter pw = new PrintWriter(sock.getOutputStream());
-            BufferedReader br = new BufferedReader(new InputStreamReader(sock.getInputStream()));
-
-            String[] input = br.readLine().split("§");
+            SBListener sbListen = new SBListener(sock, ++playerCounter);
+            Thread sbListenT = new Thread(sbListen); sbListenT.start();
 
         } catch (IOException e) {
             System.out.println("Issue with opening socket.");
@@ -42,6 +53,5 @@ public class SBServer {
     }
 
 
-    }
-
 }
+

@@ -35,16 +35,17 @@ public class Player {
     public ArrayList<Card> getStockPile(){
         return this.piles.stockPile;
     }
+
     public ArrayList<Card> getHandCards() { // returns the name of the Player object
         return this.piles.handCards;
     }
 
     public String getName() { // returns the name of the Player object
-        return name;
+        return this.name;
     }
 
     public int getId(){ //returns the id number of the player object
-        return id;
+        return this.id;
     }
 
 

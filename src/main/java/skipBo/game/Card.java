@@ -1,6 +1,5 @@
 package skipBo.game;
 import java.awt.Color;
-//import
 
 public class Card {
 
@@ -8,7 +7,7 @@ public class Card {
     public Color col;
     public String special;
 
-    Card (int num, Color col){ // Constructor for a normal card with enum color, and a number
+    Card (int num, Color col){ // Constructor for a normal card with (color and number)
         number = num;
         this.col = col;
     }

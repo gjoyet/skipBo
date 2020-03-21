@@ -16,7 +16,7 @@ public class Pile {
     public Player player;
 
 
-    public void gamePiles(){
+    public void gamePiles(){    // All Cards are created and the build-pile is added
 
         int colourcount = 0;
 
@@ -29,7 +29,7 @@ public class Pile {
 
         // Create all Cards for a Game:
 
-        // Normal Cards
+        // Add Normal Cards
         for (int j=0;j<12;j++){
             for (int i=0;i<12;i++){
                 Card card = new Card(i+1, colours.get(colourcount));
@@ -38,16 +38,16 @@ public class Pile {
             colourcount++;
             if(colourcount == 3) colourcount=0;
         }
-        // Special Cards
+        // Add Special Cards
         for (int l=0;l<18;l++){
             Card card = new Card(colours.get(4));
             drawPile.add(card);
         }
         // Print Array (ONLY TESTING PURPOSE)
-        Object[] test = this.drawPile.toArray();
+        Object[] AllCards = this.drawPile.toArray();
         for (int i=0;i<144+18;i++) {
-            Card karte = (Card) test[i];
-            System.out.println(karte.number + " " + karte.col);
+            Card karte = (Card) AllCards[i];
+            System.out.println("|"+karte.number +"| " + karte.col);
         }
         // Add four empty card decks for thr buildDecks
         for(int i=0;i<4;i++){

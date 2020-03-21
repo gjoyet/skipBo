@@ -5,12 +5,12 @@ import java.util.Random;
 
 public class Game {
 
-
     public Object[] players;
     public Pile piles;
     private Player winner, whosTurn;
     private boolean gameRunning, turnFinished;
     Random random = new Random();
+    int sizeOfDtockPile;
     /**
      * Constructor for Object Game, where the main Game and Game rules
      * will be implemented.
@@ -23,6 +23,7 @@ public class Game {
         this.gameRunning = gameRunning;
         this.turnFinished = turnFinished;
         this.winner = winner;
+        this.sizeOfDtockPile = 20;
     }
 
     public ArrayList<Card> getDrawPile(){
@@ -41,7 +42,7 @@ public class Game {
                         tempPlayer.getStockPile().add(c);
                         this.players[i] = (Player) tempPlayer;
             }
-            for (int j = 0; j < 15 ;j++){    // Draw Stock-Pile cards
+            for (int j = 0; j < sizeOfDtockPile ;j++){    // Draw Stock-Pile cards for each player
                         Card c = (Card) this.getDrawPile().get(random.nextInt(this.getDrawPile().size()));
                         Player tempPlayer = (Player) this.players[i];
                         tempPlayer.getHandCards() .add(c);
@@ -51,10 +52,11 @@ public class Game {
             //   Print Array (ONLY TESTING PURPOSE)
             Player tempPlayer = (Player) this.players[i];
             Object[] tempHandCards = tempPlayer.getHandCards().toArray();
+            System.out.println("");
             System.out.println(tempPlayer.getName());
             for(int t = 1 ; t<tempHandCards.length;t++) {
                 Card karte = (Card) tempHandCards[t];
-                System.out.println(karte.number + " " + karte.col);
+                System.out.println("|"+karte.number +"| " + karte.col);
             }
         }
     }
@@ -67,13 +69,15 @@ public class Game {
 
     public static void main(String[] args){
 
-        Object[] players = new Object[3];
+        Object[] players = new Object[4];
         Player sp1 = new Player(1, "Manfred");
         Player sp2 = new Player(2, "Franz Ferdinandt");
         Player sp3 = new Player(3, "Peter");
+        Player sp4 = new Player(3, "Meinrad");
         players[0] = sp1;
         players[1] = sp2;
         players[2] = sp3;
+        players[3] = sp4;
 
         Game spiel = new Game(players);
         spiel.setUpGame();

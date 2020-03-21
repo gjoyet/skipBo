@@ -57,6 +57,8 @@ public class SBServerListener implements Runnable {
                 break;
             case "LGOUT":
                 logOut(command);
+            case "PRINT":
+                print(command);
             default:
                 throw new NoCommandException();
         }
@@ -82,6 +84,10 @@ public class SBServerListener implements Runnable {
 
     void logOut(String[] command) {
         //TODO end threads SBClientListener and SBServerListener
-
     }
+
+    void print(String[] command) {
+        System.out.println(command[2]);
+    }
+
 }

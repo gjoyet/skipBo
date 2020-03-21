@@ -1,3 +1,5 @@
+package ch.unibas.enums;
+
 public enum ServerResponse {
     LOGIN_SUCCESS,
     NAME_USED,

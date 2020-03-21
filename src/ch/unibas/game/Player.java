@@ -1,4 +1,4 @@
-//package ch.unibas.game;
+package ch.unibas.game;//package ch.unibas.game;
 //import ch.unibas.game.Pile;
 import java.util.*;
 import java.net.*;
@@ -8,14 +8,13 @@ import java.net.*;
  */
 
 public class Player {
-    private String name; //name of the user
 
+    private String name; //name of the user
     private int id;
     private InetAddress ip;
     private Socket sock;
     private int port;
-
-    Pile handpile;
+    private Pile piles;
     /**
      * Player constructor to build a Player object with
      * a String name and ip and port numbers.
@@ -23,10 +22,18 @@ public class Player {
      * @param name
      * @param socket
      */
-    public Player (int id, String name, Socket socket){
+    public Player (int id, String name)  { // Socket socket){
         this.id = id;
         this.name = name;
-        sock = socket;
+        this.piles = new Pile(id);
+        // sock = socket;
+    }
+
+    public ArrayList<Card> getStockPile(){
+        return this.piles.stockPile;
+    }
+    public ArrayList<Card> getHandCards() { // returns the name of the Player object
+        return this.piles.handCards;
     }
 
     public String getName() { // returns the name of the Player object
@@ -37,10 +44,6 @@ public class Player {
         return id;
     }
 
-//    public Pile getHandpile (){
-//        Pile handpile = new Pi
-//        return ;
-//    }
 
 
 }

@@ -48,11 +48,12 @@ class SBClientListener implements Runnable {
     /**
      * Forwards user input to server
      */
-    static void forward(String string) throws NoCommandException {
+    void forward(String string) throws NoCommandException {
 
         int pos = string.indexOf(" ");
         String command = string.substring(0,pos);
-
+        String arguments = string.substring(pos);
+        arguments = arguments.replace(" ","§");
         Protocol protocolCommand;
 
         switch (command) {
@@ -62,6 +63,9 @@ class SBClientListener implements Runnable {
             default:
                 throw new NoCommandException();
         }
+
+        String protocolString = protocolCommand + arguments;
+        pw.println(protocolString);
 
     }
 

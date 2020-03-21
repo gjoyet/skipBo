@@ -15,6 +15,11 @@ public class SBClient {
             System.out.println("Connecting to port " + args[0] + "…");
             Socket sock = new Socket(args[1], Integer.parseInt(args[0]));
 
+            //Start SBClientListener Thread
+            SBClientListener clientListener = new SBClientListener(sock);
+            Thread listener = new Thread(clientListener);
+            listener.start();
+
         } catch (UnknownHostException e) {
             e.printStackTrace();
         } catch (IOException e) {

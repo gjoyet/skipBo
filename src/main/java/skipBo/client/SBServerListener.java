@@ -57,8 +57,10 @@ public class SBServerListener implements Runnable {
                 break;
             case "LGOUT":
                 logOut(command);
+                break;
             case "PRINT":
                 print(command);
+                break;
             default:
                 throw new NoCommandException();
         }

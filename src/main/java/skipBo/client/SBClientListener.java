@@ -18,10 +18,10 @@ class SBClientListener implements Runnable {
     /**
      *Creates a SBClientListener with a Socket
      */
-    SBClientListener(Socket sock, Scanner scanner) throws IOException {
+    SBClientListener(Socket sock) throws IOException {
         this.sock = sock;
         pw = new PrintWriter(sock.getOutputStream(),true);
-        this.scanner = scanner;
+        this.scanner = scanner = new Scanner(System.in);
     }
 
     /**
@@ -29,43 +29,55 @@ class SBClientListener implements Runnable {
      */
     @Override
     public void run() {
-        String line;
+        String input;
+
+        //Client has to set name
+        System.out.println("Please enter your name: ");
+        String name = scanner.nextLine();
+        pw.println("SETTO§Nickname§" + name);
 
         while(true) {
-            line = scanner.nextLine();
+            input = scanner.nextLine();
             try {
-                forward(line);
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("Please enter a valid command.");
-            } catch (NoCommandException e) {
+                forward(input);
+            } catch (IndexOutOfBoundsException | NoCommandException e) {
                 System.out.println("Please enter a valid command.");
             }
-
         }
     }
+
 
     /**
      * Forwards user input to server
      */
-    void forward(String string) throws NoCommandException {
+    void forward(String input) throws NoCommandException {
 
-        int pos = string.indexOf(" ");
-        String command = string.substring(0,pos);
-        String arguments = string.substring(pos);
-        arguments = arguments.replace(" ","§");
-        Protocol protocolCommand;
+        Protocol networkCommand;
+        String networkOption;
+        String networkArgument;
+
+        //It's a chat message
+        if (!(input.startsWith("/"))) {
+            networkCommand = Protocol.CHATM;
+            networkOption = "Global";
+            networkArgument = input;
+            pw.println(networkCommand + "§" + networkOption + "§" + networkArgument);
+            return;
+        }
+
+        //It's not a chat message
+        int pos = input.indexOf(" ");
+        String command = input.substring(0, pos);
 
         switch (command) {
-            case "/chat":
-                protocolCommand = Protocol.CHATM;
-                break;
+            case "/change":
+                networkCommand = Protocol.CHNGE;
             default:
                 throw new NoCommandException();
         }
 
-        String protocolString = protocolCommand + arguments;
-        pw.println(protocolString);
-
     }
+
+    //TODO: check if command has right amount of option/argument
 
 }

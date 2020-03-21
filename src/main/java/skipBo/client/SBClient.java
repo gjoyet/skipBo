@@ -43,7 +43,7 @@ public class SBClient {
                 isNameValid(name);
                 nameIsValid = true;
             } catch (NoNameException e) {
-                System.out.println("Name not valid.");
+                System.out.println(e.getMessage());
             }
 
         }
@@ -55,13 +55,13 @@ public class SBClient {
      */
     static void isNameValid(String name) throws NoNameException {
         if (name.length() > 13) {
-            throw new NoNameException();
+            throw new NoNameException("Name cannot exceed 13 characters.");
         }
         if (name.contains("§")) {
-            throw new NoNameException();
+            throw new NoNameException("Name contains invalid characters.");
         }
         if (name.isEmpty()) {
-            throw new NoNameException();
+            throw new NoNameException("Name cannot be empty");
         }
 
     }

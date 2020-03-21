@@ -1,5 +1,6 @@
 package skipBo.server;
 
+import skipBo.enums.Protocol;
 import skipBo.userExceptions.NoNameException;
 
 import java.io.BufferedReader;
@@ -23,18 +24,24 @@ public class SBListener implements Runnable {
 
     }
 
-    static String takeName() {
+    String takeName() {
         String name;
 
         try {
-            // Sende Befehl für System.out.println("Please enter nickname:") auf terminal von Client;
-            // Suche nach unerlaubten Zeichen im Namen -> throw NoNameException
-        } catch(NoNameException) {
+            this.pw.println("PRINT§Terminal§Please enter nickname:");
+            String[] input = this.br.readLine().split("§");
 
-        } catch(IOException) {
+            if(input[0].equals("NICKN"))
 
+
+
+        } catch(NoNameException nne) {
+
+        } catch(IOException ioe) {
+            System.out.println(ioe);
         }
 
         return name;
     }
+
 }

@@ -1,8 +1,9 @@
 package skipBo.enums;
 
 public enum Protocol {
-    LOGIN_SUCCESS,
-    NAME_TAKEN,
-    CHAT,
+    PRINT,
+    CHATM,
+    SETTO,
+    CHNGE,
     
 }

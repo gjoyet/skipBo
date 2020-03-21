@@ -17,42 +17,41 @@ public class SBClient {
         try {
             System.out.println("Connecting to port " + args[0] + "…");
             Socket sock = new Socket(args[1], Integer.parseInt(args[0]));
-            Scanner scanner = new Scanner(System.in);
-
-            setName(scanner);
 
             //Start SBClientListener Thread
-            SBClientListener clientListener = new SBClientListener(sock, scanner);
+            SBClientListener clientListener = new SBClientListener(sock);
             Thread listener = new Thread(clientListener);
             listener.start();
 
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    static void setName(Scanner scanner) {
+/*    static void setName(Scanner scanner) {
         boolean nameIsValid = false;
+        String name;
 
         while(!nameIsValid) {
             System.out.println("Please enter your name: ");
-            String name = scanner.nextLine();
+            name = scanner.nextLine();
             try {
                 isNameValid(name);
                 nameIsValid = true;
             } catch (NoNameException e) {
                 System.out.println(e.getMessage());
             }
-
         }
 
-    }
 
-    /*
+    }*/
+/*
+
+    */
+/*
     Name is not allowed to have more than 13 characters. Name cannot contain symbol §. Name cannot be empty.
-     */
+     *//*
+
     static void isNameValid(String name) throws NoNameException {
         if (name.length() > 13) {
             throw new NoNameException("Name cannot exceed 13 characters.");
@@ -67,5 +66,5 @@ public class SBClient {
     }
 
 
-
+*/
 }

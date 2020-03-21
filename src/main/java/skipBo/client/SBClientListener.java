@@ -1,4 +1,7 @@
-package skipBo.client;
+package main.java.skipBo.client;
+
+import main.java.skipBo.enums.Protocol;
+import main.java.skipBo.userExceptions.NoCommandException;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -6,11 +9,12 @@ import java.util.Scanner;
 import java.net.Socket;
 
 /**
- * Waiting for any action from user input (from console) and forwards command to Server
+ * Thread waiting for any action from user input (from console) and forwards command to Server
  */
-class SBClientListener {
+class SBClientListener implements Runnable {
     Socket sock;
     PrintWriter pw;
+    Scanner scanner;
 
     /**
      *Creates a SBClientListener with a Socket
@@ -18,26 +22,46 @@ class SBClientListener {
     SBClientListener(Socket sock) throws IOException {
         this.sock = sock;
         pw = new PrintWriter(sock.getOutputStream(),true);
+        scanner = new Scanner(System.in);
     }
 
     /**
-     * waits for input from user
+     * Waits for input from user
      */
-    void listen() {
-        Scanner scanner = new Scanner(System.in);
+    @Override
+    public void run() {
         String line;
 
         while(true) {
             line = scanner.nextLine();
-            forward(line);
-        }
+            try {
+                forward(line);
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Please enter a valid command.");
+            } catch (NoCommandException e) {
+                System.out.println("Please enter a valid command.");
+            }
 
+        }
     }
 
     /**
      * Forwards user input to server
      */
-    static void forward(String string) {
+    static void forward(String string) throws NoCommandException {
+
+        int pos = string.indexOf(" ");
+        String command = string.substring(0,pos);
+
+        Protocol protocolCommand;
+
+        switch (command) {
+            case "/chat":
+                protocolCommand = Protocol.CHATM;
+                break;
+            default:
+                throw new NoCommandException();
+        }
 
     }
 

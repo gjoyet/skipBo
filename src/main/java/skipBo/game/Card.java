@@ -1,4 +1,4 @@
-package skipBo.game;//package ch.unibas;
+package skipBo.game;
 import java.awt.Color;
 //import
 

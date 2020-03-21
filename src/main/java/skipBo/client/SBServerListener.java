@@ -1,4 +1,4 @@
-package skipBo.client;
+package main.java.skipBo.client;
 
 /**
  * Waiting for any action from server.

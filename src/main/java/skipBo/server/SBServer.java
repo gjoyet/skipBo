@@ -11,7 +11,8 @@ import java.util.ArrayList;
  */
 public class SBServer {
     static int playerCounter = 0;
-    static ArrayList<SBListener> allListeners = new ArrayList<SBListener>(0);
+    public static ArrayList<SBListener> allListeners = new ArrayList<SBListener>(0);
+    public static SBLobby lobby = new SBLobby();
 
     public static void main(String[] args) {
         ServerSocket sbServerSocket = null;

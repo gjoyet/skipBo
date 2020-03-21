@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 import static skipBo.server.SBLobby.nameIsTaken;
+import static skipBo.server.SBLobby.nameIsValid;
 
 /**
  * Thread waiting for any action from client.
@@ -45,7 +46,7 @@ public class SBListener implements Runnable {
                 System.out.println("Error with reading input from client.");
             }
 
-            this.analyze(input, this.id);
+            analyze(input, this.id, this);
         }
 
     }
@@ -54,12 +55,13 @@ public class SBListener implements Runnable {
      * Acts according to network protocol input from client.
      * @param input: Slices input from client.
      */
-    private void analyze(String[] input, int id) {
+    private void analyze(String[] input, int id, SBListener sbL) {
         switch(input[0]) {
-            case "SETTO": setTo(input, id, this);
+            case "SETTO": setTo(input, id, sbL);
                 break;
-            case "CHNGE": changeTo(input, id, this);
+            case "CHNGE": changeTo(input, id, sbL);
                 break;
+            case "CHATM": chatMessage(input, id, sbL);
         }
 
     }
@@ -77,7 +79,9 @@ public class SBListener implements Runnable {
                 } else if(nameIsTaken(name)) {
                     throw new NameTakenException(name);
                 } else if(!nameIsValid(name)) {
-                    sbL.pw.println("PRINT§Terminal§Refused: Name contains invalid symbols. Try again.");
+                    sbL.pw.println("PRINT§Terminal§Refused: Name contains invalid symbols. Name set to system username.");
+                    this.player = new Player(id, System.getProperty("user.name"), sbL);
+                    SBLobby.addPlayer(this.player);
                 }
             } else throw new NoCommandException();
         } catch(NoCommandException nce) {
@@ -111,16 +115,12 @@ public class SBListener implements Runnable {
     }
 
     /**
-     * Checks if name is valid.
+     * Method for command "CHATM".
      */
-    private static boolean nameIsValid(String name) {
-        for(int i=0; i < name.length(); i++) {
-            if(!Character.isLetterOrDigit(name.charAt(i))) return false;
-        }
-        if(name.length() > 13) return false;
+    private void chatMessage(String[] input, int id, SBListener sbL) {
 
-        return true;
     }
+
 
 
 

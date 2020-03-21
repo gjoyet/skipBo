@@ -24,10 +24,20 @@ public class SBLobby {
 
     /**
      * Checks if the name is already in use.
-     * @param name
-     * @return true if taken, false if not
      */
     public static boolean nameIsTaken(String name){
         return playerLobby.stream().anyMatch(pl -> pl.getName().equals(name));
+    }
+
+    /**
+     * Checks if name is valid.
+     */
+    public static boolean nameIsValid(String name) {
+        for(int i=0; i < name.length(); i++) {
+            if(!Character.isLetterOrDigit(name.charAt(i))) return false;
+        }
+        if(name.length() > 13) return false;
+
+        return true;
     }
 }

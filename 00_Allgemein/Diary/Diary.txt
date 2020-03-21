@@ -20,4 +20,8 @@ Chat läuft. Überlegungen dazu, wie er in unser Endprogramm eingebaut werden wi
 Aufnahme der Meilenstein 1 Präsentation.
 
 17. März:
-Skype-Konferenz. Bestimmen der Struktur des Netzwerkprotokolls. Überlegungen zu nötigen Befehlen. Klären gewisser Fragen und Unsicherheiten innerhalb der Gruppe. Besprechen des weiteren Vorgehens.
+Skype-Konferenz. Bestimmen der Struktur des Netzwerkprotokolls, da es den Grundbaustein für die Kommunikation zwischen Server und Client darstellt. Überlegungen zu nötigen Befehlen. Klären gewisser Fragen und Unsicherheiten innerhalb der Gruppe. Besprechen des weiteren Vorgehens.
+
+17. - 22. März:
+Intensive Code-Arbeit. Server und Client werden geschrieben inklusive jeweiligen Listeners. Viele Erkenntnisse zu den Anforderungen der jeweiligen Klassen und der Verteilung der Aufgaben zwischen Client und Server: das Login mit dem Starten der Listeners ist komplizierter als gedacht, weil der Listener Thread gewisse Infos braucht, welche auf ersten Blick nur durch einen bereits bestehenden Listener gesammelt werden könnte. Erschwerte Kommunikation wegen Quarantäne.
+

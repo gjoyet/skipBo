@@ -54,6 +54,9 @@ class SBClientListener implements Runnable {
      */
     void forward(String input) throws NoCommandException {
 
+        if (input.isEmpty()) {
+            return;
+        }
         String protocolString;
 
         //It's a chat message

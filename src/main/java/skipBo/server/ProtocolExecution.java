@@ -70,6 +70,7 @@ public class ProtocolExecution {
     static void chatMessage(String[] input, int id, SBListener sbL) {
         try {
             if(input.length < 3) return;
+            System.out.println("Received chat message: " + input[2]);
             if(input[1].equals("Global")) {
                 String message = input[2];
                 for(SBListener el : allListeners) {

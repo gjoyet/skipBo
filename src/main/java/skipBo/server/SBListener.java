@@ -23,7 +23,7 @@ public class SBListener implements Runnable {
     SBListener(Socket sock, int id) {
         this.sock = sock;
         try {
-            this.pw = new PrintWriter(sock.getOutputStream());
+            this.pw = new PrintWriter(sock.getOutputStream(), true);
             this.br = new BufferedReader(new InputStreamReader(sock.getInputStream()));
         } catch (IOException e) {
             e.printStackTrace();
@@ -56,16 +56,16 @@ public class SBListener implements Runnable {
     private void analyze(String[] input, int id, SBListener sbL) {
         switch(input[0]) {
             case "SETTO": setTo(input, id, sbL);
-                System.out.println("LOG: Got into setTo method.");
+                //System.out.println("LOG: Got into setTo method.");
                 break;
             case "CHNGE": changeTo(input, id, sbL);
-                System.out.println("LOG: Got into changeTo method.");
+                //System.out.println("LOG: Got into changeTo method.");
                 break;
             case "CHATM": chatMessage(input, id, sbL);
-                System.out.println("LOG: Got into chatMessage method.");
+                //System.out.println("LOG: Got into chatMessage method.");
                 break;
             case "LGOUT": logout(input, id, sbL);
-                System.out.println("LOG: Got into logout method.");
+                //System.out.println("LOG: Got into logout method.");
         }
 
     }

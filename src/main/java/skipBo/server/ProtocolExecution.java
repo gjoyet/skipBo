@@ -74,6 +74,7 @@ public class ProtocolExecution {
             if(input.length < 3) return;
             System.out.println("Received chat message: " + input[2]);
             if(input[1].equals("Global")) {
+                System.out.println("Got into if statement. input[2] = " + input[2] + ", allListeners(0) = " + allListeners.get(0).player.name);
                 String message = input[2];
                 for(SBListener el : SBServer.allListeners) {
                     el.pw.println("CHATM§Global§" + sbL.player.name + ": " + message);

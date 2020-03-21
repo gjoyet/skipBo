@@ -1,4 +1,4 @@
-package skipBo.game;//package ch.unibas.game;
+package skipBo.game;
 
 import skipBo.enums.ServerResponse;
 
@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class PlayerMaster {
     //List of players that are in the game, can be shuffled through with a loop for every turn
-    public static ArrayList<Player> players = new ArrayList<Player>(4);
+    public static ArrayList<skipBo.game.Player> players = new ArrayList<skipBo.game.Player>(4);
     public static int numPlayers;
     public static int minPlayers = 0;
     Socket sock;
@@ -43,8 +43,8 @@ public class PlayerMaster {
      * @return player
      */
 
-    public static Player getPlayerName(String name){
-        for (Player p : players){
+    public static skipBo.game.Player getPlayerName(String name){
+        for (skipBo.game.Player p : players){
             if (p.getName().equals(name)){
                 return p;
             }
@@ -58,7 +58,7 @@ public class PlayerMaster {
      * @return true if taken, false if not
      */
     public static boolean nameIsTaken(String name){
-        for (Player pl : players){
+        for (skipBo.game.Player pl : players){
             if(pl.getName().equals(name)){
                 return true;
             }

@@ -64,6 +64,8 @@ public class SBListener implements Runnable {
             case "CHATM": chatMessage(input, id, sbL);
                 System.out.println("LOG: Got into chatMessage method.");
                 break;
+            case "LGOUT": logout(input, id, sbL);
+                System.out.println("LOG: Got into logout method.");
         }
 
     }

@@ -83,4 +83,11 @@ public class ProtocolExecution {
         }
     }
 
+    /**
+     * Method for command "LGOUT".
+     */
+    static void logout(String[] input, int id, SBListener sbL) {
+        // please implement
+    }
+
 }

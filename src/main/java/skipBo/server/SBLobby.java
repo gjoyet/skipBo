@@ -8,7 +8,17 @@ import java.util.ArrayList;
  * Stores all new players and eventually starts game.
  */
 public class SBLobby {
-    ArrayList<Player> playerLobby;
+    private ArrayList<Player> playerLobby;
 
-    void addPlayer()
+    public void addPlayer(Player p) {
+        playerLobby.add(p);
+    }
+
+    public Player getPlayer(int index) {
+        return playerLobby.get(index);
+    }
+
+    public int getLength() {
+        return playerLobby.size();
+    }
 }

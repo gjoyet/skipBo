@@ -1,4 +1,4 @@
-package skipBo.chat;
+package skipBo.chat_obsolete;
 
 import java.io.BufferedReader;
 

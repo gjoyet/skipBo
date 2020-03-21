@@ -1,8 +1,6 @@
 package skipBo.server;
 
-import skipBo.enums.Protocol;
 import skipBo.game.Player;
-import skipBo.userExceptions.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,19 +8,17 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-import static skipBo.server.SBLobby.nameIsTaken;
-import static skipBo.server.SBLobby.nameIsValid;
-import static skipBo.server.SBServer.allListeners;
+import static skipBo.server.ProtocolExecution.*;
 
 /**
  * Thread waiting for any action from client.
  */
 public class SBListener implements Runnable {
-    private Socket sock;
-    private PrintWriter pw;
-    private BufferedReader br;
-    private int id;
-    private Player player;
+    Socket sock;
+    PrintWriter pw;
+    BufferedReader br;
+    int id;
+    Player player;
 
     SBListener(Socket sock, int id) {
         this.sock = sock;
@@ -54,8 +50,8 @@ public class SBListener implements Runnable {
     }
 
     /**
-     * Acts according to network protocol input from client.
-     * @param input: Slices input from client.
+     * First branching out for protocol execution. Triggers required method depending on input protocol command.
+     * @param input: Sliced input from client.
      */
     private void analyze(String[] input, int id, SBListener sbL) {
         switch(input[0]) {
@@ -67,74 +63,5 @@ public class SBListener implements Runnable {
         }
 
     }
-
-    /**
-     * Method for command "SETTO".
-     */
-    private void setTo(String[] input, int id, SBListener sbL) {
-        try {
-            if (input[1].equals("Nickname")) {
-                String name = input[2];
-                if (!nameIsTaken(name) && nameIsValid(name)) {
-                    this.player = new Player(id, name, sbL);
-                    SBLobby.addPlayer(this.player);
-                } else if(nameIsTaken(name)) {
-                    throw new NameTakenException(name);
-                } else if(!nameIsValid(name)) {
-                    sbL.pw.println("PRINT§Terminal§Refused: Name contains invalid symbols. Name set to system username.");
-                    this.player = new Player(id, System.getProperty("user.name"), sbL);
-                    SBLobby.addPlayer(this.player);
-                }
-            } else throw new NoCommandException();
-        } catch(NoCommandException nce) {
-            System.out.println(input[1] + ": no option for SETTO command.");
-        } catch(NameTakenException nte) {
-            sbL.player = new Player(id, nte.findName(), sbL);
-            SBLobby.addPlayer(this.player);
-        }
-    }
-
-    /**
-     * Method for command "CHNGE".
-     */
-    private void changeTo(String[] input, int id, SBListener sbL) {
-        try {
-            if(input[1].equals("Nickname")) {
-                String name = input[2];
-                if(!nameIsTaken(name) && nameIsValid(name)) {
-                    sbL.player.name = name;
-                } else if(!nameIsValid(name)) {
-                    sbL.pw.println("PRINT§Terminal§Refused: Name contains invalid symbols. Try again.");
-                } else if(nameIsTaken(name)) {
-                    throw new NameTakenException(name);
-                }
-            } else throw new NoCommandException();
-        } catch (NoCommandException nce) {
-            System.out.println(input[1] + ": no option for CHNGE command.");
-        } catch (NameTakenException nte) {
-            sbL.player.name = nte.findName();
-        }
-    }
-
-    /**
-     * Method for command "CHATM".
-     */
-    private void chatMessage(String[] input, int id, SBListener sbL) {
-        try {
-            if(input[1].equals("Global")) {
-                String message = input[2];
-                for(SBListener el : allListeners) {
-                    if(!el.equals(sbL)) {
-                        el.pw.println("CHATM§Global§" + sbL.player.name + ": " + message);
-                    }
-                }
-            } else throw new NoCommandException();
-        } catch (NoCommandException nce) {
-            System.out.println(input[1] + ": no option for CHNGE command.");
-        }
-    }
-
-
-
 
 }

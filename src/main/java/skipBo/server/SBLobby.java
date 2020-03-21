@@ -8,17 +8,26 @@ import java.util.ArrayList;
  * Stores all new players and eventually starts game.
  */
 public class SBLobby {
-    private ArrayList<Player> playerLobby;
+    static private ArrayList<Player> playerLobby;
 
-    public void addPlayer(Player p) {
+    public static void addPlayer(Player p) {
         playerLobby.add(p);
     }
 
-    public Player getPlayer(int index) {
+    public static Player getPlayer(int index) {
         return playerLobby.get(index);
     }
 
-    public int getLength() {
+    public static int getLength() {
         return playerLobby.size();
+    }
+
+    /**
+     * Checks if the name is already in use.
+     * @param name
+     * @return true if taken, false if not
+     */
+    public static boolean nameIsTaken(String name){
+        return playerLobby.stream().anyMatch(pl -> pl.getName().equals(name));
     }
 }

@@ -40,7 +40,7 @@ public class SBServer {
      * Accepts new socket and starts a SBListener thread.
      * @param serverSo
      */
-    static void login(ServerSocket serverSo) throws IOException {
+    private static void login(ServerSocket serverSo) throws IOException {
         try {
             Socket sock = serverSo.accept();
 

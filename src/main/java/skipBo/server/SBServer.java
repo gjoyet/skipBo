@@ -45,6 +45,7 @@ public class SBServer {
             SBListener sbListen = new SBListener(sock, ++playerCounter);
             Thread sbListenT = new Thread(sbListen); sbListenT.start();
             allListeners.add(sbListen);
+            System.out.println("allListeners size: " + allListeners.size() + "; playerCounter: " + playerCounter);
 
         } finally {}
     }

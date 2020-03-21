@@ -45,7 +45,7 @@ public class SBListener implements Runnable {
                 System.out.println("Error with reading input from client.");
             }
 
-            analyze(input, this.id, this);
+            this.analyze(input, this.id);
         }
 
     }
@@ -54,11 +54,11 @@ public class SBListener implements Runnable {
      * Acts according to network protocol input from client.
      * @param input: Slices input from client.
      */
-    private static void analyze(String[] input, int id, SBListener sbL) {
+    private void analyze(String[] input, int id) {
         switch(input[0]) {
-            case "SETTO": setTo(input, id, sbL);
+            case "SETTO": setTo(input, id, this);
                 break;
-            case "CHNGE": changeTo(input, id, sbL);
+            case "CHNGE": changeTo(input, id, this);
                 break;
         }
 
@@ -67,22 +67,23 @@ public class SBListener implements Runnable {
     /**
      * Method for command "SETTO".
      */
-    private static void setTo(String[] input, int id, SBListener sbL) {
+    private void setTo(String[] input, int id, SBListener sbL) {
         try {
             if (input[1].equals("Nickname")) {
-
                 String name = input[2];
-                if (!skipBo.server.SBLobby.nameIsTaken(name)) {
-                    this.player = new Player(id, name, sbL)
+                if (!nameIsTaken(name) && nameIsValid(name)) {
+                    this.player = new Player(id, name, sbL);
                     SBLobby.addPlayer(this.player);
-                } else {
+                } else if(nameIsTaken(name)) {
                     throw new NameTakenException(name);
+                } else if(!nameIsValid(name)) {
+                    sbL.pw.println("PRINT§Terminal§Refused: Name contains invalid symbols. Try again.");
                 }
             } else throw new NoCommandException();
         } catch(NoCommandException nce) {
             System.out.println(input[1] + ": no option for SETTO command.");
         } catch(NameTakenException nte) {
-            this.player = new Player(id, nte.findName(), sbL);
+            sbL.player = new Player(id, nte.findName(), sbL);
             SBLobby.addPlayer(this.player);
         }
     }
@@ -90,15 +91,15 @@ public class SBListener implements Runnable {
     /**
      * Method for command "CHNGE".
      */
-    private static void changeTo(String[] input, int id, SBListener sbL) {
+    private void changeTo(String[] input, int id, SBListener sbL) {
         try {
             if(input[1].equals("Nickname")) {
                 String name = input[2];
-                if(!skipBo.server.SBLobby.nameIsTaken(name) && nameIsValid(name)) {
+                if(!nameIsTaken(name) && nameIsValid(name)) {
                     sbL.player.name = name;
                 } else if(!nameIsValid(name)) {
-                    sbL.pw.println("PRINT§Terminal§Refused: Name contains invalid symbols.");
-                } else if(skipBo.server.SBLobby.nameIsTaken(name)) {
+                    sbL.pw.println("PRINT§Terminal§Refused: Name contains invalid symbols. Try again.");
+                } else if(nameIsTaken(name)) {
                     throw new NameTakenException(name);
                 }
             } else throw new NoCommandException();

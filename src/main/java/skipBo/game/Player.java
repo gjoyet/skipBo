@@ -1,5 +1,7 @@
 package skipBo.game;//package ch.unibas.game;
 //import ch.unibas.game.Pile;
+import skipBo.server.SBListener;
+
 import java.util.*;
 import java.net.*;
 
@@ -9,10 +11,11 @@ import java.net.*;
 
 public class Player {
 
-    private String name; //name of the user
+    public String name; //name of the user, has to be public so it can be changed
     private int id;
-    private InetAddress ip;
-    private Socket sock;
+    private SBListener sbListen;
+    // private InetAddress ip;
+    // private Socket sock;
     private int port;
     private Pile piles;
     /**
@@ -20,13 +23,13 @@ public class Player {
      * a String name and ip and port numbers.
      * @param id
      * @param name
-     * @param socket
+     * @param sbListen
      */
-    public Player (int id, String name)  { // Socket socket){
+    public Player (int id, String name, SBListener sbListen) {
         this.id = id;
         this.name = name;
+        this.sbListen = sbListen;
         this.piles = new Pile(id);
-        // sock = socket;
     }
 
     public ArrayList<Card> getStockPile(){

@@ -49,17 +49,10 @@ public class ChatGraphic extends JFrame {
        contentPane.add(sendMes);
 
        inputMes = new JTextArea();
-       inputMes.setBounds(290, 320,200, 50);
+       inputMes.setBounds(290, 335,200, 50);
        inputMes.setEditable(true);
        inputMes.setColumns(3);
        contentPane.add(inputMes);
-
-
-
-
-
-
-
 
     }
 }

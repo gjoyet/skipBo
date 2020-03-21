@@ -51,6 +51,8 @@ public class ProtocolExecution {
                 String name = input[2];
                 if(!SBServer.lobby.nameIsTaken(name) && SBServer.lobby.nameIsValid(name)) {
                     sbL.player.name = name;
+                    sbL.pw.println("PRINT§Terminal§Name changed to " + name + ".");
+                    System.out.println("Name changed to " + name +".");
                 } else if(!SBServer.lobby.nameIsValid(name)) {
                     sbL.pw.println("PRINT§Terminal§Refused: Name contains invalid symbols. Try again.");
                 } else if(SBServer.lobby.nameIsTaken(name)) {
@@ -73,10 +75,8 @@ public class ProtocolExecution {
             System.out.println("Received chat message: " + input[2]);
             if(input[1].equals("Global")) {
                 String message = input[2];
-                for(SBListener el : allListeners) {
-                    if(!el.equals(sbL)) {
-                        el.pw.println("CHATM§Global§" + sbL.player.name + ": " + message);
-                    }
+                for(SBListener el : SBServer.allListeners) {
+                    el.pw.println("CHATM§Global§" + sbL.player.name + ": " + message);
                 }
             } else throw new NoCommandException();
         } catch (NoCommandException nce) {

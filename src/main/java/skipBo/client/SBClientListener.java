@@ -1,12 +1,11 @@
-package main.java.skipBo.client;
-
-import main.java.skipBo.enums.Protocol;
-import main.java.skipBo.userExceptions.NoCommandException;
+package skipBo.client;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 import java.net.Socket;
+import skipBo.userExceptions.*;
+import skipBo.enums.Protocol;
 
 /**
  * Thread waiting for any action from user input (from console) and forwards command to Server

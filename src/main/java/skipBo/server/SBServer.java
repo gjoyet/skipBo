@@ -49,7 +49,5 @@ public class SBServer {
             System.out.println("Issue with opening socket.");
         }
     }
-
-
 }
 

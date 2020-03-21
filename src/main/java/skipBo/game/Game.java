@@ -38,7 +38,7 @@ public class Game {
     /**
      * setUpGame creates all card Decks and hands out random cards
      * from the main deck to all players in the game.
-     * Game and Player Objects have a Object of type Pile, which contain
+     * Game and Player Objects have an Object of type Pile, which contain
      * all the different pile-types, which are specifically needed.
      */
     public void setUpGame() {
@@ -84,17 +84,17 @@ public class Game {
 
     public static void main(String[] args){
 
-        Object[] players = new Object[4];
-        Player sp1 = new Player(1, "Manfred");
-        Player sp2 = new Player(2, "Franz Ferdinandt");
-        Player sp3 = new Player(3, "Peter");
-        Player sp4 = new Player(3, "Meinrad");
-        players[0] = sp1;
-        players[1] = sp2;
-        players[2] = sp3;
-        players[3] = sp4;
+//        Object[] players = new Object[4];
+//        Player sp1 = new Player(1, "Manfred");
+//        Player sp2 = new Player(2, "Franz Ferdinandt");
+//        Player sp3 = new Player(3, "Peter");
+//        Player sp4 = new Player(3, "Meinrad");
+//        players[0] = sp1;
+//        players[1] = sp2;
+//        players[2] = sp3;
+//        players[3] = sp4;
 
-        Game spiel = new Game(players);
-        spiel.setUpGame();
+//        Game spiel = new Game(players);
+//        spiel.setUpGame();
     }
 }

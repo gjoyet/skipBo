@@ -29,9 +29,7 @@ public class PlayerMaster {
      */
 
     public static ServerResponse newPlayer(String name, Socket socket){
-        if(nameIsTaken(name)){
-            return ServerResponse.NAME_USED;
-        }else if (players.size() > 4){
+        if (players.size() > 4){
             return ServerResponse.SERVER_FULL;
         }
         return srp.LOGIN_SUCCESS;
@@ -56,7 +54,7 @@ public class PlayerMaster {
      * Checks if the name is already in use
      * @param name
      * @return true if taken, false if not
-     */
+
     public static boolean nameIsTaken(String name){
         for (skipBo.game.Player pl : players){
             if(pl.getName().equals(name)){
@@ -65,4 +63,5 @@ public class PlayerMaster {
         }
         return false;
     }
+     */
 }

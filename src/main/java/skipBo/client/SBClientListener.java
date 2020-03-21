@@ -18,10 +18,10 @@ class SBClientListener implements Runnable {
     /**
      *Creates a SBClientListener with a Socket
      */
-    SBClientListener(Socket sock) throws IOException {
+    SBClientListener(Socket sock, Scanner scanner) throws IOException {
         this.sock = sock;
         pw = new PrintWriter(sock.getOutputStream(),true);
-        scanner = new Scanner(System.in);
+        this.scanner = scanner;
     }
 
     /**

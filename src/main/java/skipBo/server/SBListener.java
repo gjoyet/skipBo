@@ -19,6 +19,7 @@ public class SBListener implements Runnable {
     private PrintWriter pw;
     private BufferedReader br;
     private int id;
+    private Player player;
 
     SBListener(Socket sock, int id) {
         this.sock = sock;
@@ -29,6 +30,7 @@ public class SBListener implements Runnable {
             e.printStackTrace();
         }
         this.id = id;
+        this.player = null;
     }
 
     /**
@@ -43,7 +45,7 @@ public class SBListener implements Runnable {
                 System.out.println("Error with reading input from client.");
             }
 
-            analyze(input, this.id);
+            analyze(input, this.id, this);
         }
 
     }
@@ -52,11 +54,11 @@ public class SBListener implements Runnable {
      * Acts according to network protocol input from client.
      * @param input: Slices input from client.
      */
-    private void analyze(String[] input, int id) {
+    private static void analyze(String[] input, int id, SBListener sbL) {
         switch(input[0]) {
-            case "SETTO": setTo(input, id);
+            case "SETTO": setTo(input, id, sbL);
                 break;
-            case "CHNGE": changeTo(input, id);
+            case "CHNGE": changeTo(input, id, sbL);
                 break;
         }
 
@@ -65,45 +67,58 @@ public class SBListener implements Runnable {
     /**
      * Method for command "SETTO".
      */
-    private void setTo(String[] input, int id) {
+    private static void setTo(String[] input, int id, SBListener sbL) {
         try {
             if (input[1].equals("Nickname")) {
 
                 String name = input[2];
                 if (!skipBo.server.SBLobby.nameIsTaken(name)) {
-                    SBLobby.addPlayer(new Player(id, name));
+                    this.player = new Player(id, name, sbL)
+                    SBLobby.addPlayer(this.player);
                 } else {
-                    int i = 1;
-                    String nameWithNumber = name + i;
-                    while (skipBo.server.SBLobby.nameIsTaken(nameWithNumber)) {
-                        i++;
-                        nameWithNumber = name + i;
-                    }
-                    SBLobby.addPlayer(new Player(id, nameWithNumber));
+                    throw new NameTakenException(name);
                 }
             } else throw new NoCommandException();
-        } catch (NoCommandException nce) {
+        } catch(NoCommandException nce) {
             System.out.println(input[1] + ": no option for SETTO command.");
+        } catch(NameTakenException nte) {
+            this.player = new Player(id, nte.findName(), sbL);
+            SBLobby.addPlayer(this.player);
         }
     }
 
     /**
      * Method for command "CHNGE".
      */
-    private void changeTo(String[] input, int id) {
+    private static void changeTo(String[] input, int id, SBListener sbL) {
         try {
-
             if(input[1].equals("Nickname")) {
-
                 String name = input[2];
-                if(!skipBo.server.SBLobby.nameIsTaken(name)) {
-                    // get Player with playerID 'id' out of arraylist 'playerLobby' and change his name
+                if(!skipBo.server.SBLobby.nameIsTaken(name) && nameIsValid(name)) {
+                    sbL.player.name = name;
+                } else if(!nameIsValid(name)) {
+                    sbL.pw.println("PRINT§Terminal§Refused: Name contains invalid symbols.");
+                } else if(skipBo.server.SBLobby.nameIsTaken(name)) {
+                    throw new NameTakenException(name);
                 }
-
             } else throw new NoCommandException();
         } catch (NoCommandException nce) {
-
+            System.out.println(input[1] + ": no option for CHNGE command.");
+        } catch (NameTakenException nte) {
+            sbL.player.name = nte.findName();
         }
+    }
+
+    /**
+     * Checks if name is valid.
+     */
+    private static boolean nameIsValid(String name) {
+        for(int i=0; i < name.length(); i++) {
+            if(!Character.isLetterOrDigit(name.charAt(i))) return false;
+        }
+        if(name.length() > 13) return false;
+
+        return true;
     }
 
 

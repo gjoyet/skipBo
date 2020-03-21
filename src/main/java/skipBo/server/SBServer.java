@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  * Server for Skip-Bo: manages lobby, chat, starts game. This server accepts players while starting
@@ -15,6 +16,7 @@ import java.net.Socket;
  */
 public class SBServer {
     static int playerCounter = 0;
+    static ArrayList<SBListener> allListeners;
 
     public static void main(String[] args) {
         ServerSocket sbServerSocket = null;
@@ -46,6 +48,7 @@ public class SBServer {
 
             SBListener sbListen = new SBListener(sock, ++playerCounter);
             Thread sbListenT = new Thread(sbListen); sbListenT.start();
+            allListeners.add(sbListen);
 
         } catch (IOException e) {
             System.out.println("Issue with opening socket.");

@@ -11,6 +11,7 @@ import java.net.Socket;
 
 import static skipBo.server.SBLobby.nameIsTaken;
 import static skipBo.server.SBLobby.nameIsValid;
+import static skipBo.server.SBServer.allListeners;
 
 /**
  * Thread waiting for any action from client.
@@ -118,7 +119,20 @@ public class SBListener implements Runnable {
      * Method for command "CHATM".
      */
     private void chatMessage(String[] input, int id, SBListener sbL) {
-
+        try {
+            if(input[1].equals("Send")) {
+                String message = input[2];
+                for(SBListener el : allListeners) {
+                    if(!el.equals(sbL)) {
+                        el.pw.println("CHATM§Recieve§" + message);
+                    }
+                }
+            } else if(input[1].equals("Recieve")) {
+                // ignore
+            } else throw new NoCommandException();
+        } catch (NoCommandException nce) {
+            System.out.println(input[1] + ": no option for CHNGE command.");
+        }
     }
 
 

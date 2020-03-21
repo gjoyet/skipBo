@@ -17,5 +17,6 @@ Lobby 		CHNGE		Nickname	String nickname, 			changes nickname of player sending t
 
 
 
-Chat		CHATM		Global		String message				writes ‚message‘ on the global chat
+Chat		CHATM		Send		String message				sends ‚message‘ to write on the global chat
+				Receive		String message				sends ,message, to client to write on terminal
 

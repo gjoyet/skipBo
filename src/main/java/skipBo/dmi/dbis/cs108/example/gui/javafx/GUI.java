@@ -1,3 +1,4 @@
+/*
 package skipBo.dmi.dbis.cs108.example.gui.javafx;
 
 import javafx.application.Application;
@@ -6,15 +7,19 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+*/
 /**
  * This is an example JavaFX-Application.
- */
+ *//*
+
 public class GUI extends Application {
 
-    /**
+    */
+/**
      * Launching this method will not work on some platforms.
      * What you should do is to create a separate main class and launch the GUI class from there as is done in {@link Main}
-     */
+     *//*
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -30,3 +35,4 @@ public class GUI extends Application {
     }
 
 }
+*/

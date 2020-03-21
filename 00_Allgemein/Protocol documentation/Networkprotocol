@@ -1,6 +1,7 @@
 
 Basic Structure: XXXXX§Option§Arguments
-Example: PRINT§Terminal§Please enter nickname:
+Example: PRINT§Terminal§Please enter nickname:	Prints ‚Please enter nickname:‘ on terminal of client
+Example: CHNGE§Nickname§3§Destroyer			Changes nickname of Player with playerId ‚3‘ to ‚Destroyer‘
 
 Section		Command		Option		Arguments				Comments
 
@@ -12,7 +13,7 @@ Login		SETTO		Nickname	String nickname				Sets nickname of new player to ‚nick
 
 
 
-Lobby 		CHNGE		Nickname	String nickname, PlayerID player	changes nickname of ‚player‘ to ‚nickname‘
+Lobby 		CHNGE		Nickname	PlayerID player, String nickname, 	changes nickname of ‚player‘ to ‚nickname‘
 
 
 

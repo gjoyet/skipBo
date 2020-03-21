@@ -1,6 +1,7 @@
 package skipBo.server;
 
 import skipBo.game.Player;
+import skipBo.userExceptions.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -55,7 +56,8 @@ public class SBListener implements Runnable {
         switch(input[0]) {
             case "SETTO": setTo(input, id);
                 break;
-            case "CHNGE":
+            case "CHNGE": changeTo(input, id);
+                break;
         }
 
     }
@@ -66,8 +68,8 @@ public class SBListener implements Runnable {
     private void setTo(String[] input, int id) {
         try {
             if (input[1].equals("Nickname")) {
-                String name = input[2];
 
+                String name = input[2];
                 if (!skipBo.server.SBLobby.nameIsTaken(name)) {
                     SBLobby.addPlayer(new Player(id, name));
                 } else {
@@ -79,9 +81,28 @@ public class SBListener implements Runnable {
                     }
                     SBLobby.addPlayer(new Player(id, nameWithNumber));
                 }
-            } else throw new main.java.skipBo.userExceptions.NoCommandException();
-        } catch (main.java.skipBo.userExceptions.NoCommandException nce) {
+            } else throw new NoCommandException();
+        } catch (NoCommandException nce) {
             System.out.println(input[1] + ": no option for SETTO command.");
+        }
+    }
+
+    /**
+     * Method for command "CHNGE".
+     */
+    private void changeTo(String[] input, int id) {
+        try {
+
+            if(input[1].equals("Nickname")) {
+
+                String name = input[2];
+                if(!skipBo.server.SBLobby.nameIsTaken(name)) {
+                    // get Player with playerID 'id' out of arraylist 'playerLobby' and change his name
+                }
+
+            } else throw new NoCommandException();
+        } catch (NoCommandException nce) {
+
         }
     }
 

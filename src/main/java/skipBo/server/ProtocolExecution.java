@@ -4,8 +4,6 @@ import skipBo.game.Player;
 import skipBo.userExceptions.NameTakenException;
 import skipBo.userExceptions.NoCommandException;
 
-import static skipBo.server.SBLobby.nameIsTaken;
-import static skipBo.server.SBLobby.nameIsValid;
 import static skipBo.server.SBServer.allListeners;
 
 public class ProtocolExecution {
@@ -17,22 +15,22 @@ public class ProtocolExecution {
         try {
             if (input[1].equals("Nickname")) {
                 String name = input[2];
-                if (!nameIsTaken(name) && nameIsValid(name)) {
+                if (!SBServer.lobby.nameIsTaken(name) && SBServer.lobby.nameIsValid(name)) {
                     sbL.player = new Player(id, name, sbL);
-                    SBLobby.addPlayer(sbL.player);
-                } else if(nameIsTaken(name)) {
+                    SBServer.lobby.addPlayer(sbL.player);
+                } else if(SBServer.lobby.nameIsTaken(name)) {
                     throw new NameTakenException(name);
-                } else if(!nameIsValid(name)) {
+                } else if(!SBServer.lobby.nameIsValid(name)) {
                     sbL.pw.println("PRINT§Terminal§Invalid name. Name set to system username.");
                     sbL.player = new Player(id, System.getProperty("user.name"), sbL);
-                    SBLobby.addPlayer(sbL.player);
+                    SBServer.lobby.addPlayer(sbL.player);
                 }
             } else throw new NoCommandException();
         } catch(NoCommandException nce) {
             System.out.println(input[1] + ": no option for SETTO command.");
         } catch(NameTakenException nte) {
             sbL.player = new Player(id, nte.findName(), sbL);
-            SBLobby.addPlayer(sbL.player);
+            SBServer.lobby.addPlayer(sbL.player);
         }
     }
 
@@ -43,11 +41,11 @@ public class ProtocolExecution {
         try {
             if(input[1].equals("Nickname")) {
                 String name = input[2];
-                if(!nameIsTaken(name) && nameIsValid(name)) {
+                if(!SBServer.lobby.nameIsTaken(name) && SBServer.lobby.nameIsValid(name)) {
                     sbL.player.name = name;
-                } else if(!nameIsValid(name)) {
+                } else if(!SBServer.lobby.nameIsValid(name)) {
                     sbL.pw.println("PRINT§Terminal§Refused: Name contains invalid symbols. Try again.");
-                } else if(nameIsTaken(name)) {
+                } else if(SBServer.lobby.nameIsTaken(name)) {
                     throw new NameTakenException(name);
                 }
             } else throw new NoCommandException();

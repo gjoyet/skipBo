@@ -1,0 +1,20 @@
+
+Basic Structure: XXXXX§Option§Arguments
+Example: PRINT§Terminal§Please enter nickname:
+
+Section		Command		Option		Arguments				Comments
+
+Terminal	PRINT		Terminal	String message				prints ‚message‘ on the receiver’s terminal
+
+
+
+Login		SETTO		Nickname	String nickname				Sets nickname of new player to ‚nickname‘
+
+
+
+Lobby 		CHNGE		Nickname	String nickname, PlayerID player	changes nickname of ‚player‘ to ‚nickname‘
+
+
+
+Chat		CHATM		Global		String message				writes ‚message‘ on the global chat
+

@@ -4,13 +4,16 @@ Programmierprojekt - Diary
 Entscheid für das Spiel: Skip-Bo. Lesen der Regeln, erste und sehr abstrakte Überlegungen dazu, was zu implementieren ist.
 
 3. März:
-Erstes Treffen, um Zeitplan festzulegen und Aufgaben zu verteilen. Probleme mit git über Intellij. Erarbeiten eines Grundverständnisses für Server-Client Architekturen. Konkretere Überlegungen zu benötigten Klassen und Reihenfolge der Implementierung. Grundriss von GanttProject erstellt.
+Erstes Treffen, um Zeitplan festzulegen und Aufgaben zu verteilen. Probleme mit git über Intellij. Erarbeiten eines Grundverständnisses für Server-Client Architekturen. 
+Konkretere Überlegungen zu benötigten Klassen und Reihenfolge der Implementierung. Grundriss von GanttProject erstellt.
 
 3. März - 10. März:
-Arbeiten an der Präsentation. Jedes Gruppenmitglied macht seinen Teil der PowerPoint. Erstes individuelles Experimentieren, um selbst einen einfachen Server und Client mit Java zu programmieren. Erster Versuch, einen simplen Chat zu programmieren.
+Arbeiten an der Präsentation. Jedes Gruppenmitglied macht seinen Teil der PowerPoint. Erstes individuelles Experimentieren, um selbst einen einfachen Server und Client mit Java zu programmieren. 
+Erster Versuch, einen simplen Chat zu programmieren.
 
 10. März:
-Erstellen eines genauen Zeitplans inklusive Verteilung der Aufgaben. Genaue Überlegungen zu Softwarearchitektur, inklusive Erstellen einer Grafik dazu. Beenden von Mock-up und diversen anderen Vorbereitungen für die Präsentation am Donnerstag. Grosse Probleme mit Git: Synchronisation klappt bei einem Mitglied nicht.
+Erstellen eines genauen Zeitplans inklusive Verteilung der Aufgaben. Genaue Überlegungen zu Softwarearchitektur, inklusive Erstellen einer Grafik dazu. 
+Beenden von Mock-up und diversen anderen Vorbereitungen für die Präsentation am Donnerstag. Grosse Probleme mit Git: Synchronisation klappt bei einem Mitglied nicht.
 Schreiben von erstem nützlichen Programmteil, einem Chat, welcher die Nachrichten auf dem Server ausgibt.
 
 11. März:
@@ -20,8 +23,23 @@ Chat läuft. Überlegungen dazu, wie er in unser Endprogramm eingebaut werden wi
 Aufnahme der Meilenstein 1 Präsentation.
 
 17. März:
-Skype-Konferenz. Bestimmen der Struktur des Netzwerkprotokolls, da es den Grundbaustein für die Kommunikation zwischen Server und Client darstellt. Überlegungen zu nötigen Befehlen. Klären gewisser Fragen und Unsicherheiten innerhalb der Gruppe. Besprechen des weiteren Vorgehens.
+Skype-Konferenz. Bestimmen der Struktur des Netzwerkprotokolls, da es den Grundbaustein für die Kommunikation zwischen Server und Client darstellt. 
+Überlegungen zu nötigen Befehlen. Klären gewisser Fragen und Unsicherheiten innerhalb der Gruppe. Besprechen des weiteren Vorgehens.
 
 17. - 22. März:
-Intensive Code-Arbeit. Server und Client werden geschrieben inklusive jeweiligen Listeners. Viele Erkenntnisse zu den Anforderungen der jeweiligen Klassen und der Verteilung der Aufgaben zwischen Client und Server: das Login mit dem Starten der Listeners ist komplizierter als gedacht, weil der Listener Thread gewisse Infos braucht, welche auf ersten Blick nur durch einen bereits bestehenden Listener gesammelt werden könnte. Erschwerte Kommunikation wegen Quarantäne.
+Intensive Code-Arbeit. Server und Client werden geschrieben inklusive jeweiligen Listeners. 
+Viele Erkenntnisse zu den Anforderungen der jeweiligen Klassen und der Verteilung der Aufgaben zwischen Client und Server: das Login mit dem Starten der Listeners ist komplizierter 
+als gedacht, weil der Listener Thread gewisse Infos braucht, welche auf ersten Blick nur durch einen bereits bestehenden Listener gesammelt werden könnte. Erschwerte Kommunikation wegen Quarantäne.
 
+20.März: 
+Bei den Spieloperationen sind einige Sachen erstellt worden. Player, Game und Card Klassen sind fast fertig geschrieben. Player Klasse ist besonders wichtig für die Server Implementation, und wir setzten
+hier Priorität. Kartenverteilung in der Klasse Game ist auch bereit. In einer Methode setupGame() werden zuerst alle Karten erstellt und dann weiter mit einer Random Variable an verschiedenen Spielern
+verteilt.Die Stapelbildung geschieht in der Klasse Pile, die Handkarten der Spieler werden auch wie ein Pile behandelt, aber mit viel wenigen Einträgen. Alle Piles sind in verschiedenen ArrayLists gespeichert, 
+da man die Grösse immer verändern kann! 
+
+21. März: 
+Server ist bereit und mehrere Clients können sich verbinden. Von der Client Seite ist es möglich, einen Username einzugeben. Server kann sich den Namen auch merken und alle Chat Messages der Clients aufnehmen.
+Leider ist das Zurückschicken der Nachrichten an alle Clients ein Problem. Die Clients können im Moment Nachrichten schicken, aber sehen die Nachrichten der anderen Clients nicht. 
+Nach einem langen Debug Session ist es klar, dass der Fehler bei Deklaration vom PrintWriter lag. Wir hatten den zweiten Parameter (autoFlush: true) vergessen; deswegen wurden die Nachrichten/Protokoll Nachrichten nicht
+an alle Clients verschickt. Client-Client Kommunikation läuft zu diesem Zeitpunkt flüssig. Die Gültigkeit der Namen wird auch gut überprüft vom Server, aber /change name Befehl gibt etwas Falsches aus. Einige Code
+Abschnitte müssen noch genauer kommentiert/beschrieben werden und das Netzwerkprotokoll muss noch besser dokumentiert werden. 

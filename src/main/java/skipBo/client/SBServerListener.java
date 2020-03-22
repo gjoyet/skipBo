@@ -67,30 +67,41 @@ public class SBServerListener implements Runnable {
     }
 
     /**
-     * Sends a chat message to the client.
-     * @param command String array according to network protocol with command, option and arguments.
+     * Sends a chat message to the client
+     * @param command String array according to network protocol with command, option and arguments
      */
     void sendChatMessage(String[] command) {
         System.out.println(command[2]);
     }
 
     /**
-     * Sends status message after changing name.
-     * @param command:String array according to network protocol with command, option and arguments.
+     * Sends status message after changing name
+     * @param command String array according to network protocol with command, option and arguments
      */
     void changeTo(String[] command) {
-        System.out.println(command[2]);
+        printMessage(command[2]);
     }
 
+    /**
+     * Terminates SBServerListener thread and sends status message to client
+     */
     void logOut() {
         isLoggedIn = false;
-        System.out.println("Logout successful");
+        printMessage("Logout successful");
     }
 
+    /**
+     * Processes PRINT command and sends message according to network protocol
+     * @param command String array according to network protocol with command, option and arguments
+     */
     void print(String[] command) {
-        System.out.println(command[2]);
+        printMessage(command[2]);
     }
 
+    /**
+     *Displays a message to the client
+     * @param message A message
+     */
     void printMessage(String message) {
         System.out.println(message);
     }

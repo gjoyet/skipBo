@@ -47,7 +47,7 @@ public class SBLobby {
     public boolean nameIsValid(String name) {
         if(name.length() > 13 || name.length() < 3) return false;
         for(int i=0; i < name.length(); i++) {
-            if(!Character.isDigit(name.charAt(i)) || !Character.isAlphabetic(name.charAt(i))) return false;
+            if(!Character.isLetterOrDigit(name.charAt(i))) return false;
         }
         return true;
     }

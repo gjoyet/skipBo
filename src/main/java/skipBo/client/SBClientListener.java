@@ -53,7 +53,7 @@ class SBClientListener implements Runnable {
     void printWelcomeInformation() {
         System.out.println("Connection successful\n");
         System.out.println("Commands:\n/change name [name]\n/quit\n"); //List of Commands
-        System.out.println("Name can only contain letters or digits and cannot be longer than 13 characters");
+        System.out.println("Name can only contain letters or digits and must have between 3 and 13 characters");
     }
 
     /**

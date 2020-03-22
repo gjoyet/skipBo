@@ -8,6 +8,10 @@ import java.io.IOException;
 
 import static skipBo.server.SBServer.sbLobby;
 
+/**
+ * The execution of the network protocol is implemented in this class. Every command has one method,
+ * with further branching inside each method according to the options.
+ */
 public class ProtocolExecution {
 
     /**
@@ -38,7 +42,7 @@ public class ProtocolExecution {
             sbL.player = new Player(sbL.id, name, sbL);
             SBServer.sbLobby.addPlayer(sbL.player);
         } finally {
-            System.out.println("Welcome to Skip-Bo, " + name + "!");
+            System.out.println(name + " logged in.");
             sbL.pw.println("PRINT§Terminal§Welcome to Skip-Bo, " + name + "!");
             sendAllExceptOne("PRINT§Terminal§" + name + " joined the room. Say hi!", sbL);
         }
@@ -49,22 +53,25 @@ public class ProtocolExecution {
      */
     static void changeTo(String[] input, SBListener sbL) throws NoCommandException {
         String formerName = sbL.player.getName();
+        if(input.length < 3) return;
         try {
             if (input[1].equals("Nickname")) {
                 String name = input[2];
                 if (!SBServer.sbLobby.nameIsTaken(name) && SBServer.sbLobby.nameIsValid(name)) {
                     sbL.player.changeName(name);
                     sbL.pw.println("PRINT§Terminal§Name changed to " + name + ".");
-                    System.out.println("Name changed to " + name + ".");
-                    sendAll("PRINT§Terminal§" + formerName + " changed name to " + name + ".");
+                    System.out.println(formerName + " changed name to " + name + ".");
+                    sendAllExceptOne("PRINT§Terminal§" + formerName + " changed name to " + name + ".", sbL);
                 } else if (!SBServer.sbLobby.nameIsValid(name)) {
-                    sbL.pw.println("PRINT§Terminal§Refused: Name contains invalid symbols. Try again.");
+                    sbL.pw.println("PRINT§Terminal§Refused: Invalid name. Try again.");
                 } else if (SBServer.sbLobby.nameIsTaken(name)) {
                     throw new NameTakenException(name, sbL);
                 }
             } else throw new NoCommandException(input[0], input[1]);
         } catch (NameTakenException nte) {
-            sbL.player.changeName(nte.findName());
+            String name = nte.findName();
+            sbL.player.changeName(name);
+            sendAllExceptOne("PRINT§Terminal§" + formerName + " changed name to " + name + ".", sbL);
         }
     }
 
@@ -77,7 +84,7 @@ public class ProtocolExecution {
             System.out.println("Received chat message: " + input[2]);
             if (input[1].equals("Global")) {
                 String message = input[2];
-                sendAll("CHATM§Global§" + sbL.player.getName() + ": " + message);
+                sendAllExceptOne("CHATM§Global§" + sbL.player.getName() + ": " + message, sbL);
             } else throw new NoCommandException(input[0], input[1]);
         } finally {}
     }
@@ -85,19 +92,35 @@ public class ProtocolExecution {
     /**
      * Method for command "LGOUT".
      */
-    static void logout(String[] input, SBListener sbL) {
+    static void logout(SBListener sbL) {
         sbL.pw.println("LGOUT");
         sbLobby.removePlayer(sbL.player);
+        sbL.stopRunning();
+        try {
+            sbL.pw.close();
+            sbL.br.close();
+            sbL.sock.close();
+        } catch(IOException ioe) {
+            System.out.println("Issues while closing the socket at logout.");
+        }
         sendAll("PRINT§Terminal§" + sbL.player.getName() + " left the room.");
+        System.out.println(sbL.player.getName() + " logged out.");
 
     }
 
+    /**
+     * @param message: String sent to all clients
+     */
     static void sendAll(String message) {
         for(int i = 0; i < sbLobby.getLength(); i++) {
             sbLobby.getSBL(i).pw.println(message);
         }
     }
 
+    /**
+     * @param message: String sent to all clients...
+     * @param sbL: ... except this one
+     */
     static void sendAllExceptOne(String message, SBListener sbL) {
         for(int i = 0; i < sbLobby.getLength(); i++) {
             if(!sbLobby.getSBL(i).equals(sbL)) {

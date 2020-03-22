@@ -1,5 +1,6 @@
 package skipBo.server;
 
+import skipBo.enums.Protocol;
 import skipBo.game.Player;
 import skipBo.userExceptions.NoCommandException;
 
@@ -8,7 +9,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.sql.SQLOutput;
 
 import static skipBo.server.ProtocolExecution.*;
 
@@ -19,8 +19,10 @@ public class SBListener implements Runnable {
     Socket sock;
     PrintWriter pw;
     BufferedReader br;
+    boolean running;
     int id;
     Player player;
+
 
     SBListener(Socket sock, int id) {
         this.sock = sock;
@@ -28,8 +30,9 @@ public class SBListener implements Runnable {
             this.pw = new PrintWriter(sock.getOutputStream(), true);
             this.br = new BufferedReader(new InputStreamReader(sock.getInputStream()));
         } catch (IOException e) {
-            System.out.printf("Issue with getting Input- and OutputStream.");
+            System.out.println("Issue with getting Input- and OutputStream.");
         }
+        this.running = true;
         this.id = id;
         this.player = null;
     }
@@ -38,7 +41,7 @@ public class SBListener implements Runnable {
      * Constantly reads input from assigned client. Read input is sliced and then passes it as argument to analyze method.
      */
      public void run() {
-        while(true) {
+        while(running) {
             String[] input = null;
             try {
                 input = this.br.readLine().split("§");
@@ -56,39 +59,45 @@ public class SBListener implements Runnable {
      * @param input: Sliced input String from client.
      */
     private static void analyze(String[] input, SBListener sbL) {
+        Protocol protocol = Protocol.valueOf(input[0]);
         try {
-            switch (input[0]) {
-                case "SETTO":
+            if(protocol == null) throw new NoCommandException();
+            switch (protocol) {
+                case SETTO:
                     setTo(input, sbL);
                     //System.out.println("LOG: Got into setTo method.");
                     break;
-                case "CHNGE":
+                case CHNGE:
                     changeTo(input, sbL);
                     //System.out.println("LOG: Got into changeTo method.");
                     break;
-                case "CHATM":
+                case CHATM:
                     chatMessage(input, sbL);
                     //System.out.println("LOG: Got into chatMessage method.");
                     break;
-                case "LGOUT":
-                    logout(input, sbL);
+                case LGOUT:
+                    logout(sbL);
                     //System.out.println("LOG: Got into logout method.");
             }
         } catch(NoCommandException nce) {
-            System.out.println(nce.option + ": not an option for command " + nce.command + ".");
+            if(nce.command != null && nce.option != null) {
+                System.out.println(nce.option + ": not an option for command " + nce.command + ".");
+            } else {
+                System.out.println("No valid protocol.");
+            }
         }
+    }
+
+    /**
+     * Sets running to false, thus getting the SBListener out of the while loop and terminating the thread.
+     */
+    public void stopRunning() {
+        this.running = false;
     }
 
     public PrintWriter getPW() {
         return this.pw;
     }
-
-                /*
-                   TODO: Handle logout, players which have not given name yet don't get messages until
-                    they have given a name, message to all when someone logs in, make name change possible (Manuela
-                    has 'name' as option, I have 'nickname'), comment protocol enums, Guillaume should use protocol enums
-                    and not just "CHATM"
-                 */
 
 }
 

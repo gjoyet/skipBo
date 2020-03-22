@@ -3,14 +3,13 @@ package skipBo.server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 
 /**
  * Server for Skip-Bo: manages lobby, chat, starts game. This server accepts players while starting
  * a listener for every new player and is the highest instance of the program.
  */
 public class SBServer {
-    static int playerCounter = 0;
+    static int playerID = 0;
     static SBLobby sbLobby = new SBLobby();
 
     public static void main(String[] args) {
@@ -35,13 +34,12 @@ public class SBServer {
 
     /**
      * Accepts new socket and starts a SBListener thread.
-     * @param serverSo
      */
     private static void login(ServerSocket serverSo) throws IOException {
         try {
             Socket sock = serverSo.accept();
 
-            SBListener sbListen = new SBListener(sock, ++playerCounter);
+            SBListener sbListen = new SBListener(sock, ++playerID);
             Thread sbListenT = new Thread(sbListen); sbListenT.start();
         } finally {}
     }
@@ -49,3 +47,6 @@ public class SBServer {
     public static SBLobby getLobby() { return sbLobby;}
 }
 
+/* TODO: What goes wrong when name is changed to name that already exists?
+    look at what happens during logout (should i close socket, inputStreams etc.?)
+ */

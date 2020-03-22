@@ -4,10 +4,14 @@ import java.io.IOException;
 import java.net.Socket;
 
 /**
- * Client for Skip-Bo. Argument 1 is the port, argument 2 is the IP address.
- * Starts SBClientListener, handles Server input
+ * A Skip-Bo client
  */
 public class SBClient {
+
+    /**
+     * Establishes a connection to the Skip-Bo server via SBClientListener thread and SBServerListener thread
+     * @param args command-line arguments. Argument 1 is the port, argument 2 is the IP address
+     */
     public static void main(String[] args) {
 
         try {

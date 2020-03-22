@@ -19,15 +19,15 @@ public class ProtocolExecution {
      * given as option to the value given as argument.
      */
     static void setTo(String[] input, SBListener sbL) throws NoCommandException {
-        String name = "Player1";
+        String name = "SBPlayer";
         try {
             if (input[1].equals("Nickname")) {
                 if(input.length == 2 || !SBServer.sbLobby.nameIsValid(input[2])) {
-                    sbL.pw.println("PRINT§Terminal§Invalid name. Name set to system username.");
+                    sbL.pw.println("PRINT§Terminal§Invalid name. Name set to " + name + ".");
                     if(!SBServer.sbLobby.nameIsTaken(name)) {
                         sbL.player = new Player(sbL.id, name, sbL);
                         SBServer.sbLobby.addPlayer(sbL.player);
-                    } else throw new NameTakenException(name.substring(0, 6), sbL);
+                    } else throw new NameTakenException(name, sbL);
                 } else {
                     name = input[2];
                     if (!SBServer.sbLobby.nameIsTaken(name) && SBServer.sbLobby.nameIsValid(name)) {
@@ -40,8 +40,8 @@ public class ProtocolExecution {
             } else throw new NoCommandException(input[0], input[1]);
         } catch(NameTakenException nte) {
             name = nte.findName();
-            sbL.player = new Player(sbL.id, name, sbL);
-            SBServer.sbLobby.addPlayer(sbL.player);
+            input[2] = name;
+            setTo(input, sbL);
         } finally {
             System.out.println(name + " logged in.");
             sbL.pw.println("PRINT§Terminal§Welcome to Skip-Bo, " + name + "!");

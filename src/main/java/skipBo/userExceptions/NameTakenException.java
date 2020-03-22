@@ -10,7 +10,7 @@ public class NameTakenException extends Exception {
     public String findName() {
         int i = 1;
         String nameWithNumber = this.name + i;
-        while (skipBo.server.SBServer.lobby.nameIsTaken(nameWithNumber)) {
+        while (skipBo.server.SBServer.getLobby().nameIsTaken(nameWithNumber)) {
             i++;
             nameWithNumber = name + i;
         }

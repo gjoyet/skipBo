@@ -1,12 +1,14 @@
 package skipBo.server;
 
 import skipBo.game.Player;
+import skipBo.userExceptions.NoCommandException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.sql.SQLOutput;
 
 import static skipBo.server.ProtocolExecution.*;
 
@@ -26,7 +28,7 @@ public class SBListener implements Runnable {
             this.pw = new PrintWriter(sock.getOutputStream(), true);
             this.br = new BufferedReader(new InputStreamReader(sock.getInputStream()));
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.printf("Issue with getting Input- and OutputStream.");
         }
         this.id = id;
         this.player = null;
@@ -44,28 +46,38 @@ public class SBListener implements Runnable {
                 System.out.println("Error with reading input from client.");
             }
 
-            analyze(input, this.id, this);
+            analyze(input, this);
         }
 
     }
 
     /**
      * First branching out for protocol execution. Triggers required method depending on input protocol command.
-     * @param input: Sliced input from client.
+     * @param input: Sliced input String from client.
      */
-    private void analyze(String[] input, int id, SBListener sbL) {
-        switch(input[0]) {
-            case "SETTO": setTo(input, id, sbL);
-                //System.out.println("LOG: Got into setTo method.");
-                break;
-            case "CHNGE": changeTo(input, id, sbL);
-                //System.out.println("LOG: Got into changeTo method.");
-                break;
-            case "CHATM": chatMessage(input, id, sbL);
-                //System.out.println("LOG: Got into chatMessage method.");
-                break;
-            case "LGOUT": logout(input, id, sbL);
-                //System.out.println("LOG: Got into logout method.");
+    private static void analyze(String[] input, SBListener sbL) {
+        try {
+            switch (input[0]) {
+                case "SETTO":
+                    setTo(input, sbL);
+                    //System.out.println("LOG: Got into setTo method.");
+                    break;
+                case "CHNGE":
+                    changeTo(input, sbL);
+                    //System.out.println("LOG: Got into changeTo method.");
+                    break;
+                case "CHATM":
+                    chatMessage(input, sbL);
+                    //System.out.println("LOG: Got into chatMessage method.");
+                    break;
+                case "LGOUT":
+                    logout(input, sbL);
+                    //System.out.println("LOG: Got into logout method.");
+            }
+        } catch(NoCommandException nce) {
+            System.out.println(nce.option + ": not an option for command " + nce.command + ".");
+        }
+    }
 
                 /*
                    TODO: Handle logout, players which have not given name yet don't get messages until
@@ -74,8 +86,6 @@ public class SBListener implements Runnable {
                     and not just "CHATM"
                  */
 
-        }
-
-    }
-
 }
+
+

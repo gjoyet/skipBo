@@ -22,20 +22,12 @@ public class ProtocolExecution {
         String name = "§";
         try {
             if (input[1].equals("Nickname")) {
-                if(input.length == 2 || !SBServer.sbLobby.nameIsValid(input[2])) {
-                    sbL.pw.println("PRINT§Terminal§Invalid name. Name set to system username.");
-                    if(!SBServer.sbLobby.nameIsTaken(System.getProperty("user.name"))) {
-                        sbL.player = new Player(sbL.id, name = System.getProperty("user.name"), sbL);
-                        SBServer.sbLobby.addPlayer(sbL.player);
-                    } else throw new NameTakenException(System.getProperty("user.name"), sbL);
-                } else {
-                    name = input[2];
-                    if (!SBServer.sbLobby.nameIsTaken(name) && SBServer.sbLobby.nameIsValid(name)) {
-                        sbL.player = new Player(sbL.id, name, sbL);
-                        SBServer.sbLobby.addPlayer(sbL.player);
-                    } else if(SBServer.sbLobby.nameIsTaken(name)) {
-                        throw new NameTakenException(name, sbL);
-                    }
+                name = input[2];
+                if (!SBServer.sbLobby.nameIsTaken(name) && SBServer.sbLobby.nameIsValid(name)) {
+                    sbL.player = new Player(sbL.id, name, sbL);
+                    SBServer.sbLobby.addPlayer(sbL.player);
+                } else if(SBServer.sbLobby.nameIsTaken(name)) {
+                    throw new NameTakenException(name, sbL);
                 }
             } else throw new NoCommandException(input[0], input[1]);
         } catch(NameTakenException nte) {

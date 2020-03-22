@@ -40,8 +40,8 @@ public class ProtocolExecution {
             } else throw new NoCommandException(input[0], input[1]);
         } catch(NameTakenException nte) {
             name = nte.findName();
-            input[2] = name;
-            setTo(input, sbL);
+            sbL.player = new Player(sbL.id, name, sbL);
+            SBServer.sbLobby.addPlayer(sbL.player);
         } finally {
             System.out.println(name + " logged in.");
             sbL.pw.println("PRINT§Terminal§Welcome to Skip-Bo, " + name + "!");

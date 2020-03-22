@@ -11,8 +11,7 @@ import java.util.ArrayList;
  */
 public class SBServer {
     static int playerCounter = 0;
-    public static ArrayList<SBListener> allListeners = new ArrayList<SBListener>(0);
-    public static SBLobby lobby = new SBLobby();
+    static SBLobby sbLobby = new SBLobby();
 
     public static void main(String[] args) {
         ServerSocket sbServerSocket = null;
@@ -44,8 +43,9 @@ public class SBServer {
 
             SBListener sbListen = new SBListener(sock, ++playerCounter);
             Thread sbListenT = new Thread(sbListen); sbListenT.start();
-            allListeners.add(sbListen);
         } finally {}
     }
+
+    public static SBLobby getLobby() { return sbLobby;}
 }
 

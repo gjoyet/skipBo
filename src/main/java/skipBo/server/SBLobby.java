@@ -11,21 +11,28 @@ import java.util.ArrayList;
 public class SBLobby {
     private ArrayList<Player> playerLobby;
 
-    public SBLobby() {
+    SBLobby() {
         this.playerLobby = new ArrayList<Player>(0);
     }
 
-    public void addPlayer(Player p) {
+    Player getPlayer(int index) {
+        return playerLobby.get(index);
+    }
+    void addPlayer(Player p) {
         playerLobby.add(p);
     }
 
-    public Player getPlayer(int index) {
-        return playerLobby.get(index);
+    void removePlayer(Player p) {
+        playerLobby.remove(p);
     }
 
-    public int getLength() {
+    SBListener getSBL(int index) {
+    return playerLobby.get(index).getSBL();
+    }
+    int getLength() {
         return playerLobby.size();
     }
+
 
     /**
      * Checks if the name is already in use.
@@ -40,7 +47,7 @@ public class SBLobby {
      * be empty nor be longer than 13 characters.
      */
     public boolean nameIsValid(String name) {
-        if(name.length() > 13 || name.length() == 0) return false;
+        if(name.length() > 13 || name.length() < 3) return false;
         for(int i=0; i < name.length(); i++) {
             if(!Character.isLetterOrDigit(name.charAt(i))) return false;
         }

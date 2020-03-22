@@ -59,7 +59,9 @@ public class ProtocolExecution {
         try {
             if (input[1].equals("Nickname")) {
                 String name = input[2];
-                if (!SBServer.sbLobby.nameIsTaken(name) && SBServer.sbLobby.nameIsValid(name)) {
+                if(name.equals(sbL.player.getName())) {
+                    sbL.pw.println("PRINT§Terminal§Name is already " + name + ".");
+                } else if (!SBServer.sbLobby.nameIsTaken(name) && SBServer.sbLobby.nameIsValid(name)) {
                     sbL.player.changeName(name);
                     sbL.pw.println("PRINT§Terminal§Name changed to " + name + ".");
                     System.out.println(formerName + " changed name to " + name + ".");

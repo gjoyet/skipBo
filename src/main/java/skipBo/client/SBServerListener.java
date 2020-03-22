@@ -2,7 +2,6 @@ package skipBo.client;
 
 import skipBo.enums.Protocol;
 import skipBo.userExceptions.NoCommandException;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

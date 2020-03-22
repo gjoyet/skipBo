@@ -77,7 +77,7 @@ class SBClientListener implements Runnable {
         }
 
 
-        switch (command) {
+        switch (command.toLowerCase()) {
             case "/change":
                 protocolString = getChangeString(input);
                 break;

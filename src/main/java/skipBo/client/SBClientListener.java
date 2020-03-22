@@ -57,11 +57,10 @@ class SBClientListener implements Runnable {
     }
 
     /**
-     * Lets client set their name
+     * Let's client set their name
      */
     void setName() {
-        System.out.println("Name can only contain letters or digits and must have between 3 and 13 characters");
-        System.out.println("Your suggested nickname: " + System.getProperty("user.name"));
+        System.out.println("Name can only contain letters or digits (no umlaut) and must have between 3 and 13 characters");
         System.out.println("Please enter your name: ");
         String name = scanner.nextLine();
         pw.println("SETTO§Nickname§" + name);

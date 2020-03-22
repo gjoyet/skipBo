@@ -15,7 +15,8 @@ import static skipBo.server.SBServer.sbLobby;
 public class ProtocolExecution {
 
     /**
-     * Method for command "SETTO".
+     * Method for command "SETTO". This command sets a parameter
+     * given as option to the value given as argument.
      */
     static void setTo(String[] input, SBListener sbL) throws NoCommandException {
         String name = "§";
@@ -49,7 +50,8 @@ public class ProtocolExecution {
     }
 
     /**
-     * Method for command "CHNGE".
+     * Method for command "CHNGE". This command sets a parameter
+     * given as option to the value given as argument.
      */
     static void changeTo(String[] input, SBListener sbL) throws NoCommandException {
         String formerName = sbL.player.getName();
@@ -76,12 +78,13 @@ public class ProtocolExecution {
     }
 
     /**
-     * Method for command "CHATM".
+     * Method for command "CHATM". Sends received chat message to all
+     * players except the one sending it.
      */
     static void chatMessage(String[] input, SBListener sbL) throws NoCommandException {
         try {
             if (input.length < 3) return;
-            System.out.println("Received chat message: " + input[2]);
+            System.out.println("Received chat message from " + sbL.player.getName() + ": " + input[2]);
             if (input[1].equals("Global")) {
                 String message = input[2];
                 sendAllExceptOne("CHATM§Global§" + sbL.player.getName() + ": " + message, sbL);
@@ -90,7 +93,8 @@ public class ProtocolExecution {
     }
 
     /**
-     * Method for command "LGOUT".
+     * Method for command "LGOUT". Terminates the SBListener of the player logging out,
+     * closes socket and sends message to all other players on which player logged out.
      */
     static void logout(SBListener sbL) {
         sbL.pw.println("LGOUT");

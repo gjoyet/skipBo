@@ -1,7 +1,7 @@
 package skipBo.client;
 
+import skipBo.enums.Protocol;
 import skipBo.userExceptions.NoCommandException;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -33,7 +33,7 @@ class SBServerListener implements Runnable {
                 executeCommand(input);
             } catch (IOException e) {
                 System.out.println("Error with reading input from server");
-            } catch (NoCommandException e) {
+            } catch (NoCommandException | IllegalArgumentException | NullPointerException e) {
                 System.out.println("Error with network protocol command");
             }
         }
@@ -44,20 +44,21 @@ class SBServerListener implements Runnable {
      * @param commandLine Network protocol string from server
      * @throws NoCommandException If commandLine string doesn't match network protocol
      */
-    void executeCommand(String commandLine) throws NoCommandException {
+    void executeCommand(String commandLine) throws NoCommandException  {
         String[] command = commandLine.split("§");
+        Protocol protocol = Protocol.valueOf(command[0]);
 
-        switch (command[0]) {
-            case "CHATM":
+        switch (protocol) {
+            case CHATM:
                 sendChatMessage(command);
                 break;
-            case "CHNGE":
+            case CHNGE:
                 changeTo(command);
                 break;
-            case "LGOUT":
+            case LGOUT:
                 logOut();
                 break;
-            case "PRINT":
+            case PRINT:
                 print(command);
                 break;
             default:

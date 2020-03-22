@@ -61,7 +61,6 @@ public class SBListener implements Runnable {
     private static void analyze(String[] input, SBListener sbL) {
         Protocol protocol = Protocol.valueOf(input[0]);
         try {
-            if(protocol == null) throw new NoCommandException();
             switch (protocol) {
                 case SETTO:
                     setTo(input, sbL);
@@ -79,6 +78,8 @@ public class SBListener implements Runnable {
                     logout(sbL);
                     //System.out.println("LOG: Got into logout method.");
             }
+        } catch(IllegalArgumentException iae) {
+            System.out.println(input[0] + ": not a command.");
         } catch(NoCommandException nce) {
             if(nce.command != null && nce.option != null) {
                 System.out.println(nce.option + ": not an option for command " + nce.command + ".");

@@ -2,29 +2,34 @@ package skipBo.server;
 
 import skipBo.game.Player;
 
-import javax.swing.*;
 import java.util.ArrayList;
 
 /**
- * Stores all new players and eventually starts game.
+ * Stores all new players in an ArrayList.
  */
 public class SBLobby {
     private ArrayList<Player> playerLobby;
 
-    public SBLobby() {
+    SBLobby() {
         this.playerLobby = new ArrayList<Player>(0);
     }
 
-    public void addPlayer(Player p) {
-        playerLobby.add(p);
-    }
+    int getLength() { return playerLobby.size(); }
 
-    public Player getPlayer(int index) {
+    Player getPlayer(int index) {
         return playerLobby.get(index);
     }
 
-    public int getLength() {
-        return playerLobby.size();
+    void addPlayer(Player p) {
+        playerLobby.add(p);
+    }
+
+    void removePlayer(Player p) {
+        playerLobby.remove(p);
+    }
+
+    SBListener getSBL(int index) {
+    return playerLobby.get(index).getSBL();
     }
 
     /**
@@ -36,14 +41,14 @@ public class SBLobby {
     }
 
     /**
-     * Checks if name is valid.
+     * Checks if name is valid. Only letters and digits are allowed, name can neither
+     * be shorter than 2 nor be longer than 13 characters.
      */
     public boolean nameIsValid(String name) {
-        if(name.length() > 13 || name.length() == 0) return false;
+        if(name.length() > 13 || name.length() < 3) return false;
         for(int i=0; i < name.length(); i++) {
             if(!Character.isLetterOrDigit(name.charAt(i))) return false;
         }
-
         return true;
     }
 

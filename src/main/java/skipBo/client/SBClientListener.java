@@ -8,15 +8,18 @@ import skipBo.userExceptions.*;
 import skipBo.enums.Protocol;
 
 /**
- * Thread waiting for any action from user input (from console) and forwards command to Server
+ * Thread waiting for any action from user input (from terminal) and forwards command to Server
  */
 class SBClientListener implements Runnable {
     Socket sock;
     PrintWriter pw;
     Scanner scanner;
+    Boolean isLoggedIn = true;
 
     /**
-     *Creates a SBClientListener with a Socket
+     *Creates a Skip-Bo client listener
+     * @param sock A client socket
+     * @throws IOException: If an I/O error occurs
      */
     SBClientListener(Socket sock) throws IOException {
         this.sock = sock;
@@ -25,7 +28,7 @@ class SBClientListener implements Runnable {
     }
 
     /**
-     * Waits for input from user
+     * Waits for input from user and forwards input to server according to network protocol
      */
     @Override
     public void run() {
@@ -38,7 +41,7 @@ class SBClientListener implements Runnable {
         String name = scanner.nextLine();
         pw.println("SETTO§Nickname§" + name);
 
-        while(true) {
+        while(isLoggedIn) {
             input = scanner.nextLine();
             try {
                 forward(input);
@@ -50,7 +53,9 @@ class SBClientListener implements Runnable {
 
 
     /**
-     * Forwards user input to server
+     * Forwards user input to server according to network protocol
+     * @param input Input from client
+     * @throws NoCommandException If the input doesn't match any command
      */
     void forward(String input) throws NoCommandException {
 
@@ -76,12 +81,13 @@ class SBClientListener implements Runnable {
         }
 
 
-        switch (command) {
+        switch (command.toLowerCase()) {
             case "/change":
                 protocolString = getChangeString(input);
                 break;
             case "/quit":
                 protocolString = Protocol.LGOUT + "";
+                isLoggedIn = false;
                 break;
             default:
                 throw new NoCommandException();
@@ -90,8 +96,10 @@ class SBClientListener implements Runnable {
     }
 
     /**
-     * builds network protocol string for the "change"-command
-     * @return: network protocol string for the "change"-command
+     * Builds network protocol string for the "change" command
+     * @param input Input from client
+     * @return The network protocol string for the "change" command
+     * @throws NoCommandException If the input doesn't match any command
      */
     String getChangeString(String input) throws NoCommandException {
 
@@ -101,7 +109,7 @@ class SBClientListener implements Runnable {
 
         if (option.equalsIgnoreCase("name")) {
             argument = input.substring(13);
-            return Protocol.CHNGE + "§name§" + argument;
+            return Protocol.CHNGE + "§Nickname§" + argument;
         } else {
             throw new NoCommandException();
         }

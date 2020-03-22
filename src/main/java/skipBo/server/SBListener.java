@@ -1,6 +1,7 @@
 package skipBo.server;
 
 import skipBo.game.Player;
+import skipBo.userExceptions.NoCommandException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,8 +18,10 @@ public class SBListener implements Runnable {
     Socket sock;
     PrintWriter pw;
     BufferedReader br;
+    boolean running;
     int id;
     Player player;
+
 
     SBListener(Socket sock, int id) {
         this.sock = sock;
@@ -26,8 +29,9 @@ public class SBListener implements Runnable {
             this.pw = new PrintWriter(sock.getOutputStream(), true);
             this.br = new BufferedReader(new InputStreamReader(sock.getInputStream()));
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.printf("Issue with getting Input- and OutputStream.");
         }
+        this.running = true;
         this.id = id;
         this.player = null;
     }
@@ -36,7 +40,7 @@ public class SBListener implements Runnable {
      * Constantly reads input from assigned client. Read input is sliced and then passes it as argument to analyze method.
      */
      public void run() {
-        while(true) {
+        while(running) {
             String[] input = null;
             try {
                 input = this.br.readLine().split("§");
@@ -44,36 +48,57 @@ public class SBListener implements Runnable {
                 System.out.println("Error with reading input from client.");
             }
 
-            analyze(input, this.id, this);
+            analyze(input, this);
         }
 
     }
 
     /**
      * First branching out for protocol execution. Triggers required method depending on input protocol command.
-     * @param input: Sliced input from client.
+     * @param input: Sliced input String from client.
      */
-    private void analyze(String[] input, int id, SBListener sbL) {
-        switch(input[0]) {
-            case "SETTO": setTo(input, id, sbL);
-                //System.out.println("LOG: Got into setTo method.");
-                break;
-            case "CHNGE": changeTo(input, id, sbL);
-                //System.out.println("LOG: Got into changeTo method.");
-                break;
-            case "CHATM": chatMessage(input, id, sbL);
-                //System.out.println("LOG: Got into chatMessage method.");
-                break;
-            case "LGOUT": logout(input, id, sbL);
-                //System.out.println("LOG: Got into logout method.");
+    private static void analyze(String[] input, SBListener sbL) {
+        try {
+            switch (input[0]) {
+                case "SETTO":
+                    setTo(input, sbL);
+                    //System.out.println("LOG: Got into setTo method.");
+                    break;
+                case "CHNGE":
+                    changeTo(input, sbL);
+                    //System.out.println("LOG: Got into changeTo method.");
+                    break;
+                case "CHATM":
+                    chatMessage(input, sbL);
+                    //System.out.println("LOG: Got into chatMessage method.");
+                    break;
+                case "LGOUT":
+                    logout(sbL);
+                    //System.out.println("LOG: Got into logout method.");
+            }
+        } catch(NoCommandException nce) {
+            System.out.println(nce.option + ": not an option for command " + nce.command + ".");
+        }
+    }
+
+    /**
+     * Sets running to false, thus getting the SBListener out of the while loop and terminating the thread.
+     */
+    public void stopRunning() {
+        this.running = false;
+    }
+
+    public PrintWriter getPW() {
+        return this.pw;
+    }
 
                 /*
                    TODO: Handle logout, players which have not given name yet don't get messages until
                     they have given a name, message to all when someone logs in, make name change possible (Manuela
-                    has 'name' as option, I have 'nickname')
+                    has 'name' as option, I have 'nickname'), comment protocol enums, Guillaume should use protocol enums
+                    and not just "CHATM"
                  */
 
-        }
-
-    }
 }
+
+

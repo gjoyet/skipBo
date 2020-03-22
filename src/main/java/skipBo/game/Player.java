@@ -10,7 +10,7 @@ import java.util.*;
 
 public class Player {
 
-    public String name; //name of the user, has to be public so it can be changed
+    private String name;
     private int id;
     private SBListener sbListen;
     // private InetAddress ip;
@@ -42,6 +42,10 @@ public class Player {
     public String getName() { // returns the name of the Player object
         return this.name;
     }
+
+    public void changeName(String name) {this.name = name;}
+
+    public SBListener getSBL() { return this.sbListen; }
 
     public int getId(){ //returns the id number of the player object
         return this.id;

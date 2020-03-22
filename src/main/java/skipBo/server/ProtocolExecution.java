@@ -19,15 +19,23 @@ public class ProtocolExecution {
      * given as option to the value given as argument.
      */
     static void setTo(String[] input, SBListener sbL) throws NoCommandException {
-        String name = "§";
+        String name = "Player1";
         try {
             if (input[1].equals("Nickname")) {
-                name = input[2];
-                if (!SBServer.sbLobby.nameIsTaken(name) && SBServer.sbLobby.nameIsValid(name)) {
-                    sbL.player = new Player(sbL.id, name, sbL);
-                    SBServer.sbLobby.addPlayer(sbL.player);
-                } else if(SBServer.sbLobby.nameIsTaken(name)) {
-                    throw new NameTakenException(name, sbL);
+                if(input.length == 2 || !SBServer.sbLobby.nameIsValid(input[2])) {
+                    sbL.pw.println("PRINT§Terminal§Invalid name. Name set to system username.");
+                    if(!SBServer.sbLobby.nameIsTaken(name)) {
+                        sbL.player = new Player(sbL.id, name, sbL);
+                        SBServer.sbLobby.addPlayer(sbL.player);
+                    } else throw new NameTakenException(name.substring(0, 6), sbL);
+                } else {
+                    name = input[2];
+                    if (!SBServer.sbLobby.nameIsTaken(name) && SBServer.sbLobby.nameIsValid(name)) {
+                        sbL.player = new Player(sbL.id, name, sbL);
+                        SBServer.sbLobby.addPlayer(sbL.player);
+                    } else if(SBServer.sbLobby.nameIsTaken(name)) {
+                        throw new NameTakenException(name, sbL);
+                    }
                 }
             } else throw new NoCommandException(input[0], input[1]);
         } catch(NameTakenException nte) {

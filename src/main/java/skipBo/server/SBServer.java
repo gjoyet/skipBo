@@ -47,6 +47,3 @@ public class SBServer {
     public static SBLobby getLobby() { return sbLobby;}
 }
 
-/* TODO: What goes wrong when name is changed to name that already exists?
-    look at what happens during logout (should i close socket, inputStreams etc.?)
- */

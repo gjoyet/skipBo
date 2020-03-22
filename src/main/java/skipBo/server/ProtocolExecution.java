@@ -18,10 +18,10 @@ public class ProtocolExecution {
      * Method for command "SETTO".
      */
     static void setTo(String[] input, SBListener sbL) throws NoCommandException {
-        String name = "NoName";
+        String name = "§";
         try {
             if (input[1].equals("Nickname")) {
-                if(!SBServer.sbLobby.nameIsValid(input[2])) {
+                if(input.length == 2 || !SBServer.sbLobby.nameIsValid(input[2])) {
                     sbL.pw.println("PRINT§Terminal§Invalid name. Name set to system username.");
                     if(!SBServer.sbLobby.nameIsTaken(System.getProperty("user.name"))) {
                         sbL.player = new Player(sbL.id, name = System.getProperty("user.name"), sbL);

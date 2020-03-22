@@ -34,7 +34,7 @@ class SBServerListener implements Runnable {
             } catch (IOException e) {
                 System.out.println("Error with reading input from server");
             } catch (NoCommandException e) {
-                System.out.println("Not a command");
+                System.out.println("Error with network protocol command");
             }
         }
     }

@@ -13,7 +13,7 @@ import static skipBo.server.SBServer.sbLobby;
  * with further branching inside each method according to the options.
  */
 public class ProtocolExecution {
-        // TODO comment methods better
+
     /**
      * Method for command "SETTO". This command sets a parameter
      * given as option to the value given as argument.

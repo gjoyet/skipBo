@@ -19,15 +19,17 @@ public class ProtocolExecution {
             if (input[1].equals("Nickname")) {
                 if(!SBServer.sbLobby.nameIsValid(input[2])) {
                     sbL.pw.println("PRINT§Terminal§Invalid name. Name set to system username.");
-                    sbL.player = new Player(sbL.id, name = System.getProperty("user.name"), sbL);
-                    SBServer.sbLobby.addPlayer(sbL.player);
+                    if(!SBServer.sbLobby.nameIsTaken(System.getProperty("user.name"))) {
+                        sbL.player = new Player(sbL.id, name = System.getProperty("user.name"), sbL);
+                        SBServer.sbLobby.addPlayer(sbL.player);
+                    } else throw new NameTakenException(System.getProperty("user.name"), sbL);
                 } else {
                     name = input[2];
                     if (!SBServer.sbLobby.nameIsTaken(name) && SBServer.sbLobby.nameIsValid(name)) {
                         sbL.player = new Player(sbL.id, name, sbL);
                         SBServer.sbLobby.addPlayer(sbL.player);
                     } else if(SBServer.sbLobby.nameIsTaken(name)) {
-                        throw new NameTakenException(name);
+                        throw new NameTakenException(name, sbL);
                     }
                 }
             } else throw new NoCommandException(input[0], input[1]);
@@ -38,6 +40,7 @@ public class ProtocolExecution {
         } finally {
             System.out.println("Welcome to Skip-Bo, " + name + "!");
             sbL.pw.println("PRINT§Terminal§Welcome to Skip-Bo, " + name + "!");
+            sendAllExceptOne("PRINT§Terminal§" + name + " joined the room. Say hi!", sbL);
         }
     }
 
@@ -45,18 +48,19 @@ public class ProtocolExecution {
      * Method for command "CHNGE".
      */
     static void changeTo(String[] input, SBListener sbL) throws NoCommandException {
+        String formerName = sbL.player.getName();
         try {
-            if (input.length < 3) return;
             if (input[1].equals("Nickname")) {
                 String name = input[2];
                 if (!SBServer.sbLobby.nameIsTaken(name) && SBServer.sbLobby.nameIsValid(name)) {
                     sbL.player.changeName(name);
                     sbL.pw.println("PRINT§Terminal§Name changed to " + name + ".");
                     System.out.println("Name changed to " + name + ".");
+                    sendAll("PRINT§Terminal§" + formerName + " changed name to " + name + ".");
                 } else if (!SBServer.sbLobby.nameIsValid(name)) {
                     sbL.pw.println("PRINT§Terminal§Refused: Name contains invalid symbols. Try again.");
                 } else if (SBServer.sbLobby.nameIsTaken(name)) {
-                    throw new NameTakenException(name);
+                    throw new NameTakenException(name, sbL);
                 }
             } else throw new NoCommandException(input[0], input[1]);
         } catch (NameTakenException nte) {
@@ -94,6 +98,12 @@ public class ProtocolExecution {
         }
     }
 
-    static void sendAllExcept(String message, SBListener sbL) {}
+    static void sendAllExceptOne(String message, SBListener sbL) {
+        for(int i = 0; i < sbLobby.getLength(); i++) {
+            if(!sbLobby.getSBL(i).equals(sbL)) {
+                sbLobby.getSBL(i).pw.println(message);
+            }
+        }
+    }
 
 }

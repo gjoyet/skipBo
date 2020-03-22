@@ -79,6 +79,10 @@ public class SBListener implements Runnable {
         }
     }
 
+    public PrintWriter getPW() {
+        return this.pw;
+    }
+
                 /*
                    TODO: Handle logout, players which have not given name yet don't get messages until
                     they have given a name, message to all when someone logs in, make name change possible (Manuela

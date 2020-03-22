@@ -1,5 +1,6 @@
 package skipBo.server;
 
+import skipBo.enums.Protocol;
 import skipBo.game.Player;
 import skipBo.userExceptions.NoCommandException;
 
@@ -58,26 +59,32 @@ public class SBListener implements Runnable {
      * @param input: Sliced input String from client.
      */
     private static void analyze(String[] input, SBListener sbL) {
+        Protocol protocol = Protocol.valueOf(input[0]);
         try {
-            switch (input[0]) {
-                case "SETTO":
+            if(protocol == null) throw new NoCommandException();
+            switch (protocol) {
+                case SETTO:
                     setTo(input, sbL);
                     //System.out.println("LOG: Got into setTo method.");
                     break;
-                case "CHNGE":
+                case CHNGE:
                     changeTo(input, sbL);
                     //System.out.println("LOG: Got into changeTo method.");
                     break;
-                case "CHATM":
+                case CHATM:
                     chatMessage(input, sbL);
                     //System.out.println("LOG: Got into chatMessage method.");
                     break;
-                case "LGOUT":
+                case LGOUT:
                     logout(sbL);
                     //System.out.println("LOG: Got into logout method.");
             }
         } catch(NoCommandException nce) {
-            System.out.println(nce.option + ": not an option for command " + nce.command + ".");
+            if(nce.command != null && nce.option != null) {
+                System.out.println(nce.option + ": not an option for command " + nce.command + ".");
+            } else {
+                System.out.println("No valid protocol.");
+            }
         }
     }
 

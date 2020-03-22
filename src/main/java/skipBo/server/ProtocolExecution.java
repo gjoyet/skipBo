@@ -4,6 +4,8 @@ import skipBo.game.Player;
 import skipBo.userExceptions.NameTakenException;
 import skipBo.userExceptions.NoCommandException;
 
+import java.io.IOException;
+
 import static skipBo.server.SBServer.sbLobby;
 
 /**
@@ -40,7 +42,7 @@ public class ProtocolExecution {
             sbL.player = new Player(sbL.id, name, sbL);
             SBServer.sbLobby.addPlayer(sbL.player);
         } finally {
-            System.out.println("Welcome to Skip-Bo, " + name + "!");
+            System.out.println(name + " logged in.");
             sbL.pw.println("PRINT§Terminal§Welcome to Skip-Bo, " + name + "!");
             sendAllExceptOne("PRINT§Terminal§" + name + " joined the room. Say hi!", sbL);
         }
@@ -94,8 +96,15 @@ public class ProtocolExecution {
         sbL.pw.println("LGOUT");
         sbLobby.removePlayer(sbL.player);
         sbL.stopRunning();
+        try {
+            sbL.pw.close();
+            sbL.br.close();
+            sbL.sock.close();
+        } catch(IOException ioe) {
+            System.out.println("Issues while closing the socket at logout.");
+        }
         sendAll("PRINT§Terminal§" + sbL.player.getName() + " left the room.");
-        System.out.println("Bye Bye, " + sbL.player.getName() + ".");
+        System.out.println(sbL.player.getName() + " logged out.");
 
     }
 

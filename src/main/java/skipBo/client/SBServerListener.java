@@ -17,7 +17,7 @@ class SBServerListener implements Runnable {
 
     SBServerListener(Socket socket) throws IOException {
         this.socket = socket;
-        br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        this.br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     }
 
     /**

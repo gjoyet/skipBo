@@ -5,7 +5,7 @@ import skipBo.server.SBListener;
 import java.util.*;
 
 /**
- * Class Player constructs a Player object with defined parameter
+ * Class Player constructs a Player object with defined parameters
  */
 
 public class Player {
@@ -19,7 +19,7 @@ public class Player {
     private Pile piles;
     /**
      * Player constructor to build a Player object with
-     * a String name and ip and port numbers.
+     * a String name  and port numbers.
      * @param id
      * @param name
      * @param sbListen

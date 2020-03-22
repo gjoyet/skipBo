@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 /**
- * Stores all new players and eventually starts game.
+ * Stores all new players in an ArrayList.
  */
 public class SBLobby {
     private ArrayList<Player> playerLobby;
@@ -44,7 +44,7 @@ public class SBLobby {
 
     /**
      * Checks if name is valid. Only letters and digits are allowed, name can neither
-     * be empty nor be longer than 13 characters.
+     * be shorter than 2 nor be longer than 13 characters.
      */
     public boolean nameIsValid(String name) {
         if(name.length() > 13 || name.length() < 3) return false;

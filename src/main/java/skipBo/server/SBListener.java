@@ -82,12 +82,15 @@ public class SBListener implements Runnable {
         }
     }
 
-    public PrintWriter getPW() {
-        return this.pw;
-    }
-
+    /**
+     * Sets running to false, thus getting the SBListener out of the while loop and terminating the thread.
+     */
     public void stopRunning() {
         this.running = false;
+    }
+
+    public PrintWriter getPW() {
+        return this.pw;
     }
 
                 /*

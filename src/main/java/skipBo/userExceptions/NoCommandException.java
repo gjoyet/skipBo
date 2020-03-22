@@ -1,5 +1,8 @@
 package skipBo.userExceptions;
 
+/**
+ * Exception thrown when a network protocol command is faulty.
+ */
 public class NoCommandException extends Exception {
     public String command;
     public String option;

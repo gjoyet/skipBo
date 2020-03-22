@@ -8,6 +8,10 @@ import java.io.IOException;
 
 import static skipBo.server.SBServer.sbLobby;
 
+/**
+ * The execution of the network protocol is implemented in this class. Every command has one method,
+ * with further branching inside each method according to the options.
+ */
 public class ProtocolExecution {
 
     /**
@@ -55,8 +59,8 @@ public class ProtocolExecution {
                 if (!SBServer.sbLobby.nameIsTaken(name) && SBServer.sbLobby.nameIsValid(name)) {
                     sbL.player.changeName(name);
                     sbL.pw.println("PRINT§Terminal§Name changed to " + name + ".");
-                    System.out.println("Name changed to " + name + ".");
-                    sendAll("PRINT§Terminal§" + formerName + " changed name to " + name + ".");
+                    System.out.println(formerName + " changed name to " + name + ".");
+                    sendAllExceptOne("PRINT§Terminal§" + formerName + " changed name to " + name + ".", sbL);
                 } else if (!SBServer.sbLobby.nameIsValid(name)) {
                     sbL.pw.println("PRINT§Terminal§Refused: Name contains invalid symbols. Try again.");
                 } else if (SBServer.sbLobby.nameIsTaken(name)) {
@@ -94,12 +98,19 @@ public class ProtocolExecution {
 
     }
 
+    /**
+     * @param message: String sent to all clients
+     */
     static void sendAll(String message) {
         for(int i = 0; i < sbLobby.getLength(); i++) {
             sbLobby.getSBL(i).pw.println(message);
         }
     }
 
+    /**
+     * @param message: String sent to all clients...
+     * @param sbL: ... except this one
+     */
     static void sendAllExceptOne(String message, SBListener sbL) {
         for(int i = 0; i < sbLobby.getLength(); i++) {
             if(!sbLobby.getSBL(i).equals(sbL)) {

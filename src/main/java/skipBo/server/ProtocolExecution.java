@@ -4,8 +4,6 @@ import skipBo.game.Player;
 import skipBo.userExceptions.NameTakenException;
 import skipBo.userExceptions.NoCommandException;
 
-import java.io.IOException;
-
 import static skipBo.server.SBServer.sbLobby;
 
 /**
@@ -89,7 +87,7 @@ public class ProtocolExecution {
     /**
      * Method for command "LGOUT".
      */
-    static void logout(String[] input, SBListener sbL) {
+    static void logout(SBListener sbL) {
         sbL.pw.println("LGOUT");
         sbLobby.removePlayer(sbL.player);
         sbL.stopRunning();

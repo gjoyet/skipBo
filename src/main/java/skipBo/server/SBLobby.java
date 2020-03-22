@@ -2,7 +2,6 @@ package skipBo.server;
 
 import skipBo.game.Player;
 
-import javax.swing.*;
 import java.util.ArrayList;
 
 /**
@@ -15,9 +14,12 @@ public class SBLobby {
         this.playerLobby = new ArrayList<Player>(0);
     }
 
+    int getLength() { return playerLobby.size(); }
+
     Player getPlayer(int index) {
         return playerLobby.get(index);
     }
+
     void addPlayer(Player p) {
         playerLobby.add(p);
     }
@@ -29,10 +31,6 @@ public class SBLobby {
     SBListener getSBL(int index) {
     return playerLobby.get(index).getSBL();
     }
-    int getLength() {
-        return playerLobby.size();
-    }
-
 
     /**
      * Checks if the name is already in use.
@@ -51,7 +49,6 @@ public class SBLobby {
         for(int i=0; i < name.length(); i++) {
             if(!Character.isLetterOrDigit(name.charAt(i))) return false;
         }
-
         return true;
     }
 

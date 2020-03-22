@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.sql.SQLOutput;
 
 import static skipBo.server.ProtocolExecution.*;
 
@@ -74,7 +73,7 @@ public class SBListener implements Runnable {
                     //System.out.println("LOG: Got into chatMessage method.");
                     break;
                 case "LGOUT":
-                    logout(input, sbL);
+                    logout(sbL);
                     //System.out.println("LOG: Got into logout method.");
             }
         } catch(NoCommandException nce) {

@@ -33,7 +33,8 @@ class SBClientListener implements Runnable {
     @Override
     public void run() {
 
-        printWelcomeInformation();
+        System.out.println("Connection successful\n");
+        printCommandInfo();
         setName();
 
         String input;
@@ -43,23 +44,23 @@ class SBClientListener implements Runnable {
                 forward(input);
             } catch (IndexOutOfBoundsException | NoCommandException e) {
                 System.out.println("Please enter a valid command");
+                printCommandInfo();
             }
         }
     }
 
     /**
-     * Sends general Information to the client about how the server works and client
+     * Sends Information about valid commands to the client
      */
-    void printWelcomeInformation() {
-        System.out.println("Connection successful\n");
+    void printCommandInfo() {
         System.out.println("Commands:\n/change name [name]\n/quit\n"); //List of Commands
-        System.out.println("Name can only contain letters or digits and must have between 3 and 13 characters");
     }
 
     /**
      * Let's client set their name
      */
     void setName() {
+        System.out.println("Name can only contain letters or digits and must have between 3 and 13 characters");
         System.out.println("Please enter your name: ");
         String name = scanner.nextLine();
         pw.println("SETTO§Nickname§" + name);

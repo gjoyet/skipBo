@@ -14,6 +14,7 @@ import java.net.Socket;
 public class SBServerListener implements Runnable {
     Socket socket;
     BufferedReader br;
+    Boolean isLoggedIn = true;
 
     SBServerListener(Socket socket) throws IOException {
         this.socket = socket;
@@ -27,7 +28,7 @@ public class SBServerListener implements Runnable {
     public void run() {
         String input;
 
-        while(true) {
+        while(isLoggedIn) {
             try {
                 input = br.readLine();
                 executeCommand(input);
@@ -85,6 +86,7 @@ public class SBServerListener implements Runnable {
     }
 
     void logOut(String[] command) {
+        isLoggedIn = false;
         //TODO end threads SBClientListener and SBServerListener
     }
 

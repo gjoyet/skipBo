@@ -29,7 +29,7 @@ public class SBListener implements Runnable {
             this.pw = new PrintWriter(sock.getOutputStream(), true);
             this.br = new BufferedReader(new InputStreamReader(sock.getInputStream()));
         } catch (IOException e) {
-            System.out.printf("Issue with getting Input- and OutputStream.");
+            System.out.println("Issue with getting Input- and OutputStream.");
         }
         this.running = true;
         this.id = id;
@@ -91,13 +91,6 @@ public class SBListener implements Runnable {
     public PrintWriter getPW() {
         return this.pw;
     }
-
-                /*
-                   TODO: Handle logout, players which have not given name yet don't get messages until
-                    they have given a name, message to all when someone logs in, make name change possible (Manuela
-                    has 'name' as option, I have 'nickname'), comment protocol enums, Guillaume should use protocol enums
-                    and not just "CHATM"
-                 */
 
 }
 

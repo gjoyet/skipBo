@@ -67,7 +67,9 @@ public class ProtocolExecution {
                 }
             } else throw new NoCommandException(input[0], input[1]);
         } catch (NameTakenException nte) {
-            sbL.player.changeName(nte.findName());
+            String name = nte.findName();
+            sbL.player.changeName(name);
+            sendAllExceptOne("PRINT§Terminal§" + formerName + " changed name to " + name + ".", sbL);
         }
     }
 

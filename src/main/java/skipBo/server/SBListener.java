@@ -19,8 +19,10 @@ public class SBListener implements Runnable {
     Socket sock;
     PrintWriter pw;
     BufferedReader br;
+    boolean running;
     int id;
     Player player;
+
 
     SBListener(Socket sock, int id) {
         this.sock = sock;
@@ -30,6 +32,7 @@ public class SBListener implements Runnable {
         } catch (IOException e) {
             System.out.printf("Issue with getting Input- and OutputStream.");
         }
+        this.running = true;
         this.id = id;
         this.player = null;
     }
@@ -38,7 +41,7 @@ public class SBListener implements Runnable {
      * Constantly reads input from assigned client. Read input is sliced and then passes it as argument to analyze method.
      */
      public void run() {
-        while(true) {
+        while(running) {
             String[] input = null;
             try {
                 input = this.br.readLine().split("§");
@@ -81,6 +84,10 @@ public class SBListener implements Runnable {
 
     public PrintWriter getPW() {
         return this.pw;
+    }
+
+    public void stopRunning() {
+        this.running = false;
     }
 
                 /*

@@ -3,14 +3,13 @@ package skipBo.server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 
 /**
  * Server for Skip-Bo: manages lobby, chat, starts game. This server accepts players while starting
  * a listener for every new player and is the highest instance of the program.
  */
 public class SBServer {
-    static int playerCounter = 0;
+    static int playerID = 0;
     static SBLobby sbLobby = new SBLobby();
 
     public static void main(String[] args) {
@@ -41,7 +40,7 @@ public class SBServer {
         try {
             Socket sock = serverSo.accept();
 
-            SBListener sbListen = new SBListener(sock, ++playerCounter);
+            SBListener sbListen = new SBListener(sock, ++playerID);
             Thread sbListenT = new Thread(sbListen); sbListenT.start();
         } finally {}
     }

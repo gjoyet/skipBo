@@ -77,7 +77,7 @@ public class ProtocolExecution {
             System.out.println("Received chat message: " + input[2]);
             if (input[1].equals("Global")) {
                 String message = input[2];
-                sendAll("CHATM§Global§" + sbL.player.getName() + ": " + message);
+                sendAllExceptOne("CHATM§Global§" + sbL.player.getName() + ": " + message, sbL);
             } else throw new NoCommandException(input[0], input[1]);
         } finally {}
     }
@@ -86,8 +86,10 @@ public class ProtocolExecution {
      * Method for command "LGOUT".
      */
     static void logout(String[] input, SBListener sbL) {
+
         sbL.pw.println("LGOUT");
         sbLobby.removePlayer(sbL.player);
+        sbL.stopRunning();
         sendAll("PRINT§Terminal§" + sbL.player.getName() + " left the room.");
 
     }

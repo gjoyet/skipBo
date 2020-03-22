@@ -65,7 +65,7 @@ public class SBListener implements Runnable {
             switch (protocol) {
                 case SETTO:
                     setTo(input, sbL);
-                    //System.out.println("LOG: Got into setTo method.");
+                    //System.out.println("LOG: Got into setTo method."); (For testing purposes)
                     break;
                 case CHNGE:
                     changeTo(input, sbL);

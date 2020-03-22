@@ -86,11 +86,11 @@ public class ProtocolExecution {
      * Method for command "LGOUT".
      */
     static void logout(String[] input, SBListener sbL) {
-
         sbL.pw.println("LGOUT");
         sbLobby.removePlayer(sbL.player);
         sbL.stopRunning();
         sendAll("PRINT§Terminal§" + sbL.player.getName() + " left the room.");
+        System.out.println("Bye Bye, " + sbL.player.getName() + ".");
 
     }
 

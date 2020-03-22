@@ -32,25 +32,39 @@ class SBClientListener implements Runnable {
      */
     @Override
     public void run() {
+
+        System.out.println("Connection successful\n");
+        printCommandInfo();
+        setName();
+
         String input;
-
-        System.out.println("Connection successful");
-        //Client has to set name
-        System.out.println("Commands:\n/change name [name]\n/quit"); //List of Commands
-        System.out.println("Please enter your name: ");
-        String name = scanner.nextLine();
-        pw.println("SETTO§Nickname§" + name);
-
         while(isLoggedIn) {
             input = scanner.nextLine();
             try {
                 forward(input);
             } catch (IndexOutOfBoundsException | NoCommandException e) {
                 System.out.println("Please enter a valid command");
+                printCommandInfo();
             }
         }
     }
 
+    /**
+     * Sends Information about valid commands to the client
+     */
+    void printCommandInfo() {
+        System.out.println("Commands:\n/change name [name]\n/quit\n"); //List of Commands
+    }
+
+    /**
+     * Let's client set their name
+     */
+    void setName() {
+        System.out.println("Name can only contain letters or digits and must have between 3 and 13 characters");
+        System.out.println("Please enter your name: ");
+        String name = scanner.nextLine();
+        pw.println("SETTO§Nickname§" + name);
+    }
 
     /**
      * Forwards user input to server according to network protocol

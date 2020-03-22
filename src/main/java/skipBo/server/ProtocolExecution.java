@@ -4,6 +4,8 @@ import skipBo.game.Player;
 import skipBo.userExceptions.NameTakenException;
 import skipBo.userExceptions.NoCommandException;
 
+import java.io.IOException;
+
 import static skipBo.server.SBServer.sbLobby;
 
 /**
@@ -40,7 +42,7 @@ public class ProtocolExecution {
             sbL.player = new Player(sbL.id, name, sbL);
             SBServer.sbLobby.addPlayer(sbL.player);
         } finally {
-            System.out.println("Welcome to Skip-Bo, " + name + "!");
+            System.out.println(name + " logged in.");
             sbL.pw.println("PRINT§Terminal§Welcome to Skip-Bo, " + name + "!");
             sendAllExceptOne("PRINT§Terminal§" + name + " joined the room. Say hi!", sbL);
         }
@@ -51,6 +53,7 @@ public class ProtocolExecution {
      */
     static void changeTo(String[] input, SBListener sbL) throws NoCommandException {
         String formerName = sbL.player.getName();
+        if(input.length < 3) return;
         try {
             if (input[1].equals("Nickname")) {
                 String name = input[2];
@@ -60,13 +63,15 @@ public class ProtocolExecution {
                     System.out.println(formerName + " changed name to " + name + ".");
                     sendAllExceptOne("PRINT§Terminal§" + formerName + " changed name to " + name + ".", sbL);
                 } else if (!SBServer.sbLobby.nameIsValid(name)) {
-                    sbL.pw.println("PRINT§Terminal§Refused: Name contains invalid symbols. Try again.");
+                    sbL.pw.println("PRINT§Terminal§Refused: Invalid name. Try again.");
                 } else if (SBServer.sbLobby.nameIsTaken(name)) {
                     throw new NameTakenException(name, sbL);
                 }
             } else throw new NoCommandException(input[0], input[1]);
         } catch (NameTakenException nte) {
-            sbL.player.changeName(nte.findName());
+            String name = nte.findName();
+            sbL.player.changeName(name);
+            sendAllExceptOne("PRINT§Terminal§" + formerName + " changed name to " + name + ".", sbL);
         }
     }
 
@@ -91,8 +96,15 @@ public class ProtocolExecution {
         sbL.pw.println("LGOUT");
         sbLobby.removePlayer(sbL.player);
         sbL.stopRunning();
+        try {
+            sbL.pw.close();
+            sbL.br.close();
+            sbL.sock.close();
+        } catch(IOException ioe) {
+            System.out.println("Issues while closing the socket at logout.");
+        }
         sendAll("PRINT§Terminal§" + sbL.player.getName() + " left the room.");
-        System.out.println("Bye Bye, " + sbL.player.getName() + ".");
+        System.out.println(sbL.player.getName() + " logged out.");
 
     }
 

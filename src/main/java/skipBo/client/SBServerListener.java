@@ -10,7 +10,7 @@ import java.net.Socket;
 /**
  * Thread waiting for any input from server and executes the input on client
  */
-public class SBServerListener implements Runnable {
+class SBServerListener implements Runnable {
     Socket socket;
     BufferedReader br;
     Boolean isLoggedIn = true;
@@ -34,9 +34,8 @@ public class SBServerListener implements Runnable {
             } catch (IOException e) {
                 System.out.println("Error with reading input from server");
             } catch (NoCommandException e) {
-                System.out.println("Not a command");
+                System.out.println("Error with network protocol command");
             }
-
         }
     }
 

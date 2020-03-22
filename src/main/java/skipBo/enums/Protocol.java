@@ -6,5 +6,7 @@ public enum Protocol {
     SETTO,
     CHNGE,
     LGOUT,
+
+    // TODO Comment protocol
     
 }

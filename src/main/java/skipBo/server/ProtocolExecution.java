@@ -51,6 +51,7 @@ public class ProtocolExecution {
      */
     static void changeTo(String[] input, SBListener sbL) throws NoCommandException {
         String formerName = sbL.player.getName();
+        if(input.length < 3) return;
         try {
             if (input[1].equals("Nickname")) {
                 String name = input[2];
@@ -60,7 +61,7 @@ public class ProtocolExecution {
                     System.out.println(formerName + " changed name to " + name + ".");
                     sendAllExceptOne("PRINT§Terminal§" + formerName + " changed name to " + name + ".", sbL);
                 } else if (!SBServer.sbLobby.nameIsValid(name)) {
-                    sbL.pw.println("PRINT§Terminal§Refused: Name contains invalid symbols. Try again.");
+                    sbL.pw.println("PRINT§Terminal§Refused: Invalid name. Try again.");
                 } else if (SBServer.sbLobby.nameIsTaken(name)) {
                     throw new NameTakenException(name, sbL);
                 }

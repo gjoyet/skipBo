@@ -14,6 +14,7 @@ class SBClientListener implements Runnable {
     Socket sock;
     PrintWriter pw;
     Scanner scanner;
+    Boolean isLoggedIn = true;
 
     /**
      *Creates a SBClientListener with a Socket
@@ -38,7 +39,7 @@ class SBClientListener implements Runnable {
         String name = scanner.nextLine();
         pw.println("SETTO§Nickname§" + name);
 
-        while(true) {
+        while(isLoggedIn) {
             input = scanner.nextLine();
             try {
                 forward(input);
@@ -82,6 +83,7 @@ class SBClientListener implements Runnable {
                 break;
             case "/quit":
                 protocolString = Protocol.LGOUT + "";
+                isLoggedIn = false;
                 break;
             default:
                 throw new NoCommandException();

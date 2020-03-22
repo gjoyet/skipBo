@@ -21,4 +21,4 @@ Chat		CHATM		Global		String message				sends ‚message‘ to write on the globa
 
 
 
-Logout		LGOUT		?		?					disconnects client				
+Logout		LGOUT		?		String message				disconnects client. From client to server no arguments			

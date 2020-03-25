@@ -22,6 +22,6 @@ Bei `game.year` sollt ihr das Jahr angeben, in dem das Spiel entwickelt wurde (F
 Zuletzt sollt ihr bei `game.developers` alle eure Entwickler_innen mit vollem Namen angeben.
 
 ## HTML-File zu Archivierungszwecken:
-Wir archivieren die Spiele des Programmierprojektes auf http://p9.dmi.skipBo.ch/cs108/. Zu diesem Zweck brauchen wir von allen Gruppen ein HTML-File, welches Infos zum Spiel enthält (und ab 2020 dazu, wie das Spiel gespielt wird). 
+Wir archivieren die Spiele des Programmierprojektes auf http://p9.dmi.skipbo.ch/cs108/. Zu diesem Zweck brauchen wir von allen Gruppen ein HTML-File, welches Infos zum Spiel enthält (und ab 2020 dazu, wie das Spiel gespielt wird). 
 
 Passt alle Teile wie im `index.html` File beschrieben an.

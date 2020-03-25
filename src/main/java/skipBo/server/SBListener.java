@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-import static skipBo.server.ProtocolExecution.*;
+import static skipBo.server.ProtocolExecutor.*;
 
 /**
  * Thread waiting for any action from client.
@@ -49,7 +49,7 @@ public class SBListener implements Runnable {
                 System.out.println("Error with reading input from client.");
             }
 
-            analyze(input, this);
+            this.analyze(input);
         }
 
     }
@@ -58,24 +58,24 @@ public class SBListener implements Runnable {
      * First branching out for protocol execution. Triggers required method depending on input protocol command.
      * @param input: Sliced input String from client.
      */
-    private static void analyze(String[] input, SBListener sbL) {
+    private void analyze(String[] input) {
         Protocol protocol = Protocol.valueOf(input[0]);
         try {
             switch (protocol) {
                 case SETTO:
-                    setTo(input, sbL);
+                    setTo(input, this);
                     //System.out.println("LOG: Got into setTo method."); (For testing purposes)
                     break;
                 case CHNGE:
-                    changeTo(input, sbL);
+                    changeTo(input, this);
                     //System.out.println("LOG: Got into changeTo method.");
                     break;
                 case CHATM:
-                    chatMessage(input, sbL);
+                    chatMessage(input, this);
                     //System.out.println("LOG: Got into chatMessage method.");
                     break;
                 case LGOUT:
-                    logout(sbL);
+                    logout(this);
                     //System.out.println("LOG: Got into logout method.");
             }
         } catch(IllegalArgumentException iae) {

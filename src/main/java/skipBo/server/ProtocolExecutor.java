@@ -12,13 +12,13 @@ import static skipBo.server.SBServer.sbLobby;
  * The execution of the network protocol is implemented in this class. Every command has one method,
  * with further branching inside each method according to the options.
  */
-public class ProtocolExecution {
+public class ProtocolExecutor {
 
     /**
      * Method for command "SETTO". This command sets a parameter
      * given as option to the value given as argument.
      */
-    static void setTo(String[] input, SBListener sbL) throws NoCommandException {
+    void setTo(String[] input, SBListener sbL) throws NoCommandException {
         String name = "SBPlayer";
         try {
             if (input[1].equals("Nickname")) {
@@ -53,7 +53,7 @@ public class ProtocolExecution {
      * Method for command "CHNGE". This command sets a parameter
      * given as option to the value given as argument.
      */
-    static void changeTo(String[] input, SBListener sbL) throws NoCommandException {
+    void changeTo(String[] input, SBListener sbL) throws NoCommandException {
         String formerName = sbL.player.getName();
         if(input.length < 3) return;
         try {
@@ -83,7 +83,7 @@ public class ProtocolExecution {
      * Method for command "CHATM". Sends received chat message to all
      * players except the one sending it.
      */
-    static void chatMessage(String[] input, SBListener sbL) throws NoCommandException {
+    void chatMessage(String[] input, SBListener sbL) throws NoCommandException {
         try {
             if (input.length < 3) return;
             System.out.println("Received chat message from " + sbL.player.getName() + ": " + input[2]);
@@ -98,7 +98,7 @@ public class ProtocolExecution {
      * Method for command "LGOUT". Terminates the SBListener of the player logging out,
      * closes socket and sends message to all other players on which player logged out.
      */
-    static void logout(SBListener sbL) {
+    void logout(SBListener sbL) {
         sbL.pw.println("LGOUT");
         sbLobby.removePlayer(sbL.player);
         sbL.stopRunning();

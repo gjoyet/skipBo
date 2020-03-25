@@ -1,7 +1,5 @@
 package skipbo.server;
 
-import skipbo.server.SBListener;
-
 /**
  * Exception thrown when a user want to take a name that is already in use.
  */

@@ -103,8 +103,9 @@ class SBClientListener implements Runnable {
                 break;
             case "/quit":
                 protocolString = Protocol.LGOUT + "";
-                isLoggedIn = false;
-                break;
+                pw.println(protocolString);
+                logOut();
+                return;
             default:
                 throw new NoCommandException();
         }
@@ -130,6 +131,17 @@ class SBClientListener implements Runnable {
             throw new NoCommandException();
         }
 
+    }
+
+    void logOut() {
+        isLoggedIn = false;
+        scanner.close();
+        pw.close();
+        try {
+            sock.close();
+        } catch (IOException e) {
+            System.out.println("Issue with closing the socket");
+        }
     }
 
 }

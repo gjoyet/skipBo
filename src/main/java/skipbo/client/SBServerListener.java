@@ -86,8 +86,14 @@ class SBServerListener implements Runnable {
      * Terminates SBServerListener thread and sends status message to client
      */
     void logOut() {
+        try {
+            br.close();
+            socket.close();
+            printMessage("Logout successful");
+        } catch (IOException e) {
+            System.out.println("Error with closing BufferedReader or Socket");
+        }
         isLoggedIn = false;
-        printMessage("Logout successful");
     }
 
     /**

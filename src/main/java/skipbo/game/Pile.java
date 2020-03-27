@@ -16,7 +16,7 @@ public class Pile {
     public Player player;
 
     /**
-     * The method gamePiles() creates all cards of a full set  and
+     * The method gamePiles() creates all cards of a full set and
      * puts them in a "ArrayList<Card>-pile" (named: drawPile).
      * <p>
      * It also creates an "ArrayList<ArrayList<Cards>>-set" (named: buildPiles),
@@ -83,17 +83,20 @@ public class Pile {
         this.handCards = new ArrayList<Card>();
     }
 
-    // public Card getTopCard() {}
+    public Card getDrawPileTopCard() {
+        return drawPile.get(drawPile.size());
+    }
+
+    public Card getHandCardAtIndex(int index) {
+        return handCards.get(index);
+    }
 
     public int getNumOfCards() {
         return numOfCards;
     }
 
-    public void removeTopCard() {
-        // Card topCard = getTopCard();
-        //topCard = deck.get(1);
-        //int size = deck.size();
-        // size--;
+    public void removeDrawPileTopCard() {
+        Card card = this.getDrawPileTopCard();
     }
 }
 

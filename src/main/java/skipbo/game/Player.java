@@ -40,14 +40,45 @@ public class Player {
         return this.name;
     }
 
-    public void changeName(String name) {this.name = name;}
+    public void changeName(String name) {
+        this.name = name;
+    }
 
-    public SBListener getSBL() { return this.sbListen; }
+    public SBListener getSBL() {
+        return this.sbListen;
+    }
 
-    public int getId(){ //returns the id number of the player object
+    public int getId() { //returns the id number of the player object
         return this.id;
     }
 
+    public void addCardToHand(Card card) {
+        this.getHandCards().add(card);
+    }
+
+
+    /**
+     * Fills player's cards at the beginning of their turn,
+     * if they have less than the maximum of five cards in their hand.
+     */
+    public void fillHandCards() {
+        ArrayList<Card> handCards = this.getHandCards();
+        int sizeOfHand = handCards.size();
+        if (sizeOfHand < 5) {
+            int toFill = (5 - sizeOfHand);
+            for (int i = 0; i < toFill; ++i) {
+                Card card = piles.getDrawPileTopCard();
+                addCardToHand(card);
+                piles.drawPile.remove(piles.getDrawPileTopCard());
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        //Execute to all players in lobby: sysout ("Gave " + this.getName() + " " + their missing " + toFill + " cards");
+    }
 
 
 }

@@ -1,22 +1,25 @@
 package skipbo.game;
 
+import skipbo.server.SBListener;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Game {
 
-    public Object[] players;
+    public ArrayList<Player> players;
     public Pile piles;
     private Player winner, whosTurn;
     private boolean gameRunning, turnFinished;
-    int sizeOfStockPile;
+    int sizeOfStockPile, playersTurn;
 
 
     /**
      * Constructor for Object Game, where the main Game and Game rules
      * will be implemented.
      */
-    public Game (Object[] players){
+    public Game(ArrayList<Player> players) {
 
         this.players = players;
         this.whosTurn = whosTurn;
@@ -41,46 +44,50 @@ public class Game {
      * Game and Player Objects have an Object of type Pile, which contain
      * all the different pile-types, which are specifically needed.
      */
-    public void setUpGame() {
+    public void dealCards() {
 
         this.piles.gamePiles();   // Game gets complete set of cards
 
-        for(int i=0; i < players.length; i++) {     // Players getting their cards
-
+        for (int i = 0; i < players.size(); i++) {     // Players getting their cards
+            Player tempPlayer = players.get(i);
             Random random = new Random();   // Object random for card distribution by chance
 
-            for (int j = 0; j < 5 ;j++){    // Draw hand-cards for each player
+            for (int j = 0; j < 5; j++) {    // Draw hand-cards for each player
                 Card c = this.getDrawPile().get(random.nextInt(this.getDrawPile().size()));
-                Player tempPlayer = (Player) this.players[i];
-                tempPlayer.getStockPile().add(c);
-                this.players[i] = tempPlayer;
+                tempPlayer.getHandCards().add(c);
+                //this.players[i] = tempPlayer;
             }
-            for (int j = 0; j < sizeOfStockPile ;j++){    // Draw Stock-Pile cards for each player
+            for (int j = 0; j < sizeOfStockPile; j++) {    // Draw Stock-Pile cards for each player
                 Card c = this.getDrawPile().get(random.nextInt(this.getDrawPile().size()));
-                Player tempPlayer = (Player) this.players[i];
-                tempPlayer.getHandCards() .add(c);
-                this.players[i] = tempPlayer;
+                tempPlayer.getStockPile().add(c);
+                //this.players[i] = tempPlayer;
             }
 
             //   Print Array (ONLY TESTING PURPOSE)
-            Player tempPlayer = (Player) this.players[i];
             Object[] tempHandCards = tempPlayer.getHandCards().toArray();
             System.out.println();
             System.out.println(tempPlayer.getName());
-            for(int t = 1 ; t<tempHandCards.length;t++) {
+            for (int t = 1; t < tempHandCards.length; t++) {
                 Card karte = (Card) tempHandCards[t];
-                System.out.println("|"+karte.number +"| " + karte.col);
+                System.out.println("|" + karte.number + "| " + karte.col);
             }
         }
     }
 
+    public void startTurn() {
+        turnFinished = false;
+        Player ply = PlayerMaster.getPlayerByID(playersTurn);
+        //Execute: sysout to Player ply = "It's your turn!"
 
-    //public void startTurn(){}
-    //public void dealCards(){}
+        ply.fillHandCards();
+
+    }
+
+    //public void setUpGame(){}
     //public void cardOperation(from, to where, which card, ){}
     //public void endGame(){}
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
 //        Object[] players = new Object[4];
 //        Player sp1 = new Player(1, "Manfred");

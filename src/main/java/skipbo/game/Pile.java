@@ -87,15 +87,22 @@ public class Pile {
         return drawPile.get(drawPile.size());
     }
 
+    /**
+     * Returns the specific hand card at the index in the parameter
+     *
+     * @param index
+     * @return
+     */
+
     public Card getHandCardAtIndex(int index) {
-        return handCards.get(index);
+        return this.handCards.get(index);
     }
 
-    public int getNumOfCards() {
-        return numOfCards;
+    public int getNumOfStockPile() {
+        return stockPile.size();
     }
 
-    public void removeDrawPileTopCard() {
+    public void removeDrawPileTopCard() {       // apparently redundant as ArrayList has a remove() method
         Card card = this.getDrawPileTopCard();
     }
 }

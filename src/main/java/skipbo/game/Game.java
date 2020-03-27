@@ -55,12 +55,12 @@ public class Game {
             for (int j = 0; j < 5; j++) {    // Draw hand-cards for each player
                 Card c = this.getDrawPile().get(random.nextInt(this.getDrawPile().size()));
                 tempPlayer.getHandCards().add(c);
-                //this.players[i] = tempPlayer;
+                //this.players[i] = tempPlayer; // possibly redundant code
             }
             for (int j = 0; j < sizeOfStockPile; j++) {    // Draw Stock-Pile cards for each player
                 Card c = this.getDrawPile().get(random.nextInt(this.getDrawPile().size()));
                 tempPlayer.getStockPile().add(c);
-                //this.players[i] = tempPlayer;
+                //this.players[i] = tempPlayer; // possibly redundant cod
             }
 
             //   Print Array (ONLY TESTING PURPOSE)
@@ -73,6 +73,11 @@ public class Game {
             }
         }
     }
+
+    /**
+     * Method to be executed at the start of each player's turn
+     * and fills their hand cards.
+     */
 
     public void startTurn() {
         turnFinished = false;

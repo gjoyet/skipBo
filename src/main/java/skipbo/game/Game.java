@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static java.lang.Thread.sleep;
+
 public class Game {
 
     public ArrayList<Player> players;
@@ -28,15 +30,35 @@ public class Game {
         this.gameRunning = gameRunning;
         this.turnFinished = turnFinished;
         this.sizeOfStockPile = 20;
+
+        start();
+        dealCards();
     }
+
 
     /**
      * Returns the drawPile of the main Game
      */
-    public ArrayList<Card> getDrawPile(){
-
+    public ArrayList<Card> getDrawPile() {
         return this.piles.drawPile;
     }
+
+    public void start() {
+        while (gameRunning) {
+            startTurn();
+            while (!turnFinished) {
+                try {
+                    sleep(100);
+                } finally {
+                }
+            }
+            try {
+                sleep(100);
+            } finally {
+            }
+        }
+    }
+
 
     /**
      * setUpGame creates all card Decks and hands out random cards
@@ -76,34 +98,47 @@ public class Game {
 
     /**
      * Method to be executed at the start of each player's turn
-     * and fills their hand cards.
+     * and to fill their hand cards.
      */
 
     public void startTurn() {
         turnFinished = false;
         Player ply = PlayerMaster.getPlayerByID(playersTurn);
         //Execute: sysout to Player ply = "It's your turn!"
-
+        //Execute to Players ply: sysout ("Your hand cards are now: " + ply.getHandCards().toString());
         ply.fillHandCards();
+        //Execute to all players in lobby: sysout ("Gave " + this.getName() + " " + their missing " + toFill + " cards");
 
     }
 
-    //public void setUpGame(){}
+    public void endTurn() {
+        turnFinished = true;
+        if (!(playersTurn == 3)) {
+            playersTurn++;
+        } else {
+            playersTurn = 0;
+        }
+    }
+
+
     //public void cardOperation(from, to where, which card, ){}
     //public void endGame(){}
 
+    private void sleep(long ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void endGame(Player winner) {
+        gameRunning = false;
+        //ServerEvents: EndGame Protocol
+    }
+
     public static void main(String[] args) {
 
-//        Object[] players = new Object[4];
-//        Player sp1 = new Player(1, "Manfred");
-//        Player sp2 = new Player(2, "Franz Ferdinandt");
-//        Player sp3 = new Player(3, "Peter");
-//        Player sp4 = new Player(3, "Meinrad");
-//        players[0] = sp1;
-//        players[1] = sp2;
-//        players[2] = sp3;
-//        players[3] = sp4;
-//
 //        Game spiel = new Game(players);
 //        spiel.setUpGame();
     }

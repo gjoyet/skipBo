@@ -37,11 +37,12 @@ public class PlayerMaster {
 
     /**
      * Returns the player object with the corresponding name
+     *
      * @param name
      * @return player
      */
 
-    public static skipbo.game.Player getPlayerName(String name) {
+    public static Player getPlayerName(String name) {
         for (skipbo.game.Player p : players) {
             if (p.getName().equals(name)) {
                 return p;
@@ -58,19 +59,4 @@ public class PlayerMaster {
         }
         return null;
     }
-
-    /**
-     * Checks if the name is already in use
-     * @param name
-     * @return true if taken, false if not
-
-    public static boolean nameIsTaken(String name){
-    for (skipBo.game.Player pl : players){
-    if(pl.getName().equals(name)){
-    return true;
-            }
-        }
-        return false;
-    }
-     */
 }

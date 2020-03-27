@@ -51,23 +51,23 @@ public class Game {
 
             for (int j = 0; j < 5 ;j++){    // Draw hand-cards for each player
 
-                        Card c = (Card) this.getDrawPile().get(random.nextInt(this.getDrawPile().size()));
+                        Card c = this.getDrawPile().get(random.nextInt(this.getDrawPile().size()));
                         Player tempPlayer = (Player) this.players[i];
                         tempPlayer.getStockPile().add(c);
-                        this.players[i] = (Player) tempPlayer;
+                        this.players[i] = tempPlayer;
             }
             for (int j = 0; j < sizeOfStockPile ;j++){    // Draw Stock-Pile cards for each player
 
-                        Card c = (Card) this.getDrawPile().get(random.nextInt(this.getDrawPile().size()));
+                        Card c = this.getDrawPile().get(random.nextInt(this.getDrawPile().size()));
                         Player tempPlayer = (Player) this.players[i];
                         tempPlayer.getHandCards() .add(c);
-                        this.players[i] = (Player) tempPlayer;
+                        this.players[i] = tempPlayer;
             }
 
             //   Print Array (ONLY TESTING PURPOSE)
             Player tempPlayer = (Player) this.players[i];
             Object[] tempHandCards = tempPlayer.getHandCards().toArray();
-            System.out.println("");
+            System.out.println();
             System.out.println(tempPlayer.getName());
             for(int t = 1 ; t<tempHandCards.length;t++) {
                 Card karte = (Card) tempHandCards[t];

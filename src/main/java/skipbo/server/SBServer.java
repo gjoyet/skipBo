@@ -33,7 +33,7 @@ public class SBServer {
     }
 
     /**
-     * Accepts new socket and starts a SBListener thread.
+     * Accepts a new socket and starts a SBListener thread.
      */
     private static void login(ServerSocket serverSo) throws IOException {
         try {

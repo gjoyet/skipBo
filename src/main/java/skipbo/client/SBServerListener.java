@@ -45,7 +45,7 @@ class SBServerListener implements Runnable {
      * @throws NoCommandException If commandLine string doesn't match network protocol
      */
     void executeCommand(String commandLine) throws NoCommandException  {
-        String[] command = commandLine.split("§");
+        String[] command = commandLine.split("§", 3);
         Protocol protocol = Protocol.valueOf(command[0]);
 
         switch (protocol) {

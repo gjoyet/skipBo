@@ -19,6 +19,7 @@ public class ProtocolExecutor {
         this.input = input;
         this.sbL = sbL;
     }
+
     /**
      * Method for command "SETTO". This command sets a parameter
      * given as option to the value given as argument.

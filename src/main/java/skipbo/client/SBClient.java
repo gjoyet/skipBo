@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 /**
- * A Skip-Bo client
+ * A Skip-Bo client.
  */
 public class SBClient {
 

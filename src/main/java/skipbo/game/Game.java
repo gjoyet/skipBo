@@ -50,18 +50,16 @@ public class Game {
             Random random = new Random();   // Object random for card distribution by chance
 
             for (int j = 0; j < 5 ;j++){    // Draw hand-cards for each player
-
-                        Card c = this.getDrawPile().get(random.nextInt(this.getDrawPile().size()));
-                        Player tempPlayer = (Player) this.players[i];
-                        tempPlayer.getStockPile().add(c);
-                        this.players[i] = tempPlayer;
+                Card c = this.getDrawPile().get(random.nextInt(this.getDrawPile().size()));
+                Player tempPlayer = (Player) this.players[i];
+                tempPlayer.getStockPile().add(c);
+                this.players[i] = tempPlayer;
             }
             for (int j = 0; j < sizeOfStockPile ;j++){    // Draw Stock-Pile cards for each player
-
-                        Card c = this.getDrawPile().get(random.nextInt(this.getDrawPile().size()));
-                        Player tempPlayer = (Player) this.players[i];
-                        tempPlayer.getHandCards() .add(c);
-                        this.players[i] = tempPlayer;
+                Card c = this.getDrawPile().get(random.nextInt(this.getDrawPile().size()));
+                Player tempPlayer = (Player) this.players[i];
+                tempPlayer.getHandCards() .add(c);
+                this.players[i] = tempPlayer;
             }
 
             //   Print Array (ONLY TESTING PURPOSE)

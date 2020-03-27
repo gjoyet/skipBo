@@ -15,7 +15,7 @@ public class ProtocolExecutor {
     private String[] input;
     private SBListener sbL;
 
-    ProtocolExecutor(String input[], SBListener sbL) {
+    ProtocolExecutor(String[] input, SBListener sbL) {
         this.input = input;
         this.sbL = sbL;
     }

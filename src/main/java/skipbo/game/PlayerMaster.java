@@ -32,7 +32,7 @@ public class PlayerMaster {
         if (players.size() > 4){
             return ServerResponse.SERVER_FULL;
         }
-        return srp.LOGIN_SUCCESS;
+        return ServerResponse.LOGIN_SUCCESS;
     }
 
     /**

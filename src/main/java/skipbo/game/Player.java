@@ -1,5 +1,4 @@
-package skipbo.game;//package ch.unibas.game;
-//import ch.unibas.game.Pile;
+package skipbo.game;
 import skipbo.server.SBListener;
 
 import java.util.*;
@@ -13,13 +12,11 @@ public class Player {
     private String name;
     private int id;
     private SBListener sbListen;
-    // private InetAddress ip;
-    // private Socket sock;
     private int port;
     private Pile piles;
     /**
      * Player constructor to build a Player object with
-     * a String name  and port numbers.
+     * an int id, String name and a ServerListener object specific to the player
      * @param id
      * @param name
      * @param sbListen

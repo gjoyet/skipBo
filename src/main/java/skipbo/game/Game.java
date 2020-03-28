@@ -33,6 +33,8 @@ public class Game {
 
         start();
         dealCards();
+
+        gameRunning = true;
     }
 
 
@@ -42,6 +44,11 @@ public class Game {
     public ArrayList<Card> getDrawPile() {
         return this.piles.drawPile;
     }
+
+    /**
+     * Method start() runs at the beginning of the Game, and waits until
+     * boolean value turnFinished
+     */
 
     public void start() {
         while (gameRunning) {
@@ -111,6 +118,10 @@ public class Game {
 
     }
 
+    public void cardOperation() {
+
+    }
+
     public void endTurn() {
         turnFinished = true;
         if (!(playersTurn == 3)) {
@@ -122,7 +133,11 @@ public class Game {
 
 
     //public void cardOperation(from, to where, which card, ){}
-    //public void endGame(){}
+
+    public void endGame(Player winner) {
+        gameRunning = false;
+        //ServerEvents: EndGame Protocol
+    }
 
     private void sleep(long ms) {
         try {
@@ -132,10 +147,7 @@ public class Game {
         }
     }
 
-    public void endGame(Player winner) {
-        gameRunning = false;
-        //ServerEvents: EndGame Protocol
-    }
+
 
     public static void main(String[] args) {
 

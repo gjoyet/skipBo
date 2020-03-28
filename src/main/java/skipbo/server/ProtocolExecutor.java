@@ -96,7 +96,7 @@ public class ProtocolExecutor {
             if (input[1].equals("Global")) {
                 String message = input[2];
                 sendAllExceptOne("CHATM§Global§" + sbL.player.getName() + ": " + message, sbL);
-            } else throw new NoCommandException(input[0], input[1]);
+            } else throw new NoCommandException(input[0], input[1]);throw new NoCommandException(input[0], input[1]);
         } finally {}
     }
 

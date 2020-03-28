@@ -24,7 +24,7 @@ public class Game {
      */
     public Game(ArrayList<Player> players) {
 
-        this.players = players;
+        this.players = players; //hello
         this.whosTurn = whosTurn;
         this.winner = winner;
         this.piles = new Pile();

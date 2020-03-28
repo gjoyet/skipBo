@@ -25,7 +25,7 @@ public class Game {
      */
     public Game(ArrayList<Player> players) {
 
-        this.players = players; //what is happening
+        this.players = players;
         this.whosTurn = whosTurn;
         this.winner = winner;
         this.piles = new Pile();
@@ -138,7 +138,7 @@ public class Game {
 
     public void playToMiddle(int id, int handCardIndex, int buildDeckIndex) {
         Player currentPly = PlayerMaster.getPlayerByID(id);     //TODO: Does this make sense? Maybe better with SBLobby.getPlayer - Discuss with GUILL
-        Card card = currentPly.getHandCards().get(handCardIndex);
+        Card card = currentPly.getHandCardAtIndex(handCardIndex);   // returns card at specified index in the hand card arraylist
 
         ArrayList<ArrayList<Card>> buildPiles = piles.buildPiles;
         ArrayList<Card> specBuildPile = buildPiles.get(buildDeckIndex);
@@ -187,7 +187,7 @@ public class Game {
         ArrayList<ArrayList<Card>> discardPiles = piles.discardPiles;
         ArrayList<Card> specDiscard = discardPiles.get(discardPileIndex);
 
-        Card card = currentPly.getHandCards().get(handCardIndex);
+        Card card = currentPly.getHandCardAtIndex(handCardIndex);
 
         specDiscard.add(card);
         currentPly.getHandCards().remove(card);

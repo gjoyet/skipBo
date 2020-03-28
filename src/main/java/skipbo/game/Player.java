@@ -48,6 +48,10 @@ public class Player {
         return this.sbListen;
     }
 
+    public Card getHandCardAtIndex(int index) {
+        return this.getHandCards().get(index);
+    }
+
     public int getId() { //returns the id number of the player object
         return this.id;
     }

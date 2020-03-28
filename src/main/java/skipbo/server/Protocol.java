@@ -6,26 +6,11 @@ package skipbo.server;
  * The command is always an all-capital 5-letter code.
  */
 public enum Protocol {
-    /**
-     * Prints a message given as argument to a location given as option.
-     */
-    PRINT,
-    /**
-     * For the server: sends all clients the received chat message; For the client: prints chat message (options: Global, Private).
-     */
-    CHATM,
-    /**
-     * Sets a parameter given as option to the value given as argument.
-     */
-    SETTO,
-    /**
-     * Changes an already existing parameter given as option to the value given as argument.
-     */
-    CHNGE,
-    /**
-     * For the server: client wants to log out; For Client: confirmation that logout was successful.
-     */
-    LGOUT
-
+    PRINT, /** Prints a message given as argument to a location given as option. */
+    CHATM, /** For server: sends all clients the received chat message; For client: prints chat message (options: Global, Private). */
+    SETTO, /** Sets a parameter given as option to the value given as argument. */
+    CHNGE, /** Changes an already existing parameter given as option to the value given as argument. */
+    LGOUT, /** For server: client wants to log ut; For Client: confirmation that logout was successful. */
+    PLAYC; /** Plays a card with index i from Pile f to Pile t (i, f and t given as arguments). */
 
 }

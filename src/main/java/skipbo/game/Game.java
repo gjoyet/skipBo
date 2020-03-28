@@ -122,6 +122,7 @@ public class Game {
     /**
      * Method playToMiddle processes which player, which Card index they wish to play
      * and which buildPile they wish to play to and carries out the command if valid.
+     * Furthermore, removes the specified card from their hand cards.
      *
      * @param id
      * @param handCardIndex
@@ -129,11 +130,11 @@ public class Game {
      */
 
     public void playToMiddle(int id, int handCardIndex, int buildDeckIndex) {
-        Player currentPly = PlayerMaster.getPlayerByID(id); //TODO: Does this make sense? Maybe better with SBLobby.getPlayer - Discuss with G
+        Player currentPly = PlayerMaster.getPlayerByID(id);     //TODO: Does this make sense? Maybe better with SBLobby.getPlayer - Discuss with GUILL
         Card card = currentPly.getHandCards().get(handCardIndex);
 
         ArrayList<ArrayList<Card>> buildPiles = piles.buildPiles;
-        ArrayList<Card> specBuildPile = buildPiles.get(handCardIndex);
+        ArrayList<Card> specBuildPile = buildPiles.get(buildDeckIndex);
 
         Card topCard = specBuildPile.get(specBuildPile.size());
 
@@ -155,11 +156,91 @@ public class Game {
         } else {
             if (card.number == 1) {
                 specBuildPile.add(card);
+                //Execute: update build pile
+            } else {
+                //Execute: invalid move! Card has to be Num 1 to be first on an empty build pile.
             }
         }
+    }
+
+    /**
+     * This method plays a hand card into a discard pile of the player's choice
+     * Parameter handCardIndex to know which hand card should be selected to be played
+     * Parameter id to know whose turn it is. Furthermore, removes the specified card
+     * from player's hand.
+     * Parameter discardPileIndex to know which Discard pile to play to.
+     *
+     * @param id
+     * @param handCardIndex
+     * @param discardPileIndex
+     */
+
+    public void playToDiscard(int id, int handCardIndex, int discardPileIndex) {
+        Player currentPly = PlayerMaster.getPlayerByID(id);     //TODO: Does this make sense? Maybe better with SBLobby.getPlayer - Discuss with GUI
+        ArrayList<ArrayList<Card>> discardPiles = piles.discardPiles;
+        ArrayList<Card> specDiscard = discardPiles.get(discardPileIndex);
+
+        Card card = currentPly.getHandCards().get(handCardIndex);
+
+        specDiscard.add(card);
+        currentPly.getHandCards().remove(card);
+        //Execute: update Discard pile and hand cards
+        endTurn();
 
     }
 
+    /**
+     * This method is to play the top card from the Stock Pile to a build pile
+     * of the player's choosing.
+     * Param id for player, Param id to know which Build pile to play to.
+     *
+     * @param id
+     * @param buildPileIndex
+     */
+
+    public void playFromStockToMiddle(int id, int buildPileIndex) {
+        Player currentPlayer = PlayerMaster.getPlayerByID(id);  //TODO: Does this make sense? Maybe better with SBLobby.getPlayer - Discuss with GUILL
+        ArrayList<Card> stockPile = currentPlayer.getStockPile();
+        Card stockCard = stockPile.get(stockPile.size());
+
+        ArrayList<ArrayList<Card>> buildPiles = piles.buildPiles;
+        var specBuildPile = buildPiles.get(buildPileIndex);
+
+        Card topCard = specBuildPile.get(specBuildPile.size());
+
+        if (!(specBuildPile.isEmpty())) {
+            if (topCard.number == (stockCard.number - 1)) {
+                specBuildPile.add(stockCard);
+                currentPlayer.getStockPile().remove(stockCard);
+                topCard = stockCard;     // could be redundant
+                // Execute: card op valid - update board and stock pile card.
+                if (stockCard.number == 12) {
+                    //Execute: make that BuildPile go away
+                    for (int i = 0; i < 12; i++) {    // remove all cards from the buildPile if the top card is 12
+                        specBuildPile.remove(i);
+                    }
+                }
+            } else {
+                //EXECUTE: the move is invalid!
+            }
+        } else {
+            if (stockCard.number == 1) {
+                specBuildPile.add(stockCard);
+                //Execute: update build pile
+            } else if (stockCard.number != 1) {
+                //Execute: invalid move! Card 1 has to be first card on build pile.
+            }
+        }
+
+        if (currentPlayer.getStockPile().isEmpty()) {
+            endGame(currentPlayer);
+        }
+    }
+
+    /**
+     * Method to be run at the end of a player's turn, which
+     * then changes turn from one player to the next.
+     */
     public void endTurn() {
         turnFinished = true;
         if (!(playersTurn == 3)) {
@@ -170,13 +251,21 @@ public class Game {
     }
 
 
-    //public void cardOperation(from, to where, which card, ){}
-
+    /**
+     * A method to run the End Game network protocol to
+     *
+     * @param winner
+     */
     public void endGame(Player winner) {
         gameRunning = false;
-        //ServerEvents: EndGame Protocol
+        //EXECUTE: EndGame Protocol (sysout: Player X won game!) server shut, reshuffle etc.
     }
 
+    /**
+     * A sleep method with long parameter to sleep the given amount of time.
+     *
+     * @param ms
+     */
     private void sleep(long ms) {
         try {
             Thread.sleep(ms);

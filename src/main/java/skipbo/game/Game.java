@@ -1,6 +1,7 @@
 package skipbo.game;
 
 import skipbo.server.SBListener;
+import skipbo.server.SBLobby;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -118,7 +119,44 @@ public class Game {
 
     }
 
-    public void cardOperation() {
+    /**
+     * Method playToMiddle processes which player, which Card index they wish to play
+     * and which buildPile they wish to play to and carries out the command if valid.
+     *
+     * @param id
+     * @param handCardIndex
+     * @param buildDeckIndex
+     */
+
+    public void playToMiddle(int id, int handCardIndex, int buildDeckIndex) {
+        Player currentPly = PlayerMaster.getPlayerByID(id); //TODO: Does this make sense? Maybe better with SBLobby.getPlayer - Discuss with G
+        Card card = currentPly.getHandCards().get(handCardIndex);
+
+        ArrayList<ArrayList<Card>> buildPiles = piles.buildPiles;
+        ArrayList<Card> specBuildPile = buildPiles.get(handCardIndex);
+
+        Card topCard = specBuildPile.get(specBuildPile.size());
+
+        if (!(specBuildPile.isEmpty())) {
+            if (topCard.number == (card.number - 1)) {
+                specBuildPile.add(card);
+                currentPly.getHandCards().remove(card);
+                topCard = card;     // could be redundant
+                // Execute: card op valid - update board and hand cards.
+                if (card.number == 12) {
+                    //Execute: make that BuildPile go away
+                    for (int i = 0; i < 12; i++) {    // remove all cards from the buildPile if the top card is 12
+                        specBuildPile.remove(i);
+                    }
+                }
+            } else {
+                //EXECUTE: the move is invalid!
+            }
+        } else {
+            if (card.number == 1) {
+                specBuildPile.add(card);
+            }
+        }
 
     }
 
@@ -146,7 +184,6 @@ public class Game {
             e.printStackTrace();
         }
     }
-
 
 
     public static void main(String[] args) {

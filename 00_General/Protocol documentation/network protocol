@@ -15,4 +15,4 @@ Lobby		SETTO		Nickname	String nickname				sets nickname of new player to ‚nick
 Chat		CHATM		Global		String message				sends ‚message‘ to write on the global chat
 				Private		Player p, String message		sends private ,message’ to player p	
 
-Game		PUTTO		Card		Card c, Pile from, Pile to		put card ‚c‘ from pile ‚from‘ to pile ‚to‘		
+Game		PUTTO		Card		Index i, Pile f, Pile t		put card with index ‚i‘ from pile ‚f‘ to pile ‚t‘		

@@ -15,6 +15,8 @@ public class ProtocolExecutor {
     private String[] input;
     private SBListener sbL;
 
+    public ProtocolExecutor() {};
+
     ProtocolExecutor(String[] input, SBListener sbL) {
         this.input = input;
         this.sbL = sbL;
@@ -123,7 +125,7 @@ public class ProtocolExecutor {
     /**
      * @param message: String sent to all clients
      */
-    void sendAll(String message) {
+    public void sendAll(String message) {
         for(int i = 0; i < sbLobby.getLength(); i++) {
             sbLobby.getSBL(i).pw.println(message);
         }
@@ -133,7 +135,7 @@ public class ProtocolExecutor {
      * @param message: String sent to all clients...
      * @param sbL: ... except this one
      */
-    void sendAllExceptOne(String message, SBListener sbL) {
+    public void sendAllExceptOne(String message, SBListener sbL) {
         for(int i = 0; i < sbLobby.getLength(); i++) {
             if(!sbLobby.getSBL(i).equals(sbL)) {
                 sbLobby.getSBL(i).pw.println(message);

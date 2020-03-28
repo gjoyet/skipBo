@@ -1,5 +1,6 @@
 package skipbo.game;
 
+import skipbo.server.ProtocolExecutor;
 import skipbo.server.SBListener;
 import skipbo.server.SBLobby;
 
@@ -112,10 +113,16 @@ public class Game {
     public void startTurn() {
         turnFinished = false;
         Player ply = PlayerMaster.getPlayerByID(playersTurn);
-        //Execute: sysout to Player ply = "It's your turn!"
-        //Execute to Players ply: sysout ("Your hand cards are now: " + ply.getHandCards().toString());
+        ply.getSBL().getPW().println("PRINT§Terminal§It's your turn!");
+        ply.getSBL().getPW().println("PRINT§Terminal§It's your turn! Your hand cards are now: "
+                                                                                + ply.getHandCards().toString());
+        //DONE: sysout to Player ply = "It's your turn!"
+        //DONE: to Player ply: sysout ("Your hand cards are now: " + ply.getHandCards().toString());
         ply.fillHandCards();
-        //Execute to all players in lobby: sysout ("Gave " + this.getName() + " " + their missing " + toFill + " cards");
+        new ProtocolExecutor().sendAllExceptOne("PRINT§Terminal§Gave " + ply.getName()
+                                                            + " their missing " + toFill + "cards.", ply.getSBL());
+        //DONE: to all players in lobby: sysout ("Gave " + this.getName() + " " + their missing " + toFill + " cards");
+        //TODO: correct toFIll variable
 
     }
 

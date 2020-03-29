@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  * Thread waiting for any action from client.
@@ -99,6 +100,8 @@ public class SBListener implements Runnable {
     public PrintWriter getPW() {
         return this.pw;
     }
+
+    public ArrayList<Player> getGameLobby() { return this.player.getGame().players; }
 
 }
 

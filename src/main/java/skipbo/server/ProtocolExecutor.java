@@ -18,7 +18,7 @@ public class ProtocolExecutor {
     private String[] input;
     private SBListener sbL;
 
-    public ProtocolExecutor() {};
+    public ProtocolExecutor() { }
 
     ProtocolExecutor(String[] input, SBListener sbL) {
         this.input = input;
@@ -56,7 +56,7 @@ public class ProtocolExecutor {
         } finally {
             System.out.println(name + " logged in.");
             sbL.pw.println("PRINT§Terminal§Welcome to Skip-Bo, " + name + "!");
-            broadcastExceptOne("PRINT§Terminal§" + name + " joined the room. Say hi!", sbL);
+            sendAllExceptOne("PRINT§Terminal§" + name + " joined the room. Say hi!", sbL);
         }
     }
 
@@ -76,7 +76,7 @@ public class ProtocolExecutor {
                     sbL.player.changeName(name);
                     sbL.pw.println("PRINT§Terminal§Name changed to " + name + ".");
                     System.out.println(formerName + " changed name to " + name + ".");
-                    broadcastExceptOne("PRINT§Terminal§" + formerName + " changed name to " + name + ".", sbL);
+                    sendAllExceptOne("PRINT§Terminal§" + formerName + " changed name to " + name + ".", sbL);
                 } else if (!SBServer.serverLobby.nameIsValid(name)) {
                     sbL.pw.println("PRINT§Terminal§Refused: Invalid name. Try again.");
                 } else if (SBServer.serverLobby.nameIsTaken(name)) {
@@ -88,7 +88,7 @@ public class ProtocolExecutor {
         } catch (NameTakenException nte) {
             String name = nte.findName();
             sbL.player.changeName(name);
-            broadcastExceptOne("PRINT§Terminal§" + formerName + " changed name to " + name + ".", sbL);
+            sendAllExceptOne("PRINT§Terminal§" + formerName + " changed name to " + name + ".", sbL);
         }
     }
 
@@ -100,11 +100,8 @@ public class ProtocolExecutor {
         try {
             if (input.length < 3) return;
             System.out.println("Received chat message from " + sbL.player.getName() + ": " + input[2]);
-            if ((input[1].equals("Global") && !sbL.player.getStatus().equals(Status.INGAME)
-                                                                     || input[1].equals("Broadcast"))) {
-                broadcastExceptOne("CHATM§Global§" + sbL.player.getName() + ": " + input[2], sbL);
-            } else if(input[1].equals("Global") && sbL.player.getStatus().equals(Status.INGAME)) {
-                sendIngameExceptOne("CHATM§Global§" + sbL.player.getName() + ": " + input[2], sbL);
+            if(input[1].equals("Global")) {
+                    sendAllExceptOne("CHATM§Global§" + sbL.player.getName() + ": " + input[2], sbL);
             } else throw new NoCommandException(input[0], input[1]);
         } finally {}
     }
@@ -124,7 +121,7 @@ public class ProtocolExecutor {
         } catch(IOException ioe) {
             System.out.println("Issues while closing the socket at logout.");
         }
-        broadcast("PRINT§Terminal§" + sbL.player.getName() + " left the room.");
+        sendAll("PRINT§Terminal§" + sbL.player.getName() + " left the room.", sbL);
         System.out.println(sbL.player.getName() + " logged out.");
 
     }
@@ -156,9 +153,15 @@ public class ProtocolExecutor {
     /**
      * @param message: String sent to all clients
      */
-    public void broadcast(String message) {
-        for(int i = 0; i < serverLobby.getLength(); i++) {
-            serverLobby.getSBL(i).pw.println(message);
+    public void sendAll(String message, SBListener sbL) {
+        if(sbL.player.getStatus().equals(Status.INGAME)) {
+            for(int i = 0; i < sbL.getGameLobby().size(); i++) {
+                sbL.getGameLobby().get(i).getSBL().pw.println(message);
+            }
+        } else {
+            for(int i = 0; i < serverLobby.getLength(); i++) {
+                serverLobby.getSBL(i).pw.println(message);
+            }
         }
     }
 
@@ -166,33 +169,21 @@ public class ProtocolExecutor {
      * @param message: String sent to all clients...
      * @param sbL: ... except this one
      */
-    public void broadcastExceptOne(String message, SBListener sbL) {
-        for(int i = 0; i < serverLobby.getLength(); i++) {
-            if(!serverLobby.getSBL(i).equals(sbL)) {
-                serverLobby.getSBL(i).pw.println(message);
+    public void sendAllExceptOne(String message, SBListener sbL) {
+        if(sbL.player.getStatus().equals(Status.INGAME)) {
+            for(int i = 0; i < sbL.getGameLobby().size(); i++) {
+                if(!sbL.getGameLobby().get(i).equals(sbL.player)) {
+                    sbL.getGameLobby().get(i).getSBL().pw.println(message);
+                }
+            }
+        } else {
+            for(int i = 0; i < serverLobby.getLength(); i++) {
+                if(!serverLobby.getSBL(i).equals(sbL)) {
+                    serverLobby.getSBL(i).pw.println(message);
+                }
             }
         }
     }
 
-    /**
-     * @param message: String sent to all clients in this game
-     */
-    public void sendIngame(String message) {
-        for(int i = 0; i < sbL.player.getGame().players.size(); i++) {
-            sbL.player.getGame().players.get(i).getSBL().pw.println(message);
-        }
-    }
-
-    /**
-     * @param message: String sent to all clients in this game...
-     * @param sbL: ... except this one
-     */
-    public void sendIngameExceptOne(String message, SBListener sbL) {
-        for(int i = 0; i < sbL.player.getGame().players.size(); i++) {
-            if(!sbL.player.getGame().players.get(i).equals(sbL.player)) {
-                sbL.player.getGame().players.get(i).getSBL().pw.println(message);
-            }
-        }
-    }
 
 }

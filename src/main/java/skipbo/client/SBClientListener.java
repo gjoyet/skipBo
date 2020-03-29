@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 import java.net.Socket;
-
-import skipbo.server.NoCommandException;
 import skipbo.server.Protocol;
 
 /**
@@ -43,7 +41,7 @@ class SBClientListener implements Runnable {
             input = scanner.nextLine();
             try {
                 forward(input);
-            } catch (IndexOutOfBoundsException | NoCommandException e) {
+            } catch (IndexOutOfBoundsException | NotACommandException e) {
                 System.out.println("Please enter a valid command");
                 printCommandInfo();
             }
@@ -71,9 +69,9 @@ class SBClientListener implements Runnable {
     /**
      * Forwards user input to server according to network protocol
      * @param input Input from client
-     * @throws NoCommandException If the input doesn't match any command
+     * @throws NotACommandException If the input doesn't match any command
      */
-    void forward(String input) throws NoCommandException {
+    void forward(String input) throws NotACommandException {
 
         if (input.isEmpty()) {
             return;
@@ -107,7 +105,7 @@ class SBClientListener implements Runnable {
                 logOut();
                 return;
             default:
-                throw new NoCommandException();
+                throw new NotACommandException();
         }
         pw.println(protocolString);
     }
@@ -116,9 +114,9 @@ class SBClientListener implements Runnable {
      * Builds network protocol string for the "change" command
      * @param input Input from client
      * @return The network protocol string for the "change" command
-     * @throws NoCommandException If the input doesn't match any command
+     * @throws NotACommandException If the input doesn't match any command
      */
-    String getChangeString(String input) throws NoCommandException {
+    String getChangeString(String input) throws NotACommandException {
 
         int pos = input.indexOf(" ",8);
         String option = input.substring(8,pos);
@@ -128,9 +126,8 @@ class SBClientListener implements Runnable {
             argument = input.substring(13);
             return Protocol.CHNGE + "§Nickname§" + argument;
         } else {
-            throw new NoCommandException();
+            throw new NotACommandException();
         }
-
     }
 
     void logOut() {

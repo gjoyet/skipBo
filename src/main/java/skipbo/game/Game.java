@@ -120,7 +120,7 @@ public class Game {
         //DONE: to Player ply: sysout ("Your hand cards are now: " + ply.getHandCards().toString());
         ply.fillHandCards();
         new ProtocolExecutor().sendAllExceptOne("PRINT§Terminal§Gave " + ply.getName()
-                                                            + " their missing " + toFill + "cards.", ply.getSBL());
+                + " their missing cards.", ply.getSBL());
         //DONE: to all players in lobby: sysout ("Gave " + this.getName() + " " + their missing " + toFill + " cards");
         //TODO: correct toFIll variable
 
@@ -150,7 +150,7 @@ public class Game {
                 specBuildPile.add(card);
                 currentPly.getHandCards().remove(card);
                 topCard = card;     // could be redundant
-                // Execute: card op valid - update board and hand cards.
+                // Execute: card op valid - update board and hand cards. (Send buildpiles.toString() from here to Server, which then gives over to client)
                 if (card.number == 12) {
                     //Execute: make that BuildPile go away
                     for (int i = 0; i < 12; i++) {    // remove all cards from the buildPile if the top card is 12

@@ -12,8 +12,8 @@ public class Player {
     private String name;
     private int id;
     private SBListener sbListen;
-    private int port;
     private Pile piles;
+    private PlayerStatus status;
     /**
      * Player constructor to build a Player object with
      * an int id, String name and a ServerListener object specific to the player
@@ -26,6 +26,7 @@ public class Player {
         this.name = name;
         this.sbListen = sbListen;
         this.piles = new Pile(id);
+        this.status = PlayerStatus.valueOf("WAITING");
     }
 
     public ArrayList<Card> getStockPile(){

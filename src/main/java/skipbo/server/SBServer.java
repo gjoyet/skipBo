@@ -24,7 +24,7 @@ public class SBServer {
         } catch(IOException ioe) {
             System.out.println("Issue with opening Serversocket. Try with another port.");
         }
-
+        
         while(true) {
             try {
                 login(sbServerSocket);

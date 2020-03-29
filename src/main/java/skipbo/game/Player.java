@@ -30,6 +30,18 @@ public class Player {
         this.status = Status.valueOf("WAITING");
     }
 
+    public String getName() { return this.name; }
+
+    public void changeName(String name) { this.name = name; }
+
+    public int getId() { return this.id; }
+
+    public SBListener getSBL() { return this.sbListen; }
+
+    public Status getStatus()  { return this.status; }
+
+    public void changeStatus(Status ps) { this.status = ps; }
+
     public Game getGame() { return this.game; }
 
     public void changeGame(Game game) { this.game = game; }
@@ -42,29 +54,7 @@ public class Player {
         return this.piles.handCards;
     }
 
-    public String getName() { // returns the name of the Player object
-        return this.name;
-    }
-
-    public void changeName(String name) {
-        this.name = name;
-    }
-
-    public SBListener getSBL() {
-        return this.sbListen;
-    }
-
-    public int getId() { //returns the id number of the player object
-        return this.id;
-    }
-
-    public Status getStatus()  { return this.status; }
-
-    public void changeStatus(Status ps) { this.status = ps; }
-
-    public void addCardToHand(Card card) {
-        this.getHandCards().add(card);
-    }
+    public void addCardToHand(Card card) { this.getHandCards().add(card); }
 
 
     /**

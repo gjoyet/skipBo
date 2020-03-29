@@ -54,7 +54,7 @@ class SBClientListener implements Runnable {
     void printCommandInfo() {
         //List of Commands
         String listOfCommands = "Commands:\n/change name [name]\n/change status [ready|waiting]\n" +
-                "/msg [name] [message]\n/quit\n";
+                "/msg [name] [message]\n/new game\n/quit\n";
         System.out.println(listOfCommands);
     }
 
@@ -99,6 +99,9 @@ class SBClientListener implements Runnable {
             case "/msg":
                 protocolString = getPrivateMessageString(input);
                 break;
+            case "/new":
+                protocolString = getNewString(input);
+                break;
             case "/quit":
                 protocolString = Protocol.LGOUT + "";
                 pw.println(protocolString);
@@ -138,6 +141,12 @@ class SBClientListener implements Runnable {
         throw new NotACommandException("Please enter a valid command");
     }
 
+    /**
+     * Builds network protocol string for the "msg" command
+     * @param input Input from client
+     * @return The network protocol string for the "msg" command
+     * @throws NotACommandException If the input doesn't match any command
+     */
     String getPrivateMessageString(String input) throws NotACommandException {
         String[] line = input.split(" ", 3);
         if (line.length < 3) {
@@ -146,6 +155,26 @@ class SBClientListener implements Runnable {
         return Protocol.CHATM + "§Private§" +line[1] + "§" + line[2];
     }
 
+    /**
+     * Builds network protocol string for the "new" command
+     * @param input Input from client
+     * @return The network protocol string for the "new" command
+     * @throws NotACommandException If the input doesn't match any command
+     */
+    String getNewString(String input) throws NotACommandException {
+        String[] line = input.split(" ",2);
+        if (line.length < 2) {
+            throw new NotACommandException("Please enter a valid command");
+        }
+        if (line[1].equalsIgnoreCase("game")) {
+            return Protocol.NWGME + "§New";
+        }
+        throw new NotACommandException("Please enter a valid command");
+    }
+
+    /**
+     * Terminates SBClientListener thread
+     */
     void logOut() {
         isLoggedIn = false;
         scanner.close();

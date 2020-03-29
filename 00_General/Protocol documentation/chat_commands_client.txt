@@ -16,3 +16,5 @@ change		name		[NewName]		changes clients name to NewName
 quit		-		-			terminates client threads, disconnects client
 
 msg		[name]		[message]		sends a private chat message to player called „name“
+
+new		game					starts a new game with 4 players

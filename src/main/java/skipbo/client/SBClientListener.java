@@ -41,8 +41,8 @@ class SBClientListener implements Runnable {
             input = scanner.nextLine();
             try {
                 forward(input);
-            } catch (IndexOutOfBoundsException | NotACommandException e) {
-                System.out.println("Please enter a valid command");
+            } catch (NotACommandException e) {
+                System.out.println(e.getMessage());
                 printCommandInfo();
             }
         }
@@ -53,7 +53,8 @@ class SBClientListener implements Runnable {
      */
     void printCommandInfo() {
         //List of Commands
-        String listOfCommands = "Commands:\n/change name [name]\n/change status [ready|waiting]\n/quit\n";
+        String listOfCommands = "Commands:\n/change name [name]\n/change status [ready|waiting]\n" +
+                "/msg [name] [message]\n/quit\n";
         System.out.println(listOfCommands);
     }
 
@@ -95,13 +96,16 @@ class SBClientListener implements Runnable {
             case "/change":
                 protocolString = getChangeString(input);
                 break;
+            case "/msg":
+                protocolString = getPrivateMessageString(input);
+                break;
             case "/quit":
                 protocolString = Protocol.LGOUT + "";
                 pw.println(protocolString);
                 logOut();
                 return;
             default:
-                throw new NotACommandException();
+                throw new NotACommandException("Please enter a valid command");
         }
         pw.println(protocolString);
     }
@@ -117,7 +121,7 @@ class SBClientListener implements Runnable {
         String[] line = input.split(" ",3);
 
         if (line.length < 3) {
-            throw new NotACommandException();
+            throw new NotACommandException("Please add an argument to your command");
         }
 
         String option = line[1];
@@ -131,7 +135,15 @@ class SBClientListener implements Runnable {
                 return Protocol.CHNGE + "§Status§" + argument.toUpperCase();
             }
         }
-        throw new NotACommandException();
+        throw new NotACommandException("Please enter a valid command");
+    }
+
+    String getPrivateMessageString(String input) throws NotACommandException {
+        String[] line = input.split(" ", 3);
+        if (line.length < 3) {
+            throw new NotACommandException("Please add a name and a message to your command");
+        }
+        return Protocol.CHATM + "§Private§" +line[1] + "§" + line[2];
     }
 
     void logOut() {

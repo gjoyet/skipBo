@@ -119,7 +119,6 @@ public class Game {
         new ProtocolExecutor().sendAllExceptOne("PRINT§Terminal§Gave " + ply.getName()
                 + " their missing cards.", ply.getSBL());
         //DONE: to all players in lobby: sysout ("Gave " + this.getName() + " " + their missing " + toFill + " cards");
-        //TODO: correct toFIll variable
 
     }
 
@@ -128,14 +127,13 @@ public class Game {
      * and which buildPile they wish to play to and carries out the command if valid.
      * Furthermore, removes the specified card from their hand cards.
      *
-     * @param id
+     * @param currentPly
      * @param handCardIndex
      * @param buildDeckIndex
      */
 
-    public void playToMiddle(int id, int handCardIndex, int buildDeckIndex) {
-        Player currentPly = PlayerMaster.getPlayerByID(id);     //TODO: Does this make sense? Maybe better with SBLobby.getPlayer - Discuss with GUILL
-        Card card = currentPly.getHandCardAtIndex(handCardIndex);   // returns card at specified index in the hand card arraylist
+    public void playToMiddle(Player currentPly, int handCardIndex, int buildDeckIndex) {
+        Card card = currentPly.getHandCards().get(handCardIndex);   // returns card at specified index in the hand card arraylist
 
         ArrayList<ArrayList<Card>> buildPiles = piles.buildPiles;
         ArrayList<Card> specBuildPile = buildPiles.get(buildDeckIndex);
@@ -171,20 +169,19 @@ public class Game {
      * This method plays a hand card into a discard pile of the player's choice
      * Parameter handCardIndex to know which hand card should be selected to be played
      * Parameter id to know whose turn it is. Furthermore, removes the specified card
-     * from player's hand.
+     * from Player's hand.
      * Parameter discardPileIndex to know which Discard pile to play to.
      *
-     * @param id
+     * @param currentPly
      * @param handCardIndex
      * @param discardPileIndex
      */
 
-    public void playToDiscard(int id, int handCardIndex, int discardPileIndex) {
-        Player currentPly = PlayerMaster.getPlayerByID(id);     //TODO: Does this make sense? Maybe better with SBLobby.getPlayer - Discuss with GUI
+    public void playToDiscard(Player currentPly, int handCardIndex, int discardPileIndex) {
         ArrayList<ArrayList<Card>> discardPiles = piles.discardPiles;
         ArrayList<Card> specDiscard = discardPiles.get(discardPileIndex);
 
-        Card card = currentPly.getHandCardAtIndex(handCardIndex);
+        Card card = currentPly.getHandCards().get(handCardIndex);
 
         specDiscard.add(card);
         currentPly.getHandCards().remove(card);
@@ -198,12 +195,11 @@ public class Game {
      * of the player's choosing.
      * Param id for player, Param id to know which Build pile to play to.
      *
-     * @param id
+     * @param currentPlayer
      * @param buildPileIndex
      */
 
-    public void playFromStockToMiddle(int id, int buildPileIndex) {
-        Player currentPlayer = PlayerMaster.getPlayerByID(id);  //TODO: Does this make sense? Maybe better with SBLobby.getPlayer - Discuss with GUILL
+    public void playFromStockToMiddle(Player currentPlayer, int buildPileIndex) {
         ArrayList<Card> stockPile = currentPlayer.getStockPile();
         Card stockCard = stockPile.get(stockPile.size());
 

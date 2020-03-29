@@ -16,6 +16,8 @@ public class SBLobby {
 
     int getLength() { return playerLobby.size(); }
 
+    SBListener getSBL(int index) { return playerLobby.get(index).getSBL(); }
+
     Player getPlayer(int index) {
         return playerLobby.get(index);
     }
@@ -28,9 +30,7 @@ public class SBLobby {
         playerLobby.remove(p);
     }
 
-    SBListener getSBL(int index) {
-    return playerLobby.get(index).getSBL();
-    }
+
 
     /**
      * Checks if the name is already in use.

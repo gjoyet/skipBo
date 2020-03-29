@@ -1,10 +1,7 @@
 package skipbo.game;
 
 import skipbo.server.ProtocolExecutor;
-import skipbo.server.SBListener;
-import skipbo.server.SBLobby;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 

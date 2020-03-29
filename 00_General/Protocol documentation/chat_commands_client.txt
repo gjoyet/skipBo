@@ -11,10 +11,14 @@ For command and option the letter case is being ignored
 Command		Option		Arguments		Comments
 
 change		name		[NewName]		changes clients name to NewName
-		status		[Status]		changes clients status to Status. Possible options for Status: ready, waiting
+		status		[Status]		changes clients status to Status. Possible options for Status: ready|waiting
 
 quit		-		-			terminates client threads, disconnects client
 
 msg		[name]		[message]		sends a private chat message to player called „name“
 
 new		game					starts a new game with 4 players
+
+play		[PlaceFrom] [N]	[PlaceTo] [N]		puts a card from the pile "PlaceFrom" to the pile "PlaceTo"
+							PlaceFrom: StockPile|HandCard N (N = numer from 1 to 5)|DiscardPileN (N = numer from 1 to 4)
+							PlaceTo: BuildPile N|DiscardPile N (N = number from 1 to 4)

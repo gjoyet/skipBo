@@ -52,7 +52,9 @@ class SBClientListener implements Runnable {
      * Sends Information about valid commands to the client
      */
     void printCommandInfo() {
-        System.out.println("Commands:\n/change name [name]\n/quit\n"); //List of Commands
+        //List of Commands
+        String listOfCommands = "Commands:\n/change name [name]\n/change status [ready|waiting]\n/quit\n";
+        System.out.println(listOfCommands);
     }
 
     /**
@@ -123,9 +125,13 @@ class SBClientListener implements Runnable {
 
         if (option.equalsIgnoreCase("name")) {
             return Protocol.CHNGE + "§Nickname§" + argument;
-        } else {
-            throw new NotACommandException();
+
+        } else if (option.equalsIgnoreCase("status")) {
+            if (argument.equalsIgnoreCase("ready") || argument.equalsIgnoreCase("waiting")) {
+                return Protocol.CHNGE + "§Status§" + argument.toUpperCase();
+            }
         }
+        throw new NotACommandException();
     }
 
     void logOut() {

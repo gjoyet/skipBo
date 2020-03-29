@@ -11,6 +11,7 @@ For command and option the letter case is being ignored
 Command		Option		Arguments		Comments
 
 change		name		[NewName]		changes clients name to NewName
+		status		[Status]		changes clients status to Status. Possible options for Status: ready, waiting
 
 quit		-		-			terminates client threads, disconnects client
 

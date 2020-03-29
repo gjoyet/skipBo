@@ -73,6 +73,10 @@ public class SBListener implements Runnable {
                 case LGOUT:
                     new ProtocolExecutor(input, this).logout();
                     //System.out.println("LOG: Got into logout method.");
+                    break;
+                case NWGME:
+                    new ProtocolExecutor(input, this).newGame();
+                    break;
             }
         } catch(IllegalArgumentException iae) {
             System.out.println(input[0] + ": not a command.");

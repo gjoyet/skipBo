@@ -53,6 +53,10 @@ public class Player {
         return this.id;
     }
 
+    public PlayerStatus getStatus()  { return this.status; }
+
+    public void changeStatus(PlayerStatus ps) { this.status = ps; }
+
     public void addCardToHand(Card card) {
         this.getHandCards().add(card);
     }

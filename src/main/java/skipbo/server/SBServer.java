@@ -1,7 +1,5 @@
 package skipbo.server;
 
-import skipbo.game.Game;
-
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -12,7 +10,7 @@ import java.net.Socket;
  */
 public class SBServer {
     static int playerID = 0;
-    static SBLobby sbLobby = new SBLobby();
+    static SBLobby serverLobby = new SBLobby();
     //public static Game currentGame; //added static Game field currentGame that will run every game
 
     public static void main(String[] args) {
@@ -24,7 +22,7 @@ public class SBServer {
         } catch(IOException ioe) {
             System.out.println("Issue with opening Serversocket. Try with another port.");
         }
-        
+
         while(true) {
             try {
                 login(sbServerSocket);
@@ -47,6 +45,6 @@ public class SBServer {
         } finally {}
     }
 
-    public static SBLobby getLobby() { return sbLobby;}
+    public static SBLobby getLobby() { return serverLobby;}
 }
 

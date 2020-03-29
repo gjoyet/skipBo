@@ -1,10 +1,13 @@
 package skipbo.server;
 
+import skipbo.game.Game;
 import skipbo.game.Player;
+import skipbo.game.PlayerStatus;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-import static skipbo.server.SBServer.sbLobby;
+import static skipbo.server.SBServer.serverLobby;
 
 /**
  * The execution of the network protocol is implemented in this class. Every command has one method,
@@ -30,18 +33,18 @@ public class ProtocolExecutor {
         String name = "SBPlayer";
         try {
             if (input[1].equals("Nickname")) {
-                if(input.length == 2 || !SBServer.sbLobby.nameIsValid(input[2])) {
+                if(input.length == 2 || !SBServer.serverLobby.nameIsValid(input[2])) {
                     sbL.pw.println("PRINT§Terminal§Invalid name. Name set to " + name + ".");
-                    if(!SBServer.sbLobby.nameIsTaken(name)) {
+                    if(!SBServer.serverLobby.nameIsTaken(name)) {
                         sbL.player = new Player(sbL.id, name, sbL);
-                        SBServer.sbLobby.addPlayer(sbL.player);
+                        SBServer.serverLobby.addPlayer(sbL.player);
                     } else throw new NameTakenException(name, sbL);
                 } else {
                     name = input[2];
-                    if (!SBServer.sbLobby.nameIsTaken(name) && SBServer.sbLobby.nameIsValid(name)) {
+                    if (!SBServer.serverLobby.nameIsTaken(name) && SBServer.serverLobby.nameIsValid(name)) {
                         sbL.player = new Player(sbL.id, name, sbL);
-                        SBServer.sbLobby.addPlayer(sbL.player);
-                    } else if(SBServer.sbLobby.nameIsTaken(name)) {
+                        SBServer.serverLobby.addPlayer(sbL.player);
+                    } else if(SBServer.serverLobby.nameIsTaken(name)) {
                         throw new NameTakenException(name, sbL);
                     }
                 }
@@ -49,7 +52,7 @@ public class ProtocolExecutor {
         } catch(NameTakenException nte) {
             name = nte.findName();
             sbL.player = new Player(sbL.id, name, sbL);
-            SBServer.sbLobby.addPlayer(sbL.player);
+            SBServer.serverLobby.addPlayer(sbL.player);
         } finally {
             System.out.println(name + " logged in.");
             sbL.pw.println("PRINT§Terminal§Welcome to Skip-Bo, " + name + "!");
@@ -69,16 +72,18 @@ public class ProtocolExecutor {
                 String name = input[2];
                 if(name.equals(sbL.player.getName())) {
                     sbL.pw.println("PRINT§Terminal§Name is already " + name + ".");
-                } else if (!SBServer.sbLobby.nameIsTaken(name) && SBServer.sbLobby.nameIsValid(name)) {
+                } else if (!SBServer.serverLobby.nameIsTaken(name) && SBServer.serverLobby.nameIsValid(name)) {
                     sbL.player.changeName(name);
                     sbL.pw.println("PRINT§Terminal§Name changed to " + name + ".");
                     System.out.println(formerName + " changed name to " + name + ".");
                     sendAllExceptOne("PRINT§Terminal§" + formerName + " changed name to " + name + ".", sbL);
-                } else if (!SBServer.sbLobby.nameIsValid(name)) {
+                } else if (!SBServer.serverLobby.nameIsValid(name)) {
                     sbL.pw.println("PRINT§Terminal§Refused: Invalid name. Try again.");
-                } else if (SBServer.sbLobby.nameIsTaken(name)) {
+                } else if (SBServer.serverLobby.nameIsTaken(name)) {
                     throw new NameTakenException(name, sbL);
                 }
+            } else if(input[1].equals("Status")) {
+                sbL.player.changeStatus(PlayerStatus.valueOf(input[2]));
             } else throw new NoCommandException(input[0], input[1]);
         } catch (NameTakenException nte) {
             String name = nte.findName();
@@ -108,7 +113,7 @@ public class ProtocolExecutor {
      */
     void logout() {
         sbL.pw.println("LGOUT");
-        sbLobby.removePlayer(sbL.player);
+        serverLobby.removePlayer(sbL.player);
         sbL.stopRunning();
         try {
             sbL.pw.close();
@@ -123,11 +128,28 @@ public class ProtocolExecutor {
     }
 
     /**
+     * Method for command "NWGME". Starts a new game with the first 4 players found with Playerstatus 'READY'.
+     */
+    void newGame() {
+        ArrayList<Player> newPlayers = new ArrayList<Player>();
+        int playerCount = 0;
+        for(int i = 0; i < SBServer.getLobby().getLength(); i++) {
+            if(SBServer.getLobby().getPlayer(i).getStatus().equals(PlayerStatus.READY)) {
+                newPlayers.add(SBServer.getLobby().getPlayer(i));
+                playerCount++;
+            }
+            if(playerCount == 4) {
+                Game game = new Game(newPlayers);
+            }
+        }
+    }
+
+    /**
      * @param message: String sent to all clients
      */
     public void sendAll(String message) {
-        for(int i = 0; i < sbLobby.getLength(); i++) {
-            sbLobby.getSBL(i).pw.println(message);
+        for(int i = 0; i < serverLobby.getLength(); i++) {
+            serverLobby.getSBL(i).pw.println(message);
         }
     }
 
@@ -136,9 +158,9 @@ public class ProtocolExecutor {
      * @param sbL: ... except this one
      */
     public void sendAllExceptOne(String message, SBListener sbL) {
-        for(int i = 0; i < sbLobby.getLength(); i++) {
-            if(!sbLobby.getSBL(i).equals(sbL)) {
-                sbLobby.getSBL(i).pw.println(message);
+        for(int i = 0; i < serverLobby.getLength(); i++) {
+            if(!serverLobby.getSBL(i).equals(sbL)) {
+                serverLobby.getSBL(i).pw.println(message);
             }
         }
     }

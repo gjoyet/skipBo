@@ -85,17 +85,11 @@ class SBClientListener implements Runnable {
             return;
         }
 
+
         //It's not a chat message
-        int pos = input.indexOf(" ");
-        String command;
-        if (pos < 0) {
-            command = input;
-        } else {
-            command = input.substring(0, pos);
-        }
+        String[] command = input.split(" ", 2);
 
-
-        switch (command.toLowerCase()) {
+        switch (command[0].toLowerCase()) {
             case "/change":
                 protocolString = getChangeString(input);
                 break;
@@ -118,12 +112,16 @@ class SBClientListener implements Runnable {
      */
     String getChangeString(String input) throws NotACommandException {
 
-        int pos = input.indexOf(" ",8);
-        String option = input.substring(8,pos);
-        String argument;
+        String[] line = input.split(" ",3);
+
+        if (line.length < 3) {
+            throw new NotACommandException();
+        }
+
+        String option = line[1];
+        String argument = line[2];
 
         if (option.equalsIgnoreCase("name")) {
-            argument = input.substring(13);
             return Protocol.CHNGE + "§Nickname§" + argument;
         } else {
             throw new NotACommandException();

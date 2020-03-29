@@ -1,6 +1,6 @@
 package skipbo.game;
 
-public enum PlayerStatus {
+public enum Status {
     WAITING,
     READY,
     INGAME;

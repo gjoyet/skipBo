@@ -8,11 +8,12 @@ Section		Command		Option		Arguments				Comments
 Terminal	PRINT		Terminal	String message				prints ‚message‘ on the receiver’s terminal
 
 Lobby		SETTO		Nickname	String nickname				sets nickname of new player to ‚nickname‘
-				Status 		String status				sets senders status to ‚status‘ (e.g. to ‚ready for game‘)
 		CHNGE		Nickname	String nickname 			changes nickname of player sending the request to ‚nickname‘
+				Status 		PlayerStatus ps				sets senders PlayerStatus to ‚ps‘
 		LGOUT		-		-					from client: logout request to server; from server: logout confirmation to client
 
 Chat		CHATM		Global		String message				sends ‚message‘ to write on the global chat
 				Private		Player p, String message		sends private ,message’ to player p	
 
-Game		PUTTO		Card		Index i, Pile f, Pile t		put card with index ‚i‘ from pile ‚f‘ to pile ‚t‘		
+Game		NWGME		New		-					starts new game with 4 players
+		PUTTO		Card		Index i, Pile f, Pile t		put card with index ‚i‘ from pile ‚f‘ to pile ‚t‘		

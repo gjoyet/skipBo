@@ -1,10 +1,7 @@
 package skipbo.game;
 
 import skipbo.server.ProtocolExecutor;
-import skipbo.server.SBListener;
-import skipbo.server.SBLobby;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -119,7 +116,7 @@ public class Game {
         //DONE: sysout to Player ply = "It's your turn!"
         //DONE: to Player ply: sysout ("Your hand cards are now: " + ply.getHandCards().toString());
         ply.fillHandCards();
-        new ProtocolExecutor().sendAllExceptOne("PRINT§Terminal§Gave " + ply.getName()
+        new ProtocolExecutor().broadcastExceptOne("PRINT§Terminal§Gave " + ply.getName()
                 + " their missing cards.", ply.getSBL());
         //DONE: to all players in lobby: sysout ("Gave " + this.getName() + " " + their missing " + toFill + " cards");
         //TODO: correct toFIll variable

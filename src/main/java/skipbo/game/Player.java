@@ -12,8 +12,9 @@ public class Player {
     private String name;
     private int id;
     private SBListener sbListen;
+    private Game game;
     private Pile piles;
-    private PlayerStatus status;
+    private Status status;
     /**
      * Player constructor to build a Player object with
      * an int id, String name and a ServerListener object specific to the player
@@ -26,8 +27,12 @@ public class Player {
         this.name = name;
         this.sbListen = sbListen;
         this.piles = new Pile(id);
-        this.status = PlayerStatus.valueOf("WAITING");
+        this.status = Status.valueOf("WAITING");
     }
+
+    public Game getGame() { return this.game; }
+
+    public void changeGame(Game game) { this.game = game; }
 
     public ArrayList<Card> getStockPile(){
         return this.piles.stockPile;
@@ -53,9 +58,9 @@ public class Player {
         return this.id;
     }
 
-    public PlayerStatus getStatus()  { return this.status; }
+    public Status getStatus()  { return this.status; }
 
-    public void changeStatus(PlayerStatus ps) { this.status = ps; }
+    public void changeStatus(Status ps) { this.status = ps; }
 
     public void addCardToHand(Card card) {
         this.getHandCards().add(card);

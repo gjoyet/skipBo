@@ -1,9 +1,13 @@
-package skipbo.game;
-import javax.swing.*;
+package skipbo.client;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
+import java.awt.Color;
 
-public class ChatGraphic extends JFrame {
+public class ChatGraphicObsolete extends JFrame {
 
     private JPanel contentPane;
     private JButton sendMes;
@@ -16,7 +20,7 @@ public class ChatGraphic extends JFrame {
         Thread window = new Thread(){
             public void run(){
                 try{
-                    ChatGraphic frame = new ChatGraphic();
+                    ChatGraphicObsolete frame = new ChatGraphicObsolete();
                     frame.setVisible(true);
                 } catch (Exception e){
                     System.out.println(e);
@@ -27,13 +31,13 @@ public class ChatGraphic extends JFrame {
   }
 
     // Create JFrame
-    public ChatGraphic() {
+    public ChatGraphicObsolete() {
 
        setTitle("Skip-Bros CHAT");
        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        setBounds(100, 100, 520, 485);
 
-       contentPane= new JPanel();
+       contentPane = new JPanel();
        contentPane.setBackground(Color.black);
        contentPane.setBorder(new EmptyBorder(5,5,5,5));
        setContentPane(contentPane);

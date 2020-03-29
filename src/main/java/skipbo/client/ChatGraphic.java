@@ -90,7 +90,7 @@ public class ChatGraphic extends JFrame implements Runnable, ActionListener {
 
                 clientListener.forward(input);
             } catch (IndexOutOfBoundsException | NotACommandException e) {
-                System.out.println("Please enter a valid command");
+                System.out.println("Please enter a valid command"); //TODO copy catch from SBClientListener
                 clientListener.printCommandInfo();
             }
         }

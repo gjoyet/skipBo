@@ -32,8 +32,8 @@ class SBClientListener implements Runnable {
     @Override
     public void run() {
 
-        System.out.println("Connection successful");
-        printCommandInfo();
+        //System.out.println("Connection successful");
+        //printCommandInfo();
         setName();
 
         String input;
@@ -43,7 +43,7 @@ class SBClientListener implements Runnable {
                 forward(input);
             } catch (NotACommandException e) {
                 System.out.println(e.getMessage());
-                printCommandInfo();
+                //printCommandInfo();
             }
         }
     }
@@ -51,12 +51,12 @@ class SBClientListener implements Runnable {
     /**
      * Sends Information about valid commands to the client
      */
-    void printCommandInfo() {
+    /*void printCommandInfo() {
         //List of Commands
         String listOfCommands = "Commands:\n/change name [name]\n/change status [ready|waiting]\n" +
                 "/msg [name] [message]\n/new game\n/play [PlaceFrom] [n] [PlaceTo] [n] | not yet implemented\n/quit\n";
         System.out.println(listOfCommands);
-    }
+    }*/
 
     /**
      * Let's client set their name

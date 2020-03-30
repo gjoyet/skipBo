@@ -16,14 +16,12 @@ public class ChatGraphic extends JFrame implements ActionListener {
     private JScrollPane inputScrollPane;
     private JButton sendMes;
 
-
-
-
-
     ChatGraphic(SBClientListener clientListener) {
-        setFrame();
         this.clientListener = clientListener;
-
+        setFrame();
+        setName();
+        printInfo("Connection successful");
+        printCommandInfo();
     }
 
     void setFrame() {
@@ -79,10 +77,42 @@ public class ChatGraphic extends JFrame implements ActionListener {
             try {
                 clientListener.forward(input);
             } catch (IndexOutOfBoundsException | NotACommandException e) {
-                System.out.println("Please enter a valid command"); //TODO copy catch from SBClientListener
-                clientListener.printCommandInfo();
+                printInfo("Please enter a valid command"); //TODO copy catch from SBClientListener
+                printCommandInfo();
             }
         }
 
+    }
+
+    /**
+     * Sends Information about valid commands to the client
+     */
+    void printCommandInfo() {
+        //List of Commands
+        String listOfCommands = "Commands:\n/change name [name]\n/change status [ready|waiting]\n" +
+                "/msg [name] [message]\n/new game\n/play [PlaceFrom] [n] [PlaceTo] [n] | not yet implemented\n/quit\n";
+        printInfo(listOfCommands);
+    }
+
+    /**
+     *Displays an information to the client
+     * @param message An information message
+     */
+    void printInfo(String message) {
+        chat.append("\n[INFO] " + message);
+    }
+
+    /**
+     * Let's client set their name
+     */
+    void setName() {
+        //TODO
+        //JOptionPane optionPane = new JOptionPane(JOptionPane.OK_OPTION);
+        String name = JOptionPane.showInputDialog(contentPane,"Please enter your name");
+        System.out.println("Name can only contain letters or digits and must have between 3 and 13 characters");
+        System.out.println("Your suggested nickname (according to your system username): " + System.getProperty("user.name"));
+        System.out.println("Please enter your name: ");
+        //String name = scanner.nextLine();
+        //pw.println("SETTO§Nickname§" + name);
     }
 }

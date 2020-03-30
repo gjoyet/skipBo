@@ -45,7 +45,7 @@ class SBServerListener implements Runnable {
      * @throws NoCommandException If commandLine string doesn't match network protocol
      */
     void executeCommand(String commandLine) throws NoCommandException  {
-        String[] command = commandLine.split("§", 3);
+        String[] command = commandLine.split("§", 3); //TODO not all commands have 3 parts
         Protocol protocol = Protocol.valueOf(command[0]);
 
         switch (protocol) {
@@ -54,6 +54,9 @@ class SBServerListener implements Runnable {
                 break;
             case CHNGE:
                 changeTo(command);
+                break;
+            case PUTTO:
+                //TODO
                 break;
             case LGOUT:
                 logOut();
@@ -71,6 +74,7 @@ class SBServerListener implements Runnable {
      * @param command String array according to network protocol with command, option and arguments
      */
     void sendChatMessage(String[] command) {
+
         System.out.println(command[2]);
     }
 

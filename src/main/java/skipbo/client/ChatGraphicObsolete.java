@@ -6,8 +6,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class ChatGraphicObsolete extends JFrame {
+public class ChatGraphicObsolete extends JFrame implements ActionListener {
 
     private JPanel contentPane;
     private JButton sendMes;
@@ -51,6 +53,7 @@ public class ChatGraphicObsolete extends JFrame {
        sendMes = new JButton("Send message");
        sendMes.setBounds(290, 405, 200,25);
        contentPane.add(sendMes);
+       sendMes.addActionListener(this);
 
        inputMes = new JTextArea();
        inputMes.setBounds(290, 335,200, 50);
@@ -58,5 +61,10 @@ public class ChatGraphicObsolete extends JFrame {
        inputMes.setColumns(3);
        contentPane.add(inputMes);
 
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        System.out.println("entered actionPerformed");
     }
 }

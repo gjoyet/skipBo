@@ -29,10 +29,9 @@ public class SBClient {
             Thread sListener = new Thread(serverListener);
             sListener.start();
 
-            //Start ChatGraphic Thread
-            ChatGraphic chatGraphic = new ChatGraphic(clientListener);
-            Thread window = new Thread(chatGraphic);
-            window.start();
+            //GUI
+            ChatGraphic frame = new ChatGraphic(clientListener);
+            frame.setVisible(true);
 
         } catch (IOException e) {
             e.printStackTrace();

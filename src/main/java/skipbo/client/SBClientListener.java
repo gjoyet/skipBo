@@ -175,6 +175,12 @@ class SBClientListener implements Runnable {
         throw new NotACommandException("Please enter a valid command");
     }
 
+    /**
+     * Builds network protocol string for the "play" command
+     * @param input Input from client
+     * @return The network protocol string for the "play" command
+     * @throws NotACommandException If the input doesn't match any command
+     */
     String getPlayString(String input) throws NotACommandException {
         String[] line = input.split(" ", 5);
         if (line.length < 4) {

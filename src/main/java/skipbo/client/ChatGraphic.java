@@ -1,10 +1,6 @@
 package skipbo.client;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -12,12 +8,16 @@ import java.awt.event.ActionListener;
 
 public class ChatGraphic extends JFrame implements ActionListener {
 
-    private JPanel contentPane;
-    private JButton sendMes;
-    private JTextArea inputMes;
-    JTextArea chat;
-    private JScrollPane scrollPane;
     private SBClientListener clientListener;
+    private JPanel contentPane;
+    JTextArea chat;
+    private JTextArea inputMes;
+    private JScrollPane chatScrollPane;
+    private JScrollPane inputScrollPane;
+    private JButton sendMes;
+
+
+
 
 
     ChatGraphic(SBClientListener clientListener) {
@@ -38,29 +38,44 @@ public class ChatGraphic extends JFrame implements ActionListener {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
+        //Output textfield
         chat = new JTextArea();
+        chat.setBounds(20, 30 ,250, 400);
+        chat.setLineWrap(true);
+        chat.setWrapStyleWord(true);
 
-        scrollPane = new JScrollPane(chat);
-        scrollPane.setBounds(20, 30 ,250, 400 );
-        scrollPane.setVisible(true);
-        contentPane.add(scrollPane);
+        chatScrollPane = new JScrollPane(chat);
+        chatScrollPane.setBounds(20, 30 ,250, 400 );
+        chatScrollPane.setVisible(true);
+        chatScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        contentPane.add(chatScrollPane);
 
-        sendMes = new JButton("Send message");
-        sendMes.setBounds(290, 405, 200,25);
-        contentPane.add(sendMes);
-        sendMes.addActionListener(this);
-
+        //Input textfield
         inputMes = new JTextArea();
         inputMes.setBounds(290, 335,200, 50);
         inputMes.setEditable(true);
         inputMes.setColumns(3);
+        inputMes.setLineWrap(true);
+        inputMes.setWrapStyleWord(true);
         contentPane.add(inputMes);
+
+        inputScrollPane = new JScrollPane(inputMes);
+        inputScrollPane.setBounds(290, 335,200, 50);
+        inputScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        contentPane.add(inputScrollPane);
+
+        //Buttons
+        sendMes = new JButton("Send message");
+        sendMes.setBounds(290, 405, 200,25);
+        contentPane.add(sendMes);
+        sendMes.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         if (actionEvent.getSource() == sendMes) {
             String input = inputMes.getText();
+            inputMes.replaceRange("",0,input.length());
             try {
                 clientListener.forward(input);
             } catch (IndexOutOfBoundsException | NotACommandException e) {

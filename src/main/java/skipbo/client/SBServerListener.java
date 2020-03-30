@@ -77,7 +77,6 @@ class SBServerListener implements Runnable {
      */
     void sendChatMessage(String[] command) {
         chatGraphic.chat.append("\n" + command[2]);
-        System.out.println(command[2]);
     }
 
     /**
@@ -115,7 +114,7 @@ class SBServerListener implements Runnable {
      * @param message A message
      */
     void printMessage(String message) {
-        System.out.println(message);
+        chatGraphic.chat.append("[Info] " + message);
     }
 
 }

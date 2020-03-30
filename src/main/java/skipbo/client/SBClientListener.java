@@ -23,7 +23,7 @@ class SBClientListener implements Runnable {
     SBClientListener(Socket sock) throws IOException {
         this.sock = sock;
         pw = new PrintWriter(sock.getOutputStream(),true);
-        this.scanner = scanner = new Scanner(System.in);
+        this.scanner = new Scanner(System.in);
     }
 
     /**
@@ -32,7 +32,7 @@ class SBClientListener implements Runnable {
     @Override
     public void run() {
 
-        System.out.println("Connection successful\n");
+        System.out.println("Connection successful");
         printCommandInfo();
         setName();
 

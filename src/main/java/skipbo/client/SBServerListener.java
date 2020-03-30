@@ -13,11 +13,13 @@ import java.net.Socket;
 class SBServerListener implements Runnable {
     Socket socket;
     BufferedReader br;
+    ChatGraphic chatGraphic;
     Boolean isLoggedIn = true;
 
-    SBServerListener(Socket socket) throws IOException {
+    SBServerListener(Socket socket, ChatGraphic chatGraphic) throws IOException {
         this.socket = socket;
         this.br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        this.chatGraphic = chatGraphic;
     }
 
     /**
@@ -74,7 +76,7 @@ class SBServerListener implements Runnable {
      * @param command String array according to network protocol with command, option and arguments
      */
     void sendChatMessage(String[] command) {
-
+        chatGraphic.chat.append("\n" + command[2]);
         System.out.println(command[2]);
     }
 

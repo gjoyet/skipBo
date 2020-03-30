@@ -15,6 +15,7 @@ public class ChatGraphic extends JFrame implements ActionListener {
     private JPanel contentPane;
     private JButton sendMes;
     private JTextArea inputMes;
+    JTextArea chat;
     private JScrollPane scrollPane;
     private SBClientListener clientListener;
 
@@ -37,7 +38,9 @@ public class ChatGraphic extends JFrame implements ActionListener {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        scrollPane = new JScrollPane();
+        chat = new JTextArea();
+
+        scrollPane = new JScrollPane(chat);
         scrollPane.setBounds(20, 30 ,250, 400 );
         scrollPane.setVisible(true);
         contentPane.add(scrollPane);
@@ -56,7 +59,6 @@ public class ChatGraphic extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        System.out.println("entered actionPerformed method"); //For testing purpose
         if (actionEvent.getSource() == sendMes) {
             String input = inputMes.getText();
             try {

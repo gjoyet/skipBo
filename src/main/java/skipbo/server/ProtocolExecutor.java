@@ -83,7 +83,10 @@ public class ProtocolExecutor {
                     throw new NameTakenException(name, sbL);
                 }
             } else if(input[1].equals("Status")) {
+                String status = Status.valueOf(input[2]).toString();
                 sbL.player.changeStatus(Status.valueOf(input[2]));
+                sbL.getPW().println("PRINT§Terminal§Status changed to " + status + ".");
+                sendAllExceptOne("PRINT§Terminal§" + sbL.player.getName() + " is " + status + ".", sbL);
             } else throw new NoCommandException(input[0], input[1]);
         } catch (NameTakenException nte) {
             String name = nte.findName();

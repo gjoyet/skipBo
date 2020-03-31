@@ -24,15 +24,14 @@ public class SBClient {
             Thread cListener = new Thread(clientListener);
             cListener.start();
 
+            //GUI
+            ChatGraphic frame = new ChatGraphic(clientListener);
+            frame.setVisible(true);
+
             //Start SBServerListener Thread
-            SBServerListener serverListener = new SBServerListener(sock);
+            SBServerListener serverListener = new SBServerListener(sock, frame);
             Thread sListener = new Thread(serverListener);
             sListener.start();
-
-            //Start ChatGraphic Thread
-            ChatGraphic chatGraphic = new ChatGraphic(clientListener);
-            Thread window = new Thread(chatGraphic);
-            window.start();
 
         } catch (IOException e) {
             e.printStackTrace();

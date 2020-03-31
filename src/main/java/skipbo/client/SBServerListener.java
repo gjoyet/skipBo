@@ -13,11 +13,13 @@ import java.net.Socket;
 class SBServerListener implements Runnable {
     Socket socket;
     BufferedReader br;
+    ChatGraphic chatGraphic;
     Boolean isLoggedIn = true;
 
-    SBServerListener(Socket socket) throws IOException {
+    SBServerListener(Socket socket, ChatGraphic chatGraphic) throws IOException {
         this.socket = socket;
         this.br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        this.chatGraphic = chatGraphic;
     }
 
     /**
@@ -45,7 +47,7 @@ class SBServerListener implements Runnable {
      * @throws NoCommandException If commandLine string doesn't match network protocol
      */
     void executeCommand(String commandLine) throws NoCommandException  {
-        String[] command = commandLine.split("§", 3);
+        String[] command = commandLine.split("§", 3); //TODO not all commands have 3 parts
         Protocol protocol = Protocol.valueOf(command[0]);
 
         switch (protocol) {
@@ -54,6 +56,9 @@ class SBServerListener implements Runnable {
                 break;
             case CHNGE:
                 changeTo(command);
+                break;
+            case PUTTO:
+                //TODO
                 break;
             case LGOUT:
                 logOut();
@@ -71,7 +76,7 @@ class SBServerListener implements Runnable {
      * @param command String array according to network protocol with command, option and arguments
      */
     void sendChatMessage(String[] command) {
-        System.out.println(command[2]);
+        chatGraphic.chat.append("\n" + command[2]);
     }
 
     /**
@@ -109,7 +114,7 @@ class SBServerListener implements Runnable {
      * @param message A message
      */
     void printMessage(String message) {
-        System.out.println(message);
+        chatGraphic.chat.append("\n[Info] " + message);
     }
 
 }

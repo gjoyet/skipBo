@@ -23,7 +23,7 @@ class SBClientListener implements Runnable {
     SBClientListener(Socket sock) throws IOException {
         this.sock = sock;
         pw = new PrintWriter(sock.getOutputStream(),true);
-        this.scanner = scanner = new Scanner(System.in);
+        this.scanner = new Scanner(System.in);
     }
 
     /**
@@ -32,8 +32,8 @@ class SBClientListener implements Runnable {
     @Override
     public void run() {
 
-        System.out.println("Connection successful\n");
-        printCommandInfo();
+        //System.out.println("Connection successful");
+        //printCommandInfo();
         setName();
 
         String input;
@@ -43,7 +43,7 @@ class SBClientListener implements Runnable {
                 forward(input);
             } catch (NotACommandException e) {
                 System.out.println(e.getMessage());
-                printCommandInfo();
+                //printCommandInfo();
             }
         }
     }
@@ -51,12 +51,12 @@ class SBClientListener implements Runnable {
     /**
      * Sends Information about valid commands to the client
      */
-    void printCommandInfo() {
+    /*void printCommandInfo() {
         //List of Commands
         String listOfCommands = "Commands:\n/change name [name]\n/change status [ready|waiting]\n" +
                 "/msg [name] [message]\n/new game\n/play [PlaceFrom] [n] [PlaceTo] [n] | not yet implemented\n/quit\n";
         System.out.println(listOfCommands);
-    }
+    }*/
 
     /**
      * Let's client set their name
@@ -175,6 +175,12 @@ class SBClientListener implements Runnable {
         throw new NotACommandException("Please enter a valid command");
     }
 
+    /**
+     * Builds network protocol string for the "play" command
+     * @param input Input from client
+     * @return The network protocol string for the "play" command
+     * @throws NotACommandException If the input doesn't match any command
+     */
     String getPlayString(String input) throws NotACommandException {
         String[] line = input.split(" ", 5);
         if (line.length < 4) {

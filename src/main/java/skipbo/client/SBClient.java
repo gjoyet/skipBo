@@ -24,8 +24,12 @@ public class SBClient {
             Thread cListener = new Thread(clientListener);
             cListener.start();
 
+            //GUI
+            ChatGraphic frame = new ChatGraphic(clientListener);
+            frame.setVisible(true);
+
             //Start SBServerListener Thread
-            SBServerListener serverListener = new SBServerListener(sock);
+            SBServerListener serverListener = new SBServerListener(sock, frame);
             Thread sListener = new Thread(serverListener);
             sListener.start();
 

@@ -1,9 +1,15 @@
-package skipbo.game;
-import javax.swing.*;
+package skipbo.client;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class ChatGraphic extends JFrame {
+public class ChatGraphicObsolete extends JFrame implements ActionListener {
 
     private JPanel contentPane;
     private JButton sendMes;
@@ -16,7 +22,7 @@ public class ChatGraphic extends JFrame {
         Thread window = new Thread(){
             public void run(){
                 try{
-                    ChatGraphic frame = new ChatGraphic();
+                    ChatGraphicObsolete frame = new ChatGraphicObsolete();
                     frame.setVisible(true);
                 } catch (Exception e){
                     System.out.println(e);
@@ -27,13 +33,13 @@ public class ChatGraphic extends JFrame {
   }
 
     // Create JFrame
-    public ChatGraphic() {
+    public ChatGraphicObsolete() {
 
        setTitle("Skip-Bros CHAT");
        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        setBounds(100, 100, 520, 485);
 
-       contentPane= new JPanel();
+       contentPane = new JPanel();
        contentPane.setBackground(Color.black);
        contentPane.setBorder(new EmptyBorder(5,5,5,5));
        setContentPane(contentPane);
@@ -47,6 +53,7 @@ public class ChatGraphic extends JFrame {
        sendMes = new JButton("Send message");
        sendMes.setBounds(290, 405, 200,25);
        contentPane.add(sendMes);
+       sendMes.addActionListener(this);
 
        inputMes = new JTextArea();
        inputMes.setBounds(290, 335,200, 50);
@@ -54,5 +61,10 @@ public class ChatGraphic extends JFrame {
        inputMes.setColumns(3);
        contentPane.add(inputMes);
 
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        System.out.println("entered actionPerformed");
     }
 }

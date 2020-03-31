@@ -50,7 +50,7 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
 
         //Input textfield
         inputMes = new JTextArea();
-        inputMes.setBounds(290, 335,200, 50);
+        inputMes.setBounds(290, 350,200, 80);
         inputMes.setEditable(true);
         inputMes.setColumns(3);
         inputMes.setLineWrap(true);
@@ -59,7 +59,7 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
         contentPane.add(inputMes);
 
         inputScrollPane = new JScrollPane(inputMes);
-        inputScrollPane.setBounds(290, 335,200, 50);
+        inputScrollPane.setBounds(290, 350,200, 80);
         inputScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentPane.add(inputScrollPane);
 

@@ -42,6 +42,5 @@ public class SBClient {
 }
 
 /*
-TODO chat input
 TODO player list method
  */

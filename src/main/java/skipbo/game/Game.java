@@ -31,8 +31,9 @@ public class Game {
         this.turnFinished = turnFinished;
         this.sizeOfStockPile = 20;
 
-        start();
         dealCards();
+        start();
+
 
         gameRunning = true;
     }
@@ -84,11 +85,13 @@ public class Game {
             for (int j = 0; j < 5; j++) {    // Draw hand-cards for each player
                 Card c = this.getDrawPile().get(random.nextInt(this.getDrawPile().size()));
                 tempPlayer.getHandCards().add(c);
+                tempPlayer.getSBL().getPW().println("PRINT§Terminal§Your Hand cards are: " + tempPlayer.getHandCards().toString());
                 //this.players[i] = tempPlayer; // possibly redundant code
             }
             for (int j = 0; j < sizeOfStockPile; j++) {    // Draw Stock-Pile cards for each player
                 Card c = this.getDrawPile().get(random.nextInt(this.getDrawPile().size()));
                 tempPlayer.getStockPile().add(c);
+                tempPlayer.getSBL().getPW().println("PRINT§Terminal§Your Stock cards are: " + tempPlayer.getStockPile().toString());
                 //this.players[i] = tempPlayer; // possibly redundant cod
             }
 
@@ -146,15 +149,28 @@ public class Game {
                 specBuildPile.add(card);
                 currentPly.getHandCards().remove(card);
                 topCard = card;     // could be redundant
-                // Execute: card op valid - update board and hand cards. (Send buildpiles.toString() from here to Server, which then gives over to client)
+                for (Player player : players) {
+                    new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: "
+                            + buildPiles.toString(), player.getSBL());
+
+                }
+                currentPly.getSBL().getPW().println("PRINT§Terminal§Your hands cards are now: "
+                        + currentPly.getHandCards().toString());
+                // DONE - Execute: card op valid - update board and hand cards. (Send buildpiles.toString() from here to Server, which then gives over to client)
                 if (card.number == 12) {
-                    //Execute: make that BuildPile go away
+                    //DONE Execute: make that BuildPile go away
                     for (int i = 0; i < 12; i++) {    // remove all cards from the buildPile if the top card is 12
                         specBuildPile.remove(i);
                     }
+                    for (Player player : players) {
+                        new ProtocolExecutor().sendAll("PRINT§Terminal§The maximum number has been reached; the deck has been reset to: "
+                                + buildPiles.toString(), player.getSBL());
+                    }
+
                 }
             } else {
                 //EXECUTE: the move is invalid!
+                currentPly.getSBL().getPW().println("PRINT§Terminal§This move is invalid!");
             }
         } else {
             if (card.number == 1) {
@@ -187,6 +203,13 @@ public class Game {
         specDiscard.add(card);
         currentPly.getHandCards().remove(card);
         //Execute: update Discard pile and hand cards
+        for (Player player : players) {
+            for (int i = 0; i < 4; i++) {
+                new ProtocolExecutor().sendAll("PRINT§Terminal§The discard pile of " + player.getName() + "is: " +
+                        player.getDiscardPile().toString(), player.getSBL());
+            }
+
+        }
         endTurn();
 
     }

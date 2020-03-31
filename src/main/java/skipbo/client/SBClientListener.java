@@ -41,7 +41,6 @@ class SBClientListener {
             return;
         }
 
-
         //It's not a chat message
         String[] command = input.split(" ", 2);
 

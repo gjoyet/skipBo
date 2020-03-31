@@ -22,7 +22,6 @@ public class WindowHandler implements WindowListener {
         try {
             clientListener.forward("/quit");
             System.exit(0);
-            //dispose method
         } catch (NotACommandException e) {
             System.out.println(e.getMessage());
         }

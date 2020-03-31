@@ -5,8 +5,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
 public class ChatGraphic extends JFrame implements ActionListener {
 
@@ -40,6 +38,7 @@ public class ChatGraphic extends JFrame implements ActionListener {
         chat.setBounds(20, 30 ,250, 400);
         chat.setLineWrap(true);
         chat.setWrapStyleWord(true);
+        chat.setEditable(false);
 
         chatScrollPane = new JScrollPane(chat);
         chatScrollPane.setBounds(20, 30 ,250, 400 );
@@ -89,7 +88,7 @@ public class ChatGraphic extends JFrame implements ActionListener {
     void printCommandInfo() {
         //List of Commands
         String listOfCommands = "Commands:\n/change name [name]\n/change status [ready|waiting]\n" +
-                "/msg [name] [message]\n/new game\n/play [PlaceFrom] [n] [PlaceTo] [n] | not yet implemented\n/quit";
+                "/msg [name] [message]\n/new game\n/play [PlaceFrom] [n] [PlaceTo] [n]\n/quit";
         printInfo(listOfCommands);
     }
 
@@ -113,7 +112,8 @@ public class ChatGraphic extends JFrame implements ActionListener {
      * Let's client set their name
      */
     void setName() {
-        String message = "Please enter your name";
+        String message = "Please enter your name\n\nName can only contain letters or digits\n" +
+                "and must have between 3 and 13 characters";
         String title = "Skip-Bo";
         String nameSuggestion = System.getProperty("user.name");
 
@@ -124,9 +124,6 @@ public class ChatGraphic extends JFrame implements ActionListener {
             name = "";
         }
         clientListener.pw.println("SETTO§Nickname§" + name);
-
-        //System.out.println("Name can only contain letters or digits and must have between 3 and 13 characters");
-        //System.out.println("Your suggested nickname (according to your system username): " + System.getProperty("user.name"));
 
     }
 }

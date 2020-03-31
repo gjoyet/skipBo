@@ -47,7 +47,7 @@ class SBServerListener implements Runnable {
      * @throws NoCommandException If commandLine string doesn't match network protocol
      */
     void executeCommand(String commandLine) throws NoCommandException  {
-        String[] command = commandLine.split("§", 3); //TODO not all commands have 3 parts
+        String[] command = commandLine.split("§", 3);
         Protocol protocol = Protocol.valueOf(command[0]);
 
         switch (protocol) {
@@ -58,6 +58,7 @@ class SBServerListener implements Runnable {
                 changeTo(command);
                 break;
             case PUTTO:
+                putTo(command);
                 //TODO
                 break;
             case LGOUT:
@@ -87,6 +88,9 @@ class SBServerListener implements Runnable {
         printMessage(command[2]);
     }
 
+    void putTo(String[] command) {
+        printMessage("Someone played a card");
+    }
     /**
      * Terminates SBServerListener thread and sends status message to client
      */

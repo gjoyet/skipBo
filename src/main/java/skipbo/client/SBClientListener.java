@@ -46,6 +46,7 @@ class SBClientListener implements Runnable {
                 //printCommandInfo();
             }
         }
+        System.out.println("Client ended run method");
     }
 
     /**
@@ -109,11 +110,13 @@ class SBClientListener implements Runnable {
                 protocolString = Protocol.LGOUT + "";
                 pw.println(protocolString);
                 logOut();
+                System.out.println("forward returned"); //TODO delete
                 return;
             default:
                 throw new NotACommandException("Please enter a valid command");
         }
         pw.println(protocolString);
+        System.out.println("ended forward client"); //TODO delete
     }
 
 
@@ -211,11 +214,13 @@ class SBClientListener implements Runnable {
      * Terminates SBClientListener thread
      */
     void logOut() {
+        System.out.println("entered logOut Client"); //TODO delete
         isLoggedIn = false;
         scanner.close();
         pw.close();
         try {
             sock.close();
+            System.out.println("closed socket"); //TODO delete
         } catch (IOException e) {
             System.out.println("Issue with closing the socket");
         }

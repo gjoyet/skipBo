@@ -160,7 +160,9 @@ public class ProtocolExecutor {
             }
         } else {
             for(int i = 0; i < serverLobby.getLength(); i++) {
-                serverLobby.getSBL(i).pw.println(message);
+                if(!serverLobby.getPlayer(i).getStatus().equals(Status.INGAME)) {
+                    serverLobby.getSBL(i).pw.println(message);
+                }
             }
         }
     }
@@ -178,7 +180,7 @@ public class ProtocolExecutor {
             }
         } else {
             for(int i = 0; i < serverLobby.getLength(); i++) {
-                if(!serverLobby.getSBL(i).equals(sbL)) {
+                if(!serverLobby.getSBL(i).equals(sbL) && !serverLobby.getPlayer(i).getStatus().equals(Status.INGAME)) {
                     serverLobby.getSBL(i).pw.println(message);
                 }
             }

@@ -92,7 +92,7 @@ public class Game {
                 Card c = this.getDrawPile().get(random.nextInt(this.getDrawPile().size()));
                 tempPlayer.getStockPile().add(c);
                 tempPlayer.getSBL().getPW().println("PRINT§Terminal§Your Stock cards are: " + tempPlayer.getStockPile().toString());
-                //this.players[i] = tempPlayer; // possibly redundant cod
+                //this.players[i] = tempPlayer; // possibly redundant code
             }
 
             //   Print Array (ONLY TESTING PURPOSE)
@@ -202,16 +202,18 @@ public class Game {
 
         specDiscard.add(card);
         currentPly.getHandCards().remove(card);
-        //Execute: update Discard pile and hand cards
-        for (Player player : players) {
-            for (int i = 0; i < 4; i++) {
-                new ProtocolExecutor().sendAll("PRINT§Terminal§The discard pile of " + player.getName() + "is: " +
-                        player.getDiscardPile().toString(), player.getSBL());
-            }
+        //DONE: Execute: update Discard pile and hand cards
+        displayDiscard();
 
-        }
         endTurn();
 
+    }
+
+    public void displayDiscard() {
+        for (Player player : players) {
+            new ProtocolExecutor().sendAll("PRINT§Terminal§The discard pile of " + player.getName() + "is: " +
+                    player.getDiscardPile().toString(), player.getSBL());
+        }
     }
 
     /**
@@ -234,38 +236,42 @@ public class Game {
 
         if (stockCard.col == Color.CYAN) {
             int num = specBuildPile.get(specBuildPile.size()).number;
-
-        }
-        if (!(specBuildPile.isEmpty())) {
-            if (topCard.number == (stockCard.number - 1)) {
-                specBuildPile.add(stockCard);
-                currentPlayer.getStockPile().remove(stockCard);
-                topCard = stockCard;     // could be redundant
-                // Execute: card op valid - update board and stock pile card.
-                for (Player player : players) {
+            stockCard.number = num + 1;
+            specBuildPile.add(stockCard);
+            new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: "
+                    + buildPiles.toString(), currentPlayer.getSBL());
+        } else {
+            if (!(specBuildPile.isEmpty())) {
+                if (topCard.number == (stockCard.number - 1)) {
+                    specBuildPile.add(stockCard);
+                    currentPlayer.getStockPile().remove(stockCard);
+                    topCard = stockCard;     // could be redundant
+                    // Execute: card op valid - update board and stock pile card.
                     new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: "
-                            + buildPiles.toString(), player.getSBL());
-                }
+                            + buildPiles.toString(), currentPlayer.getSBL());
 
-                if (stockCard.number == 12) {
-                    //Execute: make that BuildPile go away
-                    for (int i = 0; i < 12; i++) {    // remove all cards from the buildPile if the top card is 12
-                        specBuildPile.remove(i);
-                    }
-                    for (Player player : players) {
+                    if (stockCard.number == 12) {
+                        //Execute: make that BuildPile go away
+                        for (int i = 0; i < 12; i++) {    // remove all cards from the buildPile if the top card is 12
+                            specBuildPile.remove(i);
+                        }
                         new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: "
-                                + buildPiles.toString(), player.getSBL());
+                                + buildPiles.toString(), currentPlayer.getSBL());
+
                     }
+                } else {
+                    //EXECUTE: the move is invalid!
+                    currentPlayer.getSBL().getPW().println("PRINT§Terminal§This move is invalid!");
                 }
             } else {
-                //EXECUTE: the move is invalid!
-            }
-        } else {
-            if (stockCard.number == 1) {
-                specBuildPile.add(stockCard);
-                //Execute: update build pile
-            } else if (stockCard.number != 1) {
-                //Execute: invalid move! Card 1 has to be first card on build pile.
+                if (stockCard.number == 1) {
+                    specBuildPile.add(stockCard);
+                    //Execute: update build pile
+                } else if (stockCard.number != 1) {
+                    //Execute: invalid move! Card 1 has to be first card on build pile.
+                    currentPlayer.getSBL().getPW().println("PRINT§Terminal§This move is invalid! The first card has to have " +
+                            "the number 1.");
+                }
             }
         }
 
@@ -285,17 +291,20 @@ public class Game {
         } else {
             playersTurn = 0;
         }
+        startTurn(playersTurn);
     }
 
 
     /**
-     * A method to run the End Game network protocol to
+     * A method to run the End Game network protocol, and let the
+     * player know that some player has won the game!
      *
      * @param winner
      */
     public void endGame(Player winner) {
         gameRunning = false;
         //EXECUTE: EndGame Protocol (sysout: Player X won game!) server shut, reshuffle etc.
+        new ProtocolExecutor().sendAll(winner.getName() + "has won the game!", winner.getSBL());
     }
 
     /**

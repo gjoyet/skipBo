@@ -39,7 +39,6 @@ class SBServerListener implements Runnable {
                 System.out.println("Error with network protocol command");
             }
         }
-        System.out.println("ended run Server"); //TODO delete
     }
 
     /**
@@ -95,12 +94,11 @@ class SBServerListener implements Runnable {
         try {
             br.close();
             socket.close();
-            printMessage("Logout successful");
+            //printMessage("Logout successful");
         } catch (IOException e) {
             System.out.println("Error with closing BufferedReader or Socket");
         }
         isLoggedIn = false;
-        System.out.println("ended logOut Server"); //TODO delete
     }
 
     /**

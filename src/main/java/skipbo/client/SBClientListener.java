@@ -2,18 +2,15 @@ package skipbo.client;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Scanner;
 import java.net.Socket;
 import skipbo.server.Protocol;
 
 /**
  * Thread waiting for any action from user input (from terminal) and forwards command to Server
  */
-class SBClientListener implements Runnable {
+class SBClientListener {
     Socket sock;
     PrintWriter pw;
-    Scanner scanner;
-    Boolean isLoggedIn = true;
 
     /**
      *Creates a Skip-Bo client listener
@@ -23,52 +20,7 @@ class SBClientListener implements Runnable {
     SBClientListener(Socket sock) throws IOException {
         this.sock = sock;
         pw = new PrintWriter(sock.getOutputStream(),true);
-        this.scanner = new Scanner(System.in);
     }
-
-    /**
-     * Waits for input from user and forwards input to server according to network protocol
-     */
-    @Override
-    public void run() {
-
-        //System.out.println("Connection successful");
-        //printCommandInfo();
-        //setName();
-
-        String input;
-        while(isLoggedIn) {
-            input = scanner.nextLine();
-            try {
-                forward(input);
-            } catch (NotACommandException e) {
-                System.out.println(e.getMessage());
-                //printCommandInfo();
-            }
-        }
-        System.out.println("Client ended run method");
-    }
-
-    /**
-     * Sends Information about valid commands to the client
-     */
-    /*void printCommandInfo() {
-        //List of Commands
-        String listOfCommands = "Commands:\n/change name [name]\n/change status [ready|waiting]\n" +
-                "/msg [name] [message]\n/new game\n/play [PlaceFrom] [n] [PlaceTo] [n] | not yet implemented\n/quit\n";
-        System.out.println(listOfCommands);
-    }*/
-
-    /**
-     * Let's client set their name
-     */
-/*    void setName() {
-        System.out.println("Name can only contain letters or digits and must have between 3 and 13 characters");
-        System.out.println("Your suggested nickname (according to your system username): " + System.getProperty("user.name"));
-        System.out.println("Please enter your name: ");
-        String name = scanner.nextLine();
-        pw.println("SETTO§Nickname§" + name);
-    }*/
 
     /**
      * Forwards user input to server according to network protocol
@@ -110,15 +62,12 @@ class SBClientListener implements Runnable {
                 protocolString = Protocol.LGOUT + "";
                 pw.println(protocolString);
                 logOut();
-                System.out.println("forward returned"); //TODO delete
                 return;
             default:
                 throw new NotACommandException("Please enter a valid command");
         }
         pw.println(protocolString);
-        System.out.println("ended forward client"); //TODO delete
     }
-
 
     /**
      * Builds network protocol string for the "change" command
@@ -203,13 +152,9 @@ class SBClientListener implements Runnable {
      * Terminates SBClientListener thread
      */
     void logOut() {
-        System.out.println("entered logOut Client"); //TODO delete
-        isLoggedIn = false;
-        scanner.close();
         pw.close();
         try {
             sock.close();
-            System.out.println("closed socket"); //TODO delete
         } catch (IOException e) {
             System.out.println("Issue with closing the socket");
         }

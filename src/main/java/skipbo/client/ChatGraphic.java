@@ -61,28 +61,8 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
         inputScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentPane.add(inputScrollPane);
 
-/*        //Buttons
-        sendMes = new JButton("Send message");
-        sendMes.setBounds(290, 405, 200,25);
-        contentPane.add(sendMes);
-        sendMes.addActionListener(this);*/
     }
 
-/*    @Override
-    public void actionPerformed(ActionEvent actionEvent) {
-        if (actionEvent.getSource() == sendMes) {
-            String input = inputMes.getText();
-            System.out.println(input);
-            inputMes.replaceRange("",0,input.length());
-            try {
-                clientListener.forward(input);
-            } catch (IndexOutOfBoundsException | NotACommandException e) {
-                printErrorMessage(e.getMessage());
-                printCommandInfo();
-            }
-        }
-
-    }*/
 
     /**
      * Sends Information about valid commands to the client

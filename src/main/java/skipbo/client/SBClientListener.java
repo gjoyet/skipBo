@@ -187,27 +187,16 @@ class SBClientListener implements Runnable {
      */
     String getPlayString(String input) throws NotACommandException {
         String[] line = input.split(" ", 5);
-        if (line.length < 4) {
+        if (line.length < 5) {
             throw new NotACommandException("Usage: /play [PlaceFrom] [n] [PlaceTo] [n]");
         }
+
         String placeFrom = line[1];
-        String fromNumber; //probably can change to int later
-        String placeTo;
-        String toNumber; //probably can change to int later
-        if (placeFrom.equalsIgnoreCase("StockPile")) {
-            fromNumber = "-1";
-            placeTo = line[2];
-            toNumber = line[3];
-        } else {
-            if (line.length < 5) {
-                throw new NotACommandException("Usage: /play [PlaceFrom] [n] [PlaceTo] [n]");
-            }
-            fromNumber = line[2];
-            placeTo = line[3];
-            toNumber = line[4];
-        }
-        throw new NotACommandException("Command not implemented"); //delete when implemented
-        // TODO build and return correct String
+        String fromNumber = line[2]; //probably can change to int later
+        String placeTo = line[3];
+        String toNumber = line[4]; //probably can change to int later
+
+        return Protocol.PUTTO + "§Card§" + placeFrom + "§" + fromNumber + "§" + placeTo + "§" + toNumber;
     }
 
     /**

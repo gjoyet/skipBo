@@ -13,7 +13,8 @@ Lobby		SETTO		Nickname	String nickname				sets nickname of new player to ‚nick
 		LGOUT		-		-					from client: logout request to server; from server: logout confirmation to client
 
 Chat		CHATM		Global		String message				sends ‚message‘ to write on the global chat
-				Private		Player p, String message		sends private ,message’ to player p	
+				Private		Player p, String message		sends private ,message’ to player p
+				Broadcast	String message				sends 'message' to all clients across all games and lobbies	
 
 Game		NWGME		New		-					starts new game with 4 players
 		PUTTO		Card		Index i, Pile f, Pile t		put card with index ‚i‘ from pile ‚f‘ to pile ‚t‘

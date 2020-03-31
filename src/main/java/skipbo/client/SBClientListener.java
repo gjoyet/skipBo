@@ -51,11 +51,17 @@ class SBClientListener {
             case "/msg":
                 protocolString = getPrivateMessageString(input);
                 break;
+            case "/broadcast":
+                protocolString = getBroadcastString(input);
+                break;
             case "/new":
                 protocolString = getNewString(input);
                 break;
             case "/play":
                 protocolString = getPlayString(input);
+                break;
+            case "/list":
+                protocolString = getListString(input);
                 break;
             case "/quit":
                 protocolString = Protocol.LGOUT + "";
@@ -111,6 +117,20 @@ class SBClientListener {
     }
 
     /**
+     * Builds network protocol string for the "broadcast" command
+     * @param input Input from client
+     * @return The network protocol string for the "broadcast" command
+     * @throws NotACommandException If the input doesn't match any command
+     */
+    String getBroadcastString(String input) throws NotACommandException {
+        String[] line = input.split(" ", 2);
+        if (line.length < 2) {
+            throw new NotACommandException("Please add a message");
+        }
+        throw new NotACommandException("Command not implemented");
+    }
+
+    /**
      * Builds network protocol string for the "new" command
      * @param input Input from client
      * @return The network protocol string for the "new" command
@@ -145,6 +165,25 @@ class SBClientListener {
         String toNumber = line[4]; //probably can change to int later
 
         return Protocol.PUTTO + "§Card§" + placeFrom + "§" + fromNumber + "§" + placeTo + "§" + toNumber;
+    }
+
+    /**
+     * Builds network protocol string for the "list" command
+     * @param input Input from client
+     * @return The network protocol string for the "list" command
+     * @throws NotACommandException If the input doesn't match any command
+     */
+    String getListString(String input) throws NotACommandException {
+        String[] line = input.split(" ",2);
+        if (line.length < 2) {
+            throw new NotACommandException("Please add an option to your command");
+        }
+        String option = line[1].toLowerCase();
+        if (!(option.equals("games") || option.equals("players") || option.equals("commands"))) {
+            throw new NotACommandException("Please add a valid option to your command");
+        }
+
+        throw new NotACommandException("Command not implemented");
     }
 
     /**

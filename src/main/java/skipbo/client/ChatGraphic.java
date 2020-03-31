@@ -3,8 +3,6 @@ package skipbo.client;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -89,10 +87,11 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
     /**
      * Sends Information about valid commands to the client
      */
-    void printCommandInfo() {
+    void printCommandList() {
         //List of Commands
-        String listOfCommands = "Commands:\n/change name [name]\n/change status [ready|waiting]\n" +
-                "/msg [name] [message]\n/new game\n/play [PlaceFrom] [n] [PlaceTo] [n]\n/quit";
+        String listOfCommands = "\n***********\nCommands:\n/change name [name]\n/change status ready|waiting\n" +
+                "/msg [name] [message]\n/boradcast\n/new game\n/play [PlaceFrom] [n] [PlaceTo] [n]\n" +
+                "/list games|players|commands\n/quit\n***********";
         printInfo(listOfCommands);
     }
 
@@ -136,11 +135,13 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
         if (keyEvent.getKeyChar() == KeyEvent.VK_ENTER) {
             String input = inputMes.getText().replaceAll("\n", " ");
             inputMes.replaceRange("",0,input.length());
+            input = input.substring(0,input.length() - 1);
             try {
                 clientListener.forward(input);
             } catch (IndexOutOfBoundsException | NotACommandException e) {
                 printErrorMessage(e.getMessage());
-                printCommandInfo();
+                printCommandList(); //delete when /list commands is implemented
+                //printInfo("Use '/list commands' to display all possible commands");
             }
         }
     }

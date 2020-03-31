@@ -28,7 +28,7 @@ public class SBClient {
             frame.setVisible(true);
             frame.setName();
             frame.printInfo("Connection successful");
-            frame.printCommandInfo();
+            frame.printCommandList();
 
             //Start SBServerListener Thread
             SBServerListener serverListener = new SBServerListener(sock, frame);

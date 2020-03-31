@@ -34,7 +34,7 @@ class SBClientListener implements Runnable {
 
         //System.out.println("Connection successful");
         //printCommandInfo();
-        setName();
+        //setName();
 
         String input;
         while(isLoggedIn) {
@@ -61,13 +61,13 @@ class SBClientListener implements Runnable {
     /**
      * Let's client set their name
      */
-    void setName() {
+/*    void setName() {
         System.out.println("Name can only contain letters or digits and must have between 3 and 13 characters");
         System.out.println("Your suggested nickname (according to your system username): " + System.getProperty("user.name"));
         System.out.println("Please enter your name: ");
         String name = scanner.nextLine();
         pw.println("SETTO§Nickname§" + name);
-    }
+    }*/
 
     /**
      * Forwards user input to server according to network protocol
@@ -115,6 +115,7 @@ class SBClientListener implements Runnable {
         }
         pw.println(protocolString);
     }
+
 
     /**
      * Builds network protocol string for the "change" command

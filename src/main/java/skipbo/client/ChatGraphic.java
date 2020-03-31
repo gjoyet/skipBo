@@ -19,9 +19,6 @@ public class ChatGraphic extends JFrame implements ActionListener {
     ChatGraphic(SBClientListener clientListener) {
         this.clientListener = clientListener;
         setFrame();
-        setName();
-        printInfo("Connection successful");
-        printCommandInfo();
     }
 
     void setFrame() {
@@ -77,7 +74,7 @@ public class ChatGraphic extends JFrame implements ActionListener {
             try {
                 clientListener.forward(input);
             } catch (IndexOutOfBoundsException | NotACommandException e) {
-                printInfo("Please enter a valid command"); //TODO copy catch from SBClientListener
+                printInfo(e.getMessage());
                 printCommandInfo();
             }
         }
@@ -107,12 +104,18 @@ public class ChatGraphic extends JFrame implements ActionListener {
      */
     void setName() {
         //TODO
-        //JOptionPane optionPane = new JOptionPane(JOptionPane.OK_OPTION);
-        String name = JOptionPane.showInputDialog(contentPane,"Please enter your name");
-        System.out.println("Name can only contain letters or digits and must have between 3 and 13 characters");
-        System.out.println("Your suggested nickname (according to your system username): " + System.getProperty("user.name"));
-        System.out.println("Please enter your name: ");
-        //String name = scanner.nextLine();
-        //pw.println("SETTO§Nickname§" + name);
+        String message = "Please enter your name";
+        String title = "Skip-Bo";
+        String nameSuggestion = System.getProperty("user.name");
+
+        String name = (String)JOptionPane.showInputDialog(contentPane, message, title, JOptionPane.QUESTION_MESSAGE,
+                null, null, nameSuggestion);
+
+        clientListener.pw.println("SETTO§Nickname§" + name);
+
+        //System.out.println("Name can only contain letters or digits and must have between 3 and 13 characters");
+        //System.out.println("Your suggested nickname (according to your system username): " + System.getProperty("user.name"));
+
+
     }
 }

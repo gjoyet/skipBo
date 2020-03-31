@@ -27,6 +27,9 @@ public class SBClient {
             //GUI
             ChatGraphic frame = new ChatGraphic(clientListener);
             frame.setVisible(true);
+            frame.setName();
+            frame.printInfo("Connection successful");
+            frame.printCommandInfo();
 
             //Start SBServerListener Thread
             SBServerListener serverListener = new SBServerListener(sock, frame);

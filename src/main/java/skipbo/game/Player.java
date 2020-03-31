@@ -1,4 +1,5 @@
 package skipbo.game;
+
 import skipbo.server.SBListener;
 
 import java.util.*;
@@ -15,14 +16,16 @@ public class Player {
     private Game game;
     private Pile piles;
     private Status status;
+
     /**
      * Player constructor to build a Player object with
      * an int id, String name and a ServerListener object specific to the player
+     *
      * @param id
      * @param name
      * @param sbListen
      */
-    public Player (int id, String name, SBListener sbListen) {
+    public Player(int id, String name, SBListener sbListen) {
         this.id = id;
         this.name = name;
         this.sbListen = sbListen;
@@ -30,23 +33,39 @@ public class Player {
         this.status = Status.valueOf("WAITING");
     }
 
-    public String getName() { return this.name; }
+    public String getName() {
+        return this.name;
+    }
 
-    public void changeName(String name) { this.name = name; }
+    public void changeName(String name) {
+        this.name = name;
+    }
 
-    public int getId() { return this.id; }
+    public int getId() {
+        return this.id;
+    }
 
-    public SBListener getSBL() { return this.sbListen; }
+    public SBListener getSBL() {
+        return this.sbListen;
+    }
 
-    public Status getStatus()  { return this.status; }
+    public Status getStatus() {
+        return this.status;
+    }
 
-    public void changeStatus(Status ps) { this.status = ps; }
+    public void changeStatus(Status ps) {
+        this.status = ps;
+    }
 
-    public Game getGame() { return this.game; }
+    public Game getGame() {
+        return this.game;
+    }
 
-    public void changeGame(Game game) { this.game = game; }
+    public void changeGame(Game game) {
+        this.game = game;
+    }
 
-    public ArrayList<Card> getStockPile(){
+    public ArrayList<Card> getStockPile() {
         return this.piles.stockPile;
     }
 
@@ -54,7 +73,13 @@ public class Player {
         return this.piles.handCards;
     }
 
-    public void addCardToHand(Card card) { this.getHandCards().add(card); }
+    public ArrayList<ArrayList<Card>> getDiscardPile() {
+        return this.piles.discardPiles;
+    }
+
+    public void addCardToHand(Card card) {
+        this.getHandCards().add(card);
+    }
 
 
     /**

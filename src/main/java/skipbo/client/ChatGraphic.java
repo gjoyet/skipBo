@@ -5,6 +5,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 public class ChatGraphic extends JFrame implements ActionListener {
 
@@ -19,15 +21,12 @@ public class ChatGraphic extends JFrame implements ActionListener {
     ChatGraphic(SBClientListener clientListener) {
         this.clientListener = clientListener;
         setFrame();
-        setName();
-        printInfo("Connection successful");
-        printCommandInfo();
     }
 
     void setFrame() {
 
         setTitle("Skip-Bros CHAT");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setBounds(100, 100, 520, 485);
 
         contentPane = new JPanel();
@@ -77,7 +76,7 @@ public class ChatGraphic extends JFrame implements ActionListener {
             try {
                 clientListener.forward(input);
             } catch (IndexOutOfBoundsException | NotACommandException e) {
-                printInfo("Please enter a valid command"); //TODO copy catch from SBClientListener
+                printErrorMessage(e.getMessage());
                 printCommandInfo();
             }
         }
@@ -90,7 +89,7 @@ public class ChatGraphic extends JFrame implements ActionListener {
     void printCommandInfo() {
         //List of Commands
         String listOfCommands = "Commands:\n/change name [name]\n/change status [ready|waiting]\n" +
-                "/msg [name] [message]\n/new game\n/play [PlaceFrom] [n] [PlaceTo] [n] | not yet implemented\n/quit\n";
+                "/msg [name] [message]\n/new game\n/play [PlaceFrom] [n] [PlaceTo] [n] | not yet implemented\n/quit";
         printInfo(listOfCommands);
     }
 
@@ -99,20 +98,35 @@ public class ChatGraphic extends JFrame implements ActionListener {
      * @param message An information message
      */
     void printInfo(String message) {
-        chat.append("\n[INFO] " + message);
+        chat.append("[INFO] " + message + "\n");
+    }
+
+    /**
+     * Displays an error message to the client
+     * @param message An error message
+     */
+    void printErrorMessage(String message) {
+        chat.append("[ERROR] " + message + "\n");
     }
 
     /**
      * Let's client set their name
      */
     void setName() {
-        //TODO
-        //JOptionPane optionPane = new JOptionPane(JOptionPane.OK_OPTION);
-        String name = JOptionPane.showInputDialog(contentPane,"Please enter your name");
-        System.out.println("Name can only contain letters or digits and must have between 3 and 13 characters");
-        System.out.println("Your suggested nickname (according to your system username): " + System.getProperty("user.name"));
-        System.out.println("Please enter your name: ");
-        //String name = scanner.nextLine();
-        //pw.println("SETTO§Nickname§" + name);
+        String message = "Please enter your name";
+        String title = "Skip-Bo";
+        String nameSuggestion = System.getProperty("user.name");
+
+        String name = (String)JOptionPane.showInputDialog(contentPane, message, title, JOptionPane.QUESTION_MESSAGE,
+                null, null, nameSuggestion);
+
+        if (name == null) {
+            name = "";
+        }
+        clientListener.pw.println("SETTO§Nickname§" + name);
+
+        //System.out.println("Name can only contain letters or digits and must have between 3 and 13 characters");
+        //System.out.println("Your suggested nickname (according to your system username): " + System.getProperty("user.name"));
+
     }
 }

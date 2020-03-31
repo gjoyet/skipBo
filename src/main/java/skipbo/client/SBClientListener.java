@@ -34,7 +34,7 @@ class SBClientListener implements Runnable {
 
         //System.out.println("Connection successful");
         //printCommandInfo();
-        setName();
+        //setName();
 
         String input;
         while(isLoggedIn) {
@@ -46,6 +46,7 @@ class SBClientListener implements Runnable {
                 //printCommandInfo();
             }
         }
+        System.out.println("Client ended run method");
     }
 
     /**
@@ -61,13 +62,13 @@ class SBClientListener implements Runnable {
     /**
      * Let's client set their name
      */
-    void setName() {
+/*    void setName() {
         System.out.println("Name can only contain letters or digits and must have between 3 and 13 characters");
         System.out.println("Your suggested nickname (according to your system username): " + System.getProperty("user.name"));
         System.out.println("Please enter your name: ");
         String name = scanner.nextLine();
         pw.println("SETTO§Nickname§" + name);
-    }
+    }*/
 
     /**
      * Forwards user input to server according to network protocol
@@ -109,12 +110,15 @@ class SBClientListener implements Runnable {
                 protocolString = Protocol.LGOUT + "";
                 pw.println(protocolString);
                 logOut();
+                System.out.println("forward returned"); //TODO delete
                 return;
             default:
                 throw new NotACommandException("Please enter a valid command");
         }
         pw.println(protocolString);
+        System.out.println("ended forward client"); //TODO delete
     }
+
 
     /**
      * Builds network protocol string for the "change" command
@@ -210,11 +214,13 @@ class SBClientListener implements Runnable {
      * Terminates SBClientListener thread
      */
     void logOut() {
+        System.out.println("entered logOut Client"); //TODO delete
         isLoggedIn = false;
         scanner.close();
         pw.close();
         try {
             sock.close();
+            System.out.println("closed socket"); //TODO delete
         } catch (IOException e) {
             System.out.println("Issue with closing the socket");
         }

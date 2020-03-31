@@ -2,6 +2,7 @@ package skipbo.game;
 
 import skipbo.server.ProtocolExecutor;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -13,7 +14,7 @@ public class Game {
     public Pile piles;
     private Player winner, whosTurn;
     private boolean gameRunning, turnFinished;
-    int sizeOfStockPile, playersTurn;
+    int sizeOfStockPile, playersTurn = 0;
 
 
     /**
@@ -30,8 +31,9 @@ public class Game {
         this.turnFinished = turnFinished;
         this.sizeOfStockPile = 20;
 
-        start();
         dealCards();
+        start();
+
 
         gameRunning = true;
     }
@@ -51,7 +53,7 @@ public class Game {
 
     public void start() {
         while (gameRunning) {
-            startTurn();
+            startTurn(playersTurn);
             while (!turnFinished) {
                 try {
                     sleep(100);
@@ -83,11 +85,13 @@ public class Game {
             for (int j = 0; j < 5; j++) {    // Draw hand-cards for each player
                 Card c = this.getDrawPile().get(random.nextInt(this.getDrawPile().size()));
                 tempPlayer.getHandCards().add(c);
+                tempPlayer.getSBL().getPW().println("PRINT§Terminal§Your Hand cards are: " + tempPlayer.getHandCards().toString());
                 //this.players[i] = tempPlayer; // possibly redundant code
             }
             for (int j = 0; j < sizeOfStockPile; j++) {    // Draw Stock-Pile cards for each player
                 Card c = this.getDrawPile().get(random.nextInt(this.getDrawPile().size()));
                 tempPlayer.getStockPile().add(c);
+                tempPlayer.getSBL().getPW().println("PRINT§Terminal§Your Stock cards are: " + tempPlayer.getStockPile().toString());
                 //this.players[i] = tempPlayer; // possibly redundant cod
             }
 
@@ -107,12 +111,12 @@ public class Game {
      * and to fill their hand cards.
      */
 
-    public void startTurn() {
+    public void startTurn(int playersTurn) {
         turnFinished = false;
-        Player ply = PlayerMaster.getPlayerByID(playersTurn);
+        Player ply = players.get(playersTurn);
         ply.getSBL().getPW().println("PRINT§Terminal§It's your turn!");
         ply.getSBL().getPW().println("PRINT§Terminal§It's your turn! Your hand cards are now: "
-                                                                                + ply.getHandCards().toString());
+                + ply.getHandCards().toString());
         //DONE: sysout to Player ply = "It's your turn!"
         //DONE: to Player ply: sysout ("Your hand cards are now: " + ply.getHandCards().toString());
         ply.fillHandCards();
@@ -145,15 +149,28 @@ public class Game {
                 specBuildPile.add(card);
                 currentPly.getHandCards().remove(card);
                 topCard = card;     // could be redundant
-                // Execute: card op valid - update board and hand cards. (Send buildpiles.toString() from here to Server, which then gives over to client)
+                for (Player player : players) {
+                    new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: "
+                            + buildPiles.toString(), player.getSBL());
+
+                }
+                currentPly.getSBL().getPW().println("PRINT§Terminal§Your hands cards are now: "
+                        + currentPly.getHandCards().toString());
+                // DONE - Execute: card op valid - update board and hand cards. (Send buildpiles.toString() from here to Server, which then gives over to client)
                 if (card.number == 12) {
-                    //Execute: make that BuildPile go away
+                    //DONE Execute: make that BuildPile go away
                     for (int i = 0; i < 12; i++) {    // remove all cards from the buildPile if the top card is 12
                         specBuildPile.remove(i);
                     }
+                    for (Player player : players) {
+                        new ProtocolExecutor().sendAll("PRINT§Terminal§The maximum number has been reached; the deck has been reset to: "
+                                + buildPiles.toString(), player.getSBL());
+                    }
+
                 }
             } else {
                 //EXECUTE: the move is invalid!
+                currentPly.getSBL().getPW().println("PRINT§Terminal§This move is invalid!");
             }
         } else {
             if (card.number == 1) {
@@ -186,6 +203,13 @@ public class Game {
         specDiscard.add(card);
         currentPly.getHandCards().remove(card);
         //Execute: update Discard pile and hand cards
+        for (Player player : players) {
+            for (int i = 0; i < 4; i++) {
+                new ProtocolExecutor().sendAll("PRINT§Terminal§The discard pile of " + player.getName() + "is: " +
+                        player.getDiscardPile().toString(), player.getSBL());
+            }
+
+        }
         endTurn();
 
     }
@@ -208,6 +232,10 @@ public class Game {
 
         Card topCard = specBuildPile.get(specBuildPile.size());
 
+        if (stockCard.col == Color.CYAN) {
+            int num = specBuildPile.get(specBuildPile.size()).number;
+
+        }
         if (!(specBuildPile.isEmpty())) {
             if (topCard.number == (stockCard.number - 1)) {
                 specBuildPile.add(stockCard);

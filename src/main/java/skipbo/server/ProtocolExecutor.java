@@ -101,7 +101,7 @@ public class ProtocolExecutor {
             if (input.length < 3) return;
             System.out.println("Received chat message from " + sbL.player.getName() + ": " + input[2]);
             if(input[1].equals("Global")) {
-                    sendAllExceptOne("CHATM§Global§" + sbL.player.getName() + ": " + input[2], sbL);
+                    sendAll("CHATM§Global§" + sbL.player.getName() + ": " + input[2], sbL);
             } else throw new NoCommandException(input[0], input[1]);
         } finally {}
     }

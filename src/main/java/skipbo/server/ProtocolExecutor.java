@@ -83,7 +83,10 @@ public class ProtocolExecutor {
                     throw new NameTakenException(name, sbL);
                 }
             } else if(input[1].equals("Status")) {
+                String status = Status.valueOf(input[2]).toString();
                 sbL.player.changeStatus(Status.valueOf(input[2]));
+                sbL.getPW().println("PRINT§Terminal§Status changed to " + status + ".");
+                sendAllExceptOne("PRINT§Terminal§" + sbL.player.getName() + " is " + status + ".", sbL);
             } else throw new NoCommandException(input[0], input[1]);
         } catch (NameTakenException nte) {
             String name = nte.findName();
@@ -101,7 +104,7 @@ public class ProtocolExecutor {
             if (input.length < 3) return;
             System.out.println("Received chat message from " + sbL.player.getName() + ": " + input[2]);
             if(input[1].equals("Global")) {
-                    sendAllExceptOne("CHATM§Global§" + sbL.player.getName() + ": " + input[2], sbL);
+                    sendAll("CHATM§Global§" + sbL.player.getName() + ": " + input[2], sbL);
             } else throw new NoCommandException(input[0], input[1]);
         } finally {}
     }

@@ -39,6 +39,7 @@ class SBServerListener implements Runnable {
                 System.out.println("Error with network protocol command");
             }
         }
+        System.out.println("ended run Server"); //TODO delete
     }
 
     /**
@@ -76,7 +77,7 @@ class SBServerListener implements Runnable {
      * @param command String array according to network protocol with command, option and arguments
      */
     void sendChatMessage(String[] command) {
-        chatGraphic.chat.append("\n" + command[2]);
+        chatGraphic.chat.append(command[2] + "\n" );
     }
 
     /**
@@ -99,6 +100,7 @@ class SBServerListener implements Runnable {
             System.out.println("Error with closing BufferedReader or Socket");
         }
         isLoggedIn = false;
+        System.out.println("ended logOut Server"); //TODO delete
     }
 
     /**
@@ -114,7 +116,7 @@ class SBServerListener implements Runnable {
      * @param message A message
      */
     void printMessage(String message) {
-        chatGraphic.chat.append("\n[Info] " + message);
+        chatGraphic.chat.append("[Info] " + message + "\n");
     }
 
 }

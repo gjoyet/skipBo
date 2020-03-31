@@ -242,10 +242,19 @@ public class Game {
                 currentPlayer.getStockPile().remove(stockCard);
                 topCard = stockCard;     // could be redundant
                 // Execute: card op valid - update board and stock pile card.
+                for (Player player : players) {
+                    new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: "
+                            + buildPiles.toString(), player.getSBL());
+                }
+
                 if (stockCard.number == 12) {
                     //Execute: make that BuildPile go away
                     for (int i = 0; i < 12; i++) {    // remove all cards from the buildPile if the top card is 12
                         specBuildPile.remove(i);
+                    }
+                    for (Player player : players) {
+                        new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: "
+                                + buildPiles.toString(), player.getSBL());
                     }
                 }
             } else {

@@ -20,5 +20,5 @@ msg		[name]		[message]		sends a private chat message to player called „name“
 new		game					starts a new game with 4 players
 
 play		[PlaceFrom] [N]	[PlaceTo] [N]		puts a card from the pile "PlaceFrom" to the pile "PlaceTo"
-							PlaceFrom: StockPile|HandCard N (N = numer from 1 to 5)|DiscardPileN (N = numer from 1 to 4)
+							PlaceFrom: StockPile 1|HandCard N (N = numer from 1 to 5)|DiscardPileN (N = numer from 1 to 4)
 							PlaceTo: BuildPile N|DiscardPile N (N = number from 1 to 4)

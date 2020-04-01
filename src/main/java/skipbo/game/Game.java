@@ -131,53 +131,62 @@ public class Game {
      * and which buildPile they wish to play to and carries out the command if valid.
      * Furthermore, removes the specified card from their hand cards.
      *
-     * @param currentPly
+     * @param currentPlayer
      * @param handCardIndex
      * @param buildDeckIndex
      */
 
-    public void playToMiddle(Player currentPly, int handCardIndex, int buildDeckIndex) {
-        Card card = currentPly.getHandCards().get(handCardIndex);   // returns card at specified index in the hand card arraylist
+    public void playToMiddle(Player currentPlayer, int handCardIndex, int buildDeckIndex) {
+        Card card = currentPlayer.getHandCards().get(handCardIndex);   // returns card at specified index in the hand card arraylist
 
         ArrayList<ArrayList<Card>> buildPiles = piles.buildPiles;
         ArrayList<Card> specBuildPile = buildPiles.get(buildDeckIndex);
 
         Card topCard = specBuildPile.get(specBuildPile.size());
-
-        if (!(specBuildPile.isEmpty())) {
-            if (topCard.number == (card.number - 1)) {
-                specBuildPile.add(card);
-                currentPly.getHandCards().remove(card);
-                topCard = card;     // could be redundant
-                for (Player player : players) {
-                    new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: "
-                            + buildPiles.toString(), player.getSBL());
-
-                }
-                currentPly.getSBL().getPW().println("PRINT§Terminal§Your hands cards are now: "
-                        + currentPly.getHandCards().toString());
-                // DONE - Execute: card op valid - update board and hand cards. (Send buildpiles.toString() from here to Server, which then gives over to client)
-                if (card.number == 12) {
-                    //DONE Execute: make that BuildPile go away
-                    for (int i = 0; i < 12; i++) {    // remove all cards from the buildPile if the top card is 12
-                        specBuildPile.remove(i);
-                    }
-                    for (Player player : players) {
-                        new ProtocolExecutor().sendAll("PRINT§Terminal§The maximum number has been reached; the deck has been reset to: "
-                                + buildPiles.toString(), player.getSBL());
-                    }
-
-                }
-            } else {
-                //EXECUTE: the move is invalid!
-                currentPly.getSBL().getPW().println("PRINT§Terminal§This move is invalid!");
-            }
+        if (card.col == Color.CYAN) {
+            int num = specBuildPile.get(specBuildPile.size()).number;
+            card.number = num + 1;
+            specBuildPile.add(card);
+            currentPlayer.getHandCards().remove(card);
+            new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: "
+                    + buildPiles.toString(), currentPlayer.getSBL());
+            currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: " + currentPlayer.getHandCards().toString());
         } else {
-            if (card.number == 1) {
-                specBuildPile.add(card);
-                //Execute: update build pile
+            if (!(specBuildPile.isEmpty())) {
+                if (topCard.number == (card.number - 1)) {
+                    specBuildPile.add(card);
+                    currentPlayer.getHandCards().remove(card);
+                    topCard = card;     // could be redundant
+                    for (Player player : players) {
+                        new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: "
+                                + buildPiles.toString(), player.getSBL());
+
+                    }
+                    currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hands cards are now: "
+                            + currentPlayer.getHandCards().toString());
+                    // DONE - Execute: card op valid - update board and hand cards. (Send buildpiles.toString() from here to Server, which then gives over to client)
+                    if (card.number == 12) {
+                        //DONE Execute: make that BuildPile go away
+                        for (int i = 0; i < 12; i++) {    // remove all cards from the buildPile if the top card is 12
+                            specBuildPile.remove(i);
+                        }
+                        for (Player player : players) {
+                            new ProtocolExecutor().sendAll("PRINT§Terminal§The maximum number has been reached; the deck has been reset to: "
+                                    + buildPiles.toString(), player.getSBL());
+                        }
+
+                    }
+                } else {
+                    //EXECUTE: the move is invalid!
+                    currentPlayer.getSBL().getPW().println("PRINT§Terminal§This move is invalid!");
+                }
             } else {
-                //Execute: invalid move! Card has to be Num 1 to be first on an empty build pile.
+                if (card.number == 1) {
+                    specBuildPile.add(card);
+                    //Execute: update build pile
+                } else {
+                    //Execute: invalid move! Card has to be Num 1 to be first on an empty build pile.
+                }
             }
         }
     }
@@ -189,19 +198,19 @@ public class Game {
      * from Player's hand.
      * Parameter discardPileIndex to know which Discard pile to play to.
      *
-     * @param currentPly
+     * @param currentPlayer
      * @param handCardIndex
      * @param discardPileIndex
      */
 
-    public void playToDiscard(Player currentPly, int handCardIndex, int discardPileIndex) {
+    public void playToDiscard(Player currentPlayer, int handCardIndex, int discardPileIndex) {
         ArrayList<ArrayList<Card>> discardPiles = piles.discardPiles;
         ArrayList<Card> specDiscard = discardPiles.get(discardPileIndex);
 
-        Card card = currentPly.getHandCards().get(handCardIndex);
+        Card card = currentPlayer.getHandCards().get(handCardIndex);
 
         specDiscard.add(card);
-        currentPly.getHandCards().remove(card);
+        currentPlayer.getHandCards().remove(card);
         //DONE: Execute: update Discard pile and hand cards
         displayDiscard();
 
@@ -280,6 +289,8 @@ public class Game {
         }
     }
 
+    //TODO: reshuffle()!
+
     /**
      * Method to be run at the end of a player's turn, which
      * then changes turn from one player to the next.
@@ -314,16 +325,9 @@ public class Game {
      */
     private void sleep(long ms) {
         try {
-            Thread.sleep(ms);
-        } catch (InterruptedException e) {
+            sleep(ms);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-
-    public static void main(String[] args) {
-
-//        Game spiel = new Game(players);
-//        spiel.setUpGame();
     }
 }

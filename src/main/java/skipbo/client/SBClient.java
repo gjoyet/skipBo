@@ -9,26 +9,32 @@ import java.net.Socket;
 public class SBClient {
 
     /**
-     * Establishes a connection to the Skip-Bo server via SBClientListener thread and SBServerListener thread
-     *
-     * @param args command-line arguments. Argument 1 is the port, argument 2 is the IP address.
+     * Establishes a connection to the Skip-Bo server via SBClientListener thread and SBServerListener thread and
+     * opens the GUI
+     * @param args command-line arguments. <hostAddress>:<port> [<username>]
      */
     public static void main(String[] args) {
 
         try {
-            System.out.println("Connecting to port " + args[0] + "…");
-            Socket sock = new Socket(args[1], Integer.parseInt(args[0]));
+            String[] iPAndPort = args[0].split(":");
+            String ip = iPAndPort[0];
+            int port = Integer.parseInt(iPAndPort[1]);
+
+            System.out.println("Connecting to port " + port + "…");
+            Socket sock = new Socket(ip , port);
 
             //Start SBClientListener Thread
             SBClientListener clientListener = new SBClientListener(sock);
 
             //GUI
-            ChatGraphic frame = new ChatGraphic(clientListener);
+            ChatGraphic frame;
+            if (args.length == 2) {
+                frame = new ChatGraphic(clientListener, args[1]);
+            } else {
+                frame = new ChatGraphic(clientListener);
+            }
             frame.addWindowListener(new WindowHandler(clientListener));
             frame.setVisible(true);
-            frame.setName();
-            frame.printInfo("Connection successful");
-            frame.printCommandList();
 
             //Start SBServerListener Thread
             SBServerListener serverListener = new SBServerListener(sock, frame);
@@ -40,7 +46,3 @@ public class SBClient {
         }
     }
 }
-
-/*
-TODO player list method
- */

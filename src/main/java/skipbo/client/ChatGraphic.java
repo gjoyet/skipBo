@@ -14,11 +14,21 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
     private JTextArea inputMes;
     private JScrollPane chatScrollPane;
     private JScrollPane inputScrollPane;
-    //private JButton sendMes;
 
     ChatGraphic(SBClientListener clientListener) {
         this.clientListener = clientListener;
         setFrame();
+        setName();
+        printInfo("Connection successful");
+        printCommandList();
+    }
+
+    ChatGraphic(SBClientListener clientListener, String name) {
+        this.clientListener = clientListener;
+        setFrame();
+        clientListener.pw.println("SETTO§Nickname§" + name);
+        printInfo("Connection successful");
+        printCommandList();
     }
 
     void setFrame() {

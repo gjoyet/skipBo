@@ -1,5 +1,7 @@
 package skipbo.server;
 
+import skipbo.game.Player;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -46,5 +48,6 @@ public class SBServer {
     }
 
     public static SBLobby getLobby() { return serverLobby;}
+
 }
 

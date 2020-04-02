@@ -22,6 +22,13 @@ public class SBLobby {
         return playerLobby.get(index);
     }
 
+    Player getPlayerByName(String name) {
+        for(Player p : this.playerLobby) {
+            if(p.getName().equals(name)) return p;
+        }
+        return null;
+    }
+
     void addPlayer(Player p) {
         playerLobby.add(p);
     }
@@ -29,7 +36,6 @@ public class SBLobby {
     void removePlayer(Player p) {
         playerLobby.remove(p);
     }
-
 
 
     /**

@@ -7,7 +7,6 @@ import java.util.*;
 /**
  * Class Player constructs a Player object with defined parameters
  */
-
 public class Player {
 
     private String name;
@@ -20,7 +19,6 @@ public class Player {
     /**
      * Player constructor to build a Player object with
      * an int id, String name and a ServerListener object specific to the player
-     *
      * @param id
      * @param name
      * @param sbListen
@@ -41,9 +39,7 @@ public class Player {
         this.name = name;
     }
 
-    public int getId() {
-        return this.id;
-    }
+    public int getId() { return this.id; }
 
     public SBListener getSBL() {
         return this.sbListen;

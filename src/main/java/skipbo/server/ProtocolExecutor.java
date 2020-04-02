@@ -107,6 +107,7 @@ public class ProtocolExecutor {
                 sendAll("CHATM§Global§" + sbL.player.getName() + ": " + input[2], sbL);
             } else if(input[1].equals("Private")) {
                 String[] nameAndMes = input[2].split("§", 2);
+                sbL.getPW().println("CHATM§Private§(Private) " + sbL.player.getName() + ": " + nameAndMes[1]);
                 SBServer.getLobby().getPlayerByName(nameAndMes[0]).getSBL().getPW().
                         println("CHATM§Private§" + sbL.player.getName() + "§" + nameAndMes[1]);
             } throw new NoCommandException(input[0], input[1]);

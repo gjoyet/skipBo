@@ -162,6 +162,15 @@ public class ProtocolExecutor {
     }
 
     /**
+     * Method for command "PUTTO". Triggers needed methods of the Game class.
+     */
+    void putTo() {
+        String[] arguments = input[2].split("§");
+
+
+    }
+
+    /**
      * @param message: String sent to all clients
      */
     public void sendAll(String message, SBListener sbL) {

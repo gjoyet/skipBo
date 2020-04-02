@@ -78,6 +78,8 @@ public class SBListener implements Runnable {
                 case NWGME:
                     new ProtocolExecutor(input, this).newGame();
                     break;
+                case PUTTO:
+                    new ProtocolExecutor(input, this).putTo();
             }
         } catch(IllegalArgumentException iae) {
             System.out.println(input[0] + ": not a command.");

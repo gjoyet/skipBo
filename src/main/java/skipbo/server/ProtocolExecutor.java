@@ -151,6 +151,7 @@ public class ProtocolExecutor {
                     for(Player p : newPlayers) {
                         p.changeGame(game);
                         p.changeStatus(Status.INGAME);
+                        p.getSBL().getPW().println("NWGME§New§");
                     }
 
                 }
@@ -191,6 +192,20 @@ public class ProtocolExecutor {
                 if(!serverLobby.getSBL(i).equals(sbL) && !serverLobby.getPlayer(i).getStatus().equals(Status.INGAME)) {
                     serverLobby.getSBL(i).pw.println(message);
                 }
+            }
+        }
+    }
+
+    public void broadcast(String message) {
+        for(Player p : SBServer.getLobby().getPlayerLobby()) {
+            p.getSBL().getPW().println(message);
+        }
+    }
+
+    public void broadcastExceptOne(String message, SBListener sbL) {
+        for(Player p : SBServer.getLobby().getPlayerLobby()) {
+            if(!p.equals(sbL.player)) {
+                p.getSBL().getPW().println(message);
             }
         }
     }

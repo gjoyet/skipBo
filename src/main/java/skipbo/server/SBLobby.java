@@ -14,6 +14,8 @@ public class SBLobby {
         this.playerLobby = new ArrayList<Player>(0);
     }
 
+    ArrayList<Player> getPlayerLobby() { return this.playerLobby; }
+
     int getLength() { return playerLobby.size(); }
 
     SBListener getSBL(int index) { return playerLobby.get(index).getSBL(); }
@@ -29,13 +31,9 @@ public class SBLobby {
         return null;
     }
 
-    void addPlayer(Player p) {
-        playerLobby.add(p);
-    }
+    void addPlayer(Player p) { playerLobby.add(p); }
 
-    void removePlayer(Player p) {
-        playerLobby.remove(p);
-    }
+    void removePlayer(Player p) { playerLobby.remove(p); }
 
 
     /**

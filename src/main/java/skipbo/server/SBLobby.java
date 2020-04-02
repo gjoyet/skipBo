@@ -1,5 +1,6 @@
 package skipbo.server;
 
+import skipbo.game.Game;
 import skipbo.game.Player;
 
 import java.util.ArrayList;
@@ -9,12 +10,15 @@ import java.util.ArrayList;
  */
 public class SBLobby {
     private ArrayList<Player> playerLobby;
+    private ArrayList<Game> gameList;
 
     SBLobby() {
         this.playerLobby = new ArrayList<Player>(0);
     }
 
     ArrayList<Player> getPlayerLobby() { return this.playerLobby; }
+
+    ArrayList<Game> getGameList() { return this.gameList; }
 
     int getLength() { return playerLobby.size(); }
 
@@ -34,6 +38,8 @@ public class SBLobby {
     void addPlayer(Player p) { playerLobby.add(p); }
 
     void removePlayer(Player p) { playerLobby.remove(p); }
+
+    void addGame(Game g) { gameList.add(g); }
 
 
     /**

@@ -1,5 +1,6 @@
 package skipbo.server;
 
+import skipbo.game.Game;
 import skipbo.game.Player;
 
 import java.io.IOException;
@@ -48,6 +49,30 @@ public class SBServer {
     }
 
     public static SBLobby getLobby() { return serverLobby;}
+
+    public String getPlayerList() {
+        StringBuilder allNames = new StringBuilder();
+        for(Player p : serverLobby.getPlayerLobby()) {
+            allNames.append(p.getName() + "\n");
+        }
+        return allNames.toString();
+    }
+
+    public String getGamesList() {
+        StringBuilder allGames = new StringBuilder();
+        for(Game g : serverLobby.getGameList()) {
+            if(g.gameIsRunning()) {
+                allGames.append(g.toString());
+            }
+        }
+        for(Game g : serverLobby.getGameList()) {
+            if(!g.gameIsRunning()) {
+                allGames.append(g.toString());
+            }
+        }
+
+        return allGames.toString();
+    }
 
 }
 

@@ -46,6 +46,20 @@ public class Game {
         return this.piles.drawPile;
     }
 
+    public boolean gameIsRunning() { return this.gameRunning; }
+
+    public String toString() {
+        StringBuilder gToString = new StringBuilder("Participants: ");
+        for(int i=0; i < players.size(); i++) {
+            gToString.append(players.get(i).getName());
+            if(! (i == players.size()-1)) gToString.append(", ");
+        }
+        if(gameRunning) gToString.append("; RUNNING.");
+        else gToString.append("; FINISHED.");
+
+        return gToString.toString();
+    }
+
     /**
      * Method start() runs at the beginning of the Game, and waits until
      * boolean value turnFinished

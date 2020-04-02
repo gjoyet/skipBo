@@ -148,9 +148,11 @@ public class ProtocolExecutor {
                 }
                 if (playerCount == 4) {
                     Game game = new Game(newPlayers);
+                    serverLobby.addGame(game);
                     for(Player p : newPlayers) {
                         p.changeGame(game);
                         p.changeStatus(Status.INGAME);
+                        p.getSBL().getPW().println("PRINT§Terminal§Game starting...");
                         p.getSBL().getPW().println("NWGME§New§");
                     }
 

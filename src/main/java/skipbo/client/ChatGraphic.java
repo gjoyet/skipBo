@@ -80,7 +80,7 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
     void printCommandList() {
         //List of Commands
         String listOfCommands = "\n***********\nCommands:\n/change name [name]\n/change status ready|waiting\n" +
-                "/msg [name] [message]\n/boradcast\n/new game\n/play [PlaceFrom] [n] [PlaceTo] [n]\n" +
+                "/msg [name] [message]\n/broadcast\n/new game\n/play [PlaceFrom] [n] [PlaceTo] [n]\n" +
                 "/list games|players|commands\n/quit\n***********";
         printInfo(listOfCommands);
     }

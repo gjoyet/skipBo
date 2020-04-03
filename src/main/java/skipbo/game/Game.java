@@ -154,9 +154,9 @@ public class Game {
         ArrayList<ArrayList<Card>> buildPiles = piles.buildPiles;
         ArrayList<Card> specBuildPile = buildPiles.get(buildDeckIndex);
 
-        Card topCard = specBuildPile.get(specBuildPile.size());
+        Card topCard = specBuildPile.get(specBuildPile.size() - 1);
         if (card.col == Color.CYAN) {
-            int num = specBuildPile.get(specBuildPile.size()).number;
+            int num = specBuildPile.get(specBuildPile.size() - 1).number;
             card.number = num + 1;
             specBuildPile.add(card);
             currentPlayer.getHandCards().remove(card);
@@ -198,6 +198,7 @@ public class Game {
                     //Execute: update build pile
                 } else {
                     //Execute: invalid move! Card has to be Num 1 to be first on an empty build pile.
+                    currentPlayer.getSBL().getPW().println("PRINT§Terminal§Card has to be Num 1 to be first on build pile.");
                 }
             }
         }

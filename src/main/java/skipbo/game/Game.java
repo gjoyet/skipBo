@@ -112,7 +112,7 @@ public class Game {
                 tempPlayer.getStockPile().add(c);
                 //this.players[i] = tempPlayer; // possibly redundant code
             }
-            Card topCard = tempPlayer.getStockPile().get(piles.stockPile.size());
+            Card topCard = tempPlayer.getStockPile().get(piles.stockPile.size() - 1);
             tempPlayer.getSBL().getPW().println("PRINT§Terminal§Your Stock card is: " + topCard.number);
         }
     }

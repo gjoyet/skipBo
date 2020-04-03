@@ -96,15 +96,7 @@ public class Player {
                 Card card = piles.getDrawPileTopCard();
                 addCardToHand(card);
                 piles.drawPile.remove(piles.getDrawPileTopCard());
-                try {
-                    Thread.sleep(300);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
             }
         }
-        //Execute to all players in lobby: sysout ("Gave " + this.getName() + " " + their missing " + toFill + " cards");
     }
-
-
 }

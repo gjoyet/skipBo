@@ -76,6 +76,32 @@ public class Pile {
         return Arrays.toString(a);
     }
 
+    public String buildPilesPrint() {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < 4; i++) {
+            ArrayList<Card> specBuildPile = buildPiles.get(i);
+            int[] printArray = new int[specBuildPile.size()];
+            for (int j = 0; j < specBuildPile.size(); j++) {
+                printArray[j] = specBuildPile.get(j).number;
+            }
+            str.append("Build pile " + i + ": " + Arrays.toString(printArray));
+        }
+        return str.toString();
+    }
+
+    public String discardPilesPrint(Player player) {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < 4; i++) {
+            ArrayList<Card> specDiscardPile = player.getDiscardPile().get(i);
+            int[] printArray = new int[specDiscardPile.size()];
+            for (int j = 0; j < specDiscardPile.size(); j++) {
+                printArray[j] = specDiscardPile.get(j).number;
+            }
+            str.append("Discard Pile " + i + " is:" + Arrays.toString(printArray));
+        }
+        return str.toString();
+    }
+
     /**
      * The Pile-constructor is overloaded because we have different
      * types of piles for the Game and Player.
@@ -92,7 +118,6 @@ public class Pile {
         this.id = id;
         this.discardPiles = new ArrayList<ArrayList<Card>>();
 
-        //Object [] discardPiles = new Object[4];
         for (int i = 0; i < 4; i++) {
             ArrayList<Card> deck = new ArrayList<Card>();
             discardPiles.add(deck);

@@ -12,7 +12,7 @@ javafx {
 }
 
 group 'ch.unibas.dmi.dbis'
-version '0.0.1-ALPHA'
+version 'Alpha'
 mainClassName = 'SBServer'
 
 //specifies source compatibility to Java 11
@@ -41,6 +41,7 @@ dependencies {
      */
     implementation 'org.openjfx:javafx-controls:11.0.2'
 
+
     // JUNIT
     /*
     The following dependency is required to perform JUnit tests, as for example HelloWorldTest.
@@ -54,12 +55,15 @@ The following block adds both compile and runtime dependencies to the jar
  */
 jar {
     manifest {
+
         attributes(
                 "Main-Class": mainClassName
+
         )
     }
     from {
         configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
+
 }

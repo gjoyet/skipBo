@@ -141,7 +141,7 @@ public class ProtocolExecutor {
     }
 
     /**
-     * Method for command "NWGME". Starts a new game with the first 4 players found with Playerstatus 'READY'.
+     * Method for command "NWGME". Starts a new game with the first 4 players found with PlayerStatus 'READY'.
      */
     void newGame() {
         if(input[1].equals("New")) {
@@ -161,7 +161,7 @@ public class ProtocolExecutor {
                         p.getSBL().getPW().println("PRINT§Terminal§Game starting...");
                         p.getSBL().getPW().println("NWGME§New§");
                     }
-
+                    return;
                 }
             }
         }

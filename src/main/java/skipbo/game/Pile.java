@@ -66,7 +66,7 @@ public class Pile {
     public String handCardPrint(ArrayList<Card> handCards) {
         for (Card card : handCards) {
 
-            return null;
+
         }
         return null;
     }

@@ -4,6 +4,7 @@ import skipbo.server.ProtocolExecutor;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 import static java.lang.Thread.sleep;
@@ -88,6 +89,7 @@ public class Game {
      */
     public void dealCards() {
         int[] a = new int[5];
+        String str = "";
         this.piles.gamePiles();   // Game gets complete set of cards
 
         for (int i = 0; i < players.size(); i++) {     // Players getting their cards
@@ -103,7 +105,7 @@ public class Game {
                 a[n] = tempPlayer.getHandCards().get(n).number;
             }
 
-            tempPlayer.getSBL().getPW().println("PRINT§Terminal§Your Hand cards are: " + a.toString());
+            tempPlayer.getSBL().getPW().println("PRINT§Terminal§Your Hand cards are: " + Arrays.toString(a));
 
             for (int j = 0; j < sizeOfStockPile; j++) {    // Draw Stock-Pile cards for each player
                 Card c = this.getDrawPile().get(random.nextInt(this.getDrawPile().size()));
@@ -113,7 +115,7 @@ public class Game {
             Card topCard = tempPlayer.getStockPile().get(piles.stockPile.size());
             tempPlayer.getSBL().getPW().println("PRINT§Terminal§Your Stock card is: " + topCard.number);
         }
-        }
+    }
 
     /**
      * Method to be executed at the start of each player's turn

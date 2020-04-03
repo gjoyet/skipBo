@@ -386,7 +386,7 @@ public class Game {
     public void endGame(Player winner) {
         gameRunning = false;
         //EXECUTE: EndGame Protocol (sysout: Player X won game!) server shut, reshuffle etc.
-        new ProtocolExecutor().sendAll(winner.getName() + "has won the game!", winner.getSBL());
+        new ProtocolExecutor().sendAll(winner.getName() + " has won the game!", winner.getSBL());
     }
 
     /**

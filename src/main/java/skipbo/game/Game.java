@@ -101,6 +101,7 @@ public class Game {
             for (int j = 0; j < 5; j++) {    // Draw hand-cards for each player
                 Card c = this.getDrawPile().get(random.nextInt(this.getDrawPile().size()));
                 tempPlayer.getHandCards().add(c);
+                piles.drawPile.remove(c);
                 //this.players[i] = tempPlayer; // possibly redundant code
             }
             String resString = piles.handCardPrint(tempPlayer);
@@ -112,6 +113,7 @@ public class Game {
 
             for (int j = 0; j < sizeOfStockPile; j++) {    // Draw Stock-Pile cards for each player
                 Card c = this.getDrawPile().get(random.nextInt(this.getDrawPile().size()));
+                piles.drawPile.remove(c);
                 tempPlayer.getStockPile().add(c);
                 //this.players[i] = tempPlayer; // possibly redundant code
             }
@@ -130,13 +132,10 @@ public class Game {
         Player ply = players.get(playersTurn);
         ply.getSBL().getPW().println("PRINT§Terminal§It's your turn! Your hand cards are now: "
                 + piles.handCardPrint(ply));
-        //DONE: sysout to Player ply = "It's your turn!"
-        //DONE: to Player ply: sysout ("Your hand cards are now: " + ply.getHandCards().toString());
+
         ply.fillHandCards();
         new ProtocolExecutor().sendAllExceptOne("PRINT§Terminal§Gave " + ply.getName()
                 + " their missing cards.", ply.getSBL());
-        //DONE: to all players in lobby: sysout ("Gave " + this.getName() + " " + their missing " + toFill + " cards");
-
     }
 
     /**

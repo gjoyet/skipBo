@@ -1,5 +1,7 @@
 package skipbo.game;
 
+import javafx.beans.binding.ObjectExpression;
+
 import java.awt.*;
 import java.util.*;
 
@@ -89,7 +91,8 @@ public class Pile {
         this.id = id;
         this.discardPiles = new ArrayList<ArrayList<Card>>();
 
-        for (int i = 0; i < 3; i++) {
+        //Object [] discardPiles = new Object[4];
+        for (int i = 0; i < 4; i++) {
             ArrayList<Card> deck = new ArrayList<Card>();
             discardPiles.add(deck);
         }

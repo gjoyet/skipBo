@@ -1,6 +1,7 @@
 package skipbo.server;
 
 import skipbo.game.Game;
+import skipbo.game.Pile;
 import skipbo.game.Player;
 import skipbo.game.Status;
 
@@ -166,12 +167,20 @@ public class ProtocolExecutor {
      */
     void putTo() {
         String[] arguments = input[2].split("§");
-
-
+        if(arguments.length < 4) return;
+        int indexF = Integer.parseInt(arguments[1])-1;
+        int indexT = Integer.parseInt(arguments[3])-1;
+        switch(arguments[0]+arguments[2]) {
+            case "HB": sbL.player.getGame().playToMiddle(sbL.player, indexF, indexT); break;
+            case "SB": sbL.player.getGame().playFromStockToMiddle(sbL.player, indexT); break;
+            case "DB": sbL.player.getGame().playFromDiscardToMiddle(sbL.player, indexF, indexT); break;
+            case "HD": sbL.player.getGame().playToDiscard(sbL.player, indexF, indexT); break;
+        }
     }
 
     /**
-     * @param message: String sent to all clients
+     * @param message: String sent to all clients in main lobby or game, according
+     *               to where the player is.
      */
     public void sendAll(String message, SBListener sbL) {
         if(sbL.player.getStatus().equals(Status.INGAME)) {
@@ -188,7 +197,8 @@ public class ProtocolExecutor {
     }
 
     /**
-     * @param message: String sent to all clients...
+     * @param message: String sent to all clients in main lobby or game, according
+     *               to where the player is.
      * @param sbL: ... except this one
      */
     public void sendAllExceptOne(String message, SBListener sbL) {
@@ -207,12 +217,19 @@ public class ProtocolExecutor {
         }
     }
 
+    /**
+     * @param message: String sent to all clients in main lobby AND all games.
+     */
     public void broadcast(String message) {
         for(Player p : SBServer.getLobby().getPlayerLobby()) {
             p.getSBL().getPW().println(message);
         }
     }
 
+    /**
+     * @param message: String sent to all clients in main lobby AND all games...
+     * @param sbL: ... except this one.
+     */
     public void broadcastExceptOne(String message, SBListener sbL) {
         for(Player p : SBServer.getLobby().getPlayerLobby()) {
             if(!p.equals(sbL.player)) {

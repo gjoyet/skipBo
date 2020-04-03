@@ -42,9 +42,7 @@ public class Game {
     /**
      * Returns the drawPile of the main Game
      */
-    public ArrayList<Card> getDrawPile() {
-        return this.piles.drawPile;
-    }
+    public ArrayList<Card> getDrawPile() { return this.piles.drawPile; }
 
     public boolean gameIsRunning() { return this.gameRunning; }
 
@@ -301,6 +299,10 @@ public class Game {
         if (currentPlayer.getStockPile().isEmpty()) {
             endGame(currentPlayer);
         }
+    }
+
+    public void playFromDiscardToMiddle(Player currentPlayer, int discardPileIndex, int buildPileIndex) {
+        // TODO: Rohan, I let you implement this method since you know how you handled the other cases.
     }
 
     //TODO: reshuffle()!

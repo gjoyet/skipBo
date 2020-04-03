@@ -44,8 +44,6 @@ public class Game {
      */
     public ArrayList<Card> getDrawPile() { return this.piles.drawPile; }
 
-    public ArrayList getBuildPiles() { return this.piles.buildPiles; }
-
     public boolean gameIsRunning() { return this.gameRunning; }
 
     public String toString() {

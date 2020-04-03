@@ -302,7 +302,9 @@ public class Game {
     }
 
     /**
-     * Method
+     * Method to play a card from the discard pile to the build pile
+     * with index of build and discard piles to choose what card to play.
+     * Also checks validity of the move and replaces card at the
      *
      * @param currentPlayer
      * @param discardPileIndex

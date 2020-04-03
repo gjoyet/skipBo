@@ -149,7 +149,8 @@ public class ProtocolExecutor {
             newPlayers.add(sbL.player);
             int playerCount = 1;
             for (int i = 0; i < SBServer.getLobby().getLength(); i++) {
-                if (SBServer.getLobby().getPlayer(i).getStatus().equals(Status.READY)) {
+                if (SBServer.getLobby().getPlayer(i).getStatus().equals(Status.READY)
+                                && !SBServer.getLobby().getPlayer(i).equals(sbL.player)) {
                     newPlayers.add(SBServer.getLobby().getPlayer(i));
                     playerCount++;
                 }

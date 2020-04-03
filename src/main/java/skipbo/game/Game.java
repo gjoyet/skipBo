@@ -220,7 +220,7 @@ public class Game {
     public void playToDiscard(Player currentPlayer, int handCardIndex, int discardPileIndex) {
         currentPlayer.getSBL().getPW().println("PRINT§Terminal§You are playing to discard now!");
         ArrayList<ArrayList<Card>> discardPiles = piles.discardPiles;
-        ArrayList<Card> specDiscard = discardPiles.get(discardPileIndex);
+        ArrayList<Card> specDiscard = piles.discardPiles.get(discardPileIndex);
 
         Card card = currentPlayer.getHandCards().get(handCardIndex);
 

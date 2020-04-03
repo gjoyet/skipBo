@@ -88,6 +88,12 @@ public class Pile {
     public Pile(int id) {   // Pile with id (for Player)
         this.id = id;
         this.discardPiles = new ArrayList<ArrayList<Card>>();
+
+        for (int i = 0; i < 3; i++) {
+            ArrayList<Card> deck = new ArrayList<Card>();
+            discardPiles.add(deck);
+        }
+
         this.stockPile = new ArrayList<Card>();
         this.handCards = new ArrayList<Card>();
     }

@@ -54,7 +54,7 @@ public class Pile {
         for (int i = 0; i < 144 + 18; i++) {
 
             Card karte = (Card) AllCards[i];
-            System.out.println("|" + karte.number + "| " + karte.col);
+            // System.out.println("|" + karte.number + "| " + karte.col);
         }
         for (int i = 0; i < 4; i++) {        // Add four empty card piles (buildPiles)
 

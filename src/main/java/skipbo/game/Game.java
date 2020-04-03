@@ -34,7 +34,7 @@ public class Game {
         this.sizeOfStockPile = 20;
 
         dealCards();
-        start();
+        startTurn(playersTurn);
 
 
         gameRunning = true;
@@ -103,11 +103,12 @@ public class Game {
                 tempPlayer.getHandCards().add(c);
                 //this.players[i] = tempPlayer; // possibly redundant code
             }
+            String resString = piles.handCardPrint(tempPlayer);
             for (int n = 0; n < 5; n++) { // for printing purposes
                 a[n] = tempPlayer.getHandCards().get(n).number;
             }
 
-            tempPlayer.getSBL().getPW().println("PRINT§Terminal§Your Hand cards are: " + Arrays.toString(a));
+            tempPlayer.getSBL().getPW().println("PRINT§Terminal§Your Hand cards are: " + resString);
 
             for (int j = 0; j < sizeOfStockPile; j++) {    // Draw Stock-Pile cards for each player
                 Card c = this.getDrawPile().get(random.nextInt(this.getDrawPile().size()));
@@ -127,9 +128,8 @@ public class Game {
     public void startTurn(int playersTurn) {
         turnFinished = false;
         Player ply = players.get(playersTurn);
-        ply.getSBL().getPW().println("PRINT§Terminal§It's your turn!");
         ply.getSBL().getPW().println("PRINT§Terminal§It's your turn! Your hand cards are now: "
-                + ply.getHandCards().toString());
+                + piles.handCardPrint(ply));
         //DONE: sysout to Player ply = "It's your turn!"
         //DONE: to Player ply: sysout ("Your hand cards are now: " + ply.getHandCards().toString());
         ply.fillHandCards();
@@ -217,6 +217,7 @@ public class Game {
      */
 
     public void playToDiscard(Player currentPlayer, int handCardIndex, int discardPileIndex) {
+        currentPlayer.getSBL().getPW().println("PRINT§Terminal§You are playing to discard now!");
         ArrayList<ArrayList<Card>> discardPiles = piles.discardPiles;
         ArrayList<Card> specDiscard = discardPiles.get(discardPileIndex);
 

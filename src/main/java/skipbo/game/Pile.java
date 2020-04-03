@@ -63,12 +63,13 @@ public class Pile {
         }
     }
 
-    public String handCardPrint(ArrayList<Card> handCards) {
-        for (Card card : handCards) {
-
-
+    public String handCardPrint(Player player) {
+        ArrayList<Card> handCards = player.getHandCards();
+        int[] a = new int[5];
+        for (int i = 0; i < 5; i++) {
+            a[i] = handCards.get(i).number;
         }
-        return null;
+        return Arrays.toString(a);
     }
 
     /**

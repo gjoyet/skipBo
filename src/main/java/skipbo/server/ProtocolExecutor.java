@@ -146,7 +146,8 @@ public class ProtocolExecutor {
     void newGame() {
         if(input[1].equals("New")) {
             ArrayList<Player> newPlayers = new ArrayList<Player>();
-            int playerCount = 0;
+            newPlayers.add(sbL.player);
+            int playerCount = 1;
             for (int i = 0; i < SBServer.getLobby().getLength(); i++) {
                 if (SBServer.getLobby().getPlayer(i).getStatus().equals(Status.READY)) {
                     newPlayers.add(SBServer.getLobby().getPlayer(i));

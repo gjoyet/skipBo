@@ -105,7 +105,7 @@ public class ProtocolExecutor {
             if (input.length < 3) return;
             System.out.println("Received  '" + input[1] + "' chat message from " + sbL.player.getName() + ": " + input[2]);
             if(input[1].equals("Global")) {
-                sbL.getPW().println("CHATM§Global§You: " + input[2);
+                sbL.getPW().println("CHATM§Global§You: " + input[2]);
                 sendAllExceptOne("CHATM§Global§" + sbL.player.getName() + ": " + input[2], sbL);
             } else if(input[1].equals("Private")) {
                 String[] nameAndMes = input[2].split("§", 2);

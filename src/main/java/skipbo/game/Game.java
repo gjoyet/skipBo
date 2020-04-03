@@ -301,8 +301,56 @@ public class Game {
         }
     }
 
+    /**
+     * Method
+     *
+     * @param currentPlayer
+     * @param discardPileIndex
+     * @param buildPileIndex
+     */
+
     public void playFromDiscardToMiddle(Player currentPlayer, int discardPileIndex, int buildPileIndex) {
         // TODO: Rohan, I let you implement this method since you know how you handled the other cases.
+        ArrayList<Card> discardPile = currentPlayer.getDiscardPile().get(discardPileIndex);
+        ArrayList<Card> specBuildPile = piles.buildPiles.get(buildPileIndex);
+
+        Card card = discardPile.get(discardPile.size());
+
+        if (card.col == Color.CYAN) {
+            int num = specBuildPile.get(specBuildPile.size()).number;
+            card.number = num + 1;
+            specBuildPile.add(card);
+            new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: "
+                    + discardPile.toString(), currentPlayer.getSBL());
+        } else {
+            if (!specBuildPile.isEmpty()) {
+                Card topCard = specBuildPile.get(specBuildPile.size());
+                if (topCard.number == (card.number - 1)) {
+                    specBuildPile.add(card);
+                    discardPile.remove(card);
+                    new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: "
+                            + piles.buildPiles.toString(), currentPlayer.getSBL());
+
+                    if (card.number == 12) {
+                        for (int i = 0; i < 12; i++) {    // remove all cards from the buildPile if the top card is 12
+                            specBuildPile.remove(i);
+                        }
+                        new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: "
+                                + piles.buildPiles.toString(), currentPlayer.getSBL());
+                    }
+                } else {
+                    //move invalid
+                    currentPlayer.getSBL().getPW().println("PRINT§Terminal§This move is invalid!");
+                }
+            } else {
+                if (card.number == 1) {
+                    specBuildPile.add(card);
+                } else if (card.number != 1) {
+                    currentPlayer.getSBL().getPW().println("PRINT§Terminal§This move is invalid! The first card has to have " +
+                            "the number 1.");
+                }
+            }
+        }
     }
 
     //TODO: reshuffle()!

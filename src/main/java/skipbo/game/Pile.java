@@ -89,7 +89,7 @@ public class Pile {
         this.id = id;
         this.discardPiles = new ArrayList<ArrayList<Card>>();
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             ArrayList<Card> deck = new ArrayList<Card>();
             discardPiles.add(deck);
         }

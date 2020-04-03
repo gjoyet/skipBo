@@ -46,6 +46,8 @@ public class Game {
      */
     public ArrayList<Card> getDrawPile() { return this.piles.drawPile; }
 
+    public int getPlayersTurn() { return this.playersTurn; }
+
     public boolean gameIsRunning() { return this.gameRunning; }
 
     public String toString() {

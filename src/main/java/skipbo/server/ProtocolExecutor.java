@@ -172,6 +172,10 @@ public class ProtocolExecutor {
      * Method for command "PUTTO". Triggers needed methods of the Game class.
      */
     void putTo() {
+        if(sbL.getGameLobby().get(sbL.player.getGame().getPlayersTurn()).equals(sbL.player)) {
+            sbL.getPW().println("PRINT§Terminal§Wait until it's your turn, you impatient bastard!");
+            return;
+        }
         String[] arguments = input[2].split("§");
         if(arguments.length < 4) return;
         int indexF = Integer.parseInt(arguments[1])-1;

@@ -105,12 +105,13 @@ public class ProtocolExecutor {
             if (input.length < 3) return;
             System.out.println("Received  '" + input[1] + "' chat message from " + sbL.player.getName() + ": " + input[2]);
             if(input[1].equals("Global")) {
-                sendAll("CHATM§Global§" + sbL.player.getName() + ": " + input[2], sbL);
+                sbL.getPW().println("CHATM§Global§You: " + input[2);
+                sendAllExceptOne("CHATM§Global§" + sbL.player.getName() + ": " + input[2], sbL);
             } else if(input[1].equals("Private")) {
                 String[] nameAndMes = input[2].split("§", 2);
-                sbL.getPW().println("CHATM§Private§(Private) " + sbL.player.getName() + ": " + nameAndMes[1]);
+                sbL.getPW().println("CHATM§Private§(to " + nameAndMes[0] + "): " + nameAndMes[1]);
                 SBServer.getLobby().getPlayerByName(nameAndMes[0]).getSBL().getPW().
-                        println("CHATM§Private§" + sbL.player.getName() + "§" + nameAndMes[1]);
+                        println("CHATM§Private§(from " + sbL.player.getName() + "): " + nameAndMes[1]);
             } throw new NoCommandException(input[0], input[1]);
         } finally {}
     }

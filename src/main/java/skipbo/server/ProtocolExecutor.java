@@ -152,7 +152,7 @@ public class ProtocolExecutor {
                     newPlayers.add(SBServer.getLobby().getPlayer(i));
                     playerCount++;
                 }
-                if (playerCount == 4) {
+                if (playerCount == 2) {
                     Game game = new Game(newPlayers);
                     serverLobby.addGame(game);
                     for(Player p : newPlayers) {

@@ -109,9 +109,13 @@ public class ProtocolExecutor {
                 sendAllExceptOne("CHATM§Global§" + sbL.player.getName() + ": " + input[2], sbL);
             } else if(input[1].equals("Private")) {
                 String[] nameAndMes = input[2].split("§", 2);
-                sbL.getPW().println("CHATM§Private§(to " + nameAndMes[0] + "): " + nameAndMes[1]);
-                SBServer.getLobby().getPlayerByName(nameAndMes[0]).getSBL().getPW().
-                        println("CHATM§Private§(from " + sbL.player.getName() + "): " + nameAndMes[1]);
+                if(SBServer.getLobby().getPlayerByName(nameAndMes[0]) == null) {
+                    sbL.getPW().println("PRINT§Terminal§This name does not exist.");
+                } else {
+                    sbL.getPW().println("CHATM§Private§(to " + nameAndMes[0] + "): " + nameAndMes[1]);
+                    SBServer.getLobby().getPlayerByName(nameAndMes[0]).getSBL().getPW().
+                            println("CHATM§Private§(from " + sbL.player.getName() + "): " + nameAndMes[1]);
+                }
             } throw new NoCommandException(input[0], input[1]);
         } finally {}
     }

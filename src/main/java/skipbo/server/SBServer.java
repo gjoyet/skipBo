@@ -21,7 +21,7 @@ public class SBServer {
 
         try {
             sbServerSocket = new ServerSocket(Integer.parseInt(args[0]));
-            System.out.println("Waiting for port " + args[0]);
+            // System.out.println("Waiting for port " + args[0]);
         } catch(IOException ioe) {
             System.out.println("Issue with opening Serversocket. Try with another port.");
         }

@@ -363,13 +363,13 @@ public class Game {
      * then changes turn from one player to the next.
      */
     public void endTurn() {
-        turnFinished = true;
-        if (!(playersTurn == 3)) {
+        if (!(playersTurn == players.size()-1)) {
             playersTurn++;
         } else {
             playersTurn = 0;
         }
         startTurn(playersTurn);
+        turnFinished = true;
     }
 
 

@@ -29,6 +29,11 @@ public class Player {
         this.sbListen = sbListen;
         this.piles = new Pile(id);
         this.status = Status.valueOf("WAITING");
+
+        for (int i = 0; i < 3; i++) {
+            ArrayList<Card> deck = new ArrayList<Card>();
+            piles.discardPiles.add(deck);
+        }
     }
 
     public String getName() {

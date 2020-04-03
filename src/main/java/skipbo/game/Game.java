@@ -250,12 +250,12 @@ public class Game {
 
     public void playFromStockToMiddle(Player currentPlayer, int buildPileIndex) {
         ArrayList<Card> stockPile = currentPlayer.getStockPile();
-        Card stockCard = stockPile.get(stockPile.size());
+        Card stockCard = stockPile.get(stockPile.size() - 1);
 
         ArrayList<ArrayList<Card>> buildPiles = piles.buildPiles;
         var specBuildPile = buildPiles.get(buildPileIndex);
 
-        Card topCard = specBuildPile.get(specBuildPile.size());
+        Card topCard = specBuildPile.get(specBuildPile.size() - 1);
 
         if (stockCard.col == Color.CYAN) {
             int num = specBuildPile.get(specBuildPile.size()).number;

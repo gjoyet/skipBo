@@ -61,6 +61,7 @@ public class Pile {
             ArrayList<Card> deck = new ArrayList<Card>();
             this.buildPiles.add(deck);
         }
+
     }
 
     public String handCardPrint(Player player) {

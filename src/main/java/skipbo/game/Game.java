@@ -87,7 +87,7 @@ public class Game {
      * all the different pile-types, which are specifically needed.
      */
     public void dealCards() {
-
+        int[] a = new int[5];
         this.piles.gamePiles();   // Game gets complete set of cards
 
         for (int i = 0; i < players.size(); i++) {     // Players getting their cards
@@ -97,26 +97,23 @@ public class Game {
             for (int j = 0; j < 5; j++) {    // Draw hand-cards for each player
                 Card c = this.getDrawPile().get(random.nextInt(this.getDrawPile().size()));
                 tempPlayer.getHandCards().add(c);
-                tempPlayer.getSBL().getPW().println("PRINT§Terminal§Your Hand cards are: " + tempPlayer.getHandCards().toString());
                 //this.players[i] = tempPlayer; // possibly redundant code
             }
+            for (int n = 0; n < 5; n++) {
+                a[n] = tempPlayer.getHandCards().get(n).number;
+            }
+
+            tempPlayer.getSBL().getPW().println("PRINT§Terminal§Your Hand cards are: " + a.toString());
+
             for (int j = 0; j < sizeOfStockPile; j++) {    // Draw Stock-Pile cards for each player
                 Card c = this.getDrawPile().get(random.nextInt(this.getDrawPile().size()));
                 tempPlayer.getStockPile().add(c);
-                tempPlayer.getSBL().getPW().println("PRINT§Terminal§Your Stock cards are: " + tempPlayer.getStockPile().toString());
                 //this.players[i] = tempPlayer; // possibly redundant code
             }
-
-            //   Print Array (ONLY TESTING PURPOSE)
-            Object[] tempHandCards = tempPlayer.getHandCards().toArray();
-            System.out.println();
-            System.out.println(tempPlayer.getName());
-            for (int t = 1; t < tempHandCards.length; t++) {
-                Card karte = (Card) tempHandCards[t];
-                System.out.println("|" + karte.number + "| " + karte.col);
-            }
+            Card topCard = tempPlayer.getStockPile().get(piles.stockPile.size());
+            tempPlayer.getSBL().getPW().println("PRINT§Terminal§Your Stock card is: " + topCard.number);
         }
-    }
+        }
 
     /**
      * Method to be executed at the start of each player's turn

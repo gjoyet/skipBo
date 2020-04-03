@@ -68,8 +68,9 @@ public class Pile {
 
     public String handCardPrint(Player player) {
         ArrayList<Card> handCards = player.getHandCards();
-        int[] a = new int[5];
-        for (int i = 0; i < 5; i++) {
+        int len = handCards.size();
+        int[] a = new int[len];
+        for (int i = 0; i < len; i++) {
             a[i] = handCards.get(i).number;
         }
         return Arrays.toString(a);
@@ -102,7 +103,7 @@ public class Pile {
     }
 
     public Card getDrawPileTopCard() {
-        return drawPile.get(drawPile.size());
+        return drawPile.get(drawPile.size() - 1);
     }
 
     /**

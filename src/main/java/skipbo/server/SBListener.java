@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.net.Socket;
 import java.util.ArrayList;
 
@@ -76,9 +77,11 @@ public class SBListener implements Runnable {
                     //System.out.println("LOG: Got into logout method.");
                     break;
                 case NWGME:
+                    // System.out.println("LOG: got into newGame method.");
                     new ProtocolExecutor(input, this).newGame();
                     break;
                 case PUTTO:
+                    System.out.println("LOG: got into putTo method with input: " + input[2] + ".");
                     new ProtocolExecutor(input, this).putTo();
             }
         } catch(IllegalArgumentException iae) {

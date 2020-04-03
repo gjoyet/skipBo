@@ -13,7 +13,8 @@ public class SBLobby {
     private ArrayList<Game> gameList;
 
     SBLobby() {
-        this.playerLobby = new ArrayList<Player>(0);
+        this.playerLobby = new ArrayList<Player>();
+        this.gameList = new ArrayList<Game>();
     }
 
     ArrayList<Player> getPlayerLobby() { return this.playerLobby; }

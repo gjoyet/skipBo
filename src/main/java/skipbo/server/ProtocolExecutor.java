@@ -177,6 +177,7 @@ public class ProtocolExecutor {
         if(arguments.length < 4) return;
         int indexF = Integer.parseInt(arguments[1])-1;
         int indexT = Integer.parseInt(arguments[3])-1;
+        System.out.println(arguments[0] + arguments[2] + ": piles; " + indexF + indexT + ": indexes.");
         switch(arguments[0]+arguments[2]) {
             case "HB": sbL.player.getGame().playToMiddle(sbL.player, indexF, indexT); break;
             case "SB": sbL.player.getGame().playFromStockToMiddle(sbL.player, indexT); break;

@@ -164,6 +164,7 @@ class SBClientListener {
         String placeTo = line[3];
         String toNumber = line[4]; //probably can change to int later
 
+        System.out.println(Protocol.PUTTO + "§Card§" + placeFrom + "§" + fromNumber + "§" + placeTo + "§" + toNumber);
         return Protocol.PUTTO + "§Card§" + placeFrom + "§" + fromNumber + "§" + placeTo + "§" + toNumber;
     }
 

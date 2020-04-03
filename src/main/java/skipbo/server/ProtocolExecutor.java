@@ -172,7 +172,8 @@ public class ProtocolExecutor {
      * Method for command "PUTTO". Triggers needed methods of the Game class.
      */
     void putTo() {
-        if(sbL.getGameLobby().get(sbL.player.getGame().getPlayersTurn()).equals(sbL.player)) {
+        if(!sbL.getGameLobby().get(sbL.player.getGame().getPlayersTurn()).equals(sbL.player)) {
+            System.out.println("Hehehe");
             sbL.getPW().println("PRINT§Terminal§Wait until it's your turn, you impatient bastard!");
             return;
         }
@@ -186,6 +187,7 @@ public class ProtocolExecutor {
             case "SB": sbL.player.getGame().playFromStockToMiddle(sbL.player, indexT); break;
             case "DB": sbL.player.getGame().playFromDiscardToMiddle(sbL.player, indexF, indexT); break;
             case "HD": sbL.player.getGame().playToDiscard(sbL.player, indexF, indexT); break;
+            default: sbL.getPW().println("PRINT§Terminal§This move is not allowed.");
         }
     }
 

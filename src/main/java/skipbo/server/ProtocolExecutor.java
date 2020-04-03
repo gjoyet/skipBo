@@ -55,7 +55,7 @@ public class ProtocolExecutor {
             sbL.player = new Player(sbL.id, name, sbL);
             SBServer.serverLobby.addPlayer(sbL.player);
         } finally {
-            System.out.println(name + " logged in.");
+            // System.out.println(name + " logged in.");
             sbL.pw.println("PRINT§Terminal§Welcome to Skip-Bo, " + name + "!");
             sendAllExceptOne("PRINT§Terminal§" + name + " joined the room. Say hi!", sbL);
         }
@@ -103,7 +103,7 @@ public class ProtocolExecutor {
     void chatMessage() throws NoCommandException {
         try {
             if (input.length < 3) return;
-            System.out.println("Received  '" + input[1] + "' chat message from " + sbL.player.getName() + ": " + input[2]);
+            // System.out.println("Received  '" + input[1] + "' chat message from " + sbL.player.getName() + ": " + input[2]);
             if(input[1].equals("Global")) {
                 sbL.getPW().println("CHATM§Global§You: " + input[2]);
                 sendAllExceptOne("CHATM§Global§" + sbL.player.getName() + ": " + input[2], sbL);
@@ -132,7 +132,7 @@ public class ProtocolExecutor {
             System.out.println("Issues while closing the socket at logout.");
         }
         sendAll("PRINT§Terminal§" + sbL.player.getName() + " left the room.", sbL);
-        System.out.println(sbL.player.getName() + " logged out.");
+        // System.out.println(sbL.player.getName() + " logged out.");
 
     }
 

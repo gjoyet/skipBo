@@ -96,6 +96,7 @@ public class Game {
         for (int i = 0; i < players.size(); i++) {     // Players getting their cards
             int[] a = new int[5];
             Player tempPlayer = players.get(i);
+            tempPlayer.getSBL().getPW().println("PRINT§Terminal§Game is starting...");
             Random random = new Random();   // Object random for card distribution by chance
 
             for (int j = 0; j < 5; j++) {    // Draw hand-cards for each player

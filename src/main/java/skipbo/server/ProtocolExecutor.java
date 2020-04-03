@@ -160,7 +160,6 @@ public class ProtocolExecutor {
                     for(Player p : newPlayers) {
                         p.changeGame(game);
                         p.changeStatus(Status.INGAME);
-                        p.getSBL().getPW().println("PRINT§Terminal§Game starting...");
                         p.getSBL().getPW().println("NWGME§New§");
                     }
                     return;

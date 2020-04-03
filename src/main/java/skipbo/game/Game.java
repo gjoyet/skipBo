@@ -89,11 +89,12 @@ public class Game {
      * all the different pile-types, which are specifically needed.
      */
     public void dealCards() {
-        int[] a = new int[5];
+
         String str = "";
         this.piles.gamePiles();   // Game gets complete set of cards
 
         for (int i = 0; i < players.size(); i++) {     // Players getting their cards
+            int[] a = new int[5];
             Player tempPlayer = players.get(i);
             Random random = new Random();   // Object random for card distribution by chance
 
@@ -102,7 +103,7 @@ public class Game {
                 tempPlayer.getHandCards().add(c);
                 //this.players[i] = tempPlayer; // possibly redundant code
             }
-            for (int n = 0; n < 5; n++) {
+            for (int n = 0; n < 5; n++) { // for printing purposes
                 a[n] = tempPlayer.getHandCards().get(n).number;
             }
 

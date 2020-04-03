@@ -15,7 +15,8 @@ public class Game {
     public Pile piles;
     private Player winner, whosTurn;
     private boolean gameRunning, turnFinished;
-    int sizeOfStockPile, playersTurn = 0;
+    int sizeOfStockPile = 20;
+    int playersTurn = 0;
 
 
     /**
@@ -112,7 +113,7 @@ public class Game {
                 tempPlayer.getStockPile().add(c);
                 //this.players[i] = tempPlayer; // possibly redundant code
             }
-            Card topCard = tempPlayer.getStockPile().get(piles.stockPile.size() - 1);
+            Card topCard = tempPlayer.getStockPile().get(tempPlayer.getStockPile().size() - 1);
             tempPlayer.getSBL().getPW().println("PRINT§Terminal§Your Stock card is: " + topCard.number);
         }
     }

@@ -63,6 +63,14 @@ public class Pile {
         }
     }
 
+    public String handCardPrint(ArrayList<Card> handCards) {
+        for (Card card : handCards) {
+
+            return null;
+        }
+        return null;
+    }
+
     /**
      * The Pile-constructor is overloaded because we have different
      * types of piles for the Game and Player.

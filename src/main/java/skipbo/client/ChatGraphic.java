@@ -44,7 +44,7 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
         contentPane.setLayout(null);
 
         //Output textfield
-        chat = new JTextArea();
+        chat = new JTextArea(); //TODO: change to JEditorPane or JTextPane to print in colour
         chat.setBounds(20, 30 ,250, 400);
         chat.setLineWrap(true);
         chat.setWrapStyleWord(true);

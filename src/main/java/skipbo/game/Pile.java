@@ -84,7 +84,7 @@ public class Pile {
             for (int j = 0; j < specBuildPile.size(); j++) {
                 printArray[j] = specBuildPile.get(j).number;
             }
-            str.append("Build pile " + i + ": " + Arrays.toString(printArray));
+            str.append("Build pile " + (i + 1) + "of " + player.getName() + " is: " + Arrays.toString(printArray) + "\t");
         }
         return str.toString();
     }
@@ -97,7 +97,7 @@ public class Pile {
             for (int j = 0; j < specDiscardPile.size(); j++) {
                 printArray[j] = specDiscardPile.get(j).number;
             }
-            str.append("Discard Pile " + i + " is:" + Arrays.toString(printArray));
+            str.append("Discard Pile " + (i + 1) + "of" + player.getName() + " is: " + Arrays.toString(printArray) + "\t");
         }
         return str.toString();
     }
@@ -131,23 +131,9 @@ public class Pile {
         return drawPile.get(drawPile.size() - 1);
     }
 
-    /**
-     * Returns the specific hand card at the index in the parameter
-     *
-     * @param index
-     * @return
-     */
-
-    public Card getHandCardAtIndex(int index) {
-        return this.handCards.get(index);
-    }
-
     public int getNumOfStockPile() {
         return stockPile.size();
     }
 
-    public void removeDrawPileTopCard() {       // apparently redundant as ArrayList has a remove() method
-        Card card = this.getDrawPileTopCard();
-    }
 }
 

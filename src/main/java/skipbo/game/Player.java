@@ -93,9 +93,10 @@ public class Player {
         if (sizeOfHand < 5) {
             int toFill = (5 - sizeOfHand);
             for (int i = 0; i < toFill; ++i) {
-                Card card = piles.getDrawPileTopCard();
-                addCardToHand(card);
-                piles.drawPile.remove(piles.getDrawPileTopCard());
+                Random r = new Random();
+                Card card = piles.drawPile.get(r.nextInt(piles.drawPile.size() - 1));
+                this.getHandCards().add(card);
+                piles.drawPile.remove(card);
             }
         }
     }

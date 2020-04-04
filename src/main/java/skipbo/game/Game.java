@@ -101,25 +101,23 @@ public class Game {
         this.piles.gamePiles();   // Game gets complete set of cards
 
         for (int i = 0; i < players.size(); i++) {     // Players getting their cards
-            int[] a = new int[5];
+
             Player tempPlayer = players.get(i);
             tempPlayer.getSBL().getPW().println("PRINT§Terminal§Game is starting...");
             Random random = new Random();   // Object random for card distribution by chance
 
             for (int j = 0; j < 5; j++) {    // Draw hand-cards for each player
-                Card c = this.getDrawPile().get(random.nextInt(this.getDrawPile().size()));
+                Card c = getDrawPile().get(random.nextInt(getDrawPile().size()));
                 tempPlayer.getHandCards().add(c);
                 piles.drawPile.remove(c);
-                //this.players[i] = tempPlayer; // possibly redundant code
             }
 
             tempPlayer.getSBL().getPW().println("PRINT§Terminal§Your Hand cards are: " + piles.handCardPrint(tempPlayer));
 
             for (int j = 0; j < sizeOfStockPile; j++) {    // Draw Stock-Pile cards for each player
-                Card c = this.getDrawPile().get(random.nextInt(this.getDrawPile().size()));
+                Card c = getDrawPile().get(random.nextInt(getDrawPile().size()));
                 piles.drawPile.remove(c);
                 tempPlayer.getStockPile().add(c);
-                //this.players[i] = tempPlayer; // possibly redundant code
             }
             Card topCard = tempPlayer.getStockPile().get(tempPlayer.getStockPile().size() - 1);
             tempPlayer.getSBL().getPW().println("PRINT§Terminal§Your Stock card is: " + topCard.number);
@@ -166,6 +164,8 @@ public class Game {
                 currentPlayer.getHandCards().remove(card);
                 new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: "
                         + piles.buildPilesPrint(), currentPlayer.getSBL());
+                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
+                        + piles.handCardPrint(currentPlayer));
             } else if (card.number != 1 && card.col != Color.CYAN) {
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§This move is invalid! " +
                         "To play to an empty pile, the card number has to be 1.");
@@ -235,7 +235,7 @@ public class Game {
 
     public void displayDiscard() {
         for (Player player : players) {
-            new ProtocolExecutor().sendAll("PRINT§Terminal§The discard pile of " + player.getName() + "is: " +
+            new ProtocolExecutor().sendAll("PRINT§Terminal§ " +
                     piles.discardPilesPrint(player), player.getSBL());
         }
     }
@@ -273,6 +273,7 @@ public class Game {
                     // Execute: card op valid - update board and stock pile card.
                     new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: "
                             + buildPiles.toString(), currentPlayer.getSBL());
+                    piles.handCardPrint(currentPlayer);
 
                     if (stockCard.number == 12) {
                         //Execute: make that BuildPile go away
@@ -291,6 +292,9 @@ public class Game {
                 if (stockCard.number == 1) {
                     specBuildPile.add(stockCard);
                     //Execute: update build pile
+                    new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: "
+                            + buildPiles.toString(), currentPlayer.getSBL());
+                    piles.handCardPrint(currentPlayer);
                 } else if (stockCard.number != 1) {
                     //Execute: invalid move! Card 1 has to be first card on build pile.
                     currentPlayer.getSBL().getPW().println("PRINT§Terminal§This move is invalid! The first card has to have " +
@@ -298,7 +302,6 @@ public class Game {
                 }
             }
         }
-
         if (currentPlayer.getStockPile().isEmpty()) {
             endGame(currentPlayer);
         }

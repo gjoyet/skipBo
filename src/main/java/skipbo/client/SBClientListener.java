@@ -5,6 +5,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import skipbo.server.Protocol;
 
+import static skipbo.client.SBClient.clientLog;
+
 /**
  * Thread waiting for any action from user input (from terminal) and forwards command to Server
  */
@@ -164,7 +166,7 @@ class SBClientListener {
         String placeTo = line[3];
         String toNumber = line[4]; //probably can change to int later
 
-        System.out.println(Protocol.PUTTO + "§Card§" + placeFrom + "§" + fromNumber + "§" + placeTo + "§" + toNumber);
+        clientLog.debug("Command: " + Protocol.PUTTO + "§Card§" + placeFrom + "§" + fromNumber + "§" + placeTo + "§" + toNumber);
         return Protocol.PUTTO + "§Card§" + placeFrom + "§" + fromNumber + "§" + placeTo + "§" + toNumber;
     }
 
@@ -195,7 +197,7 @@ class SBClientListener {
         try {
             sock.close();
         } catch (IOException e) {
-            System.out.println("Issue with closing the socket");
+            clientLog.warn("Issue with closing the socket");
         }
     }
 

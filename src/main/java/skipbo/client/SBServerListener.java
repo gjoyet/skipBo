@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
+import static skipbo.client.SBClient.clientLog;
+
 /**
  * Thread waiting for any input from server and executes the input on client
  */
@@ -34,9 +36,9 @@ class SBServerListener implements Runnable {
                 input = br.readLine();
                 executeCommand(input);
             } catch (IOException e) {
-                System.out.println("Error with reading input from server");
+                clientLog.warn("Error with reading input from server");
             } catch (NoCommandException | IllegalArgumentException | NullPointerException e) {
-                System.out.println("Error with network protocol command");
+                clientLog.warn("Error with network protocol command");
             }
         }
     }
@@ -100,7 +102,7 @@ class SBServerListener implements Runnable {
             socket.close();
             //printMessage("Logout successful");
         } catch (IOException e) {
-            System.out.println("Error with closing BufferedReader or Socket");
+            clientLog.warn("Error with closing BufferedReader or Socket");
         }
         isLoggedIn = false;
     }

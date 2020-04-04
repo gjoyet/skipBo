@@ -1,5 +1,8 @@
 package skipbo.client;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
 import java.net.Socket;
 
@@ -7,6 +10,8 @@ import java.net.Socket;
  * A Skip-Bo client.
  */
 public class SBClient {
+
+    public static Logger clientLog = LogManager.getLogger(SBClient.class);
 
     /**
      * Establishes a connection to the Skip-Bo server via SBClientListener thread and SBServerListener thread and
@@ -20,7 +25,7 @@ public class SBClient {
             String ip = iPAndPort[0];
             int port = Integer.parseInt(iPAndPort[1]);
 
-            System.out.println("Connecting to port " + port + "…");
+            clientLog.info("Connecting to port " + port + "…");
             Socket sock = new Socket(ip , port);
 
             //Start SBClientListener Thread
@@ -42,7 +47,7 @@ public class SBClient {
             sListener.start();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            clientLog.fatal("Error while connecting to server.");
         }
     }
 }

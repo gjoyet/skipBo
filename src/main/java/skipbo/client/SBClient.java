@@ -21,9 +21,9 @@ public class SBClient {
     public static void main(String[] args) {
 
         try {
-            String[] iPAndPort = args[0].split(":");
-            String ip = iPAndPort[0];
-            int port = Integer.parseInt(iPAndPort[1]);
+            String[] ipAndPort = args[0].split(":");
+            String ip = ipAndPort[0];
+            int port = Integer.parseInt(ipAndPort[1]);
 
             clientLog.info("Connecting to port " + port + "…");
             Socket sock = new Socket(ip , port);

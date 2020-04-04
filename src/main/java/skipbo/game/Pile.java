@@ -1,9 +1,8 @@
 package skipbo.game;
 
-import javafx.beans.binding.ObjectExpression;
-
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Pile {
 
@@ -12,10 +11,35 @@ public class Pile {
     public ArrayList<Card> handCards; // 1 draw pile
     public ArrayList<ArrayList<Card>> buildPiles;// ArrayList for the 4 build decks in the middle
     public ArrayList<ArrayList<Card>> discardPiles;
+    public Player player;
     private int numOfCards;
     private int size;
     private int id;
-    public Player player;
+
+    /**
+     * The Pile-constructor is overloaded because we have different
+     * types of piles for the Game and Player.
+     * <p>
+     * The Pile-constructor for the Player needs the Player-ID, this
+     * assures that we can identify the different piles.
+     */
+    public Pile() {   // Pile without id (for Game)
+        this.drawPile = new ArrayList<Card>();
+        this.buildPiles = new ArrayList<ArrayList<Card>>();
+    }
+
+    public Pile(int id) {   // Pile with id (for Player)
+        this.id = id;
+        this.discardPiles = new ArrayList<ArrayList<Card>>();
+
+        for (int i = 0; i < 4; i++) {
+            ArrayList<Card> deck = new ArrayList<Card>();
+            discardPiles.add(deck);
+        }
+
+        this.stockPile = new ArrayList<Card>();
+        this.handCards = new ArrayList<Card>();
+    }
 
     /**
      * The method gamePiles() creates all cards of a full set and
@@ -52,12 +76,7 @@ public class Pile {
             Card card = new Card(colours.get(4));
             this.drawPile.add(card);
         }
-        Object[] AllCards = this.drawPile.toArray();     // Print Array (ONLY TESTING PURPOSE)
-        for (int i = 0; i < 144 + 18; i++) {
 
-            Card karte = (Card) AllCards[i];
-            // System.out.println("|" + karte.number + "| " + karte.col);
-        }
         for (int i = 0; i < 4; i++) {        // Add four empty card piles (buildPiles)
 
             ArrayList<Card> deck = new ArrayList<Card>();
@@ -100,32 +119,6 @@ public class Pile {
             str.append("Discard Pile " + i + " of " + player.getName() + " is: " + Arrays.toString(printArray) + "\t");
         }
         return str.toString();
-    }
-
-
-    /**
-     * The Pile-constructor is overloaded because we have different
-     * types of piles for the Game and Player.
-     * <p>
-     * The Pile-constructor for the Player needs the Player-ID, this
-     * assures that we can identify the different piles.
-     */
-    public Pile() {   // Pile without id (for Game)
-        this.drawPile = new ArrayList<Card>();
-        this.buildPiles = new ArrayList<ArrayList<Card>>();
-    }
-
-    public Pile(int id) {   // Pile with id (for Player)
-        this.id = id;
-        this.discardPiles = new ArrayList<ArrayList<Card>>();
-
-        for (int i = 0; i < 4; i++) {
-            ArrayList<Card> deck = new ArrayList<Card>();
-            discardPiles.add(deck);
-        }
-
-        this.stockPile = new ArrayList<Card>();
-        this.handCards = new ArrayList<Card>();
     }
 
     public Card getDrawPileTopCard() {

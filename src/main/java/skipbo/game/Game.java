@@ -4,19 +4,16 @@ import skipbo.server.ProtocolExecutor;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
-
-import static java.lang.Thread.sleep;
 
 public class Game {
 
     public ArrayList<Player> players;
     public Pile piles;
-    private Player winner, whosTurn;
-    private boolean gameRunning, turnFinished;
     int sizeOfStockPile = 20;
     int playersTurn = 0;
+    private Player winner, whosTurn;
+    private boolean gameRunning, turnFinished;
 
 
     /**
@@ -383,6 +380,13 @@ public class Game {
             }
         }
     }
+
+    /**
+     * Method to fill the hand cards up to 5 of the player who's turn it is to play
+     * Adds cards from top of draw pile.
+     *
+     * @param player
+     */
 
     public void fillHandCards(Player player) {
         ArrayList<Card> drawPile = piles.drawPile;

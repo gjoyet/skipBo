@@ -30,10 +30,6 @@ public class Player {
         this.piles = new Pile(id);
         this.status = Status.valueOf("WAITING");
 
-//        for (int i = 0; i < 3; i++) {
-//            ArrayList<Card> deck = new ArrayList<Card>();
-//            piles.discardPiles.add(deck);
-//        }
     }
 
     public String getName() {
@@ -82,22 +78,4 @@ public class Player {
         this.getHandCards().add(card);
     }
 
-
-    /**
-     * Fills player's cards at the beginning of their turn,
-     * if they have less than the maximum of five cards in their hand.
-     */
-    public void fillHandCards() {
-        ArrayList<Card> handCards = this.getHandCards();
-        int sizeOfHand = handCards.size();
-        if (sizeOfHand < 5) {
-            int toFill = (5 - sizeOfHand);
-            for (int i = 0; i < toFill; ++i) {
-                Random r = new Random();
-                Card card = piles.drawPile.get(r.nextInt(piles.drawPile.size() - 1));
-                this.getHandCards().add(card);
-                piles.drawPile.remove(card);
-            }
-        }
-    }
 }

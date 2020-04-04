@@ -135,7 +135,7 @@ public class Game {
         ply.getSBL().getPW().println("PRINT§Terminal§It's your turn! Your hand cards are now: "
                 + piles.handCardPrint(ply));
 
-        ply.fillHandCards();
+        fillHandCards(ply);
         new ProtocolExecutor().sendAllExceptOne("PRINT§Terminal§Gave " + ply.getName()
                 + " their missing cards.", ply.getSBL());
     }
@@ -381,6 +381,16 @@ public class Game {
                             + piles.buildPilesPrint(), player.getSBL());
                 }
             }
+        }
+    }
+
+    public void fillHandCards(Player player) {
+        ArrayList<Card> drawPile = piles.drawPile;
+        int toFill = 5 - player.getHandCards().size();
+        for (int i = 0; i <= toFill; i++) {
+            Card drawCard = drawPile.get(i);
+            player.getHandCards().add(drawCard);
+            drawPile.remove(drawPile.get(i));
         }
     }
 

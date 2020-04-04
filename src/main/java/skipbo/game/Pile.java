@@ -80,11 +80,11 @@ public class Pile {
         StringBuilder str = new StringBuilder();
         for (int i = 0; i < 4; i++) {
             ArrayList<Card> specBuildPile = buildPiles.get(i);
-            int[] printArray = new int[specBuildPile.size()];
-            for (int j = 0; j < specBuildPile.size(); j++) {
-                printArray[j] = specBuildPile.get(j).number;
+            if (specBuildPile.isEmpty()) {
+                str.append("Build pile " + i + " is : [ ]");
+            } else {
+                str.append("Build pile " + i + " is: [" + specBuildPile.get(specBuildPile.size() - 1).number + "]" + "\t");
             }
-            str.append("Build pile " + (i + 1) + "of " + player.getName() + " is: " + Arrays.toString(printArray) + "\t");
         }
         return str.toString();
     }
@@ -97,10 +97,11 @@ public class Pile {
             for (int j = 0; j < specDiscardPile.size(); j++) {
                 printArray[j] = specDiscardPile.get(j).number;
             }
-            str.append("Discard Pile " + (i + 1) + "of" + player.getName() + " is: " + Arrays.toString(printArray) + "\t");
+            str.append("Discard Pile " + i + " of " + player.getName() + " is: " + Arrays.toString(printArray) + "\t");
         }
         return str.toString();
     }
+
 
     /**
      * The Pile-constructor is overloaded because we have different

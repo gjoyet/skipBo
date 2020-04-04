@@ -1,17 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Programmierprojekt" company="" webLink="http://" view-date="2020-03-02" view-index="0" gantt-divider-location="604" resource-divider-location="281" version="2.8.10" locale="de">
+<?xml version="1.0" encoding="UTF-8"?><project name="Programmierprojekt" company="" webLink="http://" view-date="2020-03-02" view-index="0" gantt-divider-location="323" resource-divider-location="281" version="2.8.10" locale="de">
     <description/>
     <view zooming-state="default:7" id="gantt-chart">
-        <field id="tpd3" name="Vorgang" width="234" order="0"/>
-        <field id="tpd4" name="Anfang" width="95" order="1"/>
-        <field id="tpd5" name="Ende" width="117" order="2"/>
-        <field id="tpd8" name="Verantwortlich" width="139" order="3"/>
+        <field id="tpd3" name="Vorgang" width="138" order="0"/>
+        <field id="tpd4" name="Anfang" width="31" order="1"/>
+        <field id="tpd5" name="Ende" width="32" order="2"/>
+        <field id="tpd8" name="Verantwortlich" width="103" order="3"/>
         <option id="taskLabelUp" value=""/>
         <option id="taskLabelDown" value=""/>
         <timeline>
             <![CDATA[176]]>
         </timeline>
         <option id="color.recent">
-            <![CDATA[#9999ff #cc0066 #996600 #ff9900 #0099ff #00cc33 #f4f4f4 #ff0066 #66ffff]]>
+            <![CDATA[#9999ff #996600 #00cc33 #cc0066 #ff9900 #0099ff #f4f4f4 #ff0066 #66ffff]]>
         </option>
     </view>
     <view id="resource-table">
@@ -157,7 +157,7 @@ Masterkurs Client_Server-Programmierung mit Java  (gesendet)]]>
             <depend id="230" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="98" name="Übungsstunde 03" color="#9999ff" meeting="false" start="2020-03-18" duration="1" complete="100" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true"/>
-        <task id="48" name="Server/Client Communication" color="#9999ff" meeting="false" start="2020-03-12" duration="13" complete="80" thirdDate="2020-03-10" thirdDate-constraint="0" expand="true">
+        <task id="48" name="Server/Client Communication" color="#00cc33" meeting="false" start="2020-03-12" duration="13" complete="100" thirdDate="2020-03-10" thirdDate-constraint="0" expand="true">
             <notes>
                 <![CDATA[Call Me Bob 5 
 Players can change their nicknames 
@@ -270,8 +270,8 @@ The client suggests a nickname based on the system username
 ]]>
             </notes>
         </task>
-        <task id="130" name="Übungsstunde 04" color="#9999ff" meeting="false" start="2020-03-25" duration="1" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true"/>
-        <task id="316" name="Spiel Logik" color="#996600" meeting="false" start="2020-03-16" duration="19" complete="20" thirdDate="2020-03-20" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="130" name="Übungsstunde 04" color="#9999ff" meeting="false" start="2020-03-25" duration="1" complete="100" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true"/>
+        <task id="316" name="Spiel Logik" color="#996600" meeting="false" start="2020-03-16" duration="42" complete="60" thirdDate="2020-03-20" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <notes>
                 <![CDATA[Class: Game
  - start()
@@ -289,7 +289,7 @@ Class: Pile
 ]]>
             </notes>
         </task>
-        <task id="319" name="Basic GUI" color="#ff9900" meeting="false" start="2020-03-21" duration="18" complete="20" thirdDate="2020-03-26" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="319" name="Basic Chat GUI" color="#ff9900" meeting="false" start="2020-03-21" duration="15" complete="100" thirdDate="2020-03-26" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <notes>
                 <![CDATA[Karten designen
 Spielfeld designen
@@ -297,21 +297,14 @@ Lounge designen
 ]]>
             </notes>
         </task>
-        <task id="195" name="Manual" color="#0099ff" meeting="false" start="2020-03-26" duration="4" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="195" name="Manual" color="#9999ff" meeting="false" start="2020-03-26" duration="4" complete="100" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <notes>
                 <![CDATA[Manual 10 
 There is a manual which describes how the game is to be played 
 ]]>
             </notes>
         </task>
-        <task id="239" name="Outline" color="#0099ff" meeting="false" start="2020-03-30" duration="4" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
-            <notes>
-                <![CDATA[About a Game 5 
-Outline of the game with its goals, rules and mechanics 
-]]>
-            </notes>
-        </task>
-        <task id="257" name="Spielkarten GUI" color="#9999ff" meeting="false" start="2020-04-03" duration="12" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true"/>
+        <task id="257" name="Spielkarten GUI" color="#9999ff" meeting="false" start="2020-04-16" duration="19" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true"/>
         <task id="211" name="Protokoll Dokument" color="#00cc33" meeting="false" start="2020-03-21" duration="2" complete="100" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <notes>
                 <![CDATA[Protocol Document 5 
@@ -319,29 +312,29 @@ The definition of the network protocol in the external document is up to date
 ]]>
             </notes>
         </task>
-        <task id="253" name="Spielfeld GUI" color="#ff9900" meeting="false" start="2020-03-21" duration="9" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true"/>
-        <task id="200" name="Wie läufts?" color="#ff9900" meeting="false" start="2020-03-26" duration="2" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="253" name="Spielfeld GUI" color="#ff9900" meeting="false" start="2020-04-13" duration="15" complete="10" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true"/>
+        <task id="200" name="Wie läufts?" color="#ff9900" meeting="false" start="2020-04-08" duration="10" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <notes>
                 <![CDATA[Progress Report 15 
 How things are going - project timeline and responsibilities, changes and problems 
 ]]>
             </notes>
         </task>
-        <task id="214" name="Projektplan überarbeiten" color="#ff9900" meeting="false" start="2020-03-28" duration="2" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="214" name="Projektplan überarbeiten" color="#ff9900" meeting="false" start="2020-04-02" duration="2" complete="100" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <notes>
                 <![CDATA[Who? What? When? 10 
 Update and adjust your project plan for milestones 4 and 5
 ]]>
             </notes>
         </task>
-        <task id="242" name="Chat GUI" color="#9999ff" meeting="false" start="2020-03-30" duration="16" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="242" name="Chat GUI" color="#9999ff" meeting="false" start="2020-03-30" duration="16" complete="50" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <notes>
                 <![CDATA[GUI 15 
 The chat is available via a basic GUI 
 ]]>
             </notes>
         </task>
-        <task id="245" name="QA Document" color="#996600" meeting="false" start="2020-03-26" duration="4" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="245" name="QA Document" color="#996600" meeting="false" start="2020-04-11" duration="5" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <notes>
                 <![CDATA[QA 10 
 Present your QA measures which can also be found in the updated document 
@@ -351,7 +344,7 @@ Have a well thought out and detailed written QA concept and a solid and realisti
 ]]>
             </notes>
         </task>
-        <task id="293" name="Lounge GUI" color="#9999ff" meeting="false" start="2020-03-30" duration="16" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="293" name="Lounge GUI" color="#9999ff" meeting="false" start="2020-04-09" duration="13" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <notes>
                 <![CDATA[QA 10 
 Present your QA measures which can also be found in the updated document 
@@ -361,7 +354,8 @@ Have a well thought out and detailed written QA concept and a solid and realisti
 ]]>
             </notes>
         </task>
-        <task id="133" name="Übungsstunde 05" color="#9999ff" meeting="false" start="2020-04-01" duration="1" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true"/>
+        <task id="133" name="Übungsstunde 05" color="#9999ff" meeting="false" start="2020-04-01" duration="1" complete="100" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true"/>
+        <task id="358" name="Problembehandlung wechsel Spielzüge" color="#996600" meeting="false" start="2020-04-02" duration="4" complete="80" thirdDate="2020-03-02" thirdDate-constraint="0" expand="true"/>
         <task id="135" name="Übungsstunde 06" color="#9999ff" meeting="false" start="2020-04-08" duration="1" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true"/>
         <task id="139" name="Übungsstunde 07" color="#9999ff" meeting="false" start="2020-04-15" duration="1" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true"/>
         <task id="147" name="Meilenstein 3" color="#ff0066" meeting="true" start="2020-04-16" duration="0" complete="0" thirdDate="2020-03-02" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
@@ -443,7 +437,7 @@ Update and adjust your project plan for milestones 4 and 5
             </notes>
         </task>
         <task id="337" name="Übungsstunde 08" color="#9999ff" meeting="false" start="2020-04-22" duration="1" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true"/>
-        <task id="260" name="Unit Tests" color="#996600" meeting="false" start="2020-04-16" duration="11" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="260" name="Unit Tests" color="#9999ff" meeting="false" start="2020-04-16" duration="11" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <notes>
                 <![CDATA[Unit-Test 5 
 All relevant features of a core component of your game are tested 
@@ -453,50 +447,79 @@ Unit-Tests are sufficient and meaningful
 ]]>
             </notes>
         </task>
-        <task id="145" name="Full GUI" color="#cc0066" meeting="false" start="2020-04-16" duration="13" complete="0" thirdDate="2020-04-06" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="145" name="Full GUI" color="#9999ff" meeting="false" start="2020-04-13" duration="16" complete="0" thirdDate="2020-04-06" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <notes>
                 <![CDATA[Verfeinerung Design
 Drag n Drop
 Geometrie (Perspektive)]]>
             </notes>
         </task>
-        <task id="322" name="Gradle Tests" color="#cc0066" meeting="false" start="2020-04-29" duration="8" complete="0" thirdDate="2020-02-01" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true"/>
-        <task id="325" name="Feinschliff" color="#cc0066" meeting="false" start="2020-05-07" duration="7" complete="0" thirdDate="2020-02-01" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true"/>
+        <task id="322" name="Gradle Tests" color="#cc0066" meeting="false" start="2020-04-29" duration="5" complete="0" thirdDate="2020-02-01" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true"/>
+        <task id="325" name="Feinschliff" color="#cc0066" meeting="false" start="2020-05-04" duration="7" complete="0" thirdDate="2020-02-01" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true"/>
         <task id="331" name="Testing" color="#cc0066" meeting="false" start="2020-04-29" duration="15" complete="0" thirdDate="2020-04-15" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true"/>
         <task id="7" name="Meilenstein 4" color="#ff0066" meeting="true" start="2020-04-29" duration="0" complete="0" thirdDate="2020-03-02" thirdDate-constraint="0" expand="true">
             <notes>
-                <![CDATA[Full GUI:
- Card Design, 
-Spielfeld design, 
-Animationen,
- Drag & Drop methods, 
-geometry, 
-Chatroom verschönern]]>
+                <![CDATA[/** ... */ 10 
+Source code is sufficiently documented 
+ 
+5 out of 7 5 
+You will receive the playable .jar from two other groups. Assess all MS4 achievements which pertain to the game for these two groups. Handin procedure specified on Slideset 06 and via Mail after MS4. 
+ 
+Dear Diary 10 
+Project diary is up to date and filled with meaningful entries 
+ 
+GUI 20 
+The game is represented graphically 
+ 
+GUI (advanced) 30 
+The game is fully playable from the UI. Text input is only used where absolutely necessary. 
+ 
+High Score 5 
+There is a high score list which is stored persistently, updated when needed and availble for clients 
+ 
+Peer Precision 5 
+Your assessment of the other games matches our assessment with a deviation of at most one achievement 
+ 
+Referee 15 
+The rules of the game are checked and enforced correctly 
+ 
+Shall We Play A Game 20 
+Present the working game in the excercise slot by playing the game 
+ 
+Unit-Test 5 
+All relevant features of a core component of your game are tested 
+ 
+Unit-Test (advanced) 15 
+Unit-Tests are sufficient and meaningful 
+ 
+Victory! 10 
+The winner and the win state is correctly determined
+]]>
             </notes>
         </task>
         <task id="151" name="Übungsstunde 09" color="#9999ff" meeting="false" start="2020-04-29" duration="1" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true"/>
-        <task id="263" name="Dokumentation Programmarchitektur" color="#996600" meeting="false" start="2020-04-29" duration="4" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="263" name="Dokumentation Programmarchitektur" color="#996600" meeting="false" start="2020-04-26" duration="5" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <notes>
                 <![CDATA[Architecture 15 
 Have documentation outlining the overall program architecture 
 ]]>
             </notes>
         </task>
-        <task id="288" name="Gameplay Video" color="#996600" meeting="false" start="2020-05-03" duration="1" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="288" name="Gameplay Video" color="#996600" meeting="false" start="2020-05-02" duration="2" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <notes>
                 <![CDATA[Twitchy 5 
 Have a representative video showing somewhere between 20 seconds and 2 minutes of gameplay 
 ]]>
             </notes>
         </task>
-        <task id="271" name="Logo Designen" color="#ff9900" meeting="false" start="2020-04-29" duration="2" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="271" name="Logo Designen" color="#ff9900" meeting="false" start="2020-04-20" duration="5" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <notes>
                 <![CDATA[Architecture 15 
 Have documentation outlining the overall program architecture 
 ]]>
             </notes>
         </task>
-        <task id="284" name="QA Bericht" color="#ff9900" meeting="false" start="2020-05-01" duration="3" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="284" name="QA Bericht" color="#ff9900" meeting="false" start="2020-05-01" duration="5" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <notes>
                 <![CDATA[QA Report 15 
 QA report with goals, methods and results 
@@ -506,14 +529,14 @@ Detailed and relevant analysis of QA measures over time, discussion of results, 
 ]]>
             </notes>
         </task>
-        <task id="274" name="How to play" color="#0099ff" meeting="false" start="2020-04-29" duration="2" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="274" name="How to play" color="#0099ff" meeting="false" start="2020-04-29" duration="3" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <notes>
                 <![CDATA[Manual 10 
 There is a manual which describes how the game is to be played 
 ]]>
             </notes>
         </task>
-        <task id="281" name="Netzwerkprotokoll" color="#0099ff" meeting="false" start="2020-05-01" duration="3" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+        <task id="281" name="Netzwerkprotokoll" color="#00cc33" meeting="false" start="2020-05-04" duration="5" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
             <notes>
                 <![CDATA[Protocol Code 5 
 Final version of network protocol is completely defined and documented in source code 
@@ -524,9 +547,96 @@ The final version of the network protocol is current in external documentation
             </notes>
         </task>
         <task id="154" name="Übungsstunde 10" color="#9999ff" meeting="false" start="2020-05-06" duration="1" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true"/>
+        <task id="340" name="Outline" color="#0099ff" meeting="false" start="2020-05-04" duration="5" complete="0" thirdDate="2020-03-13" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+            <notes>
+                <![CDATA[About a Game 5 
+Outline of the game with its goals, rules and mechanics 
+]]>
+            </notes>
+        </task>
         <task id="9" name="Meilenstein 5" color="#ff0066" meeting="true" start="2020-05-14" duration="0" complete="100" thirdDate="2020-03-02" thirdDate-constraint="0" expand="true">
             <notes>
-                <![CDATA[Feinschliff]]>
+                <![CDATA[/** ... */ 15 
+Source code is sufficiently documented 
+ 
+About a Game 10 
+Outline of the game with its goals, rules and mechanics 
+ 
+About a Game (advanced) 10 
+Have a clear introduction to your game explaining its fundamentals in such a way that a first-time listener can understand it 
+ 
+Architecture 15 
+Have documentation outlining the overall program architecture 
+ 
+Archiving 5 
+Your repository contains an outreach/ folder with the specified content 
+ 
+Command Line 5 
+Command line parameters are still parsed correctly 
+ 
+Dear Diary 10 
+Project diary is up to date and filled with meaningful entries 
+ 
+Demo! 35 
+Have a bugfree demo of the game in the final presentation 
+ 
+GUI 30 
+The GUI works without any errors and all client functionality is accessible by it 
+ 
+Game Logic 15 
+The entire logic of the game as well as all its mechanics are present and the game is fully playable 
+ 
+High Score 10 
+There is a high score list which is stored persistently, updated when needed and shown when requested 
+ 
+Login 5 
+Arbitrarily many clients can still log on to the server 
+ 
+Logo 5 
+The game and/or team has a proper Logo 
+ 
+Manual 10 
+There is a manual which describes how the game is to be played 
+ 
+Pachydermatous Librarian 10 
+All external libraries in your project are managed by gradle via maven central 
+ 
+Picturesque 10 
+Have a representative screenshot of the game 
+ 
+Protocol Code 5 
+Final version of network protocol is completely defined and documented in source code 
+ 
+Protocol Document 5 
+The final version of the network protocol is current in external documentation 
+ 
+QA 15 
+Results of Quality Assurance measures and lessons learned from them 
+ 
+QA Report 15 
+QA report with goals, methods and results 
+ 
+QA Report (advanced) 15 
+Detailed and relevant analysis of QA measures over time, discussion of results, well-written report 
+ 
+Shall We Play A Game 35 
+Present the working final game in the excercise slot by playing the game 
+ 
+Technology! 10 
+Describe tools, libraries and processes which you use that are not introduced in the lecture and why you use them 
+ 
+Technology! (advanced) 15 
+Use at least two libraries besides JUnit actively for a significant / impactful task in your project. JavaFX does not count. 
+ 
+Twitchy 5 
+Have a representative video showing somewhere between 20 seconds and 2 minutes of gameplay 
+ 
+Unit-Test 10 
+All unit-tests are meaningful and 'green' 
+ 
+We Are Smarter Now 20 
+Lessons Learned
+]]>
             </notes>
         </task>
     </tasks>
@@ -548,6 +658,7 @@ The final version of the network protocol is current in external documentation
         <allocation task-id="253" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="242" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="257" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="145" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="112" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="182" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="211" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
@@ -556,6 +667,9 @@ The final version of the network protocol is current in external documentation
         <allocation task-id="48" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="43" resource-id="1" function="Default:1" responsible="false" load="100.0"/>
         <allocation task-id="242" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="281" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="145" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="260" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="114" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="176" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="230" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
@@ -565,15 +679,16 @@ The final version of the network protocol is current in external documentation
         <allocation task-id="288" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="316" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="293" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="358" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="116" resource-id="3" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="195" resource-id="3" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="239" resource-id="3" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="257" resource-id="3" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="274" resource-id="3" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="281" resource-id="3" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="48" resource-id="3" function="Default:1" responsible="false" load="100.0"/>
         <allocation task-id="43" resource-id="3" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="293" resource-id="3" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="340" resource-id="3" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="195" resource-id="3" function="Default:1" responsible="false" load="100.0"/>
+        <allocation task-id="145" resource-id="3" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="15" resource-id="4" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="55" resource-id="4" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="98" resource-id="4" function="Default:1" responsible="true" load="100.0"/>
@@ -585,7 +700,6 @@ The final version of the network protocol is current in external documentation
         <allocation task-id="133" resource-id="4" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="135" resource-id="4" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="139" resource-id="4" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="145" resource-id="4" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="147" resource-id="4" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="151" resource-id="4" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="154" resource-id="4" function="Default:1" responsible="true" load="100.0"/>

@@ -6,6 +6,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static skipbo.server.SBServer.servLog;
+
 public class Game {
 
     public ArrayList<Player> players;
@@ -32,7 +34,6 @@ public class Game {
 
         dealCards();
         startTurn(playersTurn);
-
 
         gameRunning = true;
     }
@@ -135,6 +136,8 @@ public class Game {
         fillHandCards(ply);
         new ProtocolExecutor().sendAllExceptOne("PRINT§Terminal§Gave " + ply.getName()
                 + " their missing cards.", ply.getSBL());
+        servLog.debug("Printed: gave their missing cards etc.");
+
     }
 
     /**

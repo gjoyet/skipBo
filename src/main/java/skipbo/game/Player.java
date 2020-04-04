@@ -4,6 +4,8 @@ import skipbo.server.SBListener;
 
 import java.util.*;
 
+import static skipbo.server.SBServer.servLog;
+
 /**
  * Class Player constructs a Player object with defined parameters
  */
@@ -52,6 +54,7 @@ public class Player {
 
     public void changeStatus(Status ps) {
         this.status = ps;
+        servLog.info(this.name + " status set to: " + ps + ".");
     }
 
     public Game getGame() {

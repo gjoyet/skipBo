@@ -147,19 +147,21 @@ public class ProtocolExecutor {
         if(input[1].equals("New")) {
             ArrayList<Player> newPlayers = new ArrayList<Player>();
             newPlayers.add(sbL.player);
+            sbL.player.changeStatus(Status.INGAME);
             int playerCount = 1;
             for (int i = 0; i < SBServer.getLobby().getLength(); i++) {
                 if (SBServer.getLobby().getPlayer(i).getStatus().equals(Status.READY)
                                 && !SBServer.getLobby().getPlayer(i).equals(sbL.player)) {
                     newPlayers.add(SBServer.getLobby().getPlayer(i));
+                    SBServer.getLobby().getPlayer(i).changeStatus(Status.INGAME);
                     playerCount++;
                 }
                 if (playerCount == 2) {
                     Game game = new Game(newPlayers);
+                    servLog.info("Game started.");
                     serverLobby.addGame(game);
-                    for(Player p : newPlayers) {
+                    for (Player p : newPlayers) {
                         p.changeGame(game);
-                        p.changeStatus(Status.INGAME);
                         p.getSBL().getPW().println("NWGME§New§");
                     }
                     return;

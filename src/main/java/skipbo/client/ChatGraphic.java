@@ -10,16 +10,16 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
 
     private SBClientListener clientListener;
     private JPanel contentPane;
-    JTextArea chat;
+    private JTextArea chat;
     private JTextArea inputMes;
-    private JScrollPane chatScrollPane;
+    JScrollPane chatScrollPane;
     private JScrollPane inputScrollPane;
 
     ChatGraphic(SBClientListener clientListener) {
         this.clientListener = clientListener;
         setFrame();
         setName();
-        printInfo("Connection successful");
+        printInfoMessage("Connection successful");
         printCommandList();
     }
 
@@ -27,7 +27,7 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
         this.clientListener = clientListener;
         setFrame();
         clientListener.pw.println("SETTO§Nickname§" + name);
-        printInfo("Connection successful");
+        printInfoMessage("Connection successful");
         printCommandList();
     }
 
@@ -82,15 +82,16 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
         String listOfCommands = "\n***********\nCommands:\n/change name [name]\n/change status ready|waiting\n" +
                 "/msg [name] [message]\n/broadcast\n/new game\n/play [PlaceFrom] [n] [PlaceTo] [n]\n" +
                 "/list games|players|commands\n/quit\n***********";
-        printInfo(listOfCommands);
+        printInfoMessage(listOfCommands);
     }
 
     /**
      *Displays an information to the client
      * @param message An information message
      */
-    void printInfo(String message) {
-        chat.append("[INFO] " + message + "\n");
+    void printInfoMessage(String message) {
+        chat.append("[Info] " + message + "\n");
+        chat.setCaretPosition(chat.getDocument().getLength());
     }
 
     /**
@@ -98,11 +99,21 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
      * @param message An error message
      */
     void printErrorMessage(String message) {
-        chat.append("[ERROR] " + message + "\n");
+        chat.append("[Error] " + message + "\n");
+        chat.setCaretPosition(chat.getDocument().getLength()-1);
     }
 
     /**
-     * Let's client set their name
+     * Displays a chat message in the chat
+     * @param message A chat message
+     */
+    void printChatMessage(String message) {
+        chat.append(message + "\n" );
+        chat.setCaretPosition(chat.getDocument().getLength()-1);
+    }
+
+    /**
+     * Lets client set their name
      */
     void setName() {
         String message = "Please enter your name\n\nName can only contain letters or digits\n" +

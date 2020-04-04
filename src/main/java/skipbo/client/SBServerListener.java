@@ -2,6 +2,8 @@ package skipbo.client;
 
 import skipbo.server.Protocol;
 import skipbo.server.NoCommandException;
+
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -54,10 +56,10 @@ class SBServerListener implements Runnable {
 
         switch (protocol) {
             case CHATM:
-                sendChatMessage(command);
+                chatGraphic.printChatMessage(command[2]);
                 break;
             case CHNGE:
-                changeTo(command);
+                chatGraphic.printInfoMessage(command[2]);
                 break;
             case PUTTO:
                 putTo(command);
@@ -67,32 +69,19 @@ class SBServerListener implements Runnable {
                 logOut();
                 break;
             case PRINT:
-                print(command);
+                chatGraphic.printInfoMessage(command[2]);
+                break;
+            case NWGME:
                 break;
             default:
                 throw new NoCommandException();
         }
     }
 
-    /**
-     * Sends a chat message to the client
-     * @param command String array according to network protocol with command, option and arguments
-     */
-    void sendChatMessage(String[] command) {
-        chatGraphic.chat.append(command[2] + "\n" );
-    }
-
-    /**
-     * Sends status message after changing name
-     * @param command String array according to network protocol with command, option and arguments
-     */
-    void changeTo(String[] command) {
-        printMessage(command[2]);
-    }
-
     void putTo(String[] command) {
-        printMessage("Someone played a card");
+        chatGraphic.printInfoMessage("Someone played a card");
     }
+
     /**
      * Terminates SBServerListener thread and sends status message to client
      */
@@ -105,22 +94,6 @@ class SBServerListener implements Runnable {
             clientLog.warn("Error with closing BufferedReader or Socket");
         }
         isLoggedIn = false;
-    }
-
-    /**
-     * Processes PRINT command and sends message according to network protocol
-     * @param command String array according to network protocol with command, option and arguments
-     */
-    void print(String[] command) {
-        printMessage(command[2]);
-    }
-
-    /**
-     *Displays a message to the client
-     * @param message A message
-     */
-    void printMessage(String message) {
-        chatGraphic.chat.append("[Info] " + message + "\n");
     }
 
 }

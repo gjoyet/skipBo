@@ -8,7 +8,7 @@ import skipbo.server.Protocol;
 import static skipbo.client.SBClient.clientLog;
 
 /**
- * Thread waiting for any action from user input (from terminal) and forwards command to Server
+ * Handles user input by forwarding correct network protocol command to the Server
  */
 class SBClientListener {
     Socket sock;
@@ -129,7 +129,8 @@ class SBClientListener {
         if (line.length < 2) {
             throw new NotACommandException("Please add a message");
         }
-        throw new NotACommandException("Command not implemented");
+        String message = line[1];
+        return Protocol.CHATM + "§Broadcast§" + message;
     }
 
     /**

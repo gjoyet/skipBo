@@ -1,5 +1,7 @@
 package skipbo.server;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import skipbo.game.Game;
 import skipbo.game.Player;
 
@@ -13,24 +15,25 @@ import java.net.Socket;
  */
 public class SBServer {
     static int playerID = 0;
-    static SBLobby serverLobby = new SBLobby();
-    //public static Game currentGame; //added static Game field currentGame that will run every game
+    static SBLobby serverLobby = new SBLobby(); // Should this maybe be non-static?
+
+    public static Logger servLog = LogManager.getLogger(SBServer.class);
 
     public static void main(String[] args) {
         ServerSocket sbServerSocket = null;
 
         try {
             sbServerSocket = new ServerSocket(Integer.parseInt(args[0]));
-            // System.out.println("Waiting for port " + args[0]);
+            servLog.info("Server waiting for port " + args[0] + ".");
         } catch(IOException ioe) {
-            System.out.println("Issue with opening Serversocket. Try with another port.");
+            servLog.fatal("Issue with opening Serversocket. Try with another port.");
         }
 
         while(true) {
             try {
                 login(sbServerSocket);
             } catch (IOException e) {
-                System.out.println("Issue with login.");
+                servLog.fatal("Issue with login.");
             }
         }
 

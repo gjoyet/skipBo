@@ -6,9 +6,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.lang.reflect.Array;
 import java.net.Socket;
 import java.util.ArrayList;
+
+import static skipbo.server.SBServer.servLog;
 
 /**
  * Thread waiting for any action from client.
@@ -22,14 +23,12 @@ public class SBListener implements Runnable {
     Player player;
 
 
-    SBListener(Socket sock, int id) {
+    SBListener(Socket sock, int id) throws IOException {
         this.sock = sock;
         try {
             this.pw = new PrintWriter(sock.getOutputStream(), true);
             this.br = new BufferedReader(new InputStreamReader(sock.getInputStream()));
-        } catch (IOException e) {
-            System.out.println("Issue with getting Input- and OutputStream.");
-        }
+        } finally {}
         this.running = true;
         this.id = id;
         this.player = null;
@@ -44,7 +43,7 @@ public class SBListener implements Runnable {
             try {
                 input = this.br.readLine().split("§", 3);
             } catch (IOException e) {
-                System.out.println("Error with reading input from client.");
+                servLog.warn("Error with reading input from client.");
             }
 
             this.analyze(input);
@@ -62,35 +61,35 @@ public class SBListener implements Runnable {
             switch (protocol) {
                 case SETTO:
                     new ProtocolExecutor(input, this).setTo();
-                    //System.out.println("LOG: Got into setTo method."); (For testing purposes)
+                    servLog.debug("Got into setTo method.");
                     break;
                 case CHNGE:
                     new ProtocolExecutor(input, this).changeTo();
-                    //System.out.println("LOG: Got into changeTo method.");
+                    servLog.debug("Got into changeTo method.");
                     break;
                 case CHATM:
                     new ProtocolExecutor(input, this).chatMessage();
-                    //System.out.println("LOG: Got into chatMessage method.");
+                    servLog.debug("Got into chatMessage method.");
                     break;
                 case LGOUT:
                     new ProtocolExecutor(input, this).logout();
-                    //System.out.println("LOG: Got into logout method.");
+                    servLog.debug("Got into logout method.");
                     break;
                 case NWGME:
-                    // System.out.println("LOG: got into newGame method.");
+                    servLog.debug("Got into newGame method.");
                     new ProtocolExecutor(input, this).newGame();
                     break;
                 case PUTTO:
-                    System.out.println("LOG: got into putTo method with input: " + input[2] + ".");
+                    servLog.debug("Got into putTo method with input: " + input[2] + ".");
                     new ProtocolExecutor(input, this).putTo();
             }
         } catch(IllegalArgumentException iae) {
-            System.out.println(input[0] + ": not a command.");
+            servLog.warn(input[0] + ": not a command.");
         } catch(NoCommandException nce) {
             if(nce.command != null && nce.option != null) {
-                System.out.println(nce.option + ": not an option for command " + nce.command + ".");
+                servLog.warn(nce.option + ": not an option for command " + nce.command + ".");
             } else {
-                System.out.println("No valid protocol.");
+                servLog.warn("No valid protocol.");
             }
         }
     }

@@ -1,13 +1,13 @@
 package skipbo.server;
 
 import skipbo.game.Game;
-import skipbo.game.Pile;
 import skipbo.game.Player;
 import skipbo.game.Status;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static skipbo.server.SBServer.servLog;
 import static skipbo.server.SBServer.serverLobby;
 
 /**
@@ -55,7 +55,7 @@ public class ProtocolExecutor {
             sbL.player = new Player(sbL.id, name, sbL);
             SBServer.serverLobby.addPlayer(sbL.player);
         } finally {
-            // System.out.println(name + " logged in.");
+            servLog.info(name + " logged in.");
             sbL.pw.println("PRINT§Terminal§Welcome to Skip-Bo, " + name + "!");
             sendAllExceptOne("PRINT§Terminal§" + name + " joined the room. Say hi!", sbL);
         }
@@ -76,7 +76,7 @@ public class ProtocolExecutor {
                 } else if (!SBServer.serverLobby.nameIsTaken(name) && SBServer.serverLobby.nameIsValid(name)) {
                     sbL.player.changeName(name);
                     sbL.pw.println("PRINT§Terminal§Name changed to " + name + ".");
-                    System.out.println(formerName + " changed name to " + name + ".");
+                    servLog.info(formerName + " changed name to " + name + ".");
                     sendAllExceptOne("PRINT§Terminal§" + formerName + " changed name to " + name + ".", sbL);
                 } else if (!SBServer.serverLobby.nameIsValid(name)) {
                     sbL.pw.println("PRINT§Terminal§Refused: Invalid name. Try again.");
@@ -103,7 +103,7 @@ public class ProtocolExecutor {
     void chatMessage() throws NoCommandException {
         try {
             if (input.length < 3) return;
-            // System.out.println("Received  '" + input[1] + "' chat message from " + sbL.player.getName() + ": " + input[2]);
+            servLog.debug("Received  '" + input[1] + "' chat message from " + sbL.player.getName() + ": " + input[2]);
             if(input[1].equals("Global")) {
                 sbL.getPW().println("CHATM§Global§You: " + input[2]);
                 sendAllExceptOne("CHATM§Global§" + sbL.player.getName() + ": " + input[2], sbL);
@@ -133,10 +133,10 @@ public class ProtocolExecutor {
             sbL.br.close();
             sbL.sock.close();
         } catch(IOException ioe) {
-            System.out.println("Issues while closing the socket at logout.");
+            servLog.warn("Issues while closing the socket at logout.");
         }
         sendAll("PRINT§Terminal§" + sbL.player.getName() + " left the room.", sbL);
-        // System.out.println(sbL.player.getName() + " logged out.");
+        servLog.info(sbL.player.getName() + " logged out.");
 
     }
 
@@ -173,7 +173,6 @@ public class ProtocolExecutor {
      */
     void putTo() {
         if(!sbL.getGameLobby().get(sbL.player.getGame().getPlayersTurn()).equals(sbL.player)) {
-            System.out.println("Hehehe");
             sbL.getPW().println("PRINT§Terminal§Wait until it's your turn, you impatient bastard!");
             return;
         }
@@ -181,7 +180,8 @@ public class ProtocolExecutor {
         if(arguments.length < 4) return;
         int indexF = Integer.parseInt(arguments[1])-1;
         int indexT = Integer.parseInt(arguments[3])-1;
-        System.out.println(arguments[0] + arguments[2] + ": piles; " + indexF + indexT + ": indexes.");
+        servLog.debug("putTo triggered with: Piles: "
+                + arguments[0] + arguments[2] + ", Indexes: " + indexF + indexT + "." );
         switch(arguments[0]+arguments[2]) {
             case "HB": sbL.player.getGame().playToMiddle(sbL.player, indexF, indexT); break;
             case "SB": sbL.player.getGame().playFromStockToMiddle(sbL.player, indexT); break;

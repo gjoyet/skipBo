@@ -93,18 +93,11 @@ public class Player {
         if (sizeOfHand < 5) {
             int toFill = (5 - sizeOfHand);
             for (int i = 0; i < toFill; ++i) {
-                Card card = piles.getDrawPileTopCard();
-                addCardToHand(card);
-                piles.drawPile.remove(piles.getDrawPileTopCard());
-                try {
-                    Thread.sleep(300);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                Random r = new Random();
+                Card card = piles.drawPile.get(r.nextInt(piles.drawPile.size() - 1));
+                this.getHandCards().add(card);
+                piles.drawPile.remove(card);
             }
         }
-        //Execute to all players in lobby: sysout ("Gave " + this.getName() + " " + their missing " + toFill + " cards");
     }
-
-
 }

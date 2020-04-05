@@ -28,3 +28,42 @@
 [WARN ] 2020-04-05 12:52:24.905 [Thread-0] SBClient - Error with reading input from server
 [WARN ] 2020-04-05 12:52:24.905 [Thread-0] SBClient - Error with reading input from server
 [WARN ] 2020-04-05 12:52:24.905 [Thread-0] SBClient - Error with reading input from server
+[INFO ] 2020-04-05 13:09:37.657 [main] SBServer - Server waiting for port 12345.
+[INFO ] 2020-04-05 13:09:42.116 [main] SBClient - Connecting to port 12345…
+[DEBUG] 2020-04-05 13:09:42.492 [Thread-0] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 13:09:42.498 [Thread-0] SBServer - rohan logged in.
+[DEBUG] 2020-04-05 13:09:42.500 [Thread-0] SBServer - Players connected: rohan
+[DEBUG] 2020-04-05 13:09:47.261 [Thread-0] SBServer - Got into changeTo method.
+[INFO ] 2020-04-05 13:09:47.269 [Thread-0] SBServer - rohan status set to: READY.
+[INFO ] 2020-04-05 13:09:52.516 [main] SBClient - Connecting to port 12345…
+[DEBUG] 2020-04-05 13:09:52.920 [Thread-1] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 13:09:52.931 [Thread-1] SBServer - rohan1 logged in.
+[DEBUG] 2020-04-05 13:09:52.933 [Thread-1] SBServer - Players connected: rohan, rohan1
+[DEBUG] 2020-04-05 13:09:57.473 [Thread-1] SBServer - Got into changeTo method.
+[INFO ] 2020-04-05 13:09:57.473 [Thread-1] SBServer - rohan1 status set to: READY.
+[DEBUG] 2020-04-05 13:10:03.900 [Thread-0] SBServer - Got into newGame method.
+[INFO ] 2020-04-05 13:10:03.900 [Thread-0] SBServer - rohan status set to: INGAME.
+[INFO ] 2020-04-05 13:10:03.900 [Thread-0] SBServer - rohan1 status set to: INGAME.
+[DEBUG] 2020-04-05 13:10:03.908 [Thread-0] SBServer - 1: Participants: rohan, rohan1; FINISHED. 
+[INFO ] 2020-04-05 13:10:03.909 [Thread-0] SBServer - Game started.
+[DEBUG] 2020-04-05 13:10:03.942 [Thread-2] SBServer - Printed: gave their missing cards etc.
+[DEBUG] 2020-04-05 13:10:10.944 [AWT-EventQueue-0] SBClient - Command: PUTTO§Card§H§4§B§1
+[DEBUG] 2020-04-05 13:10:10.952 [Thread-0] SBServer - Got into putTo method with input: H§4§B§1.
+[DEBUG] 2020-04-05 13:10:10.967 [Thread-0] SBServer - putTo triggered with: Piles: HB, Indexes: 30.
+[DEBUG] 2020-04-05 13:10:21.388 [AWT-EventQueue-0] SBClient - Command: PUTTO§Card§H§2§D§1
+[DEBUG] 2020-04-05 13:10:21.389 [Thread-0] SBServer - Got into putTo method with input: H§2§D§1.
+[DEBUG] 2020-04-05 13:10:21.389 [Thread-0] SBServer - putTo triggered with: Piles: HD, Indexes: 10.
+[DEBUG] 2020-04-05 13:10:21.401 [Thread-0] SBServer - Printed: gave their missing cards etc.
+[DEBUG] 2020-04-05 13:10:41.605 [Thread-0] SBServer - Got into logout method.
+[WARN ] 2020-04-05 13:10:41.605 [Thread-0] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 13:10:41.606 [Thread-0] SBClient - Error with reading input from server
+[INFO ] 2020-04-05 13:10:41.607 [Thread-0] SBServer - rohan logged out.
+[WARN ] 2020-04-05 13:10:41.607 [Thread-0] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 13:10:41.607 [Thread-0] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 13:10:41.607 [Thread-0] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 13:10:41.608 [Thread-0] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 13:10:41.608 [Thread-0] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 13:10:41.608 [Thread-0] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 13:10:41.608 [Thread-0] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 13:10:41.609 [Thread-0] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 13:10:42.648 [Thread-1] SBServer - Error with reading input from client.

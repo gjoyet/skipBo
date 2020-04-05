@@ -116,7 +116,8 @@ public class Pile {
             for (int j = 0; j < specDiscardPile.size(); j++) {
                 printArray[j] = specDiscardPile.get(j).number;
             }
-            str.append("Discard Pile " + i + " of " + player.getName() + " is: " + Arrays.toString(printArray) + "\t");
+            int t = i + 1;
+            str.append("Discard Pile " + t + " of " + player.getName() + " is: " + Arrays.toString(printArray) + "\t");
         }
         return str.toString();
     }

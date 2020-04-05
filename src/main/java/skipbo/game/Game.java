@@ -3,6 +3,7 @@ package skipbo.game;
 import skipbo.server.ProtocolExecutor;
 
 import java.awt.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -255,9 +256,7 @@ public class Game implements Runnable {
         Card stockCard = stockPile.get(stockPile.size() - 1);
 
         ArrayList<ArrayList<Card>> buildPiles = piles.buildPiles;
-        var specBuildPile = buildPiles.get(buildPileIndex);
-
-        //Card topCard = specBuildPile.get(specBuildPile.size() - 1);
+        ArrayList<Card> specBuildPile = buildPiles.get(buildPileIndex);
 
         if (specBuildPile.isEmpty()) {
             if (stockCard.number == 1) {

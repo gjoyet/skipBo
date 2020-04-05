@@ -1,5 +1,6 @@
 package skipbo.game;
-import java.awt.Color;
+
+import java.awt.*;
 
 public class Card {
 
@@ -7,16 +8,27 @@ public class Card {
     public Color col;
     public String special;
 
-    Card (int num, Color col){ // Constructor for a normal card with (color and number)
+    /**
+     * Constructor for a normal Card object
+     *
+     * @param num The number on the card
+     * @param col The color of the card
+     */
+
+    Card(int num, Color col) { // Constructor for a normal card with (color and number)
         number = num;
         this.col = col;
     }
 
-    Card (Color col){ // Constructor for the special card (Skip Bo)
+    /**
+     * Constructor for a Skip Bo card (joker)
+     *
+     * @param col (Special color cyan for Skip Bo cards)
+     */
+    Card(Color col) { // Constructor for the special card (Skip Bo)
         this.number = 13;
         this.col = col;
     }
-
 
 
 }

@@ -6,6 +6,9 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * GUI for Skip-Bo chat
+ */
 public class ChatGraphic extends JFrame implements KeyListener { //ActionListener
 
     private SBClientListener clientListener;
@@ -15,6 +18,10 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
     JScrollPane chatScrollPane;
     private JScrollPane inputScrollPane;
 
+    /**
+     * Constructor for ChatGraphic without client name. Lets client choose their name.
+     * @param clientListener
+     */
     ChatGraphic(SBClientListener clientListener) {
         this.clientListener = clientListener;
         setFrame();
@@ -23,6 +30,11 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
         printCommandList();
     }
 
+    /**
+     * Constructor for ChatGraphic with client name
+     * @param clientListener
+     * @param name
+     */
     ChatGraphic(SBClientListener clientListener, String name) {
         this.clientListener = clientListener;
         setFrame();
@@ -31,6 +43,9 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
         printCommandList();
     }
 
+    /**
+     * Creates the chat window
+     */
     void setFrame() {
 
         setTitle("Skip-Bros CHAT");
@@ -78,7 +93,6 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
      * Sends Information about valid commands to the client
      */
     void printCommandList() {
-        //List of Commands
         String listOfCommands = "\n***********\nCommands:\n/change name [name]\n/change status ready|waiting\n" +
                 "/msg [name] [message]\n/broadcast\n/new game\n/play [PlaceFrom] [n] [PlaceTo] [n]\n" +
                 "/list games|players\n/help\n/quit\n***********";

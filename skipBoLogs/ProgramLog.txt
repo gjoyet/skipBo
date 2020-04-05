@@ -1,0 +1,30 @@
+[INFO ] 2020-04-05 12:51:16.731 [main] SBServer - Server waiting for port 63015.
+[INFO ] 2020-04-05 12:51:24.257 [main] SBClient - Connecting to port 63015…
+[DEBUG] 2020-04-05 12:51:27.173 [Thread-0] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 12:51:27.203 [Thread-0] SBServer - Guillaume logged in.
+[DEBUG] 2020-04-05 12:51:27.212 [Thread-0] SBServer - Players connected: Guillaume
+[INFO ] 2020-04-05 12:51:36.696 [main] SBClient - Connecting to port 63015…
+[DEBUG] 2020-04-05 12:51:42.148 [Thread-1] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 12:51:42.156 [Thread-1] SBServer - Janni logged in.
+[DEBUG] 2020-04-05 12:51:42.158 [Thread-1] SBServer - Players connected: Guillaume,Janni
+[INFO ] 2020-04-05 12:51:42.132 [main] SBClient - Connecting to port 63015…
+[DEBUG] 2020-04-05 12:51:47.526 [Thread-2] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 12:51:47.528 [Thread-2] SBServer - Manuela logged in.
+[DEBUG] 2020-04-05 12:51:47.549 [Thread-2] SBServer - Players connected: Guillaume,Janni,Manuela
+[DEBUG] 2020-04-05 12:52:18.482 [Thread-2] SBServer - Got into logout method.
+[INFO ] 2020-04-05 12:52:18.486 [Thread-2] SBServer - Manuela logged out.
+[WARN ] 2020-04-05 12:52:18.487 [Thread-0] SBClient - Error with reading input from server
+[DEBUG] 2020-04-05 12:52:22.287 [Thread-1] SBServer - Got into logout method.
+[INFO ] 2020-04-05 12:52:22.288 [Thread-1] SBServer - Janni logged out.
+[WARN ] 2020-04-05 12:52:22.289 [Thread-0] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 12:52:22.297 [Thread-0] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 12:52:22.297 [Thread-0] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 12:52:22.298 [Thread-0] SBClient - Error with reading input from server
+[DEBUG] 2020-04-05 12:52:24.897 [Thread-0] SBServer - Got into logout method.
+[INFO ] 2020-04-05 12:52:24.898 [Thread-0] SBServer - Guillaume logged out.
+[WARN ] 2020-04-05 12:52:24.900 [Thread-0] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 12:52:24.904 [Thread-0] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 12:52:24.904 [Thread-0] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 12:52:24.905 [Thread-0] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 12:52:24.905 [Thread-0] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 12:52:24.905 [Thread-0] SBClient - Error with reading input from server

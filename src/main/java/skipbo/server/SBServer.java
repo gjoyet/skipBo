@@ -59,9 +59,9 @@ public class SBServer {
     public static String getWholePlayerList() {
         StringBuilder allNames = new StringBuilder();
         for(Player p : serverLobby.getPlayerLobby()) {
-            allNames.append(p.getName() + ",");
+            allNames.append(p.getName() + ", ");
         }
-        allNames.deleteCharAt(allNames.length()-1);
+        allNames.delete(allNames.length()-2, allNames.length());
         return allNames.toString();
     }
 

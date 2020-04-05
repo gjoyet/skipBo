@@ -168,7 +168,7 @@ public class ProtocolExecutor {
     /**
      * Method for command "NWGME". Starts a new game with the first 4 players found with PlayerStatus 'READY'.
      */
-    void newGame() {
+    void newGame() throws NoCommandException {
         if(input[1].equals("New")) {
             ArrayList<Player> newPlayers = new ArrayList<Player>();
             newPlayers.add(sbL.player);
@@ -179,7 +179,7 @@ public class ProtocolExecutor {
                                 && !SBServer.getLobby().getPlayer(i).equals(sbL.player)) {
                     newPlayers.add(SBServer.getLobby().getPlayer(i));
                     SBServer.getLobby().getPlayer(i).changeStatus(Status.INGAME);
-                    playerCount++;
+                    ++playerCount;
                 }
                 if (playerCount == 2) break;
             }
@@ -198,7 +198,7 @@ public class ProtocolExecutor {
                 sbL.getPW().println("PRINT§Terminal§Not enough people are ready.");
                 servLog.info(sbL.player.getName() + " tried to start game: not enough people were ready.");
             }
-        }
+        } else throw new NoCommandException(input[0], input[1]);
     }
 
     /**
@@ -222,6 +222,21 @@ public class ProtocolExecutor {
             case "HD": sbL.player.getGame().playToDiscard(sbL.player, indexF, indexT); break;
             default: sbL.getPW().println("PRINT§Terminal§This move is not allowed.");
         }
+    }
+
+    void display() throws NoCommandException {
+        try {
+            switch (input[1]) {
+                case "players":
+                    sbL.getPW().println("PRINT§Terminal§" + SBServer.getWholePlayerList());
+                    break;
+                case "games":
+                    sbL.getPW().println("PRINT§Terminal§" + SBServer.getGamesList());
+                    break;
+                default:
+                    throw new NoCommandException(input[0], input[1]);
+            }
+        } finally {}
     }
 
     /**

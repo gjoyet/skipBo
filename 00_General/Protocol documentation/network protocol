@@ -1,7 +1,7 @@
 
 Basic Structure: XXXXX§Option§Arguments
 Example: PRINT§Terminal§Please enter nickname:	Action: Prints ‚Please enter nickname:‘ on terminal of client
-Example: CHNGE§Nickname§Destroyer			Action: Changes nickname of Player sending request to ‚Destroyer‘
+Example: CHNGE§Nickname§Marc			Action: Changes nickname of Player sending request to ‚Marc‘
 
 Section		Command		Option		Arguments				Comments
 

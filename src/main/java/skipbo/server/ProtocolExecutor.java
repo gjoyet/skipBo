@@ -119,8 +119,8 @@ public class ProtocolExecutor {
                             println("CHATM§Private§(from " + sbL.player.getName() + "): " + nameAndMes[1]);
                 }
             } else if(input[1].equals("Broadcast")) {
-                sbL.getPW().println("CHATM§Broadcast§" + input[2]);
-                broadcastExceptOne("CHATM§Broadcast§" + input[2], sbL);
+                sbL.getPW().println("CHATM§Broadcast§(BC) You: " + input[2]);
+                broadcastExceptOne("CHATM§Broadcast§(BC) " + sbL.player.getName() + input[2], sbL);
             } else throw new NoCommandException(input[0], input[1]);
         } finally {}
     }

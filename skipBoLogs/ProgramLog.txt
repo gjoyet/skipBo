@@ -1,0 +1,39 @@
+[INFO ] 2020-04-05 11:35:04.043 [main] SBServer - Server waiting for port 63015.
+[INFO ] 2020-04-05 11:35:08.869 [main] SBClient - Connecting to port 63015…
+[INFO ] 2020-04-05 11:35:15.787 [main] SBClient - Connecting to port 63015…
+[INFO ] 2020-04-05 11:35:21.970 [main] SBClient - Connecting to port 63015…
+[INFO ] 2020-04-05 11:35:24.749 [Thread-0] SBServer - Guillaume logged in.
+[DEBUG] 2020-04-05 11:35:24.759 [Thread-0] SBServer - Players connected: Guillaume
+[DEBUG] 2020-04-05 11:35:24.759 [Thread-0] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 11:35:30.694 [Thread-2] SBServer - Steffi logged in.
+[DEBUG] 2020-04-05 11:35:30.697 [Thread-2] SBServer - Players connected: Guillaume,Steffi
+[DEBUG] 2020-04-05 11:35:30.697 [Thread-2] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 11:35:34.410 [Thread-1] SBServer - Sarah logged in.
+[DEBUG] 2020-04-05 11:35:34.412 [Thread-1] SBServer - Players connected: Guillaume,Steffi,Sarah
+[DEBUG] 2020-04-05 11:35:34.413 [Thread-1] SBServer - Got into setTo method.
+[DEBUG] 2020-04-05 11:35:42.653 [Thread-0] SBServer - Received  'Global' chat message from Guillaume: Hello
+[DEBUG] 2020-04-05 11:35:42.676 [Thread-0] SBServer - Got into chatMessage method.
+[DEBUG] 2020-04-05 11:35:54.238 [Thread-0] SBServer - Received  'Private' chat message from Guillaume: Steffi§Hello
+[DEBUG] 2020-04-05 11:35:54.243 [Thread-0] SBServer - Got into chatMessage method.
+[INFO ] 2020-04-05 11:36:02.885 [Thread-0] SBServer - Guillaume status set to: READY.
+[DEBUG] 2020-04-05 11:36:02.902 [Thread-0] SBServer - Got into changeTo method.
+[DEBUG] 2020-04-05 11:36:12.239 [Thread-2] SBServer - Got into newGame method.
+[INFO ] 2020-04-05 11:36:12.239 [Thread-2] SBServer - Steffi status set to: INGAME.
+[INFO ] 2020-04-05 11:36:12.240 [Thread-2] SBServer - Guillaume status set to: INGAME.
+[DEBUG] 2020-04-05 11:36:12.251 [Thread-2] SBServer - Participants: Steffi, Guillaume; FINISHED. 
+
+[INFO ] 2020-04-05 11:36:12.252 [Thread-2] SBServer - Game started.
+[DEBUG] 2020-04-05 11:36:12.314 [Thread-3] SBServer - Printed: gave their missing cards etc.
+[DEBUG] 2020-04-05 11:36:27.209 [AWT-EventQueue-0] SBClient - Command: PUTTO§Card§H§1§D§1
+[DEBUG] 2020-04-05 11:36:27.221 [Thread-2] SBServer - Got into putTo method with input: H§1§D§1.
+[DEBUG] 2020-04-05 11:36:27.252 [Thread-2] SBServer - putTo triggered with: Piles: HD, Indexes: 00.
+[DEBUG] 2020-04-05 11:36:27.303 [Thread-2] SBServer - Printed: gave their missing cards etc.
+[DEBUG] 2020-04-05 11:36:34.847 [Thread-0] SBServer - Received  'Global' chat message from Guillaume: hufhawef
+[DEBUG] 2020-04-05 11:36:34.848 [Thread-0] SBServer - Got into chatMessage method.
+[DEBUG] 2020-04-05 11:36:43.510 [Thread-0] SBServer - Received  'Broadcast' chat message from Guillaume: Hallo sarah
+[DEBUG] 2020-04-05 11:36:43.512 [Thread-0] SBServer - Got into chatMessage method.
+[INFO ] 2020-04-05 11:36:49.676 [Thread-1] SBServer - Sarah logged out.
+[DEBUG] 2020-04-05 11:36:49.677 [Thread-1] SBServer - Got into logout method.
+[INFO ] 2020-04-05 11:36:51.755 [Thread-2] SBServer - Steffi logged out.
+[DEBUG] 2020-04-05 11:36:51.756 [Thread-2] SBServer - Got into logout method.
+[INFO ] 2020-04-05 11:36:52.891 [Thread-0] SBServer - Guillaume logged out.

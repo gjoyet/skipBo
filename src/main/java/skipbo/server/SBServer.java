@@ -69,7 +69,7 @@ public class SBServer {
             if(!p.getStatus().equals(Status.INGAME))
             allNames.append(p.getName() + ",");
         }
-        allNames.deleteCharAt(allNames.length()-1);
+        if(allNames.length() > 0) allNames.deleteCharAt(allNames.length()-1);
         return allNames.toString();
     }
 
@@ -87,7 +87,7 @@ public class SBServer {
                 allGames.append(++counter + ": " + g.toString());
             }
         }
-        allGames.deleteCharAt(allGames.length()-1);
+        if(allGames.length() > 0) allGames.deleteCharAt(allGames.length()-1);
         return allGames.toString();
     }
 

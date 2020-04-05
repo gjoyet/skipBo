@@ -50,13 +50,15 @@ public class Game implements Runnable {
         return this.gameRunning;
     }
 
-    public void terminateGame() { this.gameRunning = false; }
+    public void terminateGame() {
+        this.gameRunning = false;
+    }
 
     public String getPlayerList() {
         StringBuilder playerString = new StringBuilder();
-        for(int i = 0; i < players.size(); i++) {
+        for (int i = 0; i < players.size(); i++) {
             playerString.append(players.get(i).getName());
-            if(!(i == players.size()-1)) playerString.append("\n");
+            if (!(i == players.size() - 1)) playerString.append("\n");
         }
         return playerString.toString();
     }
@@ -72,28 +74,6 @@ public class Game implements Runnable {
 
         return gToString.toString();
     }
-
-    /**
-     * Method start() runs at the beginning of the Game, and waits until
-     * boolean value turnFinished
-     */
-
-    public void start() {  // TODO: Safe delete this method (if it isn't needed anymore).
-        while (gameRunning) {
-            startTurn(playersTurn);
-            while (!turnFinished) {
-                try {
-                    sleep(100);
-                } finally {
-                }
-            }
-            try {
-                sleep(100);
-            } finally {
-            }
-        }
-    }
-
 
     /**
      * setUpGame creates all card Decks and hands out random cards
@@ -342,7 +322,7 @@ public class Game implements Runnable {
      */
 
     public void playFromDiscardToMiddle(Player currentPlayer, int discardPileIndex, int buildPileIndex) {
-        // TODO: Rohan, I let you implement this method since you know how you handled the other cases.
+
         ArrayList<Card> discardPile = currentPlayer.getDiscardPile().get(discardPileIndex);
         ArrayList<Card> specBuildPile = piles.buildPiles.get(buildPileIndex);
 

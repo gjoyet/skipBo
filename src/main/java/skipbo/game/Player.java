@@ -2,7 +2,7 @@ package skipbo.game;
 
 import skipbo.server.SBListener;
 
-import java.util.*;
+import java.util.ArrayList;
 
 import static skipbo.server.SBServer.servLog;
 
@@ -21,6 +21,7 @@ public class Player {
     /**
      * Player constructor to build a Player object with
      * an int id, String name and a ServerListener object specific to the player
+     *
      * @param id
      * @param name
      * @param sbListen
@@ -42,7 +43,9 @@ public class Player {
         this.name = name;
     }
 
-    public int getId() { return this.id; }
+    public int getId() {
+        return this.id;
+    }
 
     public SBListener getSBL() {
         return this.sbListen;

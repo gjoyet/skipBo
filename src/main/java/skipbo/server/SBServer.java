@@ -87,7 +87,7 @@ public class SBServer {
                 allGames.append(++counter + ": " + g.toString());
             }
         }
-
+        allGames.deleteCharAt(allGames.length()-1);
         return allGames.toString();
     }
 

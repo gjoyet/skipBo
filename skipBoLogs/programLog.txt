@@ -383,3 +383,146 @@
 [DEBUG] 2020-04-05 22:00:53.444 [Thread-1] SBServer - Got into for.
 [DEBUG] 2020-04-05 22:00:53.444 [Thread-1] SBServer - Content of allGame String: 
 [DEBUG] 2020-04-05 22:00:53.444 [Thread-1] SBServer - Content of gameList (with normal for): 
+[DEBUG] 2020-04-05 22:06:29.020 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:06:29.029 [main] Main - Main triggered Server.
+[INFO ] 2020-04-05 22:06:29.040 [Thread-0] SBServer - Server waiting for port 63001.
+[DEBUG] 2020-04-05 22:06:37.795 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:06:37.803 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 22:06:37.816 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 22:06:40.867 [Thread-1] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 22:06:40.879 [Thread-1] SBServer - Guillaume logged in.
+[DEBUG] 2020-04-05 22:06:40.882 [Thread-1] SBServer - Players connected: Guillaume
+[DEBUG] 2020-04-05 22:06:42.616 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:06:42.628 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 22:06:42.635 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 22:06:45.863 [Thread-2] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 22:06:45.971 [Thread-2] SBServer - Janni logged in.
+[DEBUG] 2020-04-05 22:06:45.972 [Thread-2] SBServer - Players connected: Guillaume, Janni
+[DEBUG] 2020-04-05 22:06:52.329 [Thread-2] SBServer - Got into changeTo method.
+[INFO ] 2020-04-05 22:06:52.381 [Thread-2] SBServer - Janni status set to: READY.
+[DEBUG] 2020-04-05 22:06:57.374 [Thread-1] SBServer - Got into newGame method.
+[INFO ] 2020-04-05 22:06:57.384 [Thread-1] SBServer - Guillaume status set to: INGAME.
+[INFO ] 2020-04-05 22:06:57.386 [Thread-1] SBServer - Janni status set to: INGAME.
+[DEBUG] 2020-04-05 22:06:57.409 [Thread-1] SBServer - In getGamesList, size of getGame: 1
+[WARN ] 2020-04-05 22:07:09.494 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:07:09.502 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:07:09.502 [Thread-1] SBClient - Error with reading input from server
+[DEBUG] 2020-04-05 22:07:10.077 [Thread-2] SBServer - Got into logout method.
+[WARN ] 2020-04-05 22:07:10.079 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:07:10.081 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:07:10.082 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:07:10.082 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:07:10.082 [Thread-1] SBClient - Error with reading input from server
+[INFO ] 2020-04-05 22:07:10.098 [Thread-2] SBServer - Janni logged out.
+[DEBUG] 2020-04-05 22:09:47.967 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:09:47.976 [main] Main - Main triggered Server.
+[INFO ] 2020-04-05 22:09:47.990 [Thread-0] SBServer - Server waiting for port 63001.
+[DEBUG] 2020-04-05 22:09:53.740 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:09:53.752 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 22:09:53.759 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 22:09:56.556 [Thread-1] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 22:09:56.563 [Thread-1] SBServer - Guillaume logged in.
+[DEBUG] 2020-04-05 22:09:56.571 [Thread-1] SBServer - Players connected: Guillaume
+[DEBUG] 2020-04-05 22:10:00.014 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:10:00.020 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 22:10:00.026 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 22:10:03.242 [Thread-2] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 22:10:03.252 [Thread-2] SBServer - Janni logged in.
+[DEBUG] 2020-04-05 22:10:03.253 [Thread-2] SBServer - Players connected: Guillaume, Janni
+[DEBUG] 2020-04-05 22:10:08.884 [Thread-1] SBServer - Got into display method.
+[DEBUG] 2020-04-05 22:10:08.886 [Thread-1] SBServer - In getGamesList, size of getGame: 0
+[DEBUG] 2020-04-05 22:10:14.140 [Thread-1] SBServer - Got into changeTo method.
+[INFO ] 2020-04-05 22:10:14.154 [Thread-1] SBServer - Guillaume status set to: READY.
+[DEBUG] 2020-04-05 22:10:17.469 [Thread-2] SBServer - Got into newGame method.
+[INFO ] 2020-04-05 22:10:17.474 [Thread-2] SBServer - Janni status set to: INGAME.
+[INFO ] 2020-04-05 22:10:17.475 [Thread-2] SBServer - Guillaume status set to: INGAME.
+[INFO ] 2020-04-05 22:10:17.477 [Thread-2] SBServer - Game started.
+[DEBUG] 2020-04-05 22:10:17.478 [Thread-2] SBServer - Size of gameList: 1
+[DEBUG] 2020-04-05 22:10:21.178 [Thread-2] SBServer - Got into display method.
+[DEBUG] 2020-04-05 22:10:21.179 [Thread-2] SBServer - In getGamesList, size of getGame: 1
+[DEBUG] 2020-04-05 22:10:21.179 [Thread-2] SBServer - Added game.
+[DEBUG] 2020-04-05 22:10:21.189 [Thread-2] SBServer - Content of allGame String: 1: Participants: Janni, Guillaume; RUNNING.
+[DEBUG] 2020-04-05 22:10:21.190 [Thread-2] SBServer - Content of gameList (with normal for): 1: Participants: Janni, Guillaume; RUNNING.
+[DEBUG] 2020-04-05 22:10:33.742 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:10:33.752 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 22:10:33.759 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 22:10:39.788 [Thread-4] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 22:10:39.795 [Thread-4] SBServer - Marc logged in.
+[DEBUG] 2020-04-05 22:10:39.797 [Thread-4] SBServer - Players connected: Guillaume, Janni, Marc
+[DEBUG] 2020-04-05 22:10:41.175 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:10:41.184 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 22:10:41.191 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 22:10:53.968 [Thread-5] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 22:10:53.971 [Thread-5] SBServer - Rolf logged in.
+[DEBUG] 2020-04-05 22:10:53.973 [Thread-5] SBServer - Players connected: Guillaume, Janni, Marc, Rolf
+[DEBUG] 2020-04-05 22:11:00.094 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:11:00.107 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 22:11:00.115 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 22:11:04.398 [Thread-6] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 22:11:04.400 [Thread-6] SBServer - Manuela logged in.
+[DEBUG] 2020-04-05 22:11:04.413 [Thread-6] SBServer - Players connected: Guillaume, Janni, Marc, Rolf, Manuela
+[DEBUG] 2020-04-05 22:11:07.125 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:11:07.148 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 22:11:07.158 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 22:11:11.811 [Thread-7] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 22:11:11.813 [Thread-7] SBServer - Rohan logged in.
+[DEBUG] 2020-04-05 22:11:11.825 [Thread-7] SBServer - Players connected: Guillaume, Janni, Marc, Rolf, Manuela, Rohan
+[DEBUG] 2020-04-05 22:11:13.684 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:11:13.690 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 22:11:13.697 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 22:11:22.894 [Thread-8] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 22:11:22.895 [Thread-8] SBServer - Scharlatan logged in.
+[DEBUG] 2020-04-05 22:11:22.899 [Thread-8] SBServer - Players connected: Guillaume, Janni, Marc, Rolf, Manuela, Rohan, Scharlatan
+[DEBUG] 2020-04-05 22:11:28.231 [Thread-8] SBServer - Got into changeTo method.
+[INFO ] 2020-04-05 22:11:28.237 [Thread-8] SBServer - Scharlatan status set to: READY.
+[DEBUG] 2020-04-05 22:11:33.631 [Thread-5] SBServer - Got into newGame method.
+[INFO ] 2020-04-05 22:11:33.632 [Thread-5] SBServer - Rolf status set to: INGAME.
+[INFO ] 2020-04-05 22:11:33.633 [Thread-5] SBServer - Scharlatan status set to: INGAME.
+[INFO ] 2020-04-05 22:11:33.635 [Thread-5] SBServer - Game started.
+[DEBUG] 2020-04-05 22:11:33.637 [Thread-5] SBServer - Size of gameList: 2
+[DEBUG] 2020-04-05 22:11:42.778 [Thread-4] SBServer - Got into changeTo method.
+[INFO ] 2020-04-05 22:11:42.779 [Thread-4] SBServer - Marc status set to: READY.
+[DEBUG] 2020-04-05 22:11:50.094 [Thread-6] SBServer - Got into newGame method.
+[INFO ] 2020-04-05 22:11:50.094 [Thread-6] SBServer - Manuela status set to: INGAME.
+[INFO ] 2020-04-05 22:11:50.095 [Thread-6] SBServer - Marc status set to: INGAME.
+[INFO ] 2020-04-05 22:11:50.097 [Thread-6] SBServer - Game started.
+[DEBUG] 2020-04-05 22:11:50.097 [Thread-6] SBServer - Size of gameList: 3
+[DEBUG] 2020-04-05 22:11:54.637 [Thread-6] SBServer - Got into display method.
+[DEBUG] 2020-04-05 22:11:59.405 [Thread-6] SBServer - Got into display method.
+[DEBUG] 2020-04-05 22:11:59.405 [Thread-6] SBServer - In getGamesList, size of getGame: 3
+[DEBUG] 2020-04-05 22:11:59.405 [Thread-6] SBServer - Added game.
+[DEBUG] 2020-04-05 22:11:59.407 [Thread-6] SBServer - Added game.
+[DEBUG] 2020-04-05 22:11:59.408 [Thread-6] SBServer - Added game.
+[DEBUG] 2020-04-05 22:11:59.408 [Thread-6] SBServer - Content of allGame String: 1: Participants: Janni, Guillaume; RUNNING.
+[DEBUG] 2020-04-05 22:11:59.409 [Thread-6] SBServer - Content of allGame String: 2: Participants: Rolf, Scharlatan; RUNNING.
+[DEBUG] 2020-04-05 22:11:59.409 [Thread-6] SBServer - Content of allGame String: 3: Participants: Manuela, Marc; RUNNING.
+[DEBUG] 2020-04-05 22:11:59.409 [Thread-6] SBServer - Content of gameList (with normal for): 1: Participants: Janni, Guillaume; RUNNING.
+[DEBUG] 2020-04-05 22:11:59.409 [Thread-6] SBServer - Content of gameList (with normal for): 2: Participants: Rolf, Scharlatan; RUNNING.
+[DEBUG] 2020-04-05 22:11:59.410 [Thread-6] SBServer - Content of gameList (with normal for): 3: Participants: Manuela, Marc; RUNNING.
+[DEBUG] 2020-04-05 22:14:19.452 [Thread-6] SBServer - Got into logout method.
+[INFO ] 2020-04-05 22:14:19.494 [Thread-6] SBServer - Manuela logged out.
+[DEBUG] 2020-04-05 22:14:20.385 [Thread-5] SBServer - Got into logout method.
+[INFO ] 2020-04-05 22:14:20.386 [Thread-5] SBServer - Rolf logged out.
+[DEBUG] 2020-04-05 22:14:22.205 [Thread-4] SBServer - Got into logout method.
+[INFO ] 2020-04-05 22:14:22.207 [Thread-4] SBServer - Marc logged out.
+[WARN ] 2020-04-05 22:14:22.222 [Thread-1] SBClient - Error with reading input from server
+[DEBUG] 2020-04-05 22:14:23.838 [Thread-8] SBServer - Got into logout method.
+[INFO ] 2020-04-05 22:14:23.839 [Thread-8] SBServer - Scharlatan logged out.
+[DEBUG] 2020-04-05 22:14:25.960 [Thread-7] SBServer - Got into logout method.
+[INFO ] 2020-04-05 22:14:25.962 [Thread-7] SBServer - Rohan logged out.
+[DEBUG] 2020-04-05 22:14:29.674 [Thread-2] SBServer - Got into logout method.
+[INFO ] 2020-04-05 22:14:29.675 [Thread-2] SBServer - Janni logged out.
+[WARN ] 2020-04-05 22:14:29.704 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:14:29.712 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:14:29.713 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:14:29.717 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:14:29.717 [Thread-1] SBClient - Error with reading input from server
+[DEBUG] 2020-04-05 22:14:32.818 [Thread-1] SBServer - Got into logout method.
+[INFO ] 2020-04-05 22:14:32.821 [Thread-1] SBServer - Guillaume logged out.
+[DEBUG] 2020-04-05 22:14:49.500 [Thread-6] SBServer - In getGamesList, size of getGame: 3
+[DEBUG] 2020-04-05 22:14:50.392 [Thread-5] SBServer - In getGamesList, size of getGame: 3
+[DEBUG] 2020-04-05 22:14:52.214 [Thread-4] SBServer - In getGamesList, size of getGame: 3
+[DEBUG] 2020-04-05 22:14:53.841 [Thread-8] SBServer - In getGamesList, size of getGame: 3
+[DEBUG] 2020-04-05 22:14:55.966 [Thread-7] SBServer - In getGamesList, size of getGame: 3
+[DEBUG] 2020-04-05 22:14:59.679 [Thread-2] SBServer - In getGamesList, size of getGame: 3
+[DEBUG] 2020-04-05 22:15:02.826 [Thread-1] SBServer - In getGamesList, size of getGame: 3

@@ -156,7 +156,10 @@ public class ProtocolExecutor {
                 }
                 File gameFile = new File("skipBoLogs/Games.txt");
                 PrintWriter filePW = new PrintWriter(new FileOutputStream(gameFile), true);
-                filePW.println(SBServer.getGamesList());
+                String[] gamesList = SBServer.getGamesList();
+                for(String s : gamesList) {
+                    filePW.println(s);
+                }
             } catch (FileNotFoundException e) {
                 servLog.warn("Problem with writing games into a file.");
             }
@@ -189,7 +192,6 @@ public class ProtocolExecutor {
                     p.getSBL().getPW().println("NWGME§New§");
                     p.changeStatus(Status.INGAME);
                 }
-                servLog.debug(SBServer.getGamesList());
                 Thread gameT = new Thread(game); gameT.start();
                 servLog.info("Game started.");
                 servLog.debug("Size of gameList: " + serverLobby.getGames().size());

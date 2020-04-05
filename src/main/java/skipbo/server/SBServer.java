@@ -99,28 +99,17 @@ public class SBServer implements Runnable {
         String[] allGames = new String[serverLobby.getGames().size()];
         int counter = 0;
         servLog.debug("In getGamesList, size of getGame: " + serverLobby.getGames().size());
-        for(int i=0; i < serverLobby.getGames().size(); i++) {
-            servLog.debug("Got into for.");
-            if(serverLobby.getGames().get(i).gameIsRunning()) {
+        for(Game g : serverLobby.getGames()) {
+            if(g.gameIsRunning()) {
                 servLog.debug("Added game.");
-                servLog.debug("Game to String: " + serverLobby.getGames().get(i).toString());
-                allGames[i] = i + ": " + serverLobby.getGames().get(i).toString();
+                allGames[counter++] = counter + ": " + g.toString();
             }
         }
         for(Game g : serverLobby.getGames()) {
             if(!g.gameIsRunning()) {
                 counter++;
-                allGames[counter-1] = counter + ": " + g.toString();
+                allGames[counter++] = counter + ": " + g.toString();
             }
-        }
-        if(allGames.length > 0) {
-            allGames[allGames.length - 1] = allGames[allGames.length - 1].substring(0, allGames.length - 1);
-        }
-        for(String s : allGames) {
-            servLog.debug("Content of allGame String: " + s);
-        }
-        for(int i=0; i < allGames.length; i++) {
-            servLog.debug("Content of gameList (with normal for): " + allGames[i]);
         }
         return allGames;
     }

@@ -71,7 +71,7 @@ public class Game implements Runnable {
             gToString.append(players.get(i).getName());
             if (!(i == players.size() - 1)) gToString.append(", ");
         }
-        if (gameRunning) gToString.append("; RUNNING.");
+        if(gameRunning) gToString.append("; RUNNING.");
         else gToString.append("; FINISHED.");
 
         return gToString.toString();

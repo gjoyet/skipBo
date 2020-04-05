@@ -19,7 +19,7 @@ public class SBLobby {
 
     ArrayList<Player> getPlayerLobby() { return this.playerLobby; }
 
-    ArrayList<Game> getGameList() { return this.gameList; }
+    ArrayList<Game> getGames() { return this.gameList; }
 
     int getSize() { return playerLobby.size(); }
 

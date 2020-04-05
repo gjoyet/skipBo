@@ -119,8 +119,8 @@ public class ProtocolExecutor {
                             println("CHATM§Private§(from " + sbL.player.getName() + "): " + nameAndMes[1]);
                 }
             } else if(input[1].equals("Broadcast")) {
-                sbL.getPW().println("CHATM§Broadcast§" + input[2]);
-                broadcastExceptOne("CHATM§Broadcast§" + input[2], sbL);
+                sbL.getPW().println("CHATM§Broadcast§(BC) You: " + input[2]);
+                broadcastExceptOne("CHATM§Broadcast§(BC) " + sbL.player.getName() + input[2], sbL);
             } else throw new NoCommandException(input[0], input[1]);
         } finally {}
     }
@@ -143,6 +143,16 @@ public class ProtocolExecutor {
         sendAll("PRINT§Terminal§" + sbL.player.getName() + " left the room.", sbL);
         servLog.info(sbL.player.getName() + " logged out.");
         if(serverLobby.getSize() == 0) {
+            try {
+                for(Game g : SBServer.getLobby().getGames()) {
+                    g.terminateGame();
+                }
+                File gameFile = new File("skipBoLogs/Games.txt");
+                PrintWriter filePW = new PrintWriter(new FileOutputStream(gameFile), true);
+                filePW.println(SBServer.getGamesList());
+            } catch (FileNotFoundException e) {
+                servLog.warn("Problem with writing games into a file.");
+            }
             System.exit(0);
         }
 

@@ -75,17 +75,19 @@ public class SBServer {
 
     public static String getGamesList() {
         StringBuilder allGames = new StringBuilder();
-        for(Game g : serverLobby.getGameList()) {
+        int counter = 0;
+        for(Game g : serverLobby.getGames()) {
             if(g.gameIsRunning()) {
-                allGames.append(g.toString());
+                allGames.append(++counter + ": " + g.toString());
             }
         }
-        for(Game g : serverLobby.getGameList()) {
+        if(allGames.length() > 0) allGames.append("\n");
+        for(Game g : serverLobby.getGames()) {
             if(!g.gameIsRunning()) {
-                allGames.append(g.toString());
+                allGames.append(++counter + ": " + g.toString());
             }
         }
-
+        allGames.deleteCharAt(allGames.length()-1);
         return allGames.toString();
     }
 

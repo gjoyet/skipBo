@@ -72,6 +72,7 @@ class SBServerListener implements Runnable {
                 chatGraphic.printInfoMessage(command[2]);
                 break;
             case NWGME:
+                newGame();
                 break;
             default:
                 throw new NoCommandException();
@@ -80,6 +81,10 @@ class SBServerListener implements Runnable {
 
     void putTo(String[] command) {
         chatGraphic.printInfoMessage("Someone played a card");
+    }
+
+    void newGame() {
+        chatGraphic.setGameGraphic();
     }
 
     /**

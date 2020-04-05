@@ -12,14 +12,11 @@ public class Pile {
     public ArrayList<ArrayList<Card>> buildPiles;// ArrayList for the 4 build decks in the middle
     public ArrayList<ArrayList<Card>> discardPiles;
     public Player player;
-    private int numOfCards;
-    private int size;
     private int id;
 
     /**
      * The Pile-constructor is overloaded because we have different
      * types of piles for the Game and Player.
-     * <p>
      * The Pile-constructor for the Player needs the Player-ID, this
      * assures that we can identify the different piles.
      */
@@ -44,12 +41,9 @@ public class Pile {
     /**{@literal
      * The method gamePiles() creates all cards of a full set and
      * puts them in a "ArrayList<Card>-pile" (named: drawPile).
-     * <p>
      * It also creates an "ArrayList<ArrayList<Cards>>-set" (named: buildPiles),
      * which contains four empty "ArrayList<Card>-piles".
-     * <p>
      * Every card has a number and a colour.
-     * <p>
      * Booth piles are elements of a Pile-Object.}
      */
 
@@ -85,6 +79,13 @@ public class Pile {
 
     }
 
+    /**
+     * Method to print the player's hand cards onto the Chat window.
+     *
+     * @param player (The player whose hand cards you wish to print)
+     * @return A string with the player's hand cards
+     */
+
     public String handCardPrint(Player player) {
         ArrayList<Card> handCards = player.getHandCards();
         int len = handCards.size();
@@ -108,6 +109,13 @@ public class Pile {
         return str.toString();
     }
 
+    /**
+     * Method to print a player's discard piles onto the Chat window
+     *
+     * @param player (The player whose discard piles you wish to print)
+     * @return A string with the player's hand cards
+     */
+
     public String discardPilesPrint(Player player) {
         StringBuilder str = new StringBuilder();
         for (int i = 0; i < 4; i++) {
@@ -121,14 +129,5 @@ public class Pile {
         }
         return str.toString();
     }
-
-    public Card getDrawPileTopCard() {
-        return drawPile.get(drawPile.size() - 1);
-    }
-
-    public int getNumOfStockPile() {
-        return stockPile.size();
-    }
-
 }
 

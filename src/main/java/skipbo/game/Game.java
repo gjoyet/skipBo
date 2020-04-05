@@ -14,7 +14,7 @@ public class Game implements Runnable {
     public Pile piles;
     int sizeOfStockPile = 20;
     int playersTurn = 0;
-    private Player winner, whosTurn;
+    private Player winner;
     private boolean gameRunning, turnFinished;
 
 
@@ -25,7 +25,7 @@ public class Game implements Runnable {
     public Game(ArrayList<Player> players) {
 
         this.players = players;
-        this.whosTurn = whosTurn;
+
         this.winner = winner;
         this.piles = new Pile();
         this.gameRunning = gameRunning;
@@ -78,10 +78,10 @@ public class Game implements Runnable {
     }
 
     /**
-     * setUpGame creates all card Decks and hands out random cards
-     * from the main deck to all players in the game.
+     * This run method creates all card Decks and hands out random cards
+     * from the main deck to all players in the game, and starts the first player's turn.
      * Game and Player Objects have an Object of type Pile, which contain
-     * all the different pile-types, which are specifically needed.
+     * all the different pile-types which are specifically needed.
      */
     public void run() {
 
@@ -136,9 +136,9 @@ public class Game implements Runnable {
      * and which buildPile they wish to play to and carries out the command if valid.
      * Furthermore, removes the specified card from their hand cards.
      *
-     * @param currentPlayer
-     * @param handCardIndex
-     * @param buildDeckIndex
+     * @param currentPlayer  (The player that's playing right now)
+     * @param handCardIndex  (The index of the hand card, from 0-4)
+     * @param buildDeckIndex (The index of the build pile the player wishes to play to, from 0-3)
      */
 
     public void playToMiddle(Player currentPlayer, int handCardIndex, int buildDeckIndex) {
@@ -212,9 +212,9 @@ public class Game implements Runnable {
      * from Player's hand.
      * Parameter discardPileIndex to know which Discard pile to play to.
      *
-     * @param currentPlayer
-     * @param handCardIndex
-     * @param discardPileIndex
+     * @param currentPlayer (The player that's playing right now)
+     * @param handCardIndex (The index of the hand card, from 0-4)
+     * @param discardPileIndex (The index of the discard pile that the player wishes to play to.)
      */
 
     public void playToDiscard(Player currentPlayer, int handCardIndex, int discardPileIndex) {
@@ -245,8 +245,8 @@ public class Game implements Runnable {
      * of the player's choosing.
      * Param id for player, Param id to know which Build pile to play to.
      *
-     * @param currentPlayer
-     * @param buildPileIndex
+     * @param currentPlayer (The player that's playing right now)
+     * @param buildPileIndex (The index of the pile that the player wishes to play to)
      */
 
     @SuppressWarnings("DuplicatedCode")
@@ -302,7 +302,6 @@ public class Game implements Runnable {
                 }
             }
         }
-
         if (currentPlayer.getStockPile().isEmpty()) {
             endGame(currentPlayer);
         }
@@ -314,9 +313,9 @@ public class Game implements Runnable {
      * with index of build and discard piles to choose what card to play.
      * Also checks validity of the move and replaces card at the
      *
-     * @param currentPlayer
-     * @param discardPileIndex
-     * @param buildPileIndex
+     * @param currentPlayer (The player that's playing right now)
+     * @param discardPileIndex (The index of the hand card, from 0-4)
+     * @param buildPileIndex (The index of the pile that the player wishes to play to)
      */
 
     public void playFromDiscardToMiddle(Player currentPlayer, int discardPileIndex, int buildPileIndex) {

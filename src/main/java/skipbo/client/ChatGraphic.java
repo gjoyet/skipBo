@@ -112,6 +112,11 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
         chat.setCaretPosition(chat.getDocument().getLength()-1);
     }
 
+    void setGameGraphic() {
+        GameGraphic gameGraphic = new GameGraphic(this);
+        gameGraphic.setGameGraphic();
+    }
+
     /**
      * Lets client set their name
      */

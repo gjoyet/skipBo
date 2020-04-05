@@ -29,6 +29,7 @@ public class SBLobby {
         return playerLobby.get(index);
     }
 
+    /** Returns the player in the Lobby with the name given as argument. If the player does not exists, the method return null. */
     Player getPlayerByName(String name) {
         for(Player p : this.playerLobby) {
             if(p.getName().equals(name)) return p;

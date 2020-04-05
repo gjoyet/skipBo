@@ -81,7 +81,7 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
         //List of Commands
         String listOfCommands = "\n***********\nCommands:\n/change name [name]\n/change status ready|waiting\n" +
                 "/msg [name] [message]\n/broadcast\n/new game\n/play [PlaceFrom] [n] [PlaceTo] [n]\n" +
-                "/list games|players|commands\n/quit\n***********";
+                "/list games|players\n/help\n/quit\n***********";
         printInfoMessage(listOfCommands);
     }
 
@@ -112,6 +112,9 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
         chat.setCaretPosition(chat.getDocument().getLength()-1);
     }
 
+    /**
+     * Creates the game GUI
+     */
     void setGameGraphic() {
         GameGraphic gameGraphic = new GameGraphic(this);
         gameGraphic.setGameGraphic();

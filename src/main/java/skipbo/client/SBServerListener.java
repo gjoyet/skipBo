@@ -74,6 +74,9 @@ class SBServerListener implements Runnable {
             case NWGME:
                 newGame();
                 break;
+            case DISPL:
+                chatGraphic.printCommandList();
+                break;
             default:
                 throw new NoCommandException();
         }

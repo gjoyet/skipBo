@@ -14,19 +14,29 @@ import java.net.Socket;
  * Server for Skip-Bo: manages lobby, chat, starts game. This server accepts players while starting
  * a listener for every new player and is the highest instance of the program.
  */
-public class SBServer {
+public class SBServer implements Runnable {
     static int playerID = 0;
     static int playerCount = 0;
     static SBLobby serverLobby = new SBLobby(); // Should this maybe be non-static?
 
     public static Logger servLog = LogManager.getLogger(SBServer.class);
 
-    public static void main(String[] args) {
+    int port;
+
+    /**
+     * Creates new SBServer Object.
+     * @param port: port on which ServerSocket will be based on.
+     */
+    public SBServer(int port) {
+        this.port = port;
+    }
+
+    public void run() {
         ServerSocket sbServerSocket = null;
 
         try {
-            sbServerSocket = new ServerSocket(Integer.parseInt(args[0]));
-            servLog.info("Server waiting for port " + args[0] + ".");
+            sbServerSocket = new ServerSocket(port);
+            servLog.info("Server waiting for port " + port + ".");
         } catch(IOException ioe) {
             servLog.fatal("Issue with opening Serversocket. Try with another port.");
         }
@@ -56,6 +66,9 @@ public class SBServer {
 
     public static SBLobby getLobby() { return serverLobby;}
 
+    /**
+     * @return: a String containing all players currently connected.
+     */
     public static String getWholePlayerList() {
         StringBuilder allNames = new StringBuilder();
         for(Player p : serverLobby.getPlayerLobby()) {
@@ -65,6 +78,9 @@ public class SBServer {
         return allNames.toString();
     }
 
+    /**
+     * @return: a String containing all players currently in the main lobby.
+     */
     public static String getPlayerNotIngameList() {
         StringBuilder allNames = new StringBuilder();
         for(Player p : serverLobby.getPlayerLobby()) {
@@ -75,6 +91,9 @@ public class SBServer {
         return allNames.toString();
     }
 
+    /**
+     * @return: a String with all games, running and finished.
+     */
     public static String getGamesList() {
         StringBuilder allGames = new StringBuilder();
         int counter = 0;

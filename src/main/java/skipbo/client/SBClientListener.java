@@ -65,6 +65,9 @@ class SBClientListener {
             case "/list":
                 protocolString = getListString(input);
                 break;
+            case "/help":
+                protocolString = Protocol.DISPL + "commands";
+                break;
             case "/quit":
                 protocolString = Protocol.LGOUT + "";
                 pw.println(protocolString);
@@ -183,11 +186,10 @@ class SBClientListener {
             throw new NotACommandException("Please add an option to your command");
         }
         String option = line[1].toLowerCase();
-        if (!(option.equals("games") || option.equals("players") || option.equals("commands"))) {
+        if (!(option.equals("games") || option.equals("players"))) {
             throw new NotACommandException("Please add a valid option to your command");
         }
-
-        throw new NotACommandException("Command not implemented");
+        return Protocol.DISPL + "§" + option;
     }
 
     /**

@@ -1,7 +1,7 @@
 
 Basic Structure: XXXXX§Option§Arguments
 Example: PRINT§Terminal§Please enter nickname:	Action: Prints ‚Please enter nickname:‘ on terminal of client
-Example: CHNGE§Nickname§Destroyer			Action: Changes nickname of Player sending request to ‚Destroyer‘
+Example: CHNGE§Nickname§Marc			Action: Changes nickname of Player sending request to ‚Marc‘
 
 Section		Command		Option		Arguments				Comments
 
@@ -17,4 +17,8 @@ Chat		CHATM		Global		String message				sends ‚message‘ to write on the globa
 				Broadcast	String message				sends 'message' to all clients across all games and lobbies	
 
 Game		NWGME		New		-					starts new game with 4 players
-		PUTTO		Card		Pile from, int i, Pile to, int j	puts card from pile ‚from‘, index ‚i’, to pile ‚to‘, index ‚j‘	
+		PUTTO		Card		Pile from, int i, Pile to, int j	puts card from pile ‚from‘, index ‚i’, to pile ‚to‘, index ‚j‘
+
+		DISPL		players							lists all players currently connected to the server
+				games							lists all open, ongoing and finished games
+				commands						lists all commands

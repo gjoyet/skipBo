@@ -9,16 +9,25 @@ import java.net.Socket;
 /**
  * A Skip-Bo client.
  */
-public class SBClient {
+public class SBClient implements Runnable {
 
     public static Logger clientLog = LogManager.getLogger(SBClient.class);
+
+    String[] args;
+
+    /**
+     * Creates a new SBClient Object.
+     * @param args: command-line arguments given by Main class: <hostAddress>:<port> [<username>]
+     */
+    public SBClient(String[] args) {
+        this.args = args;
+    }
 
     /**
      * Establishes a connection to the Skip-Bo server via SBClientListener thread and SBServerListener thread and
      * opens the GUI
-     * @param args command-line arguments. <hostAddress>:<port> [<username>]
      */
-    public static void main(String[] args) {
+    public void run() {
 
         try {
             String[] ipAndPort = args[0].split(":");

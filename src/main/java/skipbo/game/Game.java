@@ -3,7 +3,6 @@ package skipbo.game;
 import skipbo.server.ProtocolExecutor;
 
 import java.awt.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -55,6 +54,7 @@ public class Game implements Runnable {
         this.gameRunning = false;
     }
 
+    /** Gets a String containing all the players in the game (one per line). */
     public String getPlayerList() {
         StringBuilder playerString = new StringBuilder();
         for (int i = 0; i < players.size(); i++) {
@@ -64,6 +64,7 @@ public class Game implements Runnable {
         return playerString.toString();
     }
 
+    /** Gets a game with its players and status (all in one line). */
     public String toString() {
         StringBuilder gToString = new StringBuilder("Participants: ");
         for (int i = 0; i < players.size(); i++) {

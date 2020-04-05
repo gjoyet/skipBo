@@ -83,6 +83,10 @@ public class SBListener implements Runnable {
                     servLog.debug("Got into putTo method with input: " + input[2] + ".");
                     new ProtocolExecutor(input, this).putTo();
                     break;
+                case DISPL:
+                    servLog.debug("Got into display method.");
+                    new ProtocolExecutor(input, this).display();
+                    break;
             }
         } catch(IllegalArgumentException iae) {
             servLog.warn(input[0] + ": not a command.");

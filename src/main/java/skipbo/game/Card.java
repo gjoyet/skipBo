@@ -1,5 +1,6 @@
 package skipbo.game;
-import java.awt.Color;
+
+import java.awt.*;
 
 public class Card {
 

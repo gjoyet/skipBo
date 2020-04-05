@@ -38,7 +38,8 @@ public class Pile {
         this.handCards = new ArrayList<Card>();
     }
 
-    /**{@literal
+    /**
+     * {@literal
      * The method gamePiles() creates all cards of a full set and
      * puts them in a "ArrayList<Card>-pile" (named: drawPile).
      * It also creates an "ArrayList<ArrayList<Cards>>-set" (named: buildPiles),

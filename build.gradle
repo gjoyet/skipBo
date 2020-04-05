@@ -52,7 +52,7 @@ dependencies {
 
 /*
 The following block adds both compile and runtime dependencies to the jar
- */
+
 jar {
     manifest {
 
@@ -67,7 +67,20 @@ jar {
     }
 
 }
+*/
 
-tasks.register("build-cs108") {
-    dependsOn javadoc, jar
+task "build-cs108" (type:GradleBuild) {
+    tasks = ['build', 'jar', 'myJavadocs']
 }
+	
+task myJavadocs(type:Javadoc){
+	source = sourceSets.main.allJava
+	classpath = sourceSets.main.compileClasspath
+	failOnError = false
+}
+
+/*
+//tasks.register("build-cs108") {
+  //  dependsOn javadoc, jar
+//}
+ */

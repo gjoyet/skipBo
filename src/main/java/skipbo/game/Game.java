@@ -6,8 +6,6 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static skipbo.server.SBServer.servLog;
-
 public class Game implements Runnable {
 
     public ArrayList<Player> players;
@@ -54,7 +52,9 @@ public class Game implements Runnable {
         this.gameRunning = false;
     }
 
-    /** Gets a String containing all the players in the game (one per line). */
+    /**
+     * Gets a String containing all the players in the game (one per line).
+     */
     public String getPlayerList() {
         StringBuilder playerString = new StringBuilder();
         for (int i = 0; i < players.size(); i++) {
@@ -64,14 +64,16 @@ public class Game implements Runnable {
         return playerString.toString();
     }
 
-    /** Gets a game with its players and status (all in one line). */
+    /**
+     * Gets a game with its players and status (all in one line).
+     */
     public String toString() {
         StringBuilder gToString = new StringBuilder("Participants: ");
         for (int i = 0; i < players.size(); i++) {
             gToString.append(players.get(i).getName());
             if (!(i == players.size() - 1)) gToString.append(", ");
         }
-        if(gameRunning) gToString.append("; RUNNING.");
+        if (gameRunning) gToString.append("; RUNNING.");
         else gToString.append("; FINISHED.");
 
         return gToString.toString();
@@ -212,8 +214,8 @@ public class Game implements Runnable {
      * from Player's hand.
      * Parameter discardPileIndex to know which Discard pile to play to.
      *
-     * @param currentPlayer (The player that's playing right now)
-     * @param handCardIndex (The index of the hand card, from 0-4)
+     * @param currentPlayer    (The player that's playing right now)
+     * @param handCardIndex    (The index of the hand card, from 0-4)
      * @param discardPileIndex (The index of the discard pile that the player wishes to play to.)
      */
 
@@ -233,6 +235,10 @@ public class Game implements Runnable {
 
     }
 
+    /**
+     * Method to display all Discard piles
+     */
+
     public void displayDiscard() {
         for (Player player : players) {
             new ProtocolExecutor().sendAll("PRINT§Terminal§ " +
@@ -245,11 +251,11 @@ public class Game implements Runnable {
      * of the player's choosing.
      * Param id for player, Param id to know which Build pile to play to.
      *
-     * @param currentPlayer (The player that's playing right now)
+     * @param currentPlayer  (The player that's playing right now)
      * @param buildPileIndex (The index of the pile that the player wishes to play to)
      */
 
-    @SuppressWarnings("DuplicatedCode")
+
     public void playFromStockToMiddle(Player currentPlayer, int buildPileIndex) {
         ArrayList<Card> stockPile = currentPlayer.getStockPile();
         Card stockCard = stockPile.get(stockPile.size() - 1);
@@ -258,18 +264,18 @@ public class Game implements Runnable {
         ArrayList<Card> specBuildPile = buildPiles.get(buildPileIndex);
 
         if (specBuildPile.isEmpty()) {
-            if (stockCard.number == 1) {
+            if (stockCard.number == 1) {        // if card number is 1, new pile
                 specBuildPile.add(stockCard);
                 currentPlayer.getHandCards().remove(stockCard);
                 new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: "
                         + piles.buildPilesPrint(), currentPlayer.getSBL());
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
                         + piles.handCardPrint(currentPlayer));
-            } else if (stockCard.number != 1 && stockCard.col != Color.CYAN) {
+            } else if (stockCard.col != Color.CYAN) {   // If card number isn't 1 and isn't a Skip Bo card
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§This move is invalid! " +
                         "To play to an empty pile, the card number has to be 1.");
             }
-            if (stockCard.col == Color.CYAN) {
+            if (stockCard.col == Color.CYAN) {      // if Skip Bo card
                 stockCard.number = 1;
                 specBuildPile.add(stockCard);
                 currentPlayer.getHandCards().remove(stockCard);
@@ -280,7 +286,7 @@ public class Game implements Runnable {
                             + piles.buildPilesPrint(), currentPlayer.getSBL());
                 }
             }
-        } else {
+        } else {        // If build pile isn't empty
             Card topCard = specBuildPile.get(specBuildPile.size() - 1);
             if (topCard.number == (stockCard.number - 1)) {
                 specBuildPile.add(stockCard);
@@ -292,7 +298,7 @@ public class Game implements Runnable {
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hands cards are now: "
                         + piles.handCardPrint(currentPlayer));
             }
-            if (stockCard.number == 12) {
+            if (stockCard.number == 12) {       // If stock card is 12, remove build pile, because it's full
                 for (int i = 0; i < 12; i++) {    // remove all cards from the buildPile if the top card is 12
                     specBuildPile.remove(i);
                 }
@@ -302,7 +308,7 @@ public class Game implements Runnable {
                 }
             }
         }
-        if (currentPlayer.getStockPile().isEmpty()) {
+        if (currentPlayer.getStockPile().isEmpty()) {           // if stock pile empty, player wins.
             endGame(currentPlayer);
         }
     }
@@ -313,9 +319,9 @@ public class Game implements Runnable {
      * with index of build and discard piles to choose what card to play.
      * Also checks validity of the move and replaces card at the
      *
-     * @param currentPlayer (The player that's playing right now)
+     * @param currentPlayer    (The player that's playing right now)
      * @param discardPileIndex (The index of the hand card, from 0-4)
-     * @param buildPileIndex (The index of the pile that the player wishes to play to)
+     * @param buildPileIndex   (The index of the pile that the player wishes to play to)
      */
 
     public void playFromDiscardToMiddle(Player currentPlayer, int discardPileIndex, int buildPileIndex) {
@@ -323,17 +329,17 @@ public class Game implements Runnable {
         ArrayList<Card> discardPile = currentPlayer.getDiscardPile().get(discardPileIndex);
         ArrayList<Card> specBuildPile = piles.buildPiles.get(buildPileIndex);
 
-        Card card = discardPile.get(discardPile.size());
+        Card card = discardPile.get(discardPile.size() - 1);
 
         if (specBuildPile.isEmpty()) {
-            if (card.number == 1) {
+            if (card.number == 1) {         // if card number is 1, new pile
                 specBuildPile.add(card);
                 currentPlayer.getHandCards().remove(card);
                 new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: "
                         + piles.buildPilesPrint(), currentPlayer.getSBL());
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
                         + piles.handCardPrint(currentPlayer));
-            } else if (card.number != 1 && card.col != Color.CYAN) {
+            } else if (card.col != Color.CYAN) {
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§This move is invalid! " +
                         "To play to an empty pile, the card number has to be 1.");
             }
@@ -350,7 +356,7 @@ public class Game implements Runnable {
             }
         } else {
             Card topCard = specBuildPile.get(specBuildPile.size() - 1);
-            if (topCard.number == (card.number - 1)) {
+            if (topCard.number == (card.number - 1)) {      // checks if move is valid, if number is correct
                 specBuildPile.add(card);
                 currentPlayer.getHandCards().remove(card);
 
@@ -376,7 +382,7 @@ public class Game implements Runnable {
      * Method to fill the hand cards up to 5 of the player who's turn it is to play
      * Adds cards from top of draw pile.
      *
-     * @param player
+     * @param player (Player whose hand you wish to fill)
      */
 
     public void fillHandCards(Player player) {
@@ -410,7 +416,7 @@ public class Game implements Runnable {
      * A method to run the End Game network protocol, and let the
      * player know that some player has won the game!
      *
-     * @param winner
+     * @param winner (The player that has won the game)
      */
     public void endGame(Player winner) {
         gameRunning = false;
@@ -421,7 +427,7 @@ public class Game implements Runnable {
     /**
      * A sleep method with long parameter to sleep the given amount of time.
      *
-     * @param ms
+     * @param ms (number of seconds)
      */
     private void sleep(long ms) {
         try {

@@ -35,17 +35,23 @@ public class Player {
 
     }
 
-    /** Returns the name of the player **/
+    /**
+     * Returns the name of the player
+     **/
     public String getName() {
         return this.name;
     }
 
-    /** Changes player name to given name parameter **/
+    /**
+     * Changes player name to given name parameter
+     **/
     public void changeName(String name) {
         this.name = name;
     }
 
-    /** Returns the id of the Player object **/
+    /**
+     * Returns the id of the Player object
+     **/
     public int getId() {
         return this.id;
     }

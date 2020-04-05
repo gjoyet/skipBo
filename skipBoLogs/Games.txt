@@ -1,1 +1,1 @@
-1: Participants: Janni, Guillaume; FINISHED. 
+[Ljava.lang.String;@7b759ec7

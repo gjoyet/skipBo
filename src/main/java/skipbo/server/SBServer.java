@@ -9,6 +9,7 @@ import skipbo.game.Status;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  * Server for Skip-Bo: manages lobby, chat, starts game. This server accepts players while starting
@@ -94,22 +95,34 @@ public class SBServer implements Runnable {
     /**
      * @return: a String with all games, running and finished.
      */
-    public static String getGamesList() {
-        StringBuilder allGames = new StringBuilder();
+    public static String[] getGamesList() {
+        String[] allGames = new String[serverLobby.getGames().size()];
         int counter = 0;
-        for(Game g : serverLobby.getGames()) {
-            if(g.gameIsRunning()) {
-                allGames.append(++counter + ": " + g.toString());
+        servLog.debug("In getGamesList, size of getGame: " + serverLobby.getGames().size());
+        for(int i=0; i < serverLobby.getGames().size(); i++) {
+            servLog.debug("Got into for.");
+            if(serverLobby.getGames().get(i).gameIsRunning()) {
+                servLog.debug("Added game.");
+                servLog.debug("Game to String: " + serverLobby.getGames().get(i).toString());
+                allGames[i] = i + ": " + serverLobby.getGames().get(i).toString();
             }
         }
-        if(allGames.length() > 0) allGames.append("\n");
         for(Game g : serverLobby.getGames()) {
             if(!g.gameIsRunning()) {
-                allGames.append(++counter + ": " + g.toString());
+                counter++;
+                allGames[counter-1] = counter + ": " + g.toString();
             }
         }
-        if(allGames.length() > 0) allGames.deleteCharAt(allGames.length()-1);
-        return allGames.toString();
+        if(allGames.length > 0) {
+            allGames[allGames.length - 1] = allGames[allGames.length - 1].substring(0, allGames.length - 1);
+        }
+        for(String s : allGames) {
+            servLog.debug("Content of allGame String: " + s);
+        }
+        for(int i=0; i < allGames.length; i++) {
+            servLog.debug("Content of gameList (with normal for): " + allGames[i]);
+        }
+        return allGames;
     }
 
 }

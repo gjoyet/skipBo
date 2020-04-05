@@ -172,13 +172,11 @@ public class ProtocolExecutor {
         if(input[1].equals("New")) {
             ArrayList<Player> newPlayers = new ArrayList<Player>();
             newPlayers.add(sbL.player);
-            sbL.player.changeStatus(Status.INGAME);
             int playerCount = 1;
             for (int i = 0; i < SBServer.getLobby().getSize(); i++) {
                 if (SBServer.getLobby().getPlayer(i).getStatus().equals(Status.READY)
                                 && !SBServer.getLobby().getPlayer(i).equals(sbL.player)) {
                     newPlayers.add(SBServer.getLobby().getPlayer(i));
-                    SBServer.getLobby().getPlayer(i).changeStatus(Status.INGAME);
                     ++playerCount;
                 }
                 if (playerCount == 2) break;
@@ -189,10 +187,12 @@ public class ProtocolExecutor {
                 for (Player p : newPlayers) {
                     p.changeGame(game);
                     p.getSBL().getPW().println("NWGME§New§");
+                    p.changeStatus(Status.INGAME);
                 }
                 servLog.debug(SBServer.getGamesList());
                 Thread gameT = new Thread(game); gameT.start();
                 servLog.info("Game started.");
+                servLog.debug("Size of gameList: " + serverLobby.getGames().size());
                 return;
             } else {
                 sbL.getPW().println("PRINT§Terminal§Not enough people are ready.");
@@ -228,10 +228,18 @@ public class ProtocolExecutor {
         try {
             switch (input[1]) {
                 case "players":
-                    sbL.getPW().println("PRINT§Terminal§" + SBServer.getWholePlayerList());
+                    sbL.getPW().println("PRINT§Terminal§Players list: " + SBServer.getWholePlayerList());
                     break;
                 case "games":
-                    sbL.getPW().println("PRINT§Terminal§" + SBServer.getGamesList());
+                    String[] gamesList = SBServer.getGamesList();
+                    if(gamesList.length == 0) {
+                        sbL.getPW().println("PRINT§Terminal§No games have been started until now.");
+                    } else {
+                        sbL.getPW().println("PRINT§Terminal§Games list:");
+                        for (String s : gamesList) {
+                            if(s != null) sbL.getPW().println("PRINT§Terminal§" + s);
+                        }
+                    }
                     break;
                 default:
                     throw new NoCommandException(input[0], input[1]);

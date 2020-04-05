@@ -111,6 +111,8 @@ public class ProtocolExecutor {
                 String[] nameAndMes = input[2].split("§", 2);
                 if(SBServer.getLobby().getPlayerByName(nameAndMes[0]) == null) {
                     sbL.getPW().println("PRINT§Terminal§This name does not exist.");
+                } else if(nameAndMes[0].equals(sbL.player.getName())) {
+                    sbL.getPW().println("PRINT§Terminal§You private messaged yourself, duh...");
                 } else {
                     sbL.getPW().println("CHATM§Private§(to " + nameAndMes[0] + "): " + nameAndMes[1]);
                     SBServer.getLobby().getPlayerByName(nameAndMes[0]).getSBL().getPW().
@@ -186,7 +188,7 @@ public class ProtocolExecutor {
      */
     void putTo() {
         if(!sbL.getGameLobby().get(sbL.player.getGame().getPlayersTurn()).equals(sbL.player)) {
-            sbL.getPW().println("PRINT§Terminal§Wait until it's your turn, you impatient bastard!");
+            sbL.getPW().println("PRINT§Terminal§Wait until it's your turn, you impatient little rascal!");
             return;
         }
         String[] arguments = input[2].split("§");

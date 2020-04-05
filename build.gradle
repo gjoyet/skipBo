@@ -13,7 +13,7 @@ javafx {
 
 group 'ch.unibas.dmi.dbis'
 version 'Alpha'
-mainClassName = 'SBServer'
+mainClassName = 'skipbo.server.Main'
 
 //specifies source compatibility to Java 11
 sourceCompatibility = 1.11
@@ -53,11 +53,11 @@ dependencies {
 /*
 The following block adds both compile and runtime dependencies to the jar
  */
-jar {
+task skipbo(type: Jar) {
     manifest {
 
         attributes(
-                "Main-Class": mainClassName
+                "Main-Class": 'skipbo.server.Main'
 
         )
     }

@@ -5,12 +5,14 @@ Example: CHNGE§Nickname§Marc			Action: Changes nickname of Player sending requ
 
 Section		Command		Option		Arguments				Comments
 
-Terminal	PRINT		Terminal	String message				prints ‚message‘ on the receiver’s terminal
+General		PRINT		Terminal	String message				prints ‚message‘ on the receiver’s terminal
 
 Lobby		SETTO		Nickname	String nickname				sets nickname of new player to ‚nickname‘
 		CHNGE		Nickname	String nickname 			changes nickname of player sending the request to ‚nickname‘
 				Status 		PlayerStatus ps				sets senders PlayerStatus to ‚ps‘
 		LGOUT		-		-					from client: logout request to server; from server: logout confirmation to client
+		DISPL		players							lists all players currently connected to the server
+				games							lists all open, ongoing and finished games
 
 Chat		CHATM		Global		String message				sends ‚message‘ to write on the global chat
 				Private		(Player p), String message		sends private ,message’ to player p
@@ -18,7 +20,3 @@ Chat		CHATM		Global		String message				sends ‚message‘ to write on the globa
 
 Game		NWGME		New		-					starts new game with 4 players
 		PUTTO		Card		Pile from, int i, Pile to, int j	puts card from pile ‚from‘, index ‚i’, to pile ‚to‘, index ‚j‘
-
-		DISPL		players							lists all players currently connected to the server
-				games							lists all open, ongoing and finished games
-				commands						lists all commands

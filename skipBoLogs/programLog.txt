@@ -11,3 +11,248 @@
 [INFO ] 2020-04-05 16:49:32.855 [Thread-2] SBServer - null1 logged out.
 [DEBUG] 2020-04-05 16:49:34.441 [Thread-1] SBServer - Got into logout method.
 [INFO ] 2020-04-05 16:49:34.444 [Thread-1] SBServer - null logged out.
+[DEBUG] 2020-04-05 17:16:11.070 [main] Main - Program starting.
+[DEBUG] 2020-04-05 17:16:11.082 [main] Main - Main triggered Server.
+[INFO ] 2020-04-05 17:16:11.094 [Thread-0] SBServer - Server waiting for port 63001.
+[DEBUG] 2020-04-05 17:16:37.010 [main] Main - Program starting.
+[DEBUG] 2020-04-05 17:16:37.022 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 17:16:37.038 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 17:16:40.387 [Thread-1] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 17:16:40.405 [Thread-1] SBServer - Guillaume logged in.
+[DEBUG] 2020-04-05 17:16:40.410 [Thread-1] SBServer - Players connected: Guillaume
+[DEBUG] 2020-04-05 17:16:47.272 [main] Main - Program starting.
+[DEBUG] 2020-04-05 17:16:47.305 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 17:16:47.317 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 17:16:54.102 [Thread-2] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 17:16:54.111 [Thread-2] SBServer - Rohan logged in.
+[DEBUG] 2020-04-05 17:16:54.114 [Thread-2] SBServer - Players connected: Guillaume, Rohan
+[DEBUG] 2020-04-05 17:17:02.288 [Thread-2] SBServer - Got into changeTo method.
+[INFO ] 2020-04-05 17:17:02.317 [Thread-2] SBServer - Rohan status set to: READY.
+[DEBUG] 2020-04-05 17:17:04.921 [Thread-1] SBServer - Got into newGame method.
+[INFO ] 2020-04-05 17:17:04.921 [Thread-1] SBServer - Guillaume status set to: INGAME.
+[INFO ] 2020-04-05 17:17:04.922 [Thread-1] SBServer - Rohan status set to: INGAME.
+[DEBUG] 2020-04-05 17:17:04.975 [Thread-1] SBServer - 1: Participants: Guillaume, Rohan; FINISHED. 
+[INFO ] 2020-04-05 17:17:04.984 [Thread-1] SBServer - Game started.
+[DEBUG] 2020-04-05 17:17:05.088 [Thread-3] SBServer - Printed: gave their missing cards etc.
+[DEBUG] 2020-04-05 17:17:09.571 [Thread-1] SBServer - Got into logout method.
+[INFO ] 2020-04-05 17:17:09.581 [Thread-1] SBServer - Guillaume logged out.
+[WARN ] 2020-04-05 17:17:09.589 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 17:17:09.597 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 17:17:09.597 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 17:17:09.598 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 17:17:09.598 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 17:17:09.598 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 17:17:09.599 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 17:17:09.599 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 17:17:09.599 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 17:17:09.600 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 17:17:09.600 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 17:17:09.600 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 17:17:09.601 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 17:17:09.601 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 17:17:09.602 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 17:17:09.604 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 17:17:09.605 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 17:17:09.605 [Thread-1] SBClient - Error with reading input from server
+[DEBUG] 2020-04-05 17:17:10.556 [Thread-2] SBServer - Got into logout method.
+[INFO ] 2020-04-05 17:17:10.557 [Thread-2] SBServer - Rohan logged out.
+[WARN ] 2020-04-05 17:17:10.557 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 17:17:10.559 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 17:17:10.560 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 17:17:10.561 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 17:17:10.561 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 17:17:10.561 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 17:17:10.562 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 17:17:10.562 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 17:17:10.562 [Thread-1] SBClient - Error with reading input from server
+[DEBUG] 2020-04-05 19:24:52.889 [main] Main - Program starting.
+[DEBUG] 2020-04-05 19:24:52.899 [main] Main - Main triggered Server.
+[INFO ] 2020-04-05 19:24:52.908 [Thread-0] SBServer - Server waiting for port 63001.
+[DEBUG] 2020-04-05 19:24:59.833 [main] Main - Program starting.
+[DEBUG] 2020-04-05 19:24:59.879 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 19:24:59.893 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 19:25:05.274 [Thread-1] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 19:25:05.294 [Thread-1] SBServer - Guillaume logged in.
+[DEBUG] 2020-04-05 19:25:05.299 [Thread-1] SBServer - Players connected: Guillaume
+[DEBUG] 2020-04-05 19:25:07.449 [main] Main - Program starting.
+[DEBUG] 2020-04-05 19:25:07.459 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 19:25:07.465 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 19:27:25.245 [Thread-1] SBServer - Got into logout method.
+[INFO ] 2020-04-05 19:27:25.324 [Thread-1] SBServer - Guillaume logged out.
+[DEBUG] 2020-04-05 19:27:26.647 [Thread-2] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 19:27:26.651 [Thread-2] SBServer - Guillaume logged in.
+[DEBUG] 2020-04-05 19:27:26.652 [Thread-2] SBServer - Players connected: Guillaume
+[DEBUG] 2020-04-05 19:27:29.424 [Thread-2] SBServer - Got into logout method.
+[INFO ] 2020-04-05 19:27:29.430 [Thread-2] SBServer - Guillaume logged out.
+[WARN ] 2020-04-05 19:27:29.431 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:27:29.433 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:27:29.433 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:27:29.434 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:27:29.434 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:27:29.434 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:27:29.435 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:27:29.435 [Thread-1] SBClient - Error with reading input from server
+[DEBUG] 2020-04-05 19:40:03.526 [main] Main - Program starting.
+[DEBUG] 2020-04-05 19:40:03.538 [main] Main - Main triggered Server.
+[INFO ] 2020-04-05 19:40:03.549 [Thread-0] SBServer - Server waiting for port 63001.
+[DEBUG] 2020-04-05 19:40:09.104 [main] Main - Program starting.
+[DEBUG] 2020-04-05 19:40:09.110 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 19:40:09.118 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 19:40:11.809 [Thread-1] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 19:40:11.818 [Thread-1] SBServer - Guillaume logged in.
+[DEBUG] 2020-04-05 19:40:11.823 [Thread-1] SBServer - Players connected: Guillaume
+[DEBUG] 2020-04-05 19:40:15.566 [main] Main - Program starting.
+[DEBUG] 2020-04-05 19:40:15.575 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 19:40:15.585 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 19:40:19.335 [Thread-2] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 19:40:19.356 [Thread-2] SBServer - Janni logged in.
+[DEBUG] 2020-04-05 19:40:19.359 [Thread-2] SBServer - Players connected: Guillaume, Janni
+[DEBUG] 2020-04-05 19:40:22.458 [main] Main - Program starting.
+[DEBUG] 2020-04-05 19:40:22.470 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 19:40:22.495 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 19:40:26.614 [Thread-3] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 19:40:26.646 [Thread-3] SBServer - Rohan logged in.
+[DEBUG] 2020-04-05 19:40:26.665 [Thread-3] SBServer - Players connected: Guillaume, Janni, Rohan
+[DEBUG] 2020-04-05 19:40:36.228 [Thread-2] SBServer - Got into changeTo method.
+[INFO ] 2020-04-05 19:40:36.251 [Thread-2] SBServer - Janni status set to: READY.
+[DEBUG] 2020-04-05 19:40:40.681 [Thread-1] SBServer - Got into newGame method.
+[INFO ] 2020-04-05 19:40:40.682 [Thread-1] SBServer - Guillaume status set to: INGAME.
+[INFO ] 2020-04-05 19:40:40.683 [Thread-1] SBServer - Janni status set to: INGAME.
+[DEBUG] 2020-04-05 19:40:40.710 [Thread-1] SBServer - 1: Participants: Guillaume, Janni; FINISHED. 
+[INFO ] 2020-04-05 19:40:40.711 [Thread-1] SBServer - Game started.
+[DEBUG] 2020-04-05 19:40:40.787 [Thread-4] SBServer - Printed: gave their missing cards etc.
+[DEBUG] 2020-04-05 19:40:54.468 [Thread-3] SBServer - Got into display method.
+[DEBUG] 2020-04-05 19:41:05.999 [Thread-3] SBServer - Got into display method.
+[DEBUG] 2020-04-05 19:41:09.927 [Thread-3] SBServer - Got into display method.
+[WARN ] 2020-04-05 19:41:09.978 [Thread-1] SBClient - Error with network protocol command
+[DEBUG] 2020-04-05 19:41:16.701 [Thread-3] SBServer - Got into logout method.
+[WARN ] 2020-04-05 19:41:16.704 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.704 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.705 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.705 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.705 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.706 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.706 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.706 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.706 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.707 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.707 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.707 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.707 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.707 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.708 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.708 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.708 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.708 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.708 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.709 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.709 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.709 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.709 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.710 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.710 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.710 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.710 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.710 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.710 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.711 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.711 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.711 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.711 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.711 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.711 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.712 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.712 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.712 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.712 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.712 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.713 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.713 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.713 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.713 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.713 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.714 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.714 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.714 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.714 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.714 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.715 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.715 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.715 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.715 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.715 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.715 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.716 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.716 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.716 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.716 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.716 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.717 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.717 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.717 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.717 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.717 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.718 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.718 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.718 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.718 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.718 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.718 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.719 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.719 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.719 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.719 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.719 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.720 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.720 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.720 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.720 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.720 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.720 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.721 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.721 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.721 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.721 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.721 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.722 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.722 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.722 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.722 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.722 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.723 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.725 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.726 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.726 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.727 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.727 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.727 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.728 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.728 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.729 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.729 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.730 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.730 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.730 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.730 [Thread-1] SBClient - Error with reading input from server
+[INFO ] 2020-04-05 19:41:16.730 [Thread-3] SBServer - Rohan logged out.
+[WARN ] 2020-04-05 19:41:16.731 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.731 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.731 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.732 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.732 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.732 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.733 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.733 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.733 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.733 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.734 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.734 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.734 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.735 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.735 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.736 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.736 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.736 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.737 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.737 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 19:41:16.737 [Thread-1] SBClient - Error with reading input from server

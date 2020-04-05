@@ -13,6 +13,6 @@ public enum Protocol {
     LGOUT, /** For server: client wants to log ut; For Client: confirmation that logout was successful. */
     NWGME, /** Starts new game with the first 4 players which have the status 'READY' */
     PUTTO, /** Plays a card with index i from Pile fr to Pile to (i, fr and to given as arguments). */
-    DISPL; /** Displays information */
+    DISPL; /** Displays information on chat window. */
 
 }

@@ -12,6 +12,7 @@ public enum Protocol {
     CHNGE, /** Changes an already existing parameter given as option to the value given as argument. */
     LGOUT, /** For server: client wants to log ut; For Client: confirmation that logout was successful. */
     NWGME, /** Starts new game with the first 4 players which have the status 'READY' */
-    PUTTO; /** Plays a card with index i from Pile fr to Pile to (i, fr and to given as arguments). */
+    PUTTO, /** Plays a card with index i from Pile fr to Pile to (i, fr and to given as arguments). */
+    DISPL; /** Displays information */
 
 }

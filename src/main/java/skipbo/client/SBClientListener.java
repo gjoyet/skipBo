@@ -186,8 +186,7 @@ class SBClientListener {
         if (!(option.equals("games") || option.equals("players") || option.equals("commands"))) {
             throw new NotACommandException("Please add a valid option to your command");
         }
-
-        throw new NotACommandException("Command not implemented");
+        return Protocol.DISPL + "§" + option;
     }
 
     /**

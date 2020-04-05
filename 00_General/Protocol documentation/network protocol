@@ -17,4 +17,8 @@ Chat		CHATM		Global		String message				sends ‚message‘ to write on the globa
 				Broadcast	String message				sends 'message' to all clients across all games and lobbies	
 
 Game		NWGME		New		-					starts new game with 4 players
-		PUTTO		Card		Pile from, int i, Pile to, int j	puts card from pile ‚from‘, index ‚i’, to pile ‚to‘, index ‚j‘	
+		PUTTO		Card		Pile from, int i, Pile to, int j	puts card from pile ‚from‘, index ‚i’, to pile ‚to‘, index ‚j‘
+
+		DISPL		players
+				games
+				commands	

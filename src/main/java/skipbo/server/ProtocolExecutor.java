@@ -168,13 +168,14 @@ public class ProtocolExecutor {
             }
             if(playerCount == 2) {
                 Game game = new Game(newPlayers);
-                servLog.info("Game started.");
                 serverLobby.addGame(game);
                 for (Player p : newPlayers) {
                     p.changeGame(game);
                     p.getSBL().getPW().println("NWGME§New§");
                 }
                 servLog.debug(SBServer.getGamesList());
+                Thread gameT = new Thread(game); gameT.start();
+                servLog.info("Game started.");
                 return;
             } else {
                 sbL.getPW().println("PRINT§Terminal§Not enough people are ready.");

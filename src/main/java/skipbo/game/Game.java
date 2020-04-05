@@ -8,7 +8,7 @@ import java.util.Random;
 
 import static skipbo.server.SBServer.servLog;
 
-public class Game {
+public class Game implements Runnable {
 
     public ArrayList<Player> players;
     public Pile piles;
@@ -32,10 +32,6 @@ public class Game {
         this.turnFinished = turnFinished;
         this.sizeOfStockPile = 20;
 
-        dealCards();
-        startTurn(playersTurn);
-
-        gameRunning = true;
     }
 
 
@@ -80,7 +76,7 @@ public class Game {
      * boolean value turnFinished
      */
 
-    public void start() {
+    public void start() {  // TODO: Safe delete this method (if it isn't needed anymore).
         while (gameRunning) {
             startTurn(playersTurn);
             while (!turnFinished) {
@@ -103,7 +99,9 @@ public class Game {
      * Game and Player Objects have an Object of type Pile, which contain
      * all the different pile-types, which are specifically needed.
      */
-    public void dealCards() {
+    public void run() {
+
+        gameRunning = true;
 
         this.piles.gamePiles();   // Game gets complete set of cards
 
@@ -129,6 +127,8 @@ public class Game {
             Card topCard = tempPlayer.getStockPile().get(tempPlayer.getStockPile().size() - 1);
             tempPlayer.getSBL().getPW().println("PRINT§Terminal§Your Stock card is: " + topCard.number);
         }
+
+        startTurn(playersTurn);
     }
 
     /**

@@ -16,6 +16,7 @@ import java.net.Socket;
  */
 public class SBServer {
     static int playerID = 0;
+    static int playerCount = 0;
     static SBLobby serverLobby = new SBLobby(); // Should this maybe be non-static?
 
     public static Logger servLog = LogManager.getLogger(SBServer.class);
@@ -46,6 +47,7 @@ public class SBServer {
     private static void login(ServerSocket serverSo) throws IOException {
         try {
             Socket sock = serverSo.accept();
+            playerCount++;
 
             SBListener sbListen = new SBListener(sock, ++playerID);
             Thread sbListenT = new Thread(sbListen); sbListenT.start();

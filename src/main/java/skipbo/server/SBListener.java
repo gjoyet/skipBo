@@ -60,20 +60,20 @@ public class SBListener implements Runnable {
         try {
             switch (protocol) {
                 case SETTO:
-                    new ProtocolExecutor(input, this).setTo();
                     servLog.debug("Got into setTo method.");
+                    new ProtocolExecutor(input, this).setTo();
                     break;
                 case CHNGE:
-                    new ProtocolExecutor(input, this).changeTo();
                     servLog.debug("Got into changeTo method.");
+                    new ProtocolExecutor(input, this).changeTo();
                     break;
                 case CHATM:
-                    new ProtocolExecutor(input, this).chatMessage();
                     servLog.debug("Got into chatMessage method.");
+                    new ProtocolExecutor(input, this).chatMessage();
                     break;
                 case LGOUT:
-                    new ProtocolExecutor(input, this).logout();
                     servLog.debug("Got into logout method.");
+                    new ProtocolExecutor(input, this).logout();
                     break;
                 case NWGME:
                     servLog.debug("Got into newGame method.");
@@ -82,6 +82,7 @@ public class SBListener implements Runnable {
                 case PUTTO:
                     servLog.debug("Got into putTo method with input: " + input[2] + ".");
                     new ProtocolExecutor(input, this).putTo();
+                    break;
             }
         } catch(IllegalArgumentException iae) {
             servLog.warn(input[0] + ": not a command.");

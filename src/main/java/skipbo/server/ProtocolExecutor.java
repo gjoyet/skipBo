@@ -7,6 +7,7 @@ import skipbo.game.Status;
 import java.io.*;
 import java.util.ArrayList;
 
+import static java.lang.Thread.sleep;
 import static skipbo.server.SBServer.*;
 
 /**
@@ -142,7 +143,13 @@ public class ProtocolExecutor {
         }
         sendAll("PRINT§Terminal§" + sbL.player.getName() + " left the room.", sbL);
         servLog.info(sbL.player.getName() + " logged out.");
-        if(serverLobby.getSize() == 0) {
+        playerCount--;
+        try {
+            sleep(30000); //Prevents server from shutting down immediately, in case a player is being started right in that moment.
+        } catch (InterruptedException e) {
+            servLog.warn("Sleeptime of server before shutdown interrupted.");
+        }
+        if(playerCount == 0) {
             try {
                 for(Game g : SBServer.getLobby().getGames()) {
                     g.terminateGame();

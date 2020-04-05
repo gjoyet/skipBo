@@ -1,6 +1,0 @@
-[INFO ] 2020-04-05 12:28:30.261 [main] SBServer - Server waiting for port 63015.
-[INFO ] 2020-04-05 12:28:40.617 [main] SBClient - Connecting to port 63015…
-[INFO ] 2020-04-05 12:28:43.133 [Thread-0] SBServer - Guillaume logged in.
-[DEBUG] 2020-04-05 12:28:43.138 [Thread-0] SBServer - Players connected: Guillaume
-[DEBUG] 2020-04-05 12:28:43.138 [Thread-0] SBServer - Got into setTo method.
-[INFO ] 2020-04-05 12:29:20.728 [Thread-0] SBServer - Guillaume logged out.

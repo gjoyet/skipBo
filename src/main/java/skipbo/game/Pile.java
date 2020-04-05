@@ -41,7 +41,7 @@ public class Pile {
         this.handCards = new ArrayList<Card>();
     }
 
-    /**
+    /**{@literal
      * The method gamePiles() creates all cards of a full set and
      * puts them in a "ArrayList<Card>-pile" (named: drawPile).
      * <p>
@@ -50,7 +50,7 @@ public class Pile {
      * <p>
      * Every card has a number and a colour.
      * <p>
-     * Booth piles are elements of a Pile-Object.
+     * Booth piles are elements of a Pile-Object.}
      */
 
     public void gamePiles() {    // All Cards are created, and the build-pile is added

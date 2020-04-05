@@ -17,7 +17,7 @@ public class SBClient implements Runnable {
 
     /**
      * Creates a new SBClient Object.
-     * @param args: command-line arguments given by Main class: <hostAddress>:<port> [<username>]
+     * @param args: command-line arguments given by Main class: {@literal <hostAddress>:<port> [<username>] }
      */
     public SBClient(String[] args) {
         this.args = args;

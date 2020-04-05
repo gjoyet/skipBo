@@ -13,7 +13,7 @@ javafx {
 
 group 'ch.unibas.dmi.dbis'
 version 'Alpha'
-mainClassName = 'SBServer'
+mainClassName = 'skipbo.server.Main'
 
 //specifies source compatibility to Java 11
 sourceCompatibility = 1.11
@@ -66,4 +66,8 @@ jar {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 
+}
+
+tasks.register("build-cs108") {
+    dependsOn javadoc, jar
 }

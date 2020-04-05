@@ -86,9 +86,14 @@ public class ProtocolExecutor {
                 }
             } else if(input[1].equals("Status")) {
                 String status = Status.valueOf(input[2]).toString();
-                sbL.player.changeStatus(Status.valueOf(input[2]));
-                sbL.getPW().println("PRINT§Terminal§Status changed to " + status + ".");
-                sendAllExceptOne("PRINT§Terminal§" + sbL.player.getName() + " is " + status + ".", sbL);
+                if(sbL.player.getStatus().equals(Status.valueOf(status))) {
+                    sbL.getPW().println("PRINT§Terminal§Status is already: " + status + ".");
+                    return;
+                } else {
+                    sbL.player.changeStatus(Status.valueOf(input[2]));
+                    sbL.getPW().println("PRINT§Terminal§Status changed to " + status + ".");
+                    sendAllExceptOne("PRINT§Terminal§" + sbL.player.getName() + " is " + status + ".", sbL);
+                }
             } else throw new NoCommandException(input[0], input[1]);
         } catch (NameTakenException nte) {
             String name = nte.findName();
@@ -156,7 +161,10 @@ public class ProtocolExecutor {
                 }
                 File gameFile = new File("skipBoLogs/Games.txt");
                 PrintWriter filePW = new PrintWriter(new FileOutputStream(gameFile), true);
-                filePW.println(SBServer.getGamesList());
+                String[] gamesList = SBServer.getGamesList();
+                for(String s : gamesList) {
+                    filePW.println(s);
+                }
             } catch (FileNotFoundException e) {
                 servLog.warn("Problem with writing games into a file.");
             }
@@ -172,13 +180,11 @@ public class ProtocolExecutor {
         if(input[1].equals("New")) {
             ArrayList<Player> newPlayers = new ArrayList<Player>();
             newPlayers.add(sbL.player);
-            sbL.player.changeStatus(Status.INGAME);
             int playerCount = 1;
             for (int i = 0; i < SBServer.getLobby().getSize(); i++) {
                 if (SBServer.getLobby().getPlayer(i).getStatus().equals(Status.READY)
                                 && !SBServer.getLobby().getPlayer(i).equals(sbL.player)) {
                     newPlayers.add(SBServer.getLobby().getPlayer(i));
-                    SBServer.getLobby().getPlayer(i).changeStatus(Status.INGAME);
                     ++playerCount;
                 }
                 if (playerCount == 2) break;
@@ -189,10 +195,11 @@ public class ProtocolExecutor {
                 for (Player p : newPlayers) {
                     p.changeGame(game);
                     p.getSBL().getPW().println("NWGME§New§");
+                    p.changeStatus(Status.INGAME);
                 }
-                servLog.debug(SBServer.getGamesList());
                 Thread gameT = new Thread(game); gameT.start();
                 servLog.info("Game started.");
+                servLog.debug("Size of gameList: " + serverLobby.getGames().size());
                 return;
             } else {
                 sbL.getPW().println("PRINT§Terminal§Not enough people are ready.");
@@ -211,15 +218,22 @@ public class ProtocolExecutor {
         }
         String[] arguments = input[2].split("§");
         if(arguments.length < 4) return;
-        int indexF = Integer.parseInt(arguments[1])-1;
-        int indexT = Integer.parseInt(arguments[3])-1;
+        String pF = arguments[0]; // pile from
+        String pT = arguments[2]; // pile to
+        int iF = Integer.parseInt(arguments[1])-1; // index from
+        int iT = Integer.parseInt(arguments[3])-1; // index to
         servLog.debug("putTo triggered with: Piles: "
-                + arguments[0] + arguments[2] + ", Indexes: " + indexF + indexT + "." );
-        switch(arguments[0]+arguments[2]) {
-            case "HB": sbL.player.getGame().playToMiddle(sbL.player, indexF, indexT); break;
-            case "SB": sbL.player.getGame().playFromStockToMiddle(sbL.player, indexT); break;
-            case "DB": sbL.player.getGame().playFromDiscardToMiddle(sbL.player, indexF, indexT); break;
-            case "HD": sbL.player.getGame().playToDiscard(sbL.player, indexF, indexT); break;
+                + pF + pT + ", Indexes: " + iF + iT + "." );
+        if((pF == "H" && (iF < 1 || iF > 5)) || (pF == "S" && iF != 1) ||
+                            (pF == "D" && (iF < 0 || iF > 4)) || iT < 1 || iT > 4) {
+            sbL.getPW().println("PRINT§Terminal§Invalid indexes in this move.");
+            return;
+        }
+        switch(pF + pT) {
+            case "HB": sbL.player.getGame().playToMiddle(sbL.player, iF, iT); break;
+            case "SB": sbL.player.getGame().playFromStockToMiddle(sbL.player, iT); break;
+            case "DB": sbL.player.getGame().playFromDiscardToMiddle(sbL.player, iF, iT); break;
+            case "HD": sbL.player.getGame().playToDiscard(sbL.player, iF, iT); break;
             default: sbL.getPW().println("PRINT§Terminal§This move is not allowed.");
         }
     }
@@ -228,10 +242,18 @@ public class ProtocolExecutor {
         try {
             switch (input[1]) {
                 case "players":
-                    sbL.getPW().println("PRINT§Terminal§" + SBServer.getWholePlayerList());
+                    sbL.getPW().println("PRINT§Terminal§Players list: " + SBServer.getWholePlayerList());
                     break;
                 case "games":
-                    sbL.getPW().println("PRINT§Terminal§" + SBServer.getGamesList());
+                    String[] gamesList = SBServer.getGamesList();
+                    if(gamesList.length == 0) {
+                        sbL.getPW().println("PRINT§Terminal§No games have been started until now.");
+                    } else {
+                        sbL.getPW().println("PRINT§Terminal§Games list:");
+                        for (String s : gamesList) {
+                            if(s != null) sbL.getPW().println("PRINT§Terminal§" + s);
+                        }
+                    }
                     break;
                 default:
                     throw new NoCommandException(input[0], input[1]);

@@ -12,6 +12,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
+/**
+ * Will be class for the Game GUI in the future
+ */
 public class GameGraphic implements KeyListener{ //ActionListener
 
     ChatGraphic chatGraphic;

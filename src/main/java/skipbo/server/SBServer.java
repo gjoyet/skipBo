@@ -9,6 +9,7 @@ import skipbo.game.Status;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  * Server for Skip-Bo: manages lobby, chat, starts game. This server accepts players while starting
@@ -94,22 +95,23 @@ public class SBServer implements Runnable {
     /**
      * @return a String with all games, running and finished.
      */
-    public static String getGamesList() {
-        StringBuilder allGames = new StringBuilder();
+    public static synchronized String[] getGamesList() {
+        String[] allGames = new String[serverLobby.getGames().size()];
         int counter = 0;
+        servLog.debug("In getGamesList, size of getGame: " + serverLobby.getGames().size());
         for(Game g : serverLobby.getGames()) {
             if(g.gameIsRunning()) {
-                allGames.append(++counter + ": " + g.toString());
+                servLog.debug("Added running game " + counter);
+                allGames[counter++] = counter + ": " + g.toString();
             }
         }
-        if(allGames.length() > 0) allGames.append("\n");
         for(Game g : serverLobby.getGames()) {
             if(!g.gameIsRunning()) {
-                allGames.append(++counter + ": " + g.toString());
+                servLog.debug("Added finished game " + counter);
+                allGames[counter++] = counter + ": " + g.toString();
             }
         }
-        if(allGames.length() > 0) allGames.deleteCharAt(allGames.length()-1);
-        return allGames.toString();
+        return allGames;
     }
 
 }

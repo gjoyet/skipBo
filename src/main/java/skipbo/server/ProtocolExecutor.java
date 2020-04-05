@@ -4,11 +4,10 @@ import skipbo.game.Game;
 import skipbo.game.Player;
 import skipbo.game.Status;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
-import static skipbo.server.SBServer.servLog;
-import static skipbo.server.SBServer.serverLobby;
+import static skipbo.server.SBServer.*;
 
 /**
  * The execution of the network protocol is implemented in this class. Every command has one method,
@@ -58,6 +57,7 @@ public class ProtocolExecutor {
             servLog.info(name + " logged in.");
             sbL.pw.println("PRINT§Terminal§Welcome to Skip-Bo, " + name + "!");
             sendAllExceptOne("PRINT§Terminal§" + name + " joined the room. Say hi!", sbL);
+            servLog.debug("Players connected: " + SBServer.getWholePlayerList());
         }
     }
 
@@ -116,7 +116,10 @@ public class ProtocolExecutor {
                     SBServer.getLobby().getPlayerByName(nameAndMes[0]).getSBL().getPW().
                             println("CHATM§Private§(from " + sbL.player.getName() + "): " + nameAndMes[1]);
                 }
-            } throw new NoCommandException(input[0], input[1]);
+            } else if(input[1].equals("Broadcast")) {
+                sbL.getPW().println("CHATM§Broadcast§" + input[2]);
+                broadcastExceptOne("CHATM§Broadcast§" + input[2], sbL);
+            } else throw new NoCommandException(input[0], input[1]);
         } finally {}
     }
 
@@ -137,6 +140,9 @@ public class ProtocolExecutor {
         }
         sendAll("PRINT§Terminal§" + sbL.player.getName() + " left the room.", sbL);
         servLog.info(sbL.player.getName() + " logged out.");
+        if(serverLobby.getSize() == 0) {
+            System.exit(0);
+        }
 
     }
 
@@ -149,23 +155,28 @@ public class ProtocolExecutor {
             newPlayers.add(sbL.player);
             sbL.player.changeStatus(Status.INGAME);
             int playerCount = 1;
-            for (int i = 0; i < SBServer.getLobby().getLength(); i++) {
+            for (int i = 0; i < SBServer.getLobby().getSize(); i++) {
                 if (SBServer.getLobby().getPlayer(i).getStatus().equals(Status.READY)
                                 && !SBServer.getLobby().getPlayer(i).equals(sbL.player)) {
                     newPlayers.add(SBServer.getLobby().getPlayer(i));
                     SBServer.getLobby().getPlayer(i).changeStatus(Status.INGAME);
                     playerCount++;
                 }
-                if (playerCount == 2) {
-                    Game game = new Game(newPlayers);
-                    servLog.info("Game started.");
-                    serverLobby.addGame(game);
-                    for (Player p : newPlayers) {
-                        p.changeGame(game);
-                        p.getSBL().getPW().println("NWGME§New§");
-                    }
-                    return;
+                if (playerCount == 2) break;
+            }
+            if(playerCount == 2) {
+                Game game = new Game(newPlayers);
+                servLog.info("Game started.");
+                serverLobby.addGame(game);
+                for (Player p : newPlayers) {
+                    p.changeGame(game);
+                    p.getSBL().getPW().println("NWGME§New§");
                 }
+                servLog.debug(SBServer.getGamesList());
+                return;
+            } else {
+                sbL.getPW().println("PRINT§Terminal§Not enough people are ready.");
+                servLog.info(sbL.player.getName() + " tried to start game: not enough people were ready.");
             }
         }
     }
@@ -203,7 +214,7 @@ public class ProtocolExecutor {
                 sbL.getGameLobby().get(i).getSBL().pw.println(message);
             }
         } else {
-            for(int i = 0; i < serverLobby.getLength(); i++) {
+            for(int i = 0; i < serverLobby.getSize(); i++) {
                 if(!serverLobby.getPlayer(i).getStatus().equals(Status.INGAME)) {
                     serverLobby.getSBL(i).pw.println(message);
                 }
@@ -224,7 +235,7 @@ public class ProtocolExecutor {
                 }
             }
         } else {
-            for(int i = 0; i < serverLobby.getLength(); i++) {
+            for(int i = 0; i < serverLobby.getSize(); i++) {
                 if(!serverLobby.getSBL(i).equals(sbL) && !serverLobby.getPlayer(i).getStatus().equals(Status.INGAME)) {
                     serverLobby.getSBL(i).pw.println(message);
                 }

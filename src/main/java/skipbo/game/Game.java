@@ -54,14 +54,23 @@ public class Game {
         return this.gameRunning;
     }
 
+    public String getPlayerList() {
+        StringBuilder playerString = new StringBuilder();
+        for(int i = 0; i < players.size(); i++) {
+            playerString.append(players.get(i).getName());
+            if(!(i == players.size()-1)) playerString.append("\n");
+        }
+        return playerString.toString();
+    }
+
     public String toString() {
         StringBuilder gToString = new StringBuilder("Participants: ");
         for (int i = 0; i < players.size(); i++) {
             gToString.append(players.get(i).getName());
             if (!(i == players.size() - 1)) gToString.append(", ");
         }
-        if (gameRunning) gToString.append("; RUNNING.");
-        else gToString.append("; FINISHED.");
+        if (gameRunning) gToString.append("; RUNNING. \n");
+        else gToString.append("; FINISHED. \n");
 
         return gToString.toString();
     }

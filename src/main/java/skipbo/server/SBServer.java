@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import skipbo.game.Game;
 import skipbo.game.Player;
+import skipbo.game.Status;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -53,15 +54,26 @@ public class SBServer {
 
     public static SBLobby getLobby() { return serverLobby;}
 
-    public String getPlayerList() {
+    public static String getWholePlayerList() {
         StringBuilder allNames = new StringBuilder();
         for(Player p : serverLobby.getPlayerLobby()) {
-            allNames.append(p.getName() + "\n");
+            allNames.append(p.getName() + ",");
         }
+        allNames.deleteCharAt(allNames.length()-1);
         return allNames.toString();
     }
 
-    public String getGamesList() {
+    public static String getPlayerNotIngameList() {
+        StringBuilder allNames = new StringBuilder();
+        for(Player p : serverLobby.getPlayerLobby()) {
+            if(!p.getStatus().equals(Status.INGAME))
+            allNames.append(p.getName() + ",");
+        }
+        allNames.deleteCharAt(allNames.length()-1);
+        return allNames.toString();
+    }
+
+    public static String getGamesList() {
         StringBuilder allGames = new StringBuilder();
         for(Game g : serverLobby.getGameList()) {
             if(g.gameIsRunning()) {

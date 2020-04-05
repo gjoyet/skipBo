@@ -21,7 +21,7 @@ public class SBLobby {
 
     ArrayList<Game> getGameList() { return this.gameList; }
 
-    int getLength() { return playerLobby.size(); }
+    int getSize() { return playerLobby.size(); }
 
     SBListener getSBL(int index) { return playerLobby.get(index).getSBL(); }
 

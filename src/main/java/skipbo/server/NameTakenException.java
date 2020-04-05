@@ -13,7 +13,7 @@ public class NameTakenException extends Exception {
     }
 
     /**
-     * @return: a name that is not in use yet, according to the name chosen in the first place.
+     * @return a name that is not in use yet, according to the name chosen in the first place.
      */
     public String findName() {
         int i = 1;

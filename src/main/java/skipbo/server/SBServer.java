@@ -95,19 +95,19 @@ public class SBServer implements Runnable {
     /**
      * @return a String with all games, running and finished.
      */
-    public static String[] getGamesList() {
+    public static synchronized String[] getGamesList() {
         String[] allGames = new String[serverLobby.getGames().size()];
         int counter = 0;
         servLog.debug("In getGamesList, size of getGame: " + serverLobby.getGames().size());
         for(Game g : serverLobby.getGames()) {
             if(g.gameIsRunning()) {
-                servLog.debug("Added game.");
+                servLog.debug("Added running game " + counter);
                 allGames[counter++] = counter + ": " + g.toString();
             }
         }
         for(Game g : serverLobby.getGames()) {
             if(!g.gameIsRunning()) {
-                counter++;
+                servLog.debug("Added finished game " + counter);
                 allGames[counter++] = counter + ": " + g.toString();
             }
         }

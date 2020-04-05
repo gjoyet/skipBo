@@ -86,9 +86,14 @@ public class ProtocolExecutor {
                 }
             } else if(input[1].equals("Status")) {
                 String status = Status.valueOf(input[2]).toString();
-                sbL.player.changeStatus(Status.valueOf(input[2]));
-                sbL.getPW().println("PRINT§Terminal§Status changed to " + status + ".");
-                sendAllExceptOne("PRINT§Terminal§" + sbL.player.getName() + " is " + status + ".", sbL);
+                if(sbL.player.getStatus().equals(Status.valueOf(status))) {
+                    sbL.getPW().println("PRINT§Terminal§Status is already: " + status + ".");
+                    return;
+                } else {
+                    sbL.player.changeStatus(Status.valueOf(input[2]));
+                    sbL.getPW().println("PRINT§Terminal§Status changed to " + status + ".");
+                    sendAllExceptOne("PRINT§Terminal§" + sbL.player.getName() + " is " + status + ".", sbL);
+                }
             } else throw new NoCommandException(input[0], input[1]);
         } catch (NameTakenException nte) {
             String name = nte.findName();
@@ -213,15 +218,22 @@ public class ProtocolExecutor {
         }
         String[] arguments = input[2].split("§");
         if(arguments.length < 4) return;
-        int indexF = Integer.parseInt(arguments[1])-1;
-        int indexT = Integer.parseInt(arguments[3])-1;
+        String pF = arguments[0]; // pile from
+        String pT = arguments[2]; // pile to
+        int iF = Integer.parseInt(arguments[1])-1; // index from
+        int iT = Integer.parseInt(arguments[3])-1; // index to
         servLog.debug("putTo triggered with: Piles: "
-                + arguments[0] + arguments[2] + ", Indexes: " + indexF + indexT + "." );
-        switch(arguments[0]+arguments[2]) {
-            case "HB": sbL.player.getGame().playToMiddle(sbL.player, indexF, indexT); break;
-            case "SB": sbL.player.getGame().playFromStockToMiddle(sbL.player, indexT); break;
-            case "DB": sbL.player.getGame().playFromDiscardToMiddle(sbL.player, indexF, indexT); break;
-            case "HD": sbL.player.getGame().playToDiscard(sbL.player, indexF, indexT); break;
+                + pF + pT + ", Indexes: " + iF + iT + "." );
+        if((pF == "H" && (iF < 1 || iF > 5)) || (pF == "S" && iF != 1) ||
+                            (pF == "D" && (iF < 0 || iF > 4)) || iT < 1 || iT > 4) {
+            sbL.getPW().println("PRINT§Terminal§Invalid indexes in this move.");
+            return;
+        }
+        switch(pF + pT) {
+            case "HB": sbL.player.getGame().playToMiddle(sbL.player, iF, iT); break;
+            case "SB": sbL.player.getGame().playFromStockToMiddle(sbL.player, iT); break;
+            case "DB": sbL.player.getGame().playFromDiscardToMiddle(sbL.player, iF, iT); break;
+            case "HD": sbL.player.getGame().playToDiscard(sbL.player, iF, iT); break;
             default: sbL.getPW().println("PRINT§Terminal§This move is not allowed.");
         }
     }

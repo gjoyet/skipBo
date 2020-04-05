@@ -526,3 +526,354 @@
 [DEBUG] 2020-04-05 22:14:55.966 [Thread-7] SBServer - In getGamesList, size of getGame: 3
 [DEBUG] 2020-04-05 22:14:59.679 [Thread-2] SBServer - In getGamesList, size of getGame: 3
 [DEBUG] 2020-04-05 22:15:02.826 [Thread-1] SBServer - In getGamesList, size of getGame: 3
+[DEBUG] 2020-04-05 22:21:10.621 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:21:10.633 [main] Main - Main triggered Server.
+[INFO ] 2020-04-05 22:21:10.644 [Thread-0] SBServer - Server waiting for port 63001.
+[DEBUG] 2020-04-05 22:21:17.960 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:21:17.967 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 22:21:17.973 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 22:21:20.866 [Thread-1] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 22:21:20.883 [Thread-1] SBServer - Guillaume logged in.
+[DEBUG] 2020-04-05 22:21:20.886 [Thread-1] SBServer - Players connected: Guillaume
+[DEBUG] 2020-04-05 22:21:28.493 [Thread-1] SBServer - Got into changeTo method.
+[INFO ] 2020-04-05 22:21:28.521 [Thread-1] SBServer - Guillaume status set to: READY.
+[DEBUG] 2020-04-05 22:21:36.410 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:21:36.418 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 22:21:36.427 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 22:21:40.074 [Thread-2] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 22:21:40.084 [Thread-2] SBServer - Janni logged in.
+[DEBUG] 2020-04-05 22:21:40.086 [Thread-2] SBServer - Players connected: Guillaume, Janni
+[DEBUG] 2020-04-05 22:21:44.257 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:21:44.263 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 22:21:44.270 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 22:21:48.293 [Thread-3] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 22:21:48.294 [Thread-3] SBServer - Rohan logged in.
+[DEBUG] 2020-04-05 22:21:48.302 [Thread-3] SBServer - Players connected: Guillaume, Janni, Rohan
+[DEBUG] 2020-04-05 22:21:50.988 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:21:50.997 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 22:21:51.003 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 22:21:55.263 [Thread-4] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 22:21:55.265 [Thread-4] SBServer - Manuela logged in.
+[DEBUG] 2020-04-05 22:21:55.267 [Thread-4] SBServer - Players connected: Guillaume, Janni, Rohan, Manuela
+[DEBUG] 2020-04-05 22:22:01.087 [Thread-4] SBServer - Got into newGame method.
+[INFO ] 2020-04-05 22:22:01.116 [Thread-4] SBServer - Manuela status set to: INGAME.
+[INFO ] 2020-04-05 22:22:01.117 [Thread-4] SBServer - Guillaume status set to: INGAME.
+[INFO ] 2020-04-05 22:22:01.119 [Thread-4] SBServer - Game started.
+[DEBUG] 2020-04-05 22:22:01.133 [Thread-4] SBServer - Size of gameList: 1
+[DEBUG] 2020-04-05 22:22:10.879 [Thread-2] SBServer - Got into changeTo method.
+[INFO ] 2020-04-05 22:22:10.883 [Thread-2] SBServer - Janni status set to: READY.
+[DEBUG] 2020-04-05 22:22:15.741 [Thread-3] SBServer - Got into newGame method.
+[INFO ] 2020-04-05 22:22:15.742 [Thread-3] SBServer - Rohan status set to: INGAME.
+[INFO ] 2020-04-05 22:22:15.742 [Thread-3] SBServer - Janni status set to: INGAME.
+[INFO ] 2020-04-05 22:22:15.744 [Thread-3] SBServer - Game started.
+[DEBUG] 2020-04-05 22:22:15.745 [Thread-3] SBServer - Size of gameList: 2
+[DEBUG] 2020-04-05 22:22:19.687 [Thread-3] SBServer - Got into display method.
+[DEBUG] 2020-04-05 22:22:19.688 [Thread-3] SBServer - In getGamesList, size of getGame: 2
+[DEBUG] 2020-04-05 22:22:19.689 [Thread-3] SBServer - Added game.
+[DEBUG] 2020-04-05 22:22:19.706 [Thread-3] SBServer - Added game.
+[DEBUG] 2020-04-05 22:22:22.492 [Thread-3] SBServer - Got into logout method.
+[INFO ] 2020-04-05 22:22:22.498 [Thread-3] SBServer - Rohan logged out.
+[WARN ] 2020-04-05 22:22:22.505 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:22:22.515 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:22:22.515 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:22:22.516 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:22:22.516 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:22:22.517 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:22:22.517 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:22:22.517 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:22:22.518 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:22:22.518 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:22:22.518 [Thread-1] SBClient - Error with reading input from server
+[DEBUG] 2020-04-05 22:22:23.307 [Thread-2] SBServer - Got into logout method.
+[INFO ] 2020-04-05 22:22:23.309 [Thread-2] SBServer - Janni logged out.
+[WARN ] 2020-04-05 22:22:23.331 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:22:23.340 [Thread-1] SBClient - Error with reading input from server
+[DEBUG] 2020-04-05 22:22:24.065 [Thread-4] SBServer - Got into logout method.
+[INFO ] 2020-04-05 22:22:24.066 [Thread-4] SBServer - Manuela logged out.
+[DEBUG] 2020-04-05 22:22:29.183 [Thread-1] SBServer - Got into logout method.
+[INFO ] 2020-04-05 22:22:29.184 [Thread-1] SBServer - Guillaume logged out.
+[DEBUG] 2020-04-05 22:22:52.511 [Thread-3] SBServer - In getGamesList, size of getGame: 2
+[DEBUG] 2020-04-05 22:22:53.311 [Thread-2] SBServer - In getGamesList, size of getGame: 2
+[DEBUG] 2020-04-05 22:22:54.069 [Thread-4] SBServer - In getGamesList, size of getGame: 2
+[DEBUG] 2020-04-05 22:22:59.188 [Thread-1] SBServer - In getGamesList, size of getGame: 2
+[DEBUG] 2020-04-05 22:26:10.704 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:26:10.714 [main] Main - Main triggered Server.
+[INFO ] 2020-04-05 22:26:10.724 [Thread-0] SBServer - Server waiting for port 63001.
+[DEBUG] 2020-04-05 22:26:15.339 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:26:15.346 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 22:26:15.353 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 22:28:17.341 [Thread-1] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 22:28:17.385 [Thread-1] SBServer - Guillaume logged in.
+[DEBUG] 2020-04-05 22:28:17.388 [Thread-1] SBServer - Players connected: Guillaume
+[DEBUG] 2020-04-05 22:28:24.696 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:28:24.704 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 22:28:24.712 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 22:28:28.023 [Thread-2] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 22:28:28.133 [Thread-2] SBServer - Guillaume1 logged in.
+[DEBUG] 2020-04-05 22:28:28.136 [Thread-2] SBServer - Players connected: Guillaume, Guillaume1
+[DEBUG] 2020-04-05 22:28:31.887 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:28:31.900 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 22:28:31.910 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 22:28:34.849 [Thread-3] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 22:28:34.854 [Thread-3] SBServer - Guillaume2 logged in.
+[DEBUG] 2020-04-05 22:28:34.858 [Thread-3] SBServer - Players connected: Guillaume, Guillaume1, Guillaume2
+[DEBUG] 2020-04-05 22:28:39.157 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:28:39.165 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 22:28:39.171 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 22:28:41.695 [Thread-4] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 22:28:41.703 [Thread-4] SBServer - Guillaume3 logged in.
+[DEBUG] 2020-04-05 22:28:41.704 [Thread-4] SBServer - Players connected: Guillaume, Guillaume1, Guillaume2, Guillaume3
+[DEBUG] 2020-04-05 22:28:45.775 [Thread-4] SBServer - Got into changeTo method.
+[INFO ] 2020-04-05 22:28:45.840 [Thread-4] SBServer - Guillaume3 status set to: READY.
+[DEBUG] 2020-04-05 22:28:57.080 [Thread-2] SBServer - Got into newGame method.
+[INFO ] 2020-04-05 22:28:57.106 [Thread-2] SBServer - Guillaume1 status set to: INGAME.
+[INFO ] 2020-04-05 22:28:57.107 [Thread-2] SBServer - Guillaume3 status set to: INGAME.
+[INFO ] 2020-04-05 22:28:57.108 [Thread-2] SBServer - Game started.
+[DEBUG] 2020-04-05 22:28:57.140 [Thread-2] SBServer - Size of gameList: 1
+[DEBUG] 2020-04-05 22:29:03.429 [Thread-3] SBServer - Got into changeTo method.
+[INFO ] 2020-04-05 22:29:03.451 [Thread-3] SBServer - Guillaume2 status set to: READY.
+[DEBUG] 2020-04-05 22:29:09.060 [Thread-4] SBServer - Got into newGame method.
+[INFO ] 2020-04-05 22:29:09.061 [Thread-4] SBServer - Guillaume3 status set to: INGAME.
+[INFO ] 2020-04-05 22:29:09.062 [Thread-4] SBServer - Guillaume2 status set to: INGAME.
+[INFO ] 2020-04-05 22:29:09.067 [Thread-4] SBServer - Game started.
+[DEBUG] 2020-04-05 22:29:09.067 [Thread-4] SBServer - Size of gameList: 2
+[DEBUG] 2020-04-05 22:29:11.560 [Thread-4] SBServer - Got into display method.
+[DEBUG] 2020-04-05 22:29:11.565 [Thread-4] SBServer - In getGamesList, size of getGame: 2
+[DEBUG] 2020-04-05 22:29:11.566 [Thread-4] SBServer - Added game.
+[DEBUG] 2020-04-05 22:29:11.583 [Thread-4] SBServer - Added game.
+[DEBUG] 2020-04-05 22:29:14.767 [Thread-4] SBServer - Got into logout method.
+[WARN ] 2020-04-05 22:29:14.769 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:14.770 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:14.772 [Thread-1] SBClient - Error with reading input from server
+[INFO ] 2020-04-05 22:29:14.772 [Thread-4] SBServer - Guillaume3 logged out.
+[WARN ] 2020-04-05 22:29:14.772 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:14.773 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:14.773 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:14.773 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:14.774 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:14.774 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:14.774 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:14.775 [Thread-1] SBClient - Error with reading input from server
+[DEBUG] 2020-04-05 22:29:15.534 [Thread-3] SBServer - Got into logout method.
+[INFO ] 2020-04-05 22:29:15.535 [Thread-3] SBServer - Guillaume2 logged out.
+[WARN ] 2020-04-05 22:29:15.542 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.547 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.547 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.547 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.548 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.548 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.548 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.549 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.549 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.549 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.550 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.550 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.550 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.551 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.551 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.551 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.551 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.552 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.552 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.552 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.552 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.553 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.553 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.553 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.553 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.553 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.554 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.554 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.554 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.554 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.555 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.555 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.555 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.556 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.556 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.556 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.557 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.557 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.558 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.558 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.558 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.558 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.559 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.559 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.559 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.559 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.559 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.560 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.560 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.560 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.560 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.560 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.561 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.561 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.561 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.561 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.561 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.561 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.562 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.562 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.562 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.562 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.562 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.563 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.563 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.563 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.563 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.563 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.564 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.564 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.564 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.564 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.565 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:29:15.567 [Thread-1] SBClient - Error with reading input from server
+[DEBUG] 2020-04-05 22:29:16.306 [Thread-2] SBServer - Got into logout method.
+[INFO ] 2020-04-05 22:29:16.307 [Thread-2] SBServer - Guillaume1 logged out.
+[DEBUG] 2020-04-05 22:29:47.838 [Thread-1] SBServer - Got into logout method.
+[INFO ] 2020-04-05 22:29:47.839 [Thread-1] SBServer - Guillaume logged out.
+[DEBUG] 2020-04-05 22:30:17.842 [Thread-1] SBServer - In getGamesList, size of getGame: 2
+[DEBUG] 2020-04-05 22:33:34.279 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:33:34.285 [main] Main - Main triggered Server.
+[INFO ] 2020-04-05 22:33:34.296 [Thread-0] SBServer - Server waiting for port 63001.
+[DEBUG] 2020-04-05 22:33:39.287 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:33:39.363 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 22:33:39.371 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 22:33:45.522 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:33:45.529 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 22:33:45.536 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 22:34:07.419 [Thread-2] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 22:34:07.433 [Thread-2] SBServer - Guillaume logged in.
+[DEBUG] 2020-04-05 22:34:07.436 [Thread-2] SBServer - Players connected: Guillaume
+[DEBUG] 2020-04-05 22:34:13.382 [Thread-1] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 22:34:13.386 [Thread-1] SBServer - Janni logged in.
+[DEBUG] 2020-04-05 22:34:13.386 [Thread-1] SBServer - Players connected: Guillaume, Janni
+[DEBUG] 2020-04-05 22:34:18.992 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:34:18.999 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 22:34:19.006 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 22:34:22.556 [Thread-1] SBServer - Got into changeTo method.
+[INFO ] 2020-04-05 22:34:22.580 [Thread-1] SBServer - Janni status set to: READY.
+[DEBUG] 2020-04-05 22:34:25.169 [Thread-3] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 22:34:25.170 [Thread-3] SBServer - Manuela logged in.
+[DEBUG] 2020-04-05 22:34:25.175 [Thread-3] SBServer - Players connected: Guillaume, Janni, Manuela
+[DEBUG] 2020-04-05 22:34:37.094 [Thread-1] SBServer - Got into newGame method.
+[INFO ] 2020-04-05 22:34:37.097 [Thread-1] SBServer - Janni tried to start game: not enough people were ready.
+[DEBUG] 2020-04-05 22:34:38.242 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:34:38.250 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 22:34:38.258 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 22:34:41.049 [Thread-4] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 22:34:41.131 [Thread-4] SBServer - Guillaume1 logged in.
+[DEBUG] 2020-04-05 22:34:41.134 [Thread-4] SBServer - Players connected: Guillaume, Janni, Manuela, Guillaume1
+[DEBUG] 2020-04-05 22:34:57.057 [Thread-2] SBServer - Got into newGame method.
+[INFO ] 2020-04-05 22:34:57.066 [Thread-2] SBServer - Guillaume status set to: INGAME.
+[INFO ] 2020-04-05 22:34:57.066 [Thread-2] SBServer - Janni status set to: INGAME.
+[INFO ] 2020-04-05 22:34:57.067 [Thread-2] SBServer - Game started.
+[DEBUG] 2020-04-05 22:34:57.079 [Thread-2] SBServer - Size of gameList: 1
+[DEBUG] 2020-04-05 22:35:03.031 [Thread-3] SBServer - Got into changeTo method.
+[INFO ] 2020-04-05 22:35:03.031 [Thread-3] SBServer - Manuela status set to: READY.
+[DEBUG] 2020-04-05 22:35:09.236 [Thread-4] SBServer - Got into newGame method.
+[INFO ] 2020-04-05 22:35:09.237 [Thread-4] SBServer - Guillaume1 status set to: INGAME.
+[INFO ] 2020-04-05 22:35:09.238 [Thread-4] SBServer - Manuela status set to: INGAME.
+[INFO ] 2020-04-05 22:35:09.243 [Thread-4] SBServer - Game started.
+[DEBUG] 2020-04-05 22:35:09.243 [Thread-4] SBServer - Size of gameList: 2
+[DEBUG] 2020-04-05 22:35:12.957 [Thread-4] SBServer - Got into display method.
+[DEBUG] 2020-04-05 22:35:12.958 [Thread-4] SBServer - In getGamesList, size of getGame: 2
+[DEBUG] 2020-04-05 22:35:12.958 [Thread-4] SBServer - Added running game 0
+[DEBUG] 2020-04-05 22:35:12.981 [Thread-4] SBServer - Added running game 1
+[DEBUG] 2020-04-05 22:35:15.929 [Thread-4] SBServer - Got into logout method.
+[INFO ] 2020-04-05 22:35:15.941 [Thread-4] SBServer - Guillaume1 logged out.
+[DEBUG] 2020-04-05 22:35:16.854 [Thread-3] SBServer - Got into logout method.
+[INFO ] 2020-04-05 22:35:16.855 [Thread-3] SBServer - Manuela logged out.
+[DEBUG] 2020-04-05 22:35:17.749 [Thread-2] SBServer - Got into logout method.
+[INFO ] 2020-04-05 22:35:17.750 [Thread-2] SBServer - Guillaume logged out.
+[DEBUG] 2020-04-05 22:35:18.806 [Thread-1] SBServer - Got into logout method.
+[INFO ] 2020-04-05 22:35:18.809 [Thread-1] SBServer - Janni logged out.
+[DEBUG] 2020-04-05 22:35:45.956 [Thread-4] SBServer - In getGamesList, size of getGame: 2
+[DEBUG] 2020-04-05 22:35:45.957 [Thread-4] SBServer - Added finished game 0
+[DEBUG] 2020-04-05 22:35:45.957 [Thread-4] SBServer - Added finished game 2
+[DEBUG] 2020-04-05 22:35:46.862 [Thread-3] SBServer - In getGamesList, size of getGame: 2
+[DEBUG] 2020-04-05 22:35:46.862 [Thread-3] SBServer - Added finished game 0
+[DEBUG] 2020-04-05 22:35:46.863 [Thread-3] SBServer - Added finished game 2
+[DEBUG] 2020-04-05 22:35:47.755 [Thread-2] SBServer - In getGamesList, size of getGame: 2
+[DEBUG] 2020-04-05 22:35:47.755 [Thread-2] SBServer - Added finished game 0
+[DEBUG] 2020-04-05 22:35:47.755 [Thread-2] SBServer - Added finished game 2
+[DEBUG] 2020-04-05 22:35:48.812 [Thread-1] SBServer - In getGamesList, size of getGame: 2
+[DEBUG] 2020-04-05 22:35:48.812 [Thread-1] SBServer - Added finished game 0
+[DEBUG] 2020-04-05 22:35:48.812 [Thread-1] SBServer - Added finished game 2
+[DEBUG] 2020-04-05 22:52:22.462 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:52:22.474 [main] Main - Main triggered Server.
+[INFO ] 2020-04-05 22:52:22.484 [Thread-0] SBServer - Server waiting for port 63001.
+[DEBUG] 2020-04-05 22:52:28.195 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:52:28.208 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 22:52:28.227 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 22:52:31.278 [Thread-1] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 22:52:31.306 [Thread-1] SBServer - Guillaume logged in.
+[DEBUG] 2020-04-05 22:52:31.311 [Thread-1] SBServer - Players connected: Guillaume
+[DEBUG] 2020-04-05 22:52:35.371 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:52:35.379 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 22:52:35.387 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 22:52:40.551 [Thread-2] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 22:52:40.690 [Thread-2] SBServer - Janno logged in.
+[DEBUG] 2020-04-05 22:52:40.692 [Thread-2] SBServer - Players connected: Guillaume, Janno
+[DEBUG] 2020-04-05 22:52:42.953 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:52:42.963 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 22:52:42.971 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 22:52:47.236 [Thread-3] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 22:52:47.237 [Thread-3] SBServer - Rohan logged in.
+[DEBUG] 2020-04-05 22:52:47.255 [Thread-3] SBServer - Players connected: Guillaume, Janno, Rohan
+[DEBUG] 2020-04-05 22:52:50.220 [main] Main - Program starting.
+[DEBUG] 2020-04-05 22:52:50.229 [main] Main - Main triggered Client.
+[INFO ] 2020-04-05 22:52:50.236 [Thread-0] SBClient - Connecting to port 63001…
+[DEBUG] 2020-04-05 22:52:54.720 [Thread-4] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 22:52:54.722 [Thread-4] SBServer - Manuafjnakg logged in.
+[DEBUG] 2020-04-05 22:52:54.724 [Thread-4] SBServer - Players connected: Guillaume, Janno, Rohan, Manuafjnakg
+[DEBUG] 2020-04-05 22:52:59.464 [Thread-4] SBServer - Got into changeTo method.
+[INFO ] 2020-04-05 22:52:59.558 [Thread-4] SBServer - Manuafjnakg status set to: READY.
+[DEBUG] 2020-04-05 22:53:04.223 [Thread-4] SBServer - Got into changeTo method.
+[INFO ] 2020-04-05 22:53:04.224 [Thread-4] SBServer - Manuafjnakg status set to: READY.
+[DEBUG] 2020-04-05 22:53:15.691 [Thread-4] SBServer - Got into changeTo method.
+[INFO ] 2020-04-05 22:53:15.691 [Thread-4] SBServer - Manuafjnakg status set to: READY.
+[DEBUG] 2020-04-05 22:53:21.676 [Thread-3] SBServer - Got into newGame method.
+[INFO ] 2020-04-05 22:53:21.684 [Thread-3] SBServer - Rohan status set to: INGAME.
+[INFO ] 2020-04-05 22:53:21.685 [Thread-3] SBServer - Manuafjnakg status set to: INGAME.
+[INFO ] 2020-04-05 22:53:21.687 [Thread-3] SBServer - Game started.
+[DEBUG] 2020-04-05 22:53:21.688 [Thread-3] SBServer - Size of gameList: 1
+[DEBUG] 2020-04-05 22:53:27.775 [Thread-1] SBServer - Got into changeTo method.
+[INFO ] 2020-04-05 22:53:27.776 [Thread-1] SBServer - Guillaume status set to: READY.
+[DEBUG] 2020-04-05 22:53:32.704 [Thread-1] SBServer - Got into newGame method.
+[INFO ] 2020-04-05 22:53:32.706 [Thread-1] SBServer - Guillaume tried to start game: not enough people were ready.
+[DEBUG] 2020-04-05 22:53:41.500 [Thread-2] SBServer - Got into newGame method.
+[INFO ] 2020-04-05 22:53:41.503 [Thread-2] SBServer - Janno status set to: INGAME.
+[INFO ] 2020-04-05 22:53:41.504 [Thread-2] SBServer - Guillaume status set to: INGAME.
+[INFO ] 2020-04-05 22:53:41.508 [Thread-2] SBServer - Game started.
+[DEBUG] 2020-04-05 22:53:41.508 [Thread-2] SBServer - Size of gameList: 2
+[DEBUG] 2020-04-05 22:53:46.224 [Thread-2] SBServer - Got into display method.
+[DEBUG] 2020-04-05 22:53:49.643 [Thread-2] SBServer - Got into display method.
+[DEBUG] 2020-04-05 22:53:49.644 [Thread-2] SBServer - In getGamesList, size of getGame: 2
+[DEBUG] 2020-04-05 22:53:49.646 [Thread-2] SBServer - Added running game 0
+[DEBUG] 2020-04-05 22:53:49.666 [Thread-2] SBServer - Added running game 1
+[DEBUG] 2020-04-05 22:53:51.663 [Thread-2] SBServer - Got into logout method.
+[INFO ] 2020-04-05 22:53:51.670 [Thread-2] SBServer - Janno logged out.
+[DEBUG] 2020-04-05 22:53:52.260 [Thread-1] SBServer - Got into logout method.
+[INFO ] 2020-04-05 22:53:52.261 [Thread-1] SBServer - Guillaume logged out.
+[DEBUG] 2020-04-05 22:53:56.314 [Thread-4] SBServer - Got into logout method.
+[INFO ] 2020-04-05 22:53:56.315 [Thread-4] SBServer - Manuafjnakg logged out.
+[DEBUG] 2020-04-05 22:53:58.827 [Thread-3] SBServer - Got into logout method.
+[INFO ] 2020-04-05 22:53:58.829 [Thread-3] SBServer - Rohan logged out.
+[WARN ] 2020-04-05 22:53:58.830 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:53:58.831 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:53:58.832 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:53:58.832 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:53:58.832 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:53:58.833 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:53:58.833 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:53:58.834 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:53:58.834 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:53:58.834 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:53:58.834 [Thread-1] SBClient - Error with reading input from server
+[WARN ] 2020-04-05 22:53:58.837 [Thread-1] SBClient - Error with reading input from server
+[DEBUG] 2020-04-05 22:54:21.674 [Thread-2] SBServer - In getGamesList, size of getGame: 2
+[DEBUG] 2020-04-05 22:54:21.675 [Thread-2] SBServer - Added finished game 0
+[DEBUG] 2020-04-05 22:54:21.676 [Thread-2] SBServer - Added finished game 1

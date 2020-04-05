@@ -1,0 +1,13 @@
+[DEBUG] 2020-04-05 16:46:11.222 [main] Main - Program starting.
+[DEBUG] 2020-04-05 16:46:11.236 [main] Main - Main triggered Server.
+[INFO ] 2020-04-05 16:46:11.247 [Thread-0] SBServer - Server waiting for port 63001.
+[DEBUG] 2020-04-05 16:49:00.796 [Thread-1] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 16:49:00.824 [Thread-1] SBServer - null logged in.
+[DEBUG] 2020-04-05 16:49:00.836 [Thread-1] SBServer - Players connected: null
+[DEBUG] 2020-04-05 16:49:19.635 [Thread-2] SBServer - Got into setTo method.
+[INFO ] 2020-04-05 16:49:19.701 [Thread-2] SBServer - null1 logged in.
+[DEBUG] 2020-04-05 16:49:19.706 [Thread-2] SBServer - Players connected: null, null1
+[DEBUG] 2020-04-05 16:49:32.838 [Thread-2] SBServer - Got into logout method.
+[INFO ] 2020-04-05 16:49:32.855 [Thread-2] SBServer - null1 logged out.
+[DEBUG] 2020-04-05 16:49:34.441 [Thread-1] SBServer - Got into logout method.
+[INFO ] 2020-04-05 16:49:34.444 [Thread-1] SBServer - null logged out.

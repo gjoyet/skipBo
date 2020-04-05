@@ -68,7 +68,7 @@ public class SBServer implements Runnable {
     public static SBLobby getLobby() { return serverLobby;}
 
     /**
-     * @return: a String containing all players currently connected.
+     * @return a String containing all players currently connected.
      */
     public static String getWholePlayerList() {
         StringBuilder allNames = new StringBuilder();
@@ -80,7 +80,7 @@ public class SBServer implements Runnable {
     }
 
     /**
-     * @return: a String containing all players currently in the main lobby.
+     * @return a String containing all players currently in the main lobby.
      */
     public static String getPlayerNotIngameList() {
         StringBuilder allNames = new StringBuilder();
@@ -93,7 +93,7 @@ public class SBServer implements Runnable {
     }
 
     /**
-     * @return: a String with all games, running and finished.
+     * @return a String with all games, running and finished.
      */
     public static String[] getGamesList() {
         String[] allGames = new String[serverLobby.getGames().size()];

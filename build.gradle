@@ -53,11 +53,11 @@ dependencies {
 /*
 The following block adds both compile and runtime dependencies to the jar
  */
-task skipbo(type: Jar) {
+jar {
     manifest {
 
         attributes(
-                "Main-Class": 'skipbo.server.Main'
+                "Main-Class": mainClassName
 
         )
     }
@@ -66,4 +66,8 @@ task skipbo(type: Jar) {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 
+}
+
+tasks.register("build-cs108") {
+    dependsOn javadoc, jar
 }

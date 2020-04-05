@@ -50,6 +50,8 @@ public class Game implements Runnable {
         return this.gameRunning;
     }
 
+    public void terminateGame() { this.gameRunning = false; }
+
     public String getPlayerList() {
         StringBuilder playerString = new StringBuilder();
         for(int i = 0; i < players.size(); i++) {

@@ -143,6 +143,16 @@ public class ProtocolExecutor {
         sendAll("PRINT§Terminal§" + sbL.player.getName() + " left the room.", sbL);
         servLog.info(sbL.player.getName() + " logged out.");
         if(serverLobby.getSize() == 0) {
+            try {
+                for(Game g : SBServer.getLobby().getGames()) {
+                    g.terminateGame();
+                }
+                File gameFile = new File("skipBoLogs/Games.txt");
+                PrintWriter filePW = new PrintWriter(new FileOutputStream(gameFile), true);
+                filePW.println(SBServer.getGamesList());
+            } catch (FileNotFoundException e) {
+                servLog.warn("Problem with writing games into a file.");
+            }
             System.exit(0);
         }
 

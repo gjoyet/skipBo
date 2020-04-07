@@ -224,8 +224,8 @@ public class ProtocolExecutor {
         int iT = Integer.parseInt(arguments[3])-1; // index to
         servLog.debug("putTo triggered with: Piles: "
                 + pF + pT + ", Indexes: " + iF + iT + "." );
-        if((pF == "H" && (iF < 1 || iF > 5)) || (pF == "S" && iF != 1) ||
-                            (pF == "D" && (iF < 0 || iF > 4)) || iT < 1 || iT > 4) {
+        if((pF == "H" && (iF < 0 || iF > 4)) || (pF == "S" && iF != 0) ||
+                            (pF == "D" && (iF < 0 || iF > 3)) || iT < 0 || iT > 3) {
             sbL.getPW().println("PRINT§Terminal§Invalid indexes in this move.");
             return;
         }

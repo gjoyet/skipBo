@@ -50,24 +50,16 @@ dependencies {
     testImplementation 'junit:junit:4.+'
 }
 
-/*
-The following block adds both compile and runtime dependencies to the jar
+
+// The following block adds both compile and runtime dependencies to the jar
 
 jar {
     manifest {
-
-        attributes(
-                "Main-Class": mainClassName
-
-        )
+        attributes('Implementation-Title': project.name,
+                'Implementation-Version': project.version)
     }
-    from {
-        configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    }
-
 }
-*/
+
 
 task "build-cs108" (type:GradleBuild) {
     tasks = ['build', 'jar', 'myJavadocs']

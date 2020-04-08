@@ -150,14 +150,14 @@ public class Game implements Runnable {
         ArrayList<Card> specBuildPile = buildPiles.get(buildDeckIndex);
 
         if (specBuildPile.isEmpty()) {
-            if (card.number == 1) {
+            if (1 == card.number) {
                 specBuildPile.add(card);
                 currentPlayer.getHandCards().remove(card);
                 new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: "
                         + piles.buildPilesPrint(), currentPlayer.getSBL());
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
                         + piles.handCardPrint(currentPlayer));
-            } else if (card.number != 1 && card.col != Color.CYAN) {
+            } else if (card.col != Color.CYAN) {
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§This move is invalid! " +
                         "To play to an empty pile, the card number has to be 1.");
             }
@@ -297,6 +297,7 @@ public class Game implements Runnable {
                 }
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hands cards are now: "
                         + piles.handCardPrint(currentPlayer));
+                //TODO: stock pile card update
             }
             if (stockCard.number == 12) {       // If stock card is 12, remove build pile, because it's full
                 for (int i = 0; i < 12; i++) {    // remove all cards from the buildPile if the top card is 12

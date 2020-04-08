@@ -55,24 +55,17 @@ dependencies {
 
 jar {
     manifest {
-        attributes('Implementation-Title': project.name,
-                'Implementation-Version': project.version)
+        attributes('Main-Class' : 'skipbo.server.Main')
     }
+    from {
+        configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+
 }
 
 
-task "build-cs108" (type:GradleBuild) {
-    tasks = ['build', 'jar', 'myJavadocs']
-}
-	
-task myJavadocs(type:Javadoc){
-	source = sourceSets.main.allJava
-	classpath = sourceSets.main.compileClasspath
-	failOnError = false
+tasks.register("build-cs108") {
+    dependsOn javadoc, jar
 }
 
-/*
-//tasks.register("build-cs108") {
-  //  dependsOn javadoc, jar
-//}
- */

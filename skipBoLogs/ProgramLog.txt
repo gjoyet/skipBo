@@ -1,0 +1,12 @@
+[DEBUG] 2020-04-08 15:31:31.947 [main] Main - Program starting.
+[DEBUG] 2020-04-08 15:31:31.955 [main] Main - Main triggered Server.
+[INFO ] 2020-04-08 15:31:31.965 [Thread-0] SBServer - Server waiting for port 1337.
+[DEBUG] 2020-04-08 15:31:43.086 [main] Main - Program starting.
+[DEBUG] 2020-04-08 15:31:43.097 [main] Main - Main triggered Client.
+[INFO ] 2020-04-08 15:31:43.106 [Thread-0] SBClient - Connecting to port 1337…
+[DEBUG] 2020-04-08 15:31:48.308 [Thread-1] SBServer - Got into setTo method.
+[INFO ] 2020-04-08 15:31:48.320 [Thread-1] SBServer - Guillaume logged in.
+[DEBUG] 2020-04-08 15:31:48.324 [Thread-1] SBServer - Players connected: Guillaume
+[DEBUG] 2020-04-08 15:32:02.122 [Thread-1] SBServer - Got into logout method.
+[WARN ] 2020-04-08 15:32:02.125 [Thread-1] SBClient - Error with reading input from server
+[INFO ] 2020-04-08 15:32:02.133 [Thread-1] SBServer - Guillaume logged out.

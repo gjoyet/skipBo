@@ -55,9 +55,13 @@ dependencies {
 
 jar {
     manifest {
-        attributes('Implementation-Title': project.name,
-                'Implementation-Version': project.version)
+        attributes('MainClass' : mainClassName,
+                   'Multi-Release': true)
     }
+
+    from {    configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } 
+             configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } 
+    } 
 }
 
 

@@ -69,7 +69,7 @@ task "build-cs108" (type:GradleBuild) {
     tasks = ['build', 'jar', 'myJavadocs']
 }
 	
-task myJavadocs(type:Javadoc){
+task myJavadocs(type:Javadoc) {
 	source = sourceSets.main.allJava
 	classpath = sourceSets.main.compileClasspath
 	failOnError = false

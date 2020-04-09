@@ -130,7 +130,7 @@ public class Game implements Runnable {
      */
 
     public void startTurn(int playersTurn) {
-        servLog.debug("Entered startTurn.");
+        servLog.debug("Entered startTurn with playersTurn = " + playersTurn + ".");
         turnFinished = false;
         Player ply = players.get(playersTurn);
         ply.getSBL().getPW().println("PRINT§Terminal§It's your turn! Your hand cards are now: "
@@ -406,6 +406,7 @@ public class Game implements Runnable {
             player.getHandCards().add(drawCard);
             drawPile.remove(drawPile.get(i));
         }
+        servLog.debug("Exiting fillHandCards.");
     }
 
     //TODO: reshuffle()!
@@ -415,14 +416,14 @@ public class Game implements Runnable {
      * then changes turn from one player to the next.
      */
     public void endTurn() {
-        servLog.debug("Entered endTurn.");
+        servLog.debug("Entered endTurn with playersTurn = " + playersTurn + ".");
         if (!(playersTurn == players.size() - 1)) {
             playersTurn++;
         } else {
             playersTurn = 0;
         }
-        startTurn(playersTurn);
         turnFinished = true;
+        startTurn(playersTurn);
     }
 
 

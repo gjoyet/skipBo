@@ -9,12 +9,12 @@ import java.util.Random;
 public class Game implements Runnable {
 
     public ArrayList<Player> players;
-    public Pile piles;
-    int sizeOfStockPile = 20;
+    Pile piles;
+    int sizeOfStockPile = 3; //5 for DEMO purposes, actually 20
     int playersTurn = 0;
     private Player winner;
     private boolean gameRunning, turnFinished;
-
+    //TODO: turn counter
 
     /**
      * Constructor for Object Game, where the main Game and Game rules
@@ -95,14 +95,18 @@ public class Game implements Runnable {
 
             Player tempPlayer = players.get(i);
             tempPlayer.getSBL().getPW().println("PRINT§Terminal§Game is starting...");
-            Random random = new Random();   // Object random for card distribution by chance
-
-            for (int j = 0; j < 5; j++) {    // Draw hand-cards for each player
+            Random random = new Random();
+            for (int j  = 0; j < 5; j++){   //ONLY FOR DEMO PURPOSES
+                Card c = new Card(j+1,Color.BLACK);
+                tempPlayer.getHandCards().add(c);
+            }
+            /*
+            for (int j = 0; j < 5; j++) {    // Draw hand-cards for each player (Actual hand card loop)
                 Card c = getDrawPile().get(random.nextInt(getDrawPile().size()));
                 tempPlayer.getHandCards().add(c);
                 piles.drawPile.remove(c);
             }
-
+            */
             tempPlayer.getSBL().getPW().println("PRINT§Terminal§Your Hand cards are: " + piles.handCardPrint(tempPlayer));
 
             for (int j = 0; j < sizeOfStockPile; j++) {    // Draw Stock-Pile cards for each player

@@ -120,8 +120,15 @@ public class Game implements Runnable {
             tempPlayer.getSBL().getPW().println("PRINT§Terminal§Your Stock card is: " + topCard.number);
         }
 
-        startTurn(playersTurn);
+        startFirstTurn(playersTurn);
         servLog.debug("Game thread finished.");
+    }
+
+    void startFirstTurn(int playersTurn){
+        servLog.debug("Entered first turn.");
+        turnFinished = false;
+        Player player = players.get(playersTurn);
+        player.getSBL().getPW().println("PRINT§Terminal§It's your first turn! Your first set of hand cards are: " + piles.handCardPrint(player));
     }
 
     /**
@@ -131,14 +138,16 @@ public class Game implements Runnable {
 
     public void startTurn(int playersTurn) {
         servLog.debug("Entered startTurn.");
-        turnFinished = false;
         Player ply = players.get(playersTurn);
+        fillHandCards(ply);
+
+        turnFinished = false;
+
         ply.getSBL().getPW().println("PRINT§Terminal§It's your turn! Your hand cards are now: "
                 + piles.handCardPrint(ply));
 
-        fillHandCards(ply);
-        new ProtocolExecutor().sendAllExceptOne("PRINT§Terminal§Gave " + ply.getName()
-                + " their missing cards.", ply.getSBL());
+        new ProtocolExecutor().sendAllExceptOne("PRINT§Terminal§It's " + ply.getName()
+                + "'s turn!", ply.getSBL());
     }
 
     /**
@@ -401,10 +410,12 @@ public class Game implements Runnable {
         servLog.debug("Entered fillHandCards.");
         ArrayList<Card> drawPile = piles.drawPile;
         int toFill = 5 - player.getHandCards().size();
-        for (int i = 0; i <= toFill; i++) {
-            Card drawCard = drawPile.get(i);
-            player.getHandCards().add(drawCard);
-            drawPile.remove(drawPile.get(i));
+        if(toFill != 0) {
+            for (int i = 0; i < toFill; i++) {
+                Card drawCard = drawPile.get(i);
+                player.getHandCards().add(drawCard);
+                drawPile.remove(drawPile.get(i));
+            }
         }
     }
 

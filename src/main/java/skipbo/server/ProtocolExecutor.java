@@ -218,7 +218,10 @@ public class ProtocolExecutor {
             return;
         }
         String[] arguments = input[2].split("§");
-        if(arguments.length < 4) return;
+        if(arguments.length < 4) {
+            sbL.getPW().println("Missing an argument for command 'play'.");
+            return;
+        }
         String pF = arguments[0]; // pile from
         String pT = arguments[2]; // pile to
         int iF = Integer.parseInt(arguments[1])-1; // index from

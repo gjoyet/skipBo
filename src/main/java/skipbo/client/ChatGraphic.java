@@ -37,6 +37,7 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
         contentPane.setBorder(new EmptyBorder(5,5,5,5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
+        setFrame();
     }
     /**
      * Constructor for ChatGraphic without client name. Lets client choose their name.
@@ -61,6 +62,7 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
         clientListener.pw.println("SETTO§Nickname§" + name);
         printInfoMessage("Connection successful");
         printCommandList();
+
     }
 
     /**
@@ -68,32 +70,33 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
      */
     void setFrame() {
 
+
         setTitle("Skip-Bros CHAT");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setBounds(100, 100, 520, 485);
 
         contentPane = new JPanel();
-        contentPane.setBackground(Color.black);
+        contentPane.setBackground(Color.orange);
         contentPane.setBorder(new EmptyBorder(5,5,5,5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
         //Output textfield
         chat = new JTextArea(); //TODO: change to JEditorPane or JTextPane to print in colour
-        chat.setBounds(20, 30 ,250, 400);
+        chat.setBounds(20, 100,250, 400);
         chat.setLineWrap(true);
         chat.setWrapStyleWord(true);
         chat.setEditable(false);
 
         chatScrollPane = new JScrollPane(chat);
-        chatScrollPane.setBounds(20, 30 ,250, 400 );
+        chatScrollPane.setBounds(20, 100 ,250, 400 );
         chatScrollPane.setVisible(true);
         chatScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentPane.add(chatScrollPane);
 
         //Input textfield
         inputMes = new JTextArea();
-        inputMes.setBounds(290, 350,200, 80);
+        inputMes.setBounds(20, 505,250, 80);
         inputMes.setEditable(true);
         inputMes.setColumns(3);
         inputMes.setLineWrap(true);
@@ -102,7 +105,7 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
         contentPane.add(inputMes);
 
         inputScrollPane = new JScrollPane(inputMes);
-        inputScrollPane.setBounds(290, 350,200, 80);
+        inputScrollPane.setBounds(20, 505,250, 80);
         inputScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentPane.add(inputScrollPane);
 

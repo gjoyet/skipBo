@@ -12,12 +12,32 @@ import java.awt.event.KeyListener;
 public class ChatGraphic extends JFrame implements KeyListener { //ActionListener
 
     private SBClientListener clientListener;
-    private JPanel contentPane;
+    JPanel contentPane;
     private JTextArea chat;
     private JTextArea inputMes;
     JScrollPane chatScrollPane;
     private JScrollPane inputScrollPane;
 
+    //test method
+    public static void main(String[] args) {
+        ChatGraphic testChatGraphic = new ChatGraphic();
+        testChatGraphic.setVisible(true);
+        GameGraphic gameGraphic = new GameGraphic(testChatGraphic);
+        gameGraphic.setGameGraphic();
+    }
+
+    //Test class
+    ChatGraphic() {
+        setTitle("Skip-Bros CHAT");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 520, 485);
+
+        contentPane = new JPanel();
+        contentPane.setBackground(Color.black);
+        contentPane.setBorder(new EmptyBorder(5,5,5,5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+    }
     /**
      * Constructor for ChatGraphic without client name. Lets client choose their name.
      * @param clientListener

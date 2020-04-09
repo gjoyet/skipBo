@@ -60,31 +60,24 @@ public class SBListener implements Runnable {
         try {
             switch (protocol) {
                 case SETTO:
-                    servLog.debug("Got into setTo method.");
                     new ProtocolExecutor(input, this).setTo();
                     break;
                 case CHNGE:
-                    servLog.debug("Got into changeTo method.");
                     new ProtocolExecutor(input, this).changeTo();
                     break;
                 case CHATM:
-                    servLog.debug("Got into chatMessage method.");
                     new ProtocolExecutor(input, this).chatMessage();
                     break;
                 case LGOUT:
-                    servLog.debug("Got into logout method.");
                     new ProtocolExecutor(input, this).logout();
                     break;
                 case NWGME:
-                    servLog.debug("Got into newGame method.");
                     new ProtocolExecutor(input, this).newGame();
                     break;
                 case PUTTO:
-                    servLog.debug("Got into putTo method with input: " + input[2] + ".");
                     new ProtocolExecutor(input, this).putTo();
                     break;
                 case DISPL:
-                    servLog.debug("Got into display method.");
                     new ProtocolExecutor(input, this).display();
                     break;
             }

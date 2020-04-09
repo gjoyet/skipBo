@@ -212,6 +212,7 @@ public class ProtocolExecutor {
      * Method for command "PUTTO". Triggers needed methods of the Game class.
      */
     void putTo() {
+        servLog.debug("Got into putTo method with input: " + input[2] + ".");
         if(!sbL.getGameLobby().get(sbL.player.getGame().getPlayersTurn()).equals(sbL.player)) {
             sbL.getPW().println("PRINT§Terminal§Wait until it's your turn, you impatient little rascal!");
             return;
@@ -222,8 +223,6 @@ public class ProtocolExecutor {
         String pT = arguments[2]; // pile to
         int iF = Integer.parseInt(arguments[1])-1; // index from
         int iT = Integer.parseInt(arguments[3])-1; // index to
-        servLog.debug("putTo triggered with: Piles: "
-                + pF + pT + ", Indexes: " + iF + iT + "." );
         if((pF == "H" && (iF < 0 || iF > 4)) || (pF == "S" && iF != 0) ||
                             (pF == "D" && (iF < 0 || iF > 3)) || iT < 0 || iT > 3) {
             sbL.getPW().println("PRINT§Terminal§Invalid indexes in this move.");

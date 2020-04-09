@@ -6,6 +6,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static skipbo.server.SBServer.servLog;
+
 public class Game implements Runnable {
 
     public ArrayList<Player> players;
@@ -86,7 +88,7 @@ public class Game implements Runnable {
      * all the different pile-types which are specifically needed.
      */
     public void run() {
-
+        servLog.debug("Game thread starting.");
         gameRunning = true;
 
         this.piles.gamePiles();   // Game gets complete set of cards
@@ -115,6 +117,7 @@ public class Game implements Runnable {
         }
 
         startTurn(playersTurn);
+        servLog.debug("Game thread finished.");
     }
 
     /**
@@ -123,6 +126,7 @@ public class Game implements Runnable {
      */
 
     public void startTurn(int playersTurn) {
+        servLog.debug("Entered startTurn.");
         turnFinished = false;
         Player ply = players.get(playersTurn);
         ply.getSBL().getPW().println("PRINT§Terminal§It's your turn! Your hand cards are now: "
@@ -144,6 +148,7 @@ public class Game implements Runnable {
      */
 
     public void playToMiddle(Player currentPlayer, int handCardIndex, int buildDeckIndex) {
+        servLog.debug("Entered playToMiddle.");
         Card card = currentPlayer.getHandCards().get(handCardIndex);   // returns card at specified index in the hand card arraylist
 
         ArrayList<ArrayList<Card>> buildPiles = piles.buildPiles;
@@ -220,6 +225,7 @@ public class Game implements Runnable {
      */
 
     public void playToDiscard(Player currentPlayer, int handCardIndex, int discardPileIndex) {
+        servLog.debug("Entered playToDiscard.");
         currentPlayer.getSBL().getPW().println("PRINT§Terminal§You are playing to discard now!");
         ArrayList<ArrayList<Card>> discardPiles = currentPlayer.getDiscardPile();
         ArrayList<Card> specDiscard = discardPiles.get(discardPileIndex);
@@ -257,6 +263,7 @@ public class Game implements Runnable {
 
 
     public void playFromStockToMiddle(Player currentPlayer, int buildPileIndex) {
+        servLog.debug("Entered playFromStockToMiddle.");
         ArrayList<Card> stockPile = currentPlayer.getStockPile();
         Card stockCard = stockPile.get(stockPile.size() - 1);
 
@@ -326,7 +333,7 @@ public class Game implements Runnable {
      */
 
     public void playFromDiscardToMiddle(Player currentPlayer, int discardPileIndex, int buildPileIndex) {
-
+        servLog.debug("Entered playFromDiscardToMiddle.");
         ArrayList<Card> discardPile = currentPlayer.getDiscardPile().get(discardPileIndex);
         ArrayList<Card> specBuildPile = piles.buildPiles.get(buildPileIndex);
 
@@ -387,6 +394,7 @@ public class Game implements Runnable {
      */
 
     public void fillHandCards(Player player) {
+        servLog.debug("Entered fillHandCards.");
         ArrayList<Card> drawPile = piles.drawPile;
         int toFill = 5 - player.getHandCards().size();
         for (int i = 0; i <= toFill; i++) {
@@ -403,6 +411,7 @@ public class Game implements Runnable {
      * then changes turn from one player to the next.
      */
     public void endTurn() {
+        servLog.debug("Entered endTurn.");
         if (!(playersTurn == players.size() - 1)) {
             playersTurn++;
         } else {

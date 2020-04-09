@@ -1,0 +1,115 @@
+[DEBUG] 2020-04-09 16:25:41.618 [main] Main - Program starting.
+[DEBUG] 2020-04-09 16:25:41.633 [main] Main - Main triggered Server.
+[INFO ] 2020-04-09 16:25:41.646 [Thread-0] SBServer - Server waiting for port 1337.
+[DEBUG] 2020-04-09 16:25:48.809 [main] Main - Program starting.
+[DEBUG] 2020-04-09 16:25:48.820 [main] Main - Main triggered Client.
+[INFO ] 2020-04-09 16:25:48.828 [Thread-0] SBClient - Connecting to port 1337…
+[INFO ] 2020-04-09 16:25:52.176 [Thread-1] SBServer - Guillaume logged in.
+[DEBUG] 2020-04-09 16:25:52.187 [Thread-1] SBServer - Players connected: Guillaume
+[DEBUG] 2020-04-09 16:25:56.626 [main] Main - Program starting.
+[DEBUG] 2020-04-09 16:25:56.636 [main] Main - Main triggered Client.
+[INFO ] 2020-04-09 16:25:56.642 [Thread-0] SBClient - Connecting to port 1337…
+[INFO ] 2020-04-09 16:26:01.011 [Thread-2] SBServer - Rohan logged in.
+[DEBUG] 2020-04-09 16:26:01.013 [Thread-2] SBServer - Players connected: Guillaume, Rohan
+[INFO ] 2020-04-09 16:26:15.043 [Thread-1] SBServer - Guillaume status set to: READY.
+[INFO ] 2020-04-09 16:26:17.038 [Thread-2] SBServer - Rohan status set to: INGAME.
+[INFO ] 2020-04-09 16:26:17.038 [Thread-2] SBServer - Guillaume status set to: INGAME.
+[INFO ] 2020-04-09 16:26:17.039 [Thread-2] SBServer - Game started.
+[DEBUG] 2020-04-09 16:26:17.040 [Thread-2] SBServer - Size of gameList: 1
+[DEBUG] 2020-04-09 16:26:17.040 [Thread-3] SBServer - Game thread starting.
+[DEBUG] 2020-04-09 16:26:17.278 [Thread-3] SBServer - Entered startTurn.
+[DEBUG] 2020-04-09 16:26:17.281 [Thread-3] SBServer - Entered fillHandCards.
+[DEBUG] 2020-04-09 16:26:17.302 [Thread-3] SBServer - Exiting fillHandCards.
+[DEBUG] 2020-04-09 16:26:17.311 [Thread-3] SBServer - Game thread finished.
+[DEBUG] 2020-04-09 16:26:44.922 [AWT-EventQueue-0] SBClient - Command: PUTTO§Card§H§5§D§3
+[DEBUG] 2020-04-09 16:26:44.938 [Thread-2] SBServer - Got into putTo method with input: H§5§D§3.
+[DEBUG] 2020-04-09 16:26:44.941 [Thread-2] SBServer - Entered playToDiscard.
+[DEBUG] 2020-04-09 16:26:44.973 [Thread-2] SBServer - Entered endTurn.
+[DEBUG] 2020-04-09 16:26:44.974 [Thread-2] SBServer - Entered startTurn.
+[DEBUG] 2020-04-09 16:26:44.974 [Thread-2] SBServer - Entered fillHandCards.
+[DEBUG] 2020-04-09 16:26:44.974 [Thread-2] SBServer - Exiting fillHandCards.
+[DEBUG] 2020-04-09 16:26:55.473 [AWT-EventQueue-0] SBClient - Command: PUTTO§Card§H§1§B§1
+[DEBUG] 2020-04-09 16:26:55.491 [Thread-1] SBServer - Got into putTo method with input: H§1§B§1.
+[DEBUG] 2020-04-09 16:26:55.491 [Thread-1] SBServer - Entered playToMiddle.
+[DEBUG] 2020-04-09 16:27:08.747 [AWT-EventQueue-0] SBClient - Command: PUTTO§Card§H§2§B§1
+[DEBUG] 2020-04-09 16:27:08.755 [Thread-1] SBServer - Got into putTo method with input: H§2§B§1.
+[DEBUG] 2020-04-09 16:27:08.756 [Thread-1] SBServer - Entered playToMiddle.
+[DEBUG] 2020-04-09 16:27:19.332 [AWT-EventQueue-0] SBClient - Command: PUTTO§Card§H§1§B§1
+[DEBUG] 2020-04-09 16:27:19.332 [Thread-1] SBServer - Got into putTo method with input: H§1§B§1.
+[DEBUG] 2020-04-09 16:27:19.333 [Thread-1] SBServer - Entered playToMiddle.
+[DEBUG] 2020-04-09 16:27:27.555 [AWT-EventQueue-0] SBClient - Command: PUTTO§Card§H§3§D§1
+[DEBUG] 2020-04-09 16:27:27.564 [Thread-1] SBServer - Got into putTo method with input: H§3§D§1.
+[DEBUG] 2020-04-09 16:27:27.565 [Thread-1] SBServer - Entered playToDiscard.
+[DEBUG] 2020-04-09 16:27:27.567 [Thread-1] SBServer - Entered endTurn.
+[DEBUG] 2020-04-09 16:27:27.567 [Thread-1] SBServer - Entered startTurn.
+[DEBUG] 2020-04-09 16:27:27.568 [Thread-1] SBServer - Entered fillHandCards.
+[DEBUG] 2020-04-09 16:27:27.568 [Thread-1] SBServer - Exiting fillHandCards.
+[DEBUG] 2020-04-09 16:27:53.017 [AWT-EventQueue-0] SBClient - Command: PUTTO§Card§D§3§B§1
+[DEBUG] 2020-04-09 16:27:53.018 [Thread-2] SBServer - Got into putTo method with input: D§3§B§1.
+[DEBUG] 2020-04-09 16:27:53.018 [Thread-2] SBServer - Entered playFromDiscardToMiddle.
+[DEBUG] 2020-04-09 16:28:08.170 [AWT-EventQueue-0] SBClient - Command: PUTTO§Card§H§4§D§1
+[DEBUG] 2020-04-09 16:28:08.179 [Thread-2] SBServer - Got into putTo method with input: H§4§D§1.
+[DEBUG] 2020-04-09 16:28:08.179 [Thread-2] SBServer - Entered playToDiscard.
+[DEBUG] 2020-04-09 16:28:08.181 [Thread-2] SBServer - Entered endTurn.
+[DEBUG] 2020-04-09 16:28:08.181 [Thread-2] SBServer - Entered startTurn.
+[DEBUG] 2020-04-09 16:28:08.181 [Thread-2] SBServer - Entered fillHandCards.
+[DEBUG] 2020-04-09 16:28:08.182 [Thread-2] SBServer - Exiting fillHandCards.
+[DEBUG] 2020-04-09 16:28:22.277 [AWT-EventQueue-0] SBClient - Command: PUTTO§Card§H§1§B§1
+[DEBUG] 2020-04-09 16:28:22.278 [Thread-1] SBServer - Got into putTo method with input: H§1§B§1.
+[DEBUG] 2020-04-09 16:28:22.278 [Thread-1] SBServer - Entered playToMiddle.
+[DEBUG] 2020-04-09 16:36:59.269 [main] Main - Program starting.
+[DEBUG] 2020-04-09 16:36:59.277 [main] Main - Main triggered Server.
+[INFO ] 2020-04-09 16:36:59.286 [Thread-0] SBServer - Server waiting for port 1337.
+[DEBUG] 2020-04-09 16:37:09.633 [main] Main - Program starting.
+[DEBUG] 2020-04-09 16:37:09.640 [main] Main - Main triggered Client.
+[INFO ] 2020-04-09 16:37:09.648 [Thread-0] SBClient - Connecting to port 1337…
+[INFO ] 2020-04-09 16:37:15.250 [Thread-1] SBServer - Guillaume logged in.
+[DEBUG] 2020-04-09 16:37:15.256 [Thread-1] SBServer - Players connected: Guillaume
+[DEBUG] 2020-04-09 16:37:17.737 [main] Main - Program starting.
+[DEBUG] 2020-04-09 16:37:17.749 [main] Main - Main triggered Client.
+[INFO ] 2020-04-09 16:37:17.757 [Thread-0] SBClient - Connecting to port 1337…
+[INFO ] 2020-04-09 16:37:22.463 [Thread-2] SBServer - Rohan logged in.
+[DEBUG] 2020-04-09 16:37:22.471 [Thread-2] SBServer - Players connected: Guillaume, Rohan
+[INFO ] 2020-04-09 16:37:28.361 [Thread-1] SBServer - Guillaume status set to: READY.
+[INFO ] 2020-04-09 16:37:35.339 [Thread-2] SBServer - Rohan status set to: INGAME.
+[INFO ] 2020-04-09 16:37:35.341 [Thread-2] SBServer - Guillaume status set to: INGAME.
+[INFO ] 2020-04-09 16:37:35.342 [Thread-2] SBServer - Game started.
+[DEBUG] 2020-04-09 16:37:35.343 [Thread-2] SBServer - Size of gameList: 1
+[DEBUG] 2020-04-09 16:37:35.344 [Thread-3] SBServer - Game thread starting.
+[DEBUG] 2020-04-09 16:37:35.535 [Thread-3] SBServer - Entered startTurn with playersTurn = 0.
+[DEBUG] 2020-04-09 16:37:35.553 [Thread-3] SBServer - Entered fillHandCards.
+[DEBUG] 2020-04-09 16:37:35.558 [Thread-3] SBServer - Exiting fillHandCards.
+[DEBUG] 2020-04-09 16:37:35.571 [Thread-3] SBServer - Game thread finished.
+[DEBUG] 2020-04-09 16:37:57.478 [AWT-EventQueue-0] SBClient - Command: PUTTO§Card§H§1§B§1
+[DEBUG] 2020-04-09 16:37:57.501 [Thread-2] SBServer - Got into putTo method with input: H§1§B§1.
+[DEBUG] 2020-04-09 16:37:57.503 [Thread-2] SBServer - Entered playToMiddle.
+[DEBUG] 2020-04-09 16:38:06.409 [AWT-EventQueue-0] SBClient - Command: PUTTO§Card§H§1§B§1
+[DEBUG] 2020-04-09 16:38:06.410 [Thread-2] SBServer - Got into putTo method with input: H§1§B§1.
+[DEBUG] 2020-04-09 16:38:06.411 [Thread-2] SBServer - Entered playToMiddle.
+[DEBUG] 2020-04-09 16:38:13.537 [AWT-EventQueue-0] SBClient - Command: PUTTO§Card§H§1§B§1
+[DEBUG] 2020-04-09 16:38:13.538 [Thread-2] SBServer - Got into putTo method with input: H§1§B§1.
+[DEBUG] 2020-04-09 16:38:13.539 [Thread-2] SBServer - Entered playToMiddle.
+[DEBUG] 2020-04-09 16:38:31.165 [AWT-EventQueue-0] SBClient - Command: PUTTO§Card§H§1§B§1
+[DEBUG] 2020-04-09 16:38:31.188 [Thread-1] SBServer - Got into putTo method with input: H§1§B§1.
+[DEBUG] 2020-04-09 16:38:38.315 [AWT-EventQueue-0] SBClient - Command: PUTTO§Card§H§1§D§4
+[DEBUG] 2020-04-09 16:38:38.316 [Thread-2] SBServer - Got into putTo method with input: H§1§D§4.
+[DEBUG] 2020-04-09 16:38:38.316 [Thread-2] SBServer - Entered playToDiscard.
+[DEBUG] 2020-04-09 16:38:38.347 [Thread-2] SBServer - Entered endTurn with playersTurn = 0.
+[DEBUG] 2020-04-09 16:38:38.348 [Thread-2] SBServer - Entered startTurn with playersTurn = 1.
+[DEBUG] 2020-04-09 16:38:38.348 [Thread-2] SBServer - Entered fillHandCards.
+[DEBUG] 2020-04-09 16:38:38.348 [Thread-2] SBServer - Exiting fillHandCards.
+[DEBUG] 2020-04-09 16:38:47.805 [AWT-EventQueue-0] SBClient - Command: PUTTO§Card§H§§5§D 
+[DEBUG] 2020-04-09 16:38:47.806 [Thread-1] SBServer - Got into putTo method with input: H§§5§D .
+[WARN ] 2020-04-09 16:38:47.809 [Thread-1] SBServer - PUTTO: not a command.
+[DEBUG] 2020-04-09 16:41:04.536 [AWT-EventQueue-0] SBClient - Command: PUTTO§Card§H§1§D§1
+[DEBUG] 2020-04-09 16:41:04.552 [Thread-1] SBServer - Got into putTo method with input: H§1§D§1.
+[DEBUG] 2020-04-09 16:41:04.557 [Thread-1] SBServer - Entered playToDiscard.
+[DEBUG] 2020-04-09 16:41:04.560 [Thread-1] SBServer - Entered endTurn with playersTurn = 1.
+[DEBUG] 2020-04-09 16:41:04.561 [Thread-1] SBServer - Entered startTurn with playersTurn = 0.
+[DEBUG] 2020-04-09 16:41:04.563 [Thread-1] SBServer - Entered fillHandCards.
+[DEBUG] 2020-04-09 16:41:04.563 [Thread-1] SBServer - Exiting fillHandCards.
+[DEBUG] 2020-04-09 16:41:32.612 [AWT-EventQueue-0] SBClient - Command: PUTTO§Card§H§1§B§1
+[DEBUG] 2020-04-09 16:41:32.616 [Thread-2] SBServer - Got into putTo method with input: H§1§B§1.
+[DEBUG] 2020-04-09 16:41:32.617 [Thread-2] SBServer - Entered playToMiddle.
+[INFO ] 2020-04-09 16:41:34.976 [Thread-2] SBServer - Rohan logged out.
+[INFO ] 2020-04-09 16:41:36.091 [Thread-1] SBServer - Guillaume logged out.

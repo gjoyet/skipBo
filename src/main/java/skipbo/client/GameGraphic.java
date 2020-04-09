@@ -1,6 +1,5 @@
 package skipbo.client;
 
-
 import skipbo.game.Card;
 import skipbo.game.Game;
 import skipbo.game.Player;
@@ -11,6 +10,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import static skipbo.client.SBClient.clientLog;
 
 /**
  * Will be class for the Game GUI in the future
@@ -40,13 +40,16 @@ public class GameGraphic implements KeyListener{ //ActionListener
         */
             // Discard Piles
             JTextField discard_A = new JTextField();
-            discard_A.setBounds(50,100, 120,220);
+            discard_A.setBounds(100,100, 120,220);
             JTextField discard_B = new JTextField();
             discard_B.setBounds(50,100, 120,220);
             JTextField discard_C = new JTextField();
             discard_C.setBounds(50,100, 120,220);
             JTextField discard_D = new JTextField();
             discard_D.setBounds(50,100, 120,220);
+            chatGraphic.contentPane.add(discard_A);
+            clientLog.debug("Added discard_A");
+
             // hand piles
             JTextField hand_A = new JTextField();
             hand_A.setBounds(50,100, 120,220);
@@ -157,6 +160,11 @@ public class GameGraphic implements KeyListener{ //ActionListener
         contentPane.add(inputScrollPane);*/
 
     }
+
+    void displayTestCard() {
+        //Icon card = new ImageIcon("")
+    }
+
     // Play a hand card to build pile
     public void handToBuild(){
 

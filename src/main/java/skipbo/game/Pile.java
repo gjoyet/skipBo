@@ -104,7 +104,7 @@ public class Pile {
             if (specBuildPile.isEmpty()) {
                 str.append("Build pile " + i + " is : [ ]");
             } else {
-                str.append("Build pile " + i + " is: [" + specBuildPile.get(specBuildPile.size() - 1).number + "]" + "\t");
+                str.append("Build pile " + i + " is: [" + specBuildPile.get(specBuildPile.size() - 1).number + "]" + "\t" + "\t");
             }
         }
         return str.toString();

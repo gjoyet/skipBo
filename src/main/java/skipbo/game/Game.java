@@ -12,11 +12,13 @@ public class Game implements Runnable {
 
     public ArrayList<Player> players;
     Pile piles;
-    int sizeOfStockPile = 3; //5 for DEMO purposes, actually 20
+    int sizeOfStockPile = 3; //3 for DEMO purposes, actually 20
     int playersTurn = 0;
     private Player winner;
     private boolean gameRunning, turnFinished;
     //TODO: turn counter
+    public int turnCounter = 0;
+
 
     /**
      * Constructor for Object Game, where the main Game and Game rules
@@ -111,11 +113,16 @@ public class Game implements Runnable {
             */
             tempPlayer.getSBL().getPW().println("PRINT§Terminal§Your Hand cards are: " + piles.handCardPrint(tempPlayer));
 
-            for (int j = 0; j < sizeOfStockPile; j++) {    // Draw Stock-Pile cards for each player
+            for (int k = 2; k >= 0; k--){   //FOR TESTING AND DEMO PURPOSE
+                Card c = new Card(k+6,Color.BLACK);
+                tempPlayer.getStockPile().add(c);
+            }
+
+            /*for (int j = 0; j < sizeOfStockPile; j++) {    // Draw Stock-Pile cards for each player (REAL METHOD)
                 Card c = getDrawPile().get(random.nextInt(getDrawPile().size()));
                 piles.drawPile.remove(c);
                 tempPlayer.getStockPile().add(c);
-            }
+            }*/
             Card topCard = tempPlayer.getStockPile().get(tempPlayer.getStockPile().size() - 1);
             tempPlayer.getSBL().getPW().println("PRINT§Terminal§Your Stock card is: " + topCard.number);
         }
@@ -129,6 +136,7 @@ public class Game implements Runnable {
         turnFinished = false;
         Player player = players.get(playersTurn);
         player.getSBL().getPW().println("PRINT§Terminal§It's your first turn! Your first set of hand cards are: " + piles.handCardPrint(player));
+        turnCounter++;
     }
 
     /**
@@ -140,11 +148,14 @@ public class Game implements Runnable {
         servLog.debug("Entered startTurn.");
         Player ply = players.get(playersTurn);
         fillHandCards(ply);
+        turnCounter++;
 
         turnFinished = false;
 
         ply.getSBL().getPW().println("PRINT§Terminal§It's your turn! Your hand cards are now: "
                 + piles.handCardPrint(ply));
+        ply.getSBL().getPW().println("PRINT§Terminal§Your stock card is: " +
+                ply.getStockPile().get(ply.getStockPile().size()-1));
 
         new ProtocolExecutor().sendAllExceptOne("PRINT§Terminal§It's " + ply.getName()
                 + "'s turn!", ply.getSBL());
@@ -175,6 +186,8 @@ public class Game implements Runnable {
                         + piles.buildPilesPrint(), currentPlayer.getSBL());
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
                         + piles.handCardPrint(currentPlayer));
+                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your stock card is: " +
+                        currentPlayer.getStockPile().get(currentPlayer.getStockPile().size()-1));
             } else if (card.col != Color.CYAN) {
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§This move is invalid! " +
                         "To play to an empty pile, the card number has to be 1.");
@@ -185,6 +198,9 @@ public class Game implements Runnable {
                 currentPlayer.getHandCards().remove(card);
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
                         + piles.handCardPrint(currentPlayer));
+
+                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your stock card is: " +
+                        currentPlayer.getStockPile().get(currentPlayer.getStockPile().size()-1));
 
                 new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: "
                         + piles.buildPilesPrint(), currentPlayer.getSBL());
@@ -199,6 +215,9 @@ public class Game implements Runnable {
 
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hands cards are now: "
                         + piles.handCardPrint(currentPlayer));
+
+                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your stock card is: " +
+                        currentPlayer.getStockPile().get(currentPlayer.getStockPile().size()-1));
             } else if (topCard.number != (card.number - 1) && card.col != Color.CYAN) {
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Invalid move! The card you play to build deck " +
                         "has to be one number higher than the card on the build deck.");
@@ -211,6 +230,9 @@ public class Game implements Runnable {
                         + piles.buildPilesPrint(), currentPlayer.getSBL());
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hands cards are now: "
                         + piles.handCardPrint(currentPlayer));
+
+                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your stock card is: " +
+                        currentPlayer.getStockPile().get(currentPlayer.getStockPile().size()-1));
             }
             //TODO: skip bo card is to go to 12
             if (card.number == 12) {

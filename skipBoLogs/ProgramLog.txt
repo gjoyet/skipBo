@@ -113,3 +113,271 @@
 [DEBUG] 2020-04-09 16:41:32.617 [Thread-2] SBServer - Entered playToMiddle.
 [INFO ] 2020-04-09 16:41:34.976 [Thread-2] SBServer - Rohan logged out.
 [INFO ] 2020-04-09 16:41:36.091 [Thread-1] SBServer - Guillaume logged out.
+[DEBUG] 2020-04-09 17:41:40.839 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-09 17:44:40.673 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-09 20:18:29.055 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-09 20:21:14.377 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-09 20:24:26.190 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-09 20:26:12.070 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-09 21:28:33.084 [AWT-EventQueue-0] SBClient - Drop event occurred
+[DEBUG] 2020-04-09 21:29:35.846 [AWT-EventQueue-0] SBClient - Drop event occurred
+[DEBUG] 2020-04-09 21:29:40.893 [AWT-EventQueue-0] SBClient - Drop event occurred
+[DEBUG] 2020-04-09 21:29:47.451 [AWT-EventQueue-0] SBClient - Drop event occurred
+[DEBUG] 2020-04-09 21:29:53.515 [AWT-EventQueue-0] SBClient - Drop event occurred
+[DEBUG] 2020-04-09 21:29:55.451 [AWT-EventQueue-0] SBClient - Drop event occurred
+[DEBUG] 2020-04-09 21:30:02.076 [AWT-EventQueue-0] SBClient - Drop event occurred
+[DEBUG] 2020-04-09 21:30:07.342 [AWT-EventQueue-0] SBClient - Drop event occurred
+[DEBUG] 2020-04-09 21:35:31.798 [AWT-EventQueue-0] SBClient - Drop event occurred
+[DEBUG] 2020-04-09 21:35:42.010 [AWT-EventQueue-0] SBClient - Drop event occurred
+[DEBUG] 2020-04-09 21:36:22.914 [AWT-EventQueue-0] SBClient - Drop event occurred
+[DEBUG] 2020-04-09 21:40:31.498 [AWT-EventQueue-0] SBClient - Drop event occurred
+[DEBUG] 2020-04-09 21:44:51.646 [AWT-EventQueue-0] SBClient - Drop event occurred
+[DEBUG] 2020-04-09 21:49:55.293 [AWT-EventQueue-0] SBClient - Drop event occurred
+[DEBUG] 2020-04-09 21:49:58.049 [AWT-EventQueue-0] SBClient - Drop event occurred
+[DEBUG] 2020-04-09 21:54:58.952 [AWT-EventQueue-0] SBClient - Drop event occurred
+[DEBUG] 2020-04-09 21:55:06.111 [AWT-EventQueue-0] SBClient - Drop event occurred
+[DEBUG] 2020-04-09 21:55:12.030 [AWT-EventQueue-0] SBClient - Drop event occurred
+[DEBUG] 2020-04-09 22:11:23.491 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:11:23.510 [AWT-EventQueue-0] SBClient - Drop event occurred
+[DEBUG] 2020-04-09 22:19:15.459 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:19:18.076 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:19:19.688 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:19:21.528 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:19:23.131 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:19:24.371 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:19:30.246 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:19:30.633 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:19:32.417 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:19:36.169 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:19:39.623 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:21:23.343 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:21:23.351 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:21:29.704 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:21:29.716 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:29.731 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:29.739 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:29.749 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:29.761 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:29.772 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:29.783 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:29.795 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:29.806 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:29.817 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:21:33.069 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:21:33.070 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:33.096 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:33.102 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:33.129 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:33.136 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:33.148 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:33.161 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:33.170 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:33.182 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:33.195 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:33.204 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:33.215 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:33.228 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:33.238 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:33.249 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:33.262 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:33.271 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:33.282 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:33.294 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:33.304 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:33.315 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:33.329 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:33.338 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:33.350 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:33.363 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:21:35.747 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:21:35.747 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:35.757 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:35.769 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:35.780 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:35.791 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:35.802 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:35.813 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:35.826 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:35.837 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:35.848 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:35.859 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:35.870 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:35.881 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:35.894 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:35.949 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:35.963 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:35.974 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:35.982 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:35.997 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:36.005 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:36.016 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:36.029 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:36.038 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:36.050 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:36.140 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:36.151 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:36.163 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:36.175 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:36.185 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:36.199 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:36.207 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:36.218 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:36.232 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:21:42.022 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:21:42.025 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:42.047 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:42.058 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:42.082 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:42.091 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:42.102 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:21:55.266 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:21:55.267 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.277 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.288 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.299 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.310 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.322 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.333 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.343 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.355 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.366 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.378 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.389 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.400 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.412 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.423 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.434 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.447 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.457 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.467 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.478 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.489 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.501 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.516 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.524 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.535 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.551 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.557 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.570 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.584 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.591 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.602 [AWT-EventQueue-0] SBClient - drag Over
+[DEBUG] 2020-04-09 22:21:55.969 [AWT-EventQueue-0] SBClient - Drop event occurred
+[DEBUG] 2020-04-09 22:22:36.763 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:22:36.779 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:22:38.188 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:22:38.288 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:22:43.281 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:22:46.039 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:22:46.510 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:22:48.197 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:22:48.827 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:22:50.255 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:22:51.572 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:22:52.563 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:22:53.856 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:22:54.902 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:22:55.590 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:22:55.987 [AWT-EventQueue-0] SBClient - Drop event occurred
+[DEBUG] 2020-04-09 22:27:25.479 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:27:25.630 [AWT-EventQueue-0] SBClient - Drop event occurred
+[DEBUG] 2020-04-09 22:27:31.961 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:27:34.509 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:27:35.185 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:27:35.927 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:27:37.762 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:27:38.098 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:27:38.368 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:27:38.561 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:27:38.829 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:27:39.088 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:27:47.515 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:27:47.547 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:27:48.146 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:27:50.338 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:27:51.036 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:27:52.014 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:27:53.029 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:27:54.381 [AWT-EventQueue-0] SBClient - Drop event occurred
+[DEBUG] 2020-04-09 22:28:02.098 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:28:02.184 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:33:14.437 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:33:14.475 [AWT-EventQueue-0] SBClient - Drop event occurred
+[DEBUG] 2020-04-09 22:33:20.689 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:33:20.798 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:33:23.734 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:33:24.533 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:33:25.084 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:33:25.343 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:33:25.356 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:33:26.378 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:33:26.841 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:33:27.052 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:33:27.063 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:33:27.292 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:33:27.741 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:33:27.773 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:33:27.773 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:33:27.808 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:33:28.065 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:33:28.122 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:33:28.123 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:33:28.225 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:33:28.225 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:33:28.279 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-09 22:33:28.482 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-09 22:33:28.893 [AWT-EventQueue-0] SBClient - Drop event occurred
+[DEBUG] 2020-04-10 16:21:43.521 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-10 16:21:45.336 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-10 16:21:46.167 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-10 16:21:46.756 [AWT-EventQueue-0] SBClient - Drop event occurred
+[DEBUG] 2020-04-10 16:37:42.180 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-10 16:37:43.682 [AWT-EventQueue-0] SBClient - drag Exit
+[DEBUG] 2020-04-10 16:37:44.696 [AWT-EventQueue-0] SBClient - drag Enter
+[DEBUG] 2020-04-10 16:37:45.048 [AWT-EventQueue-0] SBClient - Drop event occurred
+[DEBUG] 2020-04-10 17:50:47.432 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:50:47.593 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:50:50.980 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:50:51.914 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:50:58.765 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:51:00.936 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:51:02.299 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:51:03.310 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:51:04.851 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:51:06.370 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:51:07.315 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:51:08.057 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:51:09.249 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:51:10.172 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:51:11.196 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:51:12.152 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:51:13.615 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:51:14.391 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:51:15.785 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:52:49.501 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:54:06.951 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:54:13.244 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:54:14.786 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:54:15.632 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:54:38.093 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:54:41.648 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:54:45.777 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:54:46.699 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:54:48.229 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:55:03.150 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:55:03.766 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 17:55:04.484 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-10 19:09:15.664 [main] Main - Program starting.
+[DEBUG] 2020-04-10 19:09:15.667 [main] Main - Main triggered Server.
+[INFO ] 2020-04-10 19:09:15.673 [Thread-0] SBServer - Server waiting for port 12345.
+[DEBUG] 2020-04-10 19:09:18.566 [main] Main - Program starting.
+[DEBUG] 2020-04-10 19:09:18.570 [main] Main - Main triggered Client.
+[INFO ] 2020-04-10 19:09:18.574 [Thread-0] SBClient - Connecting to port 12345…
+[INFO ] 2020-04-10 19:09:19.113 [Thread-1] SBServer - Manuela logged in.
+[DEBUG] 2020-04-10 19:09:19.116 [Thread-1] SBServer - Players connected: Manuela
+[DEBUG] 2020-04-10 19:09:36.143 [Thread-1] SBServer - Received  'Global' chat message from Manuela: hallooo
+[DEBUG] 2020-04-10 19:09:41.558 [Thread-1] SBServer - Received  'Global' chat message from Manuela: hi
+[DEBUG] 2020-04-10 19:09:42.878 [Thread-1] SBServer - Received  'Global' chat message from Manuela: hi
+[DEBUG] 2020-04-10 19:09:55.373 [Thread-1] SBServer - Received  'Global' chat message from Manuela: hii
+[DEBUG] 2020-04-10 19:09:58.581 [Thread-1] SBServer - Received  'Global' chat message from Manuela: halo
+[INFO ] 2020-04-10 19:10:02.079 [Thread-1] SBServer - Manuela logged out.

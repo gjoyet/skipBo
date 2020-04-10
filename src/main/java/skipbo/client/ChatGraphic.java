@@ -26,18 +26,10 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
         gameGraphic.setGameGraphic();
     }
 
-    //Test class
+    //Test constructor
     ChatGraphic() {
-        setTitle("Skip-Bros CHAT");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 520, 485);
-
-        contentPane = new JPanel();
-        contentPane.setBackground(Color.black);
-        contentPane.setBorder(new EmptyBorder(5,5,5,5));
-        setContentPane(contentPane);
-        contentPane.setLayout(null);
         setFrame();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     /**
      * Constructor for ChatGraphic without client name. Lets client choose their name.

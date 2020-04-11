@@ -9,9 +9,9 @@ public class DragDropTest extends JFrame implements DropTargetListener, DragGest
 
     JTextPane draggedPane;
 
-    ImageIcon card1 = new ImageIcon(getClass().getClassLoader().getResource("TestCard1.png"));
-    ImageIcon card2 = new ImageIcon(getClass().getClassLoader().getResource("TestCard2.png"));
-    ImageIcon card3 = new ImageIcon(getClass().getClassLoader().getResource("TestCard3.png"));
+    ImageIcon card1 = new ImageIcon(getClass().getClassLoader().getResource("R1.png"));
+    ImageIcon card2 = new ImageIcon(getClass().getClassLoader().getResource("R12scaled.png"));
+    ImageIcon card3 = new ImageIcon(getClass().getClassLoader().getResource("R3.png"));
 
     public static void main(String[] args) {
 
@@ -57,10 +57,14 @@ public class DragDropTest extends JFrame implements DropTargetListener, DragGest
         textPane2.setDragEnabled(false);
 */
 
-        //Hand card
+        //scale image
+        Image image = card1.getImage().getScaledInstance(100, 145, Image.SCALE_DEFAULT);
+        ImageIcon scaledIcon = new ImageIcon(image);
+
         JTextPane hand = new JTextPane();
-        hand.setBounds(500, 500, card1.getIconWidth(), card1.getIconHeight());
-        hand.insertIcon(card1);
+        hand.setBounds(500, 500, scaledIcon.getIconWidth(), scaledIcon.getIconHeight());
+        hand.setPreferredSize(new Dimension(scaledIcon.getIconWidth(), scaledIcon.getIconHeight()));
+        hand.insertIcon(scaledIcon);
         hand.setEditable(false);
         contentPane.add(hand);
         hand.setDragEnabled(true);

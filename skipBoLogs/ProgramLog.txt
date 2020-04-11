@@ -381,3 +381,20 @@
 [DEBUG] 2020-04-10 19:09:55.373 [Thread-1] SBServer - Received  'Global' chat message from Manuela: hii
 [DEBUG] 2020-04-10 19:09:58.581 [Thread-1] SBServer - Received  'Global' chat message from Manuela: halo
 [INFO ] 2020-04-10 19:10:02.079 [Thread-1] SBServer - Manuela logged out.
+[DEBUG] 2020-04-11 10:15:33.919 [main] Main - Program starting.
+[DEBUG] 2020-04-11 10:15:33.923 [main] Main - Main triggered Server.
+[INFO ] 2020-04-11 10:15:33.928 [Thread-0] SBServer - Server waiting for port 12345.
+[DEBUG] 2020-04-11 10:15:41.145 [main] Main - Program starting.
+[DEBUG] 2020-04-11 10:15:41.148 [main] Main - Main triggered Client.
+[INFO ] 2020-04-11 10:15:41.154 [Thread-0] SBClient - Connecting to port 12345…
+[INFO ] 2020-04-11 10:15:41.631 [Thread-1] SBServer - Manuela logged in.
+[DEBUG] 2020-04-11 10:15:41.633 [Thread-1] SBServer - Players connected: Manuela
+[INFO ] 2020-04-11 10:16:25.623 [Thread-1] SBServer - Manuela logged out.
+[DEBUG] 2020-04-11 17:06:39.220 [main] Main - Program starting.
+[DEBUG] 2020-04-11 17:06:39.225 [main] Main - Main triggered Client.
+[INFO ] 2020-04-11 17:06:39.229 [Thread-0] SBClient - Connecting to port 12345…
+[FATAL] 2020-04-11 17:06:39.231 [Thread-0] SBClient - Error while connecting to server.
+[DEBUG] 2020-04-11 17:15:25.331 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-11 17:48:20.337 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-11 18:11:23.210 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-11 18:11:58.887 [main] SBClient - Added discard_A

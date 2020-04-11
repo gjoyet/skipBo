@@ -398,3 +398,27 @@
 [DEBUG] 2020-04-11 17:48:20.337 [main] SBClient - Added discard_A
 [DEBUG] 2020-04-11 18:11:23.210 [main] SBClient - Added discard_A
 [DEBUG] 2020-04-11 18:11:58.887 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-11 19:03:05.035 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-11 19:03:11.072 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-11 19:03:13.502 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-11 19:03:25.123 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-11 19:03:27.519 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-11 19:03:28.690 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-11 19:03:42.752 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-11 19:03:44.012 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-11 19:03:45.857 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-11 19:03:47.218 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-11 19:03:48.343 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-11 19:03:49.266 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-11 19:03:50.571 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-11 19:03:51.875 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-11 19:03:53.327 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-11 19:03:54.025 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-11 19:03:58.165 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-11 19:03:59.042 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-11 19:04:08.211 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-11 19:04:08.897 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-11 19:04:17.560 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-11 19:04:18.333 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-11 19:04:19.023 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-11 19:04:19.811 [AWT-EventQueue-0] SBClient - drag gesture recognized

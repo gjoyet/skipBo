@@ -28,5 +28,3 @@ play		[PlaceFrom] [N]	[PlaceTo] [N]		puts a card from the pile "PlaceFrom" to th
 
 list		games					lists all open, ongoing and finished games
 		players					lists all players currently connected to the server
-		
-help							lists all commands

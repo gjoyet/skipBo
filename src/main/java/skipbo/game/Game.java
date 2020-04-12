@@ -323,9 +323,11 @@ public class Game implements Runnable {
                         + piles.buildPilesPrint(), currentPlayer.getSBL());
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
                         + piles.handCardPrint(currentPlayer));
+                // return stockPile.get(stockPile.size() - 1);
             } else if (stockCard.col != Color.CYAN) {   // If card number isn't 1 and isn't a Skip Bo card
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§This move is invalid! " +
                         "To play to an empty pile, the card number has to be 1.");
+                // return null;
             }
             if (stockCard.col == Color.CYAN) {      // if Skip Bo card
                 stockCard.number = 1;
@@ -337,6 +339,7 @@ public class Game implements Runnable {
                     new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: "
                             + piles.buildPilesPrint(), currentPlayer.getSBL());
                 }
+                // return stockPile.get(stockPile.size() - 1);
             }
         } else {        // If build pile isn't empty
             Card topCard = specBuildPile.get(specBuildPile.size() - 1);
@@ -349,8 +352,28 @@ public class Game implements Runnable {
                 }
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hands cards are now: "
                         + piles.handCardPrint(currentPlayer));
-                //TODO: stock pile card update
+                // TODO: stock pile card update
+
+                // return stockPile.get(stockPile.size() - 1);
+
+            } else if (topCard.number != (stockCard.number - 1) && stockCard.col != Color.CYAN) {
+                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Invalid move! The card you play to build deck " +
+                        "has to be one number higher than the card on the build deck.");
+                // return null;
+            } else if (stockCard.col == Color.CYAN) {
+                stockCard.number = topCard.number + 1;
+                specBuildPile.add(stockCard);
+                currentPlayer.getHandCards().remove(stockCard);
+                new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: "
+                        + piles.buildPilesPrint(), currentPlayer.getSBL());
+                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hands cards are now: "
+                        + piles.handCardPrint(currentPlayer));
+
+                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your stock card is: " +
+                        currentPlayer.getStockPile().get(currentPlayer.getStockPile().size()-1));
+                // return stockPile.get(stockPile.size() - 1);
             }
+
             /* TODO: This part needs to be in a separate method that is called
                 before every return statement if card.number == 12; */
             if (stockCard.number == 12) {       // If stock card is 12, remove build pile, because it's full

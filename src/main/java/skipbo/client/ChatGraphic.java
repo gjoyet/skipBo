@@ -72,6 +72,20 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
+        JButton readyB = new JButton("Ready");
+        readyB.setBounds(80, 120, 110,20);
+        contentPane.add(readyB);
+
+        JButton startB = new JButton("Start Game");
+        startB.setBounds(200, 120, 110,20);
+        contentPane.add(startB);
+
+        JButton infoB = new JButton("Info");
+        infoB.setBounds(80, 155, 110,20);
+        contentPane.add(infoB);
+
+
+
         //Output textfield
         chat = new JTextArea(); //TODO: change to JEditorPane or JTextPane to print in colour
         chat.setBounds(80, 205,250, 400);

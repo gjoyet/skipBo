@@ -72,14 +72,12 @@ public class GameGraphic extends JButton implements KeyListener { //ActionListen
             chatGraphic.getContentPane().add(sp);
 
             // Discard Piles
-
             ImageIcon card = new ImageIcon(getClass().getClassLoader().getResource("R1.png"));
             Image cardSc = card.getImage().getScaledInstance(100, 145, Image.SCALE_DEFAULT);
             ImageIcon scaledCard = new ImageIcon(cardSc);
 
             JButton discard_A = new JButton(scaledCard);
             discard_A.setBounds(620, 400, 100, 145);
-
             JButton discard_B = new JButton();
             discard_B.setBounds(730, 400, 100, 145);
             JButton discard_C = new JButton();

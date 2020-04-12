@@ -583,3 +583,12 @@
 [DEBUG] 2020-04-12 13:19:40.471 [main] SBClient - Added discard_A
 [DEBUG] 2020-04-12 13:20:07.580 [main] SBClient - Added discard_A
 [DEBUG] 2020-04-12 13:21:55.994 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 15:02:26.306 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 15:06:01.329 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 15:08:58.404 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 15:09:15.299 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 15:11:05.329 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 15:11:29.259 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 15:13:29.018 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 15:13:45.530 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 15:14:11.252 [main] SBClient - Added discard_A

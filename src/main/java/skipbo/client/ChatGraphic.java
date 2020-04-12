@@ -1,8 +1,12 @@
 package skipbo.client;
 
+import skipbo.server.Protocol;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -17,6 +21,7 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
     private JTextArea inputMes;
     JScrollPane chatScrollPane;
     private JScrollPane inputScrollPane;
+    private JButton infoB;
 
     //test method
     public static void main(String[] args) {
@@ -95,6 +100,16 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
         JButton infoB = new JButton("Info");
         infoB.setBounds(80, 155, 110,20);
         contentPane.add(infoB);
+        infoB.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    getClientListener().forward("/help");
+                } catch (NotACommandException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            });
 
 
 
@@ -222,4 +237,5 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
     SBClientListener getClientListener() {
         return clientListener;
     }
+
 }

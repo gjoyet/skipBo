@@ -2,6 +2,7 @@ package skipbo.client;
 
 import skipbo.game.Game;
 import skipbo.game.Player;
+import skipbo.server.Protocol;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -299,6 +300,7 @@ public class GameGraphic extends JButton implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
+
         if (button1Pressed == null) {
             button1Pressed = (JButton) actionEvent.getSource();
             button1Pressed.setBorder(clickedBorder);

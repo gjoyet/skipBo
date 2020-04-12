@@ -109,7 +109,7 @@ public class Pile {
         for (int i = 0; i < 4; i++) {
             ArrayList<Card> specBuildPile = buildPiles.get(i);
             if (specBuildPile.isEmpty()) {
-                str.append("Build pile " + i + " is : [ ]");
+                str.append("Build pile " + i + " is : [ ]" + "\t");
             } else {
                 str.append("Build pile " + i + " is: [" + specBuildPile.get(specBuildPile.size() - 1).number + "]" + "\t" + "\t");
             }

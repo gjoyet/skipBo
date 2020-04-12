@@ -198,9 +198,10 @@ public class ProtocolExecutor {
                 for(Player p : newPlayers) {
                     names += p.getName() + "§";
                 }
+                servLog.debug("NWGME command with names: " + names);
                 for (Player p : newPlayers) {
                     p.changeGame(game);
-                    p.getSBL().getPW().println("NWGME§Response§" + names);
+                    p.getSBL().getPW().println("NWGME§Names§" + names);
                     p.changeStatus(Status.INGAME);
                 }
                 Thread gameT = new Thread(game); gameT.start();

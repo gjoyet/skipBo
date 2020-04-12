@@ -100,6 +100,20 @@ public class Pile {
     }
 
     /**
+     * @return: A String containing all handcards of a player, formatted for network protocol.
+     */
+    public String getCardsForProtocol(Player player) {
+        StringBuilder cards = new StringBuilder();
+        for(Card c : player.getHandCards()) {
+            cards.append(c.col.toString() + "§" + c.number + "§");
+        }
+        Card stockTopCard = player.getStockPile().get(player.getStockPile().size()-1);
+        cards.append(stockTopCard.col.toString() + "§" + stockTopCard.number);
+
+        return cards.toString();
+    }
+
+    /**
      * Returns all build piles printed to console.
      * @return String with piles
      */

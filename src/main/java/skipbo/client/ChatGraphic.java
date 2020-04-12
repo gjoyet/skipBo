@@ -218,4 +218,8 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
     public void keyReleased(KeyEvent keyEvent) {
 
     }
+
+    SBClientListener getClientListener() {
+        return clientListener;
+    }
 }

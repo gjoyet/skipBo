@@ -313,8 +313,6 @@ public class GameGraphic extends JButton implements ActionListener {
                 chatGraphic.getClientListener().forward(input);
             } catch (IndexOutOfBoundsException | NotACommandException e) {
                 chatGraphic.printErrorMessage(e.getMessage());
-                chatGraphic.printCommandList(); //delete when /list commands is implemented
-                //printInfo("Use '/list commands' to display all possible commands");
             }
             setClickable(button1Pressed, true);
             button1Pressed.setBorder(defaultBorder);

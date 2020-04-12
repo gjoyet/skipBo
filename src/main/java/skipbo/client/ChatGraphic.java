@@ -21,7 +21,6 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
     //test method
     public static void main(String[] args) {
         ChatGraphic testChatGraphic = new ChatGraphic();
-        testChatGraphic.setVisible(true);
         GameGraphic gameGraphic = new GameGraphic(testChatGraphic);
         gameGraphic.setGameGraphic();
     }
@@ -75,20 +74,20 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
 
         //Output textfield
         chat = new JTextArea(); //TODO: change to JEditorPane or JTextPane to print in colour
-        chat.setBounds(20, 100,250, 400);
+        chat.setBounds(80, 205,250, 400);
         chat.setLineWrap(true);
         chat.setWrapStyleWord(true);
         chat.setEditable(false);
 
         chatScrollPane = new JScrollPane(chat);
-        chatScrollPane.setBounds(20, 100 ,250, 400 );
+        chatScrollPane.setBounds(80, 205 ,250, 400 );
         chatScrollPane.setVisible(true);
         chatScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentPane.add(chatScrollPane);
 
         //Input textfield
         inputMes = new JTextArea();
-        inputMes.setBounds(20, 505,250, 80);
+        inputMes.setBounds(80, 610,250, 80);
         inputMes.setEditable(true);
         inputMes.setColumns(3);
         inputMes.setLineWrap(true);
@@ -97,7 +96,7 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
         contentPane.add(inputMes);
 
         inputScrollPane = new JScrollPane(inputMes);
-        inputScrollPane.setBounds(20, 505,250, 80);
+        inputScrollPane.setBounds(80, 610,250, 80);
         inputScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentPane.add(inputScrollPane);
 

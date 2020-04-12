@@ -13,11 +13,11 @@ public class DragDropTest extends JFrame implements DropTargetListener, DragGest
     ImageIcon card2 = new ImageIcon(getClass().getClassLoader().getResource("R2.png"));
     ImageIcon card3 = new ImageIcon(getClass().getClassLoader().getResource("R3.png"));
 
+
     public static void main(String[] args) {
 
         JFrame frame = new DragDropTest();
         frame.setVisible(true);
-
     }
 
     DragDropTest() {
@@ -29,11 +29,6 @@ public class DragDropTest extends JFrame implements DropTargetListener, DragGest
 
         JPanel contentPane = new JPanel();
         setContentPane(contentPane);
-
-
-        JButton button = new JButton(null,  card1);
-        button.setBounds(100, 100, card1.getIconWidth(), card1.getIconHeight());
-        //contentPane.add(button);
 
 /*
 

@@ -23,6 +23,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     private JButton readyB;
     private JButton startB;
     private JButton infoB;
+    private GameGraphic gameGraphic;
 
 
     //test method
@@ -180,7 +181,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
      * Creates the game GUI
      */
     void setGameGraphic() {
-        GameGraphic gameGraphic = new GameGraphic(this);
+        gameGraphic = new GameGraphic(this);
         gameGraphic.setGameGraphic();
         startB.setEnabled(false);
         readyB.setEnabled(false);
@@ -261,6 +262,10 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
     SBClientListener getClientListener() {
         return clientListener;
+    }
+
+    GameGraphic getGameGraphic() {
+        return gameGraphic;
     }
 
 }

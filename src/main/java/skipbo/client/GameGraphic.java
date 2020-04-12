@@ -16,21 +16,22 @@ import static skipbo.client.SBClient.clientLog;
  */
 public class GameGraphic extends JButton implements ActionListener {
 
-    ChatGraphic chatGraphic;
+    private ChatGraphic chatGraphic;
     private JTextArea chat;
     private Player player;
     private Game game;
     private DefaultButtonModel notClickableModel;
     private DefaultButtonModel defaultButtonModel = new DefaultButtonModel();
-    JButton button1Pressed = null;
-    JButton button2Pressed;
-    Border defaultBorder = UIManager.getBorder("Button.border");
-    Border clickedBorder = BorderFactory.createLineBorder(Color.BLACK,2);
+    private JButton button1Pressed = null;
+    private Border defaultBorder = UIManager.getBorder("Button.border");
+    private Border clickedBorder = BorderFactory.createLineBorder(Color.BLACK,2);
+    private JLabel e1;
+    private JLabel e2;
+    private JLabel e3;
 
     GameGraphic(ChatGraphic chatGraphic) {
         this.chatGraphic = chatGraphic;
         setButtonModel();
-        //appendDecks();
     }
 
     void setGameGraphic() {
@@ -185,7 +186,7 @@ public class GameGraphic extends JButton implements ActionListener {
         */
 
         // enemy 1
-        JLabel e1 = new JLabel("Opponent 1");
+        e1 = new JLabel("Opponent 1");
         e1.setBounds(490,30,120,15);
         chatGraphic.getContentPane().add(e1);
 
@@ -208,7 +209,7 @@ public class GameGraphic extends JButton implements ActionListener {
         setClickable(E1_D, false);
 
         // enemy 2
-        JLabel e2 = new JLabel("Opponent 2");
+        e2 = new JLabel("Opponent 2");
         e2.setBounds(650,30,120,15);
         chatGraphic.getContentPane().add(e2);
 
@@ -231,7 +232,7 @@ public class GameGraphic extends JButton implements ActionListener {
         setClickable(E2_D, false);
 
         // enemy 3
-        JLabel e3 = new JLabel("Opponent 3");
+        e3 = new JLabel("Opponent 3");
         e3.setBounds(810,30,120,15);
         chatGraphic.getContentPane().add(e3);
 
@@ -253,6 +254,14 @@ public class GameGraphic extends JButton implements ActionListener {
         setClickable(E3_C, false);
         setClickable(E3_D, false);
 
+    }
+
+    void setOpponentNames(String[] names) {
+        e1.setText(names[0]);
+        e2.setText(names[1]);
+        if (names.length > 2) {
+            e3.setText(names[3]);
+        }
     }
 
     private void setClickable(JButton button, boolean b) {
@@ -309,7 +318,7 @@ public class GameGraphic extends JButton implements ActionListener {
             button1Pressed.setBorder(defaultBorder);
             button1Pressed = null;
         } else {
-            button2Pressed = (JButton) actionEvent.getSource();
+            JButton button2Pressed = (JButton) actionEvent.getSource();
             String input = "/play" + button1Pressed.getName() + button2Pressed.getName();
             try {
                 chatGraphic.getClientListener().forward(input);

@@ -47,7 +47,7 @@ public class GameGraphic extends JButton implements KeyListener { //ActionListen
         appendDecks();
 
         chatGraphic.setVisible(true);
-
+        chatGraphic.repaint();
 
 
         this.player = player;

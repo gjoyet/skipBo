@@ -422,3 +422,164 @@
 [DEBUG] 2020-04-11 19:04:18.333 [AWT-EventQueue-0] SBClient - drag gesture recognized
 [DEBUG] 2020-04-11 19:04:19.023 [AWT-EventQueue-0] SBClient - drag gesture recognized
 [DEBUG] 2020-04-11 19:04:19.811 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:30:07.693 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:30:08.025 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:30:10.685 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:30:11.834 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:30:12.790 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:30:14.271 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:30:15.227 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:30:22.158 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:30:23.183 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:30:25.637 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:30:26.624 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:30:30.117 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:30:31.884 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:30:32.455 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:30:33.310 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:30:33.843 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:30:34.394 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:30:34.799 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:30:36.467 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:30:38.829 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:30:42.156 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:30:43.570 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:30:44.297 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:30:44.846 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:30:45.749 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:36:16.182 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:36:18.500 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:36:19.784 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:36:22.887 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:36:23.972 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:36:24.689 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:36:28.848 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:36:30.853 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:36:37.207 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:36:39.010 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:36:40.914 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:36:42.954 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:36:44.135 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:36:45.238 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:36:48.670 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:36:50.641 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:36:51.872 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:38:08.442 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 09:38:09.164 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:01:51.372 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:01:52.317 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:01:53.892 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:01:57.582 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:01:58.746 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:02:00.447 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:02:01.972 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:02:03.752 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:02:04.743 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:02:05.573 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:02:06.692 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:02:08.052 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:02:10.412 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:02:12.356 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:02:13.922 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:02:15.022 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:02:15.677 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:02:17.382 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:02:18.585 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:02:20.865 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:02:21.412 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:02:22.632 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:02:23.574 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:02:24.523 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:02:25.082 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:02:25.928 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:02:28.072 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:02:30.492 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:02:32.342 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:02:33.142 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:11:34.001 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:11:35.361 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:11:36.533 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:11:38.521 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:11:40.961 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:11:41.981 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:11:42.720 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:11:43.930 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:11:44.761 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:11:46.041 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:11:47.276 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:11:48.111 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:11:48.881 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:11:50.080 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:11:52.461 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:11:53.471 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:11:54.400 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:11:55.221 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:11:55.971 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:11:58.431 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:12:00.130 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:12:00.741 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:12:02.781 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:12:04.185 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:12:04.930 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:12:05.391 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:12:05.801 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:12:06.301 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:12:06.740 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 10:15:37.150 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 10:19:31.034 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 10:30:48.248 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 10:36:36.969 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 10:39:38.792 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 10:57:53.879 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 11:01:07.249 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 11:13:59.157 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 11:24:59.504 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 11:25:28.848 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 11:26:02.111 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 11:29:09.542 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 11:36:44.547 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 11:37:04.970 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 11:40:21.474 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 11:45:01.652 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 11:46:31.531 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 11:47:22.988 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 11:50:49.948 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 11:51:15.782 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 11:54:01.012 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 11:54:29.313 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 11:54:42.243 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 11:55:51.799 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 11:56:29.285 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 11:56:41.286 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 11:58:39.479 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 11:59:22.732 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 11:59:59.856 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 12:00:53.976 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 12:01:37.709 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 12:02:21.290 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 12:43:41.305 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 12:44:00.864 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 12:45:01.540 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 12:45:19.942 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 12:45:59.175 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 12:46:47.566 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 12:47:01.497 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 12:48:10.903 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 12:48:28.799 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 12:49:25.795 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 12:50:40.995 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 12:51:07.432 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 12:53:52.114 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 12:54:25.758 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 12:55:59.174 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 12:56:59.792 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 13:01:38.243 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 13:01:47.764 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 13:02:52.189 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 13:05:47.192 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 13:06:59.975 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 13:07:42.554 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 13:14:36.035 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 13:19:40.471 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 13:20:07.580 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 13:21:55.994 [main] SBClient - Added discard_A

@@ -127,7 +127,7 @@ public class DragDropTest extends JFrame implements DropTargetListener, DragGest
     //Dragging
     @Override
     public void dragGestureRecognized(DragGestureEvent dragGestureEvent) {
-        clientLog.debug("drag gesture recognized");
+        //clientLog.debug("drag gesture recognized");
         draggedPane = (JTextPane) dragGestureEvent.getComponent();
 
     }

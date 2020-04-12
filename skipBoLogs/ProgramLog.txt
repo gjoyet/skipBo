@@ -592,3 +592,92 @@
 [DEBUG] 2020-04-12 15:13:29.018 [main] SBClient - Added discard_A
 [DEBUG] 2020-04-12 15:13:45.530 [main] SBClient - Added discard_A
 [DEBUG] 2020-04-12 15:14:11.252 [main] SBClient - Added discard_A
+[DEBUG] 2020-04-12 15:21:54.100 [main] Main - Program starting.
+[DEBUG] 2020-04-12 15:21:54.103 [main] Main - Main triggered Server.
+[INFO ] 2020-04-12 15:21:54.109 [Thread-0] SBServer - Server waiting for port 12345.
+[DEBUG] 2020-04-12 15:21:58.887 [main] Main - Program starting.
+[DEBUG] 2020-04-12 15:21:58.890 [main] Main - Main triggered Client.
+[INFO ] 2020-04-12 15:21:58.894 [Thread-0] SBClient - Connecting to port 12345…
+[INFO ] 2020-04-12 15:21:59.424 [Thread-1] SBServer - Manuela logged in.
+[DEBUG] 2020-04-12 15:21:59.426 [Thread-1] SBServer - Players connected: Manuela
+[INFO ] 2020-04-12 15:22:09.222 [Thread-1] SBServer - Manuela status set to: READY.
+[DEBUG] 2020-04-12 15:22:13.599 [main] Main - Program starting.
+[DEBUG] 2020-04-12 15:22:13.602 [main] Main - Main triggered Client.
+[INFO ] 2020-04-12 15:22:13.608 [Thread-0] SBClient - Connecting to port 12345…
+[INFO ] 2020-04-12 15:22:14.158 [Thread-2] SBServer - Manuela1 logged in.
+[DEBUG] 2020-04-12 15:22:14.160 [Thread-2] SBServer - Players connected: Manuela, Manuela1
+[INFO ] 2020-04-12 15:22:25.181 [Thread-2] SBServer - Manuela1 status set to: INGAME.
+[INFO ] 2020-04-12 15:22:25.181 [Thread-2] SBServer - Manuela status set to: INGAME.
+[INFO ] 2020-04-12 15:22:25.182 [Thread-2] SBServer - Game started.
+[DEBUG] 2020-04-12 15:22:25.182 [Thread-3] SBServer - Game thread starting.
+[DEBUG] 2020-04-12 15:22:25.183 [Thread-2] SBServer - Size of gameList: 1
+[DEBUG] 2020-04-12 15:22:25.225 [Thread-3] SBServer - Entered first turn.
+[DEBUG] 2020-04-12 15:22:25.226 [Thread-3] SBServer - Game thread finished.
+[DEBUG] 2020-04-12 15:22:25.352 [Thread-1] SBClient - Added discard_A
+[DEBUG] 2020-04-12 15:22:25.403 [Thread-1] SBClient - Added discard_A
+[INFO ] 2020-04-12 15:22:50.165 [Thread-2] SBServer - Manuela1 logged out.
+[INFO ] 2020-04-12 15:22:56.498 [Thread-1] SBServer - Manuela logged out.
+[DEBUG] 2020-04-12 15:23:48.628 [main] Main - Program starting.
+[DEBUG] 2020-04-12 15:23:48.631 [main] Main - Main triggered Server.
+[INFO ] 2020-04-12 15:23:48.637 [Thread-0] SBServer - Server waiting for port 12345.
+[DEBUG] 2020-04-12 15:23:52.714 [main] Main - Program starting.
+[DEBUG] 2020-04-12 15:23:52.718 [main] Main - Main triggered Client.
+[INFO ] 2020-04-12 15:23:52.722 [Thread-0] SBClient - Connecting to port 12345…
+[INFO ] 2020-04-12 15:23:53.238 [Thread-1] SBServer - Manuela logged in.
+[DEBUG] 2020-04-12 15:23:53.240 [Thread-1] SBServer - Players connected: Manuela
+[DEBUG] 2020-04-12 15:23:56.319 [main] Main - Program starting.
+[DEBUG] 2020-04-12 15:23:56.322 [main] Main - Main triggered Client.
+[INFO ] 2020-04-12 15:23:56.326 [Thread-0] SBClient - Connecting to port 12345…
+[INFO ] 2020-04-12 15:23:56.901 [Thread-2] SBServer - Manuela1 logged in.
+[DEBUG] 2020-04-12 15:23:56.914 [Thread-2] SBServer - Players connected: Manuela, Manuela1
+[INFO ] 2020-04-12 15:24:07.561 [Thread-2] SBServer - Manuela1 status set to: READY.
+[INFO ] 2020-04-12 15:24:13.530 [Thread-1] SBServer - Manuela status set to: INGAME.
+[INFO ] 2020-04-12 15:24:13.531 [Thread-1] SBServer - Manuela1 status set to: INGAME.
+[INFO ] 2020-04-12 15:24:13.531 [Thread-1] SBServer - Game started.
+[DEBUG] 2020-04-12 15:24:13.531 [Thread-3] SBServer - Game thread starting.
+[DEBUG] 2020-04-12 15:24:13.532 [Thread-1] SBServer - Size of gameList: 1
+[DEBUG] 2020-04-12 15:24:13.575 [Thread-3] SBServer - Entered first turn.
+[DEBUG] 2020-04-12 15:24:13.575 [Thread-3] SBServer - Game thread finished.
+[DEBUG] 2020-04-12 15:24:13.706 [Thread-1] SBClient - Added discard_A
+[DEBUG] 2020-04-12 15:24:13.730 [Thread-1] SBClient - Added discard_A
+[INFO ] 2020-04-12 15:24:19.672 [Thread-1] SBServer - Manuela logged out.
+[INFO ] 2020-04-12 15:24:20.919 [Thread-2] SBServer - Manuela1 logged out.
+[DEBUG] 2020-04-12 15:26:02.875 [main] Main - Program starting.
+[DEBUG] 2020-04-12 15:26:02.878 [main] Main - Main triggered Client.
+[INFO ] 2020-04-12 15:26:02.882 [Thread-0] SBClient - Connecting to port 12345…
+[FATAL] 2020-04-12 15:26:02.886 [Thread-0] SBClient - Error while connecting to server.
+[DEBUG] 2020-04-12 15:26:16.767 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:26:16.891 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:26:17.503 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:26:22.437 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:26:23.135 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:26:25.632 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:26:46.695 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:26:46.951 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:26:47.603 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:26:48.447 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:26:49.055 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:26:49.662 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:26:51.732 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:26:52.419 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:26:53.150 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:26:53.939 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:26:55.535 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:26:56.120 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:27:00.968 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:27:01.598 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:27:03.354 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:27:04.007 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:27:06.122 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:27:06.773 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:27:08.337 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:27:09.496 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:27:10.272 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:27:10.981 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:27:19.464 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:27:20.027 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:27:22.175 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:27:22.917 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:27:23.495 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:27:34.201 [AWT-EventQueue-0] SBClient - drag gesture recognized
+[DEBUG] 2020-04-12 15:27:35.000 [AWT-EventQueue-0] SBClient - drag gesture recognized

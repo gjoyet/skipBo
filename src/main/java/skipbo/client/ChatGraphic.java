@@ -23,6 +23,9 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     private JButton readyB;
     private JButton startB;
     private JButton infoB;
+    private JButton gamesB;
+    private JButton whosOnB;
+    private JButton leaveB;
     private GameGraphic gameGraphic;
 
 
@@ -107,17 +110,32 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         contentPane.add(infoB);
         infoB.addActionListener(this);
 
+        gamesB = new JButton("Ranking");
+        gamesB.setBounds(200, 155, 110,20);
+        contentPane.add(gamesB);
+        gamesB.addActionListener(this);
+
+        whosOnB = new JButton("Who`s on?");
+        whosOnB.setBounds(80, 190, 110,20);
+        contentPane.add(whosOnB);
+        whosOnB.addActionListener(this);
+
+        leaveB = new JButton("leave");
+        leaveB.setBounds(200, 190, 110,20);
+        contentPane.add(leaveB);
+        leaveB.addActionListener(this);
+
 
 
         //Output textfield
         chat = new JTextArea(); //TODO: change to JEditorPane or JTextPane to print in colour
-        chat.setBounds(80, 205,250, 400);
+        chat.setBounds(80, 225,250, 380);
         chat.setLineWrap(true);
         chat.setWrapStyleWord(true);
         chat.setEditable(false);
 
         chatScrollPane = new JScrollPane(chat);
-        chatScrollPane.setBounds(80, 205 ,250, 400 );
+        chatScrollPane.setBounds(80, 225 ,250, 380 );
         chatScrollPane.setVisible(true);
         chatScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentPane.add(chatScrollPane);
@@ -257,7 +275,28 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
         } else if (buttonPressed == infoB) {
             printCommandList();
-        }
+
+        } else if (buttonPressed == gamesB) {
+            try {
+                clientListener.forward("/list games");
+            } catch (NotACommandException e) {
+                clientLog.warn("Error with /list command");
+            }
+
+        } else if (buttonPressed == whosOnB) {
+            try {
+                clientListener.forward("/list players");
+            } catch (NotACommandException e) {
+                clientLog.warn("Error with /list command");
+            }
+
+        } else if (buttonPressed == leaveB) {
+            try {
+                clientListener.forward("/quit");
+            } catch (NotACommandException e) {
+                clientLog.warn("Error with /quit command");
+            }
+    }
     }
 
     SBClientListener getClientListener() {

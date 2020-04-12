@@ -171,7 +171,7 @@ public class Game implements Runnable {
      * @param buildDeckIndex (The index of the build pile the player wishes to play to, from 0-3)
      */
 
-    public void playToMiddle(Player currentPlayer, int handCardIndex, int buildDeckIndex) {
+    public boolean playToMiddle(Player currentPlayer, int handCardIndex, int buildDeckIndex) {
         servLog.debug("Entered playToMiddle.");
         Card card = currentPlayer.getHandCards().get(handCardIndex);   // returns card at specified index in the hand card arraylist
 
@@ -188,9 +188,11 @@ public class Game implements Runnable {
                         + piles.handCardPrint(currentPlayer));
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your stock card is: " +
                         currentPlayer.getStockPile().get(currentPlayer.getStockPile().size()-1));
+                // return true;
             } else if (card.col != Color.CYAN) {
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§This move is invalid! " +
                         "To play to an empty pile, the card number has to be 1.");
+                //return false;
             }
             if (card.col == Color.CYAN) {
                 card.number = 1;
@@ -204,6 +206,7 @@ public class Game implements Runnable {
 
                 new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: "
                         + piles.buildPilesPrint(), currentPlayer.getSBL());
+                // return true;
             }
         } else {
             Card topCard = specBuildPile.get(specBuildPile.size() - 1);
@@ -218,9 +221,11 @@ public class Game implements Runnable {
 
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your stock card is: " +
                         currentPlayer.getStockPile().get(currentPlayer.getStockPile().size()-1));
+                // return true;
             } else if (topCard.number != (card.number - 1) && card.col != Color.CYAN) {
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Invalid move! The card you play to build deck " +
                         "has to be one number higher than the card on the build deck.");
+                // return false;
             }
             if (card.col == Color.CYAN) {
                 card.number = topCard.number + 1;
@@ -233,6 +238,7 @@ public class Game implements Runnable {
 
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your stock card is: " +
                         currentPlayer.getStockPile().get(currentPlayer.getStockPile().size()-1));
+                // return true;
             }
             //TODO: skip bo card is to go to 12
             if (card.number == 12) {
@@ -259,7 +265,8 @@ public class Game implements Runnable {
      * @param discardPileIndex (The index of the discard pile that the player wishes to play to.)
      */
 
-    public void playToDiscard(Player currentPlayer, int handCardIndex, int discardPileIndex) {
+    public boolean playToDiscard(Player currentPlayer, int handCardIndex, int discardPileIndex) {
+        // TODO: Add clause preventing player to play a hand card with an index too high
         servLog.debug("Entered playToDiscard.");
         currentPlayer.getSBL().getPW().println("PRINT§Terminal§You are playing to discard now!");
         ArrayList<ArrayList<Card>> discardPiles = currentPlayer.getDiscardPile();
@@ -269,10 +276,11 @@ public class Game implements Runnable {
 
         specDiscard.add(card);
         currentPlayer.getHandCards().remove(card);
-        //DONE: Execute: update Discard pile and hand cards
         displayDiscard();
 
         endTurn();
+
+        // return true;
 
     }
 
@@ -297,7 +305,7 @@ public class Game implements Runnable {
      */
 
 
-    public void playFromStockToMiddle(Player currentPlayer, int buildPileIndex) {
+    public Card playFromStockToMiddle(Player currentPlayer, int buildPileIndex) {
         servLog.debug("Entered playFromStockToMiddle.");
         ArrayList<Card> stockPile = currentPlayer.getStockPile();
         Card stockCard = stockPile.get(stockPile.size() - 1);
@@ -367,7 +375,7 @@ public class Game implements Runnable {
      * @param buildPileIndex   (The index of the pile that the player wishes to play to)
      */
 
-    public void playFromDiscardToMiddle(Player currentPlayer, int discardPileIndex, int buildPileIndex) {
+    public boolean playFromDiscardToMiddle(Player currentPlayer, int discardPileIndex, int buildPileIndex) {
         servLog.debug("Entered playFromDiscardToMiddle.");
         ArrayList<Card> discardPile = currentPlayer.getDiscardPile().get(discardPileIndex);
         ArrayList<Card> specBuildPile = piles.buildPiles.get(buildPileIndex);
@@ -382,9 +390,11 @@ public class Game implements Runnable {
                         + piles.buildPilesPrint(), currentPlayer.getSBL());
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
                         + piles.handCardPrint(currentPlayer));
+                // return true;
             } else if (card.col != Color.CYAN) {
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§This move is invalid! " +
                         "To play to an empty pile, the card number has to be 1.");
+                // return false;
             }
             if (card.col == Color.CYAN) {
                 card.number = 1;
@@ -396,8 +406,12 @@ public class Game implements Runnable {
                     new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: "
                             + piles.buildPilesPrint(), currentPlayer.getSBL());
                 }
+                // return true;
             }
         } else {
+            /* TODO: This part is missing a clause allowing to play a joker card from discard to middle
+                (even though it is improbable, we should still consider the case) */
+
             Card topCard = specBuildPile.get(specBuildPile.size() - 1);
             if (topCard.number == (card.number - 1)) {      // checks if move is valid, if number is correct
                 specBuildPile.add(card);
@@ -408,6 +422,7 @@ public class Game implements Runnable {
 
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hands cards are now: "
                         + piles.handCardPrint(currentPlayer));
+                // return true;
             }
             if (card.number == 12) {
                 for (int i = 0; i < 12; i++) {    // remove all cards from the buildPile if the top card is 12

@@ -232,10 +232,31 @@ public class ProtocolExecutor {
             return;
         }
         switch(pF + pT) {
-            case "HB": sbL.player.getGame().playToMiddle(sbL.player, iF, iT); break;
-            case "SB": sbL.player.getGame().playFromStockToMiddle(sbL.player, iT); break;
-            case "DB": sbL.player.getGame().playFromDiscardToMiddle(sbL.player, iF, iT); break;
-            case "HD": sbL.player.getGame().playToDiscard(sbL.player, iF, iT); break;
+            case "HB": if(sbL.player.getGame().playToMiddle(sbL.player, iF, iT)) {
+                    sendAll("PUTTO§Card§" + input[2], sbL);
+                } else {
+                    sbL.getPW().println("Error"); // TODO: Add error message
+                }
+                break;
+            case "SB": if(sbL.player.getGame().playFromStockToMiddle(sbL.player, iT) != null) {
+                    sbL.getPW().println(""); // TODO: Tell client what the new stockpile top card is
+                    sendAllExceptOne("PUTTO§Card§" + input[2], sbL);
+                } else {
+                    sbL.getPW().println("Error"); // TODO: Add error message
+                }
+                break;
+            case "DB": if(sbL.player.getGame().playFromDiscardToMiddle(sbL.player, iF, iT)) {
+                    sendAll("PUTTO§Card§" + input[2], sbL);
+                } else {
+                    sbL.getPW().println("Error"); // TODO: Add error message
+                }
+                break;
+            case "HD": if(sbL.player.getGame().playToDiscard(sbL.player, iF, iT)) {
+                    sendAll("PUTTO§Card§" + input[2], sbL);
+                } else {
+                    sbL.getPW().println("Error"); // TODO: Add error message
+                }
+                break;
             default: sbL.getPW().println("PRINT§Terminal§This move is not allowed.");
         }
     }
@@ -268,14 +289,15 @@ public class ProtocolExecutor {
      *               to where the player is.
      */
     public void sendAll(String message, SBListener sbL) {
+        String[] splitMessage = message.split("\n");
         if(sbL.player.getStatus().equals(Status.INGAME)) {
             for(int i = 0; i < sbL.getGameLobby().size(); i++) {
-                sbL.getGameLobby().get(i).getSBL().pw.println(message);
+                for(String s : splitMessage) sbL.getGameLobby().get(i).getSBL().pw.println(s);
             }
         } else {
             for(int i = 0; i < serverLobby.getSize(); i++) {
                 if(!serverLobby.getPlayer(i).getStatus().equals(Status.INGAME)) {
-                    serverLobby.getSBL(i).pw.println(message);
+                    for(String s : splitMessage) serverLobby.getSBL(i).pw.println(s);
                 }
             }
         }
@@ -287,16 +309,17 @@ public class ProtocolExecutor {
      * @param sbL: ... except this one
      */
     public void sendAllExceptOne(String message, SBListener sbL) {
+        String[] splitMessage = message.split("\n");
         if(sbL.player.getStatus().equals(Status.INGAME)) {
             for(int i = 0; i < sbL.getGameLobby().size(); i++) {
                 if(!sbL.getGameLobby().get(i).equals(sbL.player)) {
-                    sbL.getGameLobby().get(i).getSBL().pw.println(message);
+                    for(String s : splitMessage) sbL.getGameLobby().get(i).getSBL().pw.println(s);
                 }
             }
         } else {
             for(int i = 0; i < serverLobby.getSize(); i++) {
                 if(!serverLobby.getSBL(i).equals(sbL) && !serverLobby.getPlayer(i).getStatus().equals(Status.INGAME)) {
-                    serverLobby.getSBL(i).pw.println(message);
+                    for(String s : splitMessage) serverLobby.getSBL(i).pw.println(s);
                 }
             }
         }
@@ -306,8 +329,9 @@ public class ProtocolExecutor {
      * @param message: String sent to all clients in main lobby AND all games.
      */
     public void broadcast(String message) {
+        String[] splitMessage = message.split("\n");
         for(Player p : SBServer.getLobby().getPlayerLobby()) {
-            p.getSBL().getPW().println(message);
+            for(String s : splitMessage) p.getSBL().getPW().println(s);
         }
     }
 
@@ -316,9 +340,10 @@ public class ProtocolExecutor {
      * @param sbL: ... except this one.
      */
     public void broadcastExceptOne(String message, SBListener sbL) {
+        String[] splitMessage = message.split("\n");
         for(Player p : SBServer.getLobby().getPlayerLobby()) {
             if(!p.equals(sbL.player)) {
-                p.getSBL().getPW().println(message);
+                for(String s : splitMessage) p.getSBL().getPW().println(s);
             }
         }
     }

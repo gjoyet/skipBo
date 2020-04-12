@@ -8,6 +8,7 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import static skipbo.client.SBClient.clientLog;
 
 /**
  * Will be class for the Game GUI in the future
@@ -300,9 +301,8 @@ public class GameGraphic extends JButton implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         if (button1Pressed == null) {
             button1Pressed = (JButton) actionEvent.getSource();
-            setClickable(button1Pressed, false);
             button1Pressed.setBorder(clickedBorder);
-        } else if (button1Pressed == (JButton) actionEvent.getSource()) {
+        } else if (button1Pressed == actionEvent.getSource()) {
             setClickable(button1Pressed, true);
             button1Pressed.setBorder(defaultBorder);
             button1Pressed = null;

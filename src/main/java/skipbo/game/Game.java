@@ -404,22 +404,23 @@ public class Game implements Runnable {
         if (specBuildPile.isEmpty()) {
             if (card.number == 1) {         // if card number is 1, new pile
                 specBuildPile.add(card);
-                currentPlayer.getHandCards().remove(card);
+                discardPile.remove(card);
                 new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: "
                         + piles.buildPilesPrint(), currentPlayer.getSBL());
+                displayDiscard();
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
                         + piles.handCardPrint(currentPlayer));
                 return true;
             }  else if (card.col == Color.CYAN) {
                 card.number = 1;
                 specBuildPile.add(card);
-                currentPlayer.getHandCards().remove(card);
+                discardPile.remove(card);
+                new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: "
+                        + piles.buildPilesPrint(), currentPlayer.getSBL());
+                displayDiscard();
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
                         + piles.handCardPrint(currentPlayer));
-                for (Player player : players) {
-                    new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: "
-                            + piles.buildPilesPrint(), currentPlayer.getSBL());
-                }
+
                 return true;
             } else {
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§This move is invalid! " +
@@ -427,25 +428,35 @@ public class Game implements Runnable {
                 return false;
             }
         } else {
-            /* TODO: This part is missing a clause allowing to play a joker card from discard to middle
-                (even though it is improbable, we should still consider the case) */
-
+            // DONE: joker case added
             Card topCard = specBuildPile.get(specBuildPile.size() - 1);
             if (topCard.number == (card.number - 1)) {      // checks if move is valid, if number is correct
                 specBuildPile.add(card);
-                currentPlayer.getHandCards().remove(card);
-                checkBuildPileAndPrint(topCard, specBuildPile, currentPlayer);
-//                new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: "
-//                        + piles.buildPilesPrint(), currentPlayer.getSBL());
+                discardPile.remove(card);
+                checkBuildPileAndPrint(card, specBuildPile, currentPlayer);
+                displayDiscard();
 
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hands cards are now: "
                         + piles.handCardPrint(currentPlayer));
                 return true;
+            }else if(card.col == Color.CYAN){
+                card.number = (topCard.number+1);
+                specBuildPile.add(card);
+                discardPile.remove(card);
+
+                checkBuildPileAndPrint(card,specBuildPile,currentPlayer);
+                displayDiscard();
+                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
+                        + piles.handCardPrint(currentPlayer));
+                return true;
+            }else{
+                currentPlayer.getSBL().getPW().println("PRINT§Terminal§This move is invalid! " +
+                        "Card number has to be one higher than top card on build pile.");
+                return false;
             }
             /* TODO: This part needs to be in a separate method that is called
                 before every return statement if card.number == 12; */
         }
-        return false;
     }
 
     /**

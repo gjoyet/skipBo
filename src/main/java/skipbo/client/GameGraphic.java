@@ -295,11 +295,11 @@ public class GameGraphic extends JButton implements ActionListener {
         ImageIcon card;
         Image image;
         int i = 0;
-        for (int cardIndex = 0; cardIndex < handCards.length; cardIndex++) {
+        for (JButton handCard : handCards) {
             card = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(colAndNum[i] + colAndNum[i] + 1)));
             image = card.getImage().getScaledInstance(78, 120, Image.SCALE_DEFAULT);
             ImageIcon scaledCard = new ImageIcon(image);
-            handCards[cardIndex].setIcon(scaledCard);
+            handCard.setIcon(scaledCard);
             i = i + 2;
         }
         card = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(colAndNum[i] + colAndNum[i] + 1)));

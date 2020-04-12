@@ -66,7 +66,7 @@ class SBClientListener {
                 protocolString = getListString(input);
                 break;
             case "/help":
-                protocolString = Protocol.DISPL + "commands";
+                protocolString = Protocol.DISPL + "§commands";
                 break;
             case "/quit":
                 protocolString = Protocol.LGOUT + "";

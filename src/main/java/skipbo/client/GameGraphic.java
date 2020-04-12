@@ -4,9 +4,11 @@ import skipbo.game.Game;
 import skipbo.game.Player;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import static skipbo.client.SBClient.clientLog;
 
 /**
  * Will be class for the Game GUI in the future
@@ -21,6 +23,8 @@ public class GameGraphic extends JButton implements ActionListener {
     private DefaultButtonModel defaultButtonModel = new DefaultButtonModel();
     JButton button1Pressed = null;
     JButton button2Pressed;
+    Border defaultBorder = UIManager.getBorder("Button.border");
+    Border clickedBorder = BorderFactory.createLineBorder(Color.BLACK,2);
 
     GameGraphic(ChatGraphic chatGraphic) {
         this.chatGraphic = chatGraphic;
@@ -90,11 +94,14 @@ public class GameGraphic extends JButton implements ActionListener {
         chatGraphic.getContentPane().add(discard_B);
         chatGraphic.getContentPane().add(discard_C);
         chatGraphic.getContentPane().add(discard_D);
-
         discard_A.setName(" D 1");
         discard_B.setName(" D 2");
         discard_C.setName(" D 3");
         discard_D.setName(" D 4");
+        discard_A.addActionListener(this);
+        discard_B.addActionListener(this);
+        discard_C.addActionListener(this);
+        discard_D.addActionListener(this);
 
         // hand piles
         JButton hand_A = new JButton();
@@ -113,18 +120,23 @@ public class GameGraphic extends JButton implements ActionListener {
         chatGraphic.getContentPane().add(hand_C);
         chatGraphic.getContentPane().add(hand_D);
         chatGraphic.getContentPane().add(hand_E);
-
         hand_A.setName(" H 1");
         hand_B.setName(" H 2");
         hand_C.setName(" H 3");
         hand_D.setName(" H 4");
         hand_E.setName(" H 5");
+        hand_A.addActionListener(this);
+        hand_B.addActionListener(this);
+        hand_C.addActionListener(this);
+        hand_D.addActionListener(this);
+        hand_E.addActionListener(this);
 
         //stock pile
         JButton stock = new JButton();
         stock.setBounds(490, 400, 100, 145);
         chatGraphic.getContentPane().add(stock);
         stock.setName(" S 1");
+        stock.addActionListener(this);
 
         /*
         Cards of the game
@@ -151,11 +163,14 @@ public class GameGraphic extends JButton implements ActionListener {
         chatGraphic.getContentPane().add(build_B);
         chatGraphic.getContentPane().add(build_C);
         chatGraphic.getContentPane().add(build_D);
-
         build_A.setName(" B 1");
         build_B.setName(" B 2");
         build_C.setName(" B 3");
         build_D.setName(" B 4");
+        build_A.addActionListener(this);
+        build_B.addActionListener(this);
+        build_C.addActionListener(this);
+        build_D.addActionListener(this);
 
         // draw piles
         JButton draw = new JButton();
@@ -286,7 +301,10 @@ public class GameGraphic extends JButton implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         if (button1Pressed == null) {
             button1Pressed = (JButton) actionEvent.getSource();
-        } else if (button1Pressed == (JButton) actionEvent.getSource()) {
+            button1Pressed.setBorder(clickedBorder);
+        } else if (button1Pressed == actionEvent.getSource()) {
+            setClickable(button1Pressed, true);
+            button1Pressed.setBorder(defaultBorder);
             button1Pressed = null;
         } else {
             button2Pressed = (JButton) actionEvent.getSource();
@@ -298,6 +316,9 @@ public class GameGraphic extends JButton implements ActionListener {
                 chatGraphic.printCommandList(); //delete when /list commands is implemented
                 //printInfo("Use '/list commands' to display all possible commands");
             }
+            setClickable(button1Pressed, true);
+            button1Pressed.setBorder(defaultBorder);
+            button1Pressed = null;
         }
     }
 

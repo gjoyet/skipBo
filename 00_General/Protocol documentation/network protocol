@@ -20,3 +20,8 @@ Chat		CHATM		Global		String message				sends ‚message‘ to write on the globa
 
 Game		NWGME		New		-					starts new game with 4 players
 		PUTTO		Card		Pile from, int i, Pile to, int j	puts card from pile ‚from‘, index ‚i’, to pile ‚to‘, index ‚j‘
+				ResponsePile 	from, int i, Pile to, int j, 		tells client to execute the move (as stated above) by player with name ‚name‘
+						String ‚name‘
+				StockResponse	Pile from, int i, Pile to, int j, 	tells client to execute the move (as stated above) by player ‚p‘ plus 
+						String name, Colour c, int x		what the new top card of the stockpile is (colour ‚c‘ and number ‚x‘)
+						

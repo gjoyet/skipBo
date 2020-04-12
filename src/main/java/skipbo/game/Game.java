@@ -240,7 +240,9 @@ public class Game implements Runnable {
                         currentPlayer.getStockPile().get(currentPlayer.getStockPile().size()-1));
                 // return true;
             }
-            //TODO: skip bo card is to go to 12
+            // TODO: skip bo card is to go to 12
+            /* TODO: This part needs to be in a separate method that is called
+                before every return statement if card.number == 12; */
             if (card.number == 12) {
                 for (int i = 0; i < 12; i++) {    // remove all cards from the buildPile if the top card is 12
                     specBuildPile.remove(i);
@@ -349,6 +351,8 @@ public class Game implements Runnable {
                         + piles.handCardPrint(currentPlayer));
                 //TODO: stock pile card update
             }
+            /* TODO: This part needs to be in a separate method that is called
+                before every return statement if card.number == 12; */
             if (stockCard.number == 12) {       // If stock card is 12, remove build pile, because it's full
                 for (int i = 0; i < 12; i++) {    // remove all cards from the buildPile if the top card is 12
                     specBuildPile.remove(i);

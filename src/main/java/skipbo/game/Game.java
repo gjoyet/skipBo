@@ -169,6 +169,10 @@ public class Game implements Runnable {
 
     public boolean playToMiddle(Player currentPlayer, int handCardIndex, int buildDeckIndex) {
         // TODO: Add clause preventing player to play a hand card with an index too high
+        if(handCardIndex < 0 || handCardIndex >= currentPlayer.getHandCards().size()){
+            currentPlayer.getSBL().getPW().println("PRINT§Terminal§Hand Card Index is invalid!");
+            servLog.debug("Invalid index");
+        }
         servLog.debug("Entered playToMiddle.");
         Card card = currentPlayer.getHandCards().get(handCardIndex);   // returns card at specified index in the hand card arraylist
 

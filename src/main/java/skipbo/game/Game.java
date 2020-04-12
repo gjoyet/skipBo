@@ -173,6 +173,11 @@ public class Game implements Runnable {
             currentPlayer.getSBL().getPW().println("PRINT§Terminal§Hand Card Index is invalid!");
             servLog.debug("Invalid index");
         }
+        if(buildDeckIndex < 0 || buildDeckIndex > 3){
+            currentPlayer.getSBL().getPW().println("PRINT§Terminal§Build Deck Index is invalid!");
+            servLog.debug("Invalid build deck index");
+        }
+
         servLog.debug("Entered playToMiddle.");
         Card card = currentPlayer.getHandCards().get(handCardIndex);   // returns card at specified index in the hand card arraylist
 
@@ -267,6 +272,14 @@ public class Game implements Runnable {
 
     public boolean playToDiscard(Player currentPlayer, int handCardIndex, int discardPileIndex) {
         // TODO: Add clause preventing player to play a hand card with an index too high
+        if(handCardIndex < 0 || handCardIndex >= currentPlayer.getHandCards().size()){
+            currentPlayer.getSBL().getPW().println("PRINT§Terminal§Hand Card Index is invalid!");
+            servLog.debug("Invalid index");
+        }
+        if(discardPileIndex < 0 || discardPileIndex > 3){
+            currentPlayer.getSBL().getPW().println("PRINT§Terminal§Discard deck index is invalid!");
+            servLog.debug("Invalid discard deck index");
+        }
         servLog.debug("Entered playToDiscard.");
         currentPlayer.getSBL().getPW().println("PRINT§Terminal§You are playing to discard now!");
         ArrayList<ArrayList<Card>> discardPiles = currentPlayer.getDiscardPile();
@@ -306,6 +319,11 @@ public class Game implements Runnable {
 
 
     public Card playFromStockToMiddle(Player currentPlayer, int buildPileIndex) {
+
+        if (buildPileIndex < 0 || buildPileIndex > 3){
+            currentPlayer.getSBL().getPW().println("PRINT§Terminal§Build Deck Index is invalid!");
+            servLog.debug("Invalid build deck index");
+        }
         servLog.debug("Entered playFromStockToMiddle.");
         ArrayList<Card> stockPile = currentPlayer.getStockPile();
         Card stockCard = currentPlayer.getStockPile().get(stockPile.size() - 1);
@@ -397,6 +415,14 @@ public class Game implements Runnable {
 
     public boolean playFromDiscardToMiddle(Player currentPlayer, int discardPileIndex, int buildPileIndex) {
         // TODO: Add clause preventing player to play a discard card with an index too high
+        if(buildPileIndex < 0 || buildPileIndex > 3){
+            currentPlayer.getSBL().getPW().println("PRINT§Terminal§Build Deck Index is invalid!");
+            servLog.debug("Invalid build deck index");
+        }
+        if(discardPileIndex < 0 || discardPileIndex > 3){
+            currentPlayer.getSBL().getPW().println("PRINT§Terminal§Discard deck index is invalid!");
+            servLog.debug("Invalid discard deck index");
+        }
         servLog.debug("Entered playFromDiscardToMiddle.");
         ArrayList<Card> discardPile = currentPlayer.getDiscardPile().get(discardPileIndex);
         ArrayList<Card> specBuildPile = piles.buildPiles.get(buildPileIndex);

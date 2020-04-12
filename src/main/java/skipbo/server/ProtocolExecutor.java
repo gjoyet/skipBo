@@ -232,8 +232,8 @@ public class ProtocolExecutor {
         String pT = arguments[2]; // pile to
         int iF = Integer.parseInt(arguments[1])-1; // index from
         int iT = Integer.parseInt(arguments[3])-1; // index to
-        if((pF == "H" && (iF < 0 || iF > 4)) || (pF == "S" && iF != 0) ||
-                            (pF == "D" && (iF < 0 || iF > 3)) || iT < 0 || iT > 3) {
+        if((pF.equals("H") && (iF < 0 || iF > 4)) || (pF.equals("S") && iF != 0) ||
+                            (pF.equals("D") && (iF < 0 || iF > 3)) || iT < 0 || iT > 3) {
             sbL.getPW().println("PRINT§Terminal§Invalid indexes in this move.");
             return;
         }

@@ -427,7 +427,6 @@ public class Game implements Runnable {
      *
      * @param player (Player whose hand you wish to fill)
      */
-
     public void fillHandCards(Player player) {
         servLog.debug("Entered fillHandCards.");
         ArrayList<Card> drawPile = piles.drawPile;

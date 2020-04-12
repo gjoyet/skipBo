@@ -6,13 +6,14 @@ import java.util.Arrays;
 
 public class Pile {
 
-    public ArrayList<Card> drawPile;
+    public ArrayList<Card> drawPile;        // 1 draw pile
     public ArrayList<Card> stockPile;
-    public ArrayList<Card> handCards; // 1 draw pile
+    public ArrayList<Card> handCards;
     public ArrayList<ArrayList<Card>> buildPiles;// ArrayList for the 4 build decks in the middle
     public ArrayList<ArrayList<Card>> discardPiles;
+    public ArrayList<Card> emptyPile;
     public Player player;
-    private int id;
+    public int id;
 
     /**
      * The Pile-constructor is overloaded because we have different
@@ -23,6 +24,7 @@ public class Pile {
     public Pile() {   // Pile without id (for Game)
         this.drawPile = new ArrayList<Card>();
         this.buildPiles = new ArrayList<ArrayList<Card>>();
+        this.emptyPile = new ArrayList<Card>(0);
     }
 
     public Pile(int id) {   // Pile with id (for Player)
@@ -96,6 +98,11 @@ public class Pile {
         }
         return Arrays.toString(a);
     }
+
+    /**
+     * Returns all build piles printed to console.
+     * @return String with piles
+     */
 
     public String buildPilesPrint() {
         StringBuilder str = new StringBuilder();

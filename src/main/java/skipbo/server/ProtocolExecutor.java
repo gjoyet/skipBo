@@ -1,5 +1,7 @@
 package skipbo.server;
 
+import javafx.scene.paint.Color;
+import skipbo.game.Card;
 import skipbo.game.Game;
 import skipbo.game.Player;
 import skipbo.game.Status;
@@ -233,26 +235,30 @@ public class ProtocolExecutor {
         }
         switch(pF + pT) {
             case "HB": if(sbL.player.getGame().playToMiddle(sbL.player, iF, iT)) {
-                    sendAll("PUTTO§Card§" + input[2], sbL);
+                    sendAll("PUTTO§Response§" + input[2] + "§" + sbL.player.getName(), sbL);
                 } else {
                     sbL.getPW().println("Error"); // TODO: Add error message
                 }
                 break;
-            case "SB": if(sbL.player.getGame().playFromStockToMiddle(sbL.player, iT) != null) {
-                    sbL.getPW().println(""); // TODO: Tell client what the new stockpile top card is
-                    sendAllExceptOne("PUTTO§Card§" + input[2], sbL);
+            case "SB":
+                Card stockPileTopCard = sbL.player.getGame().playFromStockToMiddle(sbL.player, iT);
+                if(stockPileTopCard != null) {
+                    sbL.getPW().println("PUTTO§StockResponse§" + input[2]  + "§" + sbL.player.getName()
+                                            + "§" + stockPileTopCard.col + "§" + stockPileTopCard.number);
+                    // TODO: Tell client what the new stockpile top card is
+                    sendAllExceptOne("PUTTO§Response§" + input[2], sbL);
                 } else {
                     sbL.getPW().println("Error"); // TODO: Add error message
                 }
                 break;
             case "DB": if(sbL.player.getGame().playFromDiscardToMiddle(sbL.player, iF, iT)) {
-                    sendAll("PUTTO§Card§" + input[2], sbL);
+                    sendAll("PUTTO§Response§" + input[2] + "§" + sbL.player.getName(), sbL);
                 } else {
                     sbL.getPW().println("Error"); // TODO: Add error message
                 }
                 break;
             case "HD": if(sbL.player.getGame().playToDiscard(sbL.player, iF, iT)) {
-                    sendAll("PUTTO§Card§" + input[2], sbL);
+                    sendAll("PUTTO§Response§" + input[2] + "§" + sbL.player.getName(), sbL);
                 } else {
                     sbL.getPW().println("Error"); // TODO: Add error message
                 }

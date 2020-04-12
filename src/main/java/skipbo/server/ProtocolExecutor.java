@@ -128,7 +128,7 @@ public class ProtocolExecutor {
                 }
             } else if(input[1].equals("Broadcast")) {
                 sbL.getPW().println("CHATM§Broadcast§(BC) You: " + input[2]);
-                broadcastExceptOne("CHATM§Broadcast§(BC) " + sbL.player.getName() + input[2], sbL);
+                broadcastExceptOne("CHATM§Broadcast§(BC) " + sbL.player.getName() + ": " + input[2], sbL);
             } else throw new NoCommandException(input[0], input[1]);
         } finally {}
     }
@@ -194,9 +194,13 @@ public class ProtocolExecutor {
             if(playerCount == 2) {
                 Game game = new Game(newPlayers);
                 serverLobby.addGame(game);
+                String names = "";
+                for(Player p : newPlayers) {
+                    names += p.getName() + "§";
+                }
                 for (Player p : newPlayers) {
                     p.changeGame(game);
-                    p.getSBL().getPW().println("NWGME§New§");
+                    p.getSBL().getPW().println("NWGME§Response§" + names);
                     p.changeStatus(Status.INGAME);
                 }
                 Thread gameT = new Thread(game); gameT.start();

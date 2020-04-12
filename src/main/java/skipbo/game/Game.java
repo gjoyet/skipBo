@@ -428,6 +428,8 @@ public class Game implements Runnable {
                         + piles.handCardPrint(currentPlayer));
                 // return true;
             }
+            /* TODO: This part needs to be in a separate method that is called
+                before every return statement if card.number == 12; */
             if (card.number == 12) {
                 for (int i = 0; i < 12; i++) {    // remove all cards from the buildPile if the top card is 12
                     specBuildPile.remove(i);

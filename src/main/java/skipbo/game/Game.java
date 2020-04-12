@@ -26,7 +26,6 @@ public class Game implements Runnable {
     public Game(ArrayList<Player> players) {
 
         this.players = players;
-
         this.piles = new Pile();
         this.gameRunning = gameRunning;
         this.turnFinished = turnFinished;
@@ -93,9 +92,8 @@ public class Game implements Runnable {
 
         this.piles.gamePiles();   // Game gets complete set of cards
 
-        for (int i = 0; i < players.size(); i++) {     // Players getting their cards
+        for (Player tempPlayer : players) {     // Players getting their cards
 
-            Player tempPlayer = players.get(i);
             tempPlayer.getSBL().getPW().println("PRINT§Terminal§Game is starting...");
             Random random = new Random();
             for (int j = 0; j < 5; j++) {   //ONLY FOR DEMO PURPOSES
@@ -323,7 +321,7 @@ public class Game implements Runnable {
                         currentPlayer.getStockPile().get(sizeOfStockPile-2).number);
                 checkStockPile(currentPlayer);
                 return stockPile.get(stockPile.size() - 1);
-            } else if (stockCard.col == Color.CYAN){
+            } else if (stockCard.col == Color.CYAN){ //if stock card
                 stockCard.number = 1;
                 specBuildPile.add(stockCard);
                 currentPlayer.getStockPile().remove(stockCard);
@@ -339,7 +337,7 @@ public class Game implements Runnable {
                         "To play to an empty pile, the card number has to be 1.");
                 return null;
             }
-        }else {
+        }else {         //case build pile isn't empty
             Card topCard = specBuildPile.get(specBuildPile.size()-1);
             if(topCard.number == (stockCard.number-1)){
                 specBuildPile.add(stockCard);
@@ -454,8 +452,6 @@ public class Game implements Runnable {
                         "Card number has to be one higher than top card on build pile.");
                 return false;
             }
-            /* TODO: This part needs to be in a separate method that is called
-                before every return statement if card.number == 12; */
         }
     }
 

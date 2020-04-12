@@ -2,7 +2,7 @@ package skipbo.client;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -62,15 +62,27 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
     void setFrame() {
 
 
+
         setTitle("Skip-Bros CHAT");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        setBounds(100, 100, 520, 485);
+        setBounds(100, 100, 420, 760);
 
         contentPane = new JPanel();
         contentPane.setBackground(Color.orange);
         contentPane.setBorder(new EmptyBorder(5,5,5,5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
+
+        ImageIcon logoI = new ImageIcon(getClass().getClassLoader().getResource("logo.png"));
+        Image image = logoI.getImage().getScaledInstance(250, 70, Image.SCALE_DEFAULT);
+        ImageIcon scaledIcon = new ImageIcon(image);
+        JTextPane logoJ = new JTextPane();
+        logoJ.setBorder(null);
+        logoJ.setEditable(false);
+        logoJ.setBounds(80,30, scaledIcon.getIconWidth(), scaledIcon.getIconHeight());
+        logoJ.setPreferredSize(new Dimension(scaledIcon.getIconWidth(), scaledIcon.getIconHeight()));
+        logoJ.insertIcon(scaledIcon);
+        contentPane.add(logoJ);
 
         JButton readyB = new JButton("Ready");
         readyB.setBounds(80, 120, 110,20);

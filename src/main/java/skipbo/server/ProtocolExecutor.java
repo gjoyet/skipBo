@@ -213,7 +213,7 @@ public class ProtocolExecutor {
                 return;
             } else {
                 sbL.getPW().println("PRINT§Terminal§Not enough people are ready.");
-                servLog.info(sbL.player.getName() + " tried to start game: not enough people were ready.");
+                servLog.debug(sbL.player.getName() + " tried to start game: not enough people were ready.");
             }
         } else throw new NoCommandException(input[0], input[1]);
     }
@@ -280,6 +280,9 @@ public class ProtocolExecutor {
         } else throw new NoCommandException(input[0], input[1]);
     }
 
+    /**
+     * Method for command DISPL. Displays certain elements (players, games,...) to client.
+     */
     void display() throws NoCommandException {
         try {
             switch (input[1]) {
@@ -301,6 +304,15 @@ public class ProtocolExecutor {
                     throw new NoCommandException(input[0], input[1]);
             }
         } finally {}
+    }
+
+    public void gameEnding(Game game, Player winner) {
+        for(Player p : game.players) {
+            p.changeStatus(Status.WAITING);
+        }
+        if(winner != null) {
+            sendAll("ENDGM§Winner§" + winner.getName(), winner.getSBL());
+        }
     }
 
     /**

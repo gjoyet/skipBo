@@ -84,6 +84,7 @@ class SBServerListener implements Runnable {
     }
 
     void putTo(String[] command) {
+
         //chatGraphic.printInfoMessage("Someone played a card");
     }
 

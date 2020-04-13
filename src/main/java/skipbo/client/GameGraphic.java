@@ -2,7 +2,6 @@ package skipbo.client;
 
 import skipbo.game.Game;
 import skipbo.game.Player;
-import skipbo.server.Protocol;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -10,8 +9,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
-
-import static skipbo.client.SBClient.clientLog;
 
 /**
  * Will be class for the Game GUI in the future
@@ -33,14 +30,14 @@ public class GameGraphic extends JButton implements ActionListener {
     private JLabel e3;
 
     //Own piles
-    private JButton hand_a;
-    private JButton hand_b;
-    private JButton hand_c;
-    private JButton hand_d;
-    private JButton hand_e;
-    private JButton stock;
-    private JButton discard_a;
-    private JButton discard_b;
+    private CardButton hand_a;
+    private CardButton hand_b;
+    private CardButton hand_c;
+    private CardButton hand_d;
+    private CardButton hand_e;
+    private CardButton stock;
+    private CardButton discard_a;
+    private CardButton discard_b;
     private JButton discard_c;
     private JButton discard_d;
 
@@ -151,7 +148,7 @@ public class GameGraphic extends JButton implements ActionListener {
         discard_D.addActionListener(this);
 
         // hand piles
-        hand_a = new JButton();
+        hand_a = new CardButton();
         hand_a.setBounds(620, 570, 78, 120);
         hand_b = new JButton();
         hand_b.setBounds(708, 570, 78, 120);

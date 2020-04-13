@@ -6,7 +6,6 @@ public class Card {
 
     public int number;
     public Color col;
-    public String special;
 
     /**
      * Constructor for a normal Card object

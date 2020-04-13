@@ -19,7 +19,6 @@ import static skipbo.client.SBClient.clientLog;
 public class GameGraphic extends JButton implements ActionListener {
 
     private ChatGraphic chatGraphic;
-    private JTextArea chat;
     private Player player;
     private Game game;
     private DefaultButtonModel notClickableModel;
@@ -28,6 +27,7 @@ public class GameGraphic extends JButton implements ActionListener {
     private Border defaultBorder = UIManager.getBorder("Button.border");
     private Border clickedBorder = BorderFactory.createLineBorder(Color.BLACK,2);
 
+    //Opponents
     private JLabel e1;
     private JLabel e2;
     private JLabel e3;

@@ -155,6 +155,7 @@ public class Game implements Runnable {
                 + piles.handCardPrint(ply));
         ply.getSBL().getPW().println("PRINT§Terminal§Your stock card is: " +
                 ply.getStockPile().get(ply.getStockPile().size() - 1).number);
+        ply.getSBL().getPW().println("PRINT§Terminal§The build decks are: " + piles.buildPilesPrint());
 
         new ProtocolExecutor().sendAllExceptOne("PRINT§Terminal§It's " + ply.getName()
                 + "'s turn!", ply.getSBL());
@@ -175,10 +176,12 @@ public class Game implements Runnable {
         if(handCardIndex < 0 || handCardIndex >= currentPlayer.getHandCards().size()){
             currentPlayer.getSBL().getPW().println("PRINT§Terminal§Hand Card Index is invalid!");
             servLog.debug("Invalid index");
+            return false;
         }
         if(buildDeckIndex < 0 || buildDeckIndex > 3){       //if bp index is a false index that cannot be true
             currentPlayer.getSBL().getPW().println("PRINT§Terminal§Build Deck Index is invalid!");
             servLog.debug("Invalid build deck index");
+            return false;
         }
 
         servLog.debug("Entered playToMiddle.");

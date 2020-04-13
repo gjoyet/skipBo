@@ -86,7 +86,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         contentPane.setLayout(null);
 
         ImageIcon logoI = new ImageIcon(getClass().getClassLoader().getResource("logo.png"));
-        Image image = logoI.getImage().getScaledInstance(250, 70, Image.SCALE_DEFAULT);
+        Image image = logoI.getImage().getScaledInstance(250, 190, Image.SCALE_DEFAULT);
         ImageIcon scaledIcon = new ImageIcon(image);
         JTextPane logoJ = new JTextPane();
         logoJ.setBorder(null);
@@ -97,32 +97,32 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         contentPane.add(logoJ);
 
         readyB = new JButton("Ready");
-        readyB.setBounds(80, 120, 110,20);
+        readyB.setBounds(80, 230, 120,20);
         contentPane.add(readyB);
         readyB.addActionListener(this);
 
         startB = new JButton("Start Game");
-        startB.setBounds(200, 120, 110,20);
+        startB.setBounds(210, 230, 120,20);
         contentPane.add(startB);
         startB.addActionListener(this);
 
         infoB = new JButton("Info");
-        infoB.setBounds(80, 155, 110,20);
+        infoB.setBounds(80, 260, 120,20);
         contentPane.add(infoB);
         infoB.addActionListener(this);
 
         gamesB = new JButton("Ranking");
-        gamesB.setBounds(200, 155, 110,20);
+        gamesB.setBounds(210, 260, 120,20);
         contentPane.add(gamesB);
         gamesB.addActionListener(this);
 
         whosOnB = new JButton("Who`s on?");
-        whosOnB.setBounds(80, 190, 110,20);
+        whosOnB.setBounds(80, 290, 120,20);
         contentPane.add(whosOnB);
         whosOnB.addActionListener(this);
 
         leaveB = new JButton("leave");
-        leaveB.setBounds(200, 190, 110,20);
+        leaveB.setBounds(210, 290, 120,20);
         contentPane.add(leaveB);
         leaveB.addActionListener(this);
 
@@ -130,20 +130,20 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
         //Output textfield
         chat = new JTextArea(); //TODO: change to JEditorPane or JTextPane to print in colour
-        chat.setBounds(80, 225,250, 380);
+        chat.setBounds(80, 320,250, 300);
         chat.setLineWrap(true);
         chat.setWrapStyleWord(true);
         chat.setEditable(false);
 
         chatScrollPane = new JScrollPane(chat);
-        chatScrollPane.setBounds(80, 225 ,250, 380 );
+        chatScrollPane.setBounds(80, 320 ,250, 300);
         chatScrollPane.setVisible(true);
         chatScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentPane.add(chatScrollPane);
 
         //Input textfield
         inputMes = new JTextArea();
-        inputMes.setBounds(80, 610,250, 80);
+        inputMes.setBounds(80, 630,250, 80);
         inputMes.setEditable(true);
         inputMes.setColumns(3);
         inputMes.setLineWrap(true);
@@ -152,7 +152,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         contentPane.add(inputMes);
 
         inputScrollPane = new JScrollPane(inputMes);
-        inputScrollPane.setBounds(80, 610,250, 80);
+        inputScrollPane.setBounds(80, 630,250, 80);
         inputScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentPane.add(inputScrollPane);
 

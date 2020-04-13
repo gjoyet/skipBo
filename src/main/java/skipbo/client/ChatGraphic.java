@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Objects;
+
 import static skipbo.client.SBClient.clientLog;
 
 /**
@@ -73,8 +75,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
      */
     void setFrame() {
 
-
-
         setTitle("Skip-Bros CHAT");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setBounds(100, 100, 420, 760);
@@ -85,7 +85,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        ImageIcon logoI = new ImageIcon(getClass().getClassLoader().getResource("logo.png"));
+        ImageIcon logoI = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo.png")));
         Image image = logoI.getImage().getScaledInstance(250, 190, Image.SCALE_DEFAULT);
         ImageIcon scaledIcon = new ImageIcon(image);
         JTextPane logoJ = new JTextPane();

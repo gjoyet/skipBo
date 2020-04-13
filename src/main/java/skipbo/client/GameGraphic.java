@@ -30,39 +30,17 @@ public class GameGraphic extends JButton implements ActionListener {
     private JLabel e3;
 
     //Own piles
-    private CardButton hand_a;
-    private CardButton hand_b;
-    private CardButton hand_c;
-    private CardButton hand_d;
-    private CardButton hand_e;
     private CardButton[] hand = new CardButton[5];
     private CardButton stock;
     private CardButton[] discard = new CardButton[4];
-    private CardButton discard_a;
-    private CardButton discard_b;
-    private CardButton discard_c;
-    private CardButton discard_d;
 
     //Game piles
     private CardButton[] build = new CardButton[4];
-    private CardButton build_a;
-    private CardButton build_b;
-    private CardButton build_c;
-    private CardButton build_d;
 
     //Opponent discard piles
-    private CardButton e1_a;
-    private CardButton e1_b;
-    private CardButton e1_c;
-    private CardButton e1_d;
-    private CardButton e2_a;
-    private CardButton e2_b;
-    private CardButton e2_c;
-    private CardButton e2_d;
-    private CardButton e3_a;
-    private CardButton e3_b;
-    private CardButton e3_c;
-    private CardButton e3_d;
+    private CardButton[] e1_discard = new CardButton[4];
+    private CardButton[] e2_discard = new CardButton[4];
+    private CardButton[] e3_discard = new CardButton[4];
 
     //Opponent stock piles
     private CardButton e1_stock;
@@ -80,7 +58,7 @@ public class GameGraphic extends JButton implements ActionListener {
     void setGameGraphic() {
 
         // Logo upper left corner
-        ImageIcon logoI = new ImageIcon(getClass().getClassLoader().getResource("logo.png"));
+        ImageIcon logoI = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo.png")));
         Image image = logoI.getImage().getScaledInstance(250, 70, Image.SCALE_DEFAULT);
         ImageIcon scaledIcon = new ImageIcon(image);
         JTextPane logoJ = new JTextPane();
@@ -109,7 +87,7 @@ public class GameGraphic extends JButton implements ActionListener {
 
     void appendDecks() {
         /*
-        Cards of the Player
+        Cards of the Player and build piles
         */
 
         JLabel dp = new JLabel("Your Discard Piles");
@@ -118,15 +96,24 @@ public class GameGraphic extends JButton implements ActionListener {
         hp.setBounds(620,550,120,15);
         JLabel sp = new JLabel("Your stock pile");
         sp.setBounds(490, 380,120,15);
+        JLabel bp = new JLabel("Build piles");
+        bp.setBounds(620,130,120,15);
         chatGraphic.getContentPane().add(dp);
         chatGraphic.getContentPane().add(hp);
         chatGraphic.getContentPane().add(sp);
+        chatGraphic.getContentPane().add(bp);
 
         // Discard and build Piles
 
-        for (int i = 0; i < discard.length; i++) {
+        for (int i = 0, j = 1; i < discard.length; i++, j++) {
             discard[i] = new CardButton();
             build[i] = new CardButton();
+            chatGraphic.getContentPane().add(discard[i]);
+            chatGraphic.getContentPane().add(build[i]);
+            discard[i].addActionListener(this);
+            build[i].addActionListener(this);
+            discard[i].setName(" D " + j);
+            build[i].setName(" B " + j);
         }
         discard[0].setBounds(620, 400, 100, 145);
         discard[1].setBounds(730, 400, 100, 145);
@@ -136,84 +123,21 @@ public class GameGraphic extends JButton implements ActionListener {
         build[1].setBounds(730, 150, 100, 145);
         build[2].setBounds(840, 150, 100, 145);
         build[3].setBounds(950, 150, 100, 145);
-        for (int i = 0, j = 1; i < discard.length; i++, j++) {
-            chatGraphic.getContentPane().add(discard[i]);
-            chatGraphic.getContentPane().add(build[i]);
-            discard[i].addActionListener(this);
-            build[i].addActionListener(this);
-            discard[i].setName(" D " + j);
-            build[i].setName(" B " + j);
-        }
-/*
-        discard_a = new CardButton();
-        JButton discard_A = discard_a;
-        discard_A.setBounds(620, 400, 100, 145);
-        discard_b = new CardButton();
-        JButton discard_B = discard_b;
-        discard_B.setBounds(730, 400, 100, 145);
-        discard_c = new CardButton();
-        JButton discard_C = discard_c;
-        discard_C.setBounds(840, 400, 100, 145);
-        discard_d = new CardButton();
-        JButton discard_D = discard_d;
-        discard_D.setBounds(950, 400, 100, 145);
-        chatGraphic.getContentPane().add(discard_A);
-        chatGraphic.getContentPane().add(discard_B);
-        chatGraphic.getContentPane().add(discard_C);
-        chatGraphic.getContentPane().add(discard_D);
-        discard_A.setName(" D 1");
-        discard_B.setName(" D 2");
-        discard_C.setName(" D 3");
-        discard_D.setName(" D 4");
-        discard_A.addActionListener(this);
-        discard_B.addActionListener(this);
-        discard_C.addActionListener(this);
-        discard_D.addActionListener(this);*/
 
 
         // hand piles
-        for (int i = 0; i < hand.length; i++) {
+        for (int i = 0; i < hand.length;) {
             hand[i] = new CardButton();
+            chatGraphic.getContentPane().add(hand[i]);
+            hand[i].addActionListener(this);
+            hand[i].setName(" H " + ++i);
         }
-
         hand[0].setBounds(620, 570, 78, 120);
         hand[1].setBounds(708, 570, 78, 120);
         hand[2].setBounds(796, 570, 78, 120);
         hand[3].setBounds(884, 570, 78, 120);
         hand[4].setBounds(972, 570, 78, 120);
 
-        for (int i = 0; i < hand.length;) {
-            chatGraphic.getContentPane().add(hand[i]);
-            hand[i].addActionListener(this);
-            hand[i].setName(" H " + ++i);
-        }
-
-/*        hand_a = new CardButton();
-        hand_a.setBounds(620, 570, 78, 120);
-        hand_b = new CardButton();
-        hand_b.setBounds(708, 570, 78, 120);
-        hand_c = new CardButton();
-        hand_c.setBounds(796, 570, 78, 120);
-        hand_d = new CardButton();
-        hand_d.setBounds(884, 570, 78, 120);
-        hand_e = new CardButton();
-        hand_e.setBounds(972, 570, 78, 120);
-
-        chatGraphic.getContentPane().add(hand_a);
-        chatGraphic.getContentPane().add(hand_b);
-        chatGraphic.getContentPane().add(hand_c);
-        chatGraphic.getContentPane().add(hand_d);
-        chatGraphic.getContentPane().add(hand_e);
-        hand_a.setName(" H 1");
-        hand_b.setName(" H 2");
-        hand_c.setName(" H 3");
-        hand_d.setName(" H 4");
-        hand_e.setName(" H 5");
-        hand_a.addActionListener(this);
-        hand_b.addActionListener(this);
-        hand_c.addActionListener(this);
-        hand_d.addActionListener(this);
-        hand_e.addActionListener(this);*/
 
         //stock pile
         stock = new CardButton();
@@ -223,40 +147,14 @@ public class GameGraphic extends JButton implements ActionListener {
         stock.addActionListener(this);
 
         /*
-        Cards of the game
+        Cards of the game (draw pile)
         */
 
-        JLabel bp = new JLabel("Build piles");
-        bp.setBounds(620,130,120,15);
         JLabel dpg = new JLabel("Draw pile");
         dpg.setBounds(490,130,120,15);
-        chatGraphic.getContentPane().add(bp);
         chatGraphic.getContentPane().add(dpg);
 
-/*        // Build piles
-        build_a = new CardButton();
-        build_a.setBounds(620, 150, 100, 145);
-        build_b = new CardButton();
-        build_b.setBounds(730, 150, 100, 145);
-        build_c = new CardButton();
-        build_c.setBounds(840, 150, 100, 145);
-        build_d = new CardButton();
-        build_d.setBounds(950, 150, 100, 145);
-
-        chatGraphic.getContentPane().add(build_a);
-        chatGraphic.getContentPane().add(build_b);
-        chatGraphic.getContentPane().add(build_c);
-        chatGraphic.getContentPane().add(build_d);
-        build_a.setName(" B 1");
-        build_b.setName(" B 2");
-        build_c.setName(" B 3");
-        build_d.setName(" B 4");
-        build_a.addActionListener(this);
-        build_b.addActionListener(this);
-        build_c.addActionListener(this);
-        build_d.addActionListener(this);*/
-
-        // draw piles
+        // draw pile
         JButton draw = new JButton();
         draw.setBounds(490, 150, 100, 145);
         chatGraphic.getContentPane().add(draw);
@@ -268,74 +166,49 @@ public class GameGraphic extends JButton implements ActionListener {
         display cards of enemies
         */
 
-        // enemy 1
+        //Labels of enemies
+
         e1 = new JLabel("Opponent 1");
         e1.setBounds(490,30,120,15);
         chatGraphic.getContentPane().add(e1);
 
-        e1_a = new CardButton();
-        e1_a.setBounds(490, 50, 30, 50);
-        e1_b = new CardButton();
-        e1_b.setBounds(525, 50, 30, 50);
-        e1_c = new CardButton();
-        e1_c.setBounds(560, 50, 30, 50);
-        e1_d = new CardButton();
-        e1_d.setBounds(595, 50, 30, 50);
-
-        chatGraphic.getContentPane().add(e1_a);
-        chatGraphic.getContentPane().add(e1_b);
-        chatGraphic.getContentPane().add(e1_c);
-        chatGraphic.getContentPane().add(e1_d);
-        setClickable(e1_a, false);
-        setClickable(e1_b, false);
-        setClickable(e1_c, false);
-        setClickable(e1_d, false);
-
-        // enemy 2
         e2 = new JLabel("Opponent 2");
         e2.setBounds(650,30,120,15);
         chatGraphic.getContentPane().add(e2);
 
-        e2_a = new CardButton();
-        e2_a.setBounds(650, 50, 30, 50);
-        e2_b = new CardButton();
-        e2_b.setBounds(685, 50, 30, 50);
-        e2_c = new CardButton();
-        e2_c.setBounds(720, 50, 30, 50);
-        e2_d = new CardButton();
-        e2_d.setBounds(755, 50, 30, 50);
-
-        chatGraphic.getContentPane().add(e2_a);
-        chatGraphic.getContentPane().add(e2_b);
-        chatGraphic.getContentPane().add(e2_c);
-        chatGraphic.getContentPane().add(e2_d);
-        setClickable(e2_a, false);
-        setClickable(e2_b, false);
-        setClickable(e2_c, false);
-        setClickable(e2_d, false);
-
-        // enemy 3
         e3 = new JLabel("Opponent 3");
         e3.setBounds(810,30,120,15);
         chatGraphic.getContentPane().add(e3);
 
-        e3_a = new CardButton();
-        e3_a.setBounds(810, 50, 30, 50);
-        e3_b = new CardButton();
-        e3_b.setBounds(845, 50, 30, 50);
-        e3_c = new CardButton();
-        e3_c.setBounds(880, 50, 30, 50);
-        e3_d = new CardButton();
-        e3_d.setBounds(915, 50, 30, 50);
 
-        chatGraphic.getContentPane().add(e3_a);
-        chatGraphic.getContentPane().add(e3_b);
-        chatGraphic.getContentPane().add(e3_c);
-        chatGraphic.getContentPane().add(e3_d);
-        setClickable(e3_a, false);
-        setClickable(e3_b, false);
-        setClickable(e3_c, false);
-        setClickable(e3_d, false);
+        //Cards of enemies
+
+        for (int i = 0; i < e1_discard.length; i++) {
+            e1_discard[i] = new CardButton();
+            e2_discard[i] = new CardButton();
+            e3_discard[i] = new CardButton();
+            chatGraphic.getContentPane().add(e1_discard[i]);
+            chatGraphic.getContentPane().add(e2_discard[i]);
+            chatGraphic.getContentPane().add(e3_discard[i]);
+            setClickable(e1_discard[i], false);
+            setClickable(e2_discard[i], false);
+            setClickable(e3_discard[i], false);
+        }
+
+        e1_discard[0].setBounds(490, 50, 30, 50);
+        e1_discard[1].setBounds(525, 50, 30, 50);
+        e1_discard[2].setBounds(560, 50, 30, 50);
+        e1_discard[3].setBounds(595, 50, 30, 50);
+
+        e2_discard[0].setBounds(650, 50, 30, 50);
+        e2_discard[1].setBounds(685, 50, 30, 50);
+        e2_discard[2].setBounds(720, 50, 30, 50);
+        e2_discard[3].setBounds(755, 50, 30, 50);
+
+        e3_discard[0].setBounds(810, 50, 30, 50);
+        e3_discard[1].setBounds(845, 50, 30, 50);
+        e3_discard[2].setBounds(880, 50, 30, 50);
+        e3_discard[3].setBounds(915, 50, 30, 50);
 
     }
 
@@ -365,19 +238,7 @@ public class GameGraphic extends JButton implements ActionListener {
             hand[i].setIcon(cardIcons.getIcon(colAndNum[j], Integer.parseInt(colAndNum[j+1]), "M"));
             hand[i].addCard(colAndNum[j++], Integer.parseInt(colAndNum[j++]));
         }
-
-/*        hand_a.setIcon(cardIcons.getIcon(colAndNum[0], Integer.parseInt(colAndNum[1]), "M"));
-        hand_b.setIcon(cardIcons.getIcon(colAndNum[2], Integer.parseInt(colAndNum[3]), "M"));
-        hand_c.setIcon(cardIcons.getIcon(colAndNum[4], Integer.parseInt(colAndNum[5]), "M"));
-        hand_d.setIcon(cardIcons.getIcon(colAndNum[6], Integer.parseInt(colAndNum[7]), "M"));
-        hand_e.setIcon(cardIcons.getIcon(colAndNum[8], Integer.parseInt(colAndNum[9]), "M"));*/
         stock.setIcon(cardIcons.getIcon(colAndNum[10], Integer.parseInt(colAndNum[11]), "L"));
-/*
-        hand_a.addCard(colAndNum[0], Integer.parseInt(colAndNum[1]));
-        hand_b.addCard(colAndNum[2], Integer.parseInt(colAndNum[3]));
-        hand_c.addCard(colAndNum[4], Integer.parseInt(colAndNum[5]));
-        hand_d.addCard(colAndNum[6], Integer.parseInt(colAndNum[7]));
-        hand_e.addCard(colAndNum[8], Integer.parseInt(colAndNum[9]));*/
         stock.addCard(colAndNum[10], Integer.parseInt(colAndNum[11]));
     }
 
@@ -415,18 +276,19 @@ public class GameGraphic extends JButton implements ActionListener {
             buildCard.setIcon(cardIcons.getIcon(handCard.removeColour(), handCard.removeNumber(), "L"));
             handCard.setIcon(null);
         }
-
     }
     // Play a hand card to the discard pile
     public void handToDiscard(int i, int j, String name) {
-        CardButton handCard = hand[i-1];
-        CardButton discardCard = discard[j-1];
+        if (name.equals(chatGraphic.playerName)) {
+            CardButton handCard = hand[i - 1];
+            CardButton discardCard = discard[j - 1];
 
-        String color = handCard.removeColour();
-        int number = handCard.removeNumber();
-        discardCard.setIcon(cardIcons.getIcon(color, number, "L"));
-        discardCard.addCard(color, number);
-        handCard.setIcon(null);
+            String color = handCard.removeColour();
+            int number = handCard.removeNumber();
+            discardCard.setIcon(cardIcons.getIcon(color, number, "L"));
+            discardCard.addCard(color, number);
+            handCard.setIcon(null);
+        }
     }
     // Play the stock card to a build pile
     public void stockToBuild(int i, int j, String name, String color, int number) {

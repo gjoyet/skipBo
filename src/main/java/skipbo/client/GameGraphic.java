@@ -269,22 +269,24 @@ public class GameGraphic extends JButton implements ActionListener {
         //Icon card = new ImageIcon("")
     }
 
+    //TODO: update cards when an enemy  plays a card
+
     // Play a hand card to the discard pile
-    void handToDiscard(int i, int j, String name) {
+    void handToDiscard(int i, int j, String name, String colour, int number) {
         if (name.equals(chatGraphic.playerName)) {
             CardButton handCard = hand[i - 1];
             CardButton discardCard = discard[j - 1];
 
-            String color = handCard.removeColour();
-            int number = handCard.removeNumber();
-            discardCard.setIcon(cardIcons.getIcon(color, number, "L"));
-            discardCard.addCard(color, number);
+            String col = handCard.removeColour();
+            int num = handCard.removeNumber();
+            discardCard.setIcon(cardIcons.getIcon(col, num, "L"));
+            discardCard.addCard(col, num);
             handCard.setIcon(null);
         }
     }
 
     // Play a hand card to build pile
-    void handToBuild(int i, int j, String name) {
+    void handToBuild(int i, int j, String name, String colour, int number) {
         if (name.equals(chatGraphic.playerName)) {
             CardButton handCard = hand[i-1];
             CardButton buildCard = build[j-1];
@@ -295,22 +297,22 @@ public class GameGraphic extends JButton implements ActionListener {
     }
 
     // Play the stock card to a build pile
-    void stockToBuild(int i, int j, String name, String color, int number) {
+    void stockToBuild(int i, int j, String name, String colour1, int number1, String colour2, int number2) {
         if (name.equals(chatGraphic.playerName)) {
             CardButton buildCard = build[j-1];
             buildCard.setIcon(cardIcons.getIcon(stock.removeColour(), stock.removeNumber(), "L"));
-            stock.setIcon(cardIcons.getIcon(color, number, "L"));
-            stock.addCard(color, number);
+            stock.setIcon(cardIcons.getIcon(colour1, number1, "L"));
+            stock.addCard(colour1, number1);
         }
     }
     // Play from discard pile to a build pile
-    void discardToBuild(int i, int j, String name) {
+    void discardToBuild(int i, int j, String name, String colour, int number) {
         if (name.equals(chatGraphic.playerName)) {
             CardButton discardCard = discard[i-1];
             CardButton buildCard = build[j-1];
-            String color = discardCard.removeColour();
-            int number = discardCard.removeNumber();
-            buildCard.setIcon(cardIcons.getIcon(color, number, "L"));
+            String col = discardCard.removeColour();
+            int num = discardCard.removeNumber();
+            buildCard.setIcon(cardIcons.getIcon(col, num, "L"));
             discardCard.setIcon(cardIcons.getIcon(discardCard.getTopColour(), discardCard.getTopNumber(), "L"));
         }
     }
@@ -345,6 +347,16 @@ public class GameGraphic extends JButton implements ActionListener {
             button1Pressed.setBorder(defaultBorder);
             button1Pressed = null;
         }
+    }
+
+    //TODO
+    //returns discard pile button of enemy
+    CardButton getEnemyButton(String name, int index) {
+        return null;
+    }
+    //returns stock pile button of enemy
+    CardButton getEnemyButton(String name) {
+        return null;
     }
 
 }

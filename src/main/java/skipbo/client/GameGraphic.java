@@ -172,7 +172,7 @@ public class GameGraphic extends JButton implements ActionListener {
 
         JLabel bp = new JLabel("Build piles");
         bp.setBounds(620,130,120,15);
-        JLabel dpg = new JLabel("Main stock pile");
+        JLabel dpg = new JLabel("Draw pile");
         dpg.setBounds(490,130,120,15);
         chatGraphic.getContentPane().add(bp);
         chatGraphic.getContentPane().add(dpg);
@@ -204,7 +204,8 @@ public class GameGraphic extends JButton implements ActionListener {
         JButton draw = new JButton();
         draw.setBounds(490, 150, 100, 145);
         chatGraphic.getContentPane().add(draw);
-        draw.setIcon(scaledCard);
+        ImageIcon back = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("Back.png")));
+        draw.setIcon(back);
         setClickable(draw, false);
 
         /*
@@ -296,13 +297,13 @@ public class GameGraphic extends JButton implements ActionListener {
         Image image;
         int i = 0;
         for (JButton handCard : handCards) {
-            card = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(colAndNum[i] + colAndNum[i] + 1)));
+            card = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(colAndNum[i] + colAndNum[++i] + ".png")));
             image = card.getImage().getScaledInstance(78, 120, Image.SCALE_DEFAULT);
             ImageIcon scaledCard = new ImageIcon(image);
             handCard.setIcon(scaledCard);
-            i = i + 2;
+            i++;
         }
-        card = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(colAndNum[i] + colAndNum[i] + 1)));
+        card = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(colAndNum[i] + colAndNum[++i] + ".png")));
         image = card.getImage().getScaledInstance(100, 145, Image.SCALE_DEFAULT);
         ImageIcon scaledCard = new ImageIcon(image);
         stock.setIcon(scaledCard);

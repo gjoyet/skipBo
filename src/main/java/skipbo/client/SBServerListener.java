@@ -37,6 +37,7 @@ class SBServerListener implements Runnable {
             try {
                 input = br.readLine();
                 executeCommand(input);
+                //clientLog.debug(input);
             } catch (IOException e) {
                 clientLog.warn("Error with reading input from server");
             } catch (NoCommandException | NullPointerException | IllegalArgumentException e) {
@@ -59,7 +60,6 @@ class SBServerListener implements Runnable {
                 chatGraphic.printChatMessage(command[2]);
                 break;
             case CHNGE:
-                clientLog.debug("Change message: " + commandLine);
                 chatGraphic.printInfoMessage(command[2]);
                 break;
             case PUTTO:
@@ -88,15 +88,16 @@ class SBServerListener implements Runnable {
     }
 
     void newGame(String[] command) {
-        if (command[1].equals("")) { //change to "New" when server sends correct command
+/*        if (command[1].equals("New")) {
             chatGraphic.setGameGraphic();
-/*        } else if (command[1].equals("Names")) {
+        } else if (command[1].equals("Names")) {
             String[] names = command[2].split("§");
             chatGraphic.getGameGraphic().setOpponentNames(names);
         } else if (command[1].equals("Cards")) {
             String[] cards = command[2].split("§");
-            chatGraphic.getGameGraphic().setInitialCards(cards);*/
-        } else { //delete when server sends correct command
+            chatGraphic.getGameGraphic().setInitialCards(cards);
+        }*/
+        if (chatGraphic.getGameGraphic() == null) { //delete when network protocol command is correct
             chatGraphic.setGameGraphic();
         }
 

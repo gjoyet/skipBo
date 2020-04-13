@@ -269,16 +269,6 @@ public class GameGraphic extends JButton implements ActionListener {
         //Icon card = new ImageIcon("")
     }
 
-    // Play a hand card to build pile
-    public void handToBuild(int i, int j, String name) {
-        if (name.equals(chatGraphic.playerName)) {
-            CardButton handCard = hand[i-1];
-            CardButton buildCard = build[j-1];
-
-            buildCard.setIcon(cardIcons.getIcon(handCard.removeColour(), handCard.removeNumber(), "L"));
-            handCard.setIcon(null);
-        }
-    }
     // Play a hand card to the discard pile
     public void handToDiscard(int i, int j, String name) {
         if (name.equals(chatGraphic.playerName)) {
@@ -292,13 +282,37 @@ public class GameGraphic extends JButton implements ActionListener {
             handCard.setIcon(null);
         }
     }
+
+    // Play a hand card to build pile
+    public void handToBuild(int i, int j, String name) {
+        if (name.equals(chatGraphic.playerName)) {
+            CardButton handCard = hand[i-1];
+            CardButton buildCard = build[j-1];
+
+            buildCard.setIcon(cardIcons.getIcon(handCard.removeColour(), handCard.removeNumber(), "L"));
+            handCard.setIcon(null);
+        }
+    }
+
     // Play the stock card to a build pile
     public void stockToBuild(int i, int j, String name, String color, int number) {
-
+        if (name.equals(chatGraphic.playerName)) {
+            CardButton buildCard = build[j-1];
+            buildCard.setIcon(cardIcons.getIcon(stock.removeColour(), stock.removeNumber(), "L"));
+            stock.setIcon(cardIcons.getIcon(color, number, "L"));
+            stock.addCard(color, number);
+        }
     }
     // Play from discard pile to a build pile
     public void discardToBuild(int i, int j, String name) {
-
+        if (name.equals(chatGraphic.playerName)) {
+            CardButton discardCard = discard[i-1];
+            CardButton buildCard = build[j-1];
+            String color = discardCard.removeColour();
+            int number = discardCard.removeNumber();
+            buildCard.setIcon(cardIcons.getIcon(color, number, "L"));
+            discardCard.setIcon(cardIcons.getIcon(discardCard.getTopColour(), discardCard.getTopNumber(), "L"));
+        }
     }
 
 

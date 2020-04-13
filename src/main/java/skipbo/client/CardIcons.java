@@ -22,6 +22,8 @@ class CardIcons {
         ImageIcon[] gS = new ImageIcon[12];
         ImageIcon[] bS = new ImageIcon[12];
 
+        ImageIcon[] skipbo = new ImageIcon[3];
+
         Image image;
         for (int i = 1; i <= 12; i++) {
             rL[i-1] = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("R" + i + ".png")));
@@ -44,7 +46,13 @@ class CardIcons {
 
         }
 
-        icons = new ImageIcon[][]{rL, rM, rS, gL, gM, gS, bL, bM, bS};
+        skipbo[0] = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("skipbo.png")));
+        image = skipbo[0].getImage().getScaledInstance(widthMedium, heightMedium, Image.SCALE_SMOOTH);
+        skipbo[1] = new ImageIcon(image);
+        image = skipbo[0].getImage().getScaledInstance(widthSmall, heightSmall, Image.SCALE_SMOOTH);
+        skipbo[2] = new ImageIcon(image);
+
+        icons = new ImageIcon[][]{rL, rM, rS, gL, gM, gS, bL, bM, bS, skipbo};
 
     }
 
@@ -68,6 +76,12 @@ class CardIcons {
         } else if (size.equals("S")) {
             i = i + 2;
         }
+
+        if (number == 13) {
+            number = ++i;
+            i = 9;
+        }
+
         return icons[i][number-1];
     }
 }

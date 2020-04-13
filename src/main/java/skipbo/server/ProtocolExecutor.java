@@ -57,6 +57,7 @@ public class ProtocolExecutor {
             sbL.player = new Player(sbL.id, name, sbL);
             SBServer.serverLobby.addPlayer(sbL.player);
         } finally {
+            sbL.pw.println("SETTO§Nickname§" + name);
             servLog.info(name + " logged in.");
             sbL.pw.println("PRINT§Terminal§Welcome to Skip-Bo, " + name + "!");
             sendAllExceptOne("PRINT§Terminal§" + name + " joined the room. Say hi!", sbL);
@@ -79,6 +80,7 @@ public class ProtocolExecutor {
                 } else if (!SBServer.serverLobby.nameIsTaken(name) && SBServer.serverLobby.nameIsValid(name)) {
                     sbL.player.changeName(name);
                     sbL.pw.println("PRINT§Terminal§Name changed to " + name + ".");
+                    sbL.pw.println("CHNGE§Nickname§" + name);
                     servLog.info(formerName + " changed name to " + name + ".");
                     sendAllExceptOne("PRINT§Terminal§" + formerName + " changed name to " + name + ".", sbL);
                 } else if (!SBServer.serverLobby.nameIsValid(name)) {
@@ -100,6 +102,7 @@ public class ProtocolExecutor {
         } catch (NameTakenException nte) {
             String name = nte.findName();
             sbL.player.changeName(name);
+            sbL.pw.println("CHNGE§Nickname§" + name);
             sendAllExceptOne("PRINT§Terminal§" + formerName + " changed name to " + name + ".", sbL);
         }
     }

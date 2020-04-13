@@ -76,8 +76,8 @@ class SBServerListener implements Runnable {
             case NWGME:
                 newGame(command);
                 break;
-            case DISPL:
-                chatGraphic.printCommandList();
+            case CHECK:
+                check(command);
                 break;
             default:
                 throw new NoCommandException();
@@ -114,6 +114,19 @@ class SBServerListener implements Runnable {
         } else if (command[1].equals("Cards")) {
             String[] cards = command[2].split("§");
             chatGraphic.getGameGraphic().setInitialCards(cards);
+        }
+    }
+
+    private void check(String[] command) {
+        if (command[1].equals("HandCards")) {
+            String[] cards = command[2].split("§");
+            String[] colours = new String[5];
+            int[] numbers = new int[5];
+            for (int i = 0, j = 0; i < 5; i++) {
+                colours[i] = cards[j++];
+                numbers[i] = Integer.parseInt(cards[j++]);
+            }
+            chatGraphic.getGameGraphic().updateHandCards(colours, numbers);
         }
     }
 

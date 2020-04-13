@@ -270,7 +270,7 @@ public class GameGraphic extends JButton implements ActionListener {
     }
 
     // Play a hand card to the discard pile
-    public void handToDiscard(int i, int j, String name) {
+    void handToDiscard(int i, int j, String name) {
         if (name.equals(chatGraphic.playerName)) {
             CardButton handCard = hand[i - 1];
             CardButton discardCard = discard[j - 1];
@@ -284,7 +284,7 @@ public class GameGraphic extends JButton implements ActionListener {
     }
 
     // Play a hand card to build pile
-    public void handToBuild(int i, int j, String name) {
+    void handToBuild(int i, int j, String name) {
         if (name.equals(chatGraphic.playerName)) {
             CardButton handCard = hand[i-1];
             CardButton buildCard = build[j-1];
@@ -295,7 +295,7 @@ public class GameGraphic extends JButton implements ActionListener {
     }
 
     // Play the stock card to a build pile
-    public void stockToBuild(int i, int j, String name, String color, int number) {
+    void stockToBuild(int i, int j, String name, String color, int number) {
         if (name.equals(chatGraphic.playerName)) {
             CardButton buildCard = build[j-1];
             buildCard.setIcon(cardIcons.getIcon(stock.removeColour(), stock.removeNumber(), "L"));
@@ -304,7 +304,7 @@ public class GameGraphic extends JButton implements ActionListener {
         }
     }
     // Play from discard pile to a build pile
-    public void discardToBuild(int i, int j, String name) {
+    void discardToBuild(int i, int j, String name) {
         if (name.equals(chatGraphic.playerName)) {
             CardButton discardCard = discard[i-1];
             CardButton buildCard = build[j-1];
@@ -312,6 +312,15 @@ public class GameGraphic extends JButton implements ActionListener {
             int number = discardCard.removeNumber();
             buildCard.setIcon(cardIcons.getIcon(color, number, "L"));
             discardCard.setIcon(cardIcons.getIcon(discardCard.getTopColour(), discardCard.getTopNumber(), "L"));
+        }
+    }
+
+    void updateHandCards(String[] colours, int[] numbers) {
+        for (int i = 0; i < 5; i++) {
+            hand[i].setIcon(cardIcons.getIcon(colours[i], numbers[i], "M"));
+            hand[i].removeColour();
+            hand[i].removeNumber();
+            hand[i].addCard(colours[i], numbers[i]);
         }
     }
 

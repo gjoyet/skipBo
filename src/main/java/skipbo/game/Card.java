@@ -30,5 +30,14 @@ public class Card {
         this.col = col;
     }
 
+    public String getColString() {
+        if(this.col.equals(Color.green)) return "G"; // will be green on GUI
+        if(this.col.equals(Color.yellow)) return "Y"; // will be yellow on GUI
+        if(this.col.equals(Color.orange)) return "B"; // will be blue on GUI
+        if(this.col.equals(Color.red)) return "R"; // will be red on GUI
+        if(this.col.equals(Color.cyan)) return "S"; // special card
+        return "";
+    }
+
 
 }

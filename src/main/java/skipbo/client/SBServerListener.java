@@ -60,8 +60,10 @@ class SBServerListener implements Runnable {
                 chatGraphic.printChatMessage(command[2]);
                 break;
             case CHNGE:
-                chatGraphic.printInfoMessage(command[2]);
+                chatGraphic.changePlayerName(command[2]);
                 break;
+            case SETTO:
+                chatGraphic.changePlayerName(command[2]);
             case PUTTO:
                 putTo(command);
                 //TODO
@@ -89,19 +91,15 @@ class SBServerListener implements Runnable {
     }
 
     void newGame(String[] command) {
-/*        if (command[1].equals("New")) {
+        if (command[1].equals("Names")) {
             chatGraphic.setGameGraphic();
-        } else if (command[1].equals("Names")) {
             String[] names = command[2].split("§");
             chatGraphic.getGameGraphic().setOpponentNames(names);
+
         } else if (command[1].equals("Cards")) {
             String[] cards = command[2].split("§");
             chatGraphic.getGameGraphic().setInitialCards(cards);
-        }*/
-        if (chatGraphic.getGameGraphic() == null) { //delete when network protocol command is correct
-            chatGraphic.setGameGraphic();
         }
-
     }
 
     /**

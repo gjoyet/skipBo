@@ -67,6 +67,8 @@ public class GameGraphic extends JButton implements ActionListener {
     private CardButton e3_stock;
     private CardButton e4_stock;
 
+    private CardIcons cardIcons = new CardIcons( 30, 50, 78, 120);
+
     GameGraphic(ChatGraphic chatGraphic) {
         this.chatGraphic = chatGraphic;
         setButtonModel();
@@ -308,7 +310,7 @@ public class GameGraphic extends JButton implements ActionListener {
     }
 
     void setInitialCards(String[] colAndNum) {
-        JButton[] handCards = new JButton[] {hand_a, hand_b, hand_c, hand_d, hand_e};
+        JButton[] handCards = new JButton[] {hand_a, hand_b, hand_c, hand_d, hand_e}; //Does not work
         ImageIcon card;
         Image image;
         int i = 0;

@@ -32,16 +32,25 @@ public class GameGraphic extends JButton implements ActionListener {
     private JLabel e2;
     private JLabel e3;
 
+    //Own piles
     private JButton hand_a;
     private JButton hand_b;
     private JButton hand_c;
     private JButton hand_d;
     private JButton hand_e;
     private JButton stock;
+    private JButton discard_a;
+    private JButton discard_b;
+    private JButton discard_c;
+    private JButton discard_d;
+
+    //Game piles
     private JButton build_a;
     private JButton build_b;
     private JButton build_c;
     private JButton build_d;
+
+    //Opponent discard piles
     private JButton e1_a;
     private JButton e1_b;
     private JButton e1_c;
@@ -54,6 +63,12 @@ public class GameGraphic extends JButton implements ActionListener {
     private JButton e3_b;
     private JButton e3_c;
     private JButton e3_d;
+
+    //Opponent stock piles
+    private JButton e1_stock;
+    private JButton e2_stock;
+    private JButton e3_stock;
+    private JButton e4_stock;
 
     GameGraphic(ChatGraphic chatGraphic) {
         this.chatGraphic = chatGraphic;
@@ -110,13 +125,17 @@ public class GameGraphic extends JButton implements ActionListener {
         Image cardSc = card.getImage().getScaledInstance(100, 145, Image.SCALE_DEFAULT);
         ImageIcon scaledCard = new ImageIcon(cardSc);
 
-        JButton discard_A = new JButton(scaledCard);
+        discard_a = new JButton(scaledCard);
+        JButton discard_A = discard_a;
         discard_A.setBounds(620, 400, 100, 145);
-        JButton discard_B = new JButton();
+        discard_b = new JButton();
+        JButton discard_B = discard_b;
         discard_B.setBounds(730, 400, 100, 145);
-        JButton discard_C = new JButton();
+        discard_c = new JButton();
+        JButton discard_C = discard_c;
         discard_C.setBounds(840, 400, 100, 145);
-        JButton discard_D = new JButton();
+        discard_d = new JButton();
+        JButton discard_D = discard_d;
         discard_D.setBounds(950, 400, 100, 145);
         chatGraphic.getContentPane().add(discard_A);
         chatGraphic.getContentPane().add(discard_B);

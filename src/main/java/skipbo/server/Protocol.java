@@ -20,6 +20,8 @@ public enum Protocol {
     NWGME,
     /** Plays a card with index i from Pile fr to Pile to (i, fr and to given as arguments). */
     PUTTO,
+    /** Gives the client information about the game state (e.g. what its handcards are in that moment). */
+    CHECK,
     /** Displays information on chat window. */
     DISPL;
 

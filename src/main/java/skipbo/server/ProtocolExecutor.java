@@ -222,62 +222,83 @@ public class ProtocolExecutor {
      * Method for command "PUTTO". Triggers needed methods of the Game class.
      */
     void putTo() throws NoCommandException {
-        if(input[1].equals("Card")) {
-            servLog.debug("Got into putTo method with input: " + input[2] + ".");
-            if (!sbL.getGameLobby().get(sbL.player.getGame().getPlayersTurn()).equals(sbL.player)) {
-                sbL.getPW().println("PRINT§Terminal§Wait until it's your turn, you impatient little rascal!");
-                return;
-            }
-            String[] arguments = input[2].split("§");
-            if (arguments.length < 4) {
-                sbL.getPW().println("Missing an argument for command 'play'.");
-                return;
-            }
-            String pF = arguments[0]; // pile from
-            String pT = arguments[2]; // pile to
-            int iF = Integer.parseInt(arguments[1]) - 1; // index from
-            int iT = Integer.parseInt(arguments[3]) - 1; // index to
-            if ((pF.equals("H") && (iF < 0 || iF > 4)) || (pF.equals("S") && iF != 0) ||
-                    (pF.equals("D") && (iF < 0 || iF > 3)) || iT < 0 || iT > 3) {
-                sbL.getPW().println("PRINT§Terminal§Invalid indexes in this move.");
-                return;
-            }
-            switch (pF + pT) {
-                case "HB":
-                    if (sbL.player.getGame().playToMiddle(sbL.player, iF, iT)) {
-                        sendAll("PUTTO§Response§" + input[2] + "§" + sbL.player.getName(), sbL);
-                    } else {
-                        sbL.getPW().println("Error"); // TODO: Add error message
-                    }
+        try {
+            if (input[1].equals("Card")) {
+                servLog.debug("Got into putTo method with input: " + input[2] + ".");
+                if (!sbL.getGameLobby().get(sbL.player.getGame().getPlayersTurn()).equals(sbL.player)) {
+                    sbL.getPW().println("PRINT§Terminal§Wait until it's your turn, you impatient little rascal!");
+                    return;
+                }
+                String[] arguments = input[2].split("§");
+                if (arguments.length < 4) {
+                    sbL.getPW().println("Missing an argument for command 'play'.");
+                    return;
+                }
+                String pF = arguments[0]; // pile from
+                String pT = arguments[2]; // pile to
+                int iF = Integer.parseInt(arguments[1]) - 1; // index from
+                int iT = Integer.parseInt(arguments[3]) - 1; // index to
+                if ((pF.equals("H") && (iF < 0 || iF > 4)) || (pF.equals("S") && iF != 0) ||
+                        (pF.equals("D") && (iF < 0 || iF > 3)) || iT < 0 || iT > 3) {
+                    sbL.getPW().println("PRINT§Terminal§Invalid indexes in this move.");
+                    return;
+                }
+                switch (pF + pT) {
+                    case "HB":
+                        if (sbL.player.getGame().playToMiddle(sbL.player, iF, iT)) {
+                            sendAll("PUTTO§Response§" + input[2] + "§" + sbL.player.getName(), sbL);
+                        } else {
+                            sbL.getPW().println("Error"); // TODO: Add error message
+                        }
+                        break;
+                    case "SB":
+                        Card stockPileTopCard = sbL.player.getGame().playFromStockToMiddle(sbL.player, iT);
+                        if (stockPileTopCard != null) {
+                            sbL.getPW().println("PUTTO§StockResponse§" + input[2] + "§" + sbL.player.getName()
+                                    + "§" + stockPileTopCard.getColString() + "§" + stockPileTopCard.number);
+                            sendAllExceptOne("PUTTO§Response§" + input[2], sbL);
+                        } else {
+                            sbL.getPW().println("Error"); // TODO: Add error message
+                        }
+                        break;
+                    case "DB":
+                        if (sbL.player.getGame().playFromDiscardToMiddle(sbL.player, iF, iT)) {
+                            sendAll("PUTTO§Response§" + input[2] + "§" + sbL.player.getName(), sbL);
+                        } else {
+                            sbL.getPW().println("Error"); // TODO: Add error message
+                        }
+                        break;
+                    case "HD":
+                        if (sbL.player.getGame().playToDiscard(sbL.player, iF, iT)) {
+                            sendAll("PUTTO§Response§" + input[2] + "§" + sbL.player.getName(), sbL);
+                        } else {
+                            sbL.getPW().println("Error"); // TODO: Add error message
+                        }
+                        break;
+                    default:
+                        sbL.getPW().println("PRINT§Terminal§This move is not allowed.");
+                }
+            } else throw new NoCommandException(input[0], input[1]);
+        } finally {}
+    }
+
+    void check() throws NoCommandException {
+        try {
+            switch (input[1]) {
+                case "HandCards":
+                    String cards = sbL.player.getGame().getPiles().getCardsForProtocol(sbL.player);
+                    cards = cards.substring(0, cards.length()-3);
+                    servLog.debug("Sending CHECK Handcards command with cards = " + cards);
+                    sbL.getPW().println("CHECK§Handcards§" + cards);
                     break;
-                case "SB":
-                    Card stockPileTopCard = sbL.player.getGame().playFromStockToMiddle(sbL.player, iT);
-                    if (stockPileTopCard != null) {
-                        sbL.getPW().println("PUTTO§StockResponse§" + input[2] + "§" + sbL.player.getName()
-                                + "§" + stockPileTopCard.getColString() + "§" + stockPileTopCard.number);
-                        sendAllExceptOne("PUTTO§Response§" + input[2], sbL);
-                    } else {
-                        sbL.getPW().println("Error"); // TODO: Add error message
-                    }
-                    break;
-                case "DB":
-                    if (sbL.player.getGame().playFromDiscardToMiddle(sbL.player, iF, iT)) {
-                        sendAll("PUTTO§Response§" + input[2] + "§" + sbL.player.getName(), sbL);
-                    } else {
-                        sbL.getPW().println("Error"); // TODO: Add error message
-                    }
-                    break;
-                case "HD":
-                    if (sbL.player.getGame().playToDiscard(sbL.player, iF, iT)) {
-                        sendAll("PUTTO§Response§" + input[2] + "§" + sbL.player.getName(), sbL);
-                    } else {
-                        sbL.getPW().println("Error"); // TODO: Add error message
-                    }
-                    break;
-                default:
-                    sbL.getPW().println("PRINT§Terminal§This move is not allowed.");
+                case "StockCard":
+                    Card stockC = sbL.player.getStockPile().get(sbL.player.getStockPile().size()-1);
+                    servLog.debug("Sending CHECK Stockcard command with arguments: "
+                                                                + stockC.getColString() + "§" + stockC.number);
+                    sbL.getPW().println("CHECK§Stockcard§" + stockC.getColString() + "§" + stockC.number);
+                default: throw new NoCommandException(input[0], input[1]);
             }
-        } else throw new NoCommandException(input[0], input[1]);
+        } finally {}
     }
 
     /**

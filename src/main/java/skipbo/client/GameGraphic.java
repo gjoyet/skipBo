@@ -35,13 +35,16 @@ public class GameGraphic extends JButton implements ActionListener {
     private CardButton hand_c;
     private CardButton hand_d;
     private CardButton hand_e;
+    private CardButton[] hand = new CardButton[5];
     private CardButton stock;
+    private CardButton[] discard = new CardButton[4];
     private CardButton discard_a;
     private CardButton discard_b;
     private CardButton discard_c;
     private CardButton discard_d;
 
     //Game piles
+    private CardButton[] build = new CardButton[4];
     private CardButton build_a;
     private CardButton build_b;
     private CardButton build_c;
@@ -119,8 +122,29 @@ public class GameGraphic extends JButton implements ActionListener {
         chatGraphic.getContentPane().add(hp);
         chatGraphic.getContentPane().add(sp);
 
-        // Discard Piles
+        // Discard and build Piles
 
+        for (int i = 0; i < discard.length; i++) {
+            discard[i] = new CardButton();
+            build[i] = new CardButton();
+        }
+        discard[0].setBounds(620, 400, 100, 145);
+        discard[1].setBounds(730, 400, 100, 145);
+        discard[2].setBounds(840, 400, 100, 145);
+        discard[3].setBounds(950, 400, 100, 145);
+        build[0].setBounds(620, 150, 100, 145);
+        build[1].setBounds(730, 150, 100, 145);
+        build[2].setBounds(840, 150, 100, 145);
+        build[3].setBounds(950, 150, 100, 145);
+        for (int i = 0, j = 1; i < discard.length; i++, j++) {
+            chatGraphic.getContentPane().add(discard[i]);
+            chatGraphic.getContentPane().add(build[i]);
+            discard[i].addActionListener(this);
+            build[i].addActionListener(this);
+            discard[i].setName(" D " + j);
+            build[i].setName(" B " + j);
+        }
+/*
         discard_a = new CardButton();
         JButton discard_A = discard_a;
         discard_A.setBounds(620, 400, 100, 145);
@@ -144,10 +168,27 @@ public class GameGraphic extends JButton implements ActionListener {
         discard_A.addActionListener(this);
         discard_B.addActionListener(this);
         discard_C.addActionListener(this);
-        discard_D.addActionListener(this);
+        discard_D.addActionListener(this);*/
+
 
         // hand piles
-        hand_a = new CardButton();
+        for (int i = 0; i < hand.length; i++) {
+            hand[i] = new CardButton();
+        }
+
+        hand[0].setBounds(620, 570, 78, 120);
+        hand[1].setBounds(708, 570, 78, 120);
+        hand[2].setBounds(796, 570, 78, 120);
+        hand[3].setBounds(884, 570, 78, 120);
+        hand[4].setBounds(972, 570, 78, 120);
+
+        for (int i = 0; i < hand.length;) {
+            chatGraphic.getContentPane().add(hand[i]);
+            hand[i].addActionListener(this);
+            hand[i].setName(" H " + ++i);
+        }
+
+/*        hand_a = new CardButton();
         hand_a.setBounds(620, 570, 78, 120);
         hand_b = new CardButton();
         hand_b.setBounds(708, 570, 78, 120);
@@ -172,7 +213,7 @@ public class GameGraphic extends JButton implements ActionListener {
         hand_b.addActionListener(this);
         hand_c.addActionListener(this);
         hand_d.addActionListener(this);
-        hand_e.addActionListener(this);
+        hand_e.addActionListener(this);*/
 
         //stock pile
         stock = new CardButton();
@@ -192,7 +233,7 @@ public class GameGraphic extends JButton implements ActionListener {
         chatGraphic.getContentPane().add(bp);
         chatGraphic.getContentPane().add(dpg);
 
-        // Build piles
+/*        // Build piles
         build_a = new CardButton();
         build_a.setBounds(620, 150, 100, 145);
         build_b = new CardButton();
@@ -213,7 +254,7 @@ public class GameGraphic extends JButton implements ActionListener {
         build_a.addActionListener(this);
         build_b.addActionListener(this);
         build_c.addActionListener(this);
-        build_d.addActionListener(this);
+        build_d.addActionListener(this);*/
 
         // draw piles
         JButton draw = new JButton();
@@ -319,12 +360,25 @@ public class GameGraphic extends JButton implements ActionListener {
     }
 
     void setInitialCards(String[] colAndNum) {
-        hand_a.setIcon(cardIcons.getIcon(colAndNum[0], Integer.parseInt(colAndNum[1]), "M"));
+
+        for (int i = 0, j = 0; i < hand.length; i++) {
+            hand[i].setIcon(cardIcons.getIcon(colAndNum[j], Integer.parseInt(colAndNum[j+1]), "M"));
+            hand[i].addCard(colAndNum[j++], Integer.parseInt(colAndNum[j++]));
+        }
+
+/*        hand_a.setIcon(cardIcons.getIcon(colAndNum[0], Integer.parseInt(colAndNum[1]), "M"));
         hand_b.setIcon(cardIcons.getIcon(colAndNum[2], Integer.parseInt(colAndNum[3]), "M"));
         hand_c.setIcon(cardIcons.getIcon(colAndNum[4], Integer.parseInt(colAndNum[5]), "M"));
         hand_d.setIcon(cardIcons.getIcon(colAndNum[6], Integer.parseInt(colAndNum[7]), "M"));
-        hand_e.setIcon(cardIcons.getIcon(colAndNum[8], Integer.parseInt(colAndNum[9]), "M"));
+        hand_e.setIcon(cardIcons.getIcon(colAndNum[8], Integer.parseInt(colAndNum[9]), "M"));*/
         stock.setIcon(cardIcons.getIcon(colAndNum[10], Integer.parseInt(colAndNum[11]), "L"));
+/*
+        hand_a.addCard(colAndNum[0], Integer.parseInt(colAndNum[1]));
+        hand_b.addCard(colAndNum[2], Integer.parseInt(colAndNum[3]));
+        hand_c.addCard(colAndNum[4], Integer.parseInt(colAndNum[5]));
+        hand_d.addCard(colAndNum[6], Integer.parseInt(colAndNum[7]));
+        hand_e.addCard(colAndNum[8], Integer.parseInt(colAndNum[9]));*/
+        stock.addCard(colAndNum[10], Integer.parseInt(colAndNum[11]));
     }
 
     private void setClickable(JButton button, boolean b) {
@@ -353,19 +407,33 @@ public class GameGraphic extends JButton implements ActionListener {
     }
 
     // Play a hand card to build pile
-    public void handToBuild(){
+    public void handToBuild(int i, int j, String name) {
+        if (name.equals(chatGraphic.playerName)) {
+            CardButton handCard = hand[i-1];
+            CardButton buildCard = build[j-1];
+
+            buildCard.setIcon(cardIcons.getIcon(handCard.removeColour(), handCard.removeNumber(), "L"));
+            handCard.setIcon(null);
+        }
 
     }
     // Play a hand card to the discard pile
-    public void handToDiscard() {
+    public void handToDiscard(int i, int j, String name) {
+        CardButton handCard = hand[i-1];
+        CardButton discardCard = discard[j-1];
 
+        String color = handCard.removeColour();
+        int number = handCard.removeNumber();
+        discardCard.setIcon(cardIcons.getIcon(color, number, "L"));
+        discardCard.addCard(color, number);
+        handCard.setIcon(null);
     }
     // Play the stock card to a build pile
-    public void stockToBuild(){
+    public void stockToBuild(int i, int j, String name, String color, int number) {
 
     }
     // Play from discard pile to a build pile
-    public void discardToBuild(){
+    public void discardToBuild(int i, int j, String name) {
 
     }
 
@@ -377,7 +445,6 @@ public class GameGraphic extends JButton implements ActionListener {
             button1Pressed = (CardButton) actionEvent.getSource();
             button1Pressed.setBorder(clickedBorder);
         } else if (button1Pressed == actionEvent.getSource()) {
-            setClickable(button1Pressed, true);
             button1Pressed.setBorder(defaultBorder);
             button1Pressed = null;
         } else {
@@ -388,7 +455,6 @@ public class GameGraphic extends JButton implements ActionListener {
             } catch (IndexOutOfBoundsException | NotACommandException e) {
                 chatGraphic.printErrorMessage(e.getMessage());
             }
-            setClickable(button1Pressed, true);
             button1Pressed.setBorder(defaultBorder);
             button1Pressed = null;
         }

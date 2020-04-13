@@ -79,17 +79,7 @@ public class GameGraphic extends JButton implements ActionListener {
 
     void setGameGraphic() {
 
-        // Logo upper left corner
-        ImageIcon logoI = new ImageIcon(getClass().getClassLoader().getResource("logo.png"));
-        Image image = logoI.getImage().getScaledInstance(250, 70, Image.SCALE_DEFAULT);
-        ImageIcon scaledIcon = new ImageIcon(image);
-        JTextPane logoJ = new JTextPane();
-        logoJ.setBorder(null);
-        logoJ.setEditable(false);
-        logoJ.setBounds(80,30, scaledIcon.getIconWidth(), scaledIcon.getIconHeight());
-        logoJ.setPreferredSize(new Dimension(scaledIcon.getIconWidth(), scaledIcon.getIconHeight()));
-        logoJ.insertIcon(scaledIcon);
-        chatGraphic.getContentPane().add(logoJ);
+
 
         chatGraphic.setTitle("Skip-Bros GAME");
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();

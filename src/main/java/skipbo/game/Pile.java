@@ -55,11 +55,11 @@ public class Pile {
         int colourCount = 0;
 
         ArrayList<Color> colours = new ArrayList<Color>();     // Save five different colours
-        colours.add(Color.yellow);      // Color index Nr. 0
-        colours.add(Color.orange);      // Color index Nr. 1
-        colours.add(Color.green);       // Color index Nr. 2
-        colours.add(Color.red);         // Color index Nr. 3
-        colours.add(Color.cyan);        // Color index Nr. 4
+        //colours.add(Color.yellow);
+        colours.add(Color.orange);      // Color index Nr. 0
+        colours.add(Color.green);       // Color index Nr. 1
+        colours.add(Color.red);         // Color index Nr. 2
+        colours.add(Color.cyan);        // Color index Nr. 3
 
         for (int j = 0; j < 12; j++) {        // Add Normal Cards (144 pcs.)
             for (int i = 0; i < 12; i++) {
@@ -67,10 +67,10 @@ public class Pile {
                 this.drawPile.add(card);
             }
             colourCount++;
-            if (colourCount == 3) colourCount = 0;
+            if (colourCount == 2) colourCount = 0;
         }
         for (int l = 0; l < 18; l++) {       // Add Special Cards (18 pcs.)
-            Card card = new Card(colours.get(4));
+            Card card = new Card(colours.get(3));
             this.drawPile.add(card);
         }
 
@@ -123,9 +123,9 @@ public class Pile {
         for (int i = 0; i < 4; i++) {
             ArrayList<Card> specBuildPile = buildPiles.get(i);
             if (specBuildPile.isEmpty()) {
-                str.append("Build pile ").append(i).append(" is : [ ]").append("\t");
+                str.append("Build pile ").append(i).append(" is : [ ]").append("\n");
             } else {
-                str.append("Build pile ").append(i).append(" is: [").append(specBuildPile.get(specBuildPile.size() - 1).number).append("]").append("\t").append("\t");
+                str.append("Build pile ").append(i).append(" is: [").append(specBuildPile.get(specBuildPile.size() - 1).number).append("]").append("\n");
             }
         }
         return str.toString();

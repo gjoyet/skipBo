@@ -20,7 +20,7 @@ public class GameGraphic extends JButton implements ActionListener {
     private Game game;
     private DefaultButtonModel notClickableModel;
     private DefaultButtonModel defaultButtonModel = new DefaultButtonModel();
-    private JButton button1Pressed = null;
+    private CardButton button1Pressed = null;
     private Border defaultBorder = UIManager.getBorder("Button.border");
     private Border clickedBorder = BorderFactory.createLineBorder(Color.BLACK,2);
 
@@ -38,34 +38,34 @@ public class GameGraphic extends JButton implements ActionListener {
     private CardButton stock;
     private CardButton discard_a;
     private CardButton discard_b;
-    private JButton discard_c;
-    private JButton discard_d;
+    private CardButton discard_c;
+    private CardButton discard_d;
 
     //Game piles
-    private JButton build_a;
-    private JButton build_b;
-    private JButton build_c;
-    private JButton build_d;
+    private CardButton build_a;
+    private CardButton build_b;
+    private CardButton build_c;
+    private CardButton build_d;
 
     //Opponent discard piles
-    private JButton e1_a;
-    private JButton e1_b;
-    private JButton e1_c;
-    private JButton e1_d;
-    private JButton e2_a;
-    private JButton e2_b;
-    private JButton e2_c;
-    private JButton e2_d;
-    private JButton e3_a;
-    private JButton e3_b;
-    private JButton e3_c;
-    private JButton e3_d;
+    private CardButton e1_a;
+    private CardButton e1_b;
+    private CardButton e1_c;
+    private CardButton e1_d;
+    private CardButton e2_a;
+    private CardButton e2_b;
+    private CardButton e2_c;
+    private CardButton e2_d;
+    private CardButton e3_a;
+    private CardButton e3_b;
+    private CardButton e3_c;
+    private CardButton e3_d;
 
     //Opponent stock piles
-    private JButton e1_stock;
-    private JButton e2_stock;
-    private JButton e3_stock;
-    private JButton e4_stock;
+    private CardButton e1_stock;
+    private CardButton e2_stock;
+    private CardButton e3_stock;
+    private CardButton e4_stock;
 
     GameGraphic(ChatGraphic chatGraphic) {
         this.chatGraphic = chatGraphic;
@@ -122,16 +122,16 @@ public class GameGraphic extends JButton implements ActionListener {
         Image cardSc = card.getImage().getScaledInstance(100, 145, Image.SCALE_DEFAULT);
         ImageIcon scaledCard = new ImageIcon(cardSc);
 
-        discard_a = new JButton(scaledCard);
+        discard_a = new CardButton(scaledCard);
         JButton discard_A = discard_a;
         discard_A.setBounds(620, 400, 100, 145);
-        discard_b = new JButton();
+        discard_b = new CardButton();
         JButton discard_B = discard_b;
         discard_B.setBounds(730, 400, 100, 145);
-        discard_c = new JButton();
+        discard_c = new CardButton();
         JButton discard_C = discard_c;
         discard_C.setBounds(840, 400, 100, 145);
-        discard_d = new JButton();
+        discard_d = new CardButton();
         JButton discard_D = discard_d;
         discard_D.setBounds(950, 400, 100, 145);
         chatGraphic.getContentPane().add(discard_A);
@@ -150,13 +150,13 @@ public class GameGraphic extends JButton implements ActionListener {
         // hand piles
         hand_a = new CardButton();
         hand_a.setBounds(620, 570, 78, 120);
-        hand_b = new JButton();
+        hand_b = new CardButton();
         hand_b.setBounds(708, 570, 78, 120);
-        hand_c = new JButton();
+        hand_c = new CardButton();
         hand_c.setBounds(796, 570, 78, 120);
-        hand_d = new JButton();
+        hand_d = new CardButton();
         hand_d.setBounds(884, 570, 78, 120);
-        hand_e = new JButton();
+        hand_e = new CardButton();
         hand_e.setBounds(972, 570, 78, 120);
 
         chatGraphic.getContentPane().add(hand_a);
@@ -176,7 +176,7 @@ public class GameGraphic extends JButton implements ActionListener {
         hand_e.addActionListener(this);
 
         //stock pile
-        stock = new JButton();
+        stock = new CardButton();
         stock.setBounds(490, 400, 100, 145);
         chatGraphic.getContentPane().add(stock);
         stock.setName(" S 1");
@@ -194,13 +194,13 @@ public class GameGraphic extends JButton implements ActionListener {
         chatGraphic.getContentPane().add(dpg);
 
         // Build piles
-        build_a = new JButton();
+        build_a = new CardButton();
         build_a.setBounds(620, 150, 100, 145);
-        build_b = new JButton();
+        build_b = new CardButton();
         build_b.setBounds(730, 150, 100, 145);
-        build_c = new JButton();
+        build_c = new CardButton();
         build_c.setBounds(840, 150, 100, 145);
-        build_d = new JButton();
+        build_d = new CardButton();
         build_d.setBounds(950, 150, 100, 145);
 
         chatGraphic.getContentPane().add(build_a);
@@ -233,13 +233,13 @@ public class GameGraphic extends JButton implements ActionListener {
         e1.setBounds(490,30,120,15);
         chatGraphic.getContentPane().add(e1);
 
-        e1_a = new JButton();
+        e1_a = new CardButton();
         e1_a.setBounds(490, 50, 30, 50);
-        e1_b = new JButton();
+        e1_b = new CardButton();
         e1_b.setBounds(525, 50, 30, 50);
-        e1_c = new JButton();
+        e1_c = new CardButton();
         e1_c.setBounds(560, 50, 30, 50);
-        e1_d = new JButton();
+        e1_d = new CardButton();
         e1_d.setBounds(595, 50, 30, 50);
 
         chatGraphic.getContentPane().add(e1_a);
@@ -256,13 +256,13 @@ public class GameGraphic extends JButton implements ActionListener {
         e2.setBounds(650,30,120,15);
         chatGraphic.getContentPane().add(e2);
 
-        e2_a = new JButton();
+        e2_a = new CardButton();
         e2_a.setBounds(650, 50, 30, 50);
-        e2_b = new JButton();
+        e2_b = new CardButton();
         e2_b.setBounds(685, 50, 30, 50);
-        e2_c = new JButton();
+        e2_c = new CardButton();
         e2_c.setBounds(720, 50, 30, 50);
-        e2_d = new JButton();
+        e2_d = new CardButton();
         e2_d.setBounds(755, 50, 30, 50);
 
         chatGraphic.getContentPane().add(e2_a);
@@ -279,13 +279,13 @@ public class GameGraphic extends JButton implements ActionListener {
         e3.setBounds(810,30,120,15);
         chatGraphic.getContentPane().add(e3);
 
-        e3_a = new JButton();
+        e3_a = new CardButton();
         e3_a.setBounds(810, 50, 30, 50);
-        e3_b = new JButton();
+        e3_b = new CardButton();
         e3_b.setBounds(845, 50, 30, 50);
-        e3_c = new JButton();
+        e3_c = new CardButton();
         e3_c.setBounds(880, 50, 30, 50);
-        e3_d = new JButton();
+        e3_d = new CardButton();
         e3_d.setBounds(915, 50, 30, 50);
 
         chatGraphic.getContentPane().add(e3_a);
@@ -372,7 +372,7 @@ public class GameGraphic extends JButton implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
 
         if (button1Pressed == null) {
-            button1Pressed = (JButton) actionEvent.getSource();
+            button1Pressed = (CardButton) actionEvent.getSource();
             button1Pressed.setBorder(clickedBorder);
         } else if (button1Pressed == actionEvent.getSource()) {
             setClickable(button1Pressed, true);

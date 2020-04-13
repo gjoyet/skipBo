@@ -65,7 +65,6 @@ class SBServerListener implements Runnable {
                 break;
             case PUTTO:
                 putTo(command);
-                //TODO
                 break;
             case LGOUT:
                 logOut();

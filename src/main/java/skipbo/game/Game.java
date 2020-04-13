@@ -278,10 +278,12 @@ public class Game implements Runnable {
         if(handCardIndex < 0 || handCardIndex >= currentPlayer.getHandCards().size()){
             currentPlayer.getSBL().getPW().println("PRINT§Terminal§Hand Card Index is invalid!");
             servLog.debug("Invalid index");
+            return false;
         }
         if(discardPileIndex < 0 || discardPileIndex > 3){
             currentPlayer.getSBL().getPW().println("PRINT§Terminal§Discard deck index is invalid!");
             servLog.debug("Invalid discard deck index");
+            return false;
         }
 
         servLog.debug("Entered playToDiscard.");
@@ -326,6 +328,7 @@ public class Game implements Runnable {
         if (buildPileIndex < 0 || buildPileIndex > 3){      //if bp index is a false index that cannot be true
             currentPlayer.getSBL().getPW().println("PRINT§Terminal§Build Deck Index is invalid!");
             servLog.debug("Invalid build deck index");
+            return null;
         }
         servLog.debug("Entered playFromStockToMiddle.");
         ArrayList<Card> stockPile = currentPlayer.getStockPile();
@@ -417,17 +420,25 @@ public class Game implements Runnable {
      */
 
     public boolean playFromDiscardToMiddle(Player currentPlayer, int discardPileIndex, int buildPileIndex) {
+        servLog.debug("Entered playFromDiscardToMiddle.");
+        ArrayList<Card> discardPile = currentPlayer.getDiscardPile().get(discardPileIndex);
 
         if(buildPileIndex < 0 || buildPileIndex > 3){       //if bp index is a false index that cannot be true
             currentPlayer.getSBL().getPW().println("PRINT§Terminal§Build Deck Index is invalid!");
             servLog.debug("Invalid build deck index");
+            return false;
         }
         if(discardPileIndex < 0 || discardPileIndex > 3){   //If Dp index is false
             currentPlayer.getSBL().getPW().println("PRINT§Terminal§Discard deck index is invalid!");
             servLog.debug("Invalid discard deck index");
+            return false;
         }
-        servLog.debug("Entered playFromDiscardToMiddle.");
-        ArrayList<Card> discardPile = currentPlayer.getDiscardPile().get(discardPileIndex);
+
+        if(discardPile.isEmpty()){
+            currentPlayer.getSBL().getPW().println("PRINT§Terminal§That discard pile is empty! Choose another.");
+            servLog.debug("Played from an empty discard deck");
+            return false;
+        }
         ArrayList<Card> specBuildPile = piles.buildPiles.get(buildPileIndex);
 
         Card card = discardPile.get(discardPile.size() - 1);

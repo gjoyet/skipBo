@@ -249,8 +249,7 @@ public class ProtocolExecutor {
                 Card stockPileTopCard = sbL.player.getGame().playFromStockToMiddle(sbL.player, iT);
                 if(stockPileTopCard != null) {
                     sbL.getPW().println("PUTTO§StockResponse§" + input[2]  + "§" + sbL.player.getName()
-                                            + "§" + stockPileTopCard.col + "§" + stockPileTopCard.number);
-                    // TODO: Tell client what the new stockpile top card is
+                                            + "§" + stockPileTopCard.getColString() + "§" + stockPileTopCard.number);
                     sendAllExceptOne("PUTTO§Response§" + input[2], sbL);
                 } else {
                     sbL.getPW().println("Error"); // TODO: Add error message

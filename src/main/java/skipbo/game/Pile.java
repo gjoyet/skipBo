@@ -9,11 +9,11 @@ public class Pile {
     public ArrayList<Card> drawPile;        // 1 draw pile
     public ArrayList<Card> stockPile;
     public ArrayList<Card> handCards;
-    public ArrayList<ArrayList<Card>> buildPiles;// ArrayList for the 4 build decks in the middle
+    public ArrayList<ArrayList<Card>> buildPiles;   // ArrayList for the 4 build decks in the middle
     public ArrayList<ArrayList<Card>> discardPiles;
-    public ArrayList<Card> emptyPile;
+    public ArrayList<Card> emptyPile;   //pile for the reshuffle set of cards
     public Player player;
-    public int id;
+    int id;
 
     /**
      * The Pile-constructor is overloaded because we have different
@@ -100,7 +100,7 @@ public class Pile {
     }
 
     /**
-     * @return: A String containing all handcards of a player, formatted for network protocol.
+     * @return A String containing all handcards of a player, formatted for network protocol.
      */
     public String getCardsForProtocol(Player player) {
         StringBuilder cards = new StringBuilder();
@@ -123,9 +123,9 @@ public class Pile {
         for (int i = 0; i < 4; i++) {
             ArrayList<Card> specBuildPile = buildPiles.get(i);
             if (specBuildPile.isEmpty()) {
-                str.append("Build pile " + i + " is : [ ]" + "\t");
+                str.append("Build pile ").append(i).append(" is : [ ]").append("\t");
             } else {
-                str.append("Build pile " + i + " is: [" + specBuildPile.get(specBuildPile.size() - 1).number + "]" + "\t" + "\t");
+                str.append("Build pile ").append(i).append(" is: [").append(specBuildPile.get(specBuildPile.size() - 1).number).append("]").append("\t").append("\t");
             }
         }
         return str.toString();
@@ -147,7 +147,8 @@ public class Pile {
                 printArray[j] = specDiscardPile.get(j).number;
             }
             int t = i + 1;
-            str.append("Discard Pile " + t + " of " + player.getName() + " is: " + Arrays.toString(printArray) + "\t");
+            str.append("Discard Pile ").append(t).append(" of ").append(player.getName()).append(" is: ")
+                    .append(Arrays.toString(printArray)).append("\t");
         }
         return str.toString();
     }

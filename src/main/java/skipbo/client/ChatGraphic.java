@@ -3,13 +3,16 @@ package skipbo.client;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import static skipbo.client.SBClient.clientLog;
 
 /**
  * GUI for Skip-Bo chat
  */
-public class ChatGraphic extends JFrame implements KeyListener { //ActionListener
+public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
     private SBClientListener clientListener;
     JPanel contentPane;
@@ -17,6 +20,14 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
     private JTextArea inputMes;
     JScrollPane chatScrollPane;
     private JScrollPane inputScrollPane;
+    private JButton readyB;
+    private JButton startB;
+    private JButton infoB;
+    private JButton gamesB;
+    private JButton whosOnB;
+    private JButton leaveB;
+    private GameGraphic gameGraphic;
+
 
     //test method
     public static void main(String[] args) {
@@ -84,29 +95,47 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
         logoJ.insertIcon(scaledIcon);
         contentPane.add(logoJ);
 
-        JButton readyB = new JButton("Ready");
+        readyB = new JButton("Ready");
         readyB.setBounds(80, 120, 110,20);
         contentPane.add(readyB);
+        readyB.addActionListener(this);
 
-        JButton startB = new JButton("Start Game");
+        startB = new JButton("Start Game");
         startB.setBounds(200, 120, 110,20);
         contentPane.add(startB);
+        startB.addActionListener(this);
 
-        JButton infoB = new JButton("Info");
+        infoB = new JButton("Info");
         infoB.setBounds(80, 155, 110,20);
         contentPane.add(infoB);
+        infoB.addActionListener(this);
+
+        gamesB = new JButton("Ranking");
+        gamesB.setBounds(200, 155, 110,20);
+        contentPane.add(gamesB);
+        gamesB.addActionListener(this);
+
+        whosOnB = new JButton("Who`s on?");
+        whosOnB.setBounds(80, 190, 110,20);
+        contentPane.add(whosOnB);
+        whosOnB.addActionListener(this);
+
+        leaveB = new JButton("leave");
+        leaveB.setBounds(200, 190, 110,20);
+        contentPane.add(leaveB);
+        leaveB.addActionListener(this);
 
 
 
         //Output textfield
         chat = new JTextArea(); //TODO: change to JEditorPane or JTextPane to print in colour
-        chat.setBounds(80, 205,250, 400);
+        chat.setBounds(80, 225,250, 380);
         chat.setLineWrap(true);
         chat.setWrapStyleWord(true);
         chat.setEditable(false);
 
         chatScrollPane = new JScrollPane(chat);
-        chatScrollPane.setBounds(80, 205 ,250, 400 );
+        chatScrollPane.setBounds(80, 225 ,250, 380 );
         chatScrollPane.setVisible(true);
         chatScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentPane.add(chatScrollPane);
@@ -170,8 +199,10 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
      * Creates the game GUI
      */
     void setGameGraphic() {
-        GameGraphic gameGraphic = new GameGraphic(this);
+        gameGraphic = new GameGraphic(this);
         gameGraphic.setGameGraphic();
+        startB.setEnabled(false);
+        readyB.setEnabled(false);
     }
 
     /**
@@ -203,8 +234,6 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
                 clientListener.forward(input);
             } catch (IndexOutOfBoundsException | NotACommandException e) {
                 printErrorMessage(e.getMessage());
-                printCommandList(); //delete when /list commands is implemented
-                //printInfo("Use '/list commands' to display all possible commands");
             }
         }
     }
@@ -219,7 +248,63 @@ public class ChatGraphic extends JFrame implements KeyListener { //ActionListene
 
     }
 
+    //Handles button events
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        JButton buttonPressed = (JButton) actionEvent.getSource();
+        if (buttonPressed == readyB) {
+            try {
+                if (readyB.getText().equals("Ready")) {
+                    clientListener.forward("/change status ready");
+                    readyB.setText("Waiting");
+                } else {
+                    clientListener.forward("/change status waiting");
+                    readyB.setText("Ready");
+                }
+
+            } catch (NotACommandException e) {
+                clientLog.warn("Error with /change status command");
+            }
+
+        } else if (buttonPressed == startB) {
+            try {
+                clientListener.forward("/new game");
+            } catch (NotACommandException e) {
+                clientLog.warn("Error with /new game command");
+            }
+
+        } else if (buttonPressed == infoB) {
+            printCommandList();
+
+        } else if (buttonPressed == gamesB) {
+            try {
+                clientListener.forward("/list games");
+            } catch (NotACommandException e) {
+                clientLog.warn("Error with /list command");
+            }
+
+        } else if (buttonPressed == whosOnB) {
+            try {
+                clientListener.forward("/list players");
+            } catch (NotACommandException e) {
+                clientLog.warn("Error with /list command");
+            }
+
+        } else if (buttonPressed == leaveB) {
+            try {
+                clientListener.forward("/quit");
+            } catch (NotACommandException e) {
+                clientLog.warn("Error with /quit command");
+            }
+    }
+    }
+
     SBClientListener getClientListener() {
         return clientListener;
     }
+
+    GameGraphic getGameGraphic() {
+        return gameGraphic;
+    }
+
 }

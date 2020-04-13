@@ -12,10 +12,10 @@ import static skipbo.server.SBServer.servLog;
 public class Player {
 
     private String name;
-    private int id;
-    private SBListener sbListen;
+    private final int id;
+    private final SBListener sbListen;
     private Game game;
-    private Pile piles;
+    private final Pile piles;
     private Status status;
 
     /**

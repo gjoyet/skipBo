@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+import static java.lang.Thread.sleep;
 import static skipbo.server.SBServer.servLog;
 
 public class Game implements Runnable {
@@ -73,8 +74,11 @@ public class Game implements Runnable {
             gToString.append(players.get(i).getName());
             if (!(i == players.size() - 1)) gToString.append(", ");
         }
-        if (gameRunning) gToString.append("; RUNNING.");
-        else gToString.append("; FINISHED.");
+        if (gameRunning) {
+            gToString.append("; RUNNING.");
+        } else {
+            gToString.append("; FINISHED. Winner was: " + this.winner.getName() + ".");
+        }
 
         return gToString.toString();
     }
@@ -572,7 +576,13 @@ public class Game implements Runnable {
      */
     public void endGame(Player winner) {
         gameRunning = false;
-        //EXECUTE: EndGame Protocol
+        this.winner = winner;
         new ProtocolExecutor().sendAll("PRINT§Terminal§" + winner.getName() + " has won the game!", winner.getSBL());
+        try {
+            sleep(5000);
+        } catch (InterruptedException e) {
+            servLog.error("Sleep time at end of game interrupted.");
+        }
+        new ProtocolExecutor().gameEnding(this, winner);
     }
 }

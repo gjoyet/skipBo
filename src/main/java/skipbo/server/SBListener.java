@@ -77,6 +77,9 @@ public class SBListener implements Runnable {
                 case PUTTO:
                     new ProtocolExecutor(input, this).putTo();
                     break;
+                case CHECK:
+                    new ProtocolExecutor(input, this).check();
+                    break;
                 case DISPL:
                     new ProtocolExecutor(input, this).display();
                     break;

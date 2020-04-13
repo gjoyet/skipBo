@@ -102,7 +102,7 @@ public class Pile {
     }
 
     /**
-     * @return A String containing all handcards of a player, formatted for network protocol.
+     * @return A String containing all hand cards and the top stock card of a player, formatted for network protocol.
      */
     public String getCardsForProtocol(Player player) {
         StringBuilder cards = new StringBuilder();
@@ -130,8 +130,7 @@ public class Pile {
                 str.append("Build pile ").append(i+1).append(" is: [").append(specBuildPile.get(specBuildPile.size() - 1).number).append("]").append("\n");
             }
         }
-        String[] buildPiles = str.toString().split("\n");
-        return buildPiles;
+        return str.toString().split("\n");
     }
 
     /**
@@ -141,7 +140,7 @@ public class Pile {
      * @return A string with the player's hand cards
      */
 
-    public String discardPilesPrint(Player player) {
+    public String[] discardPilesPrint(Player player) {
         StringBuilder str = new StringBuilder();
         for (int i = 0; i < 4; i++) {
             ArrayList<Card> specDiscardPile = player.getDiscardPile().get(i);
@@ -151,9 +150,9 @@ public class Pile {
             }
             int t = i + 1;
             str.append("Discard Pile ").append(t).append(" of ").append(player.getName()).append(" is: ")
-                    .append(Arrays.toString(printArray)).append("\t");
+                    .append(Arrays.toString(printArray)).append("\n");
         }
-        return str.toString();
+        return str.toString().split("\n");
     }
 }
 

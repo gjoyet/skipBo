@@ -417,6 +417,8 @@ public class Game implements Runnable {
      */
 
     public boolean playFromDiscardToMiddle(Player currentPlayer, int discardPileIndex, int buildPileIndex) {
+        servLog.debug("Entered playFromDiscardToMiddle.");
+        ArrayList<Card> discardPile = currentPlayer.getDiscardPile().get(discardPileIndex);
 
         if(buildPileIndex < 0 || buildPileIndex > 3){       //if bp index is a false index that cannot be true
             currentPlayer.getSBL().getPW().println("PRINT§Terminal§Build Deck Index is invalid!");
@@ -426,8 +428,11 @@ public class Game implements Runnable {
             currentPlayer.getSBL().getPW().println("PRINT§Terminal§Discard deck index is invalid!");
             servLog.debug("Invalid discard deck index");
         }
-        servLog.debug("Entered playFromDiscardToMiddle.");
-        ArrayList<Card> discardPile = currentPlayer.getDiscardPile().get(discardPileIndex);
+
+        if(discardPile.isEmpty()){
+            currentPlayer.getSBL().getPW().println("PRINT§Terminal§That discard pile is empty! Choose another.");
+            servLog.debug("Played from an empty discard deck");
+        }
         ArrayList<Card> specBuildPile = piles.buildPiles.get(buildPileIndex);
 
         Card card = discardPile.get(discardPile.size() - 1);

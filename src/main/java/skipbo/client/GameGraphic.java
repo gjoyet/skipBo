@@ -319,7 +319,6 @@ public class GameGraphic extends JButton implements ActionListener {
     }
 
     void setInitialCards(String[] colAndNum) {
-
         hand_a.setIcon(cardIcons.getIcon(colAndNum[0], Integer.parseInt(colAndNum[1]), "M"));
         hand_b.setIcon(cardIcons.getIcon(colAndNum[2], Integer.parseInt(colAndNum[3]), "M"));
         hand_c.setIcon(cardIcons.getIcon(colAndNum[4], Integer.parseInt(colAndNum[5]), "M"));
@@ -361,12 +360,12 @@ public class GameGraphic extends JButton implements ActionListener {
     public void handToDiscard() {
 
     }
-    // draw a card from the stock pile
-    public void drawFromStock(){
+    // Play the stock card to a build pile
+    public void stockToBuild(){
 
     }
-    // draw a card from the draw pile
-    public void drawFromDraw(){
+    // Play from discard pile to a build pile
+    public void discardToBuild(){
 
     }
 

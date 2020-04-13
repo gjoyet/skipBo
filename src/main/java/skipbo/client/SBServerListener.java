@@ -86,7 +86,14 @@ class SBServerListener implements Runnable {
     }
 
     void putTo(String[] command) {
+        String[] argument = command[2].split("§");
+        if (command[1].equals("Response")) {
+            if (argument[0].equals("H")) {
 
+            } else { //pile must be Discard
+
+            }
+        }
         //chatGraphic.printInfoMessage("Someone played a card");
     }
 

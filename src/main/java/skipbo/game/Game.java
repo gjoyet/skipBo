@@ -314,7 +314,7 @@ public class Game implements Runnable {
         specDiscard.add(card);
         currentPlayer.getHandCards().remove(card);
         currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your discard piles are: "
-                + piles.discardPilesPrint(currentPlayer));
+                + Arrays.toString(piles.discardPilesPrint(currentPlayer)));
         //displayDiscard();
 
         endTurn();
@@ -330,7 +330,7 @@ public class Game implements Runnable {
     public void displayDiscard(){
         for (Player player : players) {
             new ProtocolExecutor().sendAll("PRINT§Terminal§ " +
-                    piles.discardPilesPrint(player), player.getSBL());
+                    Arrays.toString(piles.discardPilesPrint(player)), player.getSBL());
         }
     }
 

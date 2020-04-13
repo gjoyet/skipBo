@@ -323,7 +323,7 @@ public class Game implements Runnable {
      * Method to display all Discard piles
      */
 
-    public void displayDiscard() {
+    public void displayDiscard(){
         for (Player player : players) {
             new ProtocolExecutor().sendAll("PRINT§Terminal§ " +
                     piles.discardPilesPrint(player), player.getSBL());
@@ -369,14 +369,16 @@ public class Game implements Runnable {
                 stockCard.number = 1;
                 specBuildPile.add(stockCard);
                 currentPlayer.getStockPile().remove(stockCard);
+
                 checkBuildPileAndPrint(stockCard,specBuildPile,currentPlayer);
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
                         + piles.handCardPrint(currentPlayer));
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your stock card is: " +
                         currentPlayer.getStockPile().get(currentPlayer.getStockPile().size() - 1).number);
                 checkStockPile(currentPlayer);
+
                 return stockPile.get(stockPile.size() - 1);
-            }else{  //if invalid move
+            }else{      //if invalid move
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§This move is invalid! " +
                         "To play to an empty pile, the card number has to be 1.");
                 return null;
@@ -517,7 +519,7 @@ public class Game implements Runnable {
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
                         + piles.handCardPrint(currentPlayer));
                 return true;
-            }else{  //invalid move
+            }else{          //invalid move
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§This move is invalid! " +
                         "Card number has to be one higher than top card on build pile.");
                 return false;

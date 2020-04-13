@@ -27,6 +27,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     private JButton whosOnB;
     private JButton leaveB;
     private GameGraphic gameGraphic;
+    String playerName = "";
 
 
     //test method
@@ -307,4 +308,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         return gameGraphic;
     }
 
+    public void changePlayerName(String name) {
+        playerName = name;
+    }
 }

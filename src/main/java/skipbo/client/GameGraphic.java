@@ -120,11 +120,8 @@ public class GameGraphic extends JButton implements ActionListener {
         chatGraphic.getContentPane().add(sp);
 
         // Discard Piles
-        ImageIcon card = new ImageIcon(getClass().getClassLoader().getResource("R1.png"));
-        Image cardSc = card.getImage().getScaledInstance(100, 145, Image.SCALE_DEFAULT);
-        ImageIcon scaledCard = new ImageIcon(cardSc);
 
-        discard_a = new CardButton(scaledCard);
+        discard_a = new CardButton();
         JButton discard_A = discard_a;
         discard_A.setBounds(620, 400, 100, 145);
         discard_b = new CardButton();
@@ -302,29 +299,32 @@ public class GameGraphic extends JButton implements ActionListener {
     }
 
     void setOpponentNames(String[] names) {
-        e1.setText(names[0]);
-        e2.setText(names[1]);
+        int i = 0;
+        if (names[i].equals(chatGraphic.playerName)) {
+            i++;
+        }
+        e1.setText(names[i]);
         if (names.length > 2) {
-            e3.setText(names[3]);
+            if (names[i].equals(chatGraphic.playerName)) {
+                i++;
+            }
+            e2.setText(names[i]);
+            if (names.length > 3) {
+                if (names[i].equals(chatGraphic.playerName)) {
+                    i++;
+                }
+                e3.setText(names[i]);
+            }
         }
     }
 
     void setInitialCards(String[] colAndNum) {
-        JButton[] handCards = new JButton[] {hand_a, hand_b, hand_c, hand_d, hand_e}; //Does not work
-        ImageIcon card;
-        Image image;
-        int i = 0;
-        for (JButton handCard : handCards) {
-            card = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(colAndNum[i] + colAndNum[++i] + ".png")));
-            image = card.getImage().getScaledInstance(78, 120, Image.SCALE_DEFAULT);
-            ImageIcon scaledCard = new ImageIcon(image);
-            handCard.setIcon(scaledCard);
-            i++;
-        }
-        card = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(colAndNum[i] + colAndNum[++i] + ".png")));
-        image = card.getImage().getScaledInstance(100, 145, Image.SCALE_DEFAULT);
-        ImageIcon scaledCard = new ImageIcon(image);
-        stock.setIcon(scaledCard);
+        hand_a.setIcon(cardIcons.getIcon(colAndNum[0], Integer.parseInt(colAndNum[1]), "M"));
+        hand_b.setIcon(cardIcons.getIcon(colAndNum[2], Integer.parseInt(colAndNum[3]), "M"));
+        hand_c.setIcon(cardIcons.getIcon(colAndNum[4], Integer.parseInt(colAndNum[5]), "M"));
+        hand_d.setIcon(cardIcons.getIcon(colAndNum[6], Integer.parseInt(colAndNum[7]), "M"));
+        hand_e.setIcon(cardIcons.getIcon(colAndNum[8], Integer.parseInt(colAndNum[9]), "M"));
+        stock.setIcon(cardIcons.getIcon(colAndNum[10], Integer.parseInt(colAndNum[11]), "L"));
     }
 
     private void setClickable(JButton button, boolean b) {
@@ -360,12 +360,12 @@ public class GameGraphic extends JButton implements ActionListener {
     public void handToDiscard() {
 
     }
-    // draw a card from the stock pile
-    public void drawFromStock(){
+    // Play the stock card to a build pile
+    public void stockToBuild(){
 
     }
-    // draw a card from the draw pile
-    public void drawFromDraw(){
+    // Play from discard pile to a build pile
+    public void discardToBuild(){
 
     }
 

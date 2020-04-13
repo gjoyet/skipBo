@@ -105,10 +105,10 @@ public class Pile {
     public String getCardsForProtocol(Player player) {
         StringBuilder cards = new StringBuilder();
         for(Card c : player.getHandCards()) {
-            cards.append(c.col.toString() + "§" + c.number + "§");
+            cards.append(c.getColString() + "§" + c.number + "§");
         }
         Card stockTopCard = player.getStockPile().get(player.getStockPile().size()-1);
-        cards.append(stockTopCard.col.toString() + "§" + stockTopCard.number);
+        cards.append(stockTopCard.getColString() + "§" + stockTopCard.number);
 
         return cards.toString();
     }

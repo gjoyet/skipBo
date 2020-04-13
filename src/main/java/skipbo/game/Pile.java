@@ -4,6 +4,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static skipbo.server.SBServer.servLog;
+
 public class Pile {
 
     public ArrayList<Card> drawPile;        // 1 draw pile
@@ -118,17 +120,18 @@ public class Pile {
      * @return String with piles
      */
 
-    public String buildPilesPrint() {
+    public String[] buildPilesPrint() {
         StringBuilder str = new StringBuilder();
         for (int i = 0; i < 4; i++) {
             ArrayList<Card> specBuildPile = buildPiles.get(i);
             if (specBuildPile.isEmpty()) {
-                str.append("Build pile ").append(i).append(" is : [ ]").append("\t");
+                str.append("Build pile ").append(i+1).append(" is : [ ]").append("\n");
             } else {
-                str.append("Build pile ").append(i).append(" is: [").append(specBuildPile.get(specBuildPile.size() - 1).number).append("]").append("\t").append("\t");
+                str.append("Build pile ").append(i+1).append(" is: [").append(specBuildPile.get(specBuildPile.size() - 1).number).append("]").append("\n");
             }
         }
-        return str.toString();
+        String[] buildPiles = str.toString().split("\n");
+        return buildPiles;
     }
 
     /**

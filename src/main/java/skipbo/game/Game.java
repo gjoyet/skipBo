@@ -191,8 +191,7 @@ public class Game implements Runnable {
             if (1 == card.number) {
                 specBuildPile.add(card);
                 currentPlayer.getHandCards().remove(card);
-                new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: "
-                        + piles.buildPilesPrint(), currentPlayer.getSBL());
+                checkBuildPileAndPrint(card, specBuildPile, currentPlayer);
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
                         + piles.handCardPrint(currentPlayer));
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your stock card is: " +
@@ -253,11 +252,18 @@ public class Game implements Runnable {
             for (Card buildPileCard : buildPile) {
                 buildPile.remove(buildPileCard);
             }
-            new ProtocolExecutor().sendAll("PRINT§Terminal§The maximum number has been reached; " +
-                    "the deck has been reset to: " + piles.buildPilesPrint(), player.getSBL());
+            String[] buildPiles = piles.buildPilesPrint();
+            new ProtocolExecutor().sendAll("PRINT§Terminal§The maximum number has been reached: " +
+                    "the deck has been reset to: ", player.getSBL());
+            for(String s : buildPiles) {
+                new ProtocolExecutor().sendAll("PRINT§Terminal§" + s, player.getSBL());
+            }
         } else {
-            new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: "
-                    + piles.buildPilesPrint(), player.getSBL());
+            String[] buildPiles = piles.buildPilesPrint();
+            new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: ", player.getSBL());
+            for(String s : buildPiles) {
+                new ProtocolExecutor().sendAll("PRINT§Terminal§" + s, player.getSBL());
+            }
         }
     }
 

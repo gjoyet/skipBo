@@ -40,7 +40,7 @@ class SBServerListener implements Runnable {
                 //clientLog.debug(input);
             } catch (IOException e) {
                 clientLog.warn("Error with reading input from server");
-            } catch (NoCommandException | NullPointerException | IllegalArgumentException e) {
+            } catch (NoCommandException | IllegalArgumentException e) {
                 clientLog.warn("Error with network protocol command");
             }
         }
@@ -60,10 +60,9 @@ class SBServerListener implements Runnable {
                 chatGraphic.printChatMessage(command[2]);
                 break;
             case CHNGE:
-                chatGraphic.changePlayerName(command[2]);
-                break;
             case SETTO:
                 chatGraphic.changePlayerName(command[2]);
+                break;
             case PUTTO:
                 putTo(command);
                 //TODO
@@ -89,12 +88,21 @@ class SBServerListener implements Runnable {
         String[] argument = command[2].split("§");
         if (command[1].equals("Response")) {
             if (argument[0].equals("H")) {
-
+                if (argument[2].equals("B")) {
+                    chatGraphic.getGameGraphic().handToBuild(Integer.parseInt(argument[1]),
+                            Integer.parseInt(argument[3]), argument[4]);
+                } else { //2nd pile must be Discard
+                    chatGraphic.getGameGraphic().handToDiscard(Integer.parseInt(argument[1]),
+                            Integer.parseInt(argument[3]), argument[4]);
+                }
             } else { //pile must be Discard
-
+                chatGraphic.getGameGraphic().discardToBuild(Integer.parseInt(argument[1]),
+                        Integer.parseInt(argument[3]), argument[4]);
             }
+        } else {
+            chatGraphic.getGameGraphic().stockToBuild(Integer.parseInt(argument[1]),
+                    Integer.parseInt(argument[3]), argument[4], argument[5], Integer.parseInt(argument[6]));
         }
-        //chatGraphic.printInfoMessage("Someone played a card");
     }
 
     void newGame(String[] command) {

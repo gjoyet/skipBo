@@ -46,7 +46,6 @@ public class GameGraphic extends JButton implements ActionListener {
     private CardButton e1_stock;
     private CardButton e2_stock;
     private CardButton e3_stock;
-    private CardButton e4_stock;
 
     private CardIcons cardIcons = new CardIcons( 30, 50, 78, 120);
 
@@ -172,73 +171,32 @@ public class GameGraphic extends JButton implements ActionListener {
         e1.setBounds(490,30,120,15);
         chatGraphic.getContentPane().add(e1);
 
-        e1_stock = new CardButton();
-        e1_stock.setBounds(490, 50, 30, 50);
-        e1_a = new CardButton();
-        e1_a.setBounds(535, 50, 30, 50);
-        e1_b = new CardButton();
-        e1_b.setBounds(570, 50, 30, 50);
-        e1_c = new CardButton();
-        e1_c.setBounds(605, 50, 30, 50);
-        e1_d = new CardButton();
-        e1_d.setBounds(640, 50, 30, 50);
-
-        chatGraphic.getContentPane().add(e1_a);
-        chatGraphic.getContentPane().add(e1_b);
-        chatGraphic.getContentPane().add(e1_c);
-        chatGraphic.getContentPane().add(e1_d);
-        chatGraphic.getContentPane().add(e1_stock);
-
-        setClickable(e1_a, false);
-        setClickable(e1_b, false);
-        setClickable(e1_c, false);
-        setClickable(e1_d, false);
-        setClickable(e1_stock, false);
-
-        // enemy 2
         e2 = new JLabel("Opponent 2");
         e2.setBounds(700,30,120,15);
         chatGraphic.getContentPane().add(e2);
 
-        e2_stock = new CardButton();
-        e2_stock.setBounds(700, 50, 30, 50);
-        e2_a = new CardButton();
-        e2_a.setBounds(745, 50, 30, 50);
-        e2_b = new CardButton();
-        e2_b.setBounds(780, 50, 30, 50);
-        e2_c = new CardButton();
-        e2_c.setBounds(815, 50, 30, 50);
-        e2_d = new CardButton();
-        e2_d.setBounds(850, 50, 30, 50);
-
-        chatGraphic.getContentPane().add(e2_a);
-        chatGraphic.getContentPane().add(e2_b);
-        chatGraphic.getContentPane().add(e2_c);
-        chatGraphic.getContentPane().add(e2_d);
-        chatGraphic.getContentPane().add(e2_stock);
-        setClickable(e2_a, false);
-        setClickable(e2_b, false);
-        setClickable(e2_c, false);
-        setClickable(e2_d, false);
-        setClickable(e2_stock, false);
-
-        // enemy 3
         e3 = new JLabel("Opponent 3");
         e3.setBounds(910,30,120,15);
         chatGraphic.getContentPane().add(e3);
 
+        //Stock piles of enemies
+        e1_stock = new CardButton();
+        e1_stock.setBounds(490, 50, 30, 50);
+        chatGraphic.getContentPane().add(e1_stock);
+        setClickable(e1_stock, false);
+
+        e2_stock = new CardButton();
+        e2_stock.setBounds(700, 50, 30, 50);
+        chatGraphic.getContentPane().add(e2_stock);
+        setClickable(e2_stock, false);
+
         e3_stock = new CardButton();
         e3_stock.setBounds(910, 50, 30, 50);
-        e3_a = new CardButton();
-        e3_a.setBounds(955, 50, 30, 50);
-        e3_b = new CardButton();
-        e3_b.setBounds(990, 50, 30, 50);
-        e3_c = new CardButton();
-        e3_c.setBounds(1025, 50, 30, 50);
-        e3_d = new CardButton();
-        e3_d.setBounds(1060, 50, 30, 50);
+        chatGraphic.getContentPane().add(e3_stock);
+        setClickable(e3_stock, false);
 
-        //Cards of enemies
+
+        //Discard piles of enemies
 
         for (int i = 0; i < e1_discard.length; i++) {
             e1_discard[i] = new CardButton();
@@ -252,29 +210,20 @@ public class GameGraphic extends JButton implements ActionListener {
             setClickable(e3_discard[i], false);
         }
 
-        e1_discard[0].setBounds(490, 50, 30, 50);
-        e1_discard[1].setBounds(525, 50, 30, 50);
-        e1_discard[2].setBounds(560, 50, 30, 50);
-        e1_discard[3].setBounds(595, 50, 30, 50);
+        e1_discard[0].setBounds(535, 50, 30, 50);
+        e1_discard[1].setBounds(570, 50, 30, 50);
+        e1_discard[2].setBounds(605, 50, 30, 50);
+        e1_discard[3].setBounds(640, 50, 30, 50);
 
-        chatGraphic.getContentPane().add(e3_a);
-        chatGraphic.getContentPane().add(e3_b);
-        chatGraphic.getContentPane().add(e3_c);
-        chatGraphic.getContentPane().add(e3_d);
-        chatGraphic.getContentPane().add(e3_stock);
-        setClickable(e3_a, false);
-        setClickable(e3_b, false);
-        setClickable(e3_c, false);
-        setClickable(e3_d, false);
-        e2_discard[0].setBounds(650, 50, 30, 50);
-        e2_discard[1].setBounds(685, 50, 30, 50);
-        e2_discard[2].setBounds(720, 50, 30, 50);
-        e2_discard[3].setBounds(755, 50, 30, 50);
+        e2_discard[0].setBounds(745, 50, 30, 50);
+        e2_discard[1].setBounds(780, 50, 30, 50);
+        e2_discard[2].setBounds(815, 50, 30, 50);
+        e2_discard[3].setBounds(850, 50, 30, 50);
 
-        e3_discard[0].setBounds(810, 50, 30, 50);
-        e3_discard[1].setBounds(845, 50, 30, 50);
-        e3_discard[2].setBounds(880, 50, 30, 50);
-        e3_discard[3].setBounds(915, 50, 30, 50);
+        e3_discard[0].setBounds(955, 50, 30, 50);
+        e3_discard[1].setBounds(990, 50, 30, 50);
+        e3_discard[2].setBounds(1025, 50, 30, 50);
+        e3_discard[3].setBounds(1060, 50, 30, 50);
 
     }
 

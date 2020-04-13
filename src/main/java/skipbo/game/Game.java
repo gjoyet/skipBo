@@ -27,8 +27,6 @@ public class Game implements Runnable {
 
         this.players = players;
         this.piles = new Pile();
-        this.gameRunning = gameRunning;
-        this.turnFinished = turnFinished;
         this.sizeOfStockPile = 3;
 
     }
@@ -173,12 +171,12 @@ public class Game implements Runnable {
      */
 
     public boolean playToMiddle(Player currentPlayer, int handCardIndex, int buildDeckIndex) {
-        // TODO: Add clause preventing player to play a hand card with an index too high
+
         if(handCardIndex < 0 || handCardIndex >= currentPlayer.getHandCards().size()){
             currentPlayer.getSBL().getPW().println("PRINT§Terminal§Hand Card Index is invalid!");
             servLog.debug("Invalid index");
         }
-        if(buildDeckIndex < 0 || buildDeckIndex > 3){
+        if(buildDeckIndex < 0 || buildDeckIndex > 3){       //if bp index is a false index that cannot be true
             currentPlayer.getSBL().getPW().println("PRINT§Terminal§Build Deck Index is invalid!");
             servLog.debug("Invalid build deck index");
         }
@@ -276,7 +274,7 @@ public class Game implements Runnable {
      */
 
     public boolean playToDiscard(Player currentPlayer, int handCardIndex, int discardPileIndex) {
-        // TODO: Add clause preventing player to play a hand card with an index too high
+
         if(handCardIndex < 0 || handCardIndex >= currentPlayer.getHandCards().size()){
             currentPlayer.getSBL().getPW().println("PRINT§Terminal§Hand Card Index is invalid!");
             servLog.debug("Invalid index");
@@ -285,6 +283,7 @@ public class Game implements Runnable {
             currentPlayer.getSBL().getPW().println("PRINT§Terminal§Discard deck index is invalid!");
             servLog.debug("Invalid discard deck index");
         }
+
         servLog.debug("Entered playToDiscard.");
         currentPlayer.getSBL().getPW().println("PRINT§Terminal§You are playing to discard now!");
         ArrayList<ArrayList<Card>> discardPiles = currentPlayer.getDiscardPile();
@@ -316,7 +315,6 @@ public class Game implements Runnable {
     /**
      * This method is to play the top card from the Stock Pile to a build pile
      * of the player's choosing.
-     * Param id for player, Param id to know which Build pile to play to.
      *
      * @param currentPlayer  (The player that's playing right now)
      * @param buildPileIndex (The index of the pile that the player wishes to play to)
@@ -325,7 +323,7 @@ public class Game implements Runnable {
 
     public Card playFromStockToMiddle(Player currentPlayer, int buildPileIndex) {
 
-        if (buildPileIndex < 0 || buildPileIndex > 3){
+        if (buildPileIndex < 0 || buildPileIndex > 3){      //if bp index is a false index that cannot be true
             currentPlayer.getSBL().getPW().println("PRINT§Terminal§Build Deck Index is invalid!");
             servLog.debug("Invalid build deck index");
         }
@@ -337,7 +335,7 @@ public class Game implements Runnable {
         ArrayList<Card> specBuildPile = buildPiles.get(buildPileIndex);
 
         if (specBuildPile.isEmpty()) {
-            if (stockCard.number == 1) {        // if card number is 1, new pile
+            if (stockCard.number == 1) {        // if card number is 1, add to new pile
                 specBuildPile.add(stockCard);
                 currentPlayer.getHandCards().remove(stockCard);
 
@@ -348,7 +346,7 @@ public class Game implements Runnable {
                         currentPlayer.getStockPile().get(sizeOfStockPile-2).number);
                 checkStockPile(currentPlayer);
                 return stockPile.get(stockPile.size() - 1);
-            } else if (stockCard.col == Color.CYAN){ //if stock card
+            } else if (stockCard.col == Color.CYAN){ //if stock card is Joker card
                 stockCard.number = 1;
                 specBuildPile.add(stockCard);
                 currentPlayer.getStockPile().remove(stockCard);
@@ -359,7 +357,7 @@ public class Game implements Runnable {
                         currentPlayer.getStockPile().get(currentPlayer.getStockPile().size() - 1).number);
                 checkStockPile(currentPlayer);
                 return stockPile.get(stockPile.size() - 1);
-            }else{
+            }else{  //if invalid move
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§This move is invalid! " +
                         "To play to an empty pile, the card number has to be 1.");
                 return null;
@@ -419,12 +417,12 @@ public class Game implements Runnable {
      */
 
     public boolean playFromDiscardToMiddle(Player currentPlayer, int discardPileIndex, int buildPileIndex) {
-        // TODO: Add clause preventing player to play a discard card with an index too high
-        if(buildPileIndex < 0 || buildPileIndex > 3){
+
+        if(buildPileIndex < 0 || buildPileIndex > 3){       //if bp index is a false index that cannot be true
             currentPlayer.getSBL().getPW().println("PRINT§Terminal§Build Deck Index is invalid!");
             servLog.debug("Invalid build deck index");
         }
-        if(discardPileIndex < 0 || discardPileIndex > 3){
+        if(discardPileIndex < 0 || discardPileIndex > 3){   //If Dp index is false
             currentPlayer.getSBL().getPW().println("PRINT§Terminal§Discard deck index is invalid!");
             servLog.debug("Invalid discard deck index");
         }
@@ -444,7 +442,7 @@ public class Game implements Runnable {
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
                         + piles.handCardPrint(currentPlayer));
                 return true;
-            }  else if (card.col == Color.CYAN) {
+            }  else if (card.col == Color.CYAN) {       //if Joker card, then make it 1 and add
                 card.number = 1;
                 specBuildPile.add(card);
                 discardPile.remove(card);
@@ -455,7 +453,7 @@ public class Game implements Runnable {
                         + piles.handCardPrint(currentPlayer));
 
                 return true;
-            } else {
+            } else {            //invalid move
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§This move is invalid! " +
                         "To play to an empty pile, the card number has to be 1.");
                 return false;
@@ -472,7 +470,7 @@ public class Game implements Runnable {
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hands cards are now: "
                         + piles.handCardPrint(currentPlayer));
                 return true;
-            }else if(card.col == Color.CYAN){
+            }else if(card.col == Color.CYAN){       //if Joker card
                 card.number = (topCard.number+1);
                 specBuildPile.add(card);
                 discardPile.remove(card);
@@ -482,7 +480,7 @@ public class Game implements Runnable {
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
                         + piles.handCardPrint(currentPlayer));
                 return true;
-            }else{
+            }else{  //invalid move
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§This move is invalid! " +
                         "Card number has to be one higher than top card on build pile.");
                 return false;
@@ -520,10 +518,10 @@ public class Game implements Runnable {
      */
     public void endTurn() {
         servLog.debug("Entered endTurn.");
-        if (!(playersTurn == players.size() - 1)) {
+        if (!(playersTurn == players.size() - 1)) {     //if not the last player in the array, go up by one
             playersTurn++;
         } else {
-            playersTurn = 0;
+            playersTurn = 0;    //otherwise start over from first player
         }
         startTurn(playersTurn);
         turnFinished = true;
@@ -537,7 +535,7 @@ public class Game implements Runnable {
      */
     public void endGame(Player winner) {
         gameRunning = false;
-        //EXECUTE: EndGame Protocol (sysout: Player X won game!) server shut, reshuffle etc.
+        //EXECUTE: EndGame Protocol
         new ProtocolExecutor().sendAll("PRINT§Terminal§" + winner.getName() + " has won the game!", winner.getSBL());
     }
 }

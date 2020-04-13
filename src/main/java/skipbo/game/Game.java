@@ -45,6 +45,8 @@ public class Game implements Runnable {
         return this.playersTurn;
     }
 
+    public Pile getPiles() { return this.piles; }
+
     public boolean gameIsRunning() {
         return this.gameRunning;
     }

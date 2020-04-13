@@ -102,7 +102,7 @@ public class Pile {
     }
 
     /**
-     * @return A String containing all handcards of a player, formatted for network protocol.
+     * @return A String containing all hand cards and the top stock card of a player, formatted for network protocol.
      */
     public String getCardsForProtocol(Player player) {
         StringBuilder cards = new StringBuilder();

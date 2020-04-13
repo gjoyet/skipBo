@@ -3,15 +3,17 @@ package skipbo.client;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.dnd.*;
+import java.util.Objects;
+
 import static skipbo.client.SBClient.clientLog;
 
 public class DragDropTest extends JFrame implements DropTargetListener, DragGestureListener {
 
     JTextPane draggedPane;
 
-    ImageIcon card1 = new ImageIcon(getClass().getClassLoader().getResource("R1.png"));
-    ImageIcon card2 = new ImageIcon(getClass().getClassLoader().getResource("R2.png"));
-    ImageIcon card3 = new ImageIcon(getClass().getClassLoader().getResource("R3.png"));
+    ImageIcon card1 = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("R1.png")));
+    ImageIcon card2 = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("R2.png")));
+    ImageIcon card3 = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("R3.png")));
 
 
     public static void main(String[] args) {

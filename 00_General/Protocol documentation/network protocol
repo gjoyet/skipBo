@@ -19,10 +19,11 @@ Chat		CHATM		Global		String message				sends ‚message‘ to write on the globa
 				Broadcast	String message				sends 'message' to all clients across all games and lobbies	
 
 Game		NWGME		New		-					starts new game with 4 players
-				Names		{ String name }				confirms to client that game is starting, with the names 
+				Names		{String name}				confirms to client that game is starting, with the names 
 											of the players in that game as argument
-				Cards		6x { Colour c, int number }		tells client which cards the player has at the beginning of the game 
+				Cards		6x {Colour c, int number}		tells client which cards the player has at the beginning of the game 
 											(first 5 are hand cards, last one is the top card of the stockpile)
+		ENDGM		Winner		String name				signals client that game is ending, player with ‚name‘ won
 		PUTTO		Card		Pile from, int i, Pile to, int j	puts card from pile ‚from‘, index ‚i’, to pile ‚to‘, index ‚j‘
 				Response	Pile from, int i, Pile to, int j, 	tells client to execute the move (as stated above) by player with name ‚name‘
 						String ‚name‘

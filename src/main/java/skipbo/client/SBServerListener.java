@@ -141,7 +141,8 @@ class SBServerListener implements Runnable {
     }
 
     private void check(String[] command) {
-        if (command[1].equals("HandCards")) {
+        clientLog.debug("got into check method");
+        if (command[1].equalsIgnoreCase("HandCards")) {
             String[] cards = command[2].split("§");
             String[] colours = new String[5];
             int[] numbers = new int[5];
@@ -150,6 +151,7 @@ class SBServerListener implements Runnable {
                 numbers[i] = Integer.parseInt(cards[j++]);
             }
             chatGraphic.getGameGraphic().updateHandCards(colours, numbers);
+            clientLog.debug("got into update method in GameGraphic");
         }
     }
 

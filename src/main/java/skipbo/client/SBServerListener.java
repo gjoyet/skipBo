@@ -42,9 +42,9 @@ class SBServerListener implements Runnable {
                 clientLog.warn("Error with reading input from server");
             } catch (NoCommandException e) {
                 clientLog.warn("Error with network protocol command (NoCommand)");
-            } /*catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) {
                 clientLog.warn("Error with network protocol command (IllegalArgument)");
-            }*/
+            }
         }
     }
 

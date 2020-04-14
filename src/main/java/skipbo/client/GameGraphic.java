@@ -240,12 +240,12 @@ public class GameGraphic extends JButton implements ActionListener {
 
     void setInitialCards(String[] colAndNum) {
         for (int i = 0, j = 0; i < hand.length; i++) {
-            //clientLog.debug(colAndNum[j] + colAndNum[j+1]);
             hand[i].setIcon(cardIcons.getIcon(colAndNum[j], Integer.parseInt(colAndNum[j+1]), "M"));
             hand[i].addCard(colAndNum[j++], Integer.parseInt(colAndNum[j++]));
         }
         for (int i = 0, j = 10; i < (colAndNum.length - 10)/3; i++) {
             CardButton stockCard = getEnemyButton(colAndNum[j]);
+            j++;
             if (stockCard == null) {
                 stock.setIcon(cardIcons.getIcon(colAndNum[j], Integer.parseInt(colAndNum[j+1]), "L"));
                 stock.addCard(colAndNum[j++], Integer.parseInt(colAndNum[j++]));

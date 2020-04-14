@@ -3,6 +3,8 @@ package skipbo.client;
 import javax.swing.*;
 import java.util.ArrayList;
 
+import static skipbo.client.SBClient.clientLog;
+
 public class CardButton extends JButton {
 
     private ArrayList<ImageIcon> icons;
@@ -16,6 +18,8 @@ public class CardButton extends JButton {
     }
 
     void addCard(String color, int number) {
+        clientLog.debug("Color looks like this: " + color);
+        clientLog.debug("Num: " + number);
         colors.add(color);
         numbers.add(number);
     }

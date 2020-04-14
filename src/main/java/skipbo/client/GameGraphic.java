@@ -221,11 +221,13 @@ public class GameGraphic extends JButton implements ActionListener {
             i++;
         }
         e1.setText(names[i]);
+        i++;
         if (names.length > 2) {
             if (names[i].equals(chatGraphic.playerName)) {
                 i++;
             }
             e2.setText(names[i]);
+            i++;
             if (names.length > 3) {
                 if (names[i].equals(chatGraphic.playerName)) {
                     i++;
@@ -398,9 +400,9 @@ public class GameGraphic extends JButton implements ActionListener {
     //returns stock pile button of enemy
     CardButton getEnemyButton(String name) {
         CardButton button;
-        if (e1.getName().equals(name)) {
+        if (e1.getText().equals(name)) {
             button = e1_stock;
-        } else if (e2.getName().equals(name)) {
+        } else if (e2.getText().equals(name)) {
             button = e2_stock;
         } else {
             button = e3_stock;

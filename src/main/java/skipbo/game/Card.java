@@ -2,6 +2,8 @@ package skipbo.game;
 
 import java.awt.*;
 
+import static skipbo.server.SBServer.servLog;
+
 public class Card {
 
     public int number;
@@ -30,11 +32,13 @@ public class Card {
     }
 
     public String getColString() {
-        if(this.col.equals(Color.green)) return "G"; // will be green on GUI
-        if(this.col.equals(Color.orange)) return "B"; // will be blue on GUI
-        if(this.col.equals(Color.red)) return "R"; // will be red on GUI
-        if(this.col.equals(Color.cyan)) return "S"; // special card
-        return "";
+        String c = "";
+        if(this.col.equals(Color.green)) c = "G"; // will be green on GUI
+        if(this.col.equals(Color.orange)) c = "B"; // will be blue on GUI
+        if(this.col.equals(Color.red)) c = "R"; // will be red on GUI
+        if(this.col.equals(Color.cyan)) c = "S"; // special card
+        servLog.debug("getColString returning: " + c);
+        return c;
     }
 
 

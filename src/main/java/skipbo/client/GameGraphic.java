@@ -336,6 +336,7 @@ public class GameGraphic extends JButton implements ActionListener {
             chatGraphic.getClientListener().pw.println(Protocol.PUTTO + "§Update§S§" + j + "§" + name + "§" +
                     colour1 + "§" + number1 + "§" + col + "§" + num);
         } else {
+            clientLog.debug("is updating build & stock from enemy");
             CardButton stockCard = getEnemyButton(name);
             CardButton buildCard = build[j-1];
             buildCard.setIcon(cardIcons.getIcon(colour2, number2, "L"));

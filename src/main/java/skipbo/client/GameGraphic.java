@@ -247,7 +247,6 @@ public class GameGraphic extends JButton implements ActionListener {
             CardButton stockCard = getEnemyButton(colAndNum[j]);
             j++;
             if (stockCard == null) {
-                clientLog.debug("Set my stock card");
                 stock.setIcon(cardIcons.getIcon(colAndNum[j], Integer.parseInt(colAndNum[j+1]), "L"));
                 stock.addCard(colAndNum[j++], Integer.parseInt(colAndNum[j++]));
             } else {
@@ -397,12 +396,12 @@ public class GameGraphic extends JButton implements ActionListener {
 
     //returns discard pile button of enemy
     CardButton getEnemyButton(String name, int index) {
-        CardButton button;
+        CardButton button = null;
         if (e1.getText().equals(name)) {
             button = e1_discard[index-1];
         } else if (e2.getText().equals(name)) {
             button = e2_discard[index-1];
-        } else {
+        } else if (e3.getText().equals(name)) {
             button = e3_discard[index-1];
         }
         return button;
@@ -410,12 +409,12 @@ public class GameGraphic extends JButton implements ActionListener {
 
     //returns stock pile button of enemy
     CardButton getEnemyButton(String name) {
-        CardButton button;
+        CardButton button = null;
         if (e1.getText().equals(name)) {
             button = e1_stock;
         } else if (e2.getText().equals(name)) {
             button = e2_stock;
-        } else {
+        } else if (e3.getText().equals(name)) {
             button = e3_stock;
         }
         return button;

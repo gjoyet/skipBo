@@ -23,6 +23,8 @@ public enum Protocol {
     /** Gives the client information about the game state (e.g. what its handcards are in that moment). */
     CHECK,
     /** Displays information on chat window. */
-    DISPL;
+    DISPL,
+    /** Tells the client that the game is finished and who the winner is*/
+    ENDGM;
 
 }

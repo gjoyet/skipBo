@@ -78,6 +78,9 @@ class SBServerListener implements Runnable {
             case CHECK:
                 check(command);
                 break;
+            case ENDGM:
+                chatGraphic.endGame(command[2]);
+                break;
             default:
                 throw new NoCommandException();
         }

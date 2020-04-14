@@ -204,6 +204,13 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         gameGraphic.setGameGraphic();
         startB.setEnabled(false);
         readyB.setEnabled(false);
+        readyB.setText("Ready");
+    }
+
+    void endGame(String name) {
+        gameGraphic = null;
+        startB.setEnabled(true);
+        readyB.setEnabled(true);
     }
 
     /**

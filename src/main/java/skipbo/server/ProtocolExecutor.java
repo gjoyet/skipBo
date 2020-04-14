@@ -248,6 +248,7 @@ public class ProtocolExecutor {
                         if (sbL.player.getGame().playToMiddle(sbL.player, iF, iT)) {
                             sbL.getPW().println("PUTTO§Response§" + input[2] + "§" + sbL.player.getName());
                             this.check("HandCards");
+                            sbL.player.getGame().checkHandCards(sbL.player);
                         } else {
                             sbL.getPW().println("Error"); // TODO: Add error message
                         }

@@ -89,6 +89,7 @@ class SBServerListener implements Runnable {
     }
 
     void putTo(String[] command) {
+        clientLog.debug("got into putTo with command " + command[1]);
         String[] argument = command[2].split("§");
         if (command[1].equals("Response")) {
             if (argument[0].equals("H")) {
@@ -103,7 +104,7 @@ class SBServerListener implements Runnable {
                 chatGraphic.getGameGraphic().discardToBuild(Integer.parseInt(argument[1]),
                         Integer.parseInt(argument[3]), argument[4]);
             }
-        } else if (command[1].equals("StockResponse")){
+        } else if (command[1].equals("StockResponse")) {
             chatGraphic.getGameGraphic().stockToBuild(Integer.parseInt(argument[3]), argument[4], argument[7],
                     Integer.parseInt(argument[8]));
         } else { //must be Update

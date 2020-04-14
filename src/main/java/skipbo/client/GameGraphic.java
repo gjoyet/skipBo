@@ -247,6 +247,7 @@ public class GameGraphic extends JButton implements ActionListener {
             CardButton stockCard = getEnemyButton(colAndNum[j]);
             j++;
             if (stockCard == null) {
+                clientLog.debug("Set my stock card");
                 stock.setIcon(cardIcons.getIcon(colAndNum[j], Integer.parseInt(colAndNum[j+1]), "L"));
                 stock.addCard(colAndNum[j++], Integer.parseInt(colAndNum[j++]));
             } else {

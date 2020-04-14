@@ -82,7 +82,7 @@ public class Game implements Runnable {
         if (gameRunning) {
             gToString.append("; RUNNING.");
         } else {
-            gToString.append("; FINISHED. Winner was: " + this.winner.getName() + ".");
+            gToString.append("; FINISHED. Winner was: ").append(this.winner.getName()).append(".");
         }
 
         return gToString.toString();
@@ -173,8 +173,6 @@ public class Game implements Runnable {
         for(String str: bPiles){
             ply.getSBL().getPW().println("PRINT§Terminal§" + str);
         }
-
-        //ply.getSBL().getPW().println("PRINT§Terminal§The build decks are: " + Arrays.toString(piles.buildPilesPrint()));
 
         ply.getSBL().getPW().println("PRINT§Terminal§Your hand cards are: " + piles.handCardPrint(ply));
 

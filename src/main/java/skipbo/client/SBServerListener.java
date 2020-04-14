@@ -142,7 +142,7 @@ class SBServerListener implements Runnable {
 
     private void check(String[] command) {
         clientLog.debug("got into check method");
-        if (command[1].equals("HandCards")) {
+        if (command[1].equalsIgnoreCase("HandCards")) {
             String[] cards = command[2].split("§");
             String[] colours = new String[5];
             int[] numbers = new int[5];

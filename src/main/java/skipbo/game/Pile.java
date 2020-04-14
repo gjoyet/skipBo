@@ -58,10 +58,10 @@ public class Pile {
 
         ArrayList<Color> colours = new ArrayList<Color>();     // Save five different colours
         //colours.add(Color.yellow);      // Color index Nr. 0
-        colours.add(Color.orange);      // Color index Nr. 1
-        colours.add(Color.green);       // Color index Nr. 2
-        colours.add(Color.red);         // Color index Nr. 3
-        colours.add(Color.cyan);        // Color index Nr. 4
+        colours.add(Color.orange);      // Color index Nr. 0
+        colours.add(Color.green);       // Color index Nr. 1
+        colours.add(Color.red);         // Color index Nr. 2
+        colours.add(Color.cyan);        // Color index Nr. 3
 
         for (int j = 0; j < 12; j++) {        // Add Normal Cards (144 pcs.)
             for (int i = 0; i < 12; i++) {

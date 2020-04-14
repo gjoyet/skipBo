@@ -181,6 +181,16 @@ public class Game implements Runnable {
     }
 
     /**
+     * Checks if player's hand cards are empty. If yes, fills the player's hand again.
+     * @param player The player's that currently playing
+     */
+    public void checkHandCards(Player player){
+        if(player.getHandCards().isEmpty()){
+            fillHandCards(player);
+        }
+    }
+
+    /**
      * Method playToMiddle processes which player, which Card index they wish to play
      * and which buildPile they wish to play to and carries out the command if valid.
      * Furthermore, removes the specified card from their hand cards.
@@ -215,10 +225,6 @@ public class Game implements Runnable {
                 specBuildPile.add(card);
                 currentPlayer.getHandCards().remove(card);
 
-                if(currentPlayer.getHandCards().isEmpty()){
-                    fillHandCards(currentPlayer);
-                }
-
                 checkBuildPileAndPrint(card, specBuildPile, currentPlayer);
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
                         + piles.handCardPrint(currentPlayer));
@@ -229,10 +235,6 @@ public class Game implements Runnable {
                 card.number = 1;
                 specBuildPile.add(card);
                 currentPlayer.getHandCards().remove(card);
-
-                if(currentPlayer.getHandCards().isEmpty()){
-                    fillHandCards(currentPlayer);
-                }
 
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
                         + piles.handCardPrint(currentPlayer));
@@ -253,10 +255,6 @@ public class Game implements Runnable {
                 specBuildPile.add(card);
                 currentPlayer.getHandCards().remove(card);
 
-                if(currentPlayer.getHandCards().isEmpty()){
-                    fillHandCards(currentPlayer);
-                }
-
                 checkBuildPileAndPrint(card, specBuildPile, currentPlayer);  //check if buildPile is full and print build pile
 
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hands cards are now: "
@@ -269,10 +267,6 @@ public class Game implements Runnable {
                 card.number = topCard.number + 1;
                 specBuildPile.add(card);
                 currentPlayer.getHandCards().remove(card);
-
-                if(currentPlayer.getHandCards().isEmpty()){
-                    fillHandCards(currentPlayer);
-                }
 
                 checkBuildPileAndPrint(card, specBuildPile, currentPlayer); //check if buildPile is full and should be emptied.
 

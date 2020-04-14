@@ -349,14 +349,30 @@ public class GameGraphic extends JButton implements ActionListener {
         }
     }
 
-    //TODO
     //returns discard pile button of enemy
     CardButton getEnemyButton(String name, int index) {
-        return null;
+        CardButton button;
+        if (e1.getName().equals(name)) {
+            button = e1_discard[index-1];
+        } else if (e2.getName().equals(name)) {
+            button = e2_discard[index-1];
+        } else {
+            button = e3_discard[index-1];
+        }
+        return button;
     }
+
     //returns stock pile button of enemy
     CardButton getEnemyButton(String name) {
-        return null;
+        CardButton button;
+        if (e1.getName().equals(name)) {
+            button = e1_stock;
+        } else if (e2.getName().equals(name)) {
+            button = e2_stock;
+        } else {
+            button = e3_stock;
+        }
+        return button;
     }
 
 }

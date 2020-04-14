@@ -305,8 +305,9 @@ public class GameGraphic extends JButton implements ActionListener {
             stock.addCard(colour2, number2);
         }
     }
+
     // Play from discard pile to a build pile
-    void discardToBuild(int i, int j, String name, String colour, int number) {
+    void discardToBuild(int i, int j, String name) {
         if (name.equals(chatGraphic.playerName)) {
             CardButton discardCard = discard[i-1];
             CardButton buildCard = build[j-1];

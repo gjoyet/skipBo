@@ -57,6 +57,11 @@ class CardIcons {
     }
 
     ImageIcon getIcon(String color, int number, String size) {
+
+        if (color == null || number == -1) {
+            return null;
+        }
+
         int i = 0;
 
         switch (color) {

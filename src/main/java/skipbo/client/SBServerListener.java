@@ -40,7 +40,7 @@ class SBServerListener implements Runnable {
                 //clientLog.debug(input);
             } catch (IOException e) {
                 clientLog.warn("Error with reading input from server");
-            } catch (NoCommandException | NullPointerException | IllegalArgumentException e) {
+            } catch (NoCommandException | IllegalArgumentException e) {
                 clientLog.warn("Error with network protocol command");
             }
         }
@@ -60,13 +60,11 @@ class SBServerListener implements Runnable {
                 chatGraphic.printChatMessage(command[2]);
                 break;
             case CHNGE:
-                chatGraphic.changePlayerName(command[2]);
-                break;
             case SETTO:
                 chatGraphic.changePlayerName(command[2]);
+                break;
             case PUTTO:
                 putTo(command);
-                //TODO
                 break;
             case LGOUT:
                 logOut();
@@ -77,8 +75,8 @@ class SBServerListener implements Runnable {
             case NWGME:
                 newGame(command);
                 break;
-            case DISPL:
-                chatGraphic.printCommandList();
+            case CHECK:
+                check(command);
                 break;
             default:
                 throw new NoCommandException();
@@ -89,12 +87,22 @@ class SBServerListener implements Runnable {
         String[] argument = command[2].split("§");
         if (command[1].equals("Response")) {
             if (argument[0].equals("H")) {
-
+                if (argument[2].equals("B")) {
+                    chatGraphic.getGameGraphic().handToBuild(Integer.parseInt(argument[1]),
+                            Integer.parseInt(argument[3]), argument[4], argument[5], Integer.parseInt(argument[6]));
+                } else { //2nd pile must be Discard
+                    chatGraphic.getGameGraphic().handToDiscard(Integer.parseInt(argument[1]),
+                            Integer.parseInt(argument[3]), argument[4], argument[5], Integer.parseInt(argument[6]));
+                }
             } else { //pile must be Discard
-
+                chatGraphic.getGameGraphic().discardToBuild(Integer.parseInt(argument[1]),
+                        Integer.parseInt(argument[3]), argument[4], argument[5], Integer.parseInt(argument[6]));
             }
+        } else {
+            chatGraphic.getGameGraphic().stockToBuild(Integer.parseInt(argument[1]),
+                    Integer.parseInt(argument[3]), argument[4], argument[5], Integer.parseInt(argument[6]),
+                    argument[7], Integer.parseInt(argument[8]));
         }
-        //chatGraphic.printInfoMessage("Someone played a card");
     }
 
     void newGame(String[] command) {
@@ -106,6 +114,19 @@ class SBServerListener implements Runnable {
         } else if (command[1].equals("Cards")) {
             String[] cards = command[2].split("§");
             chatGraphic.getGameGraphic().setInitialCards(cards);
+        }
+    }
+
+    private void check(String[] command) {
+        if (command[1].equals("HandCards")) {
+            String[] cards = command[2].split("§");
+            String[] colours = new String[5];
+            int[] numbers = new int[5];
+            for (int i = 0, j = 0; i < 5; i++) {
+                colours[i] = cards[j++];
+                numbers[i] = Integer.parseInt(cards[j++]);
+            }
+            chatGraphic.getGameGraphic().updateHandCards(colours, numbers);
         }
     }
 

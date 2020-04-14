@@ -233,7 +233,7 @@ public class Game implements Runnable {
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your stock card is: " +
                         stockCard.number);
                 return true;
-            } else if (card.col == Color.CYAN) {
+            } else if (card.col == Color.cyan) {
                 card.number = 1;
                 specBuildPile.add(card);
                 currentPlayer.getHandCards().remove(card);
@@ -265,7 +265,7 @@ public class Game implements Runnable {
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your stock card is: " +
                         stockCard.number);
                 return true;
-            } else if (card.col == Color.CYAN) {      //if Joker card
+            } else if (card.col == Color.cyan) {      //if Joker card
                 card.number = topCard.number + 1;
                 specBuildPile.add(card);
                 currentPlayer.getHandCards().remove(card);
@@ -415,7 +415,7 @@ public class Game implements Runnable {
                         stockCard.number);
                 checkStockPile(currentPlayer);
                 return stockPile.get(stockPile.size() - 1);
-            } else if (stockCard.col == Color.CYAN) { //if stock card is Joker card
+            } else if (stockCard.col == Color.cyan) { //if stock card is Joker card
                 stockCard.number = 1;
                 specBuildPile.add(stockCard);
                 currentPlayer.getStockPile().remove(stockCard);
@@ -454,7 +454,7 @@ public class Game implements Runnable {
                         currentPlayer.getStockPile().get(currentPlayer.getStockPile().size()-1).number);
 
                 return stockPile.get(stockPile.size() - 1);
-            } else if (stockCard.col == Color.CYAN) {      // if Skip Bo card
+            } else if (stockCard.col == Color.cyan) {      // if Skip Bo card
                 stockCard.number = 1;
                 specBuildPile.add(stockCard);
                 currentPlayer.getHandCards().remove(stockCard);
@@ -536,7 +536,7 @@ public class Game implements Runnable {
                         + piles.handCardPrint(currentPlayer));
 
                 return true;
-            } else if (card.col == Color.CYAN) {       //if Joker card, then make it 1 and add
+            } else if (card.col == Color.cyan) {       //if Joker card, then make it 1 and add
                 card.number = 1;
                 specBuildPile.add(card);
                 discardPile.remove(card);
@@ -566,7 +566,7 @@ public class Game implements Runnable {
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hands cards are now: "
                         + piles.handCardPrint(currentPlayer));
                 return true;
-            } else if (card.col == Color.CYAN) {       //if Joker card
+            } else if (card.col == Color.cyan) {       //if Joker card
                 card.number = (topCard.number + 1);
                 specBuildPile.add(card);
                 discardPile.remove(card);

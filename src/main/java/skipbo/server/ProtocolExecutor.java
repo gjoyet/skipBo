@@ -23,7 +23,7 @@ public class ProtocolExecutor {
 
     public ProtocolExecutor() { }
 
-    ProtocolExecutor(String[] input, SBListener sbL) {
+    public ProtocolExecutor(String[] input, SBListener sbL) {
         this.input = input;
         this.sbL = sbL;
     }
@@ -284,10 +284,10 @@ public class ProtocolExecutor {
         } finally {}
     }
 
-    void check() throws NoCommandException {
+    public void check(String option) {
         String cards;
         try {
-            switch (input[1]) {
+            switch (option) {
                 case "HandCards":
                     cards = sbL.player.getGame().getPiles().getHandCardsForProtocol(sbL.player);
                     servLog.debug("Sending CHECK Handcards command with arguments = " + cards);
@@ -302,7 +302,7 @@ public class ProtocolExecutor {
                     cards = sbL.player.getGame().getPiles().getHandCardsForProtocol(sbL.player);
                     servLog.debug("Sending CHECK AllCards command with arguments = " + cards);
                     sbL.getPW().println("CHECK§AllCards§" + cards);
-                default: throw new NoCommandException(input[0], input[1]);
+                default: servLog.debug("Not a valid CHECK option.");
             }
         } finally {}
     }

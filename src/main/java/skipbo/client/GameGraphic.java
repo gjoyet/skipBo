@@ -364,7 +364,12 @@ public class GameGraphic extends JButton implements ActionListener {
     * */
 
     void updateHandCards(String[] colours, int[] numbers) {
+        clientLog.debug("(Graphic) length of colours = " + colours.length);
+        clientLog.debug("(Graphic) length of numbers = " + numbers.length);
         for (int i = 0; i < colours.length; i++) {
+            clientLog.debug("index of card to be updated: " + i);
+            clientLog.debug("colour to be added: " + colours[i]);
+            clientLog.debug("number to be added: " + numbers[i]);
             hand[i].setIcon(cardIcons.getIcon(colours[i], numbers[i], "M"));
             hand[i].resetCards();
             hand[i].addCard(colours[i], numbers[i]);

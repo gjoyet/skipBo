@@ -103,7 +103,10 @@ public class SBListener implements Runnable {
         return this.pw;
     }
 
-    public ArrayList<Player> getGameLobby() { return this.player.getGame().players; }
+    public ArrayList<Player> getGameLobby() {
+        if(this.player.getGame() != null) return this.player.getGame().players;
+        else return null;
+    }
 
 }
 

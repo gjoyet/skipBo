@@ -109,15 +109,19 @@ class SBServerListener implements Runnable {
                     Integer.parseInt(argument[8]));
         } else { //must be Update
             if (argument.length == 3) { //Discard to build
+                clientLog.debug("updated discard to build");
                 chatGraphic.getGameGraphic().discardToBuild(Integer.parseInt(argument[0]), Integer.parseInt(argument[1]),
                         argument[2]);
             } else if (argument.length == 4) { //Stock to build
+                clientLog.debug("updated stock to build");
                 chatGraphic.getGameGraphic().stockToBuild(Integer.parseInt(argument[0]), argument[1], argument[2],
                         Integer.parseInt(argument[3]));
             } else if (argument[0].equals("D")) { //Hand to discard
+                clientLog.debug("updated hand to discard");
                 chatGraphic.getGameGraphic().handToDiscard(Integer.parseInt(argument[1]), Integer.parseInt(argument[2]),
                         argument[3], argument[4], Integer.parseInt(argument[5]));
             } else { //Hand to build
+                clientLog.debug("updated hand to build");
                 chatGraphic.getGameGraphic().handToBuild(Integer.parseInt(argument[1]), Integer.parseInt(argument[2]),
                         argument[3], argument[4], Integer.parseInt(argument[5]));
             }

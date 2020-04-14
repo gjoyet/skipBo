@@ -368,6 +368,7 @@ public class GameGraphic extends JButton implements ActionListener {
             hand[i].removeColour();
             hand[i].removeNumber();
             hand[i].addCard(colours[i], numbers[i]);
+            clientLog.debug("updated hand card " + i);
         }
     }
 

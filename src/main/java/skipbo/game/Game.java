@@ -169,7 +169,12 @@ public class Game implements Runnable {
 
         displayDiscard(ply);
 
-        ply.getSBL().getPW().println("PRINT§Terminal§The build decks are: " + Arrays.toString(piles.buildPilesPrint()));
+        String [] bPiles = piles.buildPilesPrint();
+        for(String str: bPiles){
+            ply.getSBL().getPW().println("PRINT§Terminal§" + str);
+        }
+
+        //ply.getSBL().getPW().println("PRINT§Terminal§The build decks are: " + Arrays.toString(piles.buildPilesPrint()));
 
         ply.getSBL().getPW().println("PRINT§Terminal§Your hand cards are: " + piles.handCardPrint(ply));
 

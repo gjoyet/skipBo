@@ -208,9 +208,11 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     }
 
     void endGame(String name) {
-        /*JOptionPane winner = new JOptionPane(contentPane, "The winner is: " + name + "!",
-                JOptionPane.INFORMATION_MESSAGE)*/
+        JOptionPane.showMessageDialog(contentPane, "The winner is: " + name + "!", "Game is finished.",
+                JOptionPane.INFORMATION_MESSAGE,
+                new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo.png"))));
         gameGraphic = null;
+        repaint();
         startB.setEnabled(true);
         readyB.setEnabled(true);
     }

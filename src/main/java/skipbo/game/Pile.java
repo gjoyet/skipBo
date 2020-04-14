@@ -136,7 +136,7 @@ public class Pile {
         for (int i = 0; i < 4; i++) {
             ArrayList<Card> specBuildPile = buildPiles.get(i);
             if (specBuildPile.isEmpty()) {
-                str.append("Build pile ").append(i+1).append(" is : [ ]").append("\n");
+                str.append("Build pile ").append(i+1).append(" is: [ ]").append("\n");
             } else {
                 str.append("Build pile ").append(i+1).append(" is: [").append(specBuildPile.get(specBuildPile.size() - 1).number).append("]").append("\n");
             }

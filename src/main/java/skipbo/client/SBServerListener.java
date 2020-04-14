@@ -99,9 +99,8 @@ class SBServerListener implements Runnable {
                         Integer.parseInt(argument[3]), argument[4], argument[5], Integer.parseInt(argument[6]));
             }
         } else {
-            chatGraphic.getGameGraphic().stockToBuild(Integer.parseInt(argument[1]),
-                    Integer.parseInt(argument[3]), argument[4], argument[5], Integer.parseInt(argument[6]),
-                    argument[7], Integer.parseInt(argument[8]));
+            chatGraphic.getGameGraphic().stockToBuild(Integer.parseInt(argument[3]), argument[4], argument[5],
+                    Integer.parseInt(argument[6]), argument[7], Integer.parseInt(argument[8]));
         }
     }
 

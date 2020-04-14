@@ -128,7 +128,7 @@ public class Game implements Runnable {
             tempPlayer.getSBL().getPW().println("PRINT§Terminal§Your Stock card is: " + topCard.number);
         }
         for(Player p : players) {
-            String cards = piles.getCardsForProtocol(p);
+            String cards = piles.getAllCardsForProtocol(p, this);
             servLog.debug("NWGME command with cards: " + cards);
             p.getSBL().getPW().println("NWGME§Cards§" + cards);
         }

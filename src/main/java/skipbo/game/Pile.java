@@ -104,13 +104,24 @@ public class Pile {
     /**
      * @return A String containing all hand cards and the top stock card of a player, formatted for network protocol.
      */
-    public String getCardsForProtocol(Player player) {
+    public String getAllCardsForProtocol(Player player, Game game) {
         StringBuilder cards = new StringBuilder();
         for(Card c : player.getHandCards()) {
             cards.append(c.getColString()).append("§").append(c.number).append("§");
         }
-        Card stockTopCard = player.getStockPile().get(player.getStockPile().size()-1);
-        cards.append(stockTopCard.getColString()).append("§").append(stockTopCard.number);
+        for(Player p : game.players) {
+            Card stockTopCard = p.getStockPile().get(p.getStockPile().size() - 1);
+            cards.append(p.getName() + "§" + stockTopCard.getColString() + "§" + stockTopCard.number + "§");
+        }
+
+        return cards.toString();
+    }
+
+    public String getHandCardsForProtocol(Player player) {
+        StringBuilder cards = new StringBuilder();
+        for(Card c : player.getHandCards()) {
+            cards.append(c.getColString()).append("§").append(c.number).append("§");
+        }
 
         return cards.toString();
     }

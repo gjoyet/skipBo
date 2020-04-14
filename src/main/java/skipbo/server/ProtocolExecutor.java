@@ -283,12 +283,12 @@ public class ProtocolExecutor {
     }
 
     void check() throws NoCommandException {
+        String cards;
         try {
             switch (input[1]) {
                 case "HandCards":
-                    String cards = sbL.player.getGame().getPiles().getCardsForProtocol(sbL.player);
-                    cards = cards.substring(0, cards.length()-3);
-                    servLog.debug("Sending CHECK Handcards command with cards = " + cards);
+                    cards = sbL.player.getGame().getPiles().getHandCardsForProtocol(sbL.player);
+                    servLog.debug("Sending CHECK Handcards command with arguments = " + cards);
                     sbL.getPW().println("CHECK§Handcards§" + cards);
                     break;
                 case "StockCard":
@@ -296,6 +296,10 @@ public class ProtocolExecutor {
                     servLog.debug("Sending CHECK Stockcard command with arguments: "
                                                                 + stockC.getColString() + "§" + stockC.number);
                     sbL.getPW().println("CHECK§Stockcard§" + stockC.getColString() + "§" + stockC.number);
+                case "AllCards":
+                    cards = sbL.player.getGame().getPiles().getHandCardsForProtocol(sbL.player);
+                    servLog.debug("Sending CHECK AllCards command with arguments = " + cards);
+                    sbL.getPW().println("CHECK§AllCards§" + cards);
                 default: throw new NoCommandException(input[0], input[1]);
             }
         } finally {}
@@ -330,6 +334,7 @@ public class ProtocolExecutor {
     public void gameEnding(Game game, Player winner) {
         for(Player p : game.players) {
             p.changeStatus(Status.WAITING);
+            p.changeGame(null);
         }
         if(winner != null) {
             sendAll("ENDGM§Winner§" + winner.getName(), winner.getSBL());

@@ -256,7 +256,7 @@ public class ProtocolExecutor {
                         if (stockPileTopCard != null) {
                             sbL.getPW().println("PUTTO§StockResponse§" + input[2] + "§" + sbL.player.getName()
                                     + "§" + stockPileTopCard.getColString() + "§" + stockPileTopCard.number);
-                            sbL.getPW().println("PUTTO§Response§" + input[2]);
+                            this.check("HandCards");
                         } else {
                             sbL.getPW().println("Error"); // TODO: Add error message
                         }
@@ -271,6 +271,7 @@ public class ProtocolExecutor {
                     case "HD":
                         if (sbL.player.getGame().playToDiscard(sbL.player, iF, iT)) {
                             sbL.getPW().println("PUTTO§Response§" + input[2] + "§" + sbL.player.getName());
+                            this.check("HandCards");
                         } else {
                             sbL.getPW().println("Error"); // TODO: Add error message
                         }

@@ -283,7 +283,7 @@ public class GameGraphic extends JButton implements ActionListener {
             discardCard.addCard(col, num);
             handCard.setIcon(null);
             chatGraphic.getClientListener().pw.println(Protocol.PUTTO + "§Update§D§" + i + "§" + j + "§" + name + "§" +
-                    colour + "§" + number);
+                    discardCard.getTopColour() + "§" + discardCard.getTopNumber());
         } else {
             CardButton discard =  getEnemyButton(name, j);
             discard.addCard(colour, number);
@@ -299,7 +299,7 @@ public class GameGraphic extends JButton implements ActionListener {
             buildCard.setIcon(cardIcons.getIcon(handCard.removeColour(), handCard.removeNumber(), "L"));
             handCard.setIcon(null);
             chatGraphic.getClientListener().pw.println(Protocol.PUTTO + "§Update§B§" + i + "§" + j + "§" + name + "§" +
-                    colour + "§" + number);
+                    buildCard.getTopColour() + "§" + buildCard.getTopNumber());
         } else {
             CardButton buildCard = build[j-1];
             buildCard.setIcon(cardIcons.getIcon(colour, number, "L"));

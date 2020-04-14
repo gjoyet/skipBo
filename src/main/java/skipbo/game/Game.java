@@ -105,7 +105,7 @@ public class Game implements Runnable {
             tempPlayer.getSBL().getPW().println("PRINT§Terminal§Game is starting...");
             Random random = new Random();
             for (int j = 0; j < 5; j++) {   //ONLY FOR DEMO PURPOSES
-                Card c = new Card(j + 1, Color.BLACK);
+                Card c = new Card(j + 1, Color.green);
                 tempPlayer.getHandCards().add(c);
             }
             /*
@@ -118,7 +118,7 @@ public class Game implements Runnable {
             tempPlayer.getSBL().getPW().println("PRINT§Terminal§Your Hand cards are: " + piles.handCardPrint(tempPlayer));
 
             for (int k = 2; k >= 0; k--) {   //FOR TESTING AND DEMO PURPOSE
-                Card c = new Card(k + 6, Color.BLACK);
+                Card c = new Card(k + 6, Color.red);
                 tempPlayer.getStockPile().add(c);
             }
 

@@ -57,7 +57,7 @@ public class Pile {
         int colourCount = 0;
 
         ArrayList<Color> colours = new ArrayList<Color>();     // Save five different colours
-        colours.add(Color.yellow);      // Color index Nr. 0
+        //colours.add(Color.yellow);      // Color index Nr. 0
         colours.add(Color.orange);      // Color index Nr. 1
         colours.add(Color.green);       // Color index Nr. 2
         colours.add(Color.red);         // Color index Nr. 3
@@ -69,10 +69,10 @@ public class Pile {
                 this.drawPile.add(card);
             }
             colourCount++;
-            if (colourCount == 3) colourCount = 0;
+            if (colourCount == 2) colourCount = 0;
         }
         for (int l = 0; l < 18; l++) {       // Add Special Cards (18 pcs.)
-            Card card = new Card(colours.get(4));
+            Card card = new Card(colours.get(3));
             this.drawPile.add(card);
         }
 

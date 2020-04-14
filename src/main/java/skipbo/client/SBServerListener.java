@@ -105,8 +105,8 @@ class SBServerListener implements Runnable {
                         Integer.parseInt(argument[3]), argument[4]);
             }
         } else if (command[1].equals("StockResponse")) {
-            chatGraphic.getGameGraphic().stockToBuild(Integer.parseInt(argument[0]), argument[1], argument[2],
-                    Integer.parseInt(argument[3]), "", -1);
+            chatGraphic.getGameGraphic().stockToBuild(Integer.parseInt(argument[3]), argument[4], argument[5],
+                    Integer.parseInt(argument[6]), "", -1);
         } else { //must be Update
             if (argument.length == 3) { //Discard to build
                 clientLog.debug("updated discard to build");

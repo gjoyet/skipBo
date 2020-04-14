@@ -631,6 +631,7 @@ public class Game implements Runnable {
      * @param winner (The player that has won the game)
      */
     public void endGame(Player winner) {
+        servLog.info("Game ending.");
         gameRunning = false;
         this.winner = winner;
         if(winner != null) {

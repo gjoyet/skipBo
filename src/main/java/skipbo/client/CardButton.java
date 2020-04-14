@@ -6,11 +6,13 @@ import java.util.ArrayList;
 public class CardButton extends JButton {
 
     private ArrayList<ImageIcon> icons;
-    private ArrayList<String> colors = new ArrayList<>();
-    private ArrayList<Integer> numbers = new ArrayList<>();
+    private ArrayList<String> colors;
+    private ArrayList<Integer> numbers;
 
     CardButton() {
         super();
+        colors = new ArrayList<>();
+        numbers = new ArrayList<>();
     }
 
     void addCard(String color, int number) {

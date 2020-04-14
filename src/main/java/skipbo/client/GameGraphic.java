@@ -2,6 +2,7 @@ package skipbo.client;
 
 import skipbo.game.Game;
 import skipbo.game.Player;
+import skipbo.server.Protocol;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -276,12 +277,17 @@ public class GameGraphic extends JButton implements ActionListener {
         if (name.equals(chatGraphic.playerName)) {
             CardButton handCard = hand[i - 1];
             CardButton discardCard = discard[j - 1];
-
             String col = handCard.removeColour();
             int num = handCard.removeNumber();
             discardCard.setIcon(cardIcons.getIcon(col, num, "L"));
             discardCard.addCard(col, num);
             handCard.setIcon(null);
+            chatGraphic.getClientListener().pw.println(Protocol.PUTTO + "§Update§D§" + i + "§" + j + "§" + name + "§" +
+                    colour + "§" + number);
+        } else {
+            CardButton discard =  getEnemyButton(name, j);
+            discard.addCard(colour, number);
+            discard.setIcon(cardIcons.getIcon(colour, number, "S"));
         }
     }
 
@@ -290,33 +296,59 @@ public class GameGraphic extends JButton implements ActionListener {
         if (name.equals(chatGraphic.playerName)) {
             CardButton handCard = hand[i-1];
             CardButton buildCard = build[j-1];
-
             buildCard.setIcon(cardIcons.getIcon(handCard.removeColour(), handCard.removeNumber(), "L"));
             handCard.setIcon(null);
+            chatGraphic.getClientListener().pw.println(Protocol.PUTTO + "§Update§B§" + i + "§" + j + "§" + name + "§" +
+                    colour + "§" + number);
+        } else {
+            CardButton buildCard = build[j-1];
+            buildCard.setIcon(cardIcons.getIcon(colour, number, "L"));
         }
     }
 
     // Play the stock card to a build pile
-    void stockToBuild(int j, String name, String colour1, int number1, String colour2, int number2) {
+    void stockToBuild(int j, String name, String colour, int number) {
         if (name.equals(chatGraphic.playerName)) {
             CardButton buildCard = build[j-1];
             buildCard.setIcon(cardIcons.getIcon(stock.removeColour(), stock.removeNumber(), "L"));
-            stock.setIcon(cardIcons.getIcon(colour2, number2, "L"));
-            stock.addCard(colour2, number2);
+            stock.setIcon(cardIcons.getIcon(colour, number, "L"));
+            stock.addCard(colour, number);
+            chatGraphic.getClientListener().pw.println(Protocol.PUTTO + "§Update§" + j + "§" + name + "§" + colour + "§" + number);
+        } else {
+            CardButton stockCard = getEnemyButton(name);
+            CardButton buildCard = build[j-1];
+            buildCard.setIcon(cardIcons.getIcon(stockCard.removeColour(), stockCard.removeNumber(), "L"));
+            stockCard.addCard(colour, number);
+            stockCard.setIcon(cardIcons.getIcon(colour, number, "S"));
         }
     }
 
     // Play from discard pile to a build pile
     void discardToBuild(int i, int j, String name) {
+        CardButton discardCard;
+        CardButton buildCard = build[j-1];
         if (name.equals(chatGraphic.playerName)) {
-            CardButton discardCard = discard[i-1];
-            CardButton buildCard = build[j-1];
+            discardCard = discard[i - 1];
             String col = discardCard.removeColour();
             int num = discardCard.removeNumber();
             buildCard.setIcon(cardIcons.getIcon(col, num, "L"));
             discardCard.setIcon(cardIcons.getIcon(discardCard.getTopColour(), discardCard.getTopNumber(), "L"));
+            chatGraphic.getClientListener().pw.println(Protocol.PUTTO +"§Update§" + i + "§" + j + "§" + name);
+        } else {
+            discardCard = getEnemyButton(name, i);
+            String col = discardCard.removeColour();
+            int num = discardCard.removeNumber();
+            buildCard.setIcon(cardIcons.getIcon(col, num, "L"));
+            discardCard.setIcon(cardIcons.getIcon(discardCard.getTopColour(), discardCard.getTopNumber(), "S"));
         }
     }
+
+    /*
+    * dis -> build: 2x index, name = 3
+    * stock -> build: 1x index, name, 1x Card = 4
+    * hand -> build: 2x index, name, 1x Card = 5
+    * hand -> dis: 2x index, name, 1x Card = 5
+    * */
 
     void updateHandCards(String[] colours, int[] numbers) {
         for (int i = 0; i < 5; i++) {

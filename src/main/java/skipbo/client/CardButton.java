@@ -9,10 +9,6 @@ public class CardButton extends JButton {
     private ArrayList<String> colors = new ArrayList<>();
     private ArrayList<Integer> numbers = new ArrayList<>();
 
-    CardButton(Icon icon) {
-        super(icon);
-    }
-
     CardButton() {
         super();
     }

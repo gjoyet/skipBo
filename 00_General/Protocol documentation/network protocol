@@ -31,9 +31,9 @@ Game		NWGME		New		-					starts new game with 4 players
 				StockResponse	Pile from, int i, Pile to, int j, 	tells client to execute the move (as stated above) by player ‚p‘ plus 
 						String name, Colour c1, int x1,	what the new top card of the stockpile is (colour ‚c1‘ and number ‚x1‘)
 						Colour c2, int x2			and which card has been moved (colour ‚c2‘ and number ‚x2‘)
-				Update		String 'name', Pile to, int i, 		Tells client what move the client with name 'name' made. If card was moved from
-						Colour c1, int x1,Pile from, int j,	hand cards, there is no "pile from, int j, colour c2, int x2"
-						Colour c2, int x2
+				Update		pile, index1, index2, name, colour,	Tells client what move the client with name 'name' made. Case discard to build: no pile, colour and number
+						number 					case stock to build: no pile, only 1 index;					
+						
 		CHECK		HandCards	5x {Colour c, int number}		tells client which hand cards the player has
 				StockCard	Colour c, int number			tells client what its top card of the stockpile is
 				AllCards	6x {Colour c, int number}		combination of HandCards and StockCard

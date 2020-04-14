@@ -326,6 +326,7 @@ public class GameGraphic extends JButton implements ActionListener {
 
     // Play the stock card to a build pile. card1 = new stock card, card2 = new build card
     void stockToBuild(int j, String name, String colour1, int number1, String colour2, int number2) {
+        //clientLog.debug("(GameGraphic) entered stock to build method");
         if (name.equals(chatGraphic.playerName)) {
             CardButton buildCard = build[j-1];
             String col = stock.removeColour();

@@ -122,8 +122,8 @@ class SBServerListener implements Runnable {
                         argument[3], argument[4], Integer.parseInt(argument[5]));
             } else { //Must be stock to build
                 clientLog.debug("updated stock to build");
-                chatGraphic.getGameGraphic().stockToBuild(Integer.parseInt(argument[0]), argument[1], argument[2],
-                        Integer.parseInt(argument[3]), argument[4], Integer.parseInt(argument[5]));
+                chatGraphic.getGameGraphic().stockToBuild(Integer.parseInt(argument[1]), argument[2], argument[3],
+                        Integer.parseInt(argument[4]), argument[5], Integer.parseInt(argument[6]));
             }
         }
     }

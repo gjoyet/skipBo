@@ -155,8 +155,8 @@ public class Game implements Runnable {
      */
 
     public void startTurn(int playersTurn) {
-        servLog.debug("Entered startTurn.");
         Player ply = players.get(playersTurn);
+        servLog.debug("Entered startTurn: it's " + ply.getName() + "'s turn.");
         checkDrawPile();
         fillHandCards(ply);
         turnCounter++;

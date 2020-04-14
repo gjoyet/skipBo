@@ -37,7 +37,7 @@ public class Card {
         if(this.col.equals(Color.orange)) c = "B"; // will be blue on GUI
         if(this.col.equals(Color.red)) c = "R"; // will be red on GUI
         if(this.col.equals(Color.cyan)) c = "S"; // special card
-        servLog.debug("getColString returning: " + c);
+        // servLog.debug("getColString returning: " + c);
         return c;
     }
 

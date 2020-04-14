@@ -465,25 +465,25 @@ public class Game implements Runnable {
      * @param buildPileIndex   (The index of the pile that the player wishes to play to)
      */
 
-    public boolean playFromDiscardToMiddle(Player currentPlayer, int discardPileIndex, int buildPileIndex) {
+    public Card playFromDiscardToMiddle(Player currentPlayer, int discardPileIndex, int buildPileIndex) {
         servLog.debug("Entered playFromDiscardToMiddle.");
         ArrayList<Card> discardPile = currentPlayer.getDiscardPile().get(discardPileIndex);
 
         if (buildPileIndex < 0 || buildPileIndex > 3) {       //if bp index is a false index that cannot be true
             currentPlayer.getSBL().getPW().println("PRINT§Terminal§Build Deck Index is invalid!");
             servLog.debug("Invalid build deck index");
-            return false;
+            return null;
         }
         if (discardPileIndex < 0 || discardPileIndex > 3) {   //If Dp index is false
             currentPlayer.getSBL().getPW().println("PRINT§Terminal§Discard deck index is invalid!");
             servLog.debug("Invalid discard deck index");
-            return false;
+            return null;
         }
 
         if (discardPile.isEmpty()) {      //if dp is empty and player tries to play from it
             currentPlayer.getSBL().getPW().println("PRINT§Terminal§That discard pile is empty! Choose another.");
             servLog.debug("Played from an empty discard deck");
-            return false;
+            return null;
         }
         ArrayList<Card> specBuildPile = piles.buildPiles.get(buildPileIndex);
 
@@ -500,7 +500,7 @@ public class Game implements Runnable {
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
                         + piles.handCardPrint(currentPlayer));
 
-                return true;
+                return discardPile.get(discardPile.size()-1);
             } else if (card.col == Color.CYAN) {       //if Joker card, then make it 1 and add
                 card.number = 1;
                 specBuildPile.add(card);
@@ -512,11 +512,11 @@ public class Game implements Runnable {
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
                         + piles.handCardPrint(currentPlayer));
 
-                return true;
+                return discardPile.get(discardPile.size()-1);
             } else {            //invalid move
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§This move is invalid! " +
                         "To play to an empty pile, the card number has to be 1.");
-                return false;
+                return null;
             }
         } else {
             // DONE: joker case added
@@ -530,7 +530,7 @@ public class Game implements Runnable {
 
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hands cards are now: "
                         + piles.handCardPrint(currentPlayer));
-                return true;
+                return discardPile.get(discardPile.size()-1);
             } else if (card.col == Color.CYAN) {       //if Joker card
                 card.number = (topCard.number + 1);
                 specBuildPile.add(card);
@@ -542,11 +542,11 @@ public class Game implements Runnable {
 
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
                         + piles.handCardPrint(currentPlayer));
-                return true;
+                return discardPile.get(discardPile.size()-1);
             } else {          //invalid move
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§This move is invalid! " +
                         "Card number has to be one higher than top card on build pile.");
-                return false;
+                return null;
             }
         }
     }

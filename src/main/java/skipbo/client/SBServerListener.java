@@ -99,25 +99,21 @@ class SBServerListener implements Runnable {
                         Integer.parseInt(argument[3]), argument[4]);
             }
         } else if (argument[0].equals("StockResponse")){
-            chatGraphic.getGameGraphic().stockToBuild(Integer.parseInt(argument[3]), argument[4], argument[5],
-                    Integer.parseInt(argument[6]), argument[7], Integer.parseInt(argument[8]));
+            chatGraphic.getGameGraphic().stockToBuild(Integer.parseInt(argument[3]), argument[4], argument[7],
+                    Integer.parseInt(argument[8]));
         } else { //must be Update
-            if (argument.length < 6) { //must be from HandCard
-                if (argument[1].equals("D")) { //to Discard
-                    chatGraphic.getGameGraphic().handToDiscard(-1, Integer.parseInt(argument[2]), argument[0],
-                            argument[3], Integer.parseInt(argument[4]));
-                } else { //must be to Build
-                    chatGraphic.getGameGraphic().handToBuild(-1, Integer.parseInt(argument[2]), argument[0],
-                    argument[3], Integer.parseInt(argument[4]));
-                }
-            } else {
-                if (argument[5].equals("S")) { //must be Stock to Build
-                    chatGraphic.getGameGraphic().stockToBuild(Integer.parseInt(argument[2]), argument[0], argument[3],
-                            Integer.parseInt(argument[4]), argument[7], Integer.parseInt(argument[8]));
-                } else { //must be from Discard to Build
-                    chatGraphic.getGameGraphic().discardToBuild(Integer.parseInt(argument[6]),
-                            Integer.parseInt(argument[2]), argument[0]);
-                }
+            if (argument.length == 3) { //Discard to build
+                chatGraphic.getGameGraphic().discardToBuild(Integer.parseInt(argument[0]), Integer.parseInt(argument[1]),
+                        argument[2]);
+            } else if (argument.length == 4) { //Stock to build
+                chatGraphic.getGameGraphic().stockToBuild(Integer.parseInt(argument[0]), argument[1], argument[2],
+                        Integer.parseInt(argument[3]));
+            } else if (argument[0].equals("D")) { //Hand to discard
+                chatGraphic.getGameGraphic().handToDiscard(Integer.parseInt(argument[1]), Integer.parseInt(argument[2]),
+                        argument[3], argument[4], Integer.parseInt(argument[5]));
+            } else { //Hand to build
+                chatGraphic.getGameGraphic().handToBuild(Integer.parseInt(argument[1]), Integer.parseInt(argument[2]),
+                        argument[3], argument[4], Integer.parseInt(argument[5]));
             }
         }
     }

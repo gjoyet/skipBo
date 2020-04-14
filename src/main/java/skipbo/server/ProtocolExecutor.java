@@ -192,9 +192,9 @@ public class ProtocolExecutor {
                     newPlayers.add(SBServer.getLobby().getPlayer(i));
                     ++playerCount;
                 }
-                if (playerCount == 2) break;
+                if (playerCount == 4) break;
             }
-            if(playerCount == 2) {
+            if(playerCount == 4) {
                 Game game = new Game(newPlayers);
                 serverLobby.addGame(game);
                 String names = "";
@@ -246,7 +246,7 @@ public class ProtocolExecutor {
                 switch (pF + pT) {
                     case "HB":
                         if (sbL.player.getGame().playToMiddle(sbL.player, iF, iT)) {
-                            sendAll("PUTTO§Response§" + input[2] + "§" + sbL.player.getName(), sbL);
+                            sbL.getPW().println("PUTTO§Response§" + input[2] + "§" + sbL.player.getName());
                         } else {
                             sbL.getPW().println("Error"); // TODO: Add error message
                         }
@@ -256,21 +256,21 @@ public class ProtocolExecutor {
                         if (stockPileTopCard != null) {
                             sbL.getPW().println("PUTTO§StockResponse§" + input[2] + "§" + sbL.player.getName()
                                     + "§" + stockPileTopCard.getColString() + "§" + stockPileTopCard.number);
-                            sendAllExceptOne("PUTTO§Response§" + input[2], sbL);
+                            sbL.getPW().println("PUTTO§Response§" + input[2]);
                         } else {
                             sbL.getPW().println("Error"); // TODO: Add error message
                         }
                         break;
                     case "DB":
                         if (sbL.player.getGame().playFromDiscardToMiddle(sbL.player, iF, iT)) {
-                            sendAll("PUTTO§Response§" + input[2] + "§" + sbL.player.getName(), sbL);
+                            sbL.getPW().println("PUTTO§Response§" + input[2] + "§" + sbL.player.getName());
                         } else {
                             sbL.getPW().println("Error"); // TODO: Add error message
                         }
                         break;
                     case "HD":
                         if (sbL.player.getGame().playToDiscard(sbL.player, iF, iT)) {
-                            sendAll("PUTTO§Response§" + input[2] + "§" + sbL.player.getName(), sbL);
+                            sbL.getPW().println("PUTTO§Response§" + input[2] + "§" + sbL.player.getName());
                         } else {
                             sbL.getPW().println("Error"); // TODO: Add error message
                         }
@@ -278,6 +278,8 @@ public class ProtocolExecutor {
                     default:
                         sbL.getPW().println("PRINT§Terminal§This move is not allowed.");
                 }
+            } else if(input[1].equals("Update")) {
+                sendAllExceptOne("PUTTO§Update§" + input[2], sbL);
             } else throw new NoCommandException(input[0], input[1]);
         } finally {}
     }
@@ -331,13 +333,10 @@ public class ProtocolExecutor {
         } finally {}
     }
 
-    public void gameEnding(Game game, Player winner) {
+    public void gameEnding(Game game) {
         for(Player p : game.players) {
             p.changeStatus(Status.WAITING);
             p.changeGame(null);
-        }
-        if(winner != null) {
-            sendAll("ENDGM§Winner§" + winner.getName(), winner.getSBL());
         }
     }
 

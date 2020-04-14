@@ -262,10 +262,8 @@ public class ProtocolExecutor {
                         }
                         break;
                     case "DB":
-                        Card discPileTopCard = sbL.player.getGame().playFromDiscardToMiddle(sbL.player, iF, iT);
-                        if (discPileTopCard != null) {
-                            sbL.getPW().println("PUTTO§Response§" + input[2] + "§" + sbL.player.getName() + "§" +
-                                                        discPileTopCard.getColString() + "§" + discPileTopCard.number);
+                        if (sbL.player.getGame().playFromDiscardToMiddle(sbL.player, iF, iT)) {
+                            sbL.getPW().println("PUTTO§Response§" + input[2] + "§" + sbL.player.getName());
                         } else {
                             sbL.getPW().println("Error"); // TODO: Add error message
                         }
@@ -335,13 +333,10 @@ public class ProtocolExecutor {
         } finally {}
     }
 
-    public void gameEnding(Game game, Player winner) {
+    public void gameEnding(Game game) {
         for(Player p : game.players) {
             p.changeStatus(Status.WAITING);
             p.changeGame(null);
-        }
-        if(winner != null) {
-            sendAll("ENDGM§Winner§" + winner.getName(), winner.getSBL());
         }
     }
 

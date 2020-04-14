@@ -155,13 +155,13 @@ class SBServerListener implements Runnable {
                 colours[i] = cards[j++];
                 numbers[i] = Integer.parseInt(cards[j++]);
             }
-            String str = "";
+            StringBuilder str = new StringBuilder();
             for(int m = 0; m < colours.length; m++){
-                str = str + colours[m];
+                str.append(colours[m]);
             }
-            String numArr = "";
+            StringBuilder numArr = new StringBuilder();
             for(int k = 0; k <numbers.length;k++){
-                numArr = numArr + numbers[k];
+                numArr.append(numbers[k]);
             }
             clientLog.debug("Num Array = " + numArr);
             clientLog.debug("Colours array = " + str);

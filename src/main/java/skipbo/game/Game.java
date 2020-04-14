@@ -409,7 +409,7 @@ public class Game implements Runnable {
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
                         + piles.handCardPrint(currentPlayer));
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your stock card is: " +
-                        stockCard.number);
+                        currentPlayer.getStockPile().get(currentPlayer.getStockPile().size()-1).number);
 
                 return stockPile.get(stockPile.size() - 1);
             } else {      //if invalid move
@@ -432,7 +432,7 @@ public class Game implements Runnable {
                         + piles.handCardPrint(currentPlayer));
 
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your stock card is: " +
-                        stockCard.number);
+                        currentPlayer.getStockPile().get(currentPlayer.getStockPile().size()-1).number);
 
                 return stockPile.get(stockPile.size() - 1);
             } else if (stockCard.col == Color.CYAN) {      // if Skip Bo card

@@ -5,6 +5,7 @@ import skipbo.server.ProtocolExecutor;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Random;
 
 import static java.lang.Thread.sleep;
@@ -156,20 +157,21 @@ public class Game implements Runnable {
     public void startTurn(int playersTurn) {
         servLog.debug("Entered startTurn.");
         Player ply = players.get(playersTurn);
+        checkDrawPile();
         fillHandCards(ply);
         turnCounter++;
 
         turnFinished = false;
 
-        ply.getSBL().getPW().println("PRINT§Terminal§It's your turn! Your hand cards are now: "
-                + piles.handCardPrint(ply));
-
+        ply.getSBL().getPW().println("PRINT§Terminal§It's your turn!");
         ply.getSBL().getPW().println("PRINT§Terminal§Your stock card is: " +
                 ply.getStockPile().get(ply.getStockPile().size() - 1).number);
 
         displayDiscard(ply);
 
         ply.getSBL().getPW().println("PRINT§Terminal§The build decks are: " + Arrays.toString(piles.buildPilesPrint()));
+
+        ply.getSBL().getPW().println("PRINT§Terminal§Your hand cards are: " + piles.handCardPrint(ply));
 
         new ProtocolExecutor().sendAllExceptOne("PRINT§Terminal§It's " + ply.getName()
                 + "'s turn!", ply.getSBL());
@@ -238,7 +240,7 @@ public class Game implements Runnable {
             if (topCard.number == (card.number - 1)) {
                 specBuildPile.add(card);
                 currentPlayer.getHandCards().remove(card);
-                checkBuildPileAndPrint(card, specBuildPile, currentPlayer); //check if buildPile is full and print build pile
+                checkBuildPileAndPrint(card, specBuildPile, currentPlayer);  //check if buildPile is full and print build pile
 
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hands cards are now: "
                         + piles.handCardPrint(currentPlayer));
@@ -246,7 +248,7 @@ public class Game implements Runnable {
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your stock card is: " +
                         stockCard.number);
                 return true;
-            } else if (card.col == Color.CYAN) {
+            } else if (card.col == Color.CYAN) {      //if Joker card
                 card.number = topCard.number + 1;
                 specBuildPile.add(card);
                 currentPlayer.getHandCards().remove(card);
@@ -257,7 +259,7 @@ public class Game implements Runnable {
 
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your stock card is: " + stockCard.number);
                 return true;
-            } else {    // if (topCard.number != (card.number - 1) && card.col != Color.CYAN)
+            } else {    // not Joker card and not a number higher than the top card on build pile
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Invalid move! The card you play to build deck " +
                         "has to be one number higher than the card on the build deck.");
                 return false;
@@ -266,19 +268,32 @@ public class Game implements Runnable {
         }
     }
 
+    /**
+     * Checks if build pile top card is 12, if yes, removes cards from that build pile and puts it into and empty pile
+     * and prints. If not, prints normally.
+     * @param card card that's played
+     * @param buildPile build pile that's played to
+     * @param player Player whose turn it is
+     */
+
     public void checkBuildPileAndPrint(Card card, ArrayList<Card> buildPile, Player player) {
+        String[] buildPiles = piles.buildPilesPrint();
         if (card.number == 12) {
+            for(String str:buildPiles){
+                new ProtocolExecutor().sendAll("PRINT§Terminal§" + str,player.getSBL());
+            }
+
             for (Card buildPileCard : buildPile) {
                 buildPile.remove(buildPileCard);
+                piles.emptyPile.add(buildPileCard);
+                reshuffle(piles.emptyPile);
             }
-            String[] buildPiles = piles.buildPilesPrint();
             new ProtocolExecutor().sendAll("PRINT§Terminal§The maximum number has been reached; " +
                     "the deck has been reset to: ", player.getSBL());
             for (String s : buildPiles) {
                 new ProtocolExecutor().sendAll("PRINT§Terminal§" + s, player.getSBL());
             }
         } else {
-            String[] buildPiles = piles.buildPilesPrint();
             new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: ", player.getSBL());
             for (String s : buildPiles) {
                 new ProtocolExecutor().sendAll("PRINT§Terminal§" + s, player.getSBL());
@@ -448,7 +463,6 @@ public class Game implements Runnable {
     public boolean checkStockPile(Player player) {
         servLog.info("Entered checkStockPile()");
         if (player.getStockPile().isEmpty()) {
-            //player.getSBL().getPW().println("PRINT§Terminal§Your stock pile is empty!");
             endGame(player);
             return true;
         }
@@ -490,7 +504,7 @@ public class Game implements Runnable {
         Card card = discardPile.get(discardPile.size() - 1);
 
         if (specBuildPile.isEmpty()) {
-            if (card.number == 1) {         // if card number is 1, new pile
+            if (card.number == 1) {                 // if card number is 1, new pile
                 specBuildPile.add(card);
                 discardPile.remove(card);
 
@@ -570,11 +584,22 @@ public class Game implements Runnable {
         }
     }
 
-    //TODO: reshuffle()!
-    public void reshuffle() {
-
+    /**
+     * Reshuffles the empty pile with shuffle method
+     * @param emptyPile the empty pile that's to be shuffled and added to the drawdeck
+     */
+    public void reshuffle(ArrayList<Card> emptyPile) {
+        Collections.shuffle(emptyPile);
     }
 
+    /**
+     * Checks if draw pile is empty, if yes, adds cards from the empty pile into the draw pile.
+     */
+    public void checkDrawPile(){
+        if(piles.drawPile.isEmpty()){
+            piles.drawPile.addAll(piles.emptyPile);
+        }
+    }
     /**
      * Method to be run at the end of a player's turn, which
      * then changes turn from one player to the next.

@@ -111,7 +111,7 @@ public class Pile {
         }
         for(Player p : game.players) {
             Card stockTopCard = p.getStockPile().get(p.getStockPile().size() - 1);
-            cards.append(p.getName() + "§" + stockTopCard.getColString() + "§" + stockTopCard.number + "§");
+            cards.append(p.getName()).append("§").append(stockTopCard.getColString()).append("§").append(stockTopCard.number).append("§");
         }
 
         return cards.toString();

@@ -257,6 +257,9 @@ public class ProtocolExecutor {
                         if (stockPileTopCard != null) {
                             sbL.getPW().println("PUTTO§StockResponse§" + input[2] + "§" + sbL.player.getName()
                                     + "§" + stockPileTopCard.getColString() + "§" + stockPileTopCard.number);
+                            servLog.debug("Sending StockResponse command from server with arguments: " + input[2] + "§"
+                                                        + sbL.player.getName() + "§" + stockPileTopCard.getColString()
+                                                                                    + "§" + stockPileTopCard.number);
                         } else {
                             sbL.getPW().println("Error"); // TODO: Add error message
                         }

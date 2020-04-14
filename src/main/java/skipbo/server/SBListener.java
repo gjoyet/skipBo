@@ -46,7 +46,7 @@ public class SBListener implements Runnable {
                 servLog.warn("Error with reading input from client.");
             }
 
-            this.analyze(input);
+            if(input != null) this.analyze(input);
         }
 
     }

@@ -18,8 +18,6 @@ public class CardButton extends JButton {
     }
 
     void addCard(String color, int number) {
-        clientLog.debug("(CardButton) Color to be added: " + color);
-        clientLog.debug("(CardButton) Number to be added: " + number);
         colors.add(color);
         numbers.add(number);
     }

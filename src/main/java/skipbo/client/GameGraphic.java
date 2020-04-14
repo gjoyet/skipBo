@@ -51,6 +51,8 @@ public class GameGraphic extends JButton implements ActionListener {
 
     private CardIcons cardIcons = new CardIcons( 30, 50, 78, 120);
 
+    boolean finishedMove = false;
+
     GameGraphic(ChatGraphic chatGraphic) {
         this.chatGraphic = chatGraphic;
         setButtonModel();
@@ -296,6 +298,7 @@ public class GameGraphic extends JButton implements ActionListener {
             handCard.setIcon(null);
             chatGraphic.getClientListener().pw.println(Protocol.PUTTO + "§Update§D§" + i + "§" + j + "§" + name + "§" +
                     discardCard.getTopColour() + "§" + discardCard.getTopNumber());
+            finishedMove = true;
         } else {
             CardButton discard =  getEnemyButton(name, j);
             discard.addCard(colour, number);
@@ -308,10 +311,12 @@ public class GameGraphic extends JButton implements ActionListener {
         if (name.equals(chatGraphic.playerName)) {
             CardButton handCard = hand[i-1];
             CardButton buildCard = build[j-1];
-            buildCard.setIcon(cardIcons.getIcon(handCard.removeColour(), handCard.removeNumber(), "L"));
+            String col = handCard.removeColour();
+            int num = handCard.removeNumber();
+            buildCard.setIcon(cardIcons.getIcon(col, num, "L"));
             handCard.setIcon(null);
             chatGraphic.getClientListener().pw.println(Protocol.PUTTO + "§Update§B§" + i + "§" + j + "§" + name + "§" +
-                    buildCard.getTopColour() + "§" + buildCard.getTopNumber());
+                    col + "§" + num);
         } else {
             clientLog.debug("set build for everyone");
             CardButton buildCard = build[j-1];
@@ -319,20 +324,23 @@ public class GameGraphic extends JButton implements ActionListener {
         }
     }
 
-    // Play the stock card to a build pile
-    void stockToBuild(int j, String name, String colour, int number) {
+    // Play the stock card to a build pile. card1 = new stock card, card2 = new build card
+    void stockToBuild(int j, String name, String colour1, int number1, String colour2, int number2) {
         if (name.equals(chatGraphic.playerName)) {
             CardButton buildCard = build[j-1];
-            buildCard.setIcon(cardIcons.getIcon(stock.removeColour(), stock.removeNumber(), "L"));
-            stock.setIcon(cardIcons.getIcon(colour, number, "L"));
-            stock.addCard(colour, number);
-            chatGraphic.getClientListener().pw.println(Protocol.PUTTO + "§Update§" + j + "§" + name + "§" + colour + "§" + number);
+            String col = stock.removeColour();
+            int num = stock.removeNumber();
+            buildCard.setIcon(cardIcons.getIcon(col, num, "L"));
+            stock.setIcon(cardIcons.getIcon(colour1, number1, "L"));
+            stock.addCard(colour1, number1);
+            chatGraphic.getClientListener().pw.println(Protocol.PUTTO + "§Update§S§" + j + "§" + name + "§" +
+                    colour1 + "§" + number1 + "§" + col + "§" + num);
         } else {
             CardButton stockCard = getEnemyButton(name);
             CardButton buildCard = build[j-1];
-            buildCard.setIcon(cardIcons.getIcon(stockCard.removeColour(), stockCard.removeNumber(), "L"));
-            stockCard.addCard(colour, number);
-            stockCard.setIcon(cardIcons.getIcon(colour, number, "S"));
+            buildCard.setIcon(cardIcons.getIcon(colour2, number2, "L"));
+            stockCard.addCard(colour1, number1);
+            stockCard.setIcon(cardIcons.getIcon(colour1, number1, "S"));
         }
     }
 
@@ -358,24 +366,25 @@ public class GameGraphic extends JButton implements ActionListener {
 
     /*
     * dis -> build: 2x index, name = 3
-    * stock -> build: 1x index, name, 1x Card = 4
-    * hand -> build: 2x index, name, 1x Card = 5
-    * hand -> dis: 2x index, name, 1x Card = 5
+    * stock -> build: 1x index, name, 2x Card = 6
+    * hand -> build: 1x Pile, 2x index, name, 1x Card = 6
+    * hand -> dis: 1x Pile, 2x index, name, 1x Card = 6
     * */
 
     void updateHandCards(String[] colours, int[] numbers) {
-        clientLog.debug("(Graphic) length of colours = " + colours.length);
-        clientLog.debug("(Graphic) length of numbers = " + numbers.length);
+/*        clientLog.debug("(Graphic) length of colours = " + colours.length);
+        clientLog.debug("(Graphic) length of numbers = " + numbers.length);*/
         for (int i = 0; i < colours.length; i++) {
-            clientLog.debug("index of card to be updated: " + i);
+/*            clientLog.debug("index of card to be updated: " + i);
             clientLog.debug("colour to be added: " + colours[i]);
-            clientLog.debug("number to be added: " + numbers[i]);
+            clientLog.debug("number to be added: " + numbers[i]);*/
             hand[i].setIcon(cardIcons.getIcon(colours[i], numbers[i], "M"));
             hand[i].resetCards();
             hand[i].addCard(colours[i], numbers[i]);
             clientLog.debug("updated hand card " + i);
         }
         for (int i = 4; i >= colours.length; i--) {
+            hand[i].resetCards();
             hand[i].setIcon(null);
         }
     }
@@ -394,6 +403,7 @@ public class GameGraphic extends JButton implements ActionListener {
             JButton button2Pressed = (JButton) actionEvent.getSource();
             String input = "/play" + button1Pressed.getName() + button2Pressed.getName();
             try {
+                finishedMove = false;
                 chatGraphic.getClientListener().forward(input);
             } catch (IndexOutOfBoundsException | NotACommandException e) {
                 chatGraphic.printErrorMessage(e.getMessage());

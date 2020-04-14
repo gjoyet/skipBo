@@ -106,24 +106,24 @@ class SBServerListener implements Runnable {
             }
         } else if (command[1].equals("StockResponse")) {
             chatGraphic.getGameGraphic().stockToBuild(Integer.parseInt(argument[3]), argument[4], argument[7],
-                    Integer.parseInt(argument[8]));
+                    Integer.parseInt(argument[8]), "", -1);
         } else { //must be Update
             if (argument.length == 3) { //Discard to build
                 clientLog.debug("updated discard to build");
                 chatGraphic.getGameGraphic().discardToBuild(Integer.parseInt(argument[0]), Integer.parseInt(argument[1]),
                         argument[2]);
-            } else if (argument.length == 4) { //Stock to build
-                clientLog.debug("updated stock to build");
-                chatGraphic.getGameGraphic().stockToBuild(Integer.parseInt(argument[0]), argument[1], argument[2],
-                        Integer.parseInt(argument[3]));
             } else if (argument[0].equals("D")) { //Hand to discard
                 clientLog.debug("updated hand to discard");
                 chatGraphic.getGameGraphic().handToDiscard(Integer.parseInt(argument[1]), Integer.parseInt(argument[2]),
                         argument[3], argument[4], Integer.parseInt(argument[5]));
-            } else { //Hand to build
+            } else if (argument[0].equals("B")){ //Hand to build
                 clientLog.debug("updated hand to build");
                 chatGraphic.getGameGraphic().handToBuild(Integer.parseInt(argument[1]), Integer.parseInt(argument[2]),
                         argument[3], argument[4], Integer.parseInt(argument[5]));
+            } else { //Must be stock to build
+                clientLog.debug("updated stock to build");
+                chatGraphic.getGameGraphic().stockToBuild(Integer.parseInt(argument[0]), argument[1], argument[2],
+                        Integer.parseInt(argument[3]), argument[4], Integer.parseInt(argument[5]));
             }
         }
     }
@@ -148,7 +148,7 @@ class SBServerListener implements Runnable {
             for (int i = 0; i < cards.length; i++) {
                 string = string + cards[i];
             }
-            clientLog.debug("cards array= " + string);
+            //clientLog.debug("cards array= " + string);
             String[] colours = new String[cards.length/2];
             int[] numbers = new int[colours.length];
             for (int i = 0, j = 0; i < colours.length; i++) {
@@ -163,10 +163,10 @@ class SBServerListener implements Runnable {
             for(int k = 0; k <numbers.length;k++){
                 numArr.append(numbers[k]);
             }
-            clientLog.debug("Num Array = " + numArr);
-            clientLog.debug("Colours array = " + str);
+            //clientLog.debug("Num Array = " + numArr);
+            //clientLog.debug("Colours array = " + str);
             chatGraphic.getGameGraphic().updateHandCards(colours, numbers);
-            clientLog.debug("got into update method in GameGraphic");
+            //clientLog.debug("got into update method in GameGraphic");
         }
     }
 

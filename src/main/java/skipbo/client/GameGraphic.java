@@ -313,6 +313,7 @@ public class GameGraphic extends JButton implements ActionListener {
             chatGraphic.getClientListener().pw.println(Protocol.PUTTO + "§Update§B§" + i + "§" + j + "§" + name + "§" +
                     buildCard.getTopColour() + "§" + buildCard.getTopNumber());
         } else {
+            clientLog.debug("set build for everyone");
             CardButton buildCard = build[j-1];
             buildCard.setIcon(cardIcons.getIcon(colour, number, "L"));
         }

@@ -290,14 +290,14 @@ public class ProtocolExecutor {
             switch (option) {
                 case "HandCards":
                     cards = sbL.player.getGame().getPiles().getHandCardsForProtocol(sbL.player);
-                    servLog.debug("Sending CHECK Handcards command with arguments = " + cards);
-                    sbL.getPW().println("CHECK§Handcards§" + cards);
+                    servLog.debug("Sending CHECK HandCards command with arguments = " + cards);
+                    sbL.getPW().println("CHECK§HandCards§" + cards);
                     break;
                 case "StockCard":
                     Card stockC = sbL.player.getStockPile().get(sbL.player.getStockPile().size()-1);
-                    servLog.debug("Sending CHECK Stockcard command with arguments: "
+                    servLog.debug("Sending CHECK StockCard command with arguments: "
                                                                 + stockC.getColString() + "§" + stockC.number);
-                    sbL.getPW().println("CHECK§Stockcard§" + stockC.getColString() + "§" + stockC.number);
+                    sbL.getPW().println("CHECK§StockCard§" + stockC.getColString() + "§" + stockC.number);
                 case "AllCards":
                     cards = sbL.player.getGame().getPiles().getHandCardsForProtocol(sbL.player);
                     servLog.debug("Sending CHECK AllCards command with arguments = " + cards);

@@ -155,6 +155,16 @@ class SBServerListener implements Runnable {
                 colours[i] = cards[j++];
                 numbers[i] = Integer.parseInt(cards[j++]);
             }
+            String str = "";
+            for(int m = 0; m < colours.length; m++){
+                str = str + colours[m];
+            }
+            String numArr = "";
+            for(int k = 0; k <numbers.length;k++){
+                numArr = numArr + numbers[k];
+            }
+            clientLog.debug("Num Array = " + numArr);
+            clientLog.debug("Colours array = " + str);
             chatGraphic.getGameGraphic().updateHandCards(colours, numbers);
             clientLog.debug("got into update method in GameGraphic");
         }

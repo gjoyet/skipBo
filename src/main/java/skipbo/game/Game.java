@@ -607,8 +607,8 @@ public class Game implements Runnable {
      * Checks if draw pile is empty, if yes, adds cards from the empty pile into the draw pile.
      */
     public void checkDrawPile(){
-        if(piles.drawPile.isEmpty()){
-            piles.drawPile.addAll(piles.emptyPile);
+        if(this.getDrawPile().isEmpty()){
+            getDrawPile().addAll(piles.emptyPile);
         }
     }
     /**

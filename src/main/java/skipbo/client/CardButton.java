@@ -45,7 +45,7 @@ public class CardButton extends JButton {
     }
 
     void resetCards() {
-        colors = null;
-        numbers = null;
+        colors.clear();
+        numbers.clear();
     }
 }

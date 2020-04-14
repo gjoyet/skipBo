@@ -99,11 +99,11 @@ class SBServerListener implements Runnable {
                     chatGraphic.getGameGraphic().handToDiscard(Integer.parseInt(argument[1]),
                             Integer.parseInt(argument[3]), argument[4], "", -1);
                 }
-            } else { //pile must be Discard
+            } else if (argument[0].equals("D")) { //pile must be Discard
                 chatGraphic.getGameGraphic().discardToBuild(Integer.parseInt(argument[1]),
                         Integer.parseInt(argument[3]), argument[4]);
             }
-        } else if (argument[0].equals("StockResponse")){
+        } else if (command[1].equals("StockResponse")){
             chatGraphic.getGameGraphic().stockToBuild(Integer.parseInt(argument[3]), argument[4], argument[7],
                     Integer.parseInt(argument[8]));
         } else { //must be Update

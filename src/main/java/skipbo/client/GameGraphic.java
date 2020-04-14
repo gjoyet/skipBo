@@ -370,7 +370,7 @@ public class GameGraphic extends JButton implements ActionListener {
             hand[i].addCard(colours[i], numbers[i]);
             clientLog.debug("updated hand card " + i);
         }
-        for (int i = 4; i > 5 - colours.length; i--) {
+        for (int i = 4; i >= colours.length; i--) {
             hand[i].setIcon(null);
         }
     }

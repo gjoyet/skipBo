@@ -23,7 +23,7 @@ class SBServerListener implements Runnable {
 
     SBServerListener(Socket socket, ChatGraphic chatGraphic) throws IOException {
         this.socket = socket;
-        this.br = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
+        this.br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         this.chatGraphic = chatGraphic;
     }
 

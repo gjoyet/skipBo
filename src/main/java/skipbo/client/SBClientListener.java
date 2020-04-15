@@ -24,7 +24,7 @@ class SBClientListener {
      */
     SBClientListener(Socket sock) throws IOException {
         this.sock = sock;
-        pw = new PrintWriter(new OutputStreamWriter(sock.getOutputStream(), StandardCharsets.UTF_8),true);
+        pw = new PrintWriter(sock.getOutputStream(),true);
     }
 
     /**

@@ -103,7 +103,7 @@ public class Game implements Runnable {
         firstPlayer.getHandCards().add(0,new Card(1,Color.green));
         firstPlayer.getHandCards().add(1,new Card(3,Color.red));
         firstPlayer.getHandCards().add(2,new Card(4, Color.red));
-        firstPlayer.getHandCards().add(3, new Card(8, Color.green));
+        firstPlayer.getHandCards().add(3,new Card(8, Color.green));
         firstPlayer.getHandCards().add(4,new Card(Color.cyan));
 
         for (int k = 2; k >= 0; k--) {   //FOR TESTING AND DEMO PURPOSE

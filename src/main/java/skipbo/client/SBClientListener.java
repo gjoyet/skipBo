@@ -1,8 +1,11 @@
 package skipbo.client;
 
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
+
 import skipbo.server.Protocol;
 
 import static skipbo.client.SBClient.clientLog;
@@ -21,7 +24,7 @@ class SBClientListener {
      */
     SBClientListener(Socket sock) throws IOException {
         this.sock = sock;
-        pw = new PrintWriter(sock.getOutputStream(),true);
+        pw = new PrintWriter(new OutputStreamWriter(sock.getOutputStream(), StandardCharsets.UTF_8),true);
     }
 
     /**

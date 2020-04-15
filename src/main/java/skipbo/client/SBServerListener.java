@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 
 import static skipbo.client.SBClient.clientLog;
 
@@ -22,7 +23,7 @@ class SBServerListener implements Runnable {
 
     SBServerListener(Socket socket, ChatGraphic chatGraphic) throws IOException {
         this.socket = socket;
-        this.br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        this.br = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
         this.chatGraphic = chatGraphic;
     }
 

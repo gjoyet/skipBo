@@ -2,11 +2,9 @@ package skipbo.server;
 
 import skipbo.game.Player;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import static skipbo.server.SBServer.servLog;
@@ -26,8 +24,8 @@ public class SBListener implements Runnable {
     SBListener(Socket sock, int id) throws IOException {
         this.sock = sock;
         try {
-            this.pw = new PrintWriter(sock.getOutputStream(), true);
-            this.br = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+            this.pw = new PrintWriter(new OutputStreamWriter(sock.getOutputStream(),StandardCharsets.UTF_8), true);
+            this.br = new BufferedReader(new InputStreamReader(sock.getInputStream(), StandardCharsets.UTF_8));
         } finally {}
         this.running = true;
         this.id = id;

@@ -110,7 +110,7 @@ public class Game implements Runnable {
             Player tempPlayer = players.get(i);
             tempPlayer.getSBL().getPW().println("PRINT§Terminal§Game is starting...");
             Random random = new Random();
-            for (int j = 0; j < 3; j++) {   //ONLY FOR DEMO PURPOSES
+            for (int j = 0; j < 4; j++) {   //ONLY FOR DEMO PURPOSES
                 Card c = new Card(j + 1, Color.green);
                 tempPlayer.getHandCards().add(c);
             }

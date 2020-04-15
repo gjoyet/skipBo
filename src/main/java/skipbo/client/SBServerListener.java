@@ -39,8 +39,7 @@ class SBServerListener implements Runnable {
                 executeCommand(input);
                 //clientLog.debug(input);
             } catch (IOException e) {
-                clientLog.warn("Error with reading input from server. Client is now terminating.");
-                isLoggedIn = false;
+                clientLog.warn("Error with reading input from server");
             } catch (NoCommandException e) {
                 clientLog.warn("Error with network protocol command (NoCommand)");
             } catch (IllegalArgumentException e) {

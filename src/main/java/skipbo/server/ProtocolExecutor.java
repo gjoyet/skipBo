@@ -74,6 +74,10 @@ public class ProtocolExecutor {
         if(input.length < 3) return;
         try {
             if (input[1].equals("Nickname")) {
+                if(sbL.player.getStatus().equals(Status.INGAME)) {
+                    sbL.getPW().println("You cannot change your name during a game.");
+                    return;
+                }
                 String name = input[2];
                 if(name.equals(sbL.player.getName())) {
                     sbL.pw.println("PRINT§Terminal§Name is already " + name + ".");
@@ -89,6 +93,10 @@ public class ProtocolExecutor {
                     throw new NameTakenException(name, sbL);
                 }
             } else if(input[1].equals("Status")) {
+                if(sbL.player.getStatus().equals(Status.INGAME)) {
+                    sbL.getPW().println("You cannot change your status during a game.");
+                    return;
+                }
                 String status = Status.valueOf(input[2]).toString();
                 if(sbL.player.getStatus().equals(Status.valueOf(status))) {
                     sbL.getPW().println("PRINT§Terminal§Status is already: " + status + ".");

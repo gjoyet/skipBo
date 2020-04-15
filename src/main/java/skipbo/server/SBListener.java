@@ -24,7 +24,11 @@ public class SBListener implements Runnable {
     SBListener(Socket sock, int id) throws IOException {
         this.sock = sock;
         try {
+<<<<<<< HEAD
             this.pw = new PrintWriter(new OutputStreamWriter(sock.getOutputStream(),StandardCharsets.UTF_8), true);
+=======
+            this.pw = new PrintWriter(sock.getOutputStream(), true);
+>>>>>>> 805eea6291606725d01959934c944f22410804b1
             this.br = new BufferedReader(new InputStreamReader(sock.getInputStream(), StandardCharsets.UTF_8));
         } finally {}
         this.running = true;

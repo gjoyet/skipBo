@@ -95,7 +95,7 @@ public class DragDropTest extends JFrame implements DropTargetListener, DragGest
     //Dropping
     @Override
     public void dragEnter(DropTargetDragEvent dropTargetDragEvent) {
-        //lientLog.debug("drag Enter");
+        // clientLog.debug("drag Enter");
     }
 
     @Override

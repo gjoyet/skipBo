@@ -101,16 +101,16 @@ public class Game implements Runnable {
         this.piles.gamePiles();   // Game gets complete set of cards
         Player firstPlayer = players.get(0);
         firstPlayer.getHandCards().add(0,new Card(1,Color.green));
-        firstPlayer.getHandCards().add(1,new Card(3,Color.red));
+        firstPlayer.getHandCards().add(1,new Card(3,Color.green));
         firstPlayer.getHandCards().add(2,new Card(4, Color.green));
-        firstPlayer.getHandCards().add(3, new Card(8, Color.blue));
+        firstPlayer.getHandCards().add(3, new Card(8, Color.green));
         firstPlayer.getHandCards().add(4,new Card(Color.cyan));
 
         for (int i = 1; i < players.size(); i++) {     // Players getting their cards
             Player tempPlayer = players.get(i);
             tempPlayer.getSBL().getPW().println("PRINT§Terminal§Game is starting...");
             Random random = new Random();
-            for (int j = 0; j < 4; j++) {   //ONLY FOR DEMO PURPOSES
+            for (int j = 0; j < 3; j++) {   //ONLY FOR DEMO PURPOSES
                 Card c = new Card(j + 1, Color.green);
                 tempPlayer.getHandCards().add(c);
             }

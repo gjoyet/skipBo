@@ -77,7 +77,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
         setTitle("Skip-Bros CHAT");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        setBounds(100, 100, 420, 760);
+        setBounds(100, 100, 420, 780);
 
         contentPane = new JPanel();
         contentPane.setBackground(Color.orange);
@@ -116,12 +116,12 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         contentPane.add(gamesB);
         gamesB.addActionListener(this);
 
-        whosOnB = new JButton("Who`s on?");
+        whosOnB = new JButton("Who's on?");
         whosOnB.setBounds(80, 290, 120,20);
         contentPane.add(whosOnB);
         whosOnB.addActionListener(this);
 
-        leaveB = new JButton("leave");
+        leaveB = new JButton("Leave");
         leaveB.setBounds(210, 290, 120,20);
         contentPane.add(leaveB);
         leaveB.addActionListener(this);

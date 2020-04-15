@@ -145,10 +145,11 @@ class SBServerListener implements Runnable {
         clientLog.debug("got into check method");
         if (command[1].equalsIgnoreCase("HandCards")) {
             String[] cards = command[2].split("§");
-            String string = "";
-            for (int i = 0; i < cards.length; i++) {
-                string = string + cards[i];
-            }
+            //DEBUGGING
+            /*StringBuilder string = new StringBuilder();
+            for (String card : cards) {
+                string.append(card);
+            }*/
             //clientLog.debug("cards array= " + string);
             String[] colours = new String[cards.length/2];
             int[] numbers = new int[colours.length];
@@ -156,14 +157,15 @@ class SBServerListener implements Runnable {
                 colours[i] = cards[j++];
                 numbers[i] = Integer.parseInt(cards[j++]);
             }
-            StringBuilder str = new StringBuilder();
-            for(int m = 0; m < colours.length; m++){
-                str.append(colours[m]);
+            //DEBUGGING
+            /*StringBuilder str = new StringBuilder();
+            for (String colour : colours) {
+                str.append(colour);
             }
             StringBuilder numArr = new StringBuilder();
-            for(int k = 0; k <numbers.length;k++){
-                numArr.append(numbers[k]);
-            }
+            for (int number : numbers) {
+                numArr.append(number);
+            }*/
             //clientLog.debug("Num Array = " + numArr);
             //clientLog.debug("Colours array = " + str);
             chatGraphic.getGameGraphic().updateHandCards(colours, numbers);

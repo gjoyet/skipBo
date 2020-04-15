@@ -99,9 +99,15 @@ public class Game implements Runnable {
         gameRunning = true;
 
         this.piles.gamePiles();   // Game gets complete set of cards
+        Player firstPlayer = players.get(0);
+        firstPlayer.getHandCards().add(0,new Card(1,Color.green));
+        firstPlayer.getHandCards().add(1,new Card(3,Color.red));
+        firstPlayer.getHandCards().add(2,new Card(4, Color.green));
+        firstPlayer.getHandCards().add(3, new Card(8, Color.blue));
+        firstPlayer.getHandCards().add(4,new Card(Color.cyan));
 
-        for (Player tempPlayer : players) {     // Players getting their cards
-
+        for (int i = 1; i < players.size(); i++) {     // Players getting their cards
+            Player tempPlayer = players.get(i);
             tempPlayer.getSBL().getPW().println("PRINT§Terminal§Game is starting...");
             Random random = new Random();
             for (int j = 0; j < 4; j++) {   //ONLY FOR DEMO PURPOSES

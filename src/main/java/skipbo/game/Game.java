@@ -106,6 +106,11 @@ public class Game implements Runnable {
         firstPlayer.getHandCards().add(3, new Card(8, Color.green));
         firstPlayer.getHandCards().add(4,new Card(Color.cyan));
 
+        for (int k = 2; k >= 0; k--) {   //FOR TESTING AND DEMO PURPOSE
+            Card c = new Card(k + 6, Color.red);
+            firstPlayer.getStockPile().add(c);
+        }
+
         for (int i = 1; i < players.size(); i++) {     // Players getting their cards
             Player tempPlayer = players.get(i);
             tempPlayer.getSBL().getPW().println("PRINT§Terminal§Game is starting...");

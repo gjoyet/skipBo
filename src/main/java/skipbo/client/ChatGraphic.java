@@ -31,19 +31,20 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     private GameGraphic gameGraphic;
     String playerName = "";
 
-
+/*
     //test method
-/*    public static void main(String[] args) {
+    public static void main(String[] args) {
         ChatGraphic testChatGraphic = new ChatGraphic();
         GameGraphic gameGraphic = new GameGraphic(testChatGraphic);
         gameGraphic.setGameGraphic();
-    }*/
+    }
 
     //Test constructor
     ChatGraphic() {
         setFrame();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+    */
     /**
      * Constructor for ChatGraphic without client name. Lets client choose their name.
      * @param clientListener
@@ -67,7 +68,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         clientListener.pw.println("SETTO§Nickname§" + name);
         printInfoMessage("Connection successful");
         printCommandList();
-
     }
 
     /**
@@ -81,8 +81,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
         contentPane = getContentPane();
         contentPane.setBackground(Color.orange);
-        //contentPane.setBorder(new EmptyBorder(5,5,5,5));
-        //setContentPane(contentPane);
         contentPane.setLayout(null);
 
         ImageIcon logoI = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo.png")));

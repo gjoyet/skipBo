@@ -1,9 +1,6 @@
 package skipbo.client;
 
-import skipbo.game.Game;
-import skipbo.game.Player;
 import skipbo.server.Protocol;
-
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -17,10 +14,7 @@ import static skipbo.client.SBClient.clientLog;
  */
 public class GameGraphic implements ActionListener {
 
-    //private ChatGraphic chatGraphic;
     private SBClientListener clientListener;
-    private Player player;
-    private Game game;
     private DefaultButtonModel notClickableModel;
     private DefaultButtonModel defaultButtonModel = new DefaultButtonModel();
     private CardButton button1Pressed = null;
@@ -58,28 +52,10 @@ public class GameGraphic implements ActionListener {
     GameGraphic(SBClientListener clientListener, String name) {
         this.clientListener = clientListener;
         playerName = name;
-        //this.chatGraphic = chatGraphic;
         layeredPane = new JLayeredPane();
         layeredPane.setBounds(0, 0, 1150, 800);
         setButtonModel();
         appendDecks();
-        //setGameGraphic();
-    }
-
-    void setGameGraphic() {
-
-/*        chatGraphic.setTitle("Skip-Bros GAME");
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        chatGraphic.setBounds(100, 100, 1150, 800);
-        chatGraphic.setLocationRelativeTo(null);*/
-        //appendDecks();
-
-/*        chatGraphic.setVisible(true);
-        chatGraphic.repaint();*/
-/*
-        this.player = player;
-        this.game = game;
-        */
     }
 
 
@@ -287,10 +263,6 @@ public class GameGraphic implements ActionListener {
         };
     }
 
-    void displayTestCard() {
-        //Icon card = new ImageIcon("")
-    }
-
 
     // Play a hand card to the discard pile
     void handToDiscard(int i, int j, String name, String colour, int number) {
@@ -382,9 +354,6 @@ public class GameGraphic implements ActionListener {
 /*        clientLog.debug("(Graphic) length of colours = " + colours.length);
         clientLog.debug("(Graphic) length of numbers = " + numbers.length);*/
         for (int i = 0; i < colours.length; i++) {
-/*            clientLog.debug("index of card to be updated: " + i);
-            clientLog.debug("colour to be added: " + colours[i]);
-            clientLog.debug("number to be added: " + numbers[i]);*/
             hand[i].setIcon(cardIcons.getIcon(colours[i], numbers[i], "M"));
             hand[i].resetCards();
             hand[i].addCard(colours[i], numbers[i]);

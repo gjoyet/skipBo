@@ -6,6 +6,7 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Objects;
 import static skipbo.client.SBClient.clientLog;
 
@@ -32,6 +33,8 @@ public class GameGraphic implements ActionListener {
     private CardButton[] hand = new CardButton[5];
     private CardButton stock;
     private CardButton[] discard = new CardButton[4];
+
+    private ArrayList<CardButton>[] dis = new ArrayList[4];
 
     //Game piles
     private CardButton[] build = new CardButton[4];
@@ -98,6 +101,25 @@ public class GameGraphic implements ActionListener {
         build[2].setBounds(840, 150, 100, 145);
         build[3].setBounds(950, 150, 100, 145);
 
+
+        /*
+        * Test/Example for multiple buttons on top of each other
+        */
+/*
+        dis[0] = new ArrayList<>();
+        dis[0].add(new CardButton());
+        dis[0].get(dis[0].size()-1).setText("Test1");
+        //dis[0].get(dis[0].size()-1).setLocation(discard[0].getLocation());
+        dis[0].get(dis[0].size()-1).setBounds(620, 400+20*dis[0].size(), 100, 145);
+        layeredPane.add(dis[0].get(dis[0].size()-1), new Integer(dis[0].size()));
+        dis[0].get(dis[0].size()-1).setVisible(true);
+
+        dis[0].add(new CardButton());
+        dis[0].get(dis[0].size()-1).setText("Test2");
+        dis[0].get(dis[0].size()-1).setBounds(620, 400+20*dis[0].size(), 100, 145);
+        layeredPane.add(dis[0].get(dis[0].size()-1), new Integer(dis[0].size()));
+        dis[0].get(dis[0].size()-1).setVisible(true);
+        */
 
         // hand piles
         for (int i = 0; i < hand.length;) {

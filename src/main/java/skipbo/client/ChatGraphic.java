@@ -17,7 +17,7 @@ import static skipbo.client.SBClient.clientLog;
 public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
     private SBClientListener clientListener;
-    JPanel contentPane;
+    private Container contentPane;
     private JTextArea chat;
     private JTextArea inputMes;
     JScrollPane chatScrollPane;
@@ -33,11 +33,11 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
 
     //test method
-    public static void main(String[] args) {
+/*    public static void main(String[] args) {
         ChatGraphic testChatGraphic = new ChatGraphic();
         GameGraphic gameGraphic = new GameGraphic(testChatGraphic);
         gameGraphic.setGameGraphic();
-    }
+    }*/
 
     //Test constructor
     ChatGraphic() {
@@ -79,10 +79,10 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setBounds(100, 100, 420, 780);
 
-        contentPane = new JPanel();
+        contentPane = getContentPane();
         contentPane.setBackground(Color.orange);
-        contentPane.setBorder(new EmptyBorder(5,5,5,5));
-        setContentPane(contentPane);
+        //contentPane.setBorder(new EmptyBorder(5,5,5,5));
+        //setContentPane(contentPane);
         contentPane.setLayout(null);
 
         ImageIcon logoI = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo.png")));
@@ -200,8 +200,11 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
      * Creates the game GUI
      */
     void setGameGraphic() {
-        gameGraphic = new GameGraphic(this);
-        gameGraphic.setGameGraphic();
+        gameGraphic = new GameGraphic(clientListener, playerName);
+        contentPane.add(gameGraphic.getGameComponent());
+        setTitle("Skip-Bros GAME");
+        setBounds(100, 100, 1150, 800);
+        setLocationRelativeTo(null);
         startB.setEnabled(false);
         readyB.setEnabled(false);
         readyB.setText("Ready");
@@ -211,8 +214,9 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         JOptionPane.showMessageDialog(contentPane, "The winner is: " + name + "!", "Game is finished.",
                 JOptionPane.INFORMATION_MESSAGE,
                 new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo.png"))));
-        gameGraphic = null;
-        repaint();
+        contentPane.remove(gameGraphic.getGameComponent());
+        setBounds(100, 100, 420, 780);
+        setTitle("Skip-Bros CHAT");
         startB.setEnabled(true);
         readyB.setEnabled(true);
     }
@@ -308,11 +312,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             } catch (NotACommandException e) {
                 clientLog.warn("Error with /quit command");
             }
-    }
-    }
-
-    SBClientListener getClientListener() {
-        return clientListener;
+        }
     }
 
     GameGraphic getGameGraphic() {

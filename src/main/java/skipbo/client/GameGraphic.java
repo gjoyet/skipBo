@@ -15,9 +15,10 @@ import static skipbo.client.SBClient.clientLog;
 /**
  * Will be class for the Game GUI in the future
  */
-public class GameGraphic extends JButton implements ActionListener {
+public class GameGraphic implements ActionListener {
 
-    private ChatGraphic chatGraphic;
+    //private ChatGraphic chatGraphic;
+    private SBClientListener clientListener;
     private Player player;
     private Game game;
     private DefaultButtonModel notClickableModel;
@@ -25,6 +26,8 @@ public class GameGraphic extends JButton implements ActionListener {
     private CardButton button1Pressed = null;
     private Border defaultBorder = UIManager.getBorder("Button.border");
     private Border clickedBorder = BorderFactory.createLineBorder(Color.BLACK,2);
+    private String playerName;
+    private JLayeredPane layeredPane;
 
     //Opponents
     private JLabel e1;
@@ -51,23 +54,28 @@ public class GameGraphic extends JButton implements ActionListener {
 
     private CardIcons cardIcons = new CardIcons( 30, 50, 78, 120);
 
-    boolean finishedMove = false;
 
-    GameGraphic(ChatGraphic chatGraphic) {
-        this.chatGraphic = chatGraphic;
+    GameGraphic(SBClientListener clientListener, String name) {
+        this.clientListener = clientListener;
+        playerName = name;
+        //this.chatGraphic = chatGraphic;
+        layeredPane = new JLayeredPane();
+        layeredPane.setBounds(0, 0, 1150, 800);
         setButtonModel();
+        appendDecks();
+        //setGameGraphic();
     }
 
     void setGameGraphic() {
 
-        chatGraphic.setTitle("Skip-Bros GAME");
+/*        chatGraphic.setTitle("Skip-Bros GAME");
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         chatGraphic.setBounds(100, 100, 1150, 800);
-        chatGraphic.setLocationRelativeTo(null);
-        appendDecks();
+        chatGraphic.setLocationRelativeTo(null);*/
+        //appendDecks();
 
-        chatGraphic.setVisible(true);
-        chatGraphic.repaint();
+/*        chatGraphic.setVisible(true);
+        chatGraphic.repaint();*/
 /*
         this.player = player;
         this.game = game;
@@ -88,18 +96,18 @@ public class GameGraphic extends JButton implements ActionListener {
         sp.setBounds(490, 380,120,15);
         JLabel bp = new JLabel("Build piles");
         bp.setBounds(620,130,120,15);
-        chatGraphic.getContentPane().add(dp);
-        chatGraphic.getContentPane().add(hp);
-        chatGraphic.getContentPane().add(sp);
-        chatGraphic.getContentPane().add(bp);
+        layeredPane.add(dp);
+        layeredPane.add(hp);
+        layeredPane.add(sp);
+        layeredPane.add(bp);
 
         // Discard and build Piles
 
         for (int i = 0, j = 1; i < discard.length; i++, j++) {
             discard[i] = new CardButton();
             build[i] = new CardButton();
-            chatGraphic.getContentPane().add(discard[i]);
-            chatGraphic.getContentPane().add(build[i]);
+            layeredPane.add(discard[i]);
+            layeredPane.add(build[i]);
             discard[i].addActionListener(this);
             build[i].addActionListener(this);
             discard[i].setName(" D " + j);
@@ -118,7 +126,7 @@ public class GameGraphic extends JButton implements ActionListener {
         // hand piles
         for (int i = 0; i < hand.length;) {
             hand[i] = new CardButton();
-            chatGraphic.getContentPane().add(hand[i]);
+            layeredPane.add(hand[i]);
             hand[i].addActionListener(this);
             hand[i].setName(" H " + ++i);
         }
@@ -132,7 +140,7 @@ public class GameGraphic extends JButton implements ActionListener {
         //stock pile
         stock = new CardButton();
         stock.setBounds(490, 400, 100, 145);
-        chatGraphic.getContentPane().add(stock);
+        layeredPane.add(stock);
         stock.setName(" S 1");
         stock.addActionListener(this);
 
@@ -142,12 +150,12 @@ public class GameGraphic extends JButton implements ActionListener {
 
         JLabel dpg = new JLabel("Draw pile");
         dpg.setBounds(490,130,120,15);
-        chatGraphic.getContentPane().add(dpg);
+        layeredPane.add(dpg);
 
         // draw pile
         JButton draw = new JButton();
         draw.setBounds(490, 150, 100, 145);
-        chatGraphic.getContentPane().add(draw);
+        layeredPane.add(draw);
         ImageIcon back = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("Back.png")));
         draw.setIcon(back);
         setClickable(draw, false);
@@ -160,30 +168,30 @@ public class GameGraphic extends JButton implements ActionListener {
 
         e1 = new JLabel("Opponent 1");
         e1.setBounds(490,30,120,15);
-        chatGraphic.getContentPane().add(e1);
+        layeredPane.add(e1);
 
         e2 = new JLabel("Opponent 2");
         e2.setBounds(700,30,120,15);
-        chatGraphic.getContentPane().add(e2);
+        layeredPane.add(e2);
 
         e3 = new JLabel("Opponent 3");
         e3.setBounds(910,30,120,15);
-        chatGraphic.getContentPane().add(e3);
+        layeredPane.add(e3);
 
         //Stock piles of enemies
         e1_stock = new CardButton();
         e1_stock.setBounds(490, 50, 30, 50);
-        chatGraphic.getContentPane().add(e1_stock);
+        layeredPane.add(e1_stock);
         setClickable(e1_stock, false);
 
         e2_stock = new CardButton();
         e2_stock.setBounds(700, 50, 30, 50);
-        chatGraphic.getContentPane().add(e2_stock);
+        layeredPane.add(e2_stock);
         setClickable(e2_stock, false);
 
         e3_stock = new CardButton();
         e3_stock.setBounds(910, 50, 30, 50);
-        chatGraphic.getContentPane().add(e3_stock);
+        layeredPane.add(e3_stock);
         setClickable(e3_stock, false);
 
 
@@ -193,9 +201,9 @@ public class GameGraphic extends JButton implements ActionListener {
             e1_discard[i] = new CardButton();
             e2_discard[i] = new CardButton();
             e3_discard[i] = new CardButton();
-            chatGraphic.getContentPane().add(e1_discard[i]);
-            chatGraphic.getContentPane().add(e2_discard[i]);
-            chatGraphic.getContentPane().add(e3_discard[i]);
+            layeredPane.add(e1_discard[i]);
+            layeredPane.add(e2_discard[i]);
+            layeredPane.add(e3_discard[i]);
             setClickable(e1_discard[i], false);
             setClickable(e2_discard[i], false);
             setClickable(e3_discard[i], false);
@@ -220,19 +228,19 @@ public class GameGraphic extends JButton implements ActionListener {
 
     void setOpponentNames(String[] names) {
         int i = 0;
-        if (names[i].equals(chatGraphic.playerName)) {
+        if (names[i].equals(playerName)) {
             i++;
         }
         e1.setText(names[i]);
         i++;
         if (names.length > 2) {
-            if (names[i].equals(chatGraphic.playerName)) {
+            if (names[i].equals(playerName)) {
                 i++;
             }
             e2.setText(names[i]);
             i++;
             if (names.length > 3) {
-                if (names[i].equals(chatGraphic.playerName)) {
+                if (names[i].equals(playerName)) {
                     i++;
                 }
                 e3.setText(names[i]);
@@ -270,7 +278,6 @@ public class GameGraphic extends JButton implements ActionListener {
 
     void setButtonModel() {
         notClickableModel =  new DefaultButtonModel() {
-
             public boolean isArmed() {
                 return false;
             }
@@ -284,11 +291,10 @@ public class GameGraphic extends JButton implements ActionListener {
         //Icon card = new ImageIcon("")
     }
 
-    //TODO: update cards when an enemy  plays a card
 
     // Play a hand card to the discard pile
     void handToDiscard(int i, int j, String name, String colour, int number) {
-        if (name.equals(chatGraphic.playerName)) {
+        if (name.equals(playerName)) {
             CardButton handCard = hand[i - 1];
             CardButton discardCard = discard[j - 1];
             String col = handCard.removeColour();
@@ -296,9 +302,8 @@ public class GameGraphic extends JButton implements ActionListener {
             discardCard.setIcon(cardIcons.getIcon(col, num, "L"));
             discardCard.addCard(col, num);
             handCard.setIcon(null);
-            chatGraphic.getClientListener().pw.println(Protocol.PUTTO + "§Update§D§" + i + "§" + j + "§" + name + "§" +
+            clientListener.pw.println(Protocol.PUTTO + "§Update§D§" + i + "§" + j + "§" + name + "§" +
                     discardCard.getTopColour() + "§" + discardCard.getTopNumber());
-            finishedMove = true;
         } else {
             CardButton discard =  getEnemyButton(name, j);
             discard.addCard(colour, number);
@@ -308,14 +313,14 @@ public class GameGraphic extends JButton implements ActionListener {
 
     // Play a hand card to build pile
     void handToBuild(int i, int j, String name, String colour, int number) {
-        if (name.equals(chatGraphic.playerName)) {
+        if (name.equals(playerName)) {
             CardButton handCard = hand[i-1];
             CardButton buildCard = build[j-1];
             String col = handCard.removeColour();
             int num = handCard.removeNumber();
             buildCard.setIcon(cardIcons.getIcon(col, num, "L"));
             handCard.setIcon(null);
-            chatGraphic.getClientListener().pw.println(Protocol.PUTTO + "§Update§B§" + i + "§" + j + "§" + name + "§" +
+            clientListener.pw.println(Protocol.PUTTO + "§Update§B§" + i + "§" + j + "§" + name + "§" +
                     col + "§" + num);
         } else {
             clientLog.debug("set build for everyone");
@@ -327,14 +332,14 @@ public class GameGraphic extends JButton implements ActionListener {
     // Play the stock card to a build pile. card1 = new stock card, card2 = new build card
     void stockToBuild(int j, String name, String colour1, int number1, String colour2, int number2) {
         //clientLog.debug("(GameGraphic) entered stock to build method");
-        if (name.equals(chatGraphic.playerName)) {
+        if (name.equals(playerName)) {
             CardButton buildCard = build[j-1];
             String col = stock.removeColour();
             int num = stock.removeNumber();
             buildCard.setIcon(cardIcons.getIcon(col, num, "L"));
             stock.setIcon(cardIcons.getIcon(colour1, number1, "L"));
             stock.addCard(colour1, number1);
-            chatGraphic.getClientListener().pw.println(Protocol.PUTTO + "§Update§S§" + j + "§" + name + "§" +
+            clientListener.pw.println(Protocol.PUTTO + "§Update§S§" + j + "§" + name + "§" +
                     colour1 + "§" + number1 + "§" + col + "§" + num);
         } else {
             clientLog.debug("is updating build & stock from enemy");
@@ -350,13 +355,13 @@ public class GameGraphic extends JButton implements ActionListener {
     void discardToBuild(int i, int j, String name) {
         CardButton discardCard;
         CardButton buildCard = build[j-1];
-        if (name.equals(chatGraphic.playerName)) {
+        if (name.equals(playerName)) {
             discardCard = discard[i - 1];
             String col = discardCard.removeColour();
             int num = discardCard.removeNumber();
             buildCard.setIcon(cardIcons.getIcon(col, num, "L"));
             discardCard.setIcon(cardIcons.getIcon(discardCard.getTopColour(), discardCard.getTopNumber(), "L"));
-            chatGraphic.getClientListener().pw.println(Protocol.PUTTO +"§Update§" + i + "§" + j + "§" + name);
+            clientListener.pw.println(Protocol.PUTTO +"§Update§" + i + "§" + j + "§" + name);
         } else {
             discardCard = getEnemyButton(name, i);
             String col = discardCard.removeColour();
@@ -405,10 +410,9 @@ public class GameGraphic extends JButton implements ActionListener {
             JButton button2Pressed = (JButton) actionEvent.getSource();
             String input = "/play" + button1Pressed.getName() + button2Pressed.getName();
             try {
-                finishedMove = false;
-                chatGraphic.getClientListener().forward(input);
+                clientListener.forward(input);
             } catch (IndexOutOfBoundsException | NotACommandException e) {
-                chatGraphic.printErrorMessage(e.getMessage());
+                clientLog.warn("Error with /play command");
             }
             button1Pressed.setBorder(defaultBorder);
             button1Pressed = null;
@@ -439,6 +443,10 @@ public class GameGraphic extends JButton implements ActionListener {
             button = e3_stock;
         }
         return button;
+    }
+
+    JLayeredPane getGameComponent() {
+        return layeredPane;
     }
 
 }

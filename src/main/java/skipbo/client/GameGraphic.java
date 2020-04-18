@@ -51,11 +51,14 @@ public class GameGraphic implements ActionListener {
 
     private CardIcons cardIcons = new CardIcons( 30, 50, 78, 120);
 
+    private JTextPane chat;
 
-    GameGraphic(SBClientListener clientListener, String name) {
+
+    GameGraphic(SBClientListener clientListener, String name, JTextPane chat) {
         this.clientListener = clientListener;
         playerName = name;
         layeredPane = new JLayeredPane();
+        this.chat = chat;
         layeredPane.setBounds(0, 0, 1150, 800);
         setButtonModel();
         appendDecks();

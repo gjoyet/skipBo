@@ -1,7 +1,10 @@
 package skipbo.client;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,7 +21,8 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
     private SBClientListener clientListener;
     private Container contentPane;
-    private JTextArea chat;
+    //private JTextArea chat;
+    private JTextPane chat;
     private JTextArea inputMes;
     JScrollPane chatScrollPane;
     private JScrollPane inputScrollPane;
@@ -30,6 +34,8 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     private JButton leaveB;
     private GameGraphic gameGraphic;
     String playerName = "";
+
+    Color darkGreen = new Color(0x0AB222);
 
 /*
     //test method
@@ -127,10 +133,14 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
 
         //Output textfield
-        chat = new JTextArea(); //TODO: change to JEditorPane or JTextPane to print in colour
+        chat = new JTextPane();
+        chat.setBounds(80, 320, 250, 300);
+        chat.setEditable(false);
+
+        chat = new JTextPane(); //TODO: change to JEditorPane or JTextPane to print in colour
         chat.setBounds(80, 320,250, 300);
-        chat.setLineWrap(true);
-        chat.setWrapStyleWord(true);
+/*        chat.setLineWrap(true);
+        chat.setWrapStyleWord(true);*/
         chat.setEditable(false);
 
         chatScrollPane = new JScrollPane(chat);
@@ -172,8 +182,11 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
      * @param message An information message
      */
     void printInfoMessage(String message) {
-        chat.append("[Info] " + message + "\n");
-        chat.setCaretPosition(chat.getDocument().getLength());
+        appendToChat("\n[Info] ", darkGreen);
+        appendToChat(message, Color.BLACK);
+        //chat.append("[Info] " + message + "\n");
+        //chat.setCaretPosition(chat.getDocument().getLength());
+        //chat.setCaretPosition(chat.getDocument().getLength());
     }
 
     /**
@@ -181,8 +194,10 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
      * @param message An error message
      */
     void printErrorMessage(String message) {
-        chat.append("[Error] " + message + "\n");
-        chat.setCaretPosition(chat.getDocument().getLength()-1);
+        appendToChat("\n[Error] ", Color.RED);
+        appendToChat(message, Color.BLACK);
+        //chat.append("[Error] " + message + "\n");
+        //chat.setCaretPosition(chat.getDocument().getLength()-1);
     }
 
     /**
@@ -190,15 +205,16 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
      * @param message A chat message
      */
     void printChatMessage(String message) {
-        chat.append(message + "\n" );
-        chat.setCaretPosition(chat.getDocument().getLength()-1);
+        appendToChat("\n" + message, Color.BLACK);
+/*        chat.append(message + "\n" );
+        chat.setCaretPosition(chat.getDocument().getLength()-1);*/
     }
 
     /**
      * Creates the game GUI
      */
     void setGameGraphic() {
-        gameGraphic = new GameGraphic(clientListener, playerName);
+        gameGraphic = new GameGraphic(clientListener, playerName, chat);
         contentPane.add(gameGraphic.getGameComponent());
         setTitle("Skip-Bros GAME");
         setBounds(100, 100, 1150, 800);
@@ -311,6 +327,20 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
                 clientLog.warn("Error with /quit command");
             }
         }
+    }
+
+    private void appendToChat(String s, Color color) {
+        SimpleAttributeSet attributeSet = new SimpleAttributeSet();
+        attributeSet.addAttribute(StyleConstants.ColorConstants.Foreground, color);
+        Document doc = chat.getDocument();
+        try {
+            doc.insertString(doc.getLength(), s, attributeSet);
+            doc = chat.getDocument();
+            chat.setCaretPosition(doc.getLength());
+        } catch (BadLocationException e) {
+            clientLog.warn("Error with appending text to chat");
+        }
+
     }
 
     GameGraphic getGameGraphic() {

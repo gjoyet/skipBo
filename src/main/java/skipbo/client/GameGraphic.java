@@ -332,12 +332,12 @@ public class GameGraphic implements ActionListener {
         if (name.equals(playerName)) {
             CardButton buildCard = build[j-1];
             String col = stock.removeColour();
-            int num = stock.removeNumber();
-            buildCard.setIcon(cardIcons.getIcon(col, num, "L"));
+            number2 = stock.removeNumber();
+            buildCard.setIcon(cardIcons.getIcon(col, number2, "L"));
             stock.setIcon(cardIcons.getIcon(colour1, number1, "L"));
             stock.addCard(colour1, number1);
             clientListener.pw.println(Protocol.PUTTO + "§Update§S§" + j + "§" + name + "§" +
-                    colour1 + "§" + number1 + "§" + col + "§" + num);
+                    colour1 + "§" + number1 + "§" + col + "§" + number2);
         } else {
             clientLog.debug("is updating build & stock from enemy");
             CardButton stockCard = getEnemyButton(name);
@@ -346,25 +346,32 @@ public class GameGraphic implements ActionListener {
             stockCard.addCard(colour1, number1);
             stockCard.setIcon(cardIcons.getIcon(colour1, number1, "S"));
         }
+        if (number2 == 12) {
+            resetBuildPile(j-1);
+        }
     }
 
     // Play from discard pile to a build pile
     void discardToBuild(int i, int j, String name) {
         CardButton discardCard;
         CardButton buildCard = build[j-1];
+        int num;
         if (name.equals(playerName)) {
             discardCard = discard[i-1];
             String col = discardCard.removeColour();
-            int num = discardCard.removeNumber();
+            num = discardCard.removeNumber();
             buildCard.setIcon(cardIcons.getIcon(col, num, "L"));
             discardCard.setIcon(cardIcons.getIcon(discardCard.getTopColour(), discardCard.getTopNumber(), "L"));
             clientListener.pw.println(Protocol.PUTTO +"§Update§" + i + "§" + j + "§" + name);
         } else {
             discardCard = getEnemyButton(name, i);
             String col = discardCard.removeColour();
-            int num = discardCard.removeNumber();
+            num = discardCard.removeNumber();
             buildCard.setIcon(cardIcons.getIcon(col, num, "L"));
             discardCard.setIcon(cardIcons.getIcon(discardCard.getTopColour(), discardCard.getTopNumber(), "S"));
+        }
+        if (num == 12) {
+            resetBuildPile(j-1);
         }
     }
 
@@ -388,6 +395,11 @@ public class GameGraphic implements ActionListener {
             hand[i].resetCards();
             hand[i].setIcon(null);
         }
+    }
+
+    void resetBuildPile(int i) {
+        build[i].resetCards();
+        build[i].setIcon(null);
     }
 
 

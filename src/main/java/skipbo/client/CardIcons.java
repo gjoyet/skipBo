@@ -7,6 +7,9 @@ import java.util.Objects;
 class CardIcons {
 
     private ImageIcon[][] icons;
+    static final int LARGE = 0;
+    static final int MEDIUM = 1;
+    static final int SMALL = 2;
 
     CardIcons(int widthSmall, int heightSmall, int widthMedium, int heightMedium) {
 
@@ -56,7 +59,7 @@ class CardIcons {
 
     }
 
-    ImageIcon getIcon(String color, int number, String size) {
+    ImageIcon getIcon(String color, int number, int size) {
 
         if (color == null || number == -1) {
             return null;
@@ -76,9 +79,9 @@ class CardIcons {
                 break;
         }
 
-        if (size.equals("M")) {
+        if (size == MEDIUM) {
             i++;
-        } else if (size.equals("S")) {
+        } else if (size == SMALL) {
             i = i + 2;
         }
 

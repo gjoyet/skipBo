@@ -251,17 +251,17 @@ public class GameGraphic implements ActionListener {
 
     void setInitialCards(String[] colAndNum) {
         for (int i = 0, j = 0; i < hand.length; i++) {
-            hand[i].setIcon(cardIcons.getIcon(colAndNum[j], Integer.parseInt(colAndNum[j+1]), "M"));
+            hand[i].setIcon(cardIcons.getIcon(colAndNum[j], Integer.parseInt(colAndNum[j+1]), CardIcons.MEDIUM));
             hand[i].addCard(colAndNum[j++], Integer.parseInt(colAndNum[j++]));
         }
         for (int i = 0, j = 10; i < (colAndNum.length - 10)/3; i++) {
             CardButton stockCard = getEnemyButton(colAndNum[j]);
             j++;
             if (stockCard == null) {
-                stock.setIcon(cardIcons.getIcon(colAndNum[j], Integer.parseInt(colAndNum[j+1]), "L"));
+                stock.setIcon(cardIcons.getIcon(colAndNum[j], Integer.parseInt(colAndNum[j+1]), CardIcons.LARGE));
                 stock.addCard(colAndNum[j++], Integer.parseInt(colAndNum[j++]));
             } else {
-                stockCard.setIcon(cardIcons.getIcon(colAndNum[j], Integer.parseInt(colAndNum[j+1]), "S"));
+                stockCard.setIcon(cardIcons.getIcon(colAndNum[j], Integer.parseInt(colAndNum[j+1]), CardIcons.SMALL));
                 stockCard.addCard(colAndNum[j++], Integer.parseInt(colAndNum[j++]));
             }
         }
@@ -296,7 +296,7 @@ public class GameGraphic implements ActionListener {
             CardButton discardCard = discard[j - 1];
             String col = handCard.removeColour();
             int num = handCard.removeNumber();
-            discardCard.setIcon(cardIcons.getIcon(col, num, "L"));
+            discardCard.setIcon(cardIcons.getIcon(col, num, CardIcons.LARGE));
             discardCard.addCard(col, num);
             handCard.setIcon(null);
             clientListener.pw.println(Protocol.PUTTO + "§Update§D§" + i + "§" + j + "§" + name + "§" +
@@ -304,7 +304,7 @@ public class GameGraphic implements ActionListener {
         } else {
             CardButton discard =  getEnemyButton(name, j);
             discard.addCard(colour, number);
-            discard.setIcon(cardIcons.getIcon(colour, number, "S"));
+            discard.setIcon(cardIcons.getIcon(colour, number, CardIcons.SMALL));
         }
     }
 
@@ -315,14 +315,14 @@ public class GameGraphic implements ActionListener {
             CardButton buildCard = build[j-1];
             String col = handCard.removeColour();
             int num = handCard.removeNumber();
-            buildCard.setIcon(cardIcons.getIcon(col, num, "L"));
+            buildCard.setIcon(cardIcons.getIcon(col, num, CardIcons.LARGE));
             handCard.setIcon(null);
             clientListener.pw.println(Protocol.PUTTO + "§Update§B§" + i + "§" + j + "§" + name + "§" +
                     col + "§" + num);
         } else {
             clientLog.debug("set build for everyone");
             CardButton buildCard = build[j-1];
-            buildCard.setIcon(cardIcons.getIcon(colour, number, "L"));
+            buildCard.setIcon(cardIcons.getIcon(colour, number, CardIcons.LARGE));
         }
     }
 
@@ -333,8 +333,8 @@ public class GameGraphic implements ActionListener {
             CardButton buildCard = build[j-1];
             String col = stock.removeColour();
             number2 = stock.removeNumber();
-            buildCard.setIcon(cardIcons.getIcon(col, number2, "L"));
-            stock.setIcon(cardIcons.getIcon(colour1, number1, "L"));
+            buildCard.setIcon(cardIcons.getIcon(col, number2, CardIcons.LARGE));
+            stock.setIcon(cardIcons.getIcon(colour1, number1, CardIcons.LARGE));
             stock.addCard(colour1, number1);
             clientListener.pw.println(Protocol.PUTTO + "§Update§S§" + j + "§" + name + "§" +
                     colour1 + "§" + number1 + "§" + col + "§" + number2);
@@ -342,9 +342,9 @@ public class GameGraphic implements ActionListener {
             clientLog.debug("is updating build & stock from enemy");
             CardButton stockCard = getEnemyButton(name);
             CardButton buildCard = build[j-1];
-            buildCard.setIcon(cardIcons.getIcon(colour2, number2, "L"));
+            buildCard.setIcon(cardIcons.getIcon(colour2, number2, CardIcons.LARGE));
             stockCard.addCard(colour1, number1);
-            stockCard.setIcon(cardIcons.getIcon(colour1, number1, "S"));
+            stockCard.setIcon(cardIcons.getIcon(colour1, number1, CardIcons.SMALL));
         }
         if (number2 == 12) {
             resetBuildPile(j-1);
@@ -360,15 +360,15 @@ public class GameGraphic implements ActionListener {
             discardCard = discard[i-1];
             String col = discardCard.removeColour();
             num = discardCard.removeNumber();
-            buildCard.setIcon(cardIcons.getIcon(col, num, "L"));
-            discardCard.setIcon(cardIcons.getIcon(discardCard.getTopColour(), discardCard.getTopNumber(), "L"));
+            buildCard.setIcon(cardIcons.getIcon(col, num, CardIcons.LARGE));
+            discardCard.setIcon(cardIcons.getIcon(discardCard.getTopColour(), discardCard.getTopNumber(), CardIcons.LARGE));
             clientListener.pw.println(Protocol.PUTTO +"§Update§" + i + "§" + j + "§" + name);
         } else {
             discardCard = getEnemyButton(name, i);
             String col = discardCard.removeColour();
             num = discardCard.removeNumber();
-            buildCard.setIcon(cardIcons.getIcon(col, num, "L"));
-            discardCard.setIcon(cardIcons.getIcon(discardCard.getTopColour(), discardCard.getTopNumber(), "S"));
+            buildCard.setIcon(cardIcons.getIcon(col, num, CardIcons.LARGE));
+            discardCard.setIcon(cardIcons.getIcon(discardCard.getTopColour(), discardCard.getTopNumber(), CardIcons.SMALL));
         }
         if (num == 12) {
             resetBuildPile(j-1);
@@ -386,7 +386,7 @@ public class GameGraphic implements ActionListener {
 /*        clientLog.debug("(Graphic) length of colours = " + colours.length);
         clientLog.debug("(Graphic) length of numbers = " + numbers.length);*/
         for (int i = 0; i < colours.length; i++) {
-            hand[i].setIcon(cardIcons.getIcon(colours[i], numbers[i], "M"));
+            hand[i].setIcon(cardIcons.getIcon(colours[i], numbers[i], CardIcons.MEDIUM));
             hand[i].resetCards();
             hand[i].addCard(colours[i], numbers[i]);
             clientLog.debug("updated hand card " + i);

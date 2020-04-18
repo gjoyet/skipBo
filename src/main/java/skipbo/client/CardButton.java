@@ -7,9 +7,23 @@ import static skipbo.client.SBClient.clientLog;
 
 public class CardButton extends JButton {
 
+    static final int HAND = 0;
+    static final int DISCARD = 1;
+    static final int STOCK = 2;
+    static final int BUILD = 3;
+
+    private int type;
+
     private ArrayList<ImageIcon> icons;
     private ArrayList<String> colors;
     private ArrayList<Integer> numbers;
+
+    CardButton(int type) {
+        super();
+        colors = new ArrayList<>();
+        numbers = new ArrayList<>();
+        this.type = type;
+    }
 
     CardButton() {
         super();
@@ -20,6 +34,10 @@ public class CardButton extends JButton {
     void addCard(String color, int number) {
         colors.add(color);
         numbers.add(number);
+    }
+
+    int getType() {
+        return type;
     }
 
     int getTopNumber() {

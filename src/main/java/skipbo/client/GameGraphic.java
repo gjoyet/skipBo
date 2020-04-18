@@ -83,8 +83,8 @@ public class GameGraphic implements ActionListener {
         // Discard and build Piles
 
         for (int i = 0, j = 1; i < discard.length; i++, j++) {
-            discard[i] = new CardButton();
-            build[i] = new CardButton();
+            discard[i] = new CardButton(CardButton.DISCARD);
+            build[i] = new CardButton(CardButton.BUILD);
             layeredPane.add(discard[i]);
             layeredPane.add(build[i]);
             discard[i].addActionListener(this);
@@ -123,7 +123,7 @@ public class GameGraphic implements ActionListener {
 
         // hand piles
         for (int i = 0; i < hand.length;) {
-            hand[i] = new CardButton();
+            hand[i] = new CardButton(CardButton.HAND);
             layeredPane.add(hand[i]);
             hand[i].addActionListener(this);
             hand[i].setName(" H " + ++i);
@@ -350,7 +350,7 @@ public class GameGraphic implements ActionListener {
         CardButton discardCard;
         CardButton buildCard = build[j-1];
         if (name.equals(playerName)) {
-            discardCard = discard[i - 1];
+            discardCard = discard[i-1];
             String col = discardCard.removeColour();
             int num = discardCard.removeNumber();
             buildCard.setIcon(cardIcons.getIcon(col, num, "L"));
@@ -394,8 +394,22 @@ public class GameGraphic implements ActionListener {
         if (button1Pressed == null) {
             button1Pressed = (CardButton) actionEvent.getSource();
             button1Pressed.setBorder(clickedBorder);
+            if (button1Pressed.getType() == CardButton.HAND) {
+                for (int i = 0; i < 5; i++) {
+                    if (hand[i] != button1Pressed) {
+                        hand[i].setEnabled(false);
+                    }
+                }
+            }
         } else if (button1Pressed == actionEvent.getSource()) {
             button1Pressed.setBorder(defaultBorder);
+            if (button1Pressed.getType() == CardButton.HAND) {
+                for (int i = 0; i < 5; i++) {
+                    if (hand[i] != button1Pressed) {
+                        hand[i].setEnabled(true);
+                    }
+                }
+            }
             button1Pressed = null;
         } else {
             JButton button2Pressed = (JButton) actionEvent.getSource();
@@ -406,6 +420,13 @@ public class GameGraphic implements ActionListener {
                 clientLog.warn("Error with /play command");
             }
             button1Pressed.setBorder(defaultBorder);
+            if (button1Pressed.getType() == CardButton.HAND) {
+                for (int i = 0; i < 5; i++) {
+                    if (hand[i] != button1Pressed) {
+                        hand[i].setEnabled(true);
+                    }
+                }
+            }
             button1Pressed = null;
         }
     }
@@ -435,6 +456,8 @@ public class GameGraphic implements ActionListener {
         }
         return button;
     }
+
+
 
     JLayeredPane getGameComponent() {
         return layeredPane;

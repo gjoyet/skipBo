@@ -91,7 +91,7 @@ public class GameGraphic implements ActionListener {
             layeredPane.add(discard[i]);
             layeredPane.add(build[i]);
             discard[i].addActionListener(this);
-            build[i].addActionListener(this);
+            //build[i].addActionListener(this);
             discard[i].setName(" D " + j);
             build[i].setName(" B " + j);
         }
@@ -139,7 +139,7 @@ public class GameGraphic implements ActionListener {
 
 
         //stock pile
-        stock = new CardButton();
+        stock = new CardButton(CardButton.STOCK);
         stock.setBounds(490, 400, 100, 145);
         layeredPane.add(stock);
         stock.setName(" S 1");
@@ -396,23 +396,15 @@ public class GameGraphic implements ActionListener {
 
         if (button1Pressed == null) {
             button1Pressed = (CardButton) actionEvent.getSource();
-            button1Pressed.setBorder(clickedBorder);
-            if (button1Pressed.getType() == CardButton.HAND) {
-                for (int i = 0; i < 5; i++) {
-                    if (hand[i] != button1Pressed) {
-                        hand[i].setEnabled(false);
-                    }
-                }
+            if (button1Pressed.getIcon() == null) {
+                button1Pressed = null;
+                return;
             }
+            button1Pressed.setBorder(clickedBorder);
+            changeButtonStates(button1Pressed, false);
         } else if (button1Pressed == actionEvent.getSource()) {
             button1Pressed.setBorder(defaultBorder);
-            if (button1Pressed.getType() == CardButton.HAND) {
-                for (int i = 0; i < 5; i++) {
-                    if (hand[i] != button1Pressed) {
-                        hand[i].setEnabled(true);
-                    }
-                }
-            }
+            changeButtonStates(button1Pressed, true);
             button1Pressed = null;
         } else {
             JButton button2Pressed = (JButton) actionEvent.getSource();
@@ -423,13 +415,7 @@ public class GameGraphic implements ActionListener {
                 clientLog.warn("Error with /play command");
             }
             button1Pressed.setBorder(defaultBorder);
-            if (button1Pressed.getType() == CardButton.HAND) {
-                for (int i = 0; i < 5; i++) {
-                    if (hand[i] != button1Pressed) {
-                        hand[i].setEnabled(true);
-                    }
-                }
-            }
+            changeButtonStates(button1Pressed, true);
             button1Pressed = null;
         }
     }
@@ -458,6 +444,51 @@ public class GameGraphic implements ActionListener {
             button = e3_stock;
         }
         return button;
+    }
+
+    //if true HandCards, StockCards and Discard are enabled; BuildCards are disabled
+    void changeButtonStates(CardButton button, boolean b) {
+        if (button.getType() == CardButton.HAND) {
+            for (CardButton cardButton : hand) {
+                if (button != cardButton) {
+                    cardButton.setEnabled(b);
+                }
+            }
+            stock.setEnabled(b);
+            for (CardButton cardButton : build) {
+                if (b) {
+                    cardButton.removeActionListener(this);
+                } else {
+                    cardButton.addActionListener(this);
+                }
+            }
+        } else if (button.getType() == CardButton.DISCARD) {
+            for (int i = 0; i < discard.length; i++) {
+                if (button != discard[i]) {
+                    discard[i].setEnabled(b);
+                }
+                if (b) {
+                    build[i].removeActionListener(this);
+                } else {
+                    build[i].addActionListener(this);
+                }
+            }
+            for (CardButton cardButton : hand) {
+                cardButton.setEnabled(b);
+            }
+        } else {
+            for (CardButton cardButton : hand) {
+                cardButton.setEnabled(b);
+            }
+            for (int i = 0; i < build.length; i++) {
+                if (b) {
+                    build[i].removeActionListener(this);
+                } else {
+                    build[i].addActionListener(this);
+                }
+                discard[i].setEnabled(b);
+            }
+        }
     }
 
 

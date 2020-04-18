@@ -12,7 +12,7 @@ public class CardButton extends JButton {
     static final int STOCK = 2;
     static final int BUILD = 3;
 
-    private int type;
+    private int type = -1;
 
     private ArrayList<ImageIcon> icons;
     private ArrayList<String> colors;

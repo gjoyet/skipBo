@@ -37,7 +37,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     private GameGraphic gameGraphic;
     String playerName = "";
 
-    Color darkGreen = new Color(0x0AB222);
+    static final Color DARKGREEN = new Color(0x0AB222);
 
 /*
     //test method
@@ -184,7 +184,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
      * @param message An information message
      */
     void printInfoMessage(String message) {
-        appendToChat("\n[Info] ", darkGreen);
+        appendToChat("\n[Info] ", DARKGREEN);
         appendToChat(message, Color.BLACK);
         //chat.append("[Info] " + message + "\n");
         //chat.setCaretPosition(chat.getDocument().getLength());

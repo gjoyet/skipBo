@@ -29,6 +29,9 @@ public class GameGraphic implements ActionListener {
     private JLabel e2;
     private JLabel e3;
 
+    private JLabel[] oppArray;
+    private int playerIndex = 0;
+
     //Own piles
     private CardButton[] hand = new CardButton[5];
     private CardButton stock;
@@ -257,10 +260,14 @@ public class GameGraphic implements ActionListener {
     }
 
     void setOpponentNames(String[] names) {
+        oppArray = new JLabel[names.length];
         int i = 0;
         if (names[i].equals(playerName)) {
             i++;
+        } else {
+            e1.setForeground(ChatGraphic.DARKGREEN);
         }
+        oppArray[i] = e1;
         e1.setText(names[i]);
         i++;
         if (names.length > 2) {
@@ -268,12 +275,14 @@ public class GameGraphic implements ActionListener {
                 i++;
             }
             e2.setText(names[i]);
+            oppArray[i] = e2;
             i++;
             if (names.length > 3) {
                 if (names[i].equals(playerName)) {
                     i++;
                 }
                 e3.setText(names[i]);
+                oppArray[i] = e3;
             }
         }
     }
@@ -320,6 +329,7 @@ public class GameGraphic implements ActionListener {
 
     // Play a hand card to the discard pile
     void handToDiscard(int i, int j, String name, String colour, int number) {
+
         ArrayList<CardButton> al;
         CardButton newDisCard;
         if (name.equals(playerName)) {
@@ -346,6 +356,9 @@ public class GameGraphic implements ActionListener {
             layeredPane.add(newDisCard, new Integer(al.size()));
             al.add(newDisCard);
 
+            playerIndex = (playerIndex+1)%oppArray.length;
+            oppArray[playerIndex].setForeground(ChatGraphic.DARKGREEN);
+
         } else {
             al = getEnemyArray(name, j);
             newDisCard = new CardButton();
@@ -359,6 +372,12 @@ public class GameGraphic implements ActionListener {
 /*            CardButton discard =  getEnemyArray(name, j);
             discard.addCard(colour, number);
             discard.setIcon(cardIcons.getIcon(colour, number, CardIcons.SMALL));*/
+
+            oppArray[playerIndex].setForeground(Color.BLACK);
+            playerIndex = (playerIndex+1)%oppArray.length;
+            if (oppArray[playerIndex] != null) { //if this is null, it means that it's this players turn
+                oppArray[playerIndex].setForeground(ChatGraphic.DARKGREEN);
+            }
         }
     }
 

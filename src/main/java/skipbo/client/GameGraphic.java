@@ -33,16 +33,18 @@ public class GameGraphic implements ActionListener {
     private CardButton[] hand = new CardButton[5];
     private CardButton stock;
     //private CardButton[] discard = new CardButton[4];
-
-    private ArrayList<CardButton>[] dis = new ArrayList[4];
+    private ArrayList<CardButton>[] discard = new ArrayList[4];
 
     //Game piles
     private CardButton[] build = new CardButton[4];
 
     //Opponent discard piles
-    private CardButton[] e1_discard = new CardButton[4];
+    private ArrayList<CardButton>[] e1_discard = new ArrayList[4];
+    private ArrayList<CardButton>[] e2_discard = new ArrayList[4];
+    private ArrayList<CardButton>[] e3_discard = new ArrayList[4];
+/*    private CardButton[] e1_discard = new CardButton[4];
     private CardButton[] e2_discard = new CardButton[4];
-    private CardButton[] e3_discard = new CardButton[4];
+    private CardButton[] e3_discard = new CardButton[4];*/
 
     //Opponent stock piles
     private CardButton e1_stock;
@@ -85,7 +87,7 @@ public class GameGraphic implements ActionListener {
 
         // Discard and build Piles
 
-        for (int i = 0, j = 1; i < dis.length; i++, j++) {
+        for (int i = 0, j = 1; i < discard.length; i++, j++) {
             //discard[i] = new CardButton(CardButton.DISCARD);
             build[i] = new CardButton(CardButton.BUILD);
             //layeredPane.add(discard[i]);
@@ -94,13 +96,13 @@ public class GameGraphic implements ActionListener {
             //build[i].addActionListener(this);
             //discard[i].setName(" D " + j);
             build[i].setName(" B " + j);
-            dis[i] = new ArrayList<>();
+            discard[i] = new ArrayList<>();
             CardButton b = new CardButton(CardButton.DISCARD);
             b.setBounds(620+i*110, 400, 100, 145);
             b.addActionListener(this);
             b.setName(" D " + j);
             layeredPane.add(b);
-            dis[i].add(b);
+            discard[i].add(b);
 
         }
 /*        discard[0].setBounds(620, 400, 100, 145);
@@ -207,7 +209,26 @@ public class GameGraphic implements ActionListener {
         //Discard piles of enemies
 
         for (int i = 0; i < e1_discard.length; i++) {
-            e1_discard[i] = new CardButton();
+            e1_discard[i] = new ArrayList<>();
+            e2_discard[i] = new ArrayList<>();
+            e3_discard[i] = new ArrayList<>();
+            CardButton b1 = new CardButton();
+            CardButton b2 = new CardButton();
+            CardButton b3 = new CardButton();
+            b1.setBounds(535+i*35, 50, 30, 50);
+            b2.setBounds(745+i*35, 50, 30, 50);
+            b3.setBounds(955+i*35, 50, 30, 50);
+            setClickable(b1, false);
+            setClickable(b2, false);
+            setClickable(b3, false);
+            layeredPane.add(b1);
+            layeredPane.add(b2);
+            layeredPane.add(b3);
+            e1_discard[i].add(b1);
+            e2_discard[i].add(b2);
+            e3_discard[i].add(b3);
+
+/*            e1_discard[i] = new CardButton();
             e2_discard[i] = new CardButton();
             e3_discard[i] = new CardButton();
             layeredPane.add(e1_discard[i]);
@@ -215,15 +236,15 @@ public class GameGraphic implements ActionListener {
             layeredPane.add(e3_discard[i]);
             setClickable(e1_discard[i], false);
             setClickable(e2_discard[i], false);
-            setClickable(e3_discard[i], false);
+            setClickable(e3_discard[i], false);*/
         }
 
-        e1_discard[0].setBounds(535, 50, 30, 50);
+/*        e1_discard[0].setBounds(535, 50, 30, 50);
         e1_discard[1].setBounds(570, 50, 30, 50);
         e1_discard[2].setBounds(605, 50, 30, 50);
-        e1_discard[3].setBounds(640, 50, 30, 50);
+        e1_discard[3].setBounds(640, 50, 30, 50);*/
 
-        e2_discard[0].setBounds(745, 50, 30, 50);
+/*        e2_discard[0].setBounds(745, 50, 30, 50);
         e2_discard[1].setBounds(780, 50, 30, 50);
         e2_discard[2].setBounds(815, 50, 30, 50);
         e2_discard[3].setBounds(850, 50, 30, 50);
@@ -231,7 +252,7 @@ public class GameGraphic implements ActionListener {
         e3_discard[0].setBounds(955, 50, 30, 50);
         e3_discard[1].setBounds(990, 50, 30, 50);
         e3_discard[2].setBounds(1025, 50, 30, 50);
-        e3_discard[3].setBounds(1060, 50, 30, 50);
+        e3_discard[3].setBounds(1060, 50, 30, 50);*/
 
     }
 
@@ -299,6 +320,8 @@ public class GameGraphic implements ActionListener {
 
     // Play a hand card to the discard pile
     void handToDiscard(int i, int j, String name, String colour, int number) {
+        ArrayList<CardButton> al;
+        CardButton newDisCard;
         if (name.equals(playerName)) {
             CardButton handCard = hand[i-1];
             //CardButton discardCard = discard[j-1];
@@ -310,13 +333,13 @@ public class GameGraphic implements ActionListener {
             clientListener.pw.println(Protocol.PUTTO + "§Update§D§" + i + "§" + j + "§" + name + "§" +
                     col + "§" + num);
 
-            ArrayList<CardButton> al = dis[j-1];
+            al = discard[j-1];
             CardButton oldDisCard = al.get(al.size()-1);
-            CardButton newDisCard = new CardButton(CardButton.DISCARD);
+            newDisCard = new CardButton(CardButton.DISCARD);
             newDisCard.addActionListener(this);
             oldDisCard.removeActionListener(this);
             newDisCard.setName(" D " + j);
-            newDisCard.setBounds(al.get(0).getX(), al.get(0).getY()+(al.size()-1)*15 ,
+            newDisCard.setBounds(al.get(0).getX(), al.get(0).getY()+(al.size()-1)*15,
                     al.get(0).getWidth(), al.get(0).getHeight());
             newDisCard.setIcon(cardIcons.getIcon(col, num, CardIcons.LARGE));
             newDisCard.addCard(col, num);
@@ -324,9 +347,18 @@ public class GameGraphic implements ActionListener {
             al.add(newDisCard);
 
         } else {
-            CardButton discard =  getEnemyButton(name, j);
+            al = getEnemyArray(name, j);
+            newDisCard = new CardButton();
+            setClickable(newDisCard, false);
+            newDisCard.setBounds(al.get(0).getX(), al.get(0).getY()+(al.size()-1)*10, al.get(0).getWidth(),
+                    al.get(0).getHeight());
+            newDisCard.setIcon(cardIcons.getIcon(colour, number, CardIcons.SMALL));
+            newDisCard.addCard(colour, number);
+            layeredPane.add(newDisCard, new Integer(al.size()));
+            al.add(newDisCard);
+/*            CardButton discard =  getEnemyArray(name, j);
             discard.addCard(colour, number);
-            discard.setIcon(cardIcons.getIcon(colour, number, CardIcons.SMALL));
+            discard.setIcon(cardIcons.getIcon(colour, number, CardIcons.SMALL));*/
         }
     }
 
@@ -375,8 +407,10 @@ public class GameGraphic implements ActionListener {
 
     // Play from discard pile to a build pile
     void discardToBuild(int i, int j, String name) {
-        CardButton discardCard;
         CardButton buildCard = build[j-1];
+        CardButton oldDisCard;
+        ArrayList<CardButton> al;
+        String col;
         int num;
         if (name.equals(playerName)) {
 /*            discardCard = discard[i-1];
@@ -386,20 +420,27 @@ public class GameGraphic implements ActionListener {
             discardCard.setIcon(cardIcons.getIcon(discardCard.getTopColour(), discardCard.getTopNumber(), CardIcons.LARGE));*/
             clientListener.pw.println(Protocol.PUTTO +"§Update§" + i + "§" + j + "§" + name);
 
-            ArrayList<CardButton> al = dis[i-1];
-            CardButton oldDisCard = al.remove(al.size()-1);
+            al = discard[i-1];
+            oldDisCard = al.remove(al.size()-1);
             layeredPane.remove(oldDisCard);
-            String col = oldDisCard.removeColour();
+            col = oldDisCard.removeColour();
             num = oldDisCard.removeNumber();
             buildCard.setIcon(cardIcons.getIcon(col, num, CardIcons.LARGE));
             al.get(al.size()-1).addActionListener(this);
             layeredPane.repaint();
         } else {
-            discardCard = getEnemyButton(name, i);
+            al = getEnemyArray(name, i);
+            oldDisCard = al.remove(al.size()-1);
+            layeredPane.remove(oldDisCard);
+            col = oldDisCard.removeColour();
+            num = oldDisCard.removeNumber();
+            buildCard.setIcon(cardIcons.getIcon(col, num, CardIcons.LARGE));
+            layeredPane.repaint();
+/*            discardCard = getEnemyArray(name, i);
             String col = discardCard.removeColour();
             num = discardCard.removeNumber();
             buildCard.setIcon(cardIcons.getIcon(col, num, CardIcons.LARGE));
-            discardCard.setIcon(cardIcons.getIcon(discardCard.getTopColour(), discardCard.getTopNumber(), CardIcons.SMALL));
+            discardCard.setIcon(cardIcons.getIcon(discardCard.getTopColour(), discardCard.getTopNumber(), CardIcons.SMALL));*/
         }
         if (num == 12) {
             resetBuildPile(j-1);
@@ -463,17 +504,17 @@ public class GameGraphic implements ActionListener {
         }
     }
 
-    //returns discard pile button of enemy
-    CardButton getEnemyButton(String name, int index) {
-        CardButton button = null;
+    //returns discard pile array of enemy
+    ArrayList<CardButton> getEnemyArray(String name, int index) {
+        ArrayList<CardButton> array = null;
         if (e1.getText().equals(name)) {
-            button = e1_discard[index-1];
+            array = e1_discard[index-1];
         } else if (e2.getText().equals(name)) {
-            button = e2_discard[index-1];
+            array = e2_discard[index-1];
         } else if (e3.getText().equals(name)) {
-            button = e3_discard[index-1];
+            array = e3_discard[index-1];
         }
-        return button;
+        return array;
     }
 
     //returns stock pile button of enemy
@@ -506,8 +547,8 @@ public class GameGraphic implements ActionListener {
                 }
             }
         } else if (button.getType() == CardButton.DISCARD) {
-            for (int i = 0; i < dis.length; i++) {
-                for (CardButton cardButton : dis[i]) {
+            for (int i = 0; i < discard.length; i++) {
+                for (CardButton cardButton : discard[i]) {
                     if (cardButton != button) {
                         cardButton.setEnabled(b);
                     }
@@ -532,7 +573,7 @@ public class GameGraphic implements ActionListener {
                 } else {
                     build[i].addActionListener(this);
                 }
-                for (CardButton cardButton : dis[i]) {
+                for (CardButton cardButton : discard[i]) {
                     cardButton.setEnabled(b);
                 }
             }

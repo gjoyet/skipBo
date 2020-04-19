@@ -387,23 +387,26 @@ public class GameGraphic implements ActionListener {
             CardButton handCard = hand[i-1];
             CardButton buildCard = build[j-1];
             String col = handCard.removeColour();
-            int num = handCard.removeNumber();
-            if (num == 13) {
-                num = buildCard.getTopNumber()+1;
-            }
-            buildCard.addCard(col, num);
-            buildCard.setIcon(cardIcons.getIcon(col, num, CardIcons.LARGE));
-            handCard.setIcon(null);
-            clientListener.pw.println(Protocol.PUTTO + "§Update§B§" + i + "§" + j + "§" + name + "§" +
-                    col + "§" + num);
-        } else {
-            clientLog.debug("set build for everyone");
-            CardButton buildCard = build[j-1];
+            number = handCard.removeNumber();
             if (number == 13) {
                 number = buildCard.getTopNumber()+1;
             }
+            buildCard.addCard(col, number);
+            buildCard.setIcon(cardIcons.getIcon(col, number, CardIcons.LARGE));
+            handCard.setIcon(null);
+            clientListener.pw.println(Protocol.PUTTO + "§Update§B§" + i + "§" + j + "§" + name + "§" +
+                    col + "§" + number);
+        } else {
+            clientLog.debug("set build for everyone");
+            CardButton buildCard = build[j-1];
+/*            if (number == 13) {
+                number = buildCard.getTopNumber()+1;
+            }*/
             buildCard.addCard(colour, number);
             buildCard.setIcon(cardIcons.getIcon(colour, number, CardIcons.LARGE));
+        }
+        if (number == 12) {
+            resetBuildPile(j-1);
         }
     }
 
@@ -427,9 +430,9 @@ public class GameGraphic implements ActionListener {
             clientLog.debug("is updating build & stock from enemy");
             CardButton stockCard = getEnemyButton(name);
             CardButton buildCard = build[j-1];
-            if (number2 == 13) {
+/*            if (number2 == 13) {
                 number2 = buildCard.getTopNumber()+1;
-            }
+            }*/
             buildCard.addCard(colour2, number2);
             buildCard.setIcon(cardIcons.getIcon(colour2, number2, CardIcons.LARGE));
             stockCard.addCard(colour1, number1);

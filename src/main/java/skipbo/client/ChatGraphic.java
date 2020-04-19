@@ -1,5 +1,7 @@
 package skipbo.client;
 
+import skipbo.server.Protocol;
+
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
@@ -325,6 +327,12 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
                 clientListener.forward("/quit");
             } catch (NotACommandException e) {
                 clientLog.warn("Error with /quit command");
+            }
+        } else {
+            String name = (String) JOptionPane.showInputDialog(contentPane, "Enter your new name:",
+                    "Change your name", JOptionPane.PLAIN_MESSAGE, null, null, playerName);
+            if (name != null) {
+                clientListener.pw.println(Protocol.CHNGE + "§Nickname§" + name);
             }
         }
     }

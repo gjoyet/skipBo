@@ -3,10 +3,7 @@ package skipbo.client;
 import skipbo.server.Protocol;
 
 import javax.swing.*;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
+import javax.swing.text.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -150,6 +147,9 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         chatScrollPane.setVisible(true);
         chatScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentPane.add(chatScrollPane);
+
+        DefaultCaret caret = (DefaultCaret) chat.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
         //Input textfield
         inputMes = new JTextArea();
@@ -343,8 +343,8 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         Document doc = chat.getDocument();
         try {
             doc.insertString(doc.getLength(), s, attributeSet);
-            doc = chat.getDocument();
-            chat.setCaretPosition(doc.getLength());
+//            doc = chat.getDocument();
+//            chat.setCaretPosition(doc.getLength());
         } catch (BadLocationException e) {
             clientLog.warn("Error with appending text to chat");
         }

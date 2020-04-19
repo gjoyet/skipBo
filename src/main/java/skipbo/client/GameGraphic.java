@@ -388,6 +388,10 @@ public class GameGraphic implements ActionListener {
             CardButton buildCard = build[j-1];
             String col = handCard.removeColour();
             int num = handCard.removeNumber();
+            if (num == 13) {
+                num = buildCard.getTopNumber()+1;
+            }
+            buildCard.addCard(col, num);
             buildCard.setIcon(cardIcons.getIcon(col, num, CardIcons.LARGE));
             handCard.setIcon(null);
             clientListener.pw.println(Protocol.PUTTO + "§Update§B§" + i + "§" + j + "§" + name + "§" +
@@ -395,6 +399,10 @@ public class GameGraphic implements ActionListener {
         } else {
             clientLog.debug("set build for everyone");
             CardButton buildCard = build[j-1];
+            if (number == 13) {
+                number = buildCard.getTopNumber()+1;
+            }
+            buildCard.addCard(colour, number);
             buildCard.setIcon(cardIcons.getIcon(colour, number, CardIcons.LARGE));
         }
     }
@@ -406,6 +414,10 @@ public class GameGraphic implements ActionListener {
             CardButton buildCard = build[j-1];
             String col = stock.removeColour();
             number2 = stock.removeNumber();
+            if (number2 == 13) {
+                number2 = buildCard.getTopNumber()+1;
+            }
+            buildCard.addCard(col, number2);
             buildCard.setIcon(cardIcons.getIcon(col, number2, CardIcons.LARGE));
             stock.setIcon(cardIcons.getIcon(colour1, number1, CardIcons.LARGE));
             stock.addCard(colour1, number1);
@@ -415,6 +427,10 @@ public class GameGraphic implements ActionListener {
             clientLog.debug("is updating build & stock from enemy");
             CardButton stockCard = getEnemyButton(name);
             CardButton buildCard = build[j-1];
+            if (number2 == 13) {
+                number2 = buildCard.getTopNumber()+1;
+            }
+            buildCard.addCard(colour2, number2);
             buildCard.setIcon(cardIcons.getIcon(colour2, number2, CardIcons.LARGE));
             stockCard.addCard(colour1, number1);
             stockCard.setIcon(cardIcons.getIcon(colour1, number1, CardIcons.SMALL));
@@ -444,6 +460,10 @@ public class GameGraphic implements ActionListener {
             layeredPane.remove(oldDisCard);
             col = oldDisCard.removeColour();
             num = oldDisCard.removeNumber();
+            if (num == 13) {
+                num = buildCard.getTopNumber()+1;
+            }
+            buildCard.addCard(col, num);
             buildCard.setIcon(cardIcons.getIcon(col, num, CardIcons.LARGE));
             al.get(al.size()-1).addActionListener(this);
             layeredPane.repaint();
@@ -453,6 +473,10 @@ public class GameGraphic implements ActionListener {
             layeredPane.remove(oldDisCard);
             col = oldDisCard.removeColour();
             num = oldDisCard.removeNumber();
+            if (num == 13) {
+                num = buildCard.getTopNumber()+1;
+            }
+            buildCard.addCard(col, num);
             buildCard.setIcon(cardIcons.getIcon(col, num, CardIcons.LARGE));
             layeredPane.repaint();
 /*            discardCard = getEnemyArray(name, i);

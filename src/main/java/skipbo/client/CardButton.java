@@ -40,11 +40,14 @@ public class CardButton extends JButton {
         return type;
     }
 
+    /**
+     * @return Number of the top Card. If there is no Card it returns 0.
+     */
     int getTopNumber() {
         if (numbers.size() > 0) {
             return numbers.get(numbers.size()-1);
         } else {
-            return -1;
+            return 0;
         }
     }
 

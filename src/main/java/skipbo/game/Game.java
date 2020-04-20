@@ -3,10 +3,7 @@ package skipbo.game;
 import skipbo.server.ProtocolExecutor;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Random;
+import java.util.*;
 
 import static java.lang.Thread.sleep;
 import static skipbo.server.SBServer.servLog;
@@ -20,7 +17,7 @@ public class Game implements Runnable {
     private Player winner;
     private boolean gameRunning, turnFinished;
     public int turnCounter = 0;
-
+    public int score = 0;
 
     /**
      * Constructor for Object Game, where the main Game and Game rules
@@ -106,7 +103,7 @@ public class Game implements Runnable {
         firstPlayer.getHandCards().add(3,new Card(8, Color.green));
         firstPlayer.getHandCards().add(4,new Card(Color.cyan));
 
-        for (int k = 2; k >= 0; k--) {   //FOR TESTING AND DEMO PURPOSE
+        for (int k = 5; k >= 0; k--) {   //FOR TESTING AND DEMO PURPOSE
             Card c = new Card(k + 6, Color.red);
             firstPlayer.getStockPile().add(c);
         }
@@ -275,6 +272,7 @@ public class Game implements Runnable {
 
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your stock card is: " +
                         stockCard.number);
+
                 return true;
             } else if (card.col == Color.cyan) {      //if Joker card
                 card.number = topCard.number + 1;
@@ -312,11 +310,16 @@ public class Game implements Runnable {
                 new ProtocolExecutor().sendAll("PRINT§Terminal§" + str,player.getSBL());
             }
 
-            for (Card buildPileCard : buildPile) {
+            for(Iterator<Card> bp = buildPile.iterator(); bp.hasNext();){
+                Card buildPileCard = bp.next();
+                bp.remove();
+            }
+
+            /*for (Card buildPileCard : buildPile) {
                 buildPile.remove(buildPileCard);
                 piles.emptyPile.add(buildPileCard);
                 reshuffle(piles.emptyPile);
-            }
+            }*/
             new ProtocolExecutor().sendAll("PRINT§Terminal§The maximum number has been reached; " +
                     "the deck has been reset to: ", player.getSBL());
             for (String s : buildPiles) {
@@ -630,6 +633,7 @@ public class Game implements Runnable {
      */
     public void checkDrawPile(){
         if(this.getDrawPile().isEmpty()){
+
             getDrawPile().addAll(piles.emptyPile);
         }
     }
@@ -642,7 +646,8 @@ public class Game implements Runnable {
         if (!(playersTurn == players.size() - 1)) {     //if not the last player in the array, go up by one
             playersTurn++;
         } else {
-            playersTurn = 0;    //otherwise start over from first player
+            playersTurn = 0;        //otherwise start over from first player
+            turnCounter++;
         }
         startTurn(playersTurn);
         turnFinished = true;
@@ -658,6 +663,7 @@ public class Game implements Runnable {
         servLog.info("Game ending.");
         gameRunning = false;
         this.winner = winner;
+
         if(winner != null) {
             new ProtocolExecutor().sendAll("ENDGM§Winner§" + winner.getName(), winner.getSBL());
         } else {

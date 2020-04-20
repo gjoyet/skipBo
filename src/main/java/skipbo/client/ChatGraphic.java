@@ -148,8 +148,8 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         chatScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentPane.add(chatScrollPane);
 
-        DefaultCaret caret = (DefaultCaret) chat.getCaret();
-        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+        /*DefaultCaret caret = (DefaultCaret) chat.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);*/
 
         //Input textfield
         inputMes = new JTextArea();

@@ -1,14 +1,12 @@
 package skipbo.client;
 
-import skipbo.server.Protocol;
 import skipbo.server.NoCommandException;
+import skipbo.server.Protocol;
 
-import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
 
 import static skipbo.client.SBClient.clientLog;
 
@@ -34,7 +32,7 @@ class SBServerListener implements Runnable {
     public void run() {
         String input;
 
-        while(isLoggedIn) {
+        while (isLoggedIn) {
             try {
                 input = br.readLine();
                 clientLog.debug(input);
@@ -51,10 +49,11 @@ class SBServerListener implements Runnable {
 
     /**
      * Executes commands coming from the server according to network protocol
+     *
      * @param commandLine Network protocol string from server
      * @throws NoCommandException If commandLine string doesn't match network protocol
      */
-    void executeCommand(String commandLine) throws NoCommandException  {
+    void executeCommand(String commandLine) throws NoCommandException {
         String[] command = commandLine.split("§", 3);
         Protocol protocol = Protocol.valueOf(command[0]);
 
@@ -117,7 +116,7 @@ class SBServerListener implements Runnable {
                 clientLog.debug("updated hand to discard");
                 chatGraphic.getGameGraphic().handToDiscard(Integer.parseInt(argument[1]), Integer.parseInt(argument[2]),
                         argument[3], argument[4], Integer.parseInt(argument[5]));
-            } else if (argument[0].equals("B")){ //Hand to build
+            } else if (argument[0].equals("B")) { //Hand to build
                 clientLog.debug("updated hand to build");
                 chatGraphic.getGameGraphic().handToBuild(Integer.parseInt(argument[1]), Integer.parseInt(argument[2]),
                         argument[3], argument[4], Integer.parseInt(argument[5]));
@@ -151,7 +150,7 @@ class SBServerListener implements Runnable {
                 string.append(card);
             }*/
             //clientLog.debug("cards array= " + string);
-            String[] colours = new String[cards.length/2];
+            String[] colours = new String[cards.length / 2];
             int[] numbers = new int[colours.length];
             for (int i = 0, j = 0; i < colours.length; i++) {
                 colours[i] = cards[j++];

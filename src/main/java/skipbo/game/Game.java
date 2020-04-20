@@ -3,9 +3,11 @@ package skipbo.game;
 import skipbo.server.ProtocolExecutor;
 
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.Random;
 
-import static java.lang.Thread.sleep;
 import static skipbo.server.SBServer.servLog;
 
 public class Game implements Runnable {
@@ -97,11 +99,11 @@ public class Game implements Runnable {
 
         this.piles.gamePiles();   // Game gets complete set of cards
         Player firstPlayer = players.get(0);
-        firstPlayer.getHandCards().add(0,new Card(1,Color.green));
-        firstPlayer.getHandCards().add(1,new Card(3,Color.red));
-        firstPlayer.getHandCards().add(2,new Card(4, Color.red));
-        firstPlayer.getHandCards().add(3,new Card(8, Color.green));
-        firstPlayer.getHandCards().add(4,new Card(Color.cyan));
+        firstPlayer.getHandCards().add(0, new Card(1, Color.green));
+        firstPlayer.getHandCards().add(1, new Card(3, Color.red));
+        firstPlayer.getHandCards().add(2, new Card(4, Color.red));
+        firstPlayer.getHandCards().add(3, new Card(8, Color.green));
+        firstPlayer.getHandCards().add(4, new Card(Color.cyan));
 
         for (int k = 5; k >= 0; k--) {   //FOR TESTING AND DEMO PURPOSE
             Card c = new Card(k + 6, Color.red);
@@ -117,7 +119,7 @@ public class Game implements Runnable {
                 tempPlayer.getHandCards().add(c);
             }
             Card skip = new Card(Color.cyan);
-            tempPlayer.getHandCards().add(4,skip);
+            tempPlayer.getHandCards().add(4, skip);
             /*
             for (int j = 0; j < 5; j++) {    // Draw hand-cards for each player (Actual hand card loop)
                 Card c = getDrawPile().get(random.nextInt(getDrawPile().size()));
@@ -179,8 +181,8 @@ public class Game implements Runnable {
 
         displayDiscard(ply);
 
-        String [] bPiles = piles.buildPilesPrint();
-        for(String str: bPiles){
+        String[] bPiles = piles.buildPilesPrint();
+        for (String str : bPiles) {
             ply.getSBL().getPW().println("PRINT§Terminal§" + str);
         }
 
@@ -192,10 +194,11 @@ public class Game implements Runnable {
 
     /**
      * Checks if player's hand cards are empty. If yes, fills the player's hand again.
+     *
      * @param player The player's that currently playing
      */
-    public void checkHandCards(Player player){
-        if(player.getHandCards().isEmpty()){
+    public void checkHandCards(Player player) {
+        if (player.getHandCards().isEmpty()) {
             fillHandCards(player);
         }
     }
@@ -298,19 +301,20 @@ public class Game implements Runnable {
     /**
      * Checks if build pile top card is 12, if yes, removes cards from that build pile and puts it into and empty pile
      * and prints. If not, prints normally.
-     * @param card card that's played
+     *
+     * @param card      card that's played
      * @param buildPile build pile that's played to
-     * @param player Player whose turn it is
+     * @param player    Player whose turn it is
      */
 
     public void checkBuildPileAndPrint(Card card, ArrayList<Card> buildPile, Player player) {
         String[] buildPiles = piles.buildPilesPrint();
         if (card.number == 12) {
-            for(String str:buildPiles){
-                new ProtocolExecutor().sendAll("PRINT§Terminal§" + str,player.getSBL());
+            for (String str : buildPiles) {
+                new ProtocolExecutor().sendAll("PRINT§Terminal§" + str, player.getSBL());
             }
 
-            for(Iterator<Card> bp = buildPile.iterator(); bp.hasNext();){
+            for (Iterator<Card> bp = buildPile.iterator(); bp.hasNext(); ) {
                 Card buildPileCard = bp.next();
                 bp.remove();
             }
@@ -368,7 +372,7 @@ public class Game implements Runnable {
         specDiscard.add(card);
         currentPlayer.getHandCards().remove(card);
 
-        if(currentPlayer.getHandCards().isEmpty()){
+        if (currentPlayer.getHandCards().isEmpty()) {
             fillHandCards(currentPlayer);
         }
 
@@ -442,7 +446,7 @@ public class Game implements Runnable {
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
                         + piles.handCardPrint(currentPlayer));
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your stock card is: " +
-                        currentPlayer.getStockPile().get(currentPlayer.getStockPile().size()-1).number);
+                        currentPlayer.getStockPile().get(currentPlayer.getStockPile().size() - 1).number);
 
                 return stockPile.get(stockPile.size() - 1);
             } else {      //if invalid move
@@ -465,7 +469,7 @@ public class Game implements Runnable {
                         + piles.handCardPrint(currentPlayer));
 
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your stock card is: " +
-                        currentPlayer.getStockPile().get(currentPlayer.getStockPile().size()-1).number);
+                        currentPlayer.getStockPile().get(currentPlayer.getStockPile().size() - 1).number);
 
                 return stockPile.get(stockPile.size() - 1);
             } else if (stockCard.col == Color.cyan) {      // if Skip Bo card
@@ -622,6 +626,7 @@ public class Game implements Runnable {
 
     /**
      * Reshuffles the empty pile with shuffle method
+     *
      * @param emptyPile the empty pile that's to be shuffled and added to the drawdeck
      */
     public void reshuffle(ArrayList<Card> emptyPile) {
@@ -631,12 +636,13 @@ public class Game implements Runnable {
     /**
      * Checks if draw pile is empty, if yes, adds cards from the empty pile into the draw pile.
      */
-    public void checkDrawPile(){
-        if(this.getDrawPile().isEmpty()){
+    public void checkDrawPile() {
+        if (this.getDrawPile().isEmpty()) {
 
             getDrawPile().addAll(piles.emptyPile);
         }
     }
+
     /**
      * Method to be run at the end of a player's turn, which
      * then changes turn from one player to the next.
@@ -664,7 +670,7 @@ public class Game implements Runnable {
         gameRunning = false;
         this.winner = winner;
 
-        if(winner != null) {
+        if (winner != null) {
             new ProtocolExecutor().sendAll("ENDGM§Winner§" + winner.getName(), winner.getSBL());
         } else {
             // TODO: option for when game got interrupted without having a winner.

@@ -5,8 +5,6 @@ import java.awt.*;
 import java.awt.dnd.*;
 import java.util.Objects;
 
-import static skipbo.client.SBClient.clientLog;
-
 public class DragDropTest extends JFrame implements DropTargetListener, DragGestureListener {
 
     JTextPane draggedPane;
@@ -123,7 +121,6 @@ public class DragDropTest extends JFrame implements DropTargetListener, DragGest
         pane.setText("");
         pane.insertIcon(card1);
     }
-
 
 
     //Dragging

@@ -3,8 +3,6 @@ package skipbo.client;
 import javax.swing.*;
 import java.util.ArrayList;
 
-import static skipbo.client.SBClient.clientLog;
-
 public class CardButton extends JButton {
 
     static final int HAND = 0;
@@ -15,8 +13,8 @@ public class CardButton extends JButton {
     private int type = -1;
 
     private ArrayList<ImageIcon> icons;
-    private ArrayList<String> colors;
-    private ArrayList<Integer> numbers;
+    private final ArrayList<String> colors;
+    private final ArrayList<Integer> numbers;
 
     CardButton(int type) {
         super();
@@ -45,7 +43,7 @@ public class CardButton extends JButton {
      */
     int getTopNumber() {
         if (numbers.size() > 0) {
-            return numbers.get(numbers.size()-1);
+            return numbers.get(numbers.size() - 1);
         } else {
             return 0;
         }
@@ -53,7 +51,7 @@ public class CardButton extends JButton {
 
     String getTopColour() {
         if (colors.size() > 0) {
-            return colors.get(colors.size()-1);
+            return colors.get(colors.size() - 1);
         } else {
             return null;
         }

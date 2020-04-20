@@ -5,7 +5,8 @@ package skipbo.client;
  */
 public class NotACommandException extends Exception {
 
-    public NotACommandException() {}
+    public NotACommandException() {
+    }
 
     public NotACommandException(String message) {
         super(message);

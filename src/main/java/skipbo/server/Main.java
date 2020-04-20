@@ -10,18 +10,20 @@ public class Main {
 
     public static void main(String[] args) {
         mainLog.debug("Program starting.");
-        if(args[0].equalsIgnoreCase("server")) {
+        if (args[0].equalsIgnoreCase("server")) {
             mainLog.debug("Main triggered Server.");
             SBServer sbServer = new SBServer(Integer.parseInt(args[1]));
-            Thread serverT = new Thread(sbServer); serverT.start();
-        } else if(args[0].equalsIgnoreCase("client")) {
+            Thread serverT = new Thread(sbServer);
+            serverT.start();
+        } else if (args[0].equalsIgnoreCase("client")) {
             mainLog.debug("Main triggered Client.");
-            String[] arguments = new String[args.length-1];
-            for(int i=1; i < args.length; i++) {
-                arguments[i-1] = args[i];
+            String[] arguments = new String[args.length - 1];
+            for (int i = 1; i < args.length; i++) {
+                arguments[i - 1] = args[i];
             }
             SBClient sbClient = new SBClient(arguments);
-            Thread sbClientT = new Thread(sbClient); sbClientT.start();
+            Thread sbClientT = new Thread(sbClient);
+            sbClientT.start();
         }
     }
 }

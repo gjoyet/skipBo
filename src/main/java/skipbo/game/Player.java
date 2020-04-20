@@ -129,9 +129,12 @@ public class Player {
 
     /**
      * For testing purposes.
+     *
      * @param hc: handcards of players are set to this.
      */
-    public void setHandCards(ArrayList<Card> hc) { this.piles.handCards = hc; }
+    public void setHandCards(ArrayList<Card> hc) {
+        this.piles.handCards = hc;
+    }
 
     /**
      * Method to return the discard piles of a player

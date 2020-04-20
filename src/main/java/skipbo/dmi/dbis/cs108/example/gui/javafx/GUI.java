@@ -10,15 +10,18 @@ import javafx.stage.Stage;
 */
 /**
  * This is an example JavaFX-Application.
+ * <p>
+ * Launching this method will not work on some platforms.
+ * What you should do is to create a separate main class and launch the GUI class from there as is done in {@link Main}
  *//*
 
 public class GUI extends Application {
 
     */
 /**
-     * Launching this method will not work on some platforms.
-     * What you should do is to create a separate main class and launch the GUI class from there as is done in {@link Main}
-     *//*
+ * Launching this method will not work on some platforms.
+ * What you should do is to create a separate main class and launch the GUI class from there as is done in {@link Main}
+ *//*
 
     public static void main(String[] args) {
         launch(args);

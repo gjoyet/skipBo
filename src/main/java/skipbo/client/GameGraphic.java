@@ -1,6 +1,7 @@
 package skipbo.client;
 
 import skipbo.server.Protocol;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -8,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Objects;
+
 import static skipbo.client.SBClient.clientLog;
 
 /**
@@ -15,14 +17,14 @@ import static skipbo.client.SBClient.clientLog;
  */
 public class GameGraphic implements ActionListener {
 
-    private SBClientListener clientListener;
+    private final SBClientListener clientListener;
     private DefaultButtonModel notClickableModel;
-    private DefaultButtonModel defaultButtonModel = new DefaultButtonModel();
+    private final DefaultButtonModel defaultButtonModel = new DefaultButtonModel();
     private CardButton button1Pressed = null;
-    private Border defaultBorder = UIManager.getBorder("Button.border");
-    private Border clickedBorder = BorderFactory.createLineBorder(Color.BLACK,2);
-    private String playerName;
-    private JLayeredPane layeredPane;
+    private final Border defaultBorder = UIManager.getBorder("Button.border");
+    private final Border clickedBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
+    private final String playerName;
+    private final JLayeredPane layeredPane;
 
     //Opponents
     private JLabel e1;
@@ -33,18 +35,18 @@ public class GameGraphic implements ActionListener {
     private int playerIndex = 0;
 
     //Own piles
-    private CardButton[] hand = new CardButton[5];
+    private final CardButton[] hand = new CardButton[5];
     private CardButton stock;
     //private CardButton[] discard = new CardButton[4];
-    private ArrayList<CardButton>[] discard = new ArrayList[4];
+    private final ArrayList<CardButton>[] discard = new ArrayList[4];
 
     //Game piles
-    private CardButton[] build = new CardButton[4];
+    private final CardButton[] build = new CardButton[4];
 
     //Opponent discard piles
-    private ArrayList<CardButton>[] e1_discard = new ArrayList[4];
-    private ArrayList<CardButton>[] e2_discard = new ArrayList[4];
-    private ArrayList<CardButton>[] e3_discard = new ArrayList[4];
+    private final ArrayList<CardButton>[] e1_discard = new ArrayList[4];
+    private final ArrayList<CardButton>[] e2_discard = new ArrayList[4];
+    private final ArrayList<CardButton>[] e3_discard = new ArrayList[4];
 /*    private CardButton[] e1_discard = new CardButton[4];
     private CardButton[] e2_discard = new CardButton[4];
     private CardButton[] e3_discard = new CardButton[4];*/
@@ -54,16 +56,13 @@ public class GameGraphic implements ActionListener {
     private CardButton e2_stock;
     private CardButton e3_stock;
 
-    private CardIcons cardIcons = new CardIcons( 30, 50, 78, 120);
-
-    private JTextPane chat;
+    private final CardIcons cardIcons = new CardIcons(30, 50, 78, 120);
 
 
     GameGraphic(SBClientListener clientListener, String name, JTextPane chat) {
         this.clientListener = clientListener;
         playerName = name;
         layeredPane = new JLayeredPane();
-        this.chat = chat;
         layeredPane.setBounds(0, 0, 1150, 800);
         setButtonModel();
         appendDecks();
@@ -78,13 +77,13 @@ public class GameGraphic implements ActionListener {
         */
 
         JLabel dp = new JLabel("Your Discard Piles");
-        dp.setBounds(620,380,120,15);
+        dp.setBounds(620, 380, 120, 15);
         JLabel hp = new JLabel("Your hand cards");
-        hp.setBounds(620,550,120,15);
+        hp.setBounds(620, 550, 120, 15);
         JLabel sp = new JLabel("Your stock pile");
-        sp.setBounds(490, 380,120,15);
+        sp.setBounds(490, 380, 120, 15);
         JLabel bp = new JLabel("Build piles");
-        bp.setBounds(620,130,120,15);
+        bp.setBounds(620, 130, 120, 15);
         layeredPane.add(dp);
         layeredPane.add(hp);
         layeredPane.add(sp);
@@ -103,7 +102,7 @@ public class GameGraphic implements ActionListener {
             build[i].setName(" B " + j);
             discard[i] = new ArrayList<>();
             CardButton b = new CardButton(CardButton.DISCARD);
-            b.setBounds(620+i*110, 400, 100, 145);
+            b.setBounds(620 + i * 110, 400, 100, 145);
             b.addActionListener(this);
             b.setName(" D " + j);
             layeredPane.add(b);
@@ -121,8 +120,8 @@ public class GameGraphic implements ActionListener {
 
 
         /*
-        * Test/Example for multiple buttons on top of each other
-        */
+         * Test/Example for multiple buttons on top of each other
+         */
 /*
         dis[0] = new ArrayList<>();
         dis[0].add(new CardButton());
@@ -140,7 +139,7 @@ public class GameGraphic implements ActionListener {
         */
 
         // hand piles
-        for (int i = 0; i < hand.length;) {
+        for (int i = 0; i < hand.length; ) {
             hand[i] = new CardButton(CardButton.HAND);
             layeredPane.add(hand[i]);
             hand[i].addActionListener(this);
@@ -165,7 +164,7 @@ public class GameGraphic implements ActionListener {
         */
 
         JLabel dpg = new JLabel("Draw pile");
-        dpg.setBounds(490,130,120,15);
+        dpg.setBounds(490, 130, 120, 15);
         layeredPane.add(dpg);
 
         // draw pile
@@ -183,15 +182,15 @@ public class GameGraphic implements ActionListener {
         //Labels of enemies
 
         e1 = new JLabel("Opponent 1");
-        e1.setBounds(490,30,120,15);
+        e1.setBounds(490, 30, 120, 15);
         layeredPane.add(e1);
 
         e2 = new JLabel("Opponent 2");
-        e2.setBounds(700,30,120,15);
+        e2.setBounds(700, 30, 120, 15);
         layeredPane.add(e2);
 
         e3 = new JLabel("Opponent 3");
-        e3.setBounds(910,30,120,15);
+        e3.setBounds(910, 30, 120, 15);
         layeredPane.add(e3);
 
         //Stock piles of enemies
@@ -220,9 +219,9 @@ public class GameGraphic implements ActionListener {
             CardButton b1 = new CardButton();
             CardButton b2 = new CardButton();
             CardButton b3 = new CardButton();
-            b1.setBounds(535+i*35, 50, 30, 50);
-            b2.setBounds(745+i*35, 50, 30, 50);
-            b3.setBounds(955+i*35, 50, 30, 50);
+            b1.setBounds(535 + i * 35, 50, 30, 50);
+            b2.setBounds(745 + i * 35, 50, 30, 50);
+            b3.setBounds(955 + i * 35, 50, 30, 50);
             setClickable(b1, false);
             setClickable(b2, false);
             setClickable(b3, false);
@@ -263,6 +262,7 @@ public class GameGraphic implements ActionListener {
 
     /**
      * Sets the opponents names and puts them in an array in the correct order (order of turns).
+     *
      * @param names Array with names of opponents and own player name.
      */
     void setOpponentNames(String[] names) {
@@ -295,21 +295,22 @@ public class GameGraphic implements ActionListener {
 
     /**
      * Sets own hand cards and stock card.
+     *
      * @param colAndNum Array of colours and numbers of hand cards (5x alternating) and colour and number of stock card.
      */
     void setInitialCards(String[] colAndNum) {
         for (int i = 0, j = 0; i < hand.length; i++) {
-            hand[i].setIcon(cardIcons.getIcon(colAndNum[j], Integer.parseInt(colAndNum[j+1]), CardIcons.MEDIUM));
+            hand[i].setIcon(cardIcons.getIcon(colAndNum[j], Integer.parseInt(colAndNum[j + 1]), CardIcons.MEDIUM));
             hand[i].addCard(colAndNum[j++], Integer.parseInt(colAndNum[j++]));
         }
-        for (int i = 0, j = 10; i < (colAndNum.length - 10)/3; i++) {
+        for (int i = 0, j = 10; i < (colAndNum.length - 10) / 3; i++) {
             CardButton stockCard = getEnemyButton(colAndNum[j]);
             j++;
             if (stockCard == null) {
-                stock.setIcon(cardIcons.getIcon(colAndNum[j], Integer.parseInt(colAndNum[j+1]), CardIcons.LARGE));
+                stock.setIcon(cardIcons.getIcon(colAndNum[j], Integer.parseInt(colAndNum[j + 1]), CardIcons.LARGE));
                 stock.addCard(colAndNum[j++], Integer.parseInt(colAndNum[j++]));
             } else {
-                stockCard.setIcon(cardIcons.getIcon(colAndNum[j], Integer.parseInt(colAndNum[j+1]), CardIcons.SMALL));
+                stockCard.setIcon(cardIcons.getIcon(colAndNum[j], Integer.parseInt(colAndNum[j + 1]), CardIcons.SMALL));
                 stockCard.addCard(colAndNum[j++], Integer.parseInt(colAndNum[j++]));
             }
         }
@@ -326,10 +327,11 @@ public class GameGraphic implements ActionListener {
     }
 
     void setButtonModel() {
-        notClickableModel =  new DefaultButtonModel() {
+        notClickableModel = new DefaultButtonModel() {
             public boolean isArmed() {
                 return false;
             }
+
             public boolean isPressed() {
                 return false;
             }
@@ -338,9 +340,10 @@ public class GameGraphic implements ActionListener {
 
     /**
      * Plays a hand card to a discard pile
-     * @param i Index of hand card
-     * @param j Index of discard pile
-     * @param name Player name of player who makes the move
+     *
+     * @param i      Index of hand card
+     * @param j      Index of discard pile
+     * @param name   Player name of player who makes the move
      * @param colour Colour of hand card being moved
      * @param number Number of hand card being moved
      */
@@ -349,7 +352,7 @@ public class GameGraphic implements ActionListener {
         ArrayList<CardButton> al;
         CardButton newDisCard;
         if (name.equals(playerName)) {
-            CardButton handCard = hand[i-1];
+            CardButton handCard = hand[i - 1];
             //CardButton discardCard = discard[j-1];
             String col = handCard.removeColour();
             int num = handCard.removeNumber();
@@ -359,27 +362,27 @@ public class GameGraphic implements ActionListener {
             clientListener.pw.println(Protocol.PUTTO + "§Update§D§" + i + "§" + j + "§" + name + "§" +
                     col + "§" + num);
 
-            al = discard[j-1];
-            CardButton oldDisCard = al.get(al.size()-1);
+            al = discard[j - 1];
+            CardButton oldDisCard = al.get(al.size() - 1);
             newDisCard = new CardButton(CardButton.DISCARD);
             newDisCard.addActionListener(this);
             oldDisCard.removeActionListener(this);
             newDisCard.setName(" D " + j);
-            newDisCard.setBounds(al.get(0).getX(), al.get(0).getY()+(al.size()-1)*15,
+            newDisCard.setBounds(al.get(0).getX(), al.get(0).getY() + (al.size() - 1) * 15,
                     al.get(0).getWidth(), al.get(0).getHeight());
             newDisCard.setIcon(cardIcons.getIcon(col, num, CardIcons.LARGE));
             newDisCard.addCard(col, num);
             layeredPane.add(newDisCard, new Integer(al.size()));
             al.add(newDisCard);
 
-            playerIndex = (playerIndex+1)%oppArray.length;
+            playerIndex = (playerIndex + 1) % oppArray.length;
             oppArray[playerIndex].setForeground(ChatGraphic.DARKGREEN);
 
         } else {
             al = getEnemyArray(name, j);
             newDisCard = new CardButton();
             setClickable(newDisCard, false);
-            newDisCard.setBounds(al.get(0).getX(), al.get(0).getY()+(al.size()-1)*10, al.get(0).getWidth(),
+            newDisCard.setBounds(al.get(0).getX(), al.get(0).getY() + (al.size() - 1) * 10, al.get(0).getWidth(),
                     al.get(0).getHeight());
             newDisCard.setIcon(cardIcons.getIcon(colour, number, CardIcons.SMALL));
             newDisCard.addCard(colour, number);
@@ -390,7 +393,7 @@ public class GameGraphic implements ActionListener {
             discard.setIcon(cardIcons.getIcon(colour, number, CardIcons.SMALL));*/
 
             oppArray[playerIndex].setForeground(Color.BLACK);
-            playerIndex = (playerIndex+1)%oppArray.length;
+            playerIndex = (playerIndex + 1) % oppArray.length;
             if (oppArray[playerIndex] != null) { //if this is null, it means that it's this players turn
                 oppArray[playerIndex].setForeground(ChatGraphic.DARKGREEN);
             }
@@ -399,20 +402,21 @@ public class GameGraphic implements ActionListener {
 
     /**
      * Plays a hand card to a build pile
-     * @param i Index of hand card
-     * @param j Index of build pile
-     * @param name Player name of player who makes the move
+     *
+     * @param i      Index of hand card
+     * @param j      Index of build pile
+     * @param name   Player name of player who makes the move
      * @param colour Colour of hand card being moved
      * @param number Number of hand card being moved
      */
     void handToBuild(int i, int j, String name, String colour, int number) {
         if (name.equals(playerName)) {
-            CardButton handCard = hand[i-1];
-            CardButton buildCard = build[j-1];
+            CardButton handCard = hand[i - 1];
+            CardButton buildCard = build[j - 1];
             String col = handCard.removeColour();
             number = handCard.removeNumber();
             if (number == 13) {
-                number = buildCard.getTopNumber()+1;
+                number = buildCard.getTopNumber() + 1;
             }
             buildCard.addCard(col, number);
             buildCard.setIcon(cardIcons.getIcon(col, number, CardIcons.LARGE));
@@ -421,7 +425,7 @@ public class GameGraphic implements ActionListener {
                     col + "§" + number);
         } else {
             clientLog.debug("set build for everyone");
-            CardButton buildCard = build[j-1];
+            CardButton buildCard = build[j - 1];
 /*            if (number == 13) {
                 number = buildCard.getTopNumber()+1;
             }*/
@@ -429,7 +433,7 @@ public class GameGraphic implements ActionListener {
             buildCard.setIcon(cardIcons.getIcon(colour, number, CardIcons.LARGE));
         }
         if (number == 12) {
-            resetBuildPile(j-1);
+            resetBuildPile(j - 1);
         }
     }
 
@@ -437,8 +441,9 @@ public class GameGraphic implements ActionListener {
 
     /**
      * Plays a stock card to a build pile
-     * @param j Index of build pile
-     * @param name Player name of player who makes the move
+     *
+     * @param j       Index of build pile
+     * @param name    Player name of player who makes the move
      * @param colour1 Colour of the new stock card
      * @param number1 Number of the new stock card
      * @param colour2 Colour of the stock card being moved
@@ -447,11 +452,11 @@ public class GameGraphic implements ActionListener {
     void stockToBuild(int j, String name, String colour1, int number1, String colour2, int number2) {
         //clientLog.debug("(GameGraphic) entered stock to build method");
         if (name.equals(playerName)) {
-            CardButton buildCard = build[j-1];
+            CardButton buildCard = build[j - 1];
             String col = stock.removeColour();
             number2 = stock.removeNumber();
             if (number2 == 13) {
-                number2 = buildCard.getTopNumber()+1;
+                number2 = buildCard.getTopNumber() + 1;
             }
             buildCard.addCard(col, number2);
             buildCard.setIcon(cardIcons.getIcon(col, number2, CardIcons.LARGE));
@@ -462,7 +467,7 @@ public class GameGraphic implements ActionListener {
         } else {
             clientLog.debug("is updating build & stock from enemy");
             CardButton stockCard = getEnemyButton(name);
-            CardButton buildCard = build[j-1];
+            CardButton buildCard = build[j - 1];
 /*            if (number2 == 13) {
                 number2 = buildCard.getTopNumber()+1;
             }*/
@@ -472,7 +477,7 @@ public class GameGraphic implements ActionListener {
             stockCard.setIcon(cardIcons.getIcon(colour1, number1, CardIcons.SMALL));
         }
         if (number2 == 12) {
-            resetBuildPile(j-1);
+            resetBuildPile(j - 1);
         }
     }
 
@@ -480,12 +485,13 @@ public class GameGraphic implements ActionListener {
 
     /**
      * Plays a card from a discard pile to a build pile
-     * @param i Index of discard pile
-     * @param j Index of build pile
+     *
+     * @param i    Index of discard pile
+     * @param j    Index of build pile
      * @param name Player name of player who made the move
      */
     void discardToBuild(int i, int j, String name) {
-        CardButton buildCard = build[j-1];
+        CardButton buildCard = build[j - 1];
         CardButton oldDisCard;
         ArrayList<CardButton> al;
         String col;
@@ -496,28 +502,28 @@ public class GameGraphic implements ActionListener {
             num = discardCard.removeNumber();
             buildCard.setIcon(cardIcons.getIcon(col, num, CardIcons.LARGE));
             discardCard.setIcon(cardIcons.getIcon(discardCard.getTopColour(), discardCard.getTopNumber(), CardIcons.LARGE));*/
-            clientListener.pw.println(Protocol.PUTTO +"§Update§" + i + "§" + j + "§" + name);
+            clientListener.pw.println(Protocol.PUTTO + "§Update§" + i + "§" + j + "§" + name);
 
-            al = discard[i-1];
-            oldDisCard = al.remove(al.size()-1);
+            al = discard[i - 1];
+            oldDisCard = al.remove(al.size() - 1);
             layeredPane.remove(oldDisCard);
             col = oldDisCard.removeColour();
             num = oldDisCard.removeNumber();
             if (num == 13) {
-                num = buildCard.getTopNumber()+1;
+                num = buildCard.getTopNumber() + 1;
             }
             buildCard.addCard(col, num);
             buildCard.setIcon(cardIcons.getIcon(col, num, CardIcons.LARGE));
-            al.get(al.size()-1).addActionListener(this);
+            al.get(al.size() - 1).addActionListener(this);
             layeredPane.repaint();
         } else {
             al = getEnemyArray(name, i);
-            oldDisCard = al.remove(al.size()-1);
+            oldDisCard = al.remove(al.size() - 1);
             layeredPane.remove(oldDisCard);
             col = oldDisCard.removeColour();
             num = oldDisCard.removeNumber();
             if (num == 13) {
-                num = buildCard.getTopNumber()+1;
+                num = buildCard.getTopNumber() + 1;
             }
             buildCard.addCard(col, num);
             buildCard.setIcon(cardIcons.getIcon(col, num, CardIcons.LARGE));
@@ -529,16 +535,16 @@ public class GameGraphic implements ActionListener {
             discardCard.setIcon(cardIcons.getIcon(discardCard.getTopColour(), discardCard.getTopNumber(), CardIcons.SMALL));*/
         }
         if (num == 12) {
-            resetBuildPile(j-1);
+            resetBuildPile(j - 1);
         }
     }
 
     /*
-    * dis -> build: 2x index, name = 3
-    * stock -> build: 1x index, name, 2x Card = 6
-    * hand -> build: 1x Pile, 2x index, name, 1x Card = 6
-    * hand -> dis: 1x Pile, 2x index, name, 1x Card = 6
-    * */
+     * dis -> build: 2x index, name = 3
+     * stock -> build: 1x index, name, 2x Card = 6
+     * hand -> build: 1x Pile, 2x index, name, 1x Card = 6
+     * hand -> dis: 1x Pile, 2x index, name, 1x Card = 6
+     * */
 
     void updateHandCards(String[] colours, int[] numbers) {
 /*        clientLog.debug("(Graphic) length of colours = " + colours.length);
@@ -557,6 +563,7 @@ public class GameGraphic implements ActionListener {
 
     /**
      * Removes all cards from a build pile
+     *
      * @param i Index of build pile
      */
     void resetBuildPile(int i) {
@@ -598,11 +605,11 @@ public class GameGraphic implements ActionListener {
     ArrayList<CardButton> getEnemyArray(String name, int index) {
         ArrayList<CardButton> array = null;
         if (e1.getText().equals(name)) {
-            array = e1_discard[index-1];
+            array = e1_discard[index - 1];
         } else if (e2.getText().equals(name)) {
-            array = e2_discard[index-1];
+            array = e2_discard[index - 1];
         } else if (e3.getText().equals(name)) {
-            array = e3_discard[index-1];
+            array = e3_discard[index - 1];
         }
         return array;
     }
@@ -624,9 +631,10 @@ public class GameGraphic implements ActionListener {
 
     /**
      * Enables or disables buttons of hand cards, stock cards and build cards
+     *
      * @param button A button which is not getting disabled
-     * @param b If true, hand cards, stock cards and discard piles are enabled while the build cards are disabled. If
-     *          false it is the other way round.
+     * @param b      If true, hand cards, stock cards and discard piles are enabled while the build cards are disabled. If
+     *               false it is the other way round.
      */
     void changeButtonStates(CardButton button, boolean b) {
         if (button.getType() == CardButton.HAND) {

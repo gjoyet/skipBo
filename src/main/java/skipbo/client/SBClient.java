@@ -17,6 +17,7 @@ public class SBClient implements Runnable {
 
     /**
      * Creates a new SBClient Object.
+     *
      * @param args: command-line arguments given by Main class: {@literal <hostAddress>:<port> [<username>] }
      */
     public SBClient(String[] args) {
@@ -35,7 +36,7 @@ public class SBClient implements Runnable {
             int port = Integer.parseInt(ipAndPort[1]);
 
             clientLog.info("Connecting to port " + port + "…");
-            Socket sock = new Socket(ip , port);
+            Socket sock = new Socket(ip, port);
 
             //Start SBClientListener Thread
             SBClientListener clientListener = new SBClientListener(sock);

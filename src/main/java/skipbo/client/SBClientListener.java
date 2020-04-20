@@ -1,12 +1,10 @@
 package skipbo.client;
 
+import skipbo.server.Protocol;
+
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
-
-import skipbo.server.Protocol;
 
 import static skipbo.client.SBClient.clientLog;
 
@@ -18,17 +16,19 @@ class SBClientListener {
     PrintWriter pw;
 
     /**
-     *Creates a Skip-Bo client listener
+     * Creates a Skip-Bo client listener
+     *
      * @param sock A client socket
      * @throws IOException: If an I/O error occurs
      */
     SBClientListener(Socket sock) throws IOException {
         this.sock = sock;
-        pw = new PrintWriter(sock.getOutputStream(),true);
+        pw = new PrintWriter(sock.getOutputStream(), true);
     }
 
     /**
      * Forwards user input to server according to network protocol
+     *
      * @param input Input from client
      * @throws NotACommandException If the input doesn't match any command
      */
@@ -81,13 +81,14 @@ class SBClientListener {
 
     /**
      * Builds network protocol string for the "change" command
+     *
      * @param input Input from client
      * @return The network protocol string for the "change" command
      * @throws NotACommandException If the input doesn't match any command
      */
     String getChangeString(String input) throws NotACommandException {
 
-        String[] line = input.split(" ",3);
+        String[] line = input.split(" ", 3);
 
         if (line.length < 3) throw new NotACommandException("Please add an argument to your command");
 
@@ -107,6 +108,7 @@ class SBClientListener {
 
     /**
      * Builds network protocol string for the "msg" command
+     *
      * @param input Input from client
      * @return The network protocol string for the "msg" command
      * @throws NotACommandException If the input doesn't match any command
@@ -123,6 +125,7 @@ class SBClientListener {
 
     /**
      * Builds network protocol string for the "broadcast" command
+     *
      * @param input Input from client
      * @return The network protocol string for the "broadcast" command
      * @throws NotACommandException If the input doesn't match any command
@@ -138,12 +141,13 @@ class SBClientListener {
 
     /**
      * Builds network protocol string for the "new" command
+     *
      * @param input Input from client
      * @return The network protocol string for the "new" command
      * @throws NotACommandException If the input doesn't match any command
      */
     String getNewString(String input) throws NotACommandException {
-        String[] line = input.split(" ",2);
+        String[] line = input.split(" ", 2);
         if (line.length < 2) {
             throw new NotACommandException("Please enter a valid command");
         }
@@ -155,6 +159,7 @@ class SBClientListener {
 
     /**
      * Builds network protocol string for the "play" command
+     *
      * @param input Input from client
      * @return The network protocol string for the "play" command
      * @throws NotACommandException If the input doesn't match any command
@@ -176,12 +181,13 @@ class SBClientListener {
 
     /**
      * Builds network protocol string for the "list" command
+     *
      * @param input Input from client
      * @return The network protocol string for the "list" command
      * @throws NotACommandException If the input doesn't match any command
      */
     String getListString(String input) throws NotACommandException {
-        String[] line = input.split(" ",2);
+        String[] line = input.split(" ", 2);
         if (line.length < 2) {
             throw new NotACommandException("Please add an option to your command");
         }

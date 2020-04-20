@@ -6,7 +6,7 @@ import java.util.Objects;
 
 class CardIcons {
 
-    private ImageIcon[][] icons;
+    private final ImageIcon[][] icons;
     static final int LARGE = 0;
     static final int MEDIUM = 1;
     static final int SMALL = 2;
@@ -29,25 +29,25 @@ class CardIcons {
 
         Image image;
         for (int i = 1; i <= 12; i++) {
-            rL[i-1] = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("R" + i + ".png")));
-            image = rL[i-1].getImage().getScaledInstance(widthMedium, heightMedium, Image.SCALE_SMOOTH);
-            rM[i-1] = new ImageIcon(image);
-            image = rL[i-1].getImage().getScaledInstance(widthSmall, heightSmall, Image.SCALE_SMOOTH);
-            rS[i-1] = new ImageIcon(image);
+            rL[i - 1] = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("R" + i + ".png")));
+            image = rL[i - 1].getImage().getScaledInstance(widthMedium, heightMedium, Image.SCALE_SMOOTH);
+            rM[i - 1] = new ImageIcon(image);
+            image = rL[i - 1].getImage().getScaledInstance(widthSmall, heightSmall, Image.SCALE_SMOOTH);
+            rS[i - 1] = new ImageIcon(image);
 
-            gL[i-1] = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("G" + i + ".png")));
-            image = gL[i-1].getImage().getScaledInstance(widthMedium, heightMedium, Image.SCALE_SMOOTH);
-            gM[i-1] = new ImageIcon(image);
-            image = gL[i-1].getImage().getScaledInstance(widthSmall, heightSmall, Image.SCALE_SMOOTH);
-            gS[i-1] = new ImageIcon(image);
+            gL[i - 1] = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("G" + i + ".png")));
+            image = gL[i - 1].getImage().getScaledInstance(widthMedium, heightMedium, Image.SCALE_SMOOTH);
+            gM[i - 1] = new ImageIcon(image);
+            image = gL[i - 1].getImage().getScaledInstance(widthSmall, heightSmall, Image.SCALE_SMOOTH);
+            gS[i - 1] = new ImageIcon(image);
 
-            bL[i-1] = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("B" + i + ".png")));
-            image = bL[i-1].getImage().getScaledInstance(widthMedium, heightMedium, Image.SCALE_SMOOTH);
-            bM[i-1] = new ImageIcon(image);
-            image = bL[i-1].getImage().getScaledInstance(widthSmall, heightSmall, Image.SCALE_SMOOTH);
-            bS[i-1] = new ImageIcon(image);
+            bL[i - 1] = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("B" + i + ".png")));
+            image = bL[i - 1].getImage().getScaledInstance(widthMedium, heightMedium, Image.SCALE_SMOOTH);
+            bM[i - 1] = new ImageIcon(image);
+            image = bL[i - 1].getImage().getScaledInstance(widthSmall, heightSmall, Image.SCALE_SMOOTH);
+            bS[i - 1] = new ImageIcon(image);
 
-            skipbo[i-1] = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("S" + i + ".png")));
+            skipbo[i - 1] = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("S" + i + ".png")));
 
         }
 
@@ -92,6 +92,6 @@ class CardIcons {
             i = 9;
         }
 
-        return icons[i][number-1];
+        return icons[i][number - 1];
     }
 }

@@ -3,7 +3,10 @@ package skipbo.client;
 import skipbo.server.Protocol;
 
 import javax.swing.*;
-import javax.swing.text.*;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,7 +21,7 @@ import static skipbo.client.SBClient.clientLog;
  */
 public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
-    private SBClientListener clientListener;
+    private final SBClientListener clientListener;
     private Container contentPane;
     //private JTextArea chat;
     private JTextPane chat;
@@ -50,8 +53,10 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     */
+
     /**
      * Constructor for ChatGraphic without player name. Lets client choose their name.
+     *
      * @param clientListener A SBClientListener
      */
     ChatGraphic(SBClientListener clientListener) {
@@ -64,8 +69,9 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
     /**
      * Constructor for ChatGraphic with player name
+     *
      * @param clientListener A SBClientListener
-     * @param name The player name that was initially chosen when starting the program
+     * @param name           The player name that was initially chosen when starting the program
      */
     ChatGraphic(SBClientListener clientListener, String name) {
         this.clientListener = clientListener;
@@ -94,41 +100,40 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         JTextPane logoJ = new JTextPane();
         logoJ.setBorder(null);
         logoJ.setEditable(false);
-        logoJ.setBounds(80,30, scaledIcon.getIconWidth(), scaledIcon.getIconHeight());
+        logoJ.setBounds(80, 30, scaledIcon.getIconWidth(), scaledIcon.getIconHeight());
         logoJ.setPreferredSize(new Dimension(scaledIcon.getIconWidth(), scaledIcon.getIconHeight()));
         logoJ.insertIcon(scaledIcon);
         contentPane.add(logoJ);
 
         readyB = new JButton("Ready");
-        readyB.setBounds(80, 230, 120,20);
+        readyB.setBounds(80, 230, 120, 20);
         contentPane.add(readyB);
         readyB.addActionListener(this);
 
         startB = new JButton("Start Game");
-        startB.setBounds(210, 230, 120,20);
+        startB.setBounds(210, 230, 120, 20);
         contentPane.add(startB);
         startB.addActionListener(this);
 
         infoB = new JButton("Info");
-        infoB.setBounds(80, 260, 120,20);
+        infoB.setBounds(80, 260, 120, 20);
         contentPane.add(infoB);
         infoB.addActionListener(this);
 
         gamesB = new JButton("Ranking");
-        gamesB.setBounds(210, 260, 120,20);
+        gamesB.setBounds(210, 260, 120, 20);
         contentPane.add(gamesB);
         gamesB.addActionListener(this);
 
         whosOnB = new JButton("Who's on?");
-        whosOnB.setBounds(80, 290, 120,20);
+        whosOnB.setBounds(80, 290, 120, 20);
         contentPane.add(whosOnB);
         whosOnB.addActionListener(this);
 
         leaveB = new JButton("Leave");
-        leaveB.setBounds(210, 290, 120,20);
+        leaveB.setBounds(210, 290, 120, 20);
         contentPane.add(leaveB);
         leaveB.addActionListener(this);
-
 
 
         //Output textfield
@@ -137,13 +142,13 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         chat.setEditable(false);
 
         chat = new JTextPane(); //TODO: change to JEditorPane or JTextPane to print in colour
-        chat.setBounds(80, 320,250, 300);
+        chat.setBounds(80, 320, 250, 300);
 /*        chat.setLineWrap(true);
         chat.setWrapStyleWord(true);*/
         chat.setEditable(false);
 
         chatScrollPane = new JScrollPane(chat);
-        chatScrollPane.setBounds(80, 320 ,250, 300);
+        chatScrollPane.setBounds(80, 320, 250, 300);
         chatScrollPane.setVisible(true);
         chatScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentPane.add(chatScrollPane);
@@ -153,7 +158,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
         //Input textfield
         inputMes = new JTextArea();
-        inputMes.setBounds(80, 630,250, 80);
+        inputMes.setBounds(80, 630, 250, 80);
         inputMes.setEditable(true);
         inputMes.setColumns(3);
         inputMes.setLineWrap(true);
@@ -162,7 +167,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         contentPane.add(inputMes);
 
         inputScrollPane = new JScrollPane(inputMes);
-        inputScrollPane.setBounds(80, 630,250, 80);
+        inputScrollPane.setBounds(80, 630, 250, 80);
         inputScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentPane.add(inputScrollPane);
 
@@ -180,7 +185,8 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     }
 
     /**
-     *Displays an information to the client
+     * Displays an information to the client
+     *
      * @param message An information message
      */
     void printInfoMessage(String message) {
@@ -193,6 +199,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
     /**
      * Displays an error message to the client
+     *
      * @param message An error message
      */
     void printErrorMessage(String message) {
@@ -204,6 +211,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
     /**
      * Displays a chat message in the chat
+     *
      * @param message A chat message
      */
     void printChatMessage(String message) {
@@ -228,6 +236,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
     /**
      * Ends the game. Removes the game graphic from the frame and displays the winners name. Sends player back to main lobby.
+     *
      * @param name Name of the winner of the game.
      */
     void endGame(String name) {
@@ -250,7 +259,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         String title = "Skip-Bo";
         String nameSuggestion = System.getProperty("user.name");
 
-        String name = (String)JOptionPane.showInputDialog(contentPane, message, title, JOptionPane.QUESTION_MESSAGE,
+        String name = (String) JOptionPane.showInputDialog(contentPane, message, title, JOptionPane.QUESTION_MESSAGE,
                 null, null, nameSuggestion);
 
         if (name == null) {
@@ -264,8 +273,8 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     public void keyTyped(KeyEvent keyEvent) {
         if (keyEvent.getKeyChar() == KeyEvent.VK_ENTER) {
             String input = inputMes.getText().replaceAll("\n", " ");
-            inputMes.replaceRange("",0,input.length());
-            input = input.substring(0,input.length() - 1);
+            inputMes.replaceRange("", 0, input.length());
+            input = input.substring(0, input.length() - 1);
             try {
                 clientListener.forward(input);
             } catch (IndexOutOfBoundsException | NotACommandException e) {
@@ -343,7 +352,8 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
     /**
      * Prints a string to the chat.
-     * @param s The string to be appended to the chat.
+     *
+     * @param s     The string to be appended to the chat.
      * @param color The color in which the string is displayed.
      */
     private void appendToChat(String s, Color color) {

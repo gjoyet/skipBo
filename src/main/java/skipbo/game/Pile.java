@@ -4,8 +4,6 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static skipbo.server.SBServer.servLog;
-
 public class Pile {
 
     public ArrayList<Card> drawPile;        // 1 draw pile
@@ -106,10 +104,10 @@ public class Pile {
      */
     public String getAllCardsForProtocol(Player player, Game game) {
         StringBuilder cards = new StringBuilder();
-        for(Card c : player.getHandCards()) {
+        for (Card c : player.getHandCards()) {
             cards.append(c.getColString()).append("§").append(c.number).append("§");
         }
-        for(Player p : game.players) {
+        for (Player p : game.players) {
             Card stockTopCard = p.getStockPile().get(p.getStockPile().size() - 1);
             cards.append(p.getName()).append("§").append(stockTopCard.getColString()).append("§").append(stockTopCard.number).append("§");
         }
@@ -119,7 +117,7 @@ public class Pile {
 
     public String getHandCardsForProtocol(Player player) {
         StringBuilder cards = new StringBuilder();
-        for(Card c : player.getHandCards()) {
+        for (Card c : player.getHandCards()) {
             cards.append(c.getColString()).append("§").append(c.number).append("§");
         }
 
@@ -128,6 +126,7 @@ public class Pile {
 
     /**
      * Returns all build piles printed to console.
+     *
      * @return String with piles
      */
 
@@ -136,9 +135,9 @@ public class Pile {
         for (int i = 0; i < 4; i++) {
             ArrayList<Card> specBuildPile = buildPiles.get(i);
             if (specBuildPile.isEmpty()) {
-                str.append("Build pile ").append(i+1).append(" is: [ ]").append("\n");
+                str.append("Build pile ").append(i + 1).append(" is: [ ]").append("\n");
             } else {
-                str.append("Build pile ").append(i+1).append(" is: [").append(specBuildPile.get(specBuildPile.size() - 1).number).append("]").append("\n");
+                str.append("Build pile ").append(i + 1).append(" is: [").append(specBuildPile.get(specBuildPile.size() - 1).number).append("]").append("\n");
             }
         }
         return str.toString().split("\n");

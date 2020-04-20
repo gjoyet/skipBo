@@ -1,7 +1,9 @@
 package skipbo.client;
 
+import skipbo.server.Protocol;
+
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
+import javax.swing.text.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,13 +14,14 @@ import java.util.Objects;
 import static skipbo.client.SBClient.clientLog;
 
 /**
- * GUI for Skip-Bo chat
+ * GUI for Skip-Bo lobby
  */
 public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
     private SBClientListener clientListener;
-    JPanel contentPane;
-    private JTextArea chat;
+    private Container contentPane;
+    //private JTextArea chat;
+    private JTextPane chat;
     private JTextArea inputMes;
     JScrollPane chatScrollPane;
     private JScrollPane inputScrollPane;
@@ -31,7 +34,9 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     private GameGraphic gameGraphic;
     String playerName = "";
 
+    static final Color DARKGREEN = new Color(0x0AB222);
 
+/*
     //test method
     public static void main(String[] args) {
         ChatGraphic testChatGraphic = new ChatGraphic();
@@ -44,9 +49,10 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         setFrame();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+    */
     /**
-     * Constructor for ChatGraphic without client name. Lets client choose their name.
-     * @param clientListener
+     * Constructor for ChatGraphic without player name. Lets client choose their name.
+     * @param clientListener A SBClientListener
      */
     ChatGraphic(SBClientListener clientListener) {
         this.clientListener = clientListener;
@@ -57,9 +63,9 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     }
 
     /**
-     * Constructor for ChatGraphic with client name
-     * @param clientListener
-     * @param name
+     * Constructor for ChatGraphic with player name
+     * @param clientListener A SBClientListener
+     * @param name The player name that was initially chosen when starting the program
      */
     ChatGraphic(SBClientListener clientListener, String name) {
         this.clientListener = clientListener;
@@ -67,11 +73,10 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         clientListener.pw.println("SETTO§Nickname§" + name);
         printInfoMessage("Connection successful");
         printCommandList();
-
     }
 
     /**
-     * Creates the chat window
+     * Creates the chat window with buttons
      */
     void setFrame() {
 
@@ -79,10 +84,8 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setBounds(100, 100, 420, 780);
 
-        contentPane = new JPanel();
+        contentPane = getContentPane();
         contentPane.setBackground(Color.orange);
-        contentPane.setBorder(new EmptyBorder(5,5,5,5));
-        setContentPane(contentPane);
         contentPane.setLayout(null);
 
         ImageIcon logoI = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo.png")));
@@ -129,10 +132,14 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
 
         //Output textfield
-        chat = new JTextArea(); //TODO: change to JEditorPane or JTextPane to print in colour
+        chat = new JTextPane();
+        chat.setBounds(80, 320, 250, 300);
+        chat.setEditable(false);
+
+        chat = new JTextPane(); //TODO: change to JEditorPane or JTextPane to print in colour
         chat.setBounds(80, 320,250, 300);
-        chat.setLineWrap(true);
-        chat.setWrapStyleWord(true);
+/*        chat.setLineWrap(true);
+        chat.setWrapStyleWord(true);*/
         chat.setEditable(false);
 
         chatScrollPane = new JScrollPane(chat);
@@ -140,6 +147,9 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         chatScrollPane.setVisible(true);
         chatScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentPane.add(chatScrollPane);
+
+        DefaultCaret caret = (DefaultCaret) chat.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
         //Input textfield
         inputMes = new JTextArea();
@@ -174,8 +184,11 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
      * @param message An information message
      */
     void printInfoMessage(String message) {
-        chat.append("[Info] " + message + "\n");
-        chat.setCaretPosition(chat.getDocument().getLength());
+        appendToChat("\n[Info] ", DARKGREEN);
+        appendToChat(message, Color.BLACK);
+        //chat.append("[Info] " + message + "\n");
+        //chat.setCaretPosition(chat.getDocument().getLength());
+        //chat.setCaretPosition(chat.getDocument().getLength());
     }
 
     /**
@@ -183,8 +196,10 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
      * @param message An error message
      */
     void printErrorMessage(String message) {
-        chat.append("[Error] " + message + "\n");
-        chat.setCaretPosition(chat.getDocument().getLength()-1);
+        appendToChat("\n[Error] ", Color.RED);
+        appendToChat(message, Color.BLACK);
+        //chat.append("[Error] " + message + "\n");
+        //chat.setCaretPosition(chat.getDocument().getLength()-1);
     }
 
     /**
@@ -192,27 +207,36 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
      * @param message A chat message
      */
     void printChatMessage(String message) {
-        chat.append(message + "\n" );
-        chat.setCaretPosition(chat.getDocument().getLength()-1);
+        appendToChat("\n" + message, Color.BLACK);
+/*        chat.append(message + "\n" );
+        chat.setCaretPosition(chat.getDocument().getLength()-1);*/
     }
 
     /**
      * Creates the game GUI
      */
     void setGameGraphic() {
-        gameGraphic = new GameGraphic(this);
-        gameGraphic.setGameGraphic();
+        gameGraphic = new GameGraphic(clientListener, playerName, chat);
+        contentPane.add(gameGraphic.getGameComponent());
+        setTitle("Skip-Bros GAME");
+        setBounds(100, 100, 1150, 800);
+        setLocationRelativeTo(null);
         startB.setEnabled(false);
         readyB.setEnabled(false);
         readyB.setText("Ready");
     }
 
+    /**
+     * Ends the game. Removes the game graphic from the frame and displays the winners name. Sends player back to main lobby.
+     * @param name Name of the winner of the game.
+     */
     void endGame(String name) {
         JOptionPane.showMessageDialog(contentPane, "The winner is: " + name + "!", "Game is finished.",
                 JOptionPane.INFORMATION_MESSAGE,
                 new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo.png"))));
-        gameGraphic = null;
-        repaint();
+        contentPane.remove(gameGraphic.getGameComponent());
+        setBounds(100, 100, 420, 780);
+        setTitle("Skip-Bros CHAT");
         startB.setEnabled(true);
         readyB.setEnabled(true);
     }
@@ -308,11 +332,32 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             } catch (NotACommandException e) {
                 clientLog.warn("Error with /quit command");
             }
-    }
+        } else {
+            String name = (String) JOptionPane.showInputDialog(contentPane, "Enter your new name:",
+                    "Change your name", JOptionPane.PLAIN_MESSAGE, null, null, playerName);
+            if (name != null) {
+                clientListener.pw.println(Protocol.CHNGE + "§Nickname§" + name);
+            }
+        }
     }
 
-    SBClientListener getClientListener() {
-        return clientListener;
+    /**
+     * Prints a string to the chat.
+     * @param s The string to be appended to the chat.
+     * @param color The color in which the string is displayed.
+     */
+    private void appendToChat(String s, Color color) {
+        SimpleAttributeSet attributeSet = new SimpleAttributeSet();
+        attributeSet.addAttribute(StyleConstants.ColorConstants.Foreground, color);
+        Document doc = chat.getDocument();
+        try {
+            doc.insertString(doc.getLength(), s, attributeSet);
+//            doc = chat.getDocument();
+//            chat.setCaretPosition(doc.getLength());
+        } catch (BadLocationException e) {
+            clientLog.warn("Error with appending text to chat");
+        }
+
     }
 
     GameGraphic getGameGraphic() {

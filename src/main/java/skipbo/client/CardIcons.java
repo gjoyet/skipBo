@@ -7,6 +7,9 @@ import java.util.Objects;
 class CardIcons {
 
     private ImageIcon[][] icons;
+    static final int LARGE = 0;
+    static final int MEDIUM = 1;
+    static final int SMALL = 2;
 
     CardIcons(int widthSmall, int heightSmall, int widthMedium, int heightMedium) {
 
@@ -22,7 +25,7 @@ class CardIcons {
         ImageIcon[] gS = new ImageIcon[12];
         ImageIcon[] bS = new ImageIcon[12];
 
-        ImageIcon[] skipbo = new ImageIcon[3];
+        ImageIcon[] skipbo = new ImageIcon[15];
 
         Image image;
         for (int i = 1; i <= 12; i++) {
@@ -44,19 +47,21 @@ class CardIcons {
             image = bL[i-1].getImage().getScaledInstance(widthSmall, heightSmall, Image.SCALE_SMOOTH);
             bS[i-1] = new ImageIcon(image);
 
+            skipbo[i-1] = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("S" + i + ".png")));
+
         }
 
-        skipbo[0] = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("skipbo.png")));
+        skipbo[12] = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("skipbo.png")));
         image = skipbo[0].getImage().getScaledInstance(widthMedium, heightMedium, Image.SCALE_SMOOTH);
-        skipbo[1] = new ImageIcon(image);
+        skipbo[13] = new ImageIcon(image);
         image = skipbo[0].getImage().getScaledInstance(widthSmall, heightSmall, Image.SCALE_SMOOTH);
-        skipbo[2] = new ImageIcon(image);
+        skipbo[14] = new ImageIcon(image);
 
         icons = new ImageIcon[][]{rL, rM, rS, gL, gM, gS, bL, bM, bS, skipbo};
 
     }
 
-    ImageIcon getIcon(String color, int number, String size) {
+    ImageIcon getIcon(String color, int number, int size) {
 
         if (color == null || number == -1) {
             return null;
@@ -76,14 +81,14 @@ class CardIcons {
                 break;
         }
 
-        if (size.equals("M")) {
+        if (size == MEDIUM) {
             i++;
-        } else if (size.equals("S")) {
+        } else if (size == SMALL) {
             i = i + 2;
         }
 
-        if (number == 13) {
-            number = ++i;
+        if (color.equals("S")) {
+            number += i;
             i = 9;
         }
 

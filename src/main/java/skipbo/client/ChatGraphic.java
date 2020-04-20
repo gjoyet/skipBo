@@ -14,7 +14,7 @@ import java.util.Objects;
 import static skipbo.client.SBClient.clientLog;
 
 /**
- * GUI for Skip-Bo chat
+ * GUI for Skip-Bo lobby
  */
 public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
@@ -51,8 +51,8 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     }
     */
     /**
-     * Constructor for ChatGraphic without client name. Lets client choose their name.
-     * @param clientListener
+     * Constructor for ChatGraphic without player name. Lets client choose their name.
+     * @param clientListener A SBClientListener
      */
     ChatGraphic(SBClientListener clientListener) {
         this.clientListener = clientListener;
@@ -63,9 +63,9 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     }
 
     /**
-     * Constructor for ChatGraphic with client name
-     * @param clientListener
-     * @param name
+     * Constructor for ChatGraphic with player name
+     * @param clientListener A SBClientListener
+     * @param name The player name that was initially chosen when starting the program
      */
     ChatGraphic(SBClientListener clientListener, String name) {
         this.clientListener = clientListener;
@@ -76,7 +76,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     }
 
     /**
-     * Creates the chat window
+     * Creates the chat window with buttons
      */
     void setFrame() {
 
@@ -226,6 +226,10 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         readyB.setText("Ready");
     }
 
+    /**
+     * Ends the game. Removes the game graphic from the frame and displays the winners name. Sends player back to main lobby.
+     * @param name Name of the winner of the game.
+     */
     void endGame(String name) {
         JOptionPane.showMessageDialog(contentPane, "The winner is: " + name + "!", "Game is finished.",
                 JOptionPane.INFORMATION_MESSAGE,
@@ -337,6 +341,11 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         }
     }
 
+    /**
+     * Prints a string to the chat.
+     * @param s The string to be appended to the chat.
+     * @param color The color in which the string is displayed.
+     */
     private void appendToChat(String s, Color color) {
         SimpleAttributeSet attributeSet = new SimpleAttributeSet();
         attributeSet.addAttribute(StyleConstants.ColorConstants.Foreground, color);

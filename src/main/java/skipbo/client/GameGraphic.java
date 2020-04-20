@@ -69,7 +69,9 @@ public class GameGraphic implements ActionListener {
         appendDecks();
     }
 
-
+    /**
+     * Creates all necessary components for the game.
+     */
     void appendDecks() {
         /*
         Cards of the Player and build piles
@@ -259,6 +261,10 @@ public class GameGraphic implements ActionListener {
 
     }
 
+    /**
+     * Sets the opponents names and puts them in an array in the correct order (order of turns).
+     * @param names Array with names of opponents and own player name.
+     */
     void setOpponentNames(String[] names) {
         oppArray = new JLabel[names.length];
         int i = 0;
@@ -287,6 +293,10 @@ public class GameGraphic implements ActionListener {
         }
     }
 
+    /**
+     * Sets own hand cards and stock card.
+     * @param colAndNum Array of colours and numbers of hand cards (5x alternating) and colour and number of stock card.
+     */
     void setInitialCards(String[] colAndNum) {
         for (int i = 0, j = 0; i < hand.length; i++) {
             hand[i].setIcon(cardIcons.getIcon(colAndNum[j], Integer.parseInt(colAndNum[j+1]), CardIcons.MEDIUM));
@@ -326,8 +336,14 @@ public class GameGraphic implements ActionListener {
         };
     }
 
-
-    // Play a hand card to the discard pile
+    /**
+     * Plays a hand card to a discard pile
+     * @param i Index of hand card
+     * @param j Index of discard pile
+     * @param name Player name of player who makes the move
+     * @param colour Colour of hand card being moved
+     * @param number Number of hand card being moved
+     */
     void handToDiscard(int i, int j, String name, String colour, int number) {
 
         ArrayList<CardButton> al;
@@ -381,7 +397,14 @@ public class GameGraphic implements ActionListener {
         }
     }
 
-    // Play a hand card to build pile
+    /**
+     * Plays a hand card to a build pile
+     * @param i Index of hand card
+     * @param j Index of build pile
+     * @param name Player name of player who makes the move
+     * @param colour Colour of hand card being moved
+     * @param number Number of hand card being moved
+     */
     void handToBuild(int i, int j, String name, String colour, int number) {
         if (name.equals(playerName)) {
             CardButton handCard = hand[i-1];
@@ -411,6 +434,16 @@ public class GameGraphic implements ActionListener {
     }
 
     // Play the stock card to a build pile. card1 = new stock card, card2 = new build card
+
+    /**
+     * Plays a stock card to a build pile
+     * @param j Index of build pile
+     * @param name Player name of player who makes the move
+     * @param colour1 Colour of the new stock card
+     * @param number1 Number of the new stock card
+     * @param colour2 Colour of the stock card being moved
+     * @param number2 Number of the stock card being moved
+     */
     void stockToBuild(int j, String name, String colour1, int number1, String colour2, int number2) {
         //clientLog.debug("(GameGraphic) entered stock to build method");
         if (name.equals(playerName)) {
@@ -444,6 +477,13 @@ public class GameGraphic implements ActionListener {
     }
 
     // Play from discard pile to a build pile
+
+    /**
+     * Plays a card from a discard pile to a build pile
+     * @param i Index of discard pile
+     * @param j Index of build pile
+     * @param name Player name of player who made the move
+     */
     void discardToBuild(int i, int j, String name) {
         CardButton buildCard = build[j-1];
         CardButton oldDisCard;
@@ -507,7 +547,7 @@ public class GameGraphic implements ActionListener {
             hand[i].setIcon(cardIcons.getIcon(colours[i], numbers[i], CardIcons.MEDIUM));
             hand[i].resetCards();
             hand[i].addCard(colours[i], numbers[i]);
-            clientLog.debug("updated hand card " + i);
+            //clientLog.debug("updated hand card " + i);
         }
         for (int i = 4; i >= colours.length; i--) {
             hand[i].resetCards();
@@ -515,6 +555,10 @@ public class GameGraphic implements ActionListener {
         }
     }
 
+    /**
+     * Removes all cards from a build pile
+     * @param i Index of build pile
+     */
     void resetBuildPile(int i) {
         build[i].resetCards();
         build[i].setIcon(null);
@@ -577,6 +621,13 @@ public class GameGraphic implements ActionListener {
     }
 
     //if true HandCards, StockCards and Discard are enabled; BuildCards are disabled
+
+    /**
+     * Enables or disables buttons of hand cards, stock cards and build cards
+     * @param button A button which is not getting disabled
+     * @param b If true, hand cards, stock cards and discard piles are enabled while the build cards are disabled. If
+     *          false it is the other way round.
+     */
     void changeButtonStates(CardButton button, boolean b) {
         if (button.getType() == CardButton.HAND) {
             for (CardButton cardButton : hand) {
@@ -625,7 +676,6 @@ public class GameGraphic implements ActionListener {
             }
         }
     }
-
 
 
     JLayeredPane getGameComponent() {

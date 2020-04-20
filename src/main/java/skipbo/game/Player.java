@@ -36,6 +36,17 @@ public class Player {
     }
 
     /**
+     * Simplified constructor for unit-testing purposes.
+     */
+    public Player(int id) {
+        this.id = id;
+        this.name = "" + id;
+        this.sbListen = null;
+        this.piles = new Pile(id);
+        this.status = Status.INGAME;
+    }
+
+    /**
      * Returns the name of the player
      **/
     public String getName() {
@@ -115,6 +126,12 @@ public class Player {
     public ArrayList<Card> getHandCards() { // returns the name of the Player object
         return this.piles.handCards;
     }
+
+    /**
+     * For testing purposes.
+     * @param hc: handcards of players are set to this.
+     */
+    public void setHandCards(ArrayList<Card> hc) { this.piles.handCards = hc; }
 
     /**
      * Method to return the discard piles of a player

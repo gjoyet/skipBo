@@ -16,7 +16,7 @@ public class Card {
      * @param col The color of the card
      */
 
-    Card(int num, Color col) { // Constructor for a normal card with (color and number)
+    public Card(int num, Color col) { // Constructor for a normal card with (color and number)
         number = num;
         this.col = col;
     }

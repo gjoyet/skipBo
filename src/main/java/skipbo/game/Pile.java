@@ -1,8 +1,10 @@
 package skipbo.game;
 
 import java.awt.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class Pile {
 
@@ -69,18 +71,19 @@ public class Pile {
             colourCount++;
             if (colourCount == 2) colourCount = 0;
         }
+
         for (int l = 0; l < 18; l++) {       // Add Special Cards (18 pcs.)
             Card card = new Card(colours.get(3));
             this.drawPile.add(card);
         }
+        Collections.shuffle(drawPile); //shuffles all draw pile cards after creating and adding them
 
         for (int i = 0; i < 4; i++) {        // Add four empty card piles (buildPiles)
-
             ArrayList<Card> deck = new ArrayList<Card>();
             this.buildPiles.add(deck);
         }
-
     }
+
 
     /**
      * Method to print the player's hand cards onto the Chat window.
@@ -163,6 +166,11 @@ public class Pile {
                     .append(Arrays.toString(printArray)).append("\n");
         }
         return str.toString().split("\n");
+    }
+
+    /** returns emptyPile   **/
+    public ArrayList<Card> getEmptyPile(){
+        return emptyPile;
     }
 }
 

@@ -233,7 +233,7 @@ public class Game implements Runnable {
         ArrayList<Card> specBuildPile = buildPiles.get(buildDeckIndex);
         Card stockCard = currentPlayer.getStockPile().get(currentPlayer.getStockPile().size() - 1);
 
-        if (specBuildPile.isEmpty()) {
+        if (specBuildPile.isEmpty()) {      //if build pile is empty
             if (1 == card.number) {
                 specBuildPile.add(card);
                 currentPlayer.getHandCards().remove(card);
@@ -262,7 +262,7 @@ public class Game implements Runnable {
                         "To play to an empty pile, the card number has to be 1.");
                 return false;
             }
-        } else {
+        } else {        // if Build Pile isn't empty
             Card topCard = specBuildPile.get(specBuildPile.size() - 1);
             if (topCard.number == (card.number - 1)) {
                 specBuildPile.add(card);
@@ -294,7 +294,6 @@ public class Game implements Runnable {
                         "has to be one number higher than the card on the build deck.");
                 return false;
             }
-            // TODO: skip bo card is to go to 12
         }
     }
 
@@ -314,16 +313,10 @@ public class Game implements Runnable {
                 new ProtocolExecutor().sendAll("PRINT§Terminal§" + str, player.getSBL());
             }
 
-            for (Iterator<Card> bp = buildPile.iterator(); bp.hasNext(); ) {
-                Card buildPileCard = bp.next();
+            for (Iterator<Card> bp = buildPile.iterator(); bp.hasNext(); ) { //Iterator to remove all cards from current BP
                 bp.remove();
             }
 
-            /*for (Card buildPileCard : buildPile) {
-                buildPile.remove(buildPileCard);
-                piles.emptyPile.add(buildPileCard);
-                reshuffle(piles.emptyPile);
-            }*/
             new ProtocolExecutor().sendAll("PRINT§Terminal§The maximum number has been reached; " +
                     "the deck has been reset to: ", player.getSBL());
             for (String s : buildPiles) {
@@ -616,30 +609,21 @@ public class Game implements Runnable {
         int toFill = 5 - player.getHandCards().size();
         if (toFill != 0) {
             for (int i = 0; i < toFill; i++) {
-                Card drawCard = drawPile.get(i);
+                Card drawCard = drawPile.get(drawPile.size()-1);
                 player.getHandCards().add(drawCard);
-                drawPile.remove(drawPile.get(i));
+                drawPile.remove(drawCard);
             }
         }
         new ProtocolExecutor(null, player.getSBL()).check("HandCards");
     }
 
     /**
-     * Reshuffles the empty pile with shuffle method
-     *
-     * @param emptyPile the empty pile that's to be shuffled and added to the drawdeck
-     */
-    public void reshuffle(ArrayList<Card> emptyPile) {
-        Collections.shuffle(emptyPile);
-    }
-
-    /**
      * Checks if draw pile is empty, if yes, adds cards from the empty pile into the draw pile.
      */
     public void checkDrawPile() {
-        if (this.getDrawPile().isEmpty()) {
-
-            getDrawPile().addAll(piles.emptyPile);
+        if (this.getDrawPile().size() <= 5) {
+            Collections.shuffle(piles.getEmptyPile());  //shuffles the empty pile
+            getDrawPile().addAll(piles.getEmptyPile()); //adds empty pile cards to the draw pile
         }
     }
 

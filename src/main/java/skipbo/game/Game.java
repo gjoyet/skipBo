@@ -414,9 +414,8 @@ public class Game implements Runnable {
             if (stockCard.number == 1) {        // if card number is 1, add to new pile
                 specBuildPile.add(stockCard);
                 currentPlayer.getHandCards().remove(stockCard);
-                if (checkStockPile(currentPlayer)) {
-                    currentPlayer.getSBL().getPW().println("PRINT§Terminal§You have won!");
-                    return null;
+                if (currentPlayer.getStockPile().size() == 0) {  //if stock pile is empty
+                    return new Card(-1, Color.cyan);
                 }
 
                 checkBuildPileAndPrint(stockCard, specBuildPile, currentPlayer);
@@ -424,15 +423,16 @@ public class Game implements Runnable {
                         + piles.handCardPrint(currentPlayer));
                 currentPlayer.getSBL().getPW().print("PRINT§Terminal§Your stock card is: [" +
                         stockCard.number);
-                checkStockPile(currentPlayer);
+                if (currentPlayer.getStockPile().size() == 0) {  //if stock pile is empty
+                    return new Card(-1, Color.cyan);
+                }
                 return stockPile.get(stockPile.size() - 1);
             } else if (stockCard.col == Color.cyan) { //if stock card is Joker card
                 stockCard.number = 1;
                 specBuildPile.add(stockCard);
                 currentPlayer.getStockPile().remove(stockCard);
-                if (checkStockPile(currentPlayer)) {      //if stock pile has emptied
-                    currentPlayer.getSBL().getPW().println("PRINT§Terminal§You have won!");
-                    return null;
+                if (currentPlayer.getStockPile().size() == 0) {  //if stock pile is empty
+                    return new Card(-1, Color.cyan);
                 }
 
                 checkBuildPileAndPrint(stockCard, specBuildPile, currentPlayer);
@@ -452,9 +452,8 @@ public class Game implements Runnable {
             if (topCard.number == (stockCard.number - 1)) {
                 specBuildPile.add(stockCard);
                 currentPlayer.getStockPile().remove(stockCard);
-                if (checkStockPile(currentPlayer)) {  //if stock pile is empty
-                    currentPlayer.getSBL().getPW().println("PRINT§Terminal§You have won!");
-                    return null;
+                if (currentPlayer.getStockPile().size() == 0) {  //if stock pile is empty
+                    return new Card(-1, Color.cyan);
                 }
                 checkBuildPileAndPrint(stockCard, specBuildPile, currentPlayer);
 
@@ -469,9 +468,8 @@ public class Game implements Runnable {
                 stockCard.number = 1;
                 specBuildPile.add(stockCard);
                 currentPlayer.getHandCards().remove(stockCard);
-                if (checkStockPile(currentPlayer)) {      //if stock pile is empty
-                    currentPlayer.getSBL().getPW().println("PRINT§Terminal§You have won!");
-                    return null;
+                if (currentPlayer.getStockPile().size() == 0) {  //if stock pile is empty
+                    return new Card(-1, Color.cyan);
                 }
 
                 checkBuildPileAndPrint(stockCard, specBuildPile, currentPlayer);
@@ -487,11 +485,9 @@ public class Game implements Runnable {
         }
     }
 
-    /**
+    /*
      * Checks if stock pile of the player is empty, if yes, the player has won.
-     *
      * @param player Check this player's stock pile
-     */
     public boolean checkStockPile(Player player) {
         servLog.info("Entered checkStockPile()");
         if (player.getStockPile().isEmpty()) {
@@ -500,6 +496,7 @@ public class Game implements Runnable {
         }
         return false;
     }
+    */
 
     /**
      * Method to play a card from the discard pile to the build pile

@@ -312,11 +312,15 @@ public class Game implements Runnable {
             for (String str : buildPiles) {
                 new ProtocolExecutor().sendAll("PRINT§Terminal§" + str, player.getSBL());
             }
+            piles.emptyPile.addAll(buildPile); //TODO: does add all remove bp cards already? ask
 
             for (Iterator<Card> bp = buildPile.iterator(); bp.hasNext(); ) { //Iterator to remove all cards from current BP
                 bp.next();
                 bp.remove();
             }
+
+            new ProtocolExecutor().sendAll("PRINT§Terminal§Your empty pile is: " + piles.emptyPilePrint()
+                    ,player.getSBL());
 
             new ProtocolExecutor().sendAll("PRINT§Terminal§The maximum number has been reached; " +
                     "the deck has been reset to: ", player.getSBL());

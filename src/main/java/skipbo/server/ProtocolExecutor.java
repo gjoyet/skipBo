@@ -263,12 +263,16 @@ public class ProtocolExecutor {
                         break;
                     case "SB":
                         Card stockPileTopCard = sbL.player.getGame().playFromStockToMiddle(sbL.player, iT);
-                        if (stockPileTopCard != null) {
+                        if (stockPileTopCard != null && stockPileTopCard.number != -1) {
                             sbL.getPW().println("PUTTO§StockResponse§" + input[2] + "§" + sbL.player.getName()
                                     + "§" + stockPileTopCard.getColString() + "§" + stockPileTopCard.number);
                             servLog.debug("Sending StockResponse command from server with arguments: " + input[2] + "§"
                                                         + sbL.player.getName() + "§" + stockPileTopCard.getColString()
                                                                                     + "§" + stockPileTopCard.number);
+                        } else if(stockPileTopCard.number == -1) {
+                            sbL.getPW().println("PUTTO§StockResponse§" + input[2] + "§" + sbL.player.getName()
+                                        + "§" + stockPileTopCard.getColString() + "§" + stockPileTopCard.number);
+                            sbL.player.getGame().endGame(sbL.player);
                         } else {
                             sbL.getPW().println("PRINT§Terminal§Error"); // TODO: Add error message
                         }
@@ -350,8 +354,8 @@ public class ProtocolExecutor {
     public void gameEnding(Game game) {
         for(Player p : game.players) {
             p.changeStatus(Status.WAITING);
-            p.changeGame(null);
             p.clearHandCards();
+            p.changeGame(null);
         }
     }
 

@@ -319,6 +319,9 @@ public class Game implements Runnable {
                 bp.remove();
             }
 
+            new ProtocolExecutor().sendAll("PRINT§Terminal§Your empty pile is: " + piles.emptyPilePrint()
+                    ,player.getSBL());
+
             new ProtocolExecutor().sendAll("PRINT§Terminal§The maximum number has been reached; " +
                     "the deck has been reset to: ", player.getSBL());
             for (String s : buildPiles) {

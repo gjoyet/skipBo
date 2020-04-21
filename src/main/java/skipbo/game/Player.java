@@ -146,6 +146,10 @@ public class Player {
         return this.piles.discardPiles;
     }
 
+    public int getSizeOfStockPile(){
+        return  this.getStockPile().size();
+    }
+
     /**
      * Method to add a card to a player's hand
      *

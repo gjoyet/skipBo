@@ -28,8 +28,6 @@ public class GameGraphic implements ActionListener {
 
     // Layout Manager
 
-    // Layout of Hand piles
-    private final int WIDTH_HAND = 78;
     private final int HEIGHT_HAND = 120;
     private final int X_HAND = 550;  // change here
     private final int Y_HAND = 620;  // change here
@@ -195,6 +193,8 @@ public class GameGraphic implements ActionListener {
             hand[i].addActionListener(this);
             hand[i].setName(" H " + ++i);
         }
+        // Layout of Hand piles
+        int WIDTH_HAND = 78;
         hand[0].setBounds(X_HAND, Y_HAND, WIDTH_HAND, HEIGHT_HAND);
         hand[1].setBounds(X_HAND + 1*X_HAND_DISTANCE, Y_HAND, WIDTH_HAND, HEIGHT_HAND);
         hand[2].setBounds(X_HAND + 2*X_HAND_DISTANCE, Y_HAND, WIDTH_HAND, HEIGHT_HAND);
@@ -419,7 +419,7 @@ public class GameGraphic implements ActionListener {
                     al.get(0).getWidth(), al.get(0).getHeight());
             newDisCard.setIcon(cardIcons.getIcon(col, num, CardIcons.LARGE));
             newDisCard.addCard(col, num);
-            layeredPane.add(newDisCard, new Integer(al.size()));
+            layeredPane.add(newDisCard, Integer.valueOf(al.size()));
             al.add(newDisCard);
 
             playerIndex = (playerIndex + 1) % oppArray.length;
@@ -433,7 +433,7 @@ public class GameGraphic implements ActionListener {
                     al.get(0).getHeight());
             newDisCard.setIcon(cardIcons.getIcon(colour, number, CardIcons.SMALL));
             newDisCard.addCard(colour, number);
-            layeredPane.add(newDisCard, new Integer(al.size()));
+            layeredPane.add(newDisCard, Integer.valueOf(al.size()));
             al.add(newDisCard);
 /*            CardButton discard =  getEnemyArray(name, j);
             discard.addCard(colour, number);

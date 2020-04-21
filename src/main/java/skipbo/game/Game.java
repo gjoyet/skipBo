@@ -312,6 +312,7 @@ public class Game implements Runnable {
             for (String str : buildPiles) {
                 new ProtocolExecutor().sendAll("PRINT§Terminal§" + str, player.getSBL());
             }
+            piles.emptyPile.addAll(buildPile); //TODO: does add all remove bp cards already? ask
 
             for (Iterator<Card> bp = buildPile.iterator(); bp.hasNext(); ) { //Iterator to remove all cards from current BP
                 bp.next();

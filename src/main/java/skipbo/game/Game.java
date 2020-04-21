@@ -365,10 +365,6 @@ public class Game implements Runnable {
         specDiscard.add(card);
         currentPlayer.getHandCards().remove(card);
 
-        if (currentPlayer.getHandCards().isEmpty()) {
-            fillHandCards(currentPlayer);
-        }
-
         displayDiscard(currentPlayer);
         endTurn();
 
@@ -636,7 +632,7 @@ public class Game implements Runnable {
             playersTurn = 0;        //otherwise start over from first player
             turnCounter++;
         }
-        startTurn(playersTurn);
+        startTurn(playersTurn);     //starts next turn
         turnFinished = true;
     }
 
@@ -651,6 +647,7 @@ public class Game implements Runnable {
         gameRunning = false;
         this.winner = winner;
 
+        score = turnCounter;
         if (winner != null) {
             new ProtocolExecutor().sendAll("ENDGM§Winner§" + winner.getName(), winner.getSBL());
         } else {

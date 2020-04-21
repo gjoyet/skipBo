@@ -241,9 +241,15 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
      * @param name Name of the winner of the game.
      */
     void endGame(String name) {
-        JOptionPane.showMessageDialog(contentPane, "The winner is: " + name + "!", "Game is finished.",
+        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo.png")));
+        JOptionPane optionPane = new JOptionPane("The winner is: " + name + "!", JOptionPane.INFORMATION_MESSAGE,
+                JOptionPane.DEFAULT_OPTION, icon);
+        JDialog dialog = optionPane.createDialog(contentPane, "Game is finished.");
+        dialog.setSize(icon.getIconWidth()+270, icon.getIconHeight()+100);
+        dialog.setVisible(true);
+        /*JOptionPane.showMessageDialog(contentPane, "The winner is: " + name + "!", "Game is finished.",
                 JOptionPane.INFORMATION_MESSAGE,
-                new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo.png"))));
+                new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo.png"))));*/
         contentPane.remove(gameGraphic.getGameComponent());
         setBounds(100, 100, 420, 780);
         setTitle("Skip-Bros CHAT");

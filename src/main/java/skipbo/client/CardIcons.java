@@ -52,9 +52,9 @@ class CardIcons {
         }
 
         skipbo[12] = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("skipbo.png")));
-        image = skipbo[0].getImage().getScaledInstance(widthMedium, heightMedium, Image.SCALE_SMOOTH);
+        image = skipbo[12].getImage().getScaledInstance(widthMedium, heightMedium, Image.SCALE_SMOOTH);
         skipbo[13] = new ImageIcon(image);
-        image = skipbo[0].getImage().getScaledInstance(widthSmall, heightSmall, Image.SCALE_SMOOTH);
+        image = skipbo[12].getImage().getScaledInstance(widthSmall, heightSmall, Image.SCALE_SMOOTH);
         skipbo[14] = new ImageIcon(image);
 
         icons = new ImageIcon[][]{rL, rM, rS, gL, gM, gS, bL, bM, bS, skipbo};

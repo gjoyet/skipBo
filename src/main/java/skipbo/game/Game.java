@@ -314,6 +314,7 @@ public class Game implements Runnable {
             }
 
             for (Iterator<Card> bp = buildPile.iterator(); bp.hasNext(); ) { //Iterator to remove all cards from current BP
+                bp.next();
                 bp.remove();
             }
 

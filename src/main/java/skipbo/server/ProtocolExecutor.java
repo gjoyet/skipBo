@@ -272,7 +272,6 @@ public class ProtocolExecutor {
                         } else if(stockPileTopCard.number == -1) {
                             sbL.getPW().println("PUTTO§StockResponse§" + input[2] + "§" + sbL.player.getName()
                                         + "§" + stockPileTopCard.getColString() + "§" + stockPileTopCard.number);
-                            sbL.player.getGame().endGame(sbL.player);
                         } else {
                             sbL.getPW().println("PRINT§Terminal§Error"); // TODO: Add error message
                         }
@@ -297,7 +296,14 @@ public class ProtocolExecutor {
                         sbL.getPW().println("PRINT§Terminal§This move is not allowed.");
                 }
             } else if(input[1].equals("Update")) {
-                sendAllExceptOne("PUTTO§Update§" + input[2], sbL);
+                String[] arguments = input[2].split("§");
+                if(arguments[0].equals("S") && arguments[4].equals("-1")) {
+                    sendAllExceptOne("PUTTO§Update§" + input[2], sbL);
+                    Player winner = serverLobby.getPlayerByName(arguments[2]);
+                    winner.getGame().endGame(winner);
+                } else {
+                    sendAllExceptOne("PUTTO§Update§" + input[2], sbL);
+                }
             } else throw new NoCommandException(input[0], input[1]);
         } finally {}
     }

@@ -128,6 +128,11 @@ public class Player {
     }
 
     /**
+     * Empties handcards of player.
+     */
+    public void clearHandCards() { this.piles.handCards.clear(); }
+
+    /**
      * For testing purposes.
      *
      * @param hc: handcards of players are set to this.

@@ -258,7 +258,7 @@ public class ProtocolExecutor {
                             this.check("HandCards");
                             sbL.player.getGame().checkHandCards(sbL.player);
                         } else {
-                            sbL.getPW().println("Error"); // TODO: Add error message
+                            sbL.getPW().println("PRINT§Terminal§Error"); // TODO: Add error message
                         }
                         break;
                     case "SB":
@@ -270,14 +270,14 @@ public class ProtocolExecutor {
                                                         + sbL.player.getName() + "§" + stockPileTopCard.getColString()
                                                                                     + "§" + stockPileTopCard.number);
                         } else {
-                            sbL.getPW().println("Error"); // TODO: Add error message
+                            sbL.getPW().println("PRINT§Terminal§Error"); // TODO: Add error message
                         }
                         break;
                     case "DB":
                         if (sbL.player.getGame().playFromDiscardToMiddle(sbL.player, iF, iT)) {
                             sbL.getPW().println("PUTTO§Response§" + input[2] + "§" + sbL.player.getName());
                         } else {
-                            sbL.getPW().println("Error"); // TODO: Add error message
+                            sbL.getPW().println("PRINT§Terminal§Error"); // TODO: Add error message
                         }
                         break;
                     case "HD":
@@ -286,7 +286,7 @@ public class ProtocolExecutor {
                             this.check("HandCards");
                             sbL.player.getGame().checkHandCards(sbL.player);
                         } else {
-                            sbL.getPW().println("Error"); // TODO: Add error message
+                            sbL.getPW().println("PRINT§Terminal§Error"); // TODO: Add error message
                         }
                         break;
                     default:
@@ -351,6 +351,7 @@ public class ProtocolExecutor {
         for(Player p : game.players) {
             p.changeStatus(Status.WAITING);
             p.changeGame(null);
+            p.clearHandCards();
         }
     }
 

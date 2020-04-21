@@ -163,7 +163,7 @@ public class ProtocolExecutor {
         servLog.info(sbL.player.getName() + " logged out.");
         playerCount--;
         try {
-            sleep(30000); //Prevents server from shutting down immediately, in case a player is being started right in that moment.
+            sleep(1000000); //Prevents server from shutting down immediately, in case a player is being started right in that moment.
         } catch (InterruptedException e) {
             servLog.warn("Sleeptime of server before shutdown interrupted.");
         }

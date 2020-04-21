@@ -88,7 +88,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
         setTitle("Skip-Bros CHAT");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        setBounds(100, 100, 420, 780);
+        setBounds(100, 100, 420, 830);
 
         contentPane = getContentPane();
         contentPane.setBackground(Color.orange);
@@ -138,17 +138,17 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
         //Output textfield
         chat = new JTextPane();
-        chat.setBounds(80, 320, 250, 300);
+        chat.setBounds(80, 320, 250, 340);
         chat.setEditable(false);
 
         chat = new JTextPane(); //TODO: change to JEditorPane or JTextPane to print in colour
-        chat.setBounds(80, 320, 250, 300);
+        chat.setBounds(80, 320, 250, 340);
 /*        chat.setLineWrap(true);
         chat.setWrapStyleWord(true);*/
         chat.setEditable(false);
 
         chatScrollPane = new JScrollPane(chat);
-        chatScrollPane.setBounds(80, 320, 250, 300);
+        chatScrollPane.setBounds(80, 320, 250, 340);
         chatScrollPane.setVisible(true);
         chatScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentPane.add(chatScrollPane);
@@ -158,7 +158,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
         //Input textfield
         inputMes = new JTextArea();
-        inputMes.setBounds(80, 630, 250, 80);
+        inputMes.setBounds(80, 665, 250, 60);
         inputMes.setEditable(true);
         inputMes.setColumns(3);
         inputMes.setLineWrap(true);
@@ -167,7 +167,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         contentPane.add(inputMes);
 
         inputScrollPane = new JScrollPane(inputMes);
-        inputScrollPane.setBounds(80, 630, 250, 80);
+        inputScrollPane.setBounds(80, 665, 250, 60);
         inputScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentPane.add(inputScrollPane);
 
@@ -228,6 +228,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         contentPane.add(gameGraphic.getGameComponent());
         setTitle("Skip-Bros GAME");
         setBounds(100, 100, 1150, 800);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         startB.setEnabled(false);
         readyB.setEnabled(false);

@@ -85,7 +85,7 @@ public class Game implements Runnable {
                 gToString.append(" || TERMINATED || No winner.");
             } else {
                 gToString.append(" || FINISHED || Winner was: ").append(this.winner.getName()).append(", ");
-                gToString.append("SCORE: " + score / sizeOfStockPile);
+                gToString.append("SCORE: " + score);
             }
         }
 

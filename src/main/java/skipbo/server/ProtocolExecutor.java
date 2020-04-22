@@ -400,9 +400,10 @@ public class ProtocolExecutor {
                     lineSplit = line.split("SCORE: ");
                     servLog.debug("lineSplit[1] = " + lineSplit[1]);
                     double scoreInLine = Double.parseDouble(lineSplit[1]);
-                    servLog.debug("score on this line = " + scoreInLine);
+                    servLog.debug("score on this line = " + scoreInLine + ", game.score is " + game.score);
+                    servLog.debug("gameAppended is: " + gameAppended);
                     if(scoreInLine <= game.score || gameAppended) {
-                        servLog.debug("Reading file.");
+                        servLog.debug("Writing from file.");
                         pw.println(line);
                     } else {
                         servLog.debug("Writing game.");

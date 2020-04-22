@@ -261,6 +261,7 @@ public class ProtocolExecutor {
                             this.check("HandCards");
                             sbL.player.getGame().checkHandCards(sbL.player);
                         }
+                        break;
                     case "SB":
                         Card stockPileTopCard = sbL.player.getGame().playFromStockToMiddle(sbL.player, iT);
                         if (stockPileTopCard != null && stockPileTopCard.number != -1) {

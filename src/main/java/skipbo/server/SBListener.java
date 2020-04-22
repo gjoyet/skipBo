@@ -21,7 +21,7 @@ public class SBListener implements Runnable {
     Player player;
 
 
-    SBListener(Socket sock, int id) throws IOException {
+    public SBListener(Socket sock, int id) throws IOException {
         this.sock = sock;
         try {
             this.pw = new PrintWriter(sock.getOutputStream(), true);

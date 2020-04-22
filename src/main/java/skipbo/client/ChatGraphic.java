@@ -3,17 +3,12 @@ package skipbo.client;
 import skipbo.server.Protocol;
 
 import javax.swing.*;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
+import javax.swing.text.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.util.Objects;
 
+import static java.lang.Thread.sleep;
 import static skipbo.client.SBClient.clientLog;
 
 /**
@@ -141,11 +136,11 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         chat.setBounds(80, 320, 250, 340);
         chat.setEditable(false);
 
-        chat = new JTextPane(); //TODO: change to JEditorPane or JTextPane to print in colour
-        chat.setBounds(80, 320, 250, 340);
+        //chat = new JTextPane(); //TODO: change to JEditorPane or JTextPane to print in colour
+        //chat.setBounds(80, 320, 250, 340);
 /*        chat.setLineWrap(true);
         chat.setWrapStyleWord(true);*/
-        chat.setEditable(false);
+        //chat.setEditable(false);
 
         chatScrollPane = new JScrollPane(chat);
         chatScrollPane.setBounds(80, 320, 250, 340);
@@ -153,8 +148,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         chatScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentPane.add(chatScrollPane);
 
-        /*DefaultCaret caret = (DefaultCaret) chat.getCaret();
-        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);*/
 
         //Input textfield
         inputMes = new JTextArea();
@@ -171,6 +164,9 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         inputScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentPane.add(inputScrollPane);
 
+        /*DefaultCaret caret = (DefaultCaret) chat.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);*/
+
     }
 
 
@@ -182,6 +178,20 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
                 "/msg [name] [message]\n/broadcast\n/new game\n/play [PlaceFrom] [n] [PlaceTo] [n]\n" +
                 "/list games|players\n/help\n/quit\n***********";
         printInfoMessage(listOfCommands);
+
+/*        JScrollBar vertical = chatScrollPane.getVerticalScrollBar();
+        vertical.setValue(vertical.getMaximum());*/
+
+/*        chatScrollPane.getVerticalScrollBar().addAdjustmentListener(e -> {
+            if ((chatScrollPane.getVerticalScrollBar().getMaximum() - e.getAdjustable().getMaximum()) == 0)
+                return;
+            e.getAdjustable().setValue(e.getAdjustable().getMaximum());
+        });*/
+
+/*        SwingUtilities.invokeLater(() -> {
+            JScrollBar bar = chatScrollPane.getVerticalScrollBar();
+            bar.setValue(bar.getMaximum());
+        });*/
     }
 
     /**
@@ -369,11 +379,16 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         Document doc = chat.getDocument();
         try {
             doc.insertString(doc.getLength(), s, attributeSet);
+
 //            doc = chat.getDocument();
 //            chat.setCaretPosition(doc.getLength());
         } catch (BadLocationException e) {
             clientLog.warn("Error with appending text to chat");
         }
+        SwingUtilities.invokeLater(() -> {
+            JScrollBar bar = chatScrollPane.getVerticalScrollBar();
+            bar.setValue(bar.getMaximum());
+        });
 
     }
 

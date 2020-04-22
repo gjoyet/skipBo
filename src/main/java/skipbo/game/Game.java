@@ -481,9 +481,9 @@ public class Game implements Runnable {
 
                 return stockPile.get(stockPile.size() - 1);
             } else if (stockCard.col == Color.cyan) {      // if Skip Bo card
-                stockCard.number = 1;
+                stockCard.number = topCard.number + 1;
                 specBuildPile.add(stockCard);
-                currentPlayer.getHandCards().remove(stockCard);
+                currentPlayer.getStockPile().remove(stockCard);
                 if (currentPlayer.getStockPile().size() == 0) {  //if stock pile is empty
                     return new Card(-1, Color.cyan);
                 }

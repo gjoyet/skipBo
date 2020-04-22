@@ -260,10 +260,7 @@ public class ProtocolExecutor {
                             sbL.getPW().println("PUTTO§Response§" + input[2] + "§" + sbL.player.getName());
                             this.check("HandCards");
                             sbL.player.getGame().checkHandCards(sbL.player);
-                        } else {
-                            sbL.getPW().println("PRINT§Terminal§Error"); // TODO: Add error message
                         }
-                        break;
                     case "SB":
                         Card stockPileTopCard = sbL.player.getGame().playFromStockToMiddle(sbL.player, iT);
                         if (stockPileTopCard != null && stockPileTopCard.number != -1) {
@@ -272,18 +269,14 @@ public class ProtocolExecutor {
                             servLog.debug("Sending StockResponse command from server with arguments: " + input[2] + "§"
                                                         + sbL.player.getName() + "§" + stockPileTopCard.getColString()
                                                                                     + "§" + stockPileTopCard.number);
-                        } else if(stockPileTopCard.number == -1) {
+                        } else if(stockPileTopCard != null) {
                             sbL.getPW().println("PUTTO§StockResponse§" + input[2] + "§" + sbL.player.getName()
                                         + "§" + stockPileTopCard.getColString() + "§" + stockPileTopCard.number);
-                        } else {
-                            sbL.getPW().println("PRINT§Terminal§Error"); // TODO: Add error message
                         }
                         break;
                     case "DB":
                         if (sbL.player.getGame().playFromDiscardToMiddle(sbL.player, iF, iT)) {
                             sbL.getPW().println("PUTTO§Response§" + input[2] + "§" + sbL.player.getName());
-                        } else {
-                            sbL.getPW().println("PRINT§Terminal§Error"); // TODO: Add error message
                         }
                         break;
                     case "HD":
@@ -293,8 +286,6 @@ public class ProtocolExecutor {
                             if(sbL.getGameLobby().get(sbL.player.getGame().getPlayersTurn()).equals(sbL.player)) {
                                 sbL.player.getGame().checkHandCards(sbL.player);
                             }
-                        } else {
-                            sbL.getPW().println("PRINT§Terminal§Error"); // TODO: Add error message
                         }
                         break;
                     default:

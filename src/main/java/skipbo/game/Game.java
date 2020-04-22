@@ -437,8 +437,9 @@ public class Game implements Runnable {
                 checkBuildPileAndPrint(stockCard, specBuildPile, currentPlayer);
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
                         + piles.handCardPrint(currentPlayer));
-                currentPlayer.getSBL().getPW().print("PRINT§Terminal§Your stock card is: [" +
-                        stockCard.number);
+/*                currentPlayer.getSBL().getPW().print("PRINT§Terminal§Your stock card is: [" +
+                        stockCard.number);*/ //Commented because it only made problems. Line doesn't seem to have an
+                // impact anyways since the new stock card ist still getting printed.
                 if (currentPlayer.getStockPile().size() == 0) {  //if stock pile is empty
                     return new Card(-1, Color.cyan);
                 }

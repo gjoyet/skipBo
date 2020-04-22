@@ -24,9 +24,6 @@ public class ProtocolExecutor {
     public ProtocolExecutor() { }
 
     public ProtocolExecutor(String[] input, SBListener sbL) {
-        if(input == null || sbL == null) {
-            throw new IllegalArgumentException();
-        }
         this.input = input;
         this.sbL = sbL;
     }

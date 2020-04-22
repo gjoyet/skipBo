@@ -22,24 +22,6 @@ import static org.junit.Assert.fail;
  */
 public class ProtocolExecutorTest {
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testConstructorException1() {
-        SBListener sbL = null;
-        try {
-            Socket sock = new Socket(InetAddress.getLocalHost(), 12345);
-            sbL = new SBListener(sock, 0);
-        } catch(IOException ioe) {
-            fail("Error with test framework.");
-        }
-        ProtocolExecutor pe = new ProtocolExecutor(null, sbL);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testConstructorException2() {
-        String[] input = {"Testing", "Program"};
-        ProtocolExecutor pe = new ProtocolExecutor(input, null);
-    }
-
     @Test
     public void testSetToNickname() {
         ProtocolExecutor pe = new ProtocolExecutor();

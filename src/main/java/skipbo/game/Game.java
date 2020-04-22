@@ -19,7 +19,7 @@ public class Game implements Runnable {
     private Player winner;
     private boolean gameRunning, turnFinished;
     public int turnCounter = 0;
-    public int score = 0;
+    public int score = -1;
 
     /**
      * Constructor for Object Game, where the main Game and Game rules
@@ -81,7 +81,8 @@ public class Game implements Runnable {
         if (gameRunning) {
             gToString.append("; RUNNING.");
         } else {
-            gToString.append("; FINISHED. Winner was: ").append(this.winner.getName()).append(".");
+            gToString.append("; FINISHED. Winner was: ").append(this.winner.getName()).append(", ");
+            gToString.append("score: " + score / sizeOfStockPile + ".");
         }
 
         return gToString.toString();

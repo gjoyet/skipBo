@@ -174,7 +174,7 @@ public class ProtocolExecutor {
         servLog.info(sbL.player.getName() + " logged out.");
         playerCount--;
         try {
-            sleep(1000000); //Prevents server from shutting down immediately, in case a player is being started right in that moment.
+            sleep(60000); //Prevents server from shutting down immediately, in case a player is being started right in that moment.
         } catch (InterruptedException e) {
             servLog.warn("Sleeptime of server before shutdown interrupted.");
         }
@@ -390,7 +390,7 @@ public class ProtocolExecutor {
         try {
             if(highscoresOld.length() == 0) {
                 servLog.debug("File length recognised to be 0, writing game: " + game.toString());
-                pw.println(game.toString());
+                pw.println(game.toString(true));
             } else {
                 servLog.debug("File length recognised to be greater than 0.");
                 String line = br.readLine();
@@ -399,7 +399,7 @@ public class ProtocolExecutor {
                 while (line != null) {
                     lineSplit = line.split("SCORE: ");
                     servLog.debug("lineSplit[1] = " + lineSplit[1]);
-                    double scoreInLine = Double.parseDouble(lineSplit[1]);
+                    double scoreInLine = Math.round(Double.parseDouble(lineSplit[1])*100)/100;
                     servLog.debug("score on this line = " + scoreInLine + ", game.score is " + game.score);
                     servLog.debug("gameAppended is: " + gameAppended);
                     if(scoreInLine <= game.score || gameAppended) {
@@ -407,7 +407,7 @@ public class ProtocolExecutor {
                         pw.println(line);
                     } else {
                         servLog.debug("Writing game.");
-                        pw.println(game.toString());
+                        pw.println(game.toString(true));
                         pw.println(line);
                         gameAppended = true;
                     }
@@ -415,7 +415,7 @@ public class ProtocolExecutor {
                 }
                 if (!gameAppended) {
                     servLog.debug("Worst score: writing game at the end of file.");
-                    pw.println(game.toString());
+                    pw.println(game.toString(true));
                 }
             }
         } catch (IOException ioe) {

@@ -101,12 +101,12 @@ public class SBServer implements Runnable {
         int counter = 0;
         for(Game g : serverLobby.getGames()) {
             if(g.gameIsRunning()) {
-                allGames[counter++] = counter + ": " + g.toString();
+                allGames[counter++] = counter + ": " + g.toString(false);
             }
         }
         for(Game g : serverLobby.getGames()) {
             if(!g.gameIsRunning()) {
-                allGames[counter++] = counter + ": " + g.toString();
+                allGames[counter++] = counter + ": " + g.toString(false);
             }
         }
         return allGames;

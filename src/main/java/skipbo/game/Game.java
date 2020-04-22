@@ -3,6 +3,8 @@ package skipbo.game;
 import skipbo.server.ProtocolExecutor;
 
 import java.awt.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -72,8 +74,16 @@ public class Game implements Runnable {
     /**
      * Gets a game with its players and status (all in one line).
      */
-    public String toString() {
-        StringBuilder gToString = new StringBuilder("Participants: ");
+    public String toString(boolean withDateAndTime) {
+        StringBuilder gToString = new StringBuilder();
+
+        if(withDateAndTime) {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime now = LocalDateTime.now();
+            gToString.append(dtf.format(now) + " || ");
+        }
+        gToString.append("Participants: ");
+
         for (int i = 0; i < players.size(); i++) {
             gToString.append(players.get(i).getName());
             if (!(i == players.size() - 1)) gToString.append(", ");
@@ -84,8 +94,8 @@ public class Game implements Runnable {
             if(winner == null) {
                 gToString.append(" || TERMINATED || No winner.");
             } else {
-                gToString.append(" || FINISHED || Winner was: ").append(this.winner.getName()).append(", ");
-                gToString.append("SCORE: " + score);
+                gToString.append(" || FINISHED || WINNER: ").append(this.winner.getName()).append(", ");
+                gToString.append("SCORE: " + String.format("%.2f", score));
             }
         }
 

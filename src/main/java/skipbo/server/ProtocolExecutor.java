@@ -179,19 +179,11 @@ public class ProtocolExecutor {
             servLog.warn("Sleeptime of server before shutdown interrupted.");
         }
         if(playerCount == 0) {
-            try {
-                for(Game g : SBServer.getLobby().getGames()) {
-                    g.terminateGame();
-                }
-                File gameFile = new File("skipBoLogs/Games.txt");
-                PrintWriter filePW = new PrintWriter(new FileOutputStream(gameFile), true);
-                String[] gamesList = SBServer.getGamesList();
-                for(String s : gamesList) {
-                    filePW.println(s);
-                }
-            } catch (FileNotFoundException e) {
-                servLog.warn("Problem with writing games into a file.");
+            for(Game g : SBServer.getLobby().getGames()) {
+                g.terminateGame();
             }
+
+            servLog.warn("Problem with writing games into a file.");
             System.exit(0);
         }
 
@@ -298,7 +290,9 @@ public class ProtocolExecutor {
                         if (sbL.player.getGame().playToDiscard(sbL.player, iF, iT)) {
                             sbL.getPW().println("PUTTO§Response§" + input[2] + "§" + sbL.player.getName());
                             this.check("HandCards");
-                            sbL.player.getGame().checkHandCards(sbL.player);
+                            if(sbL.getGameLobby().get(sbL.player.getGame().getPlayersTurn()).equals(sbL.player)) {
+                                sbL.player.getGame().checkHandCards(sbL.player);
+                            }
                         } else {
                             sbL.getPW().println("PRINT§Terminal§Error"); // TODO: Add error message
                         }
@@ -369,10 +363,73 @@ public class ProtocolExecutor {
     }
 
     public void gameEnding(Game game) {
-        for(Player p : game.players) {
+        // Ending game
+        for (Player p : game.players) {
             p.changeStatus(Status.WAITING);
             p.clearHandCards();
             p.changeGame(null);
+        }
+
+        // Writing game into highscores file
+        File highscoresOld = new File("skipBoLogs/Highscores.txt");
+        File tempFile = new File("skipBoLogs/tempFile.txt");
+        BufferedReader br = null;
+        PrintWriter pw = null;
+
+        try {
+            servLog.debug("Initializing br and pw.");
+            if(!tempFile.createNewFile()) servLog.error("Could not create file.");
+            br = new BufferedReader(new FileReader(highscoresOld));
+            pw = new PrintWriter(new FileOutputStream(tempFile), true);
+        } catch(FileNotFoundException fnfe) {
+            servLog.error("File not found.");
+        } catch(IOException ioe) {
+            servLog.error("Problem with tempFile.");
+        }
+
+        try {
+            if(highscoresOld.length() == 0) {
+                servLog.debug("File length recognised to be 0, writing game: " + game.toString());
+                pw.println(game.toString());
+            } else {
+                servLog.debug("File length recognised to be greater than 0.");
+                String line = br.readLine();
+                String[] lineSplit;
+                boolean gameAppended = false;
+                while (line != null) {
+                    lineSplit = line.split("SCORE: ");
+                    servLog.debug("lineSplit[1] = " + lineSplit[1]);
+                    double scoreInLine = Double.parseDouble(lineSplit[1]);
+                    servLog.debug("score on this line = " + scoreInLine);
+                    if(scoreInLine <= game.score || gameAppended) {
+                        servLog.debug("Reading file.");
+                        pw.println(line);
+                    } else {
+                        servLog.debug("Writing game.");
+                        pw.println(game.toString());
+                        pw.println(line);
+                        gameAppended = true;
+                    }
+                    line = br.readLine();
+                }
+                if (!gameAppended) {
+                    servLog.debug("Worst score: writing game at the end of file.");
+                    pw.println(game.toString());
+                }
+            }
+        } catch (IOException ioe) {
+            servLog.error("Problem with reading from Highscores.txt file.");
+        }
+
+        servLog.debug("Deleting old file and renaming tempFile.");
+        highscoresOld.delete();
+        tempFile.renameTo(new File("skipBoLogs/Highscores.txt"));
+
+        try {
+            br.close();
+            pw.close();
+        } catch (IOException e) {
+            servLog.debug("Problem with closing br and pw after writing in highscores.txt");
         }
     }
 

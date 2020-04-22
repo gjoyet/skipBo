@@ -19,7 +19,7 @@ public class Game implements Runnable {
     private Player winner;
     private boolean gameRunning, turnFinished;
     public int turnCounter = 0;
-    public int score = -1;
+    public double score = -1.0;
 
     /**
      * Constructor for Object Game, where the main Game and Game rules
@@ -79,10 +79,14 @@ public class Game implements Runnable {
             if (!(i == players.size() - 1)) gToString.append(", ");
         }
         if (gameRunning) {
-            gToString.append("; RUNNING.");
+            gToString.append(" || RUNNING.");
         } else {
-            gToString.append("; FINISHED. Winner was: ").append(this.winner.getName()).append(", ");
-            gToString.append("score: " + score / sizeOfStockPile + ".");
+            if(winner == null) {
+                gToString.append(" || TERMINATED || No winner.");
+            } else {
+                gToString.append(" || FINISHED || Winner was: ").append(this.winner.getName()).append(", ");
+                gToString.append("SCORE: " + score / sizeOfStockPile);
+            }
         }
 
         return gToString.toString();
@@ -653,11 +657,12 @@ public class Game implements Runnable {
         gameRunning = false;
         this.winner = winner;
 
-        score = turnCounter;
+        score = (double) turnCounter / sizeOfStockPile;
         if (winner != null) {
             new ProtocolExecutor().sendAll("ENDGM§Winner§" + winner.getName(), winner.getSBL());
         } else {
-            // TODO: option for when game got interrupted without having a winner.
+            // TODO: option for when game got interrupted without having a winner. SOLVED (see below)
+            // Solved: If game is ended w/o a winner, use method game.terminateGame().
         }
         new ProtocolExecutor().gameEnding(this);
     }

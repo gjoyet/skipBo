@@ -49,14 +49,32 @@ public class SBClient implements Runnable {
                 frame = new ChatGraphic(clientListener);
             }
             frame.addWindowListener(new WindowHandler(clientListener));
-            frame.setVisible(true);
+
+            try {
+                frame.setVisible(true);
+            } catch(Exception e) {
+                clientLog.warn("Caught Exception from setVisible. Trying again in a second.");
+                try {
+                    Thread.sleep(1000);
+                } catch(InterruptedException ex) {
+                    clientLog.warn("Interrupted sleeping thread");
+                }
+                try {
+                    frame.setVisible(true);
+                } catch (Exception e1) {
+                    clientLog.fatal("Caught Exception from setVisible again. Shutting down client now.");
+                    frame.getClientListener().forward("/quit");
+                    System.exit(-1);
+                }
+
+            }
 
             //Start SBServerListener Thread
             SBServerListener serverListener = new SBServerListener(sock, frame);
             Thread sListener = new Thread(serverListener);
             sListener.start();
 
-        } catch (IOException e) {
+        } catch (IOException | NotACommandException e) {
             clientLog.fatal("Error while connecting to server.");
         }
     }

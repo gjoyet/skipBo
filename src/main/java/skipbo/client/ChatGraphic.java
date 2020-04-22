@@ -8,7 +8,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Objects;
 
-import static java.lang.Thread.sleep;
 import static skipbo.client.SBClient.clientLog;
 
 /**
@@ -387,8 +386,12 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             clientLog.warn("Error with appending text to chat");
         }
         SwingUtilities.invokeLater(() -> {
-            JScrollBar bar = chatScrollPane.getVerticalScrollBar();
-            bar.setValue(bar.getMaximum());
+            try {
+                JScrollBar bar = chatScrollPane.getVerticalScrollBar();
+                bar.setValue(bar.getMaximum());
+            } catch (Exception e) {
+                clientLog.warn("Exception while trying to adjust the scrollbar");
+            }
         });
 
     }
@@ -399,5 +402,9 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
     public void changePlayerName(String name) {
         playerName = name;
+    }
+
+    SBClientListener getClientListener() {
+        return clientListener;
     }
 }

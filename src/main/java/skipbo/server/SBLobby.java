@@ -17,7 +17,7 @@ public class SBLobby {
         this.gameList = new ArrayList<Game>();
     }
 
-    ArrayList<Player> getPlayerLobby() {
+    public ArrayList<Player> getPlayerLobby() {
         return this.playerLobby;
     }
 
@@ -36,6 +36,8 @@ public class SBLobby {
     Player getPlayer(int index) {
         return playerLobby.get(index);
     }
+
+    public void clearLobby() { this.playerLobby.clear(); }
 
     /**
      * Returns the player in the Lobby with the name given as argument. If the player does not exists, the method return null.

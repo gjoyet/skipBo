@@ -18,7 +18,8 @@ import java.util.ArrayList;
 public class SBServer implements Runnable {
     static int playerID = 0;
     static int playerCount = 0;
-    static SBLobby serverLobby = new SBLobby(); // Should this maybe be non-static?
+
+    public static SBLobby serverLobby = new SBLobby(); // Should this maybe be non-static?
 
     public static Logger servLog = LogManager.getLogger(SBServer.class);
 

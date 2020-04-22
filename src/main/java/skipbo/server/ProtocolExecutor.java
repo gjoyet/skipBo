@@ -33,13 +33,17 @@ public class ProtocolExecutor {
 
     public String[] getInput() { return this.input; }
 
+    public void setInput(String[] input) {
+        this.input = input;
+    }
+
     public SBListener getSBL() { return this.sbL; }
 
     /**
      * Method for command "SETTO". This command sets a parameter
      * given as option to the value given as argument.
      */
-    void setTo() throws NoCommandException {
+    public void setTo() throws NoCommandException {
         String name = "SBPlayer";
         try {
             if (input[1].equals("Nickname")) {
@@ -105,6 +109,9 @@ public class ProtocolExecutor {
                     return;
                 }
                 String status = Status.valueOf(input[2]).toString();
+                if(status.equalsIgnoreCase("ingame")) {
+                    sbL.getPW().println("PRINT§Terminal§You cannot change your status to 'ingame' yourself.");
+                }
                 if(sbL.player.getStatus().equals(Status.valueOf(status))) {
                     sbL.getPW().println("PRINT§Terminal§Status is already: " + status + ".");
                     return;

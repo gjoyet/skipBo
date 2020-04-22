@@ -429,7 +429,7 @@ public class Game implements Runnable {
         if (specBuildPile.isEmpty()) {
             if (stockCard.number == 1) {        // if card number is 1, add to new pile
                 specBuildPile.add(stockCard);
-                currentPlayer.getHandCards().remove(stockCard);
+                currentPlayer.getStockPile().remove(stockCard);
                 if (currentPlayer.getStockPile().size() == 0) {  //if stock pile is empty
                     return new Card(-1, Color.cyan);
                 }

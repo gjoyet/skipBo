@@ -24,9 +24,16 @@ public class ProtocolExecutor {
     public ProtocolExecutor() { }
 
     public ProtocolExecutor(String[] input, SBListener sbL) {
+        if(input == null || sbL == null) {
+            throw new IllegalArgumentException();
+        }
         this.input = input;
         this.sbL = sbL;
     }
+
+    public String[] getInput() { return this.input; }
+
+    public SBListener getSBL() { return this.sbL; }
 
     /**
      * Method for command "SETTO". This command sets a parameter

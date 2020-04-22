@@ -65,13 +65,13 @@ public class GameGraphic implements ActionListener {
     private final int Y_DRAW_LABEL = Y_DRAW-20;
 
     // Layout of opponents
-    private final int WIDTH_OP1 = 30;
-    private final int HEIGHT_OP1 = 50;
+    private final int WIDTH_OP1 = 40; //30
+    private final int HEIGHT_OP1 = 58; //50
     private final int X_OP1 = 1050;  // change here
     private final int Y_OP1 = 120;  // change here
-    private final int Y_OP2 = Y_OP1+120;  // change here
-    private final int Y_OP3 = Y_OP2+120;  // change here
-    private final int X_OP1_DISTANCE = 35;
+    private final int Y_OP2 = Y_OP1+140; //120  // change here
+    private final int Y_OP3 = Y_OP2+140;  // change here
+    private final int X_OP1_DISTANCE = 45; //35
 
     //Opponents
     private JLabel e1;
@@ -98,12 +98,15 @@ public class GameGraphic implements ActionListener {
     private CardButton[] e2_discard = new CardButton[4];
     private CardButton[] e3_discard = new CardButton[4];*/
 
+    private final int DISTDISCARD = 30;
+    private final int DISTOPPDISCARD = 13;
+
     //Opponent stock piles
     private CardButton e1_stock;
     private CardButton e2_stock;
     private CardButton e3_stock;
 
-    private final CardIcons cardIcons = new CardIcons(30, 50, 78, 120);
+    private final CardIcons cardIcons = new CardIcons(WIDTH_OP1, HEIGHT_OP1, 78, 120);
 
 
     GameGraphic(SBClientListener clientListener, String name, JTextPane chat) {
@@ -266,9 +269,9 @@ public class GameGraphic implements ActionListener {
             CardButton b1 = new CardButton();
             CardButton b2 = new CardButton();
             CardButton b3 = new CardButton();
-            b1.setBounds(X_OP1 + i * X_OP1_DISTANCE + 45, Y_OP1, WIDTH_OP1, HEIGHT_OP1);
-            b2.setBounds(X_OP1 + i * X_OP1_DISTANCE + 45, Y_OP2, WIDTH_OP1, HEIGHT_OP1);
-            b3.setBounds(X_OP1 + i * X_OP1_DISTANCE + 45, Y_OP3, WIDTH_OP1, HEIGHT_OP1);
+            b1.setBounds(X_OP1 + i * X_OP1_DISTANCE + 55, Y_OP1, WIDTH_OP1, HEIGHT_OP1); //+45
+            b2.setBounds(X_OP1 + i * X_OP1_DISTANCE + 55, Y_OP2, WIDTH_OP1, HEIGHT_OP1);
+            b3.setBounds(X_OP1 + i * X_OP1_DISTANCE + 55, Y_OP3, WIDTH_OP1, HEIGHT_OP1);
             setClickable(b1, false);
             setClickable(b2, false);
             setClickable(b3, false);
@@ -415,8 +418,9 @@ public class GameGraphic implements ActionListener {
             newDisCard.addActionListener(this);
             oldDisCard.removeActionListener(this);
             newDisCard.setName(" D " + j);
-            newDisCard.setBounds(al.get(0).getX(), al.get(0).getY() + (al.size() - 1) * 15,
-                    al.get(0).getWidth(), al.get(0).getHeight());
+            setBoundsOfDiscard(newDisCard, al, DISTDISCARD);
+/*            newDisCard.setBounds(al.get(0).getX(), al.get(0).getY() + (al.size() - 1) * 30,
+                    al.get(0).getWidth(), al.get(0).getHeight());*/
             newDisCard.setIcon(cardIcons.getIcon(col, num, CardIcons.LARGE));
             newDisCard.addCard(col, num);
             layeredPane.add(newDisCard, Integer.valueOf(al.size()));
@@ -429,8 +433,9 @@ public class GameGraphic implements ActionListener {
             al = getEnemyArray(name, j);
             newDisCard = new CardButton();
             setClickable(newDisCard, false);
-            newDisCard.setBounds(al.get(0).getX(), al.get(0).getY() + (al.size() - 1) * 10, al.get(0).getWidth(),
-                    al.get(0).getHeight());
+            setBoundsOfDiscard(newDisCard, al, DISTOPPDISCARD);
+            /*newDisCard.setBounds(al.get(0).getX(), al.get(0).getY() + (al.size() - 1) * 13, al.get(0).getWidth(),
+                    al.get(0).getHeight());*/
             newDisCard.setIcon(cardIcons.getIcon(colour, number, CardIcons.SMALL));
             newDisCard.addCard(colour, number);
             layeredPane.add(newDisCard, Integer.valueOf(al.size()));
@@ -443,6 +448,27 @@ public class GameGraphic implements ActionListener {
             playerIndex = (playerIndex + 1) % oppArray.length;
             if (oppArray[playerIndex] != null) { //if this is null, it means that it's this players turn
                 oppArray[playerIndex].setForeground(ChatGraphic.DARKGREEN);
+            }
+        }
+    }
+
+    private void setBoundsOfDiscard(CardButton newDisCard, ArrayList<CardButton> al, int distance) {
+        if (newDisCard != null) { //Card will be added
+            if (al.size() >= 6) {
+                for (int i = al.size() - 4; i < al.size(); i++) {
+                    al.get(i).setLocation(al.get(0).getX(), al.get(i).getY() - distance);
+                }
+            }
+            if (al.size() == 1) {
+                distance = 0;
+            }
+            newDisCard.setBounds(al.get(0).getX(), al.get(al.size() - 1).getY() + distance,
+                    al.get(0).getWidth(), al.get(0).getHeight());
+        } else { //Card will be removed
+            if (al.size() >= 6) {
+                for (int i = al.size()-4; i < al.size(); i++) {
+                    al.get(i).setLocation(al.get(0).getX(), al.get(i).getY() + distance);
+                }
             }
         }
     }
@@ -562,6 +588,7 @@ public class GameGraphic implements ActionListener {
             buildCard.addCard(col, num);
             buildCard.setIcon(cardIcons.getIcon(col, num, CardIcons.LARGE));
             al.get(al.size() - 1).addActionListener(this);
+            setBoundsOfDiscard(null, al, DISTDISCARD);
             layeredPane.repaint();
         } else {
             al = getEnemyArray(name, i);
@@ -574,6 +601,7 @@ public class GameGraphic implements ActionListener {
             }
             buildCard.addCard(col, num);
             buildCard.setIcon(cardIcons.getIcon(col, num, CardIcons.LARGE));
+            setBoundsOfDiscard(null, al, DISTOPPDISCARD);
             layeredPane.repaint();
 /*            discardCard = getEnemyArray(name, i);
             String col = discardCard.removeColour();

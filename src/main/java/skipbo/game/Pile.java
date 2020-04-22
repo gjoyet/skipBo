@@ -168,6 +168,17 @@ public class Pile {
         return str.toString().split("\n");
     }
 
+    /** returns emptyPile in a String   **/
+    public String emptyPilePrint(){
+        assert emptyPile != null;
+        int len = emptyPile.size();
+        int[] a = new int[len];
+        for (int i = 0; i < len; i++) {
+            a[i] = emptyPile.get(i).number;
+        }
+        return Arrays.toString(a);
+    }
+
     /** returns emptyPile   **/
     public ArrayList<Card> getEmptyPile(){
         return emptyPile;

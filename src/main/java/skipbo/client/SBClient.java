@@ -9,29 +9,19 @@ import java.net.Socket;
 /**
  * A Skip-Bo client.
  */
-public class SBClient implements Runnable {
+public class SBClient {
 
     public static Logger clientLog = LogManager.getLogger(SBClient.class);
 
-    String[] args;
-
     /**
-     * Creates a new SBClient Object.
-     *
-     * @param args: command-line arguments given by Main class: {@literal <hostAddress>:<port> [<username>] }
+     * Establishes a connection to the Skip-Bo server via SBClientListener thread and SBServerListener thread and opens
+     * the GUI
+     * @param args: command-line arguments given by Main class: {@literal client <hostAddress>:<port> [<username>] }
      */
     public SBClient(String[] args) {
-        this.args = args;
-    }
-
-    /**
-     * Establishes a connection to the Skip-Bo server via SBClientListener thread and SBServerListener thread and
-     * opens the GUI
-     */
-    public void run() {
 
         try {
-            String[] ipAndPort = args[0].split(":");
+            String[] ipAndPort = args[1].split(":");
             String ip = ipAndPort[0];
             int port = Integer.parseInt(ipAndPort[1]);
 
@@ -43,30 +33,32 @@ public class SBClient implements Runnable {
 
             //GUI
             ChatGraphic frame;
-            if (args.length == 2) {
-                frame = new ChatGraphic(clientListener, args[1]);
+            if (args.length == 3) {
+                frame = new ChatGraphic(clientListener, args[2]);
             } else {
                 frame = new ChatGraphic(clientListener);
             }
             frame.addWindowListener(new WindowHandler(clientListener));
 
-            try {
-                frame.setVisible(true);
-            } catch(Exception e) {
-                clientLog.warn("Caught Exception from setVisible. Trying again in a second.");
-                try {
-                    Thread.sleep(1000);
-                } catch(InterruptedException ex) {
-                    clientLog.warn("Interrupted sleeping thread");
-                }
+            if (args[0].equalsIgnoreCase("client")) {
                 try {
                     frame.setVisible(true);
-                } catch (Exception e1) {
-                    clientLog.fatal("Caught Exception from setVisible again. Shutting down client now.");
-                    frame.getClientListener().forward("/quit");
-                    System.exit(-1);
-                }
+                } catch (Exception e) {
+                    clientLog.warn("Caught Exception from setVisible. Trying again in a second.");
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ex) {
+                        clientLog.warn("Interrupted sleeping thread");
+                    }
+                    try {
+                        frame.setVisible(true);
+                    } catch (Exception e1) {
+                        clientLog.fatal("Caught Exception from setVisible again. Shutting down client now.");
+                        frame.getClientListener().forward("/quit");
+                        System.exit(-1);
+                    }
 
+                }
             }
 
             //Start SBServerListener Thread

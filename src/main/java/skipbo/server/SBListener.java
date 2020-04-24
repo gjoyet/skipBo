@@ -106,6 +106,8 @@ public class SBListener implements Runnable {
         else return null;
     }
 
+    public Player getPlayer() { return this.player; }
+
 }
 
 

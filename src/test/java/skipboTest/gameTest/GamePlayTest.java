@@ -1,5 +1,6 @@
 package skipboTest.gameTest;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import skipbo.game.Card;
 import skipbo.game.Game;
@@ -17,6 +18,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class GamePlayTest {
 
+    @Ignore
     @Test
     public void testPlayToMiddle() {
         // set game framework

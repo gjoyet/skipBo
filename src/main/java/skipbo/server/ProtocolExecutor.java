@@ -30,6 +30,9 @@ public class ProtocolExecutor {
 
     public String[] getInput() { return this.input; }
 
+    /**
+     * Only for testing purposes.
+     */
     public void setInput(String[] input) {
         this.input = input;
     }

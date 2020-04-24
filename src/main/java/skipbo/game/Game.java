@@ -82,6 +82,7 @@ public class Game implements Runnable {
             LocalDateTime now = LocalDateTime.now();
             gToString.append(dtf.format(now) + " || ");
         }
+
         gToString.append("Participants: ");
 
         for (int i = 0; i < players.size(); i++) {

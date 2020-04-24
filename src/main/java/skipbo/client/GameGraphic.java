@@ -106,6 +106,12 @@ public class GameGraphic implements ActionListener {
     private CardButton e2_stock;
     private CardButton e3_stock;
 
+    //Number of cards left on stock piles
+    private JLabel numOfStockCards;
+    private JLabel[] oppNumStockCards = new JLabel[3];
+
+    private int initialNumStockCards = 3;
+
     private final CardIcons cardIcons = new CardIcons(WIDTH_OP1, HEIGHT_OP1, 78, 120);
 
 
@@ -199,7 +205,7 @@ public class GameGraphic implements ActionListener {
         // Layout of Hand piles
         int WIDTH_HAND = 78;
         hand[0].setBounds(X_HAND, Y_HAND, WIDTH_HAND, HEIGHT_HAND);
-        hand[1].setBounds(X_HAND + 1*X_HAND_DISTANCE, Y_HAND, WIDTH_HAND, HEIGHT_HAND);
+        hand[1].setBounds(X_HAND + X_HAND_DISTANCE, Y_HAND, WIDTH_HAND, HEIGHT_HAND);
         hand[2].setBounds(X_HAND + 2*X_HAND_DISTANCE, Y_HAND, WIDTH_HAND, HEIGHT_HAND);
         hand[3].setBounds(X_HAND + 3*X_HAND_DISTANCE, Y_HAND, WIDTH_HAND, HEIGHT_HAND);
         hand[4].setBounds(X_HAND + 4*X_HAND_DISTANCE, Y_HAND, WIDTH_HAND, HEIGHT_HAND);
@@ -281,7 +287,20 @@ public class GameGraphic implements ActionListener {
             e1_discard[i].add(b1);
             e2_discard[i].add(b2);
             e3_discard[i].add(b3);
+        }
 
+        //Displays number of own stock cards left. Name of label corresponds to the number of stock cards left.
+        numOfStockCards = new JLabel(initialNumStockCards + " cards left");
+        numOfStockCards.setName(String.valueOf(initialNumStockCards));
+        numOfStockCards.setBounds(X_STOCK, Y_STOCK+HEIGHT_STOCK+5, 100, 15);
+        layeredPane.add(numOfStockCards);
+
+        //creates JLabels for number of stock cards of opponents and sets their bounds. Further adjustments are done in
+        //method setOpponentNames
+        for (int i = 0; i < oppNumStockCards.length; i++) {
+            oppNumStockCards[i] = new JLabel(String.valueOf(initialNumStockCards));
+            oppNumStockCards[i].setBounds(X_OP1+(WIDTH_OP1/2-5), Y_OP1+HEIGHT_OP1+5 +i*140, 35, 15);
+        }
 /*            e1_discard[i] = new CardButton();
             e2_discard[i] = new CardButton();
             e3_discard[i] = new CardButton();
@@ -291,7 +310,7 @@ public class GameGraphic implements ActionListener {
             setClickable(e1_discard[i], false);
             setClickable(e2_discard[i], false);
             setClickable(e3_discard[i], false);*/
-        }
+
 
 /*        e1_discard[0].setBounds(535, 50, 30, 50);
         e1_discard[1].setBounds(570, 50, 30, 50);
@@ -311,7 +330,8 @@ public class GameGraphic implements ActionListener {
     }
 
     /**
-     * Sets the opponents names and puts them in an array in the correct order (order of turns).
+     * Sets the opponents names and puts them in an array in the correct order (order of turns). Adds labels of number
+     * of stock cards for opponents to layeredPane.
      *
      * @param names Array with names of opponents and own player name.
      */
@@ -325,6 +345,8 @@ public class GameGraphic implements ActionListener {
         }
         oppArray[i] = e1;
         e1.setText(names[i]);
+        layeredPane.add(oppNumStockCards[0]);
+        oppNumStockCards[0].setName(names[i]);
         i++;
         if (names.length > 2) {
             if (names[i].equals(playerName)) {
@@ -332,6 +354,8 @@ public class GameGraphic implements ActionListener {
             }
             e2.setText(names[i]);
             oppArray[i] = e2;
+            layeredPane.add(oppNumStockCards[1]);
+            oppNumStockCards[1].setName(names[i]);
             i++;
             if (names.length > 3) {
                 if (names[i].equals(playerName)) {
@@ -339,6 +363,8 @@ public class GameGraphic implements ActionListener {
                 }
                 e3.setText(names[i]);
                 oppArray[i] = e3;
+                layeredPane.add(oppNumStockCards[2]);
+                oppNumStockCards[2].setName(names[i]);
             }
         }
     }
@@ -535,6 +561,14 @@ public class GameGraphic implements ActionListener {
             buildCard.setIcon(cardIcons.getIcon(col, number2, CardIcons.LARGE));
             stock.setIcon(cardIcons.getIcon(colour1, number1, CardIcons.LARGE));
             stock.addCard(colour1, number1);
+
+            numOfStockCards.setName(String.valueOf(Integer.parseInt(numOfStockCards.getName())-1));
+            if (numOfStockCards.getName().equals("1")) {
+                numOfStockCards.setText(1 + " card left");
+            } else {
+                numOfStockCards.setText(Integer.parseInt(numOfStockCards.getName()) + " cards left");
+            }
+
             clientListener.pw.println(Protocol.PUTTO + "§Update§S§" + j + "§" + name + "§" +
                     colour1 + "§" + number1 + "§" + col + "§" + number2);
         } else {
@@ -548,6 +582,8 @@ public class GameGraphic implements ActionListener {
             buildCard.setIcon(cardIcons.getIcon(colour2, number2, CardIcons.LARGE));
             stockCard.addCard(colour1, number1);
             stockCard.setIcon(cardIcons.getIcon(colour1, number1, CardIcons.SMALL));
+            JLabel l = getNumOfStockCardsLabel(name);
+            l.setText(String.valueOf(Integer.parseInt(l.getText())-1));
         }
         if (number2 == 12) {
             resetBuildPile(j - 1);
@@ -700,6 +736,15 @@ public class GameGraphic implements ActionListener {
             button = e3_stock;
         }
         return button;
+    }
+
+    JLabel getNumOfStockCardsLabel(String name) {
+        for (JLabel oppNumStockCard : oppNumStockCards) {
+            if (oppNumStockCard.getName().equals(name)) {
+                return oppNumStockCard;
+            }
+        }
+        return null;
     }
 
     //if true HandCards, StockCards and Discard are enabled; BuildCards are disabled

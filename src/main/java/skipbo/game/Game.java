@@ -80,7 +80,7 @@ public class Game implements Runnable {
         if(withDateAndTime) {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             LocalDateTime now = LocalDateTime.now();
-            gToString.append(dtf.format(now) + " || ");
+            gToString.append(dtf.format(now)).append(" || ");
         }
 
         gToString.append("Participants: ");
@@ -96,7 +96,7 @@ public class Game implements Runnable {
                 gToString.append(" || TERMINATED || No winner.");
             } else {
                 gToString.append(" || FINISHED || WINNER: ").append(this.winner.getName()).append(", ");
-                gToString.append("SCORE: " + String.format("%.2f", score));
+                gToString.append("SCORE: ").append(String.format("%.2f", score));
             }
         }
 
@@ -114,47 +114,47 @@ public class Game implements Runnable {
         gameRunning = true;
 
         this.piles.gamePiles();   // Game gets complete set of cards
-        Player firstPlayer = players.get(0);
-        firstPlayer.getHandCards().add(0, new Card(1, Color.green));
+
+        /*Player firstPlayer = players.get(0);
+        firstPlayer.getHandCards().add(0, new Card(1, Color.green));    //FOR TESTING AND DEMO PURPOSE
         firstPlayer.getHandCards().add(1, new Card(3, Color.red));
         firstPlayer.getHandCards().add(2, new Card(4, Color.red));
         firstPlayer.getHandCards().add(3, new Card(8, Color.green));
-        firstPlayer.getHandCards().add(4, new Card(Color.cyan));
+        firstPlayer.getHandCards().add(4, new Card(Color.cyan));*/
 
-        for (int k = 5; k >= 0; k--) {   //FOR TESTING AND DEMO PURPOSE
+        /*for (int k = 5; k >= 0; k--) {   //FOR TESTING AND DEMO PURPOSE
             Card c = new Card(k + 6, Color.red);
             firstPlayer.getStockPile().add(c);
-        }
+        }*/
 
-        for (int i = 1; i < players.size(); i++) {     // Players getting their cards
-            Player tempPlayer = players.get(i);
+        for (Player tempPlayer : players) {     // Players getting their cards
             tempPlayer.getSBL().getPW().println("PRINT§Terminal§Game is starting...");
             Random random = new Random();
-            for (int j = 0; j < 4; j++) {   //ONLY FOR DEMO PURPOSES
+            /*for (int j = 0; j < 4; j++) {   //ONLY FOR DEMO PURPOSES
                 Card c = new Card(j + 1, Color.green);
                 tempPlayer.getHandCards().add(c);
-            }
-            Card skip = new Card(Color.cyan);
-            tempPlayer.getHandCards().add(4, skip);
-            /*
+            }*/
+//            Card skip = new Card(Color.cyan);     //ONLY FOR DEMO PURPOSES
+//            tempPlayer.getHandCards().add(4, skip);
+
             for (int j = 0; j < 5; j++) {    // Draw hand-cards for each player (Actual hand card loop)
                 Card c = getDrawPile().get(random.nextInt(getDrawPile().size()));
                 tempPlayer.getHandCards().add(c);
                 piles.drawPile.remove(c);
             }
-            */
+
             tempPlayer.getSBL().getPW().println("PRINT§Terminal§Your Hand cards are: " + piles.handCardPrint(tempPlayer));
 
-            for (int k = 2; k >= 0; k--) {   //FOR TESTING AND DEMO PURPOSE
+            /*for (int k = 2; k >= 0; k--) {   //FOR TESTING AND DEMO PURPOSE
                 Card c = new Card(k + 6, Color.red);
                 tempPlayer.getStockPile().add(c);
-            }
+            }*/
 
-            /*for (int j = 0; j < sizeOfStockPile; j++) {    // Draw Stock-Pile cards for each player (REAL METHOD)
+            for (int j = 0; j < sizeOfStockPile; j++) {    // Draw Stock-Pile cards for each player (REAL METHOD)
                 Card c = getDrawPile().get(random.nextInt(getDrawPile().size()));
                 piles.drawPile.remove(c);
                 tempPlayer.getStockPile().add(c);
-            }*/
+            }
             Card topCard = tempPlayer.getStockPile().get(tempPlayer.getStockPile().size() - 1);
             tempPlayer.getSBL().getPW().println("PRINT§Terminal§Your Stock card is: " + topCard.number);
         }
@@ -430,7 +430,7 @@ public class Game implements Runnable {
         if (specBuildPile.isEmpty()) {
             if (stockCard.number == 1) {        // if card number is 1, add to new pile
                 specBuildPile.add(stockCard);
-                currentPlayer.getHandCards().remove(stockCard);
+                currentPlayer.getStockPile().remove(stockCard);
                 if (currentPlayer.getStockPile().size() == 0) {  //if stock pile is empty
                     return new Card(-1, Color.cyan);
                 }
@@ -438,8 +438,9 @@ public class Game implements Runnable {
                 checkBuildPileAndPrint(stockCard, specBuildPile, currentPlayer);
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
                         + piles.handCardPrint(currentPlayer));
-                currentPlayer.getSBL().getPW().print("PRINT§Terminal§Your stock card is: [" +
-                        stockCard.number);
+/*                currentPlayer.getSBL().getPW().print("PRINT§Terminal§Your stock card is: [" +
+                        stockCard.number);*/ //Commented because it only made problems. Line doesn't seem to have an
+                // impact anyways since the new stock card ist still getting printed.
                 if (currentPlayer.getStockPile().size() == 0) {  //if stock pile is empty
                     return new Card(-1, Color.cyan);
                 }

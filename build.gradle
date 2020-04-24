@@ -2,9 +2,10 @@ plugins {
     id 'java'
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.8'
+	id 'jacoco'
 }
 
-apply plugin: 'java'
+//apply plugin: 'java'
 
 javafx {
     version = "11.0.2"
@@ -62,6 +63,15 @@ jar {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 
+}
+
+jacoco {
+    applyTo run
+}
+
+task applicationCodeCoverageReport(type:JacocoReport) {
+    executionData run
+    sourceSets sourceSets.main
 }
 
 

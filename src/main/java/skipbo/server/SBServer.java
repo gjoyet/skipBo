@@ -20,7 +20,7 @@ public class SBServer implements Runnable {
     static int playerCount = 0;
 
     public static SBLobby serverLobby = new SBLobby(); // Should this maybe be non-static?
-    public static ArrayList<SBListener> sbListenerList = new ArrayList<>(); // not needed in program itself, but for testing
+    public static ArrayList<SBListener> sbListenerList = new ArrayList<>(); // not needed in program itself, just for testing
 
     public static Logger servLog = LogManager.getLogger(SBServer.class);
 

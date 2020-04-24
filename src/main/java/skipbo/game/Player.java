@@ -133,15 +133,6 @@ public class Player {
     public void clearHandCards() { this.piles.handCards.clear(); }
 
     /**
-     * For testing purposes.
-     *
-     * @param hc: handcards of players are set to this.
-     */
-    public void setHandCards(ArrayList<Card> hc) {
-        this.piles.handCards = hc;
-    }
-
-    /**
      * Method to return the discard piles of a player
      *
      * @return The ArrayList object that contains the player's discard piles.

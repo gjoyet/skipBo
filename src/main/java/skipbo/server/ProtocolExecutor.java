@@ -44,6 +44,7 @@ public class ProtocolExecutor {
      * given as option to the value given as argument.
      */
     public void setTo() throws NoCommandException {
+        if(input.length < 2) throw new NoCommandException();
         String name = "SBPlayer";
         try {
             if (input[1].equals("Nickname")) {
@@ -63,16 +64,15 @@ public class ProtocolExecutor {
                     }
                 }
             } else throw new NoCommandException(input[0], input[1]);
-        } catch(NameTakenException nte) {
-            name = nte.findName();
-            sbL.player = new Player(sbL.id, name, sbL);
-            SBServer.serverLobby.addPlayer(sbL.player);
-        } finally {
             sbL.pw.println("SETTO§Nickname§" + name);
             servLog.info(name + " logged in.");
             sbL.pw.println("PRINT§Terminal§Welcome to Skip-Bo, " + name + "!");
             sendAllExceptOne("PRINT§Terminal§" + name + " joined the room. Say hi!", sbL);
             servLog.debug("Players connected: " + SBServer.getWholePlayerList());
+        } catch(NameTakenException nte) {
+            name = nte.findName();
+            sbL.player = new Player(sbL.id, name, sbL);
+            SBServer.serverLobby.addPlayer(sbL.player);
         }
     }
 
@@ -80,7 +80,7 @@ public class ProtocolExecutor {
      * Method for command "CHNGE". This command sets a parameter
      * given as option to the value given as argument.
      */
-    void changeTo() throws NoCommandException {
+    public void changeTo() throws NoCommandException {
         String formerName = sbL.player.getName();
         if(input.length < 3) return;
         try {
@@ -101,6 +101,7 @@ public class ProtocolExecutor {
                 } else if (!SBServer.serverLobby.nameIsValid(name)) {
                     sbL.pw.println("PRINT§Terminal§Refused: Invalid name. Try again.");
                 } else if (SBServer.serverLobby.nameIsTaken(name)) {
+                    servLog.debug(sbL.player.getName() + " tried to change name to a name already in use.");
                     throw new NameTakenException(name, sbL);
                 }
             } else if(input[1].equals("Status")) {
@@ -111,8 +112,7 @@ public class ProtocolExecutor {
                 String status = Status.valueOf(input[2]).toString();
                 if(status.equalsIgnoreCase("ingame")) {
                     sbL.getPW().println("PRINT§Terminal§You cannot change your status to 'ingame' yourself.");
-                }
-                if(sbL.player.getStatus().equals(Status.valueOf(status))) {
+                } else if(sbL.player.getStatus().equals(Status.valueOf(status))) {
                     sbL.getPW().println("PRINT§Terminal§Status is already: " + status + ".");
                     return;
                 } else {

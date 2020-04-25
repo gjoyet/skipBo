@@ -6,6 +6,8 @@ import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Objects;
 
 import static skipbo.client.SBClient.clientLog;
@@ -23,6 +25,8 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     private JTextArea inputMes;
     JScrollPane chatScrollPane;
     private JScrollPane inputScrollPane;
+    private JButton manualB;
+    private JButton changeNameB;
     private JButton readyB;
     private JButton startB;
     private JButton infoB;
@@ -89,46 +93,69 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         contentPane.setBackground(Color.orange);
         contentPane.setLayout(null);
 
+        // Logo on top
         ImageIcon logoI = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo.png")));
-        Image image = logoI.getImage().getScaledInstance(250, 190, Image.SCALE_DEFAULT);
+        Image image = logoI.getImage().getScaledInstance(210, 160, Image.SCALE_DEFAULT);
         ImageIcon scaledIcon = new ImageIcon(image);
         JTextPane logoJ = new JTextPane();
         logoJ.setBorder(null);
         logoJ.setEditable(false);
-        logoJ.setBounds(80, 30, scaledIcon.getIconWidth(), scaledIcon.getIconHeight());
+        logoJ.setBounds(100, 30, scaledIcon.getIconWidth(), scaledIcon.getIconHeight());
         logoJ.setPreferredSize(new Dimension(scaledIcon.getIconWidth(), scaledIcon.getIconHeight()));
         logoJ.insertIcon(scaledIcon);
         contentPane.add(logoJ);
 
-        readyB = new JButton("Ready");
-        readyB.setBounds(80, 230, 120, 20);
-        contentPane.add(readyB);
-        readyB.addActionListener(this);
+        // Layout Manager for menu buttons
+        final int WIDTH_MENU_B = 120;
+        final int HEIGHT_MENU_B = 22;
+        final int X_MENU_B_R1 = 80;
+        final int X_MENU_B_R2 = 210;
+        final int Y_MENU_B = 195;
+        final int Y_DISTANCE_MENU_B = 30;
 
-        startB = new JButton("Start Game");
-        startB.setBounds(210, 230, 120, 20);
-        contentPane.add(startB);
-        startB.addActionListener(this);
+        manualB = new JButton("Manual");
+        manualB.setBounds(X_MENU_B_R1, Y_MENU_B, WIDTH_MENU_B, HEIGHT_MENU_B);
+        contentPane.add(manualB);
+        manualB.addActionListener(this);
+
+        changeNameB = new JButton("Change name");
+        changeNameB.setBounds(X_MENU_B_R2, Y_MENU_B, WIDTH_MENU_B, HEIGHT_MENU_B);
+        contentPane.add(changeNameB);
+        changeNameB.addActionListener(this);
 
         infoB = new JButton("Info");
-        infoB.setBounds(80, 260, 120, 20);
+        infoB.setBounds(X_MENU_B_R1, Y_MENU_B+ 1*Y_DISTANCE_MENU_B, WIDTH_MENU_B, HEIGHT_MENU_B);
         contentPane.add(infoB);
         infoB.addActionListener(this);
 
         gamesB = new JButton("Ranking");
-        gamesB.setBounds(210, 260, 120, 20);
+        gamesB.setBounds(X_MENU_B_R2, Y_MENU_B+ 1*Y_DISTANCE_MENU_B, WIDTH_MENU_B, HEIGHT_MENU_B);
         contentPane.add(gamesB);
         gamesB.addActionListener(this);
 
         whosOnB = new JButton("Who's on?");
-        whosOnB.setBounds(80, 290, 120, 20);
+        whosOnB.setBounds(X_MENU_B_R1, Y_MENU_B+ 2*Y_DISTANCE_MENU_B, WIDTH_MENU_B, HEIGHT_MENU_B);
         contentPane.add(whosOnB);
         whosOnB.addActionListener(this);
 
         leaveB = new JButton("Leave");
-        leaveB.setBounds(210, 290, 120, 20);
+        leaveB.setBounds(X_MENU_B_R2, Y_MENU_B+ 2*Y_DISTANCE_MENU_B, WIDTH_MENU_B, HEIGHT_MENU_B);
         contentPane.add(leaveB);
         leaveB.addActionListener(this);
+
+        Color gameButtonColor = new Color (153,255,153);
+
+        readyB = new JButton("Ready");
+        readyB.setBackground(gameButtonColor);
+        readyB.setBounds(X_MENU_B_R1, Y_MENU_B+ 3*Y_DISTANCE_MENU_B+5, WIDTH_MENU_B, HEIGHT_MENU_B);
+        contentPane.add(readyB);
+        readyB.addActionListener(this);
+
+        startB = new JButton("Start Game");
+        startB.setBackground(gameButtonColor);
+        startB.setBounds(X_MENU_B_R2, Y_MENU_B+ 3*Y_DISTANCE_MENU_B+5, WIDTH_MENU_B, HEIGHT_MENU_B);
+        contentPane.add(startB);
+        startB.addActionListener(this);
 
 
         //Output textfield
@@ -136,22 +163,27 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         chat.setBounds(80, 320, 250, 340);
         chat.setEditable(false);
 
-        //chat = new JTextPane(); //TODO: change to JEditorPane or JTextPane to print in colour
-        //chat.setBounds(80, 320, 250, 340);
-/*        chat.setLineWrap(true);
-        chat.setWrapStyleWord(true);*/
-        //chat.setEditable(false);
-
         chatScrollPane = new JScrollPane(chat);
         chatScrollPane.setBounds(80, 320, 250, 340);
         chatScrollPane.setVisible(true);
         chatScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentPane.add(chatScrollPane);
 
+        // Dropdown menu for global or private chat
+        JLabel privateChatL = new JLabel("Chat with:");
+        add(privateChatL);
+        privateChatL.setBounds(80,665,90,20);
+        String[] playersChat = {"all","global","geiom","theLegend27","ManuWelan","MrDickson","RohanZohan","GreekLegend","Borat","HaikhoMisori"};
+        final JComboBox<String> listChat = new JComboBox<String>(playersChat);
+        listChat.setVisible(true);
+        listChat.setBounds(150,665,180,20);
+        add(listChat);
+
+
 
         //Input textfield
         inputMes = new JTextArea();
-        inputMes.setBounds(80, 665, 250, 60);
+        inputMes.setBounds(80, 690, 250, 60);
         inputMes.setEditable(true);
         inputMes.setColumns(3);
         inputMes.setLineWrap(true);
@@ -160,7 +192,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         contentPane.add(inputMes);
 
         inputScrollPane = new JScrollPane(inputMes);
-        inputScrollPane.setBounds(80, 665, 250, 60);
+        inputScrollPane.setBounds(80, 690, 250, 60);
         inputScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentPane.add(inputScrollPane);
 
@@ -338,6 +370,16 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             if (selectedStock == null) {return;}
             clientListener.pw.println(NWGME + "§New§" + selectedPlayer + "§" + selectedStock);
 
+        } else if (buttonPressed == manualB) {
+            try {
+                File manual = new File(
+                        getClass().getClassLoader().getResource("Instruction_manual.pdf").getFile());
+                Desktop.getDesktop().open(manual);
+            } catch (IOException ex) {
+                clientLog.warn("Cannot open manual PDF");
+            }
+
+
         } else if (buttonPressed == infoB) {
             printCommandList();
 
@@ -358,6 +400,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         } else if (buttonPressed == leaveB) {
             try {
                 clientListener.forward("/quit");
+                dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
             } catch (NotACommandException e) {
                 clientLog.warn("Error with /quit command");
             }

@@ -40,6 +40,11 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
     static final Color DARKGREEN = new Color(0x0AB222);
 
+    private final int X_FRAME = 400;
+    private final int Y_FRAME = 20;
+    private final int WIDTH_FRAME = 420;
+    private final int HEIGHT_FRAME = 830;
+
 /*
     //test method
     public static void main(String[] args) {
@@ -89,7 +94,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
         setTitle("Skip-Bros CHAT");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        setBounds(400, 20, 420, 830);
+        setBounds(X_FRAME, Y_FRAME, WIDTH_FRAME, HEIGHT_FRAME);
 
         contentPane = getContentPane();
         contentPane.setBackground(Color.orange);
@@ -176,7 +181,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         add(privateChatL);
         privateChatL.setBounds(80,675,90,20);
         //playersChat = {"all","global","geiom","theLegend27","ManuWelan","MrDickson","RohanZohan","GreekLegend","Borat","HaikhoMisori"};
-        listChat = new JComboBox<String>(playersChat);
+        listChat = new JComboBox<>(playersChat);
         listChat.setVisible(true);
         listChat.setBounds(150,675,180,20);
         add(listChat);
@@ -293,7 +298,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
                 JOptionPane.INFORMATION_MESSAGE,
                 new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo.png"))));*/
         contentPane.remove(gameGraphic.getGameComponent());
-        setBounds(100, 100, 420, 780);
+        setBounds(X_FRAME, Y_FRAME, WIDTH_FRAME, HEIGHT_FRAME);
         setTitle("Skip-Bros CHAT");
         startB.setEnabled(true);
         readyB.setEnabled(true);

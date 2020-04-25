@@ -38,3 +38,7 @@ Game		NWGME		New		int n, int x				starts new game with n players and a stockpile
 		CHECK		HandCards	5x {Colour c, int number}		tells client which hand cards the player has
 				StockCard	Colour c, int number			tells client what its top card of the stockpile is
 				PLEFT 		Leaving		String name				tells client that player with ‚name‘ left the game
+
+		PLAYR		Joined		String nickname				Tells client that the player with the name "nickname" joined the server
+				Left		String nickname				Tells client that the player with the name "nickname" left the server
+				Change		String OldName, String NewName		Tells client that the player with the name "oldName" change its name to "NewName"

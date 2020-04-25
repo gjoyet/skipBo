@@ -14,7 +14,9 @@ Lobby		SETTO		Nickname	String nickname				sets nickname of new player to ‚nick
 		DISPL		players							lists all players currently connected to the server
 				games							lists all open, ongoing and finished games
 
-		PLAYR		List		String nicknames			Tells client which players are already connected to the server. (sent when client logs in)
+		PLAYR		List		String nicknames			Tells client which players are already connected to the server. (sent when client logs in and
+											own name should not be sent @Guillaume wenns eifacher isch de eigeni name au dschicke chasch ne
+											au schicke, eifach bitte mir säge und denn muess SETTO umbedingt zersch gschickt werde)
 				Joined		String nickname				Tells client that the player with the name "nickname" joined the server
 				Left		String nickname				Tells client that the player with the name "nickname" left the server
 				Change		String OldName, String NewName		Tells client that the player with the name "oldName" change its name to "NewName"

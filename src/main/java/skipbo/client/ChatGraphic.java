@@ -93,9 +93,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
      */
     void setFrame() {
 
-        //Testing purpose
-        playerArray.addAll(Arrays.asList("geiom","theLegend27","ManuWelan"));
-
         setTitle("Skip-Bros CHAT");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setBounds(X_FRAME, Y_FRAME, WIDTH_FRAME, HEIGHT_FRAME);
@@ -184,14 +181,17 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         JLabel privateChatL = new JLabel("Chat with:");
         add(privateChatL);
         privateChatL.setBounds(80,675,90,20);
-        //playersChat = {"all","global","geiom","theLegend27","ManuWelan","MrDickson","RohanZohan","GreekLegend","Borat","HaikhoMisori"};
         JComboBox<String> listChat = new JComboBox<>();
         playerComboModel = (DefaultComboBoxModel<String>) listChat.getModel();
-        playerComboModel.addAll(Arrays.asList("all", "global", "geiom","theLegend27","ManuWelan")); //TODO remove all except "all" and "global"
+        playerComboModel.addAll(Arrays.asList("all", "global"));
         listChat.setSelectedIndex(0);
         listChat.setVisible(true);
         listChat.setBounds(150,675,180,20);
         add(listChat);
+
+        //Testing purpose
+        String[] playersForTesting = {"geiom","theLegend27","ManuWelan","MrDickson","RohanZohan","GreekLegend","Borat","HaikhoMisori"};
+        setPlayers(playersForTesting);
 
 
         //Input textfield
@@ -306,9 +306,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         int iconHeight = icon.getIconHeight()+100;
         dialog.setBounds(width/2-iconWidth/2, height/2-iconHeight/2, iconWidth, iconHeight);
         dialog.setVisible(true);
-        /*JOptionPane.showMessageDialog(contentPane, "The winner is: " + name + "!", "Game is finished.",
-                JOptionPane.INFORMATION_MESSAGE,
-                new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo.png"))));*/
         contentPane.remove(gameGraphic.getGameComponent());
         setBounds(X_FRAME, Y_FRAME, WIDTH_FRAME, HEIGHT_FRAME);
         setTitle("Skip-Bros CHAT");
@@ -427,7 +424,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             }
 
         } else if (buttonPressed == whosOnB) {
-
             try {
                 clientListener.forward("/list players");
             } catch (NotACommandException e) {
@@ -473,28 +469,60 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
     }
 
-    GameGraphic getGameGraphic() {
-        return gameGraphic;
+
+    void updateNamesInComboBox(String selectedOption) {
+        playerArray.sort(String.CASE_INSENSITIVE_ORDER);
+        playerComboModel.removeAllElements();
+        playerComboModel.addAll(Arrays.asList("all", "global"));
+        playerComboModel.addAll(playerArray);
+        playerComboModel.setSelectedItem(selectedOption);
     }
 
     void changeOwnName(String name) {
         playerName = name;
     }
 
+    /**
+     * Updates the player array and the names in the combo box when a player changes its name.
+     * @param oldName The old name of the player that want's to change its name.
+     * @param newName New name that the player want's to change its name to.
+     */
     void changePlayerName(String oldName, String newName) {
-        String selected = (String) playerComboModel.getSelectedItem();
         playerArray.remove(oldName);
         playerArray.add(newName);
-        playerArray.sort(String.CASE_INSENSITIVE_ORDER);
-        playerComboModel.removeAllElements();
-        playerComboModel.addAll(playerArray);
-        playerComboModel.addAll(0, Arrays.asList("all", "global"));
-        if (selected.equals(oldName)) {
-            printInfoMessage("Your chat partner left. You are now chatting in the lobby chat.");
-            playerComboModel.setSelectedItem("all");
+        if (playerComboModel.getSelectedItem().equals(oldName)) {
+            updateNamesInComboBox(newName);
         } else {
-            playerComboModel.setSelectedItem(selected);
+            updateNamesInComboBox((String) playerComboModel.getSelectedItem());
         }
+    }
+
+    void addPlayer(String name) {
+        playerArray.add(name);
+        updateNamesInComboBox((String) playerComboModel.getSelectedItem());
+    }
+
+    void removePlayer(String name) {
+        playerArray.remove(name);
+        if (playerComboModel.getSelectedItem().equals(name)) {
+            printInfoMessage("Your chat partner left. You are now chatting in the lobby chat.");
+            updateNamesInComboBox("all");
+        }
+
+    }
+
+    //TODO might cause problems if own name is sent as well
+    /**
+     * Puts all clients already connected to the server into the player array when this client connects to the server.
+     * @param names Array of all names that are connected to the server except for own name.
+     */
+    void setPlayers(String[] names) {
+        playerArray.addAll(Arrays.asList(names));
+        updateNamesInComboBox("all");
+    }
+
+    GameGraphic getGameGraphic() {
+        return gameGraphic;
     }
 
     SBClientListener getClientListener() {

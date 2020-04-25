@@ -146,9 +146,9 @@ public class SBServerListener implements Runnable {
     }
 
     private void endGame(String[] command) {
-        if (command.length < 3) {
+        if (command.length < 3) { //No winner
             chatGraphic.endGame(null);
-        } else {
+        } else { //winner
             chatGraphic.endGame(command[2]);
         }
     }
@@ -187,13 +187,13 @@ public class SBServerListener implements Runnable {
     }
 
     private void player(String[] command) {
-        if (command[1].equals("List")) {
-
-        } else if (command[1].equals("Joined")) {
-
-        } else if (command[1].equals("Left")) {
-
-        } else if (command[1].equals("Change")) {
+        if (command[1].equalsIgnoreCase("List")) {
+            chatGraphic.setPlayers(command[2].split("§"));
+        } else if (command[1].equalsIgnoreCase("Joined")) {
+            chatGraphic.addPlayer(command[2]);
+        } else if (command[1].equalsIgnoreCase("Left")) {
+            chatGraphic.removePlayer(command[2]);
+        } else if (command[1].equalsIgnoreCase("Change")) {
             String[] n = command[2].split("§");
             chatGraphic.changePlayerName(n[0], n[1]);
         } else {

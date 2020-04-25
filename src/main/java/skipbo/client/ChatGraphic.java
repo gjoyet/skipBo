@@ -87,7 +87,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
         setTitle("Skip-Bros CHAT");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        setBounds(100, 100, 420, 830);
+        setBounds(400, 20, 420, 830);
 
         contentPane = getContentPane();
         contentPane.setBackground(Color.orange);
@@ -147,24 +147,24 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
         readyB = new JButton("Ready");
         readyB.setBackground(gameButtonColor);
-        readyB.setBounds(X_MENU_B_R1, Y_MENU_B+ 3*Y_DISTANCE_MENU_B+5, WIDTH_MENU_B, HEIGHT_MENU_B);
+        readyB.setBounds(X_MENU_B_R1, Y_MENU_B+ 3*Y_DISTANCE_MENU_B+8, WIDTH_MENU_B, HEIGHT_MENU_B);
         contentPane.add(readyB);
         readyB.addActionListener(this);
 
         startB = new JButton("Start Game");
         startB.setBackground(gameButtonColor);
-        startB.setBounds(X_MENU_B_R2, Y_MENU_B+ 3*Y_DISTANCE_MENU_B+5, WIDTH_MENU_B, HEIGHT_MENU_B);
+        startB.setBounds(X_MENU_B_R2, Y_MENU_B+ 3*Y_DISTANCE_MENU_B+8, WIDTH_MENU_B, HEIGHT_MENU_B);
         contentPane.add(startB);
         startB.addActionListener(this);
 
 
         //Output textfield
         chat = new JTextPane();
-        chat.setBounds(80, 320, 250, 340);
+        chat.setBounds(80, 330, 250, 340);
         chat.setEditable(false);
 
         chatScrollPane = new JScrollPane(chat);
-        chatScrollPane.setBounds(80, 320, 250, 340);
+        chatScrollPane.setBounds(80, 330, 250, 340);
         chatScrollPane.setVisible(true);
         chatScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentPane.add(chatScrollPane);
@@ -172,18 +172,18 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         // Dropdown menu for global or private chat
         JLabel privateChatL = new JLabel("Chat with:");
         add(privateChatL);
-        privateChatL.setBounds(80,665,90,20);
+        privateChatL.setBounds(80,675,90,20);
         String[] playersChat = {"all","global","geiom","theLegend27","ManuWelan","MrDickson","RohanZohan","GreekLegend","Borat","HaikhoMisori"};
         final JComboBox<String> listChat = new JComboBox<String>(playersChat);
         listChat.setVisible(true);
-        listChat.setBounds(150,665,180,20);
+        listChat.setBounds(150,675,180,20);
         add(listChat);
 
 
 
         //Input textfield
         inputMes = new JTextArea();
-        inputMes.setBounds(80, 690, 250, 60);
+        inputMes.setBounds(80, 700, 250, 60);
         inputMes.setEditable(true);
         inputMes.setColumns(3);
         inputMes.setLineWrap(true);
@@ -192,7 +192,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         contentPane.add(inputMes);
 
         inputScrollPane = new JScrollPane(inputMes);
-        inputScrollPane.setBounds(80, 690, 250, 60);
+        inputScrollPane.setBounds(80, 700, 250, 60);
         inputScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentPane.add(inputScrollPane);
 
@@ -359,7 +359,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             }
 
         } else if (buttonPressed == startB) {
-
+            //TODO change to JComboBox
             String[] numberOfPlayers = new String[]{"2", "3", "4"};
             String[] numberOfStock = new String[]{"3", "10", "20", "30"};
             String selectedPlayer = (String) JOptionPane.showInputDialog(contentPane, "Select number of players",
@@ -373,7 +373,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         } else if (buttonPressed == manualB) {
             try {
                 File manual = new File(
-                        getClass().getClassLoader().getResource("Instruction_manual.pdf").getFile());
+                        Objects.requireNonNull(getClass().getClassLoader().getResource("Instruction_manual.pdf")).getFile());
                 Desktop.getDesktop().open(manual);
             } catch (IOException ex) {
                 clientLog.warn("Cannot open manual PDF");
@@ -398,13 +398,9 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             }
 
         } else if (buttonPressed == leaveB) {
-            try {
-                clientListener.forward("/quit");
-                dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-            } catch (NotACommandException e) {
-                clientLog.warn("Error with /quit command");
-            }
-        } else {
+            dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+
+        } else if (buttonPressed == changeNameB) {
             String name = (String) JOptionPane.showInputDialog(contentPane, "Enter your new name:",
                     "Change your name", JOptionPane.PLAIN_MESSAGE, null, null, playerName);
             if (name != null) {
@@ -415,7 +411,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
     /**
      * Prints a string to the chat.
-     *
      * @param s     The string to be appended to the chat.
      * @param color The color in which the string is displayed.
      */

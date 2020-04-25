@@ -110,7 +110,7 @@ public class GameGraphic implements ActionListener {
     private JLabel numOfStockCards;
     private JLabel[] oppNumStockCards = new JLabel[3];
 
-    private int initialNumStockCards = 3;
+    private int initialNumStockCards;
 
     private final CardIcons cardIcons = new CardIcons(WIDTH_OP1, HEIGHT_OP1, 78, 120);
 
@@ -290,15 +290,15 @@ public class GameGraphic implements ActionListener {
         }
 
         //Displays number of own stock cards left. Name of label corresponds to the number of stock cards left.
-        numOfStockCards = new JLabel(initialNumStockCards + " cards left");
-        numOfStockCards.setName(String.valueOf(initialNumStockCards));
+        numOfStockCards = new JLabel();
+        //numOfStockCards.setName(String.valueOf(initialNumStockCards));
         numOfStockCards.setBounds(X_STOCK, Y_STOCK+HEIGHT_STOCK+5, 100, 15);
         layeredPane.add(numOfStockCards);
 
         //creates JLabels for number of stock cards of opponents and sets their bounds. Further adjustments are done in
         //method setOpponentNames
         for (int i = 0; i < oppNumStockCards.length; i++) {
-            oppNumStockCards[i] = new JLabel(String.valueOf(initialNumStockCards));
+            oppNumStockCards[i] = new JLabel();
             oppNumStockCards[i].setBounds(X_OP1+(WIDTH_OP1/2-5), Y_OP1+HEIGHT_OP1+5 +i*140, 35, 15);
         }
 /*            e1_discard[i] = new CardButton();
@@ -370,7 +370,7 @@ public class GameGraphic implements ActionListener {
     }
 
     /**
-     * Sets own hand cards and stock card.
+     * Sets own hand cards and stock card and sets the number of stock cards.
      *
      * @param colAndNum Array of colours and numbers of hand cards (5x alternating) and colour and number of stock card.
      */
@@ -391,6 +391,15 @@ public class GameGraphic implements ActionListener {
             }
         }
 
+        //Displays number of own stock cards left. Name of label corresponds to the number of stock cards left.
+        numOfStockCards.setText(initialNumStockCards + " cards left");
+        numOfStockCards.setName(String.valueOf(initialNumStockCards));
+
+        //creates JLabels for number of stock cards of opponents and sets their bounds. Further adjustments are done in
+        //method setOpponentNames
+        for (JLabel oppNumStockCard : oppNumStockCards) {
+            oppNumStockCard.setText(String.valueOf(initialNumStockCards));
+        }
     }
 
     private void setClickable(JButton button, boolean b) {
@@ -805,6 +814,9 @@ public class GameGraphic implements ActionListener {
         }
     }
 
+    void setStockSize(int stockSize) {
+        initialNumStockCards = stockSize;
+    }
 
     JLayeredPane getGameComponent() {
         return layeredPane;

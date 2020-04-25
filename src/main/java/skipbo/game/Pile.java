@@ -69,7 +69,7 @@ public class Pile {
                 this.drawPile.add(card);
             }
             colourCount++;
-            if (colourCount == 2) colourCount = 0;
+            if (colourCount == 3) colourCount = 0;
         }
 
         for (int l = 0; l < 18; l++) {       // Add Special Cards (18 pcs.)

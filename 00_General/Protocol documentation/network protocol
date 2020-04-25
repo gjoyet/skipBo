@@ -18,9 +18,9 @@ Chat		CHATM		Global		String message				sends ‚message‘ to write on the globa
 				Private		(Player p), String message		sends private ,message’ to player p
 				Broadcast	String message				sends 'message' to all clients across all games and lobbies	
 
-Game		NWGME		New		-					starts new game with 4 players
+Game		NWGME		New		int n, int x				starts new game with n players and a stockpile that consisting of x cards
 				Names		Nx {String name}			confirms to client that game is starting, with the names
-											of the N players in that game as argument
+											of the N players in that game as argument (not implemented yet)
 				Cards		5x {Colour c, int number},		tells client which cards the player has at the beginning of the game
 						Nx {String name. colour c, int num}	and the top stockpile cards of the N player in the game
 											(first 5 are hand cards, last one is the top card of the stockpile)

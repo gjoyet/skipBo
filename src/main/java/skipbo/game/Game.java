@@ -3,6 +3,7 @@ package skipbo.game;
 import skipbo.server.ProtocolExecutor;
 
 import java.awt.*;
+import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -656,6 +657,9 @@ public class Game implements Runnable {
             dPile.clear();      //removes cards from the player's discard pile
         }
 
+        ArrayList<Card> stockPile = player.getStockPile();
+        piles.emptyPile.addAll(stockPile);
+        stockPile.clear();      //removes cards from the player's stock pile
     }
 
     /**

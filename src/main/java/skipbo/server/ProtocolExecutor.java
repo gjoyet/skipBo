@@ -173,7 +173,7 @@ public class ProtocolExecutor {
         if(sbL.getPlayer().getGame().players.size() == 1) {
             sbL.getPlayer().getGame().terminateGame();
         } else {
-            sbL.getPlayer().getGame().playerLeaving();
+            sbL.getPlayer().getGame().playerLeaving(sbL.player);
             for(Player p : sbL.getPlayer().getGame().players) {
                 p.getSBL().getPW().println("PLEFT§Leaving§" + sbL.getPlayer().getName());
             }

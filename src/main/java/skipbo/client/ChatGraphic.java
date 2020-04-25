@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Objects;
 
 import static skipbo.client.SBClient.clientLog;
@@ -486,7 +485,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         String selected = (String) playerComboModel.getSelectedItem();
         playerArray.remove(oldName);
         playerArray.add(newName);
-        Collections.sort(playerArray);
+        playerArray.sort(String.CASE_INSENSITIVE_ORDER);
         playerComboModel.removeAllElements();
         playerComboModel.addAll(playerArray);
         playerComboModel.addAll(0, Arrays.asList("all", "global"));

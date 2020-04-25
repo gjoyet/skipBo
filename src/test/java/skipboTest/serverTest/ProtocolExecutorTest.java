@@ -9,6 +9,7 @@ import skipbo.server.*;
 import static java.lang.Thread.sleep;
 import static org.junit.Assert.assertEquals;
 
+import static org.junit.Assert.assertNotEquals;
 import static skipbo.server.SBServer.*;
 
 /**
@@ -63,13 +64,13 @@ public class ProtocolExecutorTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        ProtocolExecutor pe4 = new ProtocolExecutor(new String[]{"SETTO", "Nickname"}, getSblList().get(4));
-        ProtocolExecutor pe5 = new ProtocolExecutor(new String[]{"SETTO", "Nickname", "Ma&rc"}, getSblList().get(5));
-        ProtocolExecutor pe6 = new ProtocolExecutor(new String[]{"SETTO", "Nickname", "John"}, getSblList().get(6));
-        ProtocolExecutor pe7 = new ProtocolExecutor(new String[]{"SETTO", "Nickname", "John"}, getSblList().get(7));
-        ProtocolExecutor pe8 = new ProtocolExecutor(new String[]{"SETTO", "Nickname", "Al"}, getSblList().get(8));
+        ProtocolExecutor pe4 = new ProtocolExecutor(new String[]{"SETTO", "Nickname"}, server.server.getSblList().get(4));
+        ProtocolExecutor pe5 = new ProtocolExecutor(new String[]{"SETTO", "Nickname", "Ma&rc"}, server.server.getSblList().get(5));
+        ProtocolExecutor pe6 = new ProtocolExecutor(new String[]{"SETTO", "Nickname", "John"}, server.server.getSblList().get(6));
+        ProtocolExecutor pe7 = new ProtocolExecutor(new String[]{"SETTO", "Nickname", "John"}, server.server.getSblList().get(7));
+        ProtocolExecutor pe8 = new ProtocolExecutor(new String[]{"SETTO", "Nickname", "Al"}, server.server.getSblList().get(8));
         ProtocolExecutor pe9 = new ProtocolExecutor(new String[]{"SETTO", "Nickname", "WaaayTooLongName"},
-                                                                                            getSblList().get(9));
+                                                                            server.server.getSblList().get(9));
         try {
             pe4.setTo();
             pe5.setTo();
@@ -90,7 +91,7 @@ public class ProtocolExecutorTest {
         assertEquals("John1", pe7.getSBL().getPlayer().getName()); // Test: setTo name already in use
         assertEquals("SBPlayer2", pe8.getSBL().getPlayer().getName()); // Test: name too short
         assertEquals("SBPlayer3", pe9.getSBL().getPlayer().getName()); // Test: name too long
-        servLog.debug("END of testSetToNickname, size of sbListenerList: " + getSblList().size());
+        servLog.debug("END of testSetToNickname, size of sbListenerList: " + server.server.getSblList().size());
     }
 
     /**
@@ -98,7 +99,7 @@ public class ProtocolExecutorTest {
      */
     @Test(expected = NoCommandException.class)
     public void testSetToException1() throws NoCommandException {
-        new ProtocolExecutor(new String[]{"SETTO", "NotAnOption"}, getSblList().get(0)).setTo();
+        new ProtocolExecutor(new String[]{"SETTO", "NotAnOption"}, server.server.getSblList().get(0)).setTo();
     }
 
     /**
@@ -106,7 +107,7 @@ public class ProtocolExecutorTest {
      */
     @Test(expected = NoCommandException.class)
     public void testSetToException2() throws NoCommandException {
-        new ProtocolExecutor(new String[]{"SETTO"}, getSblList().get(0)).setTo();
+        new ProtocolExecutor(new String[]{"SETTO"}, server.server.getSblList().get(0)).setTo();
     }
 
     /**
@@ -115,10 +116,10 @@ public class ProtocolExecutorTest {
      */
     @Test
     public void testChangeToName() {
-        ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"CHNGE", "Nickname", "Guillaume"}, getSblList().get(0));
-        ProtocolExecutor pe1 = new ProtocolExecutor(new String[]{"CHNGE", "Nickname", "Ma&rc"}, getSblList().get(1));
-        ProtocolExecutor pe2 = new ProtocolExecutor(new String[]{"CHNGE", "Nickname", "Marc"}, getSblList().get(2));
-        ProtocolExecutor pe3 = new ProtocolExecutor(new String[]{"CHNGE", "Nickname", "Guillaume"}, getSblList().get(3));
+        ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"CHNGE", "Nickname", "Guillaume"}, server.server.getSblList().get(0));
+        ProtocolExecutor pe1 = new ProtocolExecutor(new String[]{"CHNGE", "Nickname", "Ma&rc"}, server.server.getSblList().get(1));
+        ProtocolExecutor pe2 = new ProtocolExecutor(new String[]{"CHNGE", "Nickname", "Marc"}, server.server.getSblList().get(2));
+        ProtocolExecutor pe3 = new ProtocolExecutor(new String[]{"CHNGE", "Nickname", "Guillaume"}, server.server.getSblList().get(3));
         try {
            pe0.changeTo();
            pe1.changeTo();
@@ -141,7 +142,7 @@ public class ProtocolExecutorTest {
         assertEquals("Guillaume1", pe0.getSBL().getPlayer().getName());
         // Test: changTo while ingame (not allowed)
         pe0.getSBL().getPlayer().changeStatus(Status.WAITING);
-        servLog.debug("END of testChangeToName, size of sbListenerList: " + getSblList().size());
+        servLog.debug("END of testChangeToName, size of sbListenerList: " + server.server.getSblList().size());
     }
 
     /**
@@ -150,9 +151,9 @@ public class ProtocolExecutorTest {
      */
     @Test
     public void testChangeStatus() {
-        ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"CHNGE", "Status", "READY"}, getSblList().get(0));
-        ProtocolExecutor pe1 = new ProtocolExecutor(new String[]{"CHNGE", "Status", "WAITING"}, getSblList().get(1));
-        ProtocolExecutor pe2 = new ProtocolExecutor(new String[]{"CHNGE", "Status", "INGAME"}, getSblList().get(2));
+        ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"CHNGE", "Status", "READY"}, server.server.getSblList().get(0));
+        ProtocolExecutor pe1 = new ProtocolExecutor(new String[]{"CHNGE", "Status", "WAITING"}, server.server.getSblList().get(1));
+        ProtocolExecutor pe2 = new ProtocolExecutor(new String[]{"CHNGE", "Status", "INGAME"}, server.server.getSblList().get(2));
         try {
             pe0.changeTo();
             pe1.changeTo();
@@ -179,7 +180,7 @@ public class ProtocolExecutorTest {
             e.printStackTrace();
         }
         assertEquals(Status.WAITING, pe0.getSBL().getPlayer().getStatus()); // Test: change back to WAITING
-        servLog.debug("END of testChangeToStatus, size of sbListenerList: " + getSblList().size());
+        servLog.debug("END of testChangeToStatus, size of sbListenerList: " + server.server.getSblList().size());
     }
 
     /**
@@ -187,7 +188,7 @@ public class ProtocolExecutorTest {
      */
     @Test(expected = NoCommandException.class)
     public void testChangeToException1() throws NoCommandException {
-        new ProtocolExecutor(new String[]{"CHNGE", "NotAnOption"}, getSblList().get(0)).changeTo();
+        new ProtocolExecutor(new String[]{"CHNGE", "NotAnOption"}, server.server.getSblList().get(0)).changeTo();
     }
 
     /**
@@ -195,7 +196,7 @@ public class ProtocolExecutorTest {
      */
     @Test(expected = NoCommandException.class)
     public void testChangeToException2() throws NoCommandException {
-        new ProtocolExecutor(new String[]{"CHNGE"}, getSblList().get(0)).changeTo();
+        new ProtocolExecutor(new String[]{"CHNGE"}, server.server.getSblList().get(0)).changeTo();
     }
 
     /**
@@ -204,9 +205,9 @@ public class ProtocolExecutorTest {
      */
     @Test
     public void testNewGame() {
-        ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"CHNGE", "Status", "READY"}, getSblList().get(0));
-        ProtocolExecutor pe1 = new ProtocolExecutor(new String[]{"NWGME", "New", "2§30"}, getSblList().get(1));
-        ProtocolExecutor pe2 = new ProtocolExecutor(new String[]{"NWGME", "New", "2§30"}, getSblList().get(2));
+        ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"CHNGE", "Status", "READY"}, server.server.getSblList().get(0));
+        ProtocolExecutor pe1 = new ProtocolExecutor(new String[]{"NWGME", "New", "2§30"}, server.server.getSblList().get(1));
+        ProtocolExecutor pe2 = new ProtocolExecutor(new String[]{"NWGME", "New", "2§30"}, server.server.getSblList().get(2));
         try {
             pe0.changeTo();
             sleep(200);
@@ -219,19 +220,34 @@ public class ProtocolExecutorTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        assertEquals(1, serverLobby.getGames().size());
+        assertEquals(1, server.server.getLobby().getGames().size());
         // Test: First game was started, second one did not (not enough people ready)
-        assertEquals("Manuela\nGuillaume1", serverLobby.getGames().get(0).getPlayerList());
+        assertEquals("Manuela\nGuillaume1", server.server.getLobby().getGames().get(0).getPlayerList());
         // Test: Client 0 (Guillaume1) and 1 (Manuela) – the only one that was ready and the one that started the game,
         // even though the client was not ready – are the ones in the game, client 1 comes first since it started game
-        assertEquals(30, serverLobby.getGames().get(0).players.get(0).getStockPile().size());
+        assertEquals(30, server.server.getLobby().getGames().get(0).players.get(0).getStockPile().size());
         // Test: Stockpile of the game is 30 cards high
-        assertEquals("Marc, Guillaume, SBPlayer, SBPlayer1, John, John1, SBPlayer2, SBPlayer3", getPlayerNotIngameList());
+        assertEquals("Marc, Guillaume, SBPlayer, SBPlayer1, John, John1, SBPlayer2, SBPlayer3",
+                server.server.getPlayerNotIngameList());
         // Test: Client 2 (Marc) and 3 (Guillaume) remain in Lobby
     }
 
     @Test
     public void testChatMessage() {
+        ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"CHATM", "Global", "Global ingame."},
+                server.server.getSblList().get(0));
+        try {
+            pe0.chatMessage();
+            sleep(200);
+        } catch (NoCommandException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals("CHATM§Global§You: Global ingame.", client0.client.getServerListener().getInput());
+        // Test: client sending message receives it
+        assertEquals("CHATM§Global§Guillaume1: Global ingame.", client1.client.getServerListener().getInput());
+        // Test: other client in the game receives message
+        assertNotEquals("CHATM§Global§Guillaume1: Global ingame.", client2.client.getServerListener().getInput());
+        // Test: players not ingame don't receive the message
 
     }
 

@@ -18,7 +18,7 @@ public class NameTakenException extends Exception {
     public String findName() {
         int i = 1;
         String nameWithNumber = this.name + i;
-        while (skipbo.server.SBServer.getLobby().nameIsTaken(nameWithNumber)) {
+        while (sbL.getServer().getLobby().nameIsTaken(nameWithNumber)) {
             i++;
             nameWithNumber = name + i;
         }

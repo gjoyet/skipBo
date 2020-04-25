@@ -13,16 +13,18 @@ import static skipbo.client.SBClient.clientLog;
 /**
  * Thread waiting for any input from server and executes the input on client
  */
-class SBServerListener implements Runnable {
+public class SBServerListener implements Runnable {
     Socket socket;
     BufferedReader br;
     ChatGraphic chatGraphic;
     Boolean isLoggedIn = true;
+    String input;
 
     SBServerListener(Socket socket, ChatGraphic chatGraphic) throws IOException {
         this.socket = socket;
         this.br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         this.chatGraphic = chatGraphic;
+        this.input = null;
     }
 
     /**
@@ -30,7 +32,6 @@ class SBServerListener implements Runnable {
      */
     @Override
     public void run() {
-        String input;
 
         while (isLoggedIn) {
             try {
@@ -186,4 +187,5 @@ class SBServerListener implements Runnable {
         isLoggedIn = false;
     }
 
+    public String getInput() { return this.input; }
 }

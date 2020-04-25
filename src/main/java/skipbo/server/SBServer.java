@@ -16,11 +16,11 @@ import java.util.ArrayList;
  * a listener for every new player and is the highest instance of the program.
  */
 public class SBServer implements Runnable {
-    static int playerID = 0;
-    static int playerCount = 0;
+    int playerID = 0;
+    int playerCount = 0;
 
-    public static SBLobby serverLobby = new SBLobby(); // Should this maybe be non-static?
-    public static ArrayList<SBListener> sbListenerList = new ArrayList<>(); // not needed in program itself, just for testing
+    public SBLobby serverLobby = new SBLobby(); // Should this maybe be non-static?
+    public ArrayList<SBListener> sbListenerList = new ArrayList<>(); // not needed in program itself, just for testing
 
     public static Logger servLog = LogManager.getLogger(SBServer.class);
 
@@ -57,25 +57,25 @@ public class SBServer implements Runnable {
     /**
      * Accepts a new socket and starts a SBListener thread.
      */
-    private static void login(ServerSocket serverSo) throws IOException {
+    private void login(ServerSocket serverSo) throws IOException {
         try {
             Socket sock = serverSo.accept();
             playerCount++;
 
-            SBListener sbListen = new SBListener(sock, ++playerID);
+            SBListener sbListen = new SBListener(this, sock, ++playerID);
             Thread sbListenT = new Thread(sbListen); sbListenT.start();
             sbListenerList.add(sbListen);
         } finally {}
     }
 
-    public static SBLobby getLobby() { return serverLobby;}
+    public SBLobby getLobby() { return serverLobby;}
 
-    public static ArrayList<SBListener> getSblList() { return sbListenerList; }
+    public ArrayList<SBListener> getSblList() { return sbListenerList; }
 
     /**
      * @return a String containing all players currently connected.
      */
-    public static String getWholePlayerList() {
+    public String getWholePlayerList() {
         StringBuilder allNames = new StringBuilder();
         for(Player p : serverLobby.getPlayerLobby()) {
             allNames.append(p.getName() + " (" + p.getStatus().toString() + "), ");
@@ -87,7 +87,7 @@ public class SBServer implements Runnable {
     /**
      * @return a String containing all players currently in the main lobby.
      */
-    public static String getPlayerNotIngameList() {
+    public String getPlayerNotIngameList() {
         StringBuilder allNames = new StringBuilder();
         for(Player p : serverLobby.getPlayerLobby()) {
             if(!p.getStatus().equals(Status.INGAME))
@@ -102,7 +102,7 @@ public class SBServer implements Runnable {
     /**
      * @return a String with all games, running and finished.
      */
-    public static synchronized String[] getGamesList() {
+    public synchronized String[] getGamesList() {
         String[] allGames = new String[serverLobby.getGames().size()];
         int counter = 0;
         for(Game g : serverLobby.getGames()) {

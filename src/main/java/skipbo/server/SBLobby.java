@@ -21,7 +21,7 @@ public class SBLobby {
         return this.playerLobby;
     }
 
-    ArrayList<Game> getGames() {
+    public ArrayList<Game> getGames() {
         return this.gameList;
     }
 

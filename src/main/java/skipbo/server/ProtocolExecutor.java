@@ -1,6 +1,5 @@
 package skipbo.server;
 
-import javafx.scene.paint.Color;
 import skipbo.game.Card;
 import skipbo.game.Game;
 import skipbo.game.Player;
@@ -73,6 +72,11 @@ public class ProtocolExecutor {
             name = nte.findName();
             sbL.player = new Player(sbL.id, name, sbL);
             SBServer.serverLobby.addPlayer(sbL.player);
+            sbL.pw.println("SETTO§Nickname§" + name);
+            servLog.info(name + " logged in.");
+            sbL.pw.println("PRINT§Terminal§Welcome to Skip-Bo, " + name + "!");
+            sendAllExceptOne("PRINT§Terminal§" + name + " joined the room. Say hi!", sbL);
+            servLog.debug("Players connected: " + SBServer.getWholePlayerList());
         }
     }
 
@@ -196,14 +200,16 @@ public class ProtocolExecutor {
     /**
      * Method for command "NWGME". Starts a new game with the first 4 players found with PlayerStatus 'READY'.
      */
-    void newGame() throws NoCommandException {
+    public void newGame() throws NoCommandException {
         if(input[1].equals("New")) {
-            int numberOfPLayers = 2;
-            int stockpileHeight = 20;
+            int n = 2;
+            int x = 20;
             if(input.length == 3) {
                 String[] nAndX = input[2].split("§");
-                numberOfPLayers = Integer.parseInt(nAndX[0]);
-                stockpileHeight = Integer.parseInt(nAndX[1]);
+                n = Integer.parseInt(nAndX[0]);
+                x = Integer.parseInt(nAndX[1]);
+                if(!(n == 2 || n == 3 || n == 4)) n = 2;
+                if(!(x == 5 || x == 10 || x == 20 || x == 30)) x = 20;
             }
             ArrayList<Player> newPlayers = new ArrayList<Player>();
             newPlayers.add(sbL.player);
@@ -214,19 +220,19 @@ public class ProtocolExecutor {
                     newPlayers.add(SBServer.getLobby().getPlayer(i));
                     ++playerCount;
                 }
-                if (playerCount == numberOfPLayers) break;
+                if (playerCount == n) break;
             }
-            if(playerCount == numberOfPLayers) {
-                Game game = new Game(newPlayers, stockpileHeight);
+            if(playerCount == n) {
+                Game game = new Game(newPlayers, x);
                 serverLobby.addGame(game);
                 String names = "";
                 for(Player p : newPlayers) {
                     names += p.getName() + "§";
                 }
-                servLog.debug("NWGME command with names: " + names);
+                servLog.debug("NWGME command with names: " + x + "§" + names);
                 for (Player p : newPlayers) {
                     p.changeGame(game);
-                    p.getSBL().getPW().println("NWGME§Names§" + names);
+                    p.getSBL().getPW().println("NWGME§Names§" + x + "§" + names);
                     p.changeStatus(Status.INGAME);
                 }
                 Thread gameT = new Thread(game); gameT.start();

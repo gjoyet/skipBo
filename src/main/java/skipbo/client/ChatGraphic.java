@@ -187,7 +187,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         add(listChat);
 
 
-
         //Input textfield
         inputMes = new JTextArea();
         inputMes.setBounds(80, 700, 250, 60);
@@ -382,16 +381,32 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             }
 
         } else if (buttonPressed == startB) {
+
+            JComboBox<Integer> playerBox = new JComboBox<>(new Integer[]{2, 3, 4});
+            JComboBox<Integer> stockBox = new JComboBox<>(new Integer[]{3, 10, 20, 30});
+
+            JPanel startGamePanel = new JPanel(new GridLayout(2, 2));
+            startGamePanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+            startGamePanel.add(new JLabel("Number of players:"));
+            startGamePanel.add(playerBox);
+            startGamePanel.add(new JLabel("Number of stock cards:"));
+            startGamePanel.add(stockBox);
+
+            int option = JOptionPane.showConfirmDialog(contentPane, startGamePanel, "Please select to start a game",
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+            if (option == JOptionPane.OK_OPTION) {
+                clientListener.pw.println(NWGME + "§New§" + playerBox.getSelectedItem() + "§" + stockBox.getSelectedItem());
+            }
+
             //TODO change to JComboBox
-            String[] numberOfPlayers = new String[]{"2", "3", "4"};
+            /*String[] numberOfPlayers = new String[]{"2", "3", "4"};
             String[] numberOfStock = new String[]{"3", "10", "20", "30"};
             String selectedPlayer = (String) JOptionPane.showInputDialog(contentPane, "Select number of players",
                     "Starting new game", JOptionPane.PLAIN_MESSAGE, null, numberOfPlayers, numberOfPlayers[0]);
             if (selectedPlayer == null) {return;}
             String selectedStock = (String) JOptionPane.showInputDialog(contentPane, "Select number of stock cards",
                     "Starting new game", JOptionPane.PLAIN_MESSAGE, null, numberOfStock, numberOfStock[0]);
-            if (selectedStock == null) {return;}
-            clientListener.pw.println(NWGME + "§New§" + selectedPlayer + "§" + selectedStock);
+            if (selectedStock == null) {return;}*/
 
         } else if (buttonPressed == manualB) {
             if (Desktop.isDesktopSupported()) {
@@ -401,8 +416,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
                 } catch (NullPointerException | IOException npe) {
                     clientLog.warn("Cannot open manual PDF");
                 }
-        }
-
+            }
 
         } else if (buttonPressed == infoB) {
             printCommandList();

@@ -3,6 +3,7 @@ package skipbo.game;
 import skipbo.server.ProtocolExecutor;
 
 import java.awt.*;
+import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -641,6 +642,26 @@ public class Game implements Runnable {
             Collections.shuffle(piles.getEmptyPile());  //shuffles the empty pile
             getDrawPile().addAll(piles.getEmptyPile()); //adds empty pile cards to the draw pile
         }
+    }
+
+    /**
+     * Method to add a player's cards to the empty pile that has left the game
+     * @param player Player that's left.
+     */
+
+    public void playerLeaving (Player player){
+        ArrayList<Card> handCards = player.getHandCards();
+        piles.emptyPile.addAll(handCards);
+        handCards.clear();      //removes cards from the player's hand cards
+
+        for(ArrayList<Card> dPile: player.getDiscardPile()){
+            piles.emptyPile.addAll(dPile);
+            dPile.clear();      //removes cards from the player's discard pile
+        }
+
+        ArrayList<Card> stockPile = player.getStockPile();
+        piles.emptyPile.addAll(stockPile);
+        stockPile.clear();      //removes cards from the player's stock pile
     }
 
     /**

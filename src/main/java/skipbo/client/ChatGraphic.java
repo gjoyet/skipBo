@@ -274,6 +274,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         setLocationRelativeTo(null);
         startB.setEnabled(false);
         readyB.setEnabled(false);
+        changeNameB.setEnabled(false);
         readyB.setText("Ready");
     }
 
@@ -302,6 +303,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         setTitle("Skip-Bros CHAT");
         startB.setEnabled(true);
         readyB.setEnabled(true);
+        changeNameB.setEnabled(true);
     }
 
     /**

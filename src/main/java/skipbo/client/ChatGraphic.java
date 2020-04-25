@@ -9,6 +9,7 @@ import java.awt.event.*;
 import java.util.Objects;
 
 import static skipbo.client.SBClient.clientLog;
+import static skipbo.server.Protocol.NWGME;
 
 /**
  * GUI for Skip-Bo lobby
@@ -326,11 +327,16 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             }
 
         } else if (buttonPressed == startB) {
-            try {
-                clientListener.forward("/new game");
-            } catch (NotACommandException e) {
-                clientLog.warn("Error with /new game command");
-            }
+
+            String[] numberOfPlayers = new String[]{"2", "3", "4"};
+            String[] numberOfStock = new String[]{"3", "10", "20", "30"};
+            String selectedPlayer = (String) JOptionPane.showInputDialog(contentPane, "Select number of players",
+                    "Starting new game", JOptionPane.PLAIN_MESSAGE, null, numberOfPlayers, numberOfPlayers[0]);
+            if (selectedPlayer == null) {return;}
+            String selectedStock = (String) JOptionPane.showInputDialog(contentPane, "Select number of stock cards",
+                    "Starting new game", JOptionPane.PLAIN_MESSAGE, null, numberOfStock, numberOfStock[0]);
+            if (selectedStock == null) {return;}
+            clientListener.pw.println(NWGME + "§New§" + selectedPlayer + "§" + selectedStock);
 
         } else if (buttonPressed == infoB) {
             printCommandList();

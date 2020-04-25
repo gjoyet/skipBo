@@ -382,13 +382,14 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             clientListener.pw.println(NWGME + "§New§" + selectedPlayer + "§" + selectedStock);
 
         } else if (buttonPressed == manualB) {
-            try {
-                File manual = new File(
-                        getClass().getClassLoader().getResource("Instruction_manual.pdf").getFile());
-                Desktop.getDesktop().open(manual);
-            } catch (IOException ex) {
-                clientLog.warn("Cannot open manual PDF");
-            }
+            if (Desktop.isDesktopSupported()) {
+                try {
+                    File manual = new File("build/resources/main/Instruction_manual_v2.pdf");
+                    Desktop.getDesktop().open(manual);
+                } catch (NullPointerException | IOException npe) {
+                    clientLog.warn("Cannot open manual PDF");
+                }
+        }
 
 
         } else if (buttonPressed == infoB) {

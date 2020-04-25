@@ -86,7 +86,6 @@ public class ProtocolExecutor {
      */
     public void changeTo() throws NoCommandException {
         String formerName = sbL.player.getName();
-        if(input.length < 3) return;
         if(input.length < 2) throw new NoCommandException();
         try {
             if (input[1].equals("Nickname")) {
@@ -169,7 +168,16 @@ public class ProtocolExecutor {
      */
     void logout() {
         sbL.pw.println("LGOUT");
+        sbL.player.getGame().players.remove(sbL.player);
         serverLobby.removePlayer(sbL.player);
+        if(sbL.getPlayer().getGame().players.size() == 1) {
+            sbL.getPlayer().getGame().terminateGame();
+        } else {
+            sbL.getPlayer().getGame().playerLeaving(sbL.player);
+            for(Player p : sbL.getPlayer().getGame().players) {
+                p.getSBL().getPW().println("PLEFT§Leaving§" + sbL.getPlayer().getName());
+            }
+        }
         sbL.stopRunning();
         try {
             sbL.pw.close();
@@ -187,11 +195,6 @@ public class ProtocolExecutor {
             servLog.warn("Sleeptime of server before shutdown interrupted.");
         }
         if(playerCount == 0) {
-            for(Game g : SBServer.getLobby().getGames()) {
-                g.terminateGame();
-            }
-
-            servLog.warn("Problem with writing games into a file.");
             System.exit(0);
         }
 

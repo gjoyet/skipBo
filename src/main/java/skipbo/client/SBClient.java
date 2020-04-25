@@ -16,6 +16,7 @@ public class SBClient {
     public static Logger clientLog = LogManager.getLogger(SBClient.class);
     private String[] args;
     private SBClientListener clientListener;
+    private SBServerListener serverListener;
     private Socket sock;
 
     /**
@@ -76,6 +77,7 @@ public class SBClient {
         //Start SBServerListener Thread
         try {
             SBServerListener serverListener = new SBServerListener(sock, frame);
+            this.serverListener = serverListener;
             Thread sListener = new Thread(serverListener);
             sListener.start();
         } catch (IOException e) {
@@ -88,6 +90,9 @@ public class SBClient {
             System.exit(-1);
         }
 
-
     }
+
+    public SBServerListener getServerListener() { return this.serverListener; }
+
+
 }

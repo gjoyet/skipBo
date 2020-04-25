@@ -8,6 +8,9 @@ public class Main {
 
     static Logger mainLog = LogManager.getLogger(Main.class);
 
+    public static SBServer server;
+    public static SBClient client;
+
     public static void main(String[] args) {
         mainLog.debug("Program starting.");
         if (args[0].equalsIgnoreCase("server")) {
@@ -15,9 +18,10 @@ public class Main {
             SBServer sbServer = new SBServer(Integer.parseInt(args[1]));
             Thread serverT = new Thread(sbServer);
             serverT.start();
+            server = sbServer;
         } else if (args[0].equalsIgnoreCase("client") || args[0].equalsIgnoreCase("testClient")) {
             mainLog.debug("Main triggered Client.");
-            new SBClient(args);
+            client = new SBClient(args);
         }
     }
 }

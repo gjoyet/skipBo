@@ -13,6 +13,7 @@ import static skipbo.server.SBServer.servLog;
  * Thread waiting for any action from client.
  */
 public class SBListener implements Runnable {
+    SBServer server;
     Socket sock;
     PrintWriter pw;
     BufferedReader br;
@@ -21,7 +22,8 @@ public class SBListener implements Runnable {
     Player player;
 
 
-    public SBListener(Socket sock, int id) throws IOException {
+    public SBListener(SBServer server, Socket sock, int id) throws IOException {
+        this.server = server;
         this.sock = sock;
         try {
             this.pw = new PrintWriter(sock.getOutputStream(), true);
@@ -108,6 +110,9 @@ public class SBListener implements Runnable {
 
     public Player getPlayer() { return this.player; }
 
+    public SBServer getServer() {
+        return server;
+    }
 }
 
 

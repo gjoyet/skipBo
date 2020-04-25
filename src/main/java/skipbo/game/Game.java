@@ -642,6 +642,23 @@ public class Game implements Runnable {
     }
 
     /**
+     * Method to add a player's cards to the empty pile that has left the game
+     * @param player Player that's left.
+     */
+
+    public void playerLeaving (Player player){
+        ArrayList<Card> handCards = player.getHandCards();
+        piles.emptyPile.addAll(handCards);
+        handCards.clear();      //removes cards from the player's hand cards
+
+        for(ArrayList<Card> dPile: player.getDiscardPile()){
+            piles.emptyPile.addAll(dPile);
+            dPile.clear();      //removes cards from the player's discard pile
+        }
+
+    }
+
+    /**
      * Method to be run at the end of a player's turn, which
      * then changes turn from one player to the next.
      */

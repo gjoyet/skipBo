@@ -247,7 +247,12 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         JOptionPane optionPane = new JOptionPane("The winner is: " + name + "!", JOptionPane.INFORMATION_MESSAGE,
                 JOptionPane.DEFAULT_OPTION, icon);
         JDialog dialog = optionPane.createDialog(contentPane, "Game is finished.");
-        dialog.setBounds(50, 50, icon.getIconWidth()+270, icon.getIconHeight()+100);
+
+        int width = gameGraphic.getGameComponent().getWidth();
+        int height = gameGraphic.getGameComponent().getHeight();
+        int iconWidth = icon.getIconWidth()+270;
+        int iconHeight = icon.getIconHeight()+100;
+        dialog.setBounds(width/2-iconWidth/2, height/2-iconHeight/2, iconWidth, iconHeight);
         dialog.setVisible(true);
         /*JOptionPane.showMessageDialog(contentPane, "The winner is: " + name + "!", "Game is finished.",
                 JOptionPane.INFORMATION_MESSAGE,

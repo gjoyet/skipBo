@@ -187,7 +187,9 @@ public class SBServerListener implements Runnable {
     }
 
     private void player(String[] command) {
-        if (command[1].equals("Joined")) {
+        if (command[1].equals("List")) {
+
+        } else if (command[1].equals("Joined")) {
 
         } else if (command[1].equals("Left")) {
 

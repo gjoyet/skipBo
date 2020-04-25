@@ -6,12 +6,17 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.net.Socket;
 
+import static javax.swing.SwingUtilities.invokeLater;
+
 /**
  * A Skip-Bo client.
  */
 public class SBClient {
 
     public static Logger clientLog = LogManager.getLogger(SBClient.class);
+    private String[] args;
+    private SBClientListener clientListener;
+    private Socket sock;
 
     /**
      * Establishes a connection to the Skip-Bo server via SBClientListener thread and SBServerListener thread and opens
@@ -20,54 +25,69 @@ public class SBClient {
      */
     public SBClient(String[] args) {
 
+        this.args = args;
+
         try {
             String[] ipAndPort = args[1].split(":");
             String ip = ipAndPort[0];
             int port = Integer.parseInt(ipAndPort[1]);
 
             clientLog.info("Connecting to port " + port + "…");
-            Socket sock = new Socket(ip, port);
+            this.sock = new Socket(ip, port);
 
             //Start SBClientListener Thread
-            SBClientListener clientListener = new SBClientListener(sock);
+            this.clientListener = new SBClientListener(sock);
 
-            //GUI
-            ChatGraphic frame;
-            if (args.length == 3) {
-                frame = new ChatGraphic(clientListener, args[2]);
-            } else {
-                frame = new ChatGraphic(clientListener);
-            }
-            frame.addWindowListener(new WindowHandler(clientListener));
+            invokeLater(this::createGUI);
 
-            if (args[0].equalsIgnoreCase("client")) {
+        } catch (IOException e) {
+            clientLog.fatal("Error while connecting to server.");
+        }
+    }
+
+    /**
+     * Creates the GUI and starts the SBServerListener thread. Client logs out correctly and shuts down if an error
+     * occurs.
+     */
+    private void createGUI() {
+        //GUI
+        ChatGraphic frame;
+        if (args.length == 3) {
+            frame = new ChatGraphic(clientListener, args[2]);
+        } else {
+            frame = new ChatGraphic(clientListener);
+        }
+        frame.addWindowListener(new WindowHandler(clientListener));
+
+        if (args[0].equalsIgnoreCase("client")) {
+            try {
+                frame.setVisible(true);
+            } catch (Exception e) {
+                clientLog.fatal("Caught Exception from setVisible. Shutting down client now.");
                 try {
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    clientLog.warn("Caught Exception from setVisible. Trying again in a second.");
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException ex) {
-                        clientLog.warn("Interrupted sleeping thread");
-                    }
-                    try {
-                        frame.setVisible(true);
-                    } catch (Exception e1) {
-                        clientLog.fatal("Caught Exception from setVisible again. Shutting down client now.");
-                        frame.getClientListener().forward("/quit");
-                        System.exit(-1);
-                    }
-
+                    frame.getClientListener().forward("/quit");
+                } catch (NotACommandException ex) {
+                    clientLog.error("Error with shutting down client correctly.");
                 }
+                System.exit(-1);
             }
+        }
 
-            //Start SBServerListener Thread
+        //Start SBServerListener Thread
+        try {
             SBServerListener serverListener = new SBServerListener(sock, frame);
             Thread sListener = new Thread(serverListener);
             sListener.start();
-
-        } catch (IOException | NotACommandException e) {
-            clientLog.fatal("Error while connecting to server.");
+        } catch (IOException e) {
+            clientLog.fatal("Caught IOException from creating SBServerListener. Shutting down client now.");
+            try {
+                frame.getClientListener().forward("/quit");
+            } catch (NotACommandException ex) {
+                clientLog.error("Error with shutting down client correctly.");
+            }
+            System.exit(-1);
         }
+
+
     }
 }

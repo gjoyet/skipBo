@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 import static skipbo.client.SBClient.clientLog;
+import static skipbo.server.Protocol.NWGME;
 
 /**
  * GUI for Skip-Bo lobby
@@ -195,8 +196,8 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         inputScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentPane.add(inputScrollPane);
 
-        /*DefaultCaret caret = (DefaultCaret) chat.getCaret();
-        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);*/
+        DefaultCaret caret = (DefaultCaret) chat.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
     }
 
@@ -233,9 +234,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     void printInfoMessage(String message) {
         appendToChat("\n[Info] ", DARKGREEN);
         appendToChat(message, Color.BLACK);
-        //chat.append("[Info] " + message + "\n");
-        //chat.setCaretPosition(chat.getDocument().getLength());
-        //chat.setCaretPosition(chat.getDocument().getLength());
     }
 
     /**
@@ -246,8 +244,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     void printErrorMessage(String message) {
         appendToChat("\n[Error] ", Color.RED);
         appendToChat(message, Color.BLACK);
-        //chat.append("[Error] " + message + "\n");
-        //chat.setCaretPosition(chat.getDocument().getLength()-1);
     }
 
     /**
@@ -257,8 +253,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
      */
     void printChatMessage(String message) {
         appendToChat("\n" + message, Color.BLACK);
-/*        chat.append(message + "\n" );
-        chat.setCaretPosition(chat.getDocument().getLength()-1);*/
     }
 
     /**
@@ -286,8 +280,12 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         JOptionPane optionPane = new JOptionPane("The winner is: " + name + "!", JOptionPane.INFORMATION_MESSAGE,
                 JOptionPane.DEFAULT_OPTION, icon);
         JDialog dialog = optionPane.createDialog(contentPane, "Game is finished.");
-        dialog.setBounds(0, 0, icon.getIconWidth()+270, icon.getIconHeight()+100);
-        //dialog.setSize(icon.getIconWidth()+270, icon.getIconHeight()+100);
+
+        int width = gameGraphic.getGameComponent().getWidth();
+        int height = gameGraphic.getGameComponent().getHeight();
+        int iconWidth = icon.getIconWidth()+270;
+        int iconHeight = icon.getIconHeight()+100;
+        dialog.setBounds(width/2-iconWidth/2, height/2-iconHeight/2, iconWidth, iconHeight);
         dialog.setVisible(true);
         /*JOptionPane.showMessageDialog(contentPane, "The winner is: " + name + "!", "Game is finished.",
                 JOptionPane.INFORMATION_MESSAGE,
@@ -361,11 +359,16 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             }
 
         } else if (buttonPressed == startB) {
-            try {
-                clientListener.forward("/new game");
-            } catch (NotACommandException e) {
-                clientLog.warn("Error with /new game command");
-            }
+
+            String[] numberOfPlayers = new String[]{"2", "3", "4"};
+            String[] numberOfStock = new String[]{"3", "10", "20", "30"};
+            String selectedPlayer = (String) JOptionPane.showInputDialog(contentPane, "Select number of players",
+                    "Starting new game", JOptionPane.PLAIN_MESSAGE, null, numberOfPlayers, numberOfPlayers[0]);
+            if (selectedPlayer == null) {return;}
+            String selectedStock = (String) JOptionPane.showInputDialog(contentPane, "Select number of stock cards",
+                    "Starting new game", JOptionPane.PLAIN_MESSAGE, null, numberOfStock, numberOfStock[0]);
+            if (selectedStock == null) {return;}
+            clientListener.pw.println(NWGME + "§New§" + selectedPlayer + "§" + selectedStock);
 
         } else if (buttonPressed == manualB) {
             try {
@@ -422,20 +425,19 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         Document doc = chat.getDocument();
         try {
             doc.insertString(doc.getLength(), s, attributeSet);
-
 //            doc = chat.getDocument();
 //            chat.setCaretPosition(doc.getLength());
         } catch (BadLocationException e) {
             clientLog.warn("Error with appending text to chat");
         }
-        SwingUtilities.invokeLater(() -> {
+        /*SwingUtilities.invokeLater(() -> {
             try {
                 JScrollBar bar = chatScrollPane.getVerticalScrollBar();
                 bar.setValue(bar.getMaximum());
             } catch (Exception e) {
                 clientLog.warn("Exception while trying to adjust the scrollbar");
             }
-        });
+        });*/
 
     }
 

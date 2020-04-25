@@ -19,7 +19,7 @@ public class Game implements Runnable {
     int sizeOfStockPile; //3 for DEMO purposes, actually 20
     int playersTurn = 0;
     private Player winner;
-    private boolean gameRunning, turnFinished;
+    private boolean gameRunning;
     public int turnCounter = 0;
     public double score = -1.0;
 
@@ -27,11 +27,11 @@ public class Game implements Runnable {
      * Constructor for Object Game, where the main Game and Game rules
      * will be implemented.
      */
-    public Game(ArrayList<Player> players) {
+    public Game(ArrayList<Player> players, int sizeOfStockPile) {
 
         this.players = players;
         this.piles = new Pile();
-        this.sizeOfStockPile = 3;
+        this.sizeOfStockPile = sizeOfStockPile;
 
     }
 
@@ -171,7 +171,6 @@ public class Game implements Runnable {
 
     void startFirstTurn(int playersTurn) {
         servLog.debug("Entered first turn.");
-        turnFinished = false;
         Player player = players.get(playersTurn);
         player.getSBL().getPW().println("PRINT§Terminal§It's your first turn! Your first set of hand cards are: " + piles.handCardPrint(player));
         turnCounter++;
@@ -188,8 +187,6 @@ public class Game implements Runnable {
         checkDrawPile();
         fillHandCards(ply);
         turnCounter++;
-
-        turnFinished = false;
 
         ply.getSBL().getPW().println("PRINT§Terminal§It's your turn!");
         ply.getSBL().getPW().println("PRINT§Terminal§Your stock card is: " +
@@ -655,7 +652,6 @@ public class Game implements Runnable {
             turnCounter++;
         }
         startTurn(playersTurn);     //starts next turn
-        turnFinished = true;
     }
 
     /**

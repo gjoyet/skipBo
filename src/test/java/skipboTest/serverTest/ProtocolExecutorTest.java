@@ -102,7 +102,7 @@ public class ProtocolExecutorTest {
     public void testSetToException1() throws NoCommandException {
         Main client10 = new Main(); client10.main(new String[]{"client", "localhost:12345"});
         try {
-            sleep(500);
+            sleep(200);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -116,7 +116,7 @@ public class ProtocolExecutorTest {
     public void testSetToException2() throws NoCommandException {
         Main client11 = new Main(); client11.main(new String[]{"client", "localhost:12345"});
         try {
-            sleep(500);
+            sleep(200);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -181,6 +181,44 @@ public class ProtocolExecutorTest {
             e.printStackTrace();
         }
         assertEquals(Status.WAITING, pe0.getSBL().getPlayer().getStatus()); // Test: change back to WAITING
+    }
+
+    /**
+     * Tests the case where the option given to the CHNGE command is not valid.
+     */
+    @Test(expected = NoCommandException.class)
+    public void testChangeToException1() throws NoCommandException {
+        Main client12 = new Main(); client12.main(new String[]{"client", "localhost:12345"});
+        try {
+            sleep(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        new ProtocolExecutor(new String[]{"CHNGE", "NotAnOption"}, getSblList().get(12)).changeTo();
+    }
+
+    /**
+     * Tests the case where the option given to the CHNGE command equals null.
+     */
+    @Test(expected = NoCommandException.class)
+    public void testChangeToException2() throws NoCommandException {
+        Main client13 = new Main(); client13.main(new String[]{"client", "localhost:12345"});
+        try {
+            sleep(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        new ProtocolExecutor(new String[]{"CHNGE"}, getSblList().get(13)).changeTo();
+    }
+
+    @Test
+    public void testNewGame() {
+
+    }
+
+    @Test
+    public void testChatMessage() {
+
     }
 
 

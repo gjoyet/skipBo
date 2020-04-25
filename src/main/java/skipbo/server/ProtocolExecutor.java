@@ -83,6 +83,7 @@ public class ProtocolExecutor {
     public void changeTo() throws NoCommandException {
         String formerName = sbL.player.getName();
         if(input.length < 3) return;
+        if(input.length < 2) throw new NoCommandException();
         try {
             if (input[1].equals("Nickname")) {
                 if(sbL.player.getStatus().equals(Status.INGAME)) {
@@ -197,6 +198,13 @@ public class ProtocolExecutor {
      */
     void newGame() throws NoCommandException {
         if(input[1].equals("New")) {
+            int numberOfPLayers = 2;
+            int stockpileHeight = 20;
+            if(input.length == 3) {
+                String[] nAndX = input[2].split("§");
+                numberOfPLayers = Integer.parseInt(nAndX[0]);
+                stockpileHeight = Integer.parseInt(nAndX[1]);
+            }
             ArrayList<Player> newPlayers = new ArrayList<Player>();
             newPlayers.add(sbL.player);
             int playerCount = 1;
@@ -206,10 +214,10 @@ public class ProtocolExecutor {
                     newPlayers.add(SBServer.getLobby().getPlayer(i));
                     ++playerCount;
                 }
-                if (playerCount == 2) break;
+                if (playerCount == numberOfPLayers) break;
             }
-            if(playerCount == 2) {
-                Game game = new Game(newPlayers);
+            if(playerCount == numberOfPLayers) {
+                Game game = new Game(newPlayers, stockpileHeight);
                 serverLobby.addGame(game);
                 String names = "";
                 for(Player p : newPlayers) {

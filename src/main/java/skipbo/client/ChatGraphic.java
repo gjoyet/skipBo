@@ -373,7 +373,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         } else if (buttonPressed == manualB) {
             try {
                 File manual = new File(
-                        getClass().getClassLoader().getResource("Instruction_manual.pdf").getFile());
+                        Objects.requireNonNull(getClass().getClassLoader().getResource("Instruction_manual.pdf")).getFile());
                 Desktop.getDesktop().open(manual);
             } catch (IOException ex) {
                 clientLog.warn("Cannot open manual PDF");

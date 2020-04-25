@@ -57,6 +57,8 @@ public class Game implements Runnable {
 
     public void terminateGame() {
         this.gameRunning = false;
+        this.players.get(0).getSBL().getPW().println("ENDGM");
+        // TODO: Implement what happens if only one person is left in that game.
     }
 
     /**

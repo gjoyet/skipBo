@@ -86,7 +86,6 @@ public class ProtocolExecutor {
      */
     public void changeTo() throws NoCommandException {
         String formerName = sbL.player.getName();
-        if(input.length < 3) return;
         if(input.length < 2) throw new NoCommandException();
         try {
             if (input[1].equals("Nickname")) {
@@ -169,7 +168,11 @@ public class ProtocolExecutor {
      */
     void logout() {
         sbL.pw.println("LGOUT");
+        sbL.player.getGame().players.remove(sbL.player);
         serverLobby.removePlayer(sbL.player);
+        if(sbL.getPlayer().getGame().players.size() == 1) {
+            sbL.getPlayer().getGame().terminateGame();
+        }
         sbL.stopRunning();
         try {
             sbL.pw.close();

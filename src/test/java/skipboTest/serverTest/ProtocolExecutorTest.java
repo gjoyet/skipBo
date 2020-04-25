@@ -43,14 +43,10 @@ public class ProtocolExecutorTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        servLog.debug("sbListenerList contains, in order: ");
-        for(SBListener sbL : getSblList()) {
-            servLog.debug(sbL.getPlayer().getName());
-        }
     }
 
     /**
-     * Tests the implementation of setTo.
+     * Tests the implementation of setTo. Details about what is tested are found next to the assertEquals methods.
      */
     @Test
     public void testSetToNickname() {
@@ -102,14 +98,7 @@ public class ProtocolExecutorTest {
      */
     @Test(expected = NoCommandException.class)
     public void testSetToException1() throws NoCommandException {
-        Main client10 = new Main(); client10.main(new String[]{"client", "localhost:12345"});
-        try {
-            sleep(200);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        new ProtocolExecutor(new String[]{"SETTO", "NotAnOption"}, getSblList().get(10)).setTo();
-        servLog.debug("END of testSetToException1, size of sbListenerList: " + getSblList().size());
+        new ProtocolExecutor(new String[]{"SETTO", "NotAnOption"}, getSblList().get(0)).setTo();
     }
 
     /**
@@ -117,16 +106,13 @@ public class ProtocolExecutorTest {
      */
     @Test(expected = NoCommandException.class)
     public void testSetToException2() throws NoCommandException {
-        Main client11 = new Main(); client11.main(new String[]{"client", "localhost:12345"});
-        try {
-            sleep(200);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        new ProtocolExecutor(new String[]{"SETTO"}, getSblList().get(11)).setTo();
-        servLog.debug("END of testSetToException2, size of sbListenerList: " + getSblList().size());
+        new ProtocolExecutor(new String[]{"SETTO"}, getSblList().get(0)).setTo();
     }
 
+    /**
+     * Tests the implementation of changeTo with option 'Nickname'. Details about what is tested are
+     * found next to the assertEquals methods.
+     */
     @Test
     public void testChangeToName() {
         ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"CHNGE", "Nickname", "Guillaume"}, getSblList().get(0));
@@ -158,6 +144,10 @@ public class ProtocolExecutorTest {
         servLog.debug("END of testChangeToName, size of sbListenerList: " + getSblList().size());
     }
 
+    /**
+     * Tests the implementation of changeTo with option 'Status'. Details about what is tested are
+     * found next to the assertEquals methods.
+     */
     @Test
     public void testChangeStatus() {
         ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"CHNGE", "Status", "READY"}, getSblList().get(0));
@@ -197,14 +187,7 @@ public class ProtocolExecutorTest {
      */
     @Test(expected = NoCommandException.class)
     public void testChangeToException1() throws NoCommandException {
-        Main client12 = new Main(); client12.main(new String[]{"client", "localhost:12345"});
-        try {
-            sleep(200);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        servLog.debug("Size of sbListenerList: " + getSblList().size());
-        new ProtocolExecutor(new String[]{"CHNGE", "NotAnOption"}, getSblList().get(12)).changeTo();
+        new ProtocolExecutor(new String[]{"CHNGE", "NotAnOption"}, getSblList().get(0)).changeTo();
     }
 
     /**
@@ -212,15 +195,13 @@ public class ProtocolExecutorTest {
      */
     @Test(expected = NoCommandException.class)
     public void testChangeToException2() throws NoCommandException {
-        Main client13 = new Main(); client13.main(new String[]{"client", "localhost:12345"});
-        try {
-            sleep(200);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        new ProtocolExecutor(new String[]{"CHNGE"}, getSblList().get(13)).changeTo();
+        new ProtocolExecutor(new String[]{"CHNGE"}, getSblList().get(0)).changeTo();
     }
 
+    /**
+     * Tests the implementation of newGame. Details about what is tested are
+     * found next to the assertEquals methods.
+     */
     @Test
     public void testNewGame() {
         ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"CHNGE", "Status", "READY"}, getSblList().get(0));
@@ -243,9 +224,9 @@ public class ProtocolExecutorTest {
         assertEquals("Manuela\nGuillaume1", serverLobby.getGames().get(0).getPlayerList());
         // Test: Client 0 (Guillaume1) and 1 (Manuela) – the only one that was ready and the one that started the game,
         // even though the client was not ready – are the ones in the game, client 1 comes first since it started game
-        assertEquals(30, serverLobby.getGames().get(0).getPiles().stockPile.size());
+        assertEquals(30, serverLobby.getGames().get(0).players.get(0).getStockPile().size());
         // Test: Stockpile of the game is 30 cards high
-        assertEquals("Marc, Guillaume", getPlayerNotIngameList());
+        assertEquals("Marc, Guillaume, SBPlayer, SBPlayer1, John, John1, SBPlayer2, SBPlayer3", getPlayerNotIngameList());
         // Test: Client 2 (Marc) and 3 (Guillaume) remain in Lobby
     }
 

@@ -359,7 +359,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             }
 
         } else if (buttonPressed == startB) {
-
+            //TODO change to JComboBox
             String[] numberOfPlayers = new String[]{"2", "3", "4"};
             String[] numberOfStock = new String[]{"3", "10", "20", "30"};
             String selectedPlayer = (String) JOptionPane.showInputDialog(contentPane, "Select number of players",
@@ -371,13 +371,14 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             clientListener.pw.println(NWGME + "§New§" + selectedPlayer + "§" + selectedStock);
 
         } else if (buttonPressed == manualB) {
-            try {
-                File manual = new File(
-                        getClass().getClassLoader().getResource("Instruction_manual.pdf").getFile());
-                Desktop.getDesktop().open(manual);
-            } catch (IOException ex) {
-                clientLog.warn("Cannot open manual PDF");
-            }
+            if (Desktop.isDesktopSupported()) {
+                try {
+                    File manual = new File("build/resources/main/Instruction_manual_v2.pdf");
+                    Desktop.getDesktop().open(manual);
+                } catch (NullPointerException | IOException npe) {
+                    clientLog.warn("Cannot open manual PDF");
+                }
+        }
 
 
         } else if (buttonPressed == infoB) {
@@ -398,13 +399,9 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             }
 
         } else if (buttonPressed == leaveB) {
-            try {
-                clientListener.forward("/quit");
-                dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-            } catch (NotACommandException e) {
-                clientLog.warn("Error with /quit command");
-            }
-        } else {
+            dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+
+        } else if (buttonPressed == changeNameB) {
             String name = (String) JOptionPane.showInputDialog(contentPane, "Enter your new name:",
                     "Change your name", JOptionPane.PLAIN_MESSAGE, null, null, playerName);
             if (name != null) {
@@ -415,7 +412,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
     /**
      * Prints a string to the chat.
-     *
      * @param s     The string to be appended to the chat.
      * @param color The color in which the string is displayed.
      */

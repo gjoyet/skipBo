@@ -93,7 +93,9 @@ public class SBServer implements Runnable {
             if(!p.getStatus().equals(Status.INGAME))
             allNames.append(p.getName() + ", ");
         }
-        if(allNames.length() > 0) allNames.deleteCharAt(allNames.length()-1);
+        if(allNames.length() > 0) {
+            allNames = allNames.replace(allNames.length()-2, allNames.length(), "");
+        }
         return allNames.toString();
     }
 

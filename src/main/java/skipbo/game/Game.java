@@ -27,11 +27,11 @@ public class Game implements Runnable {
      * Constructor for Object Game, where the main Game and Game rules
      * will be implemented.
      */
-    public Game(ArrayList<Player> players) {
+    public Game(ArrayList<Player> players, int sizeOfStockPile) {
 
         this.players = players;
         this.piles = new Pile();
-        this.sizeOfStockPile = 3;
+        this.sizeOfStockPile = sizeOfStockPile;
 
     }
 

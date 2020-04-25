@@ -172,6 +172,11 @@ public class ProtocolExecutor {
         serverLobby.removePlayer(sbL.player);
         if(sbL.getPlayer().getGame().players.size() == 1) {
             sbL.getPlayer().getGame().terminateGame();
+        } else {
+            sbL.getPlayer().getGame().playerLeaving(sbL.player);
+            for(Player p : sbL.getPlayer().getGame().players) {
+                p.getSBL().getPW().println("PLEFT§Leaving§" + sbL.getPlayer().getName());
+            }
         }
         sbL.stopRunning();
         try {
@@ -190,11 +195,6 @@ public class ProtocolExecutor {
             servLog.warn("Sleeptime of server before shutdown interrupted.");
         }
         if(playerCount == 0) {
-            for(Game g : SBServer.getLobby().getGames()) {
-                g.terminateGame();
-            }
-
-            servLog.warn("Problem with writing games into a file.");
             System.exit(0);
         }
 

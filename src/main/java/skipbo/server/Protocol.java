@@ -45,6 +45,10 @@ public enum Protocol {
     /**
      * Tells the client that the game is finished and who the winner is
      */
-    ENDGM
+    ENDGM,
+    /**
+     * Tells the client that a player joined or left the server or changed its name.
+     */
+    PLAYR,
 
 }

@@ -8,6 +8,9 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Objects;
 
 import static skipbo.client.SBClient.clientLog;
@@ -33,11 +36,10 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     private JButton gamesB;
     private JButton whosOnB;
     private JButton leaveB;
-    private GameGraphic gameGraphic;
+    private GameGraphic gameGraphic = null;
     String playerName = "";
-    private JComboBox<String> listChat;
-    private String[] playersChat = {"all","global","geiom","theLegend27","ManuWelan","MrDickson","RohanZohan","GreekLegend","Borat","HaikhoMisori"};
-
+    private DefaultComboBoxModel<String> playerComboModel;
+    private ArrayList<String> playerArray = new ArrayList<>();
     static final Color DARKGREEN = new Color(0x0AB222);
 
     private final int X_FRAME = 400;
@@ -91,6 +93,9 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
      * Creates the chat window with buttons
      */
     void setFrame() {
+
+        //Testing purpose
+        playerArray.addAll(Arrays.asList("geiom","theLegend27","ManuWelan"));
 
         setTitle("Skip-Bros CHAT");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -181,7 +186,10 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         add(privateChatL);
         privateChatL.setBounds(80,675,90,20);
         //playersChat = {"all","global","geiom","theLegend27","ManuWelan","MrDickson","RohanZohan","GreekLegend","Borat","HaikhoMisori"};
-        listChat = new JComboBox<>(playersChat);
+        JComboBox<String> listChat = new JComboBox<>();
+        playerComboModel = (DefaultComboBoxModel<String>) listChat.getModel();
+        playerComboModel.addAll(Arrays.asList("all", "global", "geiom","theLegend27","ManuWelan")); //TODO remove all except "all" and "global"
+        listChat.setSelectedIndex(0);
         listChat.setVisible(true);
         listChat.setBounds(150,675,180,20);
         add(listChat);
@@ -308,6 +316,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         startB.setEnabled(true);
         readyB.setEnabled(true);
         changeNameB.setEnabled(true);
+        gameGraphic = null;
     }
 
     /**
@@ -336,7 +345,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             inputMes.replaceRange("", 0, input.length());
             input = input.substring(0, input.length() - 1);
             if (!input.startsWith("/")) {
-                String s = (String) listChat.getSelectedItem();
+                String s = (String) playerComboModel.getSelectedItem();
                 assert s != null;
                 if (s.equals("global")) {
                     input = "/broadcast " + input;
@@ -398,16 +407,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
                 clientListener.pw.println(NWGME + "§New§" + playerBox.getSelectedItem() + "§" + stockBox.getSelectedItem());
             }
 
-            //TODO change to JComboBox
-            /*String[] numberOfPlayers = new String[]{"2", "3", "4"};
-            String[] numberOfStock = new String[]{"3", "10", "20", "30"};
-            String selectedPlayer = (String) JOptionPane.showInputDialog(contentPane, "Select number of players",
-                    "Starting new game", JOptionPane.PLAIN_MESSAGE, null, numberOfPlayers, numberOfPlayers[0]);
-            if (selectedPlayer == null) {return;}
-            String selectedStock = (String) JOptionPane.showInputDialog(contentPane, "Select number of stock cards",
-                    "Starting new game", JOptionPane.PLAIN_MESSAGE, null, numberOfStock, numberOfStock[0]);
-            if (selectedStock == null) {return;}*/
-
         } else if (buttonPressed == manualB) {
             if (Desktop.isDesktopSupported()) {
                 try {
@@ -429,6 +428,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             }
 
         } else if (buttonPressed == whosOnB) {
+
             try {
                 clientListener.forward("/list players");
             } catch (NotACommandException e) {
@@ -478,8 +478,24 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         return gameGraphic;
     }
 
-    public void changePlayerName(String name) {
+    void changeOwnName(String name) {
         playerName = name;
+    }
+
+    void changePlayerName(String oldName, String newName) {
+        String selected = (String) playerComboModel.getSelectedItem();
+        playerArray.remove(oldName);
+        playerArray.add(newName);
+        Collections.sort(playerArray);
+        playerComboModel.removeAllElements();
+        playerComboModel.addAll(playerArray);
+        playerComboModel.addAll(0, Arrays.asList("all", "global"));
+        if (selected.equals(oldName)) {
+            printInfoMessage("Your chat partner left. You are now chatting in the lobby chat.");
+            playerComboModel.setSelectedItem("all");
+        } else {
+            playerComboModel.setSelectedItem(selected);
+        }
     }
 
     SBClientListener getClientListener() {

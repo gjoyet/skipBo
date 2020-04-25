@@ -64,7 +64,7 @@ public class SBServerListener implements Runnable {
                 break;
             case CHNGE:
             case SETTO:
-                chatGraphic.changePlayerName(command[2]);
+                chatGraphic.changeOwnName(command[2]);
                 break;
             case PUTTO:
                 putTo(command);
@@ -80,6 +80,9 @@ public class SBServerListener implements Runnable {
                 break;
             case CHECK:
                 check(command);
+                break;
+            case PLAYR:
+                player(command);
                 break;
             case ENDGM:
                 endGame(command);
@@ -180,6 +183,19 @@ public class SBServerListener implements Runnable {
             //clientLog.debug("Colours array = " + str);
             chatGraphic.getGameGraphic().updateHandCards(colours, numbers);
             //clientLog.debug("got into update method in GameGraphic");
+        }
+    }
+
+    private void player(String[] command) {
+        if (command[1].equals("Joined")) {
+
+        } else if (command[1].equals("Left")) {
+
+        } else if (command[1].equals("Change")) {
+            String[] n = command[2].split("§");
+            chatGraphic.changePlayerName(n[0], n[1]);
+        } else {
+            clientLog.error("PLAYR command sent by server differs from commands checked by client");
         }
     }
 

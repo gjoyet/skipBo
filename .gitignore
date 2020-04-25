@@ -8,6 +8,7 @@
 
 #ProgramLog
 skipBoLogs/ProgramLog.txt
+skipBoLogs/Games.txt
 
 # User-specific stuff
 .idea/

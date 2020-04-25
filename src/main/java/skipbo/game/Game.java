@@ -270,9 +270,6 @@ public class Game implements Runnable {
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
                         + piles.handCardPrint(currentPlayer));
 
-                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your stock card is: " +
-                        stockCard.number);
-
                 checkBuildPileAndPrint(card, specBuildPile, currentPlayer);
                 return true;
             } else {

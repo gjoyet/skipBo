@@ -35,7 +35,7 @@ class SBServerListener implements Runnable {
         while (isLoggedIn) {
             try {
                 input = br.readLine();
-                clientLog.debug(input);
+                //clientLog.debug(input);
                 executeCommand(input);
             } catch (IOException e) {
                 clientLog.warn("Error with reading input from server");

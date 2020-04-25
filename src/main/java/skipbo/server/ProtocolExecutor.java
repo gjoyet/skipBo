@@ -209,7 +209,7 @@ public class ProtocolExecutor {
                 n = Integer.parseInt(nAndX[0]);
                 x = Integer.parseInt(nAndX[1]);
                 if(!(n == 2 || n == 3 || n == 4)) n = 2;
-                if(!(x == 5 || x == 10 || x == 20 || x == 30)) x = 20;
+                if(!(x == 3 || x == 10 || x == 20 || x == 30)) x = 20;
             }
             ArrayList<Player> newPlayers = new ArrayList<Player>();
             newPlayers.add(sbL.player);

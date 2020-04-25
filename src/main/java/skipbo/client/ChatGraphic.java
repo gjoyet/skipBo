@@ -35,6 +35,8 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     private JButton leaveB;
     private GameGraphic gameGraphic;
     String playerName = "";
+    private JComboBox<String> listChat;
+    private String[] playersChat = {"all","global","geiom","theLegend27","ManuWelan","MrDickson","RohanZohan","GreekLegend","Borat","HaikhoMisori"};
 
     static final Color DARKGREEN = new Color(0x0AB222);
 
@@ -173,8 +175,8 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         JLabel privateChatL = new JLabel("Chat with:");
         add(privateChatL);
         privateChatL.setBounds(80,675,90,20);
-        String[] playersChat = {"all","global","geiom","theLegend27","ManuWelan","MrDickson","RohanZohan","GreekLegend","Borat","HaikhoMisori"};
-        final JComboBox<String> listChat = new JComboBox<String>(playersChat);
+        //playersChat = {"all","global","geiom","theLegend27","ManuWelan","MrDickson","RohanZohan","GreekLegend","Borat","HaikhoMisori"};
+        listChat = new JComboBox<String>(playersChat);
         listChat.setVisible(true);
         listChat.setBounds(150,675,180,20);
         add(listChat);
@@ -322,6 +324,15 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             String input = inputMes.getText().replaceAll("\n", " ");
             inputMes.replaceRange("", 0, input.length());
             input = input.substring(0, input.length() - 1);
+            if (!input.startsWith("/")) {
+                String s = (String) listChat.getSelectedItem();
+                assert s != null;
+                if (s.equals("global")) {
+                    input = "/broadcast " + input;
+                } else if (!s.equals("all")) {
+                    input = "/msg " + s + " " + s;
+                }
+            }
             try {
                 clientListener.forward(input);
             } catch (IndexOutOfBoundsException | NotACommandException e) {

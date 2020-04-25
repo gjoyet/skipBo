@@ -82,12 +82,13 @@ public class SBServerListener implements Runnable {
                 check(command);
                 break;
             case ENDGM:
-                chatGraphic.endGame(command[2]);
+                endGame(command);
                 break;
             default:
                 throw new NoCommandException();
         }
     }
+
 
     void putTo(String[] command) {
         clientLog.debug("got into putTo with command " + command[1]);
@@ -140,6 +141,15 @@ public class SBServerListener implements Runnable {
             chatGraphic.getGameGraphic().setInitialCards(cards);
         }
     }
+
+    private void endGame(String[] command) {
+        if (command.length < 3) {
+            chatGraphic.endGame(null);
+        } else {
+            chatGraphic.endGame(command[2]);
+        }
+    }
+
 
     private void check(String[] command) {
         clientLog.debug("got into check method");

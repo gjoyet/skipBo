@@ -284,11 +284,16 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
      * @param name Name of the winner of the game.
      */
     void endGame(String name) {
+        String message;
+        if (name != null) {
+            message = "The winner is: " + name + "!";
+        } else {
+            message = "Game ended because everyone\nelse left. There is no winner.";
+        }
         ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo.png")));
-        JOptionPane optionPane = new JOptionPane("The winner is: " + name + "!", JOptionPane.INFORMATION_MESSAGE,
+        JOptionPane optionPane = new JOptionPane(message, JOptionPane.INFORMATION_MESSAGE,
                 JOptionPane.DEFAULT_OPTION, icon);
         JDialog dialog = optionPane.createDialog(contentPane, "Game is finished.");
-
         int width = gameGraphic.getGameComponent().getWidth();
         int height = gameGraphic.getGameComponent().getHeight();
         int iconWidth = icon.getIconWidth()+270;

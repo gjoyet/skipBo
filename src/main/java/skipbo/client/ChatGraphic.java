@@ -163,8 +163,8 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         inputScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentPane.add(inputScrollPane);
 
-        /*DefaultCaret caret = (DefaultCaret) chat.getCaret();
-        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);*/
+        DefaultCaret caret = (DefaultCaret) chat.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
     }
 
@@ -201,9 +201,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     void printInfoMessage(String message) {
         appendToChat("\n[Info] ", DARKGREEN);
         appendToChat(message, Color.BLACK);
-        //chat.append("[Info] " + message + "\n");
-        //chat.setCaretPosition(chat.getDocument().getLength());
-        //chat.setCaretPosition(chat.getDocument().getLength());
     }
 
     /**
@@ -214,8 +211,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     void printErrorMessage(String message) {
         appendToChat("\n[Error] ", Color.RED);
         appendToChat(message, Color.BLACK);
-        //chat.append("[Error] " + message + "\n");
-        //chat.setCaretPosition(chat.getDocument().getLength()-1);
     }
 
     /**
@@ -225,8 +220,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
      */
     void printChatMessage(String message) {
         appendToChat("\n" + message, Color.BLACK);
-/*        chat.append(message + "\n" );
-        chat.setCaretPosition(chat.getDocument().getLength()-1);*/
     }
 
     /**
@@ -254,8 +247,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         JOptionPane optionPane = new JOptionPane("The winner is: " + name + "!", JOptionPane.INFORMATION_MESSAGE,
                 JOptionPane.DEFAULT_OPTION, icon);
         JDialog dialog = optionPane.createDialog(contentPane, "Game is finished.");
-        dialog.setBounds(0, 0, icon.getIconWidth()+270, icon.getIconHeight()+100);
-        //dialog.setSize(icon.getIconWidth()+270, icon.getIconHeight()+100);
+        dialog.setBounds(50, 50, icon.getIconWidth()+270, icon.getIconHeight()+100);
         dialog.setVisible(true);
         /*JOptionPane.showMessageDialog(contentPane, "The winner is: " + name + "!", "Game is finished.",
                 JOptionPane.INFORMATION_MESSAGE,
@@ -379,20 +371,19 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         Document doc = chat.getDocument();
         try {
             doc.insertString(doc.getLength(), s, attributeSet);
-
 //            doc = chat.getDocument();
 //            chat.setCaretPosition(doc.getLength());
         } catch (BadLocationException e) {
             clientLog.warn("Error with appending text to chat");
         }
-        SwingUtilities.invokeLater(() -> {
+        /*SwingUtilities.invokeLater(() -> {
             try {
                 JScrollBar bar = chatScrollPane.getVerticalScrollBar();
                 bar.setValue(bar.getMaximum());
             } catch (Exception e) {
                 clientLog.warn("Exception while trying to adjust the scrollbar");
             }
-        });
+        });*/
 
     }
 

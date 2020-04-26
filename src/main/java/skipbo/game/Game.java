@@ -58,6 +58,9 @@ public class Game implements Runnable {
     public void terminateGame() {
         this.gameRunning = false;
         Player pLeft = this.players.get(0);
+        pLeft.clearHandCards();
+        pLeft.clearStockPile();
+        pLeft.clearDiscardPiles();
         pLeft.getSBL().getPW().println("ENDGM§Terminated");
         pLeft.changeGame(null);
         pLeft.changeStatus(Status.WAITING);

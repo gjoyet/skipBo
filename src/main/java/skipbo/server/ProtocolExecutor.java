@@ -203,7 +203,7 @@ public class ProtocolExecutor {
         servLog.info(sbL.player.getName() + " logged out.");
         sbL.getServer().playerCount--;
         try {
-            sleep(60000); //Prevents server from shutting down immediately, in case a player is being started right in that moment.
+            sleep(2000); //Prevents server from shutting down immediately, in case a player is being started right in that moment.
         } catch (InterruptedException e) {
             servLog.warn("Sleeptime of server before shutdown interrupted.");
         }
@@ -365,7 +365,8 @@ public class ProtocolExecutor {
     /**
      * Method for command DISPL. Displays certain elements (players, games,...) to client.
      */
-    void display() throws NoCommandException {
+    public void display() throws NoCommandException {
+        if(input.length < 2) throw new NoCommandException();
         try {
             switch (input[1]) {
                 case "players":

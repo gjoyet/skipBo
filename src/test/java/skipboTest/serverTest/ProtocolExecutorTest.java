@@ -9,15 +9,15 @@ import skipbo.server.*;
 import static java.lang.Thread.sleep;
 import static org.junit.Assert.assertEquals;
 
-import static org.junit.Assert.assertNotEquals;
 import static skipbo.server.SBServer.*;
 
 /**
  * Tests the execution of the ProtocolExecutor class. Therefore, it will test cases for most protocol commands but
  * will not, however, test what happens if the input from the client is not a network protocol command to begin with –
  * this is taken care of in the SBListener class.
- * The methods putTo(), check() and gameEnding() are not tested here since they are part of the game logic and neither
- * are the small methods sendAll() and broadcastAll() since they are sufficiently tested over the various other methods.
+ * The methods putTo(), check() and gameEnding() are not tested here since they are part of the game component and
+ * cannot be tested in this frame. Apart from that, auxiliary methods like informLogin(), sendAll() and broadcast()
+ * are not tested either since they are sufficiently tested over the various other methods.
  */
 public class ProtocolExecutorTest {
 
@@ -27,7 +27,6 @@ public class ProtocolExecutorTest {
     Main client2;
     Main client3;
     static int port = 63000;
-    String portString;
 
     /**
      * This initialization method starts up a server and four clients connected to that server.
@@ -39,13 +38,10 @@ public class ProtocolExecutorTest {
         client0 = new Main(); client1 = new Main(); client2 = new Main(); client3 = new Main();
         try {
             client0.main(new String[]{"testClient", "localhost:"+portString, "Janni"});
-            sleep(500);
             client1.main(new String[]{"testClient", "localhost:"+portString, "Manuela"});
-            sleep(500);
             client2.main(new String[]{"testClient", "localhost:"+portString, "Rohan"});
-            sleep(500);
             client3.main(new String[]{"testClient", "localhost:"+portString, "Guillaume"});
-            sleep(1000);
+            sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -55,7 +51,6 @@ public class ProtocolExecutorTest {
      * Tests the implementation of setTo with option 'Nickname'. Details about what is tested are found
      * next to the assertEquals methods.
      */
-    @Ignore
     @Test
     public void testSetTo() {
         Main client4 = new Main(); Main client5 = new Main(); Main client6 = new Main();
@@ -104,7 +99,6 @@ public class ProtocolExecutorTest {
     /**
      * Tests the case where the option given to the SETTO command is not valid.
      */
-    @Ignore
     @Test(expected = NoCommandException.class)
     public void testSetToException1() throws NoCommandException {
         new ProtocolExecutor(new String[]{"SETTO", "NotAnOption"}, server.server.getSblList().get(0)).setTo();
@@ -113,7 +107,6 @@ public class ProtocolExecutorTest {
     /**
      * Tests the case where the option given to the SETTO command equals null.
      */
-    @Ignore
     @Test(expected = NoCommandException.class)
     public void testSetToException2() throws NoCommandException {
         new ProtocolExecutor(new String[]{"SETTO"}, server.server.getSblList().get(0)).setTo();
@@ -123,7 +116,6 @@ public class ProtocolExecutorTest {
      * Tests the implementation of changeTo with option 'Nickname'. Details about what is tested are
      * found next to the assertEquals methods.
      */
-    @Ignore
     @Test
     public void testChangeToName() {
         ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"CHNGE", "Nickname", "Guillaume"}, server.server.getSblList().get(0));
@@ -159,7 +151,6 @@ public class ProtocolExecutorTest {
      * Tests the implementation of changeTo with option 'Status'. Details about what is tested are
      * found next to the assertEquals methods.
      */
-    @Ignore
     @Test
     public void testChangeToStatus() {
         ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"CHNGE", "Status", "READY"}, server.server.getSblList().get(0));
@@ -197,7 +188,6 @@ public class ProtocolExecutorTest {
     /**
      * Tests the case where the option given to the CHNGE command is not valid.
      */
-    @Ignore
     @Test(expected = NoCommandException.class)
     public void testChangeToException1() throws NoCommandException {
         new ProtocolExecutor(new String[]{"CHNGE", "NotAnOption"}, server.server.getSblList().get(0)).changeTo();
@@ -206,7 +196,6 @@ public class ProtocolExecutorTest {
     /**
      * Tests the case where the option given to the CHNGE command equals null.
      */
-    @Ignore
     @Test(expected = NoCommandException.class)
     public void testChangeToException2() throws NoCommandException {
         new ProtocolExecutor(new String[]{"CHNGE"}, server.server.getSblList().get(0)).changeTo();
@@ -216,7 +205,6 @@ public class ProtocolExecutorTest {
      * Tests the implementation of newGame. Details about what is tested are
      * found next to the assertEquals methods.
      */
-    @Ignore
     @Test
     public void testNewGame() {
         ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"CHNGE", "Status", "READY"}, server.server.getSblList().get(0));
@@ -249,7 +237,6 @@ public class ProtocolExecutorTest {
     /**
      * Tests the case where the option given to the NWGME command is not valid.
      */
-    @Ignore
     @Test(expected = NoCommandException.class)
     public void testNewGameException1() throws NoCommandException {
         new ProtocolExecutor(new String[]{"NWGME", "NotAnOption"}, server.server.getSblList().get(0)).changeTo();
@@ -258,7 +245,6 @@ public class ProtocolExecutorTest {
     /**
      * Tests the case where the option given to the NWGME command equals null.
      */
-    @Ignore
     @Test(expected = NoCommandException.class)
     public void testNewGameException2() throws NoCommandException {
         new ProtocolExecutor(new String[]{"NWGME"}, server.server.getSblList().get(0)).changeTo();
@@ -268,7 +254,6 @@ public class ProtocolExecutorTest {
      * Tests the implementation of chatMessage with all three options 'Global', 'Broadcast' and 'Private'.
      * Details about what is tested are found next to the assertEquals methods.
      */
-    @Ignore
     @Test
     public void testChatMessage() {
         ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"CHNGE", "Status", "READY"}, server.server.getSblList().get(0));
@@ -365,7 +350,6 @@ public class ProtocolExecutorTest {
     /**
      * Tests the case where the option given to the CHATM command is not valid.
      */
-    @Ignore
     @Test(expected = NoCommandException.class)
     public void testChatMessageException1() throws NoCommandException {
         new ProtocolExecutor(new String[]{"CHATM", "NotAnOption"}, server.server.getSblList().get(0)).changeTo();
@@ -374,7 +358,6 @@ public class ProtocolExecutorTest {
     /**
      * Tests the case where the option given to the CHATM command equals null.
      */
-    @Ignore
     @Test(expected = NoCommandException.class)
     public void testChatMessageException2() throws NoCommandException {
         new ProtocolExecutor(new String[]{"CHATM"}, server.server.getSblList().get(0)).changeTo();
@@ -385,15 +368,83 @@ public class ProtocolExecutorTest {
      */
     @Test
     public void testLogout() {
-        ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"LGOUT"}, server.server.getSblList().get(0));
+        ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"CHNGE", "Status", "READY"}, server.server.getSblList().get(0));
+        ProtocolExecutor pe1 = new ProtocolExecutor(new String[]{"NWGME", "New", "2§30"}, server.server.getSblList().get(1));
+        try {
+            pe0.changeTo();
+            sleep(200);
+            pe1.newGame();
+            sleep(400);
+        } catch(NoCommandException nce) {
+            servLog.debug("Error with testing framework");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        pe0.setInput(new String[]{"LGOUT"});
         try {
             pe0.logout();
-            sleep(500);
+            sleep(200);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
         assertEquals(3, server.server.getLobby().getPlayerLobby().size());
+        // Test: Player got removed from main lobby
+        assertEquals(1, server.server.getLobby().getGames().get(0).players.size());
+        // Test: Player was removed from game lobby
+        assertEquals(false, server.server.getLobby().getGames().get(0).gameIsRunning());
+        // Test: Server recognised game to have only one player left and terminated it
     }
 
+    /**
+     * Tests the implementation of display with all options.
+     */
+    @Test
+    public void testDisplay() {
+        ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"CHNGE", "Status", "READY"}, server.server.getSblList().get(0));
+        ProtocolExecutor pe1 = new ProtocolExecutor(new String[]{"NWGME", "New", "2§30"}, server.server.getSblList().get(1));
+        try {
+            pe0.changeTo();
+            sleep(200);
+            pe1.newGame();
+            sleep(400);
+        } catch(NoCommandException nce) {
+            servLog.debug("Error with testing framework");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ProtocolExecutor pe2 = new ProtocolExecutor(new String[]{"DISPL", "players"}, server.server.getSblList().get(2));
+        ProtocolExecutor pe3 = new ProtocolExecutor(new String[]{"DISPL", "games"}, server.server.getSblList().get(3));
+        try {
+            pe2.display();
+            pe3.display();
+            sleep(550);
+        } catch(NoCommandException nce) {
+            servLog.debug("Error with testing framework.");
+        } catch(InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals("PRINT§Terminal§Players list: Janni (INGAME), Manuela (INGAME), Rohan (WAITING), Guillaume (WAITING)",
+                client2.clientList.get(2).getServerListener().getInput());
+        // Test: Player list is displayed
+        assertEquals("PRINT§Terminal§1: Participants: Manuela, Janni || RUNNING.",
+                client3.clientList.get(3).getServerListener().getInput());
+        // Test: Game list is displayed
+    }
+
+    /**
+     * Tests the case where the option given to the DISPL command is not valid.
+     */
+    @Test(expected = NoCommandException.class)
+    public void testDisplayException1() throws NoCommandException {
+        new ProtocolExecutor(new String[]{"DISPL", "NotAnOption"}, server.server.getSblList().get(0)).changeTo();
+    }
+
+    /**
+     * Tests the case where the option given to the DISPL command equals null.
+     */
+    @Test(expected = NoCommandException.class)
+    public void testDisplayException2() throws NoCommandException {
+        new ProtocolExecutor(new String[]{"DISPL"}, server.server.getSblList().get(0)).changeTo();
+    }
 }

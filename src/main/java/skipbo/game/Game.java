@@ -656,9 +656,6 @@ public class Game implements Runnable {
         score = Math.round(score*100) / 100;
         if (winner != null) {
             new ProtocolExecutor().sendAll("ENDGM§Winner§" + winner.getName(), winner.getSBL());
-        } else {
-            // TODO: option for when game got interrupted without having a winner. SOLVED (see below)
-            // Solved: If game is ended w/o a winner, use method game.terminateGame().
         }
         new ProtocolExecutor().gameEnding(this);
     }

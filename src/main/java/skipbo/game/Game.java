@@ -647,13 +647,15 @@ public class Game implements Runnable {
         gameRunning = false;
         this.winner = winner;
 
+        for(int i = 0; i < 4; i++){
+            ArrayList<Card> bp = piles.buildPiles.get(i);
+            bp.clear();
+        }
+
         score = (double) turnCounter / sizeOfStockPile;
         score = Math.round(score*100) / 100.0;
         if (winner != null) {
             new ProtocolExecutor().sendAll("ENDGM§Winner§" + winner.getName(), winner.getSBL());
-        } else {
-            // TODO: option for when game got interrupted without having a winner. SOLVED (see below)
-            // Solved: If game is ended w/o a winner, use method game.terminateGame().
         }
         new ProtocolExecutor().gameEnding(this);
     }

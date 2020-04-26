@@ -2,6 +2,7 @@ package skipbo.game;
 
 import skipbo.server.SBListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static skipbo.server.SBServer.servLog;
@@ -131,6 +132,23 @@ public class Player {
      * Empties handcards of player.
      */
     public void clearHandCards() { this.getHandCards().clear(); }
+
+    /**
+     * Clears discard piles of a player
+     */
+    public void clearDiscardPiles(){
+        for(int i = 0; i <4; i++){
+            ArrayList<Card> discardPile = this.getDiscardPile().get(i);
+            discardPile.clear();
+        }
+    }
+
+    /**
+     * Clears stock piles of a player
+     */
+    public void clearStockPile(){
+        this.getStockPile().clear();
+    }
 
     /**
      * Method to return the discard piles of a player

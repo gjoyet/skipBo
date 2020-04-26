@@ -1,6 +1,6 @@
 package skipbo.client;
 
-import javax.swing.JButton;
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class CardButton extends JButton {

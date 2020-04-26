@@ -504,6 +504,11 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             printInfoMessage("Your chat partner left. You are now chatting in the lobby chat.");
             updateNamesInComboBox("lobby");
         }
+        if (gameGraphic != null) {
+            if (gameGraphic.getOpponentNames().contains(name)) {
+                gameGraphic.removePlayer(name);
+            }
+        }
 
     }
 

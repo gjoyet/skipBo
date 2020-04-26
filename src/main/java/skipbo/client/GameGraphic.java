@@ -34,8 +34,9 @@ public class GameGraphic implements ActionListener {
     private JLabel e1;
     private JLabel e2;
     private JLabel e3;
-
+    //Array of JLabels e1, e2, e3 depending on how many players are playing
     private JLabel[] oppArray;
+
     private int playerIndex = 0;
 
     //Own piles
@@ -206,7 +207,7 @@ public class GameGraphic implements ActionListener {
         layeredPane.add(draw);
         ImageIcon back = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("Back.png")));
         draw.setIcon(back);
-        setClickable(draw, false);
+        setNotClickable(draw);
 
 
         /*
@@ -230,17 +231,17 @@ public class GameGraphic implements ActionListener {
         e1_stock = new CardButton();
         e1_stock.setBounds(x_OP1, y_OP1, WIDTH_OP1, HEIGHT_OP1);
         layeredPane.add(e1_stock);
-        setClickable(e1_stock, false);
+        setNotClickable(e1_stock);
 
         e2_stock = new CardButton();
         e2_stock.setBounds(x_OP1, y_OP2, WIDTH_OP1, HEIGHT_OP1);
         layeredPane.add(e2_stock);
-        setClickable(e2_stock, false);
+        setNotClickable(e2_stock);
 
         e3_stock = new CardButton();
         e3_stock.setBounds(x_OP1, y_OP3, WIDTH_OP1, HEIGHT_OP1);
         layeredPane.add(e3_stock);
-        setClickable(e3_stock, false);
+        setNotClickable(e3_stock);
 
         //Discard piles of enemies
         for (int i = 0; i < e1_discard.length; i++) {
@@ -253,9 +254,9 @@ public class GameGraphic implements ActionListener {
             b1.setBounds(x_OP1 + i * x_OP1_DISTANCE + 55, y_OP1, WIDTH_OP1, HEIGHT_OP1);
             b2.setBounds(x_OP1 + i * x_OP1_DISTANCE + 55, y_OP2, WIDTH_OP1, HEIGHT_OP1);
             b3.setBounds(x_OP1 + i * x_OP1_DISTANCE + 55, y_OP3, WIDTH_OP1, HEIGHT_OP1);
-            setClickable(b1, false);
-            setClickable(b2, false);
-            setClickable(b3, false);
+            setNotClickable(b1);
+            setNotClickable(b2);
+            setNotClickable(b3);
             layeredPane.add(b1);
             layeredPane.add(b2);
             layeredPane.add(b3);
@@ -353,15 +354,18 @@ public class GameGraphic implements ActionListener {
         }
     }
 
-    private void setClickable(JButton button, boolean b) {
-        button.setFocusPainted(b);
-        if (b) {
-            button.setModel(defaultButtonModel);
-        } else {
-            button.setModel(notClickableModel);
-        }
+    /**
+     * Makes a button not clickable without greying it out (like setEnable(false) would do)
+     * @param button Button to make not clickable
+     */
+    private void setNotClickable(JButton button) {
+        button.setFocusPainted(false);
+        button.setModel(notClickableModel);
     }
 
+    /**
+     * Creates the ButtonModel for buttons that can't be pressed but are not greyed out
+     */
     void setButtonModel() {
         notClickableModel = new DefaultButtonModel() {
             public boolean isArmed() {
@@ -415,7 +419,7 @@ public class GameGraphic implements ActionListener {
         } else {
             al = getEnemyArray(name, j);
             newDisCard = new CardButton();
-            setClickable(newDisCard, false);
+            setNotClickable(newDisCard);
             setBoundsOfDiscard(newDisCard, al, DISTOPPDISCARD);
             newDisCard.setIcon(cardIcons.getIcon(colour, number, CardIcons.SMALL));
             newDisCard.addCard(colour, number);
@@ -433,6 +437,12 @@ public class GameGraphic implements ActionListener {
         }
     }
 
+    /**
+     * Sets the location of all cards on a discard pile when a card is added or removed.
+     * @param newDisCard The card that is added on the discard pile. If null, the top card will be removed
+     * @param al An ArrayList with discard buttons
+     * @param distance Distance between two cards of the same discard pile (Y-Direction)
+     */
     private void setBoundsOfDiscard(CardButton newDisCard, ArrayList<CardButton> al, int distance) {
         if (newDisCard != null) { //Card will be added
             if (al.size() >= 6) {
@@ -540,7 +550,6 @@ public class GameGraphic implements ActionListener {
         }
     }
 
-    // Play from discard pile to a build pile
 
     /**
      * Plays a card from a discard pile to a build pile
@@ -737,8 +746,27 @@ public class GameGraphic implements ActionListener {
         }
     }
 
+    /**
+     * Removes a player that quits the game
+     * @param name Player that quit the game
+     */
+    void removePlayer(String name) {
+        //TODO
+        clientLog.debug("Got into removePlayer method in GameGraphic");
+    }
+
     void setStockSize(int stockSize) {
         initialNumStockCards = stockSize;
+    }
+
+    ArrayList<String> getOpponentNames() {
+        ArrayList<String> al = new ArrayList<>();
+        for (JLabel jLabel : oppArray) {
+            if (jLabel != null) {
+                al.add(jLabel.getText());
+            }
+        }
+        return al;
     }
 
     JLayeredPane getGameComponent() {

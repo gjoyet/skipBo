@@ -20,6 +20,9 @@ public class DragDropTest extends JFrame implements DropTargetListener, DragGest
         frame.setVisible(true);
     }
 
+    /**
+     * Class for testing drag and drop but not really working as wished (yet).
+     */
     DragDropTest() {
         setTitle("DragDrop Test");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

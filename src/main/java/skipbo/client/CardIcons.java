@@ -1,7 +1,7 @@
 package skipbo.client;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.ImageIcon;
+import java.awt.Image;
 import java.util.Objects;
 
 class CardIcons {

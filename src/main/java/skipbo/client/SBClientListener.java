@@ -171,9 +171,9 @@ class SBClientListener {
         }
 
         String placeFrom = line[1];
-        String fromNumber = line[2]; //probably can change to int later
+        String fromNumber = line[2];
         String placeTo = line[3];
-        String toNumber = line[4]; //probably can change to int later
+        String toNumber = line[4];
 
         clientLog.debug("Command: " + Protocol.PUTTO + "§Card§" + placeFrom + "§" + fromNumber + "§" + placeTo + "§" + toNumber);
         return Protocol.PUTTO + "§Card§" + placeFrom + "§" + fromNumber + "§" + placeTo + "§" + toNumber;

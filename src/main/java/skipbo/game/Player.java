@@ -2,7 +2,6 @@ package skipbo.game;
 
 import skipbo.server.SBListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static skipbo.server.SBServer.servLog;

@@ -36,7 +36,7 @@ public class SBServerListener implements Runnable {
         while (isLoggedIn) {
             try {
                 input = br.readLine();
-                clientLog.debug(input);
+                //clientLog.debug(input);
                 executeCommand(input);
             } catch (IOException e) {
                 clientLog.warn("Error with reading input from server");
@@ -158,31 +158,13 @@ public class SBServerListener implements Runnable {
         clientLog.debug("got into check method");
         if (command[1].equalsIgnoreCase("HandCards")) {
             String[] cards = command[2].split("§");
-            //DEBUGGING
-            /*StringBuilder string = new StringBuilder();
-            for (String card : cards) {
-                string.append(card);
-            }*/
-            //clientLog.debug("cards array= " + string);
             String[] colours = new String[cards.length / 2];
             int[] numbers = new int[colours.length];
             for (int i = 0, j = 0; i < colours.length; i++) {
                 colours[i] = cards[j++];
                 numbers[i] = Integer.parseInt(cards[j++]);
             }
-            //DEBUGGING
-            /*StringBuilder str = new StringBuilder();
-            for (String colour : colours) {
-                str.append(colour);
-            }
-            StringBuilder numArr = new StringBuilder();
-            for (int number : numbers) {
-                numArr.append(number);
-            }*/
-            //clientLog.debug("Num Array = " + numArr);
-            //clientLog.debug("Colours array = " + str);
             chatGraphic.getGameGraphic().updateHandCards(colours, numbers);
-            //clientLog.debug("got into update method in GameGraphic");
         }
     }
 

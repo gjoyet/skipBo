@@ -22,11 +22,9 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
     private final SBClientListener clientListener;
     private Container contentPane;
-    //private JTextArea chat;
     private JTextPane chat;
     private JTextArea inputMes;
-    JScrollPane chatScrollPane;
-    private JScrollPane inputScrollPane;
+    private JScrollPane chatScrollPane;
     private JButton manualB;
     private JButton changeNameB;
     private JButton readyB;
@@ -36,9 +34,10 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     private JButton whosOnB;
     private JButton leaveB;
     private GameGraphic gameGraphic = null;
-    String playerName = "";
+    private String playerName = "";
     private DefaultComboBoxModel<String> playerComboModel;
     private ArrayList<String> playerArray = new ArrayList<>();
+
     static final Color DARKGREEN = new Color(0x0AB222);
 
     private final int X_FRAME = 400;
@@ -46,20 +45,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     private final int WIDTH_FRAME = 420;
     private final int HEIGHT_FRAME = 830;
 
-/*
-    //test method
-    public static void main(String[] args) {
-        ChatGraphic testChatGraphic = new ChatGraphic();
-        GameGraphic gameGraphic = new GameGraphic(testChatGraphic);
-        gameGraphic.setGameGraphic();
-    }
-
-    //Test constructor
-    ChatGraphic() {
-        setFrame();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-    */
 
     /**
      * Constructor for ChatGraphic without player name. Lets client choose their name.
@@ -143,12 +128,12 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         changeNameB.addActionListener(this);
 
         infoB = new JButton("Info");
-        infoB.setBounds(X_MENU_B_R1, Y_MENU_B+ 1*Y_DISTANCE_MENU_B, WIDTH_MENU_B, HEIGHT_MENU_B);
+        infoB.setBounds(X_MENU_B_R1, Y_MENU_B+ Y_DISTANCE_MENU_B, WIDTH_MENU_B, HEIGHT_MENU_B);
         contentPane.add(infoB);
         infoB.addActionListener(this);
 
         gamesB = new JButton("Games list");
-        gamesB.setBounds(X_MENU_B_R2, Y_MENU_B+ 1*Y_DISTANCE_MENU_B, WIDTH_MENU_B, HEIGHT_MENU_B);
+        gamesB.setBounds(X_MENU_B_R2, Y_MENU_B+ Y_DISTANCE_MENU_B, WIDTH_MENU_B, HEIGHT_MENU_B);
         contentPane.add(gamesB);
         gamesB.addActionListener(this);
 
@@ -183,12 +168,15 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         chat.setEditable(false);
         //chat.setEditorKit(new WrapEditorKit());
 
-
         chatScrollPane = new JScrollPane(chat);
         chatScrollPane.setBounds(80, 330, 250, 340);
         chatScrollPane.setVisible(true);
         chatScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentPane.add(chatScrollPane);
+
+        DefaultCaret caret = (DefaultCaret) chat.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+
 
         // Dropdown menu for global or private chat
         JLabel privateChatL = new JLabel("Chat with:");
@@ -201,12 +189,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         listChat.setVisible(true);
         listChat.setBounds(150,675,180,20);
         add(listChat);
-/*
-
-        //Testing purpose
-        String[] playersForTesting = {"geiom","theLegend27","ManuWelan","MrDickson","RohanZohan","GreekLegend","Borat","HaikhoMisori"};
-        setPlayers(playersForTesting);
-*/
 
 
         //Input textfield
@@ -219,13 +201,10 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         inputMes.addKeyListener(this);
         contentPane.add(inputMes);
 
-        inputScrollPane = new JScrollPane(inputMes);
+        JScrollPane inputScrollPane = new JScrollPane(inputMes);
         inputScrollPane.setBounds(80, 700, 250, 60);
         inputScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentPane.add(inputScrollPane);
-
-        DefaultCaret caret = (DefaultCaret) chat.getCaret();
-        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
     }
 
@@ -240,20 +219,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
                 "/msg [name] [message]\n/broadcast\n/new game\n/play [PlaceFrom] [n] [PlaceTo] [n]\n" +
                 "/list games|players\n/help\n/quit\n***********";*/
         printInfoMessage(listOfCommands);
-
-/*        JScrollBar vertical = chatScrollPane.getVerticalScrollBar();
-        vertical.setValue(vertical.getMaximum());*/
-
-/*        chatScrollPane.getVerticalScrollBar().addAdjustmentListener(e -> {
-            if ((chatScrollPane.getVerticalScrollBar().getMaximum() - e.getAdjustable().getMaximum()) == 0)
-                return;
-            e.getAdjustable().setValue(e.getAdjustable().getMaximum());
-        });*/
-
-/*        SwingUtilities.invokeLater(() -> {
-            JScrollBar bar = chatScrollPane.getVerticalScrollBar();
-            bar.setValue(bar.getMaximum());
-        });*/
     }
 
     /**
@@ -315,17 +280,8 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         }
         ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo.png")));
 
-/*        int width = gameGraphic.getGameComponent().getWidth();
-        int height = gameGraphic.getGameComponent().getHeight();*/
         int iconWidth = icon.getIconWidth();
         int iconHeight = icon.getIconHeight();
-
-/*        JOptionPane optionPane = new JOptionPane(message, JOptionPane.INFORMATION_MESSAGE,
-                JOptionPane.DEFAULT_OPTION, icon);
-        JDialog dialog = optionPane.createDialog(contentPane, "Game is finished.");
-        dialog.setBounds(width/2-iconWidth/2, height/2-iconHeight/2, iconWidth+270, iconHeight+100);
-        dialog.setVisible(true);*/
-
 
         JPanel endGamePanel = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -354,6 +310,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         gameGraphic = null;
     }
 
+
     /**
      * Lets client set their name
      */
@@ -370,7 +327,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             name = "";
         }
         clientListener.pw.println("SETTO§Nickname§" + name);
-
     }
 
     @Override
@@ -551,7 +507,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
     }
 
-    //TODO might cause problems if own name is sent as well
     /**
      * Puts all clients already connected to the server into the player array when this client connects to the server.
      * @param names Array of all names that are connected to the server except for own name.

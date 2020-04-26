@@ -9,7 +9,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 import static java.lang.Thread.sleep;
-import static skipbo.server.SBServer.*;
+import static skipbo.server.SBServer.servLog;
 
 /**
  * The execution of the network protocol is implemented in this class. Every command has one method,

@@ -26,52 +26,9 @@ public class GameGraphic implements ActionListener {
     private final String playerName;
     private final JLayeredPane layeredPane;
 
-    // Layout Manager
-
-    private final int HEIGHT_HAND = 120;
-    private final int X_HAND = 550;  // change here
-    private final int Y_HAND = 620;  // change here
-    private final int X_HAND_DISTANCE = 88;
-    private final int Y_HAND_LABEL = Y_HAND-20;
-
-    // Layout of discard piles
-    private final int WIDTH_DISCARD = 100;
-    private final int HEIGHT_DISCARD = 145;
-    private final int X_DISCARD = 550;  // change here
-    private final int Y_DISCARD = 330;  // change here
-    private final int X_DISCARD_DISTANCE = 120;
-    private final int Y_DISCARD_LABEL = Y_DISCARD-20;
-
-    // Layout of stock pile
-    private final int WIDTH_STOCK = 100;
-    private final int HEIGHT_STOCK = 145;
-    private final int X_STOCK = 400;    // change here
-    private final int Y_STOCK = 330;    // change here
-    private final int Y_STOCK_LABEL = Y_STOCK-20;
-
-    // Layout of build piles
-    private final int WIDTH_BUILD = 100;
-    private final int HEIGHT_BUILD = 145;
-    private final int X_BUILD = 550;  // change here
-    private final int Y_BUILD = 120;  // change here
-    private final int X_BUILD_DISTANCE = 120;
-    private final int Y_BUILD_LABEL = Y_BUILD-20;
-
-    // Layout of draw pile
-    private final int WIDTH_DRAW = 100;
-    private final int HEIGHT_DRAW = 145;
-    private final int X_DRAW = 400;    // change here
-    private final int Y_DRAW = 120;    // change here
-    private final int Y_DRAW_LABEL = Y_DRAW-20;
-
     // Layout of opponents
     private final int WIDTH_OP1 = 40; //30
     private final int HEIGHT_OP1 = 58; //50
-    private final int X_OP1 = 1050;  // change here
-    private final int Y_OP1 = 120;  // change here
-    private final int Y_OP2 = Y_OP1+140; //120  // change here
-    private final int Y_OP3 = Y_OP2+140;  // change here
-    private final int X_OP1_DISTANCE = 45; //35
 
     //Opponents
     private JLabel e1;
@@ -84,7 +41,6 @@ public class GameGraphic implements ActionListener {
     //Own piles
     private final CardButton[] hand = new CardButton[5];
     private CardButton stock;
-    //private CardButton[] discard = new CardButton[4];
     private final ArrayList<CardButton>[] discard = new ArrayList[4];
 
     //Game piles
@@ -94,10 +50,8 @@ public class GameGraphic implements ActionListener {
     private final ArrayList<CardButton>[] e1_discard = new ArrayList[4];
     private final ArrayList<CardButton>[] e2_discard = new ArrayList[4];
     private final ArrayList<CardButton>[] e3_discard = new ArrayList[4];
-/*    private CardButton[] e1_discard = new CardButton[4];
-    private CardButton[] e2_discard = new CardButton[4];
-    private CardButton[] e3_discard = new CardButton[4];*/
 
+    //Distances between discard cards on same discard pile
     private final int DISTDISCARD = 30;
     private final int DISTOPPDISCARD = 13;
 
@@ -133,16 +87,70 @@ public class GameGraphic implements ActionListener {
         Cards of the Player and build piles
         */
 
+        // Layout Manager
+
+        int WIDTH_HAND = 78;
+        final int HEIGHT_HAND = 120;
+        final int x_HAND = 550;  // change here
+        final int y_HAND = 620;  // change here
+        final int x_HAND_DISTANCE = 88;
+        final int y_HAND_LABEL = y_HAND-20;
+
+        // Layout of discard piles
+        final int WIDTH_DISCARD = 100;
+        final int HEIGHT_DISCARD = 145;
+        final int x_DISCARD = 550;  // change here
+        final int y_DISCARD = 330;  // change here
+        final int x_DISCARD_DISTANCE = 120;
+        final int y_DISCARD_LABEL = y_DISCARD-20;
+
+        // Layout of stock pile
+        final int WIDTH_STOCK = 100;
+        final int HEIGHT_STOCK = 145;
+        final int x_STOCK = 400;    // change here
+        final int y_STOCK = 330;    // change here
+        final int y_STOCK_LABEL = y_STOCK-20;
+
+        // Layout of build piles
+        final int WIDTH_BUILD = 100;
+        final int HEIGHT_BUILD = 145;
+        final int x_BUILD = 550;  // change here
+        final int y_BUILD = 120;  // change here
+        final int x_BUILD_DISTANCE = 120;
+        final int y_BUILD_LABEL = y_BUILD-20;
+
+        // Layout of draw pile
+        final int WIDTH_DRAW = 100;
+        final int HEIGHT_DRAW = 145;
+        final int x_DRAW = 400;    // change here
+        final int y_DRAW = 120;    // change here
+        final int y_DRAW_LABEL = y_DRAW-20;
+
+        // Layout of opponents
+        final int WIDTH_OP1 = 40; //30
+        final int HEIGHT_OP1 = 58; //50
+        final int x_OP1 = 1050;  // change here
+        final int y_OP1 = 120;  // change here
+        final int y_OP2 = y_OP1+140; //120  // change here
+        final int y_OP3 = y_OP2+140;  // change here
+        final int x_OP1_DISTANCE = 45; //35
+        
+        
         JLabel dp = new JLabel("Your Discard Piles");
-        dp.setBounds(X_DISCARD, Y_DISCARD_LABEL, 120, 15);
+        dp.setBounds(x_DISCARD, y_DISCARD_LABEL, 120, 15);
+
         JLabel hp = new JLabel("Your hand cards");
-        hp.setBounds(X_HAND, Y_HAND_LABEL, 120, 15);
+        hp.setBounds(x_HAND, y_HAND_LABEL, 120, 15);
+
         JLabel sp = new JLabel("Your stock pile");
-        sp.setBounds(X_STOCK, Y_STOCK_LABEL, 120, 15);
+        sp.setBounds(x_STOCK, y_STOCK_LABEL, 120, 15);
+
         JLabel bp = new JLabel("Build piles");
-        bp.setBounds(X_BUILD, Y_BUILD_LABEL, 120, 15);
+        bp.setBounds(x_BUILD, y_BUILD_LABEL, 120, 15);
+
         JLabel dpg = new JLabel("Draw pile");
-        dpg.setBounds(X_DRAW, Y_DRAW_LABEL, 120, 15);
+        dpg.setBounds(x_DRAW, y_DRAW_LABEL, 120, 15);
+
         layeredPane.add(dpg);
         layeredPane.add(dp);
         layeredPane.add(hp);
@@ -150,50 +158,20 @@ public class GameGraphic implements ActionListener {
         layeredPane.add(bp);
 
         // Discard and build Piles
-
         for (int i = 0, j = 1; i < discard.length; i++, j++) {
-            //discard[i] = new CardButton(CardButton.DISCARD);
             build[i] = new CardButton(CardButton.BUILD);
-            build[i].setBounds(X_BUILD + i * X_BUILD_DISTANCE, Y_BUILD, WIDTH_BUILD, HEIGHT_BUILD);
-            //layeredPane.add(discard[i]);
+            build[i].setBounds(x_BUILD + i * x_BUILD_DISTANCE, y_BUILD, WIDTH_BUILD, HEIGHT_BUILD);
             layeredPane.add(build[i]);
-            //discard[i].addActionListener(this);
-            //build[i].addActionListener(this);
-            //discard[i].setName(" D " + j);
             build[i].setName(" B " + j);
+
             discard[i] = new ArrayList<>();
             CardButton b = new CardButton(CardButton.DISCARD);
-            b.setBounds(X_DISCARD + i * X_DISCARD_DISTANCE, Y_DISCARD, WIDTH_DISCARD, HEIGHT_DISCARD);
+            b.setBounds(x_DISCARD + i * x_DISCARD_DISTANCE, y_DISCARD, WIDTH_DISCARD, HEIGHT_DISCARD);
             b.addActionListener(this);
             b.setName(" D " + j);
             layeredPane.add(b);
             discard[i].add(b);
-
         }
-/*        discard[0].setBounds(620, 400, 100, 145);
-        discard[1].setBounds(730, 400, 100, 145);
-        discard[2].setBounds(840, 400, 100, 145);
-        discard[3].setBounds(950, 400, 100, 145);*/
-
-
-        /*
-         * Test/Example for multiple buttons on top of each other
-         */
-/*
-        dis[0] = new ArrayList<>();
-        dis[0].add(new CardButton());
-        dis[0].get(dis[0].size()-1).setText("Test1");
-        //dis[0].get(dis[0].size()-1).setLocation(discard[0].getLocation());
-        dis[0].get(dis[0].size()-1).setBounds(620, 400+20*dis[0].size(), 100, 145);
-        layeredPane.add(dis[0].get(dis[0].size()-1), new Integer(dis[0].size()));
-        dis[0].get(dis[0].size()-1).setVisible(true);
-
-        dis[0].add(new CardButton());
-        dis[0].get(dis[0].size()-1).setText("Test2");
-        dis[0].get(dis[0].size()-1).setBounds(620, 400+20*dis[0].size(), 100, 145);
-        layeredPane.add(dis[0].get(dis[0].size()-1), new Integer(dis[0].size()));
-        dis[0].get(dis[0].size()-1).setVisible(true);
-        */
 
         // hand piles
         for (int i = 0; i < hand.length; ) {
@@ -202,72 +180,68 @@ public class GameGraphic implements ActionListener {
             hand[i].addActionListener(this);
             hand[i].setName(" H " + ++i);
         }
-        // Layout of Hand piles
-        int WIDTH_HAND = 78;
-        hand[0].setBounds(X_HAND, Y_HAND, WIDTH_HAND, HEIGHT_HAND);
-        hand[1].setBounds(X_HAND + X_HAND_DISTANCE, Y_HAND, WIDTH_HAND, HEIGHT_HAND);
-        hand[2].setBounds(X_HAND + 2*X_HAND_DISTANCE, Y_HAND, WIDTH_HAND, HEIGHT_HAND);
-        hand[3].setBounds(X_HAND + 3*X_HAND_DISTANCE, Y_HAND, WIDTH_HAND, HEIGHT_HAND);
-        hand[4].setBounds(X_HAND + 4*X_HAND_DISTANCE, Y_HAND, WIDTH_HAND, HEIGHT_HAND);
+        hand[0].setBounds(x_HAND, y_HAND, WIDTH_HAND, HEIGHT_HAND);
+        hand[1].setBounds(x_HAND + x_HAND_DISTANCE, y_HAND, WIDTH_HAND, HEIGHT_HAND);
+        hand[2].setBounds(x_HAND + 2* x_HAND_DISTANCE, y_HAND, WIDTH_HAND, HEIGHT_HAND);
+        hand[3].setBounds(x_HAND + 3* x_HAND_DISTANCE, y_HAND, WIDTH_HAND, HEIGHT_HAND);
+        hand[4].setBounds(x_HAND + 4* x_HAND_DISTANCE, y_HAND, WIDTH_HAND, HEIGHT_HAND);
 
 
         //stock pile
         stock = new CardButton(CardButton.STOCK);
-        stock.setBounds(X_STOCK, Y_STOCK, WIDTH_STOCK, HEIGHT_STOCK);
+        stock.setBounds(x_STOCK, y_STOCK, WIDTH_STOCK, HEIGHT_STOCK);
         layeredPane.add(stock);
         stock.setName(" S 1");
         stock.addActionListener(this);
+
 
         /*
         Cards of the game (draw pile)
         */
 
-
         // draw pile
         JButton draw = new JButton();
-        draw.setBounds(X_DRAW, Y_DRAW, WIDTH_DRAW, HEIGHT_DRAW);
+        draw.setBounds(x_DRAW, y_DRAW, WIDTH_DRAW, HEIGHT_DRAW);
         layeredPane.add(draw);
         ImageIcon back = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("Back.png")));
         draw.setIcon(back);
         setClickable(draw, false);
+
 
         /*
         display cards of enemies
         */
 
         //Labels of enemies
-
         e1 = new JLabel("Opponent 1");
-        e1.setBounds(X_OP1, Y_OP1-20, 120, 15);
+        e1.setBounds(x_OP1, y_OP1 -20, 120, 15);
         layeredPane.add(e1);
 
         e2 = new JLabel("Opponent 2");
-        e2.setBounds(X_OP1, Y_OP2-20, 120, 15);
+        e2.setBounds(x_OP1, y_OP2 -20, 120, 15);
         layeredPane.add(e2);
 
         e3 = new JLabel("Opponent 3");
-        e3.setBounds(X_OP1, Y_OP3-20, 120, 15);
+        e3.setBounds(x_OP1, y_OP3 -20, 120, 15);
         layeredPane.add(e3);
 
         //Stock piles of enemies
         e1_stock = new CardButton();
-        e1_stock.setBounds(X_OP1, Y_OP1, WIDTH_OP1, HEIGHT_OP1);
+        e1_stock.setBounds(x_OP1, y_OP1, WIDTH_OP1, HEIGHT_OP1);
         layeredPane.add(e1_stock);
         setClickable(e1_stock, false);
 
         e2_stock = new CardButton();
-        e2_stock.setBounds(X_OP1, Y_OP2, WIDTH_OP1, HEIGHT_OP1);
+        e2_stock.setBounds(x_OP1, y_OP2, WIDTH_OP1, HEIGHT_OP1);
         layeredPane.add(e2_stock);
         setClickable(e2_stock, false);
 
         e3_stock = new CardButton();
-        e3_stock.setBounds(X_OP1, Y_OP3, WIDTH_OP1, HEIGHT_OP1);
+        e3_stock.setBounds(x_OP1, y_OP3, WIDTH_OP1, HEIGHT_OP1);
         layeredPane.add(e3_stock);
         setClickable(e3_stock, false);
 
-
         //Discard piles of enemies
-
         for (int i = 0; i < e1_discard.length; i++) {
             e1_discard[i] = new ArrayList<>();
             e2_discard[i] = new ArrayList<>();
@@ -275,9 +249,9 @@ public class GameGraphic implements ActionListener {
             CardButton b1 = new CardButton();
             CardButton b2 = new CardButton();
             CardButton b3 = new CardButton();
-            b1.setBounds(X_OP1 + i * X_OP1_DISTANCE + 55, Y_OP1, WIDTH_OP1, HEIGHT_OP1); //+45
-            b2.setBounds(X_OP1 + i * X_OP1_DISTANCE + 55, Y_OP2, WIDTH_OP1, HEIGHT_OP1);
-            b3.setBounds(X_OP1 + i * X_OP1_DISTANCE + 55, Y_OP3, WIDTH_OP1, HEIGHT_OP1);
+            b1.setBounds(x_OP1 + i * x_OP1_DISTANCE + 55, y_OP1, WIDTH_OP1, HEIGHT_OP1);
+            b2.setBounds(x_OP1 + i * x_OP1_DISTANCE + 55, y_OP2, WIDTH_OP1, HEIGHT_OP1);
+            b3.setBounds(x_OP1 + i * x_OP1_DISTANCE + 55, y_OP3, WIDTH_OP1, HEIGHT_OP1);
             setClickable(b1, false);
             setClickable(b2, false);
             setClickable(b3, false);
@@ -290,42 +264,17 @@ public class GameGraphic implements ActionListener {
         }
 
         //Displays number of own stock cards left. Name of label corresponds to the number of stock cards left.
+        //Further adjustments are done in method setOpponentNames
         numOfStockCards = new JLabel();
-        //numOfStockCards.setName(String.valueOf(initialNumStockCards));
-        numOfStockCards.setBounds(X_STOCK, Y_STOCK+HEIGHT_STOCK+5, 100, 15);
+        numOfStockCards.setBounds(x_STOCK, y_STOCK + HEIGHT_STOCK +5, 100, 15);
         layeredPane.add(numOfStockCards);
 
         //creates JLabels for number of stock cards of opponents and sets their bounds. Further adjustments are done in
         //method setOpponentNames
         for (int i = 0; i < oppNumStockCards.length; i++) {
             oppNumStockCards[i] = new JLabel();
-            oppNumStockCards[i].setBounds(X_OP1+(WIDTH_OP1/2)-7, Y_OP1+HEIGHT_OP1+4+i*140, 35, 15);
+            oppNumStockCards[i].setBounds(x_OP1 +(WIDTH_OP1/2)-7, y_OP1 +HEIGHT_OP1+4+i*140, 35, 15);
         }
-/*            e1_discard[i] = new CardButton();
-            e2_discard[i] = new CardButton();
-            e3_discard[i] = new CardButton();
-            layeredPane.add(e1_discard[i]);
-            layeredPane.add(e2_discard[i]);
-            layeredPane.add(e3_discard[i]);
-            setClickable(e1_discard[i], false);
-            setClickable(e2_discard[i], false);
-            setClickable(e3_discard[i], false);*/
-
-
-/*        e1_discard[0].setBounds(535, 50, 30, 50);
-        e1_discard[1].setBounds(570, 50, 30, 50);
-        e1_discard[2].setBounds(605, 50, 30, 50);
-        e1_discard[3].setBounds(640, 50, 30, 50);*/
-
-/*        e2_discard[0].setBounds(745, 50, 30, 50);
-        e2_discard[1].setBounds(780, 50, 30, 50);
-        e2_discard[2].setBounds(815, 50, 30, 50);
-        e2_discard[3].setBounds(850, 50, 30, 50);
-
-        e3_discard[0].setBounds(955, 50, 30, 50);
-        e3_discard[1].setBounds(990, 50, 30, 50);
-        e3_discard[2].setBounds(1025, 50, 30, 50);
-        e3_discard[3].setBounds(1060, 50, 30, 50);*/
 
     }
 
@@ -433,16 +382,13 @@ public class GameGraphic implements ActionListener {
      * @param number Number of hand card being moved
      */
     void handToDiscard(int i, int j, String name, String colour, int number) {
-
         ArrayList<CardButton> al;
         CardButton newDisCard;
+
         if (name.equals(playerName)) {
             CardButton handCard = hand[i - 1];
-            //CardButton discardCard = discard[j-1];
             String col = handCard.removeColour();
             int num = handCard.removeNumber();
-            //discardCard.setIcon(cardIcons.getIcon(col, num, CardIcons.LARGE));
-            //discardCard.addCard(col, num);
             handCard.setIcon(null);
             clientListener.pw.println(Protocol.PUTTO + "§Update§D§" + i + "§" + j + "§" + name + "§" +
                     col + "§" + num);
@@ -454,13 +400,12 @@ public class GameGraphic implements ActionListener {
             oldDisCard.removeActionListener(this);
             newDisCard.setName(" D " + j);
             setBoundsOfDiscard(newDisCard, al, DISTDISCARD);
-/*            newDisCard.setBounds(al.get(0).getX(), al.get(0).getY() + (al.size() - 1) * 30,
-                    al.get(0).getWidth(), al.get(0).getHeight());*/
             newDisCard.setIcon(cardIcons.getIcon(col, num, CardIcons.LARGE));
             newDisCard.addCard(col, num);
             layeredPane.add(newDisCard, Integer.valueOf(al.size()));
             al.add(newDisCard);
 
+            //Paint name of player whose turn it is green
             playerIndex = (playerIndex + 1) % oppArray.length;
             oppArray[playerIndex].setForeground(ChatGraphic.DARKGREEN);
 
@@ -469,16 +414,12 @@ public class GameGraphic implements ActionListener {
             newDisCard = new CardButton();
             setClickable(newDisCard, false);
             setBoundsOfDiscard(newDisCard, al, DISTOPPDISCARD);
-            /*newDisCard.setBounds(al.get(0).getX(), al.get(0).getY() + (al.size() - 1) * 13, al.get(0).getWidth(),
-                    al.get(0).getHeight());*/
             newDisCard.setIcon(cardIcons.getIcon(colour, number, CardIcons.SMALL));
             newDisCard.addCard(colour, number);
             layeredPane.add(newDisCard, Integer.valueOf(al.size()));
             al.add(newDisCard);
-/*            CardButton discard =  getEnemyArray(name, j);
-            discard.addCard(colour, number);
-            discard.setIcon(cardIcons.getIcon(colour, number, CardIcons.SMALL));*/
 
+            //Paint names of opponents in the right colors
             oppArray[playerIndex].setForeground(Color.BLACK);
             playerIndex = (playerIndex + 1) % oppArray.length;
             if (oppArray[playerIndex] != null) { //if this is null, it means that it's this players turn
@@ -534,9 +475,6 @@ public class GameGraphic implements ActionListener {
         } else {
             clientLog.debug("set build for everyone");
             CardButton buildCard = build[j - 1];
-/*            if (number == 13) {
-                number = buildCard.getTopNumber()+1;
-            }*/
             buildCard.addCard(colour, number);
             buildCard.setIcon(cardIcons.getIcon(colour, number, CardIcons.LARGE));
         }
@@ -545,8 +483,6 @@ public class GameGraphic implements ActionListener {
         }
     }
 
-    // Play the stock card to a build pile. card1 = new stock card, card2 = new build card
-
     /**
      * Plays a stock card to a build pile
      *
@@ -554,8 +490,8 @@ public class GameGraphic implements ActionListener {
      * @param name    Player name of player who makes the move
      * @param colour1 Colour of the new stock card
      * @param number1 Number of the new stock card
-     * @param colour2 Colour of the stock card being moved
-     * @param number2 Number of the stock card being moved
+     * @param colour2 Colour of the stock card being moved to build pile
+     * @param number2 Number of the stock card being moved to build pile
      */
     void stockToBuild(int j, String name, String colour1, int number1, String colour2, int number2) {
         //clientLog.debug("(GameGraphic) entered stock to build method");
@@ -571,6 +507,7 @@ public class GameGraphic implements ActionListener {
             stock.setIcon(cardIcons.getIcon(colour1, number1, CardIcons.LARGE));
             stock.addCard(colour1, number1);
 
+            //Update label with number of stock cards left
             numOfStockCards.setName(String.valueOf(Integer.parseInt(numOfStockCards.getName())-1));
             if (numOfStockCards.getName().equals("1")) {
                 numOfStockCards.setText(1 + " card left");
@@ -584,13 +521,12 @@ public class GameGraphic implements ActionListener {
             clientLog.debug("is updating build & stock from enemy");
             CardButton stockCard = getEnemyButton(name);
             CardButton buildCard = build[j - 1];
-/*            if (number2 == 13) {
-                number2 = buildCard.getTopNumber()+1;
-            }*/
             buildCard.addCard(colour2, number2);
             buildCard.setIcon(cardIcons.getIcon(colour2, number2, CardIcons.LARGE));
             stockCard.addCard(colour1, number1);
             stockCard.setIcon(cardIcons.getIcon(colour1, number1, CardIcons.SMALL));
+
+            //Update label with number of stock cards left
             JLabel l = getNumOfStockCardsLabel(name);
             l.setText(String.valueOf(Integer.parseInt(l.getText())-1));
         }
@@ -615,11 +551,6 @@ public class GameGraphic implements ActionListener {
         String col;
         int num;
         if (name.equals(playerName)) {
-/*            discardCard = discard[i-1];
-            String col = discardCard.removeColour();
-            num = discardCard.removeNumber();
-            buildCard.setIcon(cardIcons.getIcon(col, num, CardIcons.LARGE));
-            discardCard.setIcon(cardIcons.getIcon(discardCard.getTopColour(), discardCard.getTopNumber(), CardIcons.LARGE));*/
             clientListener.pw.println(Protocol.PUTTO + "§Update§" + i + "§" + j + "§" + name);
 
             al = discard[i - 1];
@@ -648,23 +579,12 @@ public class GameGraphic implements ActionListener {
             buildCard.setIcon(cardIcons.getIcon(col, num, CardIcons.LARGE));
             setBoundsOfDiscard(null, al, DISTOPPDISCARD);
             layeredPane.repaint();
-/*            discardCard = getEnemyArray(name, i);
-            String col = discardCard.removeColour();
-            num = discardCard.removeNumber();
-            buildCard.setIcon(cardIcons.getIcon(col, num, CardIcons.LARGE));
-            discardCard.setIcon(cardIcons.getIcon(discardCard.getTopColour(), discardCard.getTopNumber(), CardIcons.SMALL));*/
         }
         if (num == 12) {
             resetBuildPile(j - 1);
         }
     }
 
-    /*
-     * dis -> build: 2x index, name = 3
-     * stock -> build: 1x index, name, 2x Card = 6
-     * hand -> build: 1x Pile, 2x index, name, 1x Card = 6
-     * hand -> dis: 1x Pile, 2x index, name, 1x Card = 6
-     * */
 
     void updateHandCards(String[] colours, int[] numbers) {
 /*        clientLog.debug("(Graphic) length of colours = " + colours.length);
@@ -673,7 +593,6 @@ public class GameGraphic implements ActionListener {
             hand[i].setIcon(cardIcons.getIcon(colours[i], numbers[i], CardIcons.MEDIUM));
             hand[i].resetCards();
             hand[i].addCard(colours[i], numbers[i]);
-            //clientLog.debug("updated hand card " + i);
         }
         for (int i = 4; i >= colours.length; i--) {
             hand[i].resetCards();
@@ -722,7 +641,7 @@ public class GameGraphic implements ActionListener {
     }
 
     //returns discard pile array of enemy
-    ArrayList<CardButton> getEnemyArray(String name, int index) {
+    private ArrayList<CardButton> getEnemyArray(String name, int index) {
         ArrayList<CardButton> array = null;
         if (e1.getText().equals(name)) {
             array = e1_discard[index - 1];
@@ -735,7 +654,7 @@ public class GameGraphic implements ActionListener {
     }
 
     //returns stock pile button of enemy
-    CardButton getEnemyButton(String name) {
+    private CardButton getEnemyButton(String name) {
         CardButton button = null;
         if (e1.getText().equals(name)) {
             button = e1_stock;
@@ -747,7 +666,7 @@ public class GameGraphic implements ActionListener {
         return button;
     }
 
-    JLabel getNumOfStockCardsLabel(String name) {
+    private JLabel getNumOfStockCardsLabel(String name) {
         for (JLabel oppNumStockCard : oppNumStockCards) {
             if (oppNumStockCard.getName().equals(name)) {
                 return oppNumStockCard;
@@ -756,7 +675,6 @@ public class GameGraphic implements ActionListener {
         return null;
     }
 
-    //if true HandCards, StockCards and Discard are enabled; BuildCards are disabled
 
     /**
      * Enables or disables buttons of hand cards, stock cards and build cards

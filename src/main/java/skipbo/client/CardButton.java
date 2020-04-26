@@ -1,6 +1,6 @@
 package skipbo.client;
 
-import javax.swing.*;
+import javax.swing.JButton;
 import java.util.ArrayList;
 
 public class CardButton extends JButton {
@@ -12,7 +12,6 @@ public class CardButton extends JButton {
 
     private int type = -1;
 
-    private ArrayList<ImageIcon> icons;
     private final ArrayList<String> colors;
     private final ArrayList<Integer> numbers;
 

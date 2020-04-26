@@ -423,7 +423,7 @@ public class ProtocolExecutor {
             while (line != null) {
                 lineSplit = line.split("SCORE: ");
                 servLog.debug("lineSplit[1] = " + lineSplit[1]);
-                double scoreInLine = Math.round(Double.parseDouble(lineSplit[1])*100)/100;
+                double scoreInLine = Double.parseDouble(lineSplit[1]);
                 servLog.debug("score on this line = " + scoreInLine + ", game.score is " + game.score);
                 servLog.debug("gameAppended is: " + gameAppended);
                 if(scoreInLine <= game.score || gameAppended) {

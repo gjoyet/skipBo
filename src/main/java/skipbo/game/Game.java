@@ -648,6 +648,7 @@ public class Game implements Runnable {
         this.winner = winner;
 
         score = (double) turnCounter / sizeOfStockPile;
+        score = Math.round(score*100) / 100;
         if (winner != null) {
             new ProtocolExecutor().sendAll("ENDGM§Winner§" + winner.getName(), winner.getSBL());
         } else {

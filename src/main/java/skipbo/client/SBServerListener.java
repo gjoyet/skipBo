@@ -64,7 +64,7 @@ public class SBServerListener implements Runnable {
                 break;
             case CHNGE:
             case SETTO:
-                chatGraphic.changePlayerName(command[2]);
+                chatGraphic.changeOwnName(command[2]);
                 break;
             case PUTTO:
                 putTo(command);
@@ -81,13 +81,17 @@ public class SBServerListener implements Runnable {
             case CHECK:
                 check(command);
                 break;
+            case PLAYR:
+                player(command);
+                break;
             case ENDGM:
-                chatGraphic.endGame(command[2]);
+                endGame(command);
                 break;
             default:
                 throw new NoCommandException();
         }
     }
+
 
     void putTo(String[] command) {
         clientLog.debug("got into putTo with command " + command[1]);
@@ -141,6 +145,15 @@ public class SBServerListener implements Runnable {
         }
     }
 
+    private void endGame(String[] command) {
+        if (command.length < 3) { //No winner
+            chatGraphic.endGame(null);
+        } else { //winner
+            chatGraphic.endGame(command[2]);
+        }
+    }
+
+
     private void check(String[] command) {
         clientLog.debug("got into check method");
         if (command[1].equalsIgnoreCase("HandCards")) {
@@ -170,6 +183,21 @@ public class SBServerListener implements Runnable {
             //clientLog.debug("Colours array = " + str);
             chatGraphic.getGameGraphic().updateHandCards(colours, numbers);
             //clientLog.debug("got into update method in GameGraphic");
+        }
+    }
+
+    private void player(String[] command) {
+        if (command[1].equalsIgnoreCase("List")) {
+            chatGraphic.setPlayers(command[2].split("§"));
+        } else if (command[1].equalsIgnoreCase("Joined")) {
+            chatGraphic.addPlayer(command[2]);
+        } else if (command[1].equalsIgnoreCase("Left")) {
+            chatGraphic.removePlayer(command[2]);
+        } else if (command[1].equalsIgnoreCase("Change")) {
+            String[] n = command[2].split("§");
+            chatGraphic.changePlayerName(n[0], n[1]);
+        } else {
+            clientLog.error("PLAYR command sent by server differs from commands checked by client");
         }
     }
 

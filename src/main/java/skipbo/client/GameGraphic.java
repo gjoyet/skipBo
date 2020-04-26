@@ -299,7 +299,7 @@ public class GameGraphic implements ActionListener {
         //method setOpponentNames
         for (int i = 0; i < oppNumStockCards.length; i++) {
             oppNumStockCards[i] = new JLabel();
-            oppNumStockCards[i].setBounds(X_OP1+(WIDTH_OP1/2-5), Y_OP1+HEIGHT_OP1+5 +i*140, 35, 15);
+            oppNumStockCards[i].setBounds(X_OP1+(WIDTH_OP1/2)-7, Y_OP1+HEIGHT_OP1+4+i*140, 35, 15);
         }
 /*            e1_discard[i] = new CardButton();
             e2_discard[i] = new CardButton();

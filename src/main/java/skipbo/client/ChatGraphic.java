@@ -8,6 +8,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 import static skipbo.client.SBClient.clientLog;
@@ -33,12 +35,16 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     private JButton gamesB;
     private JButton whosOnB;
     private JButton leaveB;
-    private GameGraphic gameGraphic;
+    private GameGraphic gameGraphic = null;
     String playerName = "";
-    private JComboBox<String> listChat;
-    private String[] playersChat = {"all","global","geiom","theLegend27","ManuWelan","MrDickson","RohanZohan","GreekLegend","Borat","HaikhoMisori"};
-
+    private DefaultComboBoxModel<String> playerComboModel;
+    private ArrayList<String> playerArray = new ArrayList<>();
     static final Color DARKGREEN = new Color(0x0AB222);
+
+    private final int X_FRAME = 400;
+    private final int Y_FRAME = 20;
+    private final int WIDTH_FRAME = 420;
+    private final int HEIGHT_FRAME = 830;
 
 /*
     //test method
@@ -89,7 +95,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
         setTitle("Skip-Bros CHAT");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        setBounds(400, 20, 420, 830);
+        setBounds(X_FRAME, Y_FRAME, WIDTH_FRAME, HEIGHT_FRAME);
 
         contentPane = getContentPane();
         contentPane.setBackground(Color.orange);
@@ -175,12 +181,17 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         JLabel privateChatL = new JLabel("Chat with:");
         add(privateChatL);
         privateChatL.setBounds(80,675,90,20);
-        //playersChat = {"all","global","geiom","theLegend27","ManuWelan","MrDickson","RohanZohan","GreekLegend","Borat","HaikhoMisori"};
-        listChat = new JComboBox<String>(playersChat);
+        JComboBox<String> listChat = new JComboBox<>();
+        playerComboModel = (DefaultComboBoxModel<String>) listChat.getModel();
+        playerComboModel.addAll(Arrays.asList("all", "global"));
+        listChat.setSelectedIndex(0);
         listChat.setVisible(true);
         listChat.setBounds(150,675,180,20);
         add(listChat);
 
+        //Testing purpose
+        String[] playersForTesting = {"geiom","theLegend27","ManuWelan","MrDickson","RohanZohan","GreekLegend","Borat","HaikhoMisori"};
+        setPlayers(playersForTesting);
 
 
         //Input textfield
@@ -269,6 +280,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         setLocationRelativeTo(null);
         startB.setEnabled(false);
         readyB.setEnabled(false);
+        changeNameB.setEnabled(false);
         readyB.setText("Ready");
     }
 
@@ -278,25 +290,29 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
      * @param name Name of the winner of the game.
      */
     void endGame(String name) {
+        String message;
+        if (name != null) {
+            message = "The winner is: " + name + "!";
+        } else {
+            message = "Game ended because everyone\nelse left. There is no winner.";
+        }
         ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo.png")));
-        JOptionPane optionPane = new JOptionPane("The winner is: " + name + "!", JOptionPane.INFORMATION_MESSAGE,
+        JOptionPane optionPane = new JOptionPane(message, JOptionPane.INFORMATION_MESSAGE,
                 JOptionPane.DEFAULT_OPTION, icon);
         JDialog dialog = optionPane.createDialog(contentPane, "Game is finished.");
-
         int width = gameGraphic.getGameComponent().getWidth();
         int height = gameGraphic.getGameComponent().getHeight();
         int iconWidth = icon.getIconWidth()+270;
         int iconHeight = icon.getIconHeight()+100;
         dialog.setBounds(width/2-iconWidth/2, height/2-iconHeight/2, iconWidth, iconHeight);
         dialog.setVisible(true);
-        /*JOptionPane.showMessageDialog(contentPane, "The winner is: " + name + "!", "Game is finished.",
-                JOptionPane.INFORMATION_MESSAGE,
-                new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo.png"))));*/
         contentPane.remove(gameGraphic.getGameComponent());
-        setBounds(100, 100, 420, 780);
+        setBounds(X_FRAME, Y_FRAME, WIDTH_FRAME, HEIGHT_FRAME);
         setTitle("Skip-Bros CHAT");
         startB.setEnabled(true);
         readyB.setEnabled(true);
+        changeNameB.setEnabled(true);
+        gameGraphic = null;
     }
 
     /**
@@ -325,7 +341,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             inputMes.replaceRange("", 0, input.length());
             input = input.substring(0, input.length() - 1);
             if (!input.startsWith("/")) {
-                String s = (String) listChat.getSelectedItem();
+                String s = (String) playerComboModel.getSelectedItem();
                 assert s != null;
                 if (s.equals("global")) {
                     input = "/broadcast " + input;
@@ -370,16 +386,22 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             }
 
         } else if (buttonPressed == startB) {
-            //TODO change to JComboBox
-            String[] numberOfPlayers = new String[]{"2", "3", "4"};
-            String[] numberOfStock = new String[]{"3", "10", "20", "30"};
-            String selectedPlayer = (String) JOptionPane.showInputDialog(contentPane, "Select number of players",
-                    "Starting new game", JOptionPane.PLAIN_MESSAGE, null, numberOfPlayers, numberOfPlayers[0]);
-            if (selectedPlayer == null) {return;}
-            String selectedStock = (String) JOptionPane.showInputDialog(contentPane, "Select number of stock cards",
-                    "Starting new game", JOptionPane.PLAIN_MESSAGE, null, numberOfStock, numberOfStock[0]);
-            if (selectedStock == null) {return;}
-            clientListener.pw.println(NWGME + "§New§" + selectedPlayer + "§" + selectedStock);
+
+            JComboBox<Integer> playerBox = new JComboBox<>(new Integer[]{2, 3, 4});
+            JComboBox<Integer> stockBox = new JComboBox<>(new Integer[]{3, 10, 20, 30});
+
+            JPanel startGamePanel = new JPanel(new GridLayout(2, 2));
+            startGamePanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+            startGamePanel.add(new JLabel("Number of players:"));
+            startGamePanel.add(playerBox);
+            startGamePanel.add(new JLabel("Number of stock cards:"));
+            startGamePanel.add(stockBox);
+
+            int option = JOptionPane.showConfirmDialog(contentPane, startGamePanel, "Please select to start a game",
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+            if (option == JOptionPane.OK_OPTION) {
+                clientListener.pw.println(NWGME + "§New§" + playerBox.getSelectedItem() + "§" + stockBox.getSelectedItem());
+            }
 
         } else if (buttonPressed == manualB) {
             if (Desktop.isDesktopSupported()) {
@@ -389,8 +411,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
                 } catch (NullPointerException | IOException npe) {
                     clientLog.warn("Cannot open manual PDF");
                 }
-        }
-
+            }
 
         } else if (buttonPressed == infoB) {
             printCommandList();
@@ -448,12 +469,60 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
     }
 
-    GameGraphic getGameGraphic() {
-        return gameGraphic;
+
+    void updateNamesInComboBox(String selectedOption) {
+        playerArray.sort(String.CASE_INSENSITIVE_ORDER);
+        playerComboModel.removeAllElements();
+        playerComboModel.addAll(Arrays.asList("all", "global"));
+        playerComboModel.addAll(playerArray);
+        playerComboModel.setSelectedItem(selectedOption);
     }
 
-    public void changePlayerName(String name) {
+    void changeOwnName(String name) {
         playerName = name;
+    }
+
+    /**
+     * Updates the player array and the names in the combo box when a player changes its name.
+     * @param oldName The old name of the player that want's to change its name.
+     * @param newName New name that the player want's to change its name to.
+     */
+    void changePlayerName(String oldName, String newName) {
+        playerArray.remove(oldName);
+        playerArray.add(newName);
+        if (playerComboModel.getSelectedItem().equals(oldName)) {
+            updateNamesInComboBox(newName);
+        } else {
+            updateNamesInComboBox((String) playerComboModel.getSelectedItem());
+        }
+    }
+
+    void addPlayer(String name) {
+        playerArray.add(name);
+        updateNamesInComboBox((String) playerComboModel.getSelectedItem());
+    }
+
+    void removePlayer(String name) {
+        playerArray.remove(name);
+        if (playerComboModel.getSelectedItem().equals(name)) {
+            printInfoMessage("Your chat partner left. You are now chatting in the lobby chat.");
+            updateNamesInComboBox("all");
+        }
+
+    }
+
+    //TODO might cause problems if own name is sent as well
+    /**
+     * Puts all clients already connected to the server into the player array when this client connects to the server.
+     * @param names Array of all names that are connected to the server except for own name.
+     */
+    void setPlayers(String[] names) {
+        playerArray.addAll(Arrays.asList(names));
+        updateNamesInComboBox("all");
+    }
+
+    GameGraphic getGameGraphic() {
+        return gameGraphic;
     }
 
     SBClientListener getClientListener() {

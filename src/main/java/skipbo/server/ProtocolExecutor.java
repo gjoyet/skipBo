@@ -169,14 +169,16 @@ public class ProtocolExecutor {
      */
     public void logout() {
         sbL.pw.println("LGOUT");
-        sbL.player.getGame().players.remove(sbL.player);
         sbL.getServer().serverLobby.removePlayer(sbL.player);
-        if(sbL.getPlayer().getGame().players.size() == 1) {
-            sbL.getPlayer().getGame().terminateGame();
-        } else {
-            sbL.getPlayer().getGame().playerLeaving(sbL.player);
-            for(Player p : sbL.getPlayer().getGame().players) {
-                p.getSBL().getPW().println("PLEFT§Leaving§" + sbL.getPlayer().getName());
+        if (sbL.player.getGame() != null) {
+            sbL.player.getGame().players.remove(sbL.player);
+            if(sbL.getPlayer().getGame().players.size() == 1) {
+                sbL.getPlayer().getGame().terminateGame();
+            } else {
+                sbL.getPlayer().getGame().playerLeaving(sbL.player);
+                for(Player p : sbL.getPlayer().getGame().players) {
+                    p.getSBL().getPW().println("PLEFT§Leaving§" + sbL.getPlayer().getName());
+                }
             }
         }
         sbL.stopRunning();

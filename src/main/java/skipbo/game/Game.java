@@ -408,8 +408,8 @@ public class Game implements Runnable {
                     return new Card(-1, Color.cyan);
                 }
                 checkBuildPile(stockCard, specBuildPile, currentPlayer);
-                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
-                        + piles.handCardPrint(currentPlayer));
+//                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
+//                        + piles.handCardPrint(currentPlayer));
 
                 if (currentPlayer.getStockPile().size() == 0) {  //if stock pile is empty
                     return new Card(-1, Color.cyan);
@@ -461,8 +461,8 @@ public class Game implements Runnable {
                 }
 
                 checkBuildPile(stockCard, specBuildPile, currentPlayer);
-                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
-                        + piles.handCardPrint(currentPlayer));
+//                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
+//                        + piles.handCardPrint(currentPlayer));
 
                 return stockPile.get(stockPile.size() - 1);
             } else {         // If card number isn't 1 and isn't a Skip Bo card

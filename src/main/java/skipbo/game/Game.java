@@ -620,7 +620,7 @@ public class Game implements Runnable {
 
     public void playerLeaving(Player player) {
         ArrayList<Card> handCards = player.getHandCards();
-        piles.emptyPile.addAll(handCards);
+        piles.emptyPile.addAll(handCards); // adds to empty pile
         player.clearHandCards();      //removes cards from the player's hand cards
 
         for (ArrayList<Card> dPile : player.getDiscardPile()) {
@@ -629,7 +629,7 @@ public class Game implements Runnable {
         }
 
         ArrayList<Card> stockPile = player.getStockPile();
-        piles.emptyPile.addAll(stockPile);
+        piles.emptyPile.addAll(stockPile);  //adds to empty pile
         stockPile.clear();      //removes cards from the player's stock pile
     }
 

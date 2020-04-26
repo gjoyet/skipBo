@@ -61,6 +61,11 @@ public class Game implements Runnable {
         pLeft.getSBL().getPW().println("ENDGM§Terminated");
         pLeft.changeGame(null);
         pLeft.changeStatus(Status.WAITING);
+
+        for(int i = 0; i < 4; i++){
+            ArrayList<Card> bp = piles.buildPiles.get(i);
+            bp.clear();
+        }
     }
 
     /**

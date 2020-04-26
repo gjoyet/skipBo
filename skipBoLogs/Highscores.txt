@@ -1,1 +1,3 @@
+Skip-Bro Highscores (score = turns to win / stockpile size; lower scores are better)
+
 2020-04-26 02:12 || Participants: Manuela2, Manuela, Manuela1 || FINISHED || WINNER: Manuela, SCORE: 3.33

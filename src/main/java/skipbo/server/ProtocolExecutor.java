@@ -415,7 +415,8 @@ public class ProtocolExecutor {
         }
 
         try {
-            br.readLine(); br.readLine();
+            pw.println(br.readLine());
+            pw.println(br.readLine());
             String line = br.readLine();
             String[] lineSplit;
             boolean gameAppended = false;

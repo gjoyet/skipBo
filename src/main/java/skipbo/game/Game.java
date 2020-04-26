@@ -81,7 +81,7 @@ public class Game implements Runnable {
     public String toString(boolean withDateAndTime) {
         StringBuilder gToString = new StringBuilder();
 
-        if(withDateAndTime) {
+        if (withDateAndTime) {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             LocalDateTime now = LocalDateTime.now();
             gToString.append(dtf.format(now)).append(" || ");
@@ -96,7 +96,7 @@ public class Game implements Runnable {
         if (gameRunning) {
             gToString.append(" || RUNNING.");
         } else {
-            if(winner == null) {
+            if (winner == null) {
                 gToString.append(" || TERMINATED || No winner.");
             } else {
                 gToString.append(" || FINISHED || WINNER: ").append(this.winner.getName()).append(", ");
@@ -582,7 +582,7 @@ public class Game implements Runnable {
         int toFill = 5 - player.getHandCards().size();
         if (toFill != 0) {
             for (int i = 0; i < toFill; i++) {
-                Card drawCard = drawPile.get(drawPile.size()-1);
+                Card drawCard = drawPile.get(drawPile.size() - 1);
                 player.getHandCards().add(drawCard);
                 drawPile.remove(drawCard);
             }
@@ -602,15 +602,16 @@ public class Game implements Runnable {
 
     /**
      * Method to add a player's cards to the empty pile that has left the game
+     *
      * @param player Player that's left.
      */
 
-    public void playerLeaving (Player player){
+    public void playerLeaving(Player player) {
         ArrayList<Card> handCards = player.getHandCards();
         piles.emptyPile.addAll(handCards);
-        handCards.clear();      //removes cards from the player's hand cards
+        player.clearHandCards();      //removes cards from the player's hand cards
 
-        for(ArrayList<Card> dPile: player.getDiscardPile()){
+        for (ArrayList<Card> dPile : player.getDiscardPile()) {
             piles.emptyPile.addAll(dPile);
             dPile.clear();      //removes cards from the player's discard pile
         }

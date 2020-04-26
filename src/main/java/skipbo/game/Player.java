@@ -130,7 +130,7 @@ public class Player {
     /**
      * Empties handcards of player.
      */
-    public void clearHandCards() { this.piles.handCards.clear(); }
+    public void clearHandCards() { this.getHandCards().clear(); }
 
     /**
      * Method to return the discard piles of a player

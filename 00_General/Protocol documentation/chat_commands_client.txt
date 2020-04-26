@@ -1,3 +1,5 @@
+None of these Commands are needed anymore and some of them might have less features or even cause problems.
+
 Commands for terminal;
 
 Basic Structure: /Command Option Arguments

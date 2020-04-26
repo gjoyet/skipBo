@@ -181,6 +181,8 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         chat = new JTextPane();
         chat.setBounds(80, 330, 250, 340);
         chat.setEditable(false);
+        //chat.setEditorKit(new WrapEditorKit());
+
 
         chatScrollPane = new JScrollPane(chat);
         chatScrollPane.setBounds(80, 330, 250, 340);
@@ -232,9 +234,11 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
      * Sends Information about valid commands to the client
      */
     void printCommandList() {
-        String listOfCommands = "\n***********\nCommands:\n/change name [name]\n/change status ready|waiting\n" +
+        String listOfCommands = "Please use the dedicated buttons. By now the commands are not needed anymore and" +
+                " may cause problems/don't work properly";
+        /*"\n***********\nCommands:\n/change name [name]\n/change status ready|waiting\n" +
                 "/msg [name] [message]\n/broadcast\n/new game\n/play [PlaceFrom] [n] [PlaceTo] [n]\n" +
-                "/list games|players\n/help\n/quit\n***********";
+                "/list games|players\n/help\n/quit\n***********";*/
         printInfoMessage(listOfCommands);
 
 /*        JScrollBar vertical = chatScrollPane.getVerticalScrollBar();

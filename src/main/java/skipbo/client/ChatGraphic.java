@@ -194,7 +194,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         privateChatL.setBounds(80,675,90,20);
         JComboBox<String> listChat = new JComboBox<>();
         playerComboModel = (DefaultComboBoxModel<String>) listChat.getModel();
-        playerComboModel.addAll(Arrays.asList("all", "global"));
+        playerComboModel.addAll(Arrays.asList("lobby", "broadcast"));
         listChat.setSelectedIndex(0);
         listChat.setVisible(true);
         listChat.setBounds(150,675,180,20);
@@ -378,9 +378,9 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             if (!input.startsWith("/")) {
                 String s = (String) playerComboModel.getSelectedItem();
                 assert s != null;
-                if (s.equals("global")) {
+                if (s.equals("broadcast")) {
                     input = "/broadcast " + input;
-                } else if (!s.equals("all")) {
+                } else if (!s.equals("lobby")) {
                     input = "/msg " + s + " " + input;
                 }
             }
@@ -508,7 +508,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     void updateNamesInComboBox(String selectedOption) {
         playerArray.sort(String.CASE_INSENSITIVE_ORDER);
         playerComboModel.removeAllElements();
-        playerComboModel.addAll(Arrays.asList("all", "global"));
+        playerComboModel.addAll(Arrays.asList("lobby", "broadcast"));
         playerComboModel.addAll(playerArray);
         playerComboModel.setSelectedItem(selectedOption);
     }
@@ -541,7 +541,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         playerArray.remove(name);
         if (playerComboModel.getSelectedItem().equals(name)) {
             printInfoMessage("Your chat partner left. You are now chatting in the lobby chat.");
-            updateNamesInComboBox("all");
+            updateNamesInComboBox("lobby");
         }
 
     }
@@ -553,7 +553,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
      */
     void setPlayers(String[] names) {
         playerArray.addAll(Arrays.asList(names));
-        updateNamesInComboBox("all");
+        updateNamesInComboBox("lobby");
     }
 
     GameGraphic getGameGraphic() {

@@ -305,18 +305,40 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         if (name != null) {
             message = "The winner is: " + name + "!";
         } else {
-            message = "Game ended because everyone\nelse left. There is no winner.";
+            message = "Game ended because everyone else left. There is no winner.";
         }
         ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo.png")));
-        JOptionPane optionPane = new JOptionPane(message, JOptionPane.INFORMATION_MESSAGE,
+
+/*        int width = gameGraphic.getGameComponent().getWidth();
+        int height = gameGraphic.getGameComponent().getHeight();*/
+        int iconWidth = icon.getIconWidth();
+        int iconHeight = icon.getIconHeight();
+
+/*        JOptionPane optionPane = new JOptionPane(message, JOptionPane.INFORMATION_MESSAGE,
                 JOptionPane.DEFAULT_OPTION, icon);
         JDialog dialog = optionPane.createDialog(contentPane, "Game is finished.");
-        int width = gameGraphic.getGameComponent().getWidth();
-        int height = gameGraphic.getGameComponent().getHeight();
-        int iconWidth = icon.getIconWidth()+270;
-        int iconHeight = icon.getIconHeight()+100;
-        dialog.setBounds(width/2-iconWidth/2, height/2-iconHeight/2, iconWidth, iconHeight);
+        dialog.setBounds(width/2-iconWidth/2, height/2-iconHeight/2, iconWidth+270, iconHeight+100);
+        dialog.setVisible(true);*/
+
+
+        JPanel endGamePanel = new JPanel(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        JLabel messageLabel = new JLabel(message);
+        JLabel iconLabel = new JLabel(icon);
+        c.insets = new Insets(15, 0, 0, 0);
+        c.gridx = 0;
+        c.gridy = 0;
+        endGamePanel.add(messageLabel, c);
+        c.gridy = 1;
+        endGamePanel.add(iconLabel, c);
+
+        JOptionPane optionPane = new JOptionPane(endGamePanel, JOptionPane.PLAIN_MESSAGE,
+                JOptionPane.DEFAULT_OPTION);
+        JDialog dialog = optionPane.createDialog(contentPane, "Game is finished");
+        dialog.setSize( iconWidth+270, iconHeight+140);
+        dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
+
         contentPane.remove(gameGraphic.getGameComponent());
         setBounds(X_FRAME, Y_FRAME, WIDTH_FRAME, HEIGHT_FRAME);
         setTitle("Skip-Bros CHAT");

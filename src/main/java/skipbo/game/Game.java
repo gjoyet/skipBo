@@ -58,12 +58,16 @@ public class Game implements Runnable {
     public void terminateGame() {
         this.gameRunning = false;
         Player pLeft = this.players.get(0);
-        pLeft.clearHandCards();
-        pLeft.clearStockPile();
-        pLeft.clearDiscardPiles();
+
         pLeft.getSBL().getPW().println("ENDGM§Terminated");
         pLeft.changeGame(null);
         pLeft.changeStatus(Status.WAITING);
+
+        for(Player player: players){
+            player.clearStockPile();
+            player.clearDiscardPiles();
+            player.clearHandCards();
+        }
 
         for(int i = 0; i < 4; i++){
             ArrayList<Card> bp = piles.buildPiles.get(i);

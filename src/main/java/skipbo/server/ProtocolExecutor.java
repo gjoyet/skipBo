@@ -138,6 +138,7 @@ public class ProtocolExecutor {
      * players except the one sending it.
      */
     public void chatMessage() throws NoCommandException {
+        if(input.length < 2) throw new NoCommandException();
         try {
             if (input.length < 3) return;
             servLog.debug("Received '" + input[1] + "' chat message from " + sbL.player.getName() + ": " + input[2]);
@@ -166,7 +167,7 @@ public class ProtocolExecutor {
      * Method for command "LGOUT". Terminates the SBListener of the player logging out,
      * closes socket and sends message to all other players on which player logged out.
      */
-    void logout() {
+    public void logout() {
         sbL.pw.println("LGOUT");
         sbL.getServer().serverLobby.removePlayer(sbL.player);
         if (sbL.player.getGame() != null) {
@@ -206,6 +207,7 @@ public class ProtocolExecutor {
      * Method for command "NWGME". Starts a new game with the first 4 players found with PlayerStatus 'READY'.
      */
     public void newGame() throws NoCommandException {
+        if(input.length < 2) throw new NoCommandException();
         if(input[1].equals("New")) {
             int n = 2;
             int x = 20;

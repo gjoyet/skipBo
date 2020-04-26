@@ -75,6 +75,17 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     }
 
     /**
+     * Only for testing purposes.
+     */
+    ChatGraphic(SBClientListener clientListener, boolean testing) {
+        this.clientListener = clientListener;
+        setFrame();
+        if(!testing) setName();
+        printInfoMessage("Connection successful");
+        printCommandList();
+    }
+
+    /**
      * Constructor for ChatGraphic with player name
      *
      * @param clientListener A SBClientListener

@@ -1,6 +1,6 @@
 package skipboTest.serverTest;
 
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import skipbo.game.Status;
@@ -13,54 +13,60 @@ import static org.junit.Assert.assertNotEquals;
 import static skipbo.server.SBServer.*;
 
 /**
- * Tests the execution of the network protocol commands. Therefore, it will test cases for all commands but
- * will not, however, test what happens if the input from the client has no network protocol command at the
- * beginning.
+ * Tests the execution of the ProtocolExecutor class. Therefore, it will test cases for most protocol commands but
+ * will not, however, test what happens if the input from the client is not a network protocol command to begin with –
+ * this is taken care of in the SBListener class.
+ * The methods putTo(), check() and gameEnding() are not tested here since they are part of the game logic and neither
+ * are the small methods sendAll() and broadcastAll() since they are sufficiently tested over the various other methods.
  */
 public class ProtocolExecutorTest {
 
-    static Main server;
-    static Main client0;
-    static Main client1;
-    static Main client2;
-    static Main client3;
+    Main server;
+    Main client0;
+    Main client1;
+    Main client2;
+    Main client3;
+    static int port = 63000;
+    String portString;
 
     /**
      * This initialization method starts up a server and four clients connected to that server.
      */
-    @BeforeClass
-    public static void initialize() {
-        server = new Main(); server.main(new String[]{"server", "12345"});
+    @Before
+    public void initialize() {
+        String portString = ++port + "";
+        server = new Main(); server.main(new String[]{"server", portString});
         client0 = new Main(); client1 = new Main(); client2 = new Main(); client3 = new Main();
         try {
-            client0.main(new String[]{"testClient", "localhost:12345", "Janni"});
+            client0.main(new String[]{"testClient", "localhost:"+portString, "Janni"});
             sleep(500);
-            client1.main(new String[]{"testClient", "localhost:12345", "Manuela"});
+            client1.main(new String[]{"testClient", "localhost:"+portString, "Manuela"});
             sleep(500);
-            client2.main(new String[]{"testClient", "localhost:12345", "Rohan"});
+            client2.main(new String[]{"testClient", "localhost:"+portString, "Rohan"});
             sleep(500);
-            client3.main(new String[]{"testClient", "localhost:12345", "Guillaume"});
-            sleep(3000);
+            client3.main(new String[]{"testClient", "localhost:"+portString, "Guillaume"});
+            sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * Tests the implementation of setTo. Details about what is tested are found next to the assertEquals methods.
+     * Tests the implementation of setTo with option 'Nickname'. Details about what is tested are found
+     * next to the assertEquals methods.
      */
     @Test
-    public void testSetToNickname() {
+    public void testSetTo() {
         Main client4 = new Main(); Main client5 = new Main(); Main client6 = new Main();
         Main client7 = new Main(); Main client8 = new Main(); Main client9 = new Main();
-        client4.main(new String[]{"testClient", "localhost:12345"});
-        client5.main(new String[]{"testClient", "localhost:12345"});
-        client6.main(new String[]{"testClient", "localhost:12345"});
-        client7.main(new String[]{"testClient", "localhost:12345"});
-        client8.main(new String[]{"testClient", "localhost:12345"});
-        client9.main(new String[]{"testClient", "localhost:12345"});
+        client4.main(new String[]{"testClient", "localhost:"+ port});
+        client5.main(new String[]{"testClient", "localhost:"+ port});
+        client6.main(new String[]{"testClient", "localhost:"+ port});
+        client7.main(new String[]{"testClient", "localhost:"+ port});
+        client8.main(new String[]{"testClient", "localhost:"+ port});
+        client9.main(new String[]{"testClient", "localhost:"+ port});
         try {
-            sleep(1000);
+            sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -150,7 +156,7 @@ public class ProtocolExecutorTest {
      * found next to the assertEquals methods.
      */
     @Test
-    public void testChangeStatus() {
+    public void testChangeToStatus() {
         ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"CHNGE", "Status", "READY"}, server.server.getSblList().get(0));
         ProtocolExecutor pe1 = new ProtocolExecutor(new String[]{"CHNGE", "Status", "WAITING"}, server.server.getSblList().get(1));
         ProtocolExecutor pe2 = new ProtocolExecutor(new String[]{"CHNGE", "Status", "INGAME"}, server.server.getSblList().get(2));
@@ -222,34 +228,178 @@ public class ProtocolExecutorTest {
         }
         assertEquals(1, server.server.getLobby().getGames().size());
         // Test: First game was started, second one did not (not enough people ready)
-        assertEquals("Manuela\nGuillaume1", server.server.getLobby().getGames().get(0).getPlayerList());
+        assertEquals("Manuela\nJanni", server.server.getLobby().getGames().get(0).getPlayerList());
         // Test: Client 0 (Guillaume1) and 1 (Manuela) – the only one that was ready and the one that started the game,
         // even though the client was not ready – are the ones in the game, client 1 comes first since it started game
         assertEquals(30, server.server.getLobby().getGames().get(0).players.get(0).getStockPile().size());
         // Test: Stockpile of the game is 30 cards high
-        assertEquals("Marc, Guillaume, SBPlayer, SBPlayer1, John, John1, SBPlayer2, SBPlayer3",
+        assertEquals("Rohan, Guillaume",
                 server.server.getPlayerNotIngameList());
         // Test: Client 2 (Marc) and 3 (Guillaume) remain in Lobby
     }
 
-    @Test
-    public void testChatMessage() {
-        ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"CHATM", "Global", "Global ingame."},
-                server.server.getSblList().get(0));
-        try {
-            pe0.chatMessage();
-            sleep(200);
-        } catch (NoCommandException | InterruptedException e) {
-            e.printStackTrace();
-        }
-        assertEquals("CHATM§Global§You: Global ingame.", client0.client.getServerListener().getInput());
-        // Test: client sending message receives it
-        assertEquals("CHATM§Global§Guillaume1: Global ingame.", client1.client.getServerListener().getInput());
-        // Test: other client in the game receives message
-        assertNotEquals("CHATM§Global§Guillaume1: Global ingame.", client2.client.getServerListener().getInput());
-        // Test: players not ingame don't receive the message
-
+    /**
+     * Tests the case where the option given to the NWGME command is not valid.
+     */
+    @Test(expected = NoCommandException.class)
+    public void testNewGameException1() throws NoCommandException {
+        new ProtocolExecutor(new String[]{"NWGME", "NotAnOption"}, server.server.getSblList().get(0)).changeTo();
     }
 
+    /**
+     * Tests the case where the option given to the NWGME command equals null.
+     */
+    @Test(expected = NoCommandException.class)
+    public void testNewGameException2() throws NoCommandException {
+        new ProtocolExecutor(new String[]{"NWGME"}, server.server.getSblList().get(0)).changeTo();
+    }
+
+    /**
+     * Tests the implementation of chatMessage with all three options 'Global', 'Broadcast' and 'Private'.
+     * Details about what is tested are found next to the assertEquals methods.
+     */
+    @Test
+    public void testChatMessage() {
+        ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"CHNGE", "Status", "READY"}, server.server.getSblList().get(0));
+        ProtocolExecutor pe1 = new ProtocolExecutor(new String[]{"NWGME", "New", "2§30"}, server.server.getSblList().get(1));
+        try {
+            pe0.changeTo();
+            sleep(200);
+            pe1.newGame();
+            sleep(1000);
+        } catch(NoCommandException nce) {
+            servLog.debug("Error with testing framework");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        pe0.setInput(new String[]{"CHATM", "Global", "Global ingame."});
+        try {
+            pe0.chatMessage();
+            sleep(400);
+        } catch (NoCommandException e) {
+            servLog.debug("Error with testing framework.");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals("CHATM§Global§You: Global ingame.", client0.clientList.get(0).getServerListener().getInput());
+        // Test: client sending message receives it
+        assertEquals("CHATM§Global§Janni: Global ingame.", client1.clientList.get(1).getServerListener().getInput());
+        // Test: other client in the game receives message
+        assertEquals("PRINT§Terminal§Janni is READY.", client2.clientList.get(2).getServerListener().getInput());
+        // Test: players not ingame don't receive the message
+
+        ProtocolExecutor pe2 = new ProtocolExecutor(new String[]{"CHATM", "Global", "Global not ingame."},
+                server.server.getSblList().get(2));
+        try {
+            pe2.chatMessage();
+            sleep(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (NoCommandException e) {
+            servLog.debug("Error with testing framework.");
+        }
+        assertEquals("CHATM§Global§You: Global not ingame.", client2.clientList.get(2).getServerListener().getInput());
+        // Test: client sending message receives it
+        assertEquals("CHATM§Global§Rohan: Global not ingame.", client3.clientList.get(3).getServerListener().getInput());
+        // Test: other client not ingame receives message
+        assertEquals("CHATM§Global§You: Global ingame.", client0.clientList.get(0).getServerListener().getInput());
+        // Test: ingame players don't receive the message (still has old input in 'input')
+
+        pe2.setInput(new String[]{"CHATM", "Broadcast", "Broadcast."});
+        try {
+            pe2.chatMessage();
+            sleep(200);
+        } catch (NoCommandException e) {
+            servLog.debug("Error with testing framework.");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals("CHATM§Broadcast§(BC) Rohan: Broadcast.", client0.clientList.get(0).getServerListener().getInput());
+        // Test: ingame player receive broadcast
+        assertEquals("CHATM§Broadcast§(BC) You: Broadcast.", client2.clientList.get(2).getServerListener().getInput());
+        // Test: player sending message receives it itself
+        assertEquals("CHATM§Broadcast§(BC) Rohan: Broadcast.", client3.clientList.get(3).getServerListener().getInput());
+        // Test: not ingame players receive broadcast
+
+        pe2.setInput(new String[]{"CHATM", "Private", "Janni§Private message."});
+        try {
+            pe2.chatMessage();
+            sleep(200);
+        } catch (NoCommandException e) {
+            servLog.debug("Error with testing framework.");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals("CHATM§Private§(from Rohan): Private message.", client0.clientList.get(0).getServerListener().getInput());
+        // Test: client receives private message
+        assertEquals("CHATM§Private§(to Janni): Private message.", client2.clientList.get(2).getServerListener().getInput());
+        // Test: player sending message receives it itself
+        assertEquals("CHATM§Broadcast§(BC) Rohan: Broadcast.", client3.clientList.get(3).getServerListener().getInput());
+        // Test: other players don't get message (still has old input in 'input')
+
+        pe2.setInput(new String[]{"CHATM", "Private", "Rohan§Private message."});
+        try {
+            pe2.chatMessage();
+            sleep(200);
+        } catch (NoCommandException e) {
+            servLog.debug("Error with testing framework.");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals("PRINT§Terminal§You private messaged yourself, duh...", client2.clientList.get(2).getServerListener().getInput());
+        // Test: client is notified when sending private message to himself
+    }
+
+    /**
+     * Tests the case where the option given to the CHATM command is not valid.
+     */
+    @Test(expected = NoCommandException.class)
+    public void testChatMessageException1() throws NoCommandException {
+        new ProtocolExecutor(new String[]{"CHATM", "NotAnOption"}, server.server.getSblList().get(0)).changeTo();
+    }
+
+    /**
+     * Tests the case where the option given to the CHATM command equals null.
+     */
+    @Test(expected = NoCommandException.class)
+    public void testChatMessageException2() throws NoCommandException {
+        new ProtocolExecutor(new String[]{"CHATM"}, server.server.getSblList().get(0)).changeTo();
+    }
+
+    /**
+     * Tests the implementation of logout. Does not test the writing of any score in the highscore file.
+     */
+    @Ignore
+    @Test
+    public void testLogout() {
+        ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"CHNGE", "Status", "READY"}, server.server.getSblList().get(0));
+        ProtocolExecutor pe1 = new ProtocolExecutor(new String[]{"NWGME", "New", "2§30"}, server.server.getSblList().get(1));
+        try {
+            pe0.changeTo();
+            sleep(200);
+            pe1.newGame();
+            sleep(1000);
+        } catch(NoCommandException nce) {
+            servLog.debug("Error with testing framework");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        pe0.setInput(new String[]{"LGOUT"});
+        try {
+            pe0.logout();
+            sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        assertEquals(3, server.server.getLobby().getPlayerLobby().size());
+        // Test: player got removed from main lobby
+        assertEquals(1, server.server.getSblList().get(1).getPlayer().getGame().players.size());
+        // Test: player got removed from game
+        assertEquals(false, server.server.getSblList().get(1).getPlayer().getGame().gameIsRunning());
+        // Test: server recognised there was only one player left in game and terminated it
+    }
 
 }

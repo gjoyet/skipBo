@@ -444,6 +444,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
                     File manual = new File("build/resources/main/Instruction_manual_v2.pdf");
                     Desktop.getDesktop().open(manual);
                 } catch (NullPointerException | IOException npe) {
+                    npe.printStackTrace();
                     clientLog.warn("Cannot open manual PDF");
                 }
             }

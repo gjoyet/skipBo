@@ -324,9 +324,9 @@ public class Game implements Runnable {
     public void checkBuildPileAndPrint(Card card, ArrayList<Card> buildPile, Player player) {
         String[] buildPiles = piles.buildPilesPrint();
         if (card.number == 12) {
-            for (String str : buildPiles) {
-                new ProtocolExecutor().sendAll("PRINT§Terminal§" + str, player.getSBL());
-            }
+//            for (String str : buildPiles) {
+//                new ProtocolExecutor().sendAll("PRINT§Terminal§" + str, player.getSBL());
+//            }
             piles.emptyPile.addAll(buildPile); //TODO: does add all remove bp cards already? ask
 
             for (Iterator<Card> bp = buildPile.iterator(); bp.hasNext(); ) { //Iterator to remove all cards from current BP
@@ -334,19 +334,19 @@ public class Game implements Runnable {
                 bp.remove();
             }
 
-            new ProtocolExecutor().sendAll("PRINT§Terminal§Your empty pile is: " + piles.emptyPilePrint()
-                    ,player.getSBL());
+//            new ProtocolExecutor().sendAll("PRINT§Terminal§Your empty pile is: " + piles.emptyPilePrint()
+//                    ,player.getSBL());
 
-            new ProtocolExecutor().sendAll("PRINT§Terminal§The maximum number has been reached; " +
-                    "the deck has been reset to: ", player.getSBL());
-            for (String s : buildPiles) {
-                new ProtocolExecutor().sendAll("PRINT§Terminal§" + s, player.getSBL());
-            }
+//            new ProtocolExecutor().sendAll("PRINT§Terminal§The maximum number has been reached; " +
+//                    "the deck has been reset to: ", player.getSBL());
+//            for (String s : buildPiles) {
+//                new ProtocolExecutor().sendAll("PRINT§Terminal§" + s, player.getSBL());
+//            }
         } else {
-            new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: ", player.getSBL());
-            for (String s : buildPiles) {
-                new ProtocolExecutor().sendAll("PRINT§Terminal§" + s, player.getSBL());
-            }
+//            new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: ", player.getSBL());
+//            for (String s : buildPiles) {
+//                new ProtocolExecutor().sendAll("PRINT§Terminal§" + s, player.getSBL());
+//            }
         }
     }
 
@@ -385,7 +385,7 @@ public class Game implements Runnable {
         specDiscard.add(card);
         currentPlayer.getHandCards().remove(card);
 
-        displayDiscard(currentPlayer);
+//        displayDiscard(currentPlayer);
         endTurn();
 
         return true;
@@ -433,13 +433,10 @@ public class Game implements Runnable {
                 if (currentPlayer.getStockPile().size() == 0) {  //if stock pile is empty
                     return new Card(-1, Color.cyan);
                 }
-
                 checkBuildPileAndPrint(stockCard, specBuildPile, currentPlayer);
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
                         + piles.handCardPrint(currentPlayer));
-/*                currentPlayer.getSBL().getPW().print("PRINT§Terminal§Your stock card is: [" +
-                        stockCard.number);*/ //Commented because it only made problems. Line doesn't seem to have an
-                // impact anyways since the new stock card ist still getting printed.
+
                 if (currentPlayer.getStockPile().size() == 0) {  //if stock pile is empty
                     return new Card(-1, Color.cyan);
                 }
@@ -453,10 +450,10 @@ public class Game implements Runnable {
                 }
 
                 checkBuildPileAndPrint(stockCard, specBuildPile, currentPlayer);
-                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
-                        + piles.handCardPrint(currentPlayer));
-                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your stock card is: " +
-                        currentPlayer.getStockPile().get(currentPlayer.getStockPile().size() - 1).number);
+//                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
+//                        + piles.handCardPrint(currentPlayer));
+//                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your stock card is: " +
+//                        currentPlayer.getStockPile().get(currentPlayer.getStockPile().size() - 1).number);
 
                 return stockPile.get(stockPile.size() - 1);
             } else {      //if invalid move
@@ -474,11 +471,11 @@ public class Game implements Runnable {
                 }
                 checkBuildPileAndPrint(stockCard, specBuildPile, currentPlayer);
 
-                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hands cards are now: "
+                /*currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hands cards are now: "
                         + piles.handCardPrint(currentPlayer));
 
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your stock card is: " +
-                        currentPlayer.getStockPile().get(currentPlayer.getStockPile().size() - 1).number);
+                        currentPlayer.getStockPile().get(currentPlayer.getStockPile().size() - 1).number);*/
 
                 return stockPile.get(stockPile.size() - 1);
             } else if (stockCard.col == Color.cyan) {      // if Skip Bo card
@@ -502,18 +499,6 @@ public class Game implements Runnable {
         }
     }
 
-    /*
-     * Checks if stock pile of the player is empty, if yes, the player has won.
-     * @param player Check this player's stock pile
-    public boolean checkStockPile(Player player) {
-        servLog.info("Entered checkStockPile()");
-        if (player.getStockPile().isEmpty()) {
-            endGame(player);
-            return true;
-        }
-        return false;
-    }
-    */
 
     /**
      * Method to play a card from the discard pile to the build pile
@@ -557,8 +542,8 @@ public class Game implements Runnable {
                 checkBuildPileAndPrint(card, specBuildPile, currentPlayer);
                 displayDiscard(currentPlayer);
 
-                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
-                        + piles.handCardPrint(currentPlayer));
+//                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
+//                        + piles.handCardPrint(currentPlayer));
 
                 return true;
             } else if (card.col == Color.cyan) {       //if Joker card, then make it 1 and add
@@ -569,8 +554,8 @@ public class Game implements Runnable {
                 checkBuildPileAndPrint(card, specBuildPile, currentPlayer);
                 displayDiscard(currentPlayer);
 
-                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
-                        + piles.handCardPrint(currentPlayer));
+//                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
+//                        + piles.handCardPrint(currentPlayer));
 
                 return true;
             } else {            //invalid move
@@ -588,8 +573,8 @@ public class Game implements Runnable {
                 checkBuildPileAndPrint(card, specBuildPile, currentPlayer);
                 displayDiscard(currentPlayer);
 
-                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hands cards are now: "
-                        + piles.handCardPrint(currentPlayer));
+//                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hands cards are now: "
+//                        + piles.handCardPrint(currentPlayer));
                 return true;
             } else if (card.col == Color.cyan) {       //if Joker card
                 card.number = (topCard.number + 1);
@@ -600,8 +585,8 @@ public class Game implements Runnable {
 
                 displayDiscard(currentPlayer);
 
-                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
-                        + piles.handCardPrint(currentPlayer));
+//                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
+//                        + piles.handCardPrint(currentPlayer));
                 return true;
             } else {          //invalid move
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§This move is invalid! " +

@@ -55,6 +55,7 @@ public class ProtocolExecutorTest {
      * Tests the implementation of setTo with option 'Nickname'. Details about what is tested are found
      * next to the assertEquals methods.
      */
+    @Ignore
     @Test
     public void testSetTo() {
         Main client4 = new Main(); Main client5 = new Main(); Main client6 = new Main();
@@ -103,6 +104,7 @@ public class ProtocolExecutorTest {
     /**
      * Tests the case where the option given to the SETTO command is not valid.
      */
+    @Ignore
     @Test(expected = NoCommandException.class)
     public void testSetToException1() throws NoCommandException {
         new ProtocolExecutor(new String[]{"SETTO", "NotAnOption"}, server.server.getSblList().get(0)).setTo();
@@ -111,6 +113,7 @@ public class ProtocolExecutorTest {
     /**
      * Tests the case where the option given to the SETTO command equals null.
      */
+    @Ignore
     @Test(expected = NoCommandException.class)
     public void testSetToException2() throws NoCommandException {
         new ProtocolExecutor(new String[]{"SETTO"}, server.server.getSblList().get(0)).setTo();
@@ -120,6 +123,7 @@ public class ProtocolExecutorTest {
      * Tests the implementation of changeTo with option 'Nickname'. Details about what is tested are
      * found next to the assertEquals methods.
      */
+    @Ignore
     @Test
     public void testChangeToName() {
         ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"CHNGE", "Nickname", "Guillaume"}, server.server.getSblList().get(0));
@@ -155,6 +159,7 @@ public class ProtocolExecutorTest {
      * Tests the implementation of changeTo with option 'Status'. Details about what is tested are
      * found next to the assertEquals methods.
      */
+    @Ignore
     @Test
     public void testChangeToStatus() {
         ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"CHNGE", "Status", "READY"}, server.server.getSblList().get(0));
@@ -192,6 +197,7 @@ public class ProtocolExecutorTest {
     /**
      * Tests the case where the option given to the CHNGE command is not valid.
      */
+    @Ignore
     @Test(expected = NoCommandException.class)
     public void testChangeToException1() throws NoCommandException {
         new ProtocolExecutor(new String[]{"CHNGE", "NotAnOption"}, server.server.getSblList().get(0)).changeTo();
@@ -200,6 +206,7 @@ public class ProtocolExecutorTest {
     /**
      * Tests the case where the option given to the CHNGE command equals null.
      */
+    @Ignore
     @Test(expected = NoCommandException.class)
     public void testChangeToException2() throws NoCommandException {
         new ProtocolExecutor(new String[]{"CHNGE"}, server.server.getSblList().get(0)).changeTo();
@@ -209,6 +216,7 @@ public class ProtocolExecutorTest {
      * Tests the implementation of newGame. Details about what is tested are
      * found next to the assertEquals methods.
      */
+    @Ignore
     @Test
     public void testNewGame() {
         ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"CHNGE", "Status", "READY"}, server.server.getSblList().get(0));
@@ -241,6 +249,7 @@ public class ProtocolExecutorTest {
     /**
      * Tests the case where the option given to the NWGME command is not valid.
      */
+    @Ignore
     @Test(expected = NoCommandException.class)
     public void testNewGameException1() throws NoCommandException {
         new ProtocolExecutor(new String[]{"NWGME", "NotAnOption"}, server.server.getSblList().get(0)).changeTo();
@@ -249,6 +258,7 @@ public class ProtocolExecutorTest {
     /**
      * Tests the case where the option given to the NWGME command equals null.
      */
+    @Ignore
     @Test(expected = NoCommandException.class)
     public void testNewGameException2() throws NoCommandException {
         new ProtocolExecutor(new String[]{"NWGME"}, server.server.getSblList().get(0)).changeTo();
@@ -258,6 +268,7 @@ public class ProtocolExecutorTest {
      * Tests the implementation of chatMessage with all three options 'Global', 'Broadcast' and 'Private'.
      * Details about what is tested are found next to the assertEquals methods.
      */
+    @Ignore
     @Test
     public void testChatMessage() {
         ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"CHNGE", "Status", "READY"}, server.server.getSblList().get(0));
@@ -354,6 +365,7 @@ public class ProtocolExecutorTest {
     /**
      * Tests the case where the option given to the CHATM command is not valid.
      */
+    @Ignore
     @Test(expected = NoCommandException.class)
     public void testChatMessageException1() throws NoCommandException {
         new ProtocolExecutor(new String[]{"CHATM", "NotAnOption"}, server.server.getSblList().get(0)).changeTo();
@@ -362,6 +374,7 @@ public class ProtocolExecutorTest {
     /**
      * Tests the case where the option given to the CHATM command equals null.
      */
+    @Ignore
     @Test(expected = NoCommandException.class)
     public void testChatMessageException2() throws NoCommandException {
         new ProtocolExecutor(new String[]{"CHATM"}, server.server.getSblList().get(0)).changeTo();
@@ -370,7 +383,6 @@ public class ProtocolExecutorTest {
     /**
      * Tests the implementation of logout. Does not test the writing of any score in the highscore file.
      */
-    @Ignore
     @Test
     public void testLogout() {
         ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"CHNGE", "Status", "READY"}, server.server.getSblList().get(0));

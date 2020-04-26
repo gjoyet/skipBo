@@ -85,6 +85,20 @@ public class SBServer implements Runnable {
     }
 
     /**
+     * @return a String containing all players currently connected except Player 'p'.
+     */
+    public String getWholePlayerList(Player except) {
+        StringBuilder allNames = new StringBuilder();
+        for(Player p : serverLobby.getPlayerLobby()) {
+            if(!p.equals(except)) {
+                allNames.append(p.getName() + " (" + p.getStatus().toString() + "), ");
+            }
+        }
+        allNames.delete(allNames.length()-2, allNames.length());
+        return allNames.toString();
+    }
+
+    /**
      * @return a String containing all players currently in the main lobby.
      */
     public String getPlayerNotIngameList() {

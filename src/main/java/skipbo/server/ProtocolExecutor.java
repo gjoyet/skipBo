@@ -63,21 +63,26 @@ public class ProtocolExecutor {
                     }
                 }
             } else throw new NoCommandException(input[0], input[1]);
-            sbL.pw.println("SETTO§Nickname§" + name);
-            servLog.info(name + " logged in.");
-            sbL.pw.println("PRINT§Terminal§Welcome to Skip-Bo, " + name + "!");
-            sendAllExceptOne("PRINT§Terminal§" + name + " joined the room. Say hi!", sbL);
-            servLog.debug("Players connected: " + sbL.getServer().getWholePlayerList());
+            informLogin(name);
         } catch(NameTakenException nte) {
             name = nte.findName();
             sbL.player = new Player(sbL.id, name, sbL);
             sbL.getServer().serverLobby.addPlayer(sbL.player);
-            sbL.pw.println("SETTO§Nickname§" + name);
-            servLog.info(name + " logged in.");
-            sbL.pw.println("PRINT§Terminal§Welcome to Skip-Bo, " + name + "!");
-            sendAllExceptOne("PRINT§Terminal§" + name + " joined the room. Say hi!", sbL);
-            servLog.debug("Players connected: " + sbL.getServer().getWholePlayerList());
+            informLogin(name);
         }
+    }
+
+    /**
+     * @param name: Feeds all clients the needed information about the login of Player with 'name'
+     */
+    private void informLogin(String name) {
+        sbL.getPW().println("SETTO§Nickname§" + name);
+        sbL.getPW().println("PLAYR§List§" + sbL.getServer().getWholePlayerList(sbL.getPlayer()));
+        sendAllExceptOne("PLAYR§Joined§" + name, sbL);
+        servLog.info(name + " logged in.");
+        sbL.pw.println("PRINT§Terminal§Welcome to Skip-Bo, " + name + "!");
+        sendAllExceptOne("PRINT§Terminal§" + name + " joined the room. Say hi!", sbL);
+        servLog.debug("Players connected: " + sbL.getServer().getWholePlayerList());
     }
 
     /**
@@ -97,10 +102,12 @@ public class ProtocolExecutor {
                 if(name.equals(sbL.player.getName())) {
                     sbL.pw.println("PRINT§Terminal§Name is already " + name + ".");
                 } else if (!sbL.getServer().serverLobby.nameIsTaken(name) && sbL.getServer().serverLobby.nameIsValid(name)) {
+                    String oldName = sbL.player.getName();
                     sbL.player.changeName(name);
                     sbL.pw.println("PRINT§Terminal§Name changed to " + name + ".");
                     sbL.pw.println("CHNGE§Nickname§" + name);
                     servLog.info(formerName + " changed name to " + name + ".");
+                    sendAllExceptOne("PLAYR§Change§" + oldName + "§" + name, sbL);
                     sendAllExceptOne("PRINT§Terminal§" + formerName + " changed name to " + name + ".", sbL);
                 } else if (!sbL.getServer().serverLobby.nameIsValid(name)) {
                     sbL.pw.println("PRINT§Terminal§Refused: Invalid name. Try again.");
@@ -127,8 +134,12 @@ public class ProtocolExecutor {
             } else throw new NoCommandException(input[0], input[1]);
         } catch (NameTakenException nte) {
             String name = nte.findName();
+            String oldName = sbL.player.getName();
             sbL.player.changeName(name);
+            sbL.pw.println("PRINT§Terminal§Name changed to " + name + ".");
             sbL.pw.println("CHNGE§Nickname§" + name);
+            servLog.info(formerName + " changed name to " + name + ".");
+            sendAllExceptOne("PLAYR§Change§" + oldName + "§" + name, sbL);
             sendAllExceptOne("PRINT§Terminal§" + formerName + " changed name to " + name + ".", sbL);
         }
     }
@@ -171,16 +182,18 @@ public class ProtocolExecutor {
         sbL.pw.println("LGOUT");
         sbL.getServer().serverLobby.removePlayer(sbL.player);
         if (sbL.player.getGame() != null) {
-            sbL.player.getGame().players.remove(sbL.player);
-            if(sbL.getPlayer().getGame().players.size() == 1) {
+            if(sbL.getPlayer().getGame().players.size() == 2) {
+                sbL.player.getGame().players.remove(sbL.player);
                 sbL.getPlayer().getGame().terminateGame();
             } else {
                 sbL.getPlayer().getGame().playerLeaving(sbL.player);
-                for(Player p : sbL.getPlayer().getGame().players) {
-                    p.getSBL().getPW().println("PLEFT§Leaving§" + sbL.getPlayer().getName());
-                }
+                sbL.player.getGame().players.remove(sbL.player);
             }
         }
+        for(Player p : sbL.getServer().serverLobby.getPlayerLobby()) {
+            p.getSBL().getPW().println("PLAYR§Left§" + sbL.getPlayer().getName());
+        }
+        sendAll("PRINT§Terminal§" + sbL.player.getName() + " left the room.", sbL);
         sbL.stopRunning();
         try {
             sbL.pw.close();
@@ -189,7 +202,6 @@ public class ProtocolExecutor {
         } catch(IOException ioe) {
             servLog.warn("Issues while closing the socket at logout.");
         }
-        sendAll("PRINT§Terminal§" + sbL.player.getName() + " left the room.", sbL);
         servLog.info(sbL.player.getName() + " logged out.");
         sbL.getServer().playerCount--;
         try {

@@ -188,7 +188,7 @@ public class SBServerListener implements Runnable {
 
     private void player(String[] command) {
         if (command[1].equalsIgnoreCase("List")) {
-            String[] n = command[2].split("§");
+            String[] n = command[2].split(", ");
             if (!n[0].isEmpty()) {
                 chatGraphic.setPlayers(n);
             }

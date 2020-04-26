@@ -10,6 +10,7 @@
 skipBoLogs/ProgramLog.txt
 skipBoLogs/Games.txt
 
+
 # User-specific stuff
 .idea/
 .idea/**/workspace.xml

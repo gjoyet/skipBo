@@ -16,7 +16,7 @@ public class Game implements Runnable {
 
     public ArrayList<Player> players;
     Pile piles;
-    int sizeOfStockPile; //3 for DEMO purposes, actually 20
+    int sizeOfStockPile;    //3 for DEMO purposes, actually 20
     int playersTurn = 0;
     private Player winner;
     private boolean gameRunning;

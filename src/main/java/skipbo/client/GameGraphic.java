@@ -68,6 +68,7 @@ public class GameGraphic implements ActionListener {
 
     private final CardIcons cardIcons = new CardIcons(WIDTH_OP1, HEIGHT_OP1, 78, 120);
 
+    private final Font DEFAULTFONT = UIManager.getDefaults().getFont("Label.font");
 
     GameGraphic(SBClientListener clientListener, String name, JTextPane chat) {
         this.clientListener = clientListener;
@@ -89,7 +90,7 @@ public class GameGraphic implements ActionListener {
 
         // Layout Manager
 
-        int WIDTH_HAND = 78;
+        final int WIDTH_HAND = 78;
         final int HEIGHT_HAND = 120;
         final int x_HAND = 550;  // change here
         final int y_HAND = 620;  // change here
@@ -291,6 +292,7 @@ public class GameGraphic implements ActionListener {
             i++;
         } else {
             e1.setForeground(ChatGraphic.DARKGREEN);
+            e1.setFont(new Font(DEFAULTFONT.getName(), Font.BOLD, DEFAULTFONT.getSize()+5));
         }
         oppArray[i] = e1;
         e1.setText(names[i]);
@@ -405,9 +407,10 @@ public class GameGraphic implements ActionListener {
             layeredPane.add(newDisCard, Integer.valueOf(al.size()));
             al.add(newDisCard);
 
-            //Paint name of player whose turn it is green
+            //Paint name of player whose turn it is, is green
             playerIndex = (playerIndex + 1) % oppArray.length;
             oppArray[playerIndex].setForeground(ChatGraphic.DARKGREEN);
+            oppArray[playerIndex].setFont(new Font(DEFAULTFONT.getName(), Font.BOLD, DEFAULTFONT.getSize()+5));
 
         } else {
             al = getEnemyArray(name, j);
@@ -421,9 +424,11 @@ public class GameGraphic implements ActionListener {
 
             //Paint names of opponents in the right colors
             oppArray[playerIndex].setForeground(Color.BLACK);
+            oppArray[playerIndex].setFont(DEFAULTFONT);
             playerIndex = (playerIndex + 1) % oppArray.length;
             if (oppArray[playerIndex] != null) { //if this is null, it means that it's this players turn
                 oppArray[playerIndex].setForeground(ChatGraphic.DARKGREEN);
+                oppArray[playerIndex].setFont(new Font(DEFAULTFONT.getName(), Font.BOLD, DEFAULTFONT.getSize()+5));
             }
         }
     }

@@ -142,7 +142,7 @@ public class Game implements Runnable {
                 piles.drawPile.remove(c);
             }
 
-            tempPlayer.getSBL().getPW().println("PRINT§Terminal§Your Hand cards are: " + piles.handCardPrint(tempPlayer));
+//            tempPlayer.getSBL().getPW().println("PRINT§Terminal§Your Hand cards are: " + piles.handCardPrint(tempPlayer));
 
             for (int j = 0; j < sizeOfStockPile; j++) {    // Draw Stock-Pile cards for each player (REAL METHOD)
                 Card c = getDrawPile().get(random.nextInt(getDrawPile().size()));

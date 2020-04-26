@@ -199,10 +199,12 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         listChat.setVisible(true);
         listChat.setBounds(150,675,180,20);
         add(listChat);
+/*
 
         //Testing purpose
         String[] playersForTesting = {"geiom","theLegend27","ManuWelan","MrDickson","RohanZohan","GreekLegend","Borat","HaikhoMisori"};
         setPlayers(playersForTesting);
+*/
 
 
         //Input textfield
@@ -379,7 +381,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
                 if (s.equals("global")) {
                     input = "/broadcast " + input;
                 } else if (!s.equals("all")) {
-                    input = "/msg " + s + " " + s;
+                    input = "/msg " + s + " " + input;
                 }
             }
             try {

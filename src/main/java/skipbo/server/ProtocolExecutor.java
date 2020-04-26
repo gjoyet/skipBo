@@ -102,12 +102,11 @@ public class ProtocolExecutor {
                 if(name.equals(sbL.player.getName())) {
                     sbL.pw.println("PRINT§Terminal§Name is already " + name + ".");
                 } else if (!sbL.getServer().serverLobby.nameIsTaken(name) && sbL.getServer().serverLobby.nameIsValid(name)) {
-                    String oldName = sbL.player.getName();
                     sbL.player.changeName(name);
                     sbL.pw.println("PRINT§Terminal§Name changed to " + name + ".");
                     sbL.pw.println("CHNGE§Nickname§" + name);
                     servLog.info(formerName + " changed name to " + name + ".");
-                    sendAllExceptOne("PLAYR§Change§" + oldName + "§" + name, sbL);
+                    sendAllExceptOne("PLAYR§Change§" + formerName + "§" + name, sbL);
                     sendAllExceptOne("PRINT§Terminal§" + formerName + " changed name to " + name + ".", sbL);
                 } else if (!sbL.getServer().serverLobby.nameIsValid(name)) {
                     sbL.pw.println("PRINT§Terminal§Refused: Invalid name. Try again.");
@@ -134,12 +133,11 @@ public class ProtocolExecutor {
             } else throw new NoCommandException(input[0], input[1]);
         } catch (NameTakenException nte) {
             String name = nte.findName();
-            String oldName = sbL.player.getName();
             sbL.player.changeName(name);
             sbL.pw.println("PRINT§Terminal§Name changed to " + name + ".");
             sbL.pw.println("CHNGE§Nickname§" + name);
             servLog.info(formerName + " changed name to " + name + ".");
-            sendAllExceptOne("PLAYR§Change§" + oldName + "§" + name, sbL);
+            sendAllExceptOne("PLAYR§Change§" + formerName + "§" + name, sbL);
             sendAllExceptOne("PRINT§Terminal§" + formerName + " changed name to " + name + ".", sbL);
         }
     }

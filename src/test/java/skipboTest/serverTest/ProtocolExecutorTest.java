@@ -381,24 +381,11 @@ public class ProtocolExecutorTest {
     }
 
     /**
-     * Tests the implementation of logout. Does not test the writing of any score in the highscore file.
+     * Tests the implementation of logout.
      */
     @Test
     public void testLogout() {
-        ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"CHNGE", "Status", "READY"}, server.server.getSblList().get(0));
-        ProtocolExecutor pe1 = new ProtocolExecutor(new String[]{"NWGME", "New", "2§30"}, server.server.getSblList().get(1));
-        try {
-            pe0.changeTo();
-            sleep(200);
-            pe1.newGame();
-            sleep(1000);
-        } catch(NoCommandException nce) {
-            servLog.debug("Error with testing framework");
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        pe0.setInput(new String[]{"LGOUT"});
+        ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"LGOUT"}, server.server.getSblList().get(0));
         try {
             pe0.logout();
             sleep(500);
@@ -407,11 +394,6 @@ public class ProtocolExecutorTest {
         }
 
         assertEquals(3, server.server.getLobby().getPlayerLobby().size());
-        // Test: player got removed from main lobby
-        assertEquals(1, server.server.getSblList().get(1).getPlayer().getGame().players.size());
-        // Test: player got removed from game
-        assertEquals(false, server.server.getSblList().get(1).getPlayer().getGame().gameIsRunning());
-        // Test: server recognised there was only one player left in game and terminated it
     }
 
 }

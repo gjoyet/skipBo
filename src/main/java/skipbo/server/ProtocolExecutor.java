@@ -394,11 +394,13 @@ public class ProtocolExecutor {
         for (Player p : game.players) {
             p.changeStatus(Status.WAITING);
             p.clearHandCards();
+            p.clearDiscardPiles();
+            p.clearStockPile();
             p.changeGame(null);
         }
 
         // Writing game into highscores file
-        File highscoresOld = new File("skipBoLogs/Highscores.txt");
+        File highScoreOld = new File("skipBoLogs/Highscores.txt");
         File tempFile = new File("skipBoLogs/tempFile.txt");
         BufferedReader br = null;
         PrintWriter pw = null;
@@ -406,7 +408,7 @@ public class ProtocolExecutor {
         try {
             servLog.debug("Initializing br and pw.");
             if(!tempFile.createNewFile()) servLog.error("Could not create file.");
-            br = new BufferedReader(new FileReader(highscoresOld));
+            br = new BufferedReader(new FileReader(highScoreOld));
             pw = new PrintWriter(new FileOutputStream(tempFile), true);
         } catch(FileNotFoundException fnfe) {
             servLog.error("File not found.");
@@ -446,7 +448,7 @@ public class ProtocolExecutor {
         }
 
         servLog.debug("Deleting old file and renaming tempFile.");
-        highscoresOld.delete();
+        highScoreOld.delete();
         tempFile.renameTo(new File("skipBoLogs/Highscores.txt"));
 
         try {

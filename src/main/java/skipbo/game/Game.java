@@ -647,6 +647,11 @@ public class Game implements Runnable {
         gameRunning = false;
         this.winner = winner;
 
+        for(int i = 0; i < 4; i++){
+            ArrayList<Card> bp = piles.buildPiles.get(i);
+            bp.clear();
+        }
+
         score = (double) turnCounter / sizeOfStockPile;
         score = Math.round(score*100) / 100;
         if (winner != null) {

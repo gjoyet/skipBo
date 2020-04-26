@@ -91,7 +91,7 @@ public class SBServer implements Runnable {
         StringBuilder allNames = new StringBuilder("");
         for(Player p : serverLobby.getPlayerLobby()) {
             if(!p.equals(except)) {
-                allNames.append(p.getName() + " (" + p.getStatus().toString() + "), ");
+                allNames.append(p.getName() + ", ");
             }
         }
         if(allNames.length() > 0) allNames.delete(allNames.length()-2, allNames.length());

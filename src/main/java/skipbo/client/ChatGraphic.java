@@ -147,17 +147,17 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         contentPane.add(infoB);
         infoB.addActionListener(this);
 
-        gamesB = new JButton("Ranking");
+        gamesB = new JButton("Games list");
         gamesB.setBounds(X_MENU_B_R2, Y_MENU_B+ 1*Y_DISTANCE_MENU_B, WIDTH_MENU_B, HEIGHT_MENU_B);
         contentPane.add(gamesB);
         gamesB.addActionListener(this);
 
-        whosOnB = new JButton("Who's on?");
+        whosOnB = new JButton("Player list");
         whosOnB.setBounds(X_MENU_B_R1, Y_MENU_B+ 2*Y_DISTANCE_MENU_B, WIDTH_MENU_B, HEIGHT_MENU_B);
         contentPane.add(whosOnB);
         whosOnB.addActionListener(this);
 
-        leaveB = new JButton("Leave");
+        leaveB = new JButton("Quit");
         leaveB.setBounds(X_MENU_B_R2, Y_MENU_B+ 2*Y_DISTANCE_MENU_B, WIDTH_MENU_B, HEIGHT_MENU_B);
         contentPane.add(leaveB);
         leaveB.addActionListener(this);

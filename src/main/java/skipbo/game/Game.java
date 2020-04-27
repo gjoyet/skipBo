@@ -236,10 +236,10 @@ public class Game implements Runnable {
 
                 checkBuildPile(card, specBuildPile, currentPlayer);  //check if buildPile is full and print build pile
 
-                /*currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hands cards are now: "
-                        + piles.handCardPrint(currentPlayer));
-                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your stock card is: " +
-                        stockCard.number);*/
+            /*currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hands cards are now: "
+                    + piles.handCardPrint(currentPlayer));
+            currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your stock card is: " +
+                    stockCard.number);*/
 
                 return true;
             } else if (card.col == Color.cyan) {      //if Joker card
@@ -264,7 +264,7 @@ public class Game implements Runnable {
     /**
      * This method plays a hand card into a discard pile of the player's choice
      * Parameter handCardIndex to know which hand card should be selected to be played
-     * Parameter id to know whose turn it is. Furthermore, removes the specified card
+     * Parameter currentPlayer to know whose turn it is. Furthermore, removes the specified card
      * from Player's hand.
      * Parameter discardPileIndex to know which Discard pile to play to.
      *
@@ -296,7 +296,7 @@ public class Game implements Runnable {
         specDiscard.add(card);
         currentPlayer.getHandCards().remove(card);
 
-//        displayDiscard(currentPlayer);
+//      displayDiscard(currentPlayer);
         endTurn();
 
         return true;
@@ -332,8 +332,8 @@ public class Game implements Runnable {
                     return new Card(-1, Color.cyan);
                 }
                 checkBuildPile(stockCard, specBuildPile, currentPlayer);
-//                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
-//                        + piles.handCardPrint(currentPlayer));
+//               currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
+//                       + piles.handCardPrint(currentPlayer));
 
                 if (currentPlayer.getStockPile().size() == 0) {  //if stock pile is empty
                     return new Card(-1, Color.cyan);

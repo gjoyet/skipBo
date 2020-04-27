@@ -15,13 +15,13 @@ import static skipbo.server.SBServer.servLog;
 public class Game implements Runnable {
 
     public ArrayList<Player> players;
+    public int turnCounter = 0;
+    public double score = -1.0;
     Pile piles;
     int sizeOfStockPile;    //3 for DEMO purposes, actually 20
     int playersTurn = 0;
     private Player winner;
     private boolean gameRunning;
-    public int turnCounter = 0;
-    public double score = -1.0;
 
     /**
      * Constructor for Object Game, where the main Game and Game rules
@@ -34,7 +34,6 @@ public class Game implements Runnable {
         this.sizeOfStockPile = sizeOfStockPile;
 
     }
-
 
     /**
      * Returns the drawPile of the main Game
@@ -53,26 +52,6 @@ public class Game implements Runnable {
 
     public boolean gameIsRunning() {
         return this.gameRunning;
-    }
-
-    public void terminateGame() {
-        this.gameRunning = false;
-        Player pLeft = this.players.get(0);
-
-        pLeft.getSBL().getPW().println("ENDGM§Terminated");
-        pLeft.changeGame(null);
-        pLeft.changeStatus(Status.WAITING);
-
-        for(Player player: players){
-            player.clearStockPile();
-            player.clearDiscardPiles();
-            player.clearHandCards();
-        }
-
-        for(int i = 0; i < 4; i++){
-            ArrayList<Card> bp = piles.buildPiles.get(i);
-            bp.clear();
-        }
     }
 
     /**
@@ -163,6 +142,11 @@ public class Game implements Runnable {
         servLog.debug("Game thread finished.");
     }
 
+    /**
+     * Starts first turn
+     * @param playersTurn (who's turn it is)
+     */
+
     void startFirstTurn(int playersTurn) {
         servLog.debug("Entered first turn.");
         Player player = players.get(playersTurn);
@@ -183,31 +167,9 @@ public class Game implements Runnable {
         turnCounter++;
 
         ply.getSBL().getPW().println("PRINT§Terminal§It's your turn!");
-//        ply.getSBL().getPW().println("PRINT§Terminal§Your stock card is: " +
-//                ply.getStockPile().get(ply.getStockPile().size() - 1).number);
-
-//        displayDiscard(ply);
-
-//        String[] bPiles = piles.buildPilesPrint();
-//        for (String str : bPiles) {
-//            ply.getSBL().getPW().println("PRINT§Terminal§" + str);
-//        }
-
-//        ply.getSBL().getPW().println("PRINT§Terminal§Your hand cards are: " + piles.handCardPrint(ply));
 
         new ProtocolExecutor().sendAllExceptOne("PRINT§Terminal§It's " + ply.getName()
                 + "'s turn!", ply.getSBL());
-    }
-
-    /**
-     * Checks if player's hand cards are empty. If yes, fills the player's hand again.
-     *
-     * @param player The player that's currently playing
-     */
-    public void checkHandCards(Player player) {
-        if (player.getHandCards().isEmpty()) {
-            fillHandCards(player);
-        }
     }
 
     /**
@@ -300,43 +262,6 @@ public class Game implements Runnable {
     }
 
     /**
-     * Checks if build pile top card is 12, if yes, removes cards from that build pile and puts it into and empty pile
-     * and prints. If not, prints normally.
-     *
-     * @param card      card that's played
-     * @param buildPile build pile that's played to
-     * @param player    Player whose turn it is
-     */
-
-    public void checkBuildPile(Card card, ArrayList<Card> buildPile, Player player) {
-        String[] buildPiles = piles.buildPilesPrint();
-        if (card.number == 12) {
-//            for (String str : buildPiles) {
-//                new ProtocolExecutor().sendAll("PRINT§Terminal§" + str, player.getSBL());
-//            }
-            piles.emptyPile.addAll(buildPile); //TODO: does add all remove bp cards already? ask
-
-            for (Iterator<Card> bp = buildPile.iterator(); bp.hasNext(); ) { //Iterator to remove all cards from current BP
-                bp.next();
-                bp.remove();
-            }
-            /*new ProtocolExecutor().sendAll("PRINT§Terminal§Your empty pile is: " + piles.emptyPilePrint()
-                    ,player.getSBL());
-            new ProtocolExecutor().sendAll("PRINT§Terminal§The maximum number has been reached; " +
-                    "the deck has been reset to: ", player.getSBL());
-            for (String s : buildPiles) {
-                new ProtocolExecutor().sendAll("PRINT§Terminal§" + s, player.getSBL());
-            }*/
-
-        } else {
-//            new ProtocolExecutor().sendAll("PRINT§Terminal§The build decks are now: ", player.getSBL());
-//            for (String s : buildPiles) {
-//                new ProtocolExecutor().sendAll("PRINT§Terminal§" + s, player.getSBL());
-//            }
-        }
-    }
-
-    /**
      * This method plays a hand card into a discard pile of the player's choice
      * Parameter handCardIndex to know which hand card should be selected to be played
      * Parameter id to know whose turn it is. Furthermore, removes the specified card
@@ -379,25 +304,12 @@ public class Game implements Runnable {
     }
 
     /**
-     * Method to display all Discard piles
-     */
-
-    public void displayDiscard(Player player) {
-        String[] discardPiles = piles.discardPilesPrint(player);
-        for (String s : discardPiles) {
-            player.getSBL().getPW().println("PRINT§Terminal§ " + s);
-        }
-    }
-
-    /**
      * This method is to play the top card from the Stock Pile to a build pile
      * of the player's choosing.
      *
      * @param currentPlayer  (The player that's playing right now)
      * @param buildPileIndex (The index of the pile that the player wishes to play to)
      */
-
-
     public Card playFromStockToMiddle(Player currentPlayer, int buildPileIndex) {
 
         if (buildPileIndex < 0 || buildPileIndex > 3) {      //if bp index is a false index that cannot be true
@@ -613,6 +525,52 @@ public class Game implements Runnable {
     }
 
     /**
+     * Checks if player's hand cards are empty. If yes, fills the player's hand again.
+     *
+     * @param player The player that's currently playing
+     */
+    public void checkHandCards(Player player) {
+        if (player.getHandCards().isEmpty()) {
+            fillHandCards(player);
+        }
+    }
+
+    /**
+     * Checks if build pile top card is 12, if yes, removes cards from that build pile and puts it into and empty pile
+     * and prints. If not, prints normally.
+     *
+     * @param card      card that's played
+     * @param buildPile build pile that's played to
+     * @param player    Player whose turn it is
+     */
+
+    public void checkBuildPile(Card card, ArrayList<Card> buildPile, Player player) {
+        String[] buildPiles = piles.buildPilesPrint();
+        if (card.number == 12) {
+//            for (String str : buildPiles) {
+//                new ProtocolExecutor().sendAll("PRINT§Terminal§" + str, player.getSBL());
+//            }
+            piles.emptyPile.addAll(buildPile);
+
+            for (Iterator<Card> bp = buildPile.iterator(); bp.hasNext(); ) { //Iterator to remove all cards from current BP
+                bp.next();
+                bp.remove();
+            }
+        }
+    }
+
+    /**
+     * Method to display all Discard piles
+     */
+
+    public void displayDiscard(Player player) {
+        String[] discardPiles = piles.discardPilesPrint(player);
+        for (String s : discardPiles) {
+            player.getSBL().getPW().println("PRINT§Terminal§ " + s);
+        }
+    }
+
+    /**
      * Method to add a player's cards to the empty pile that has left the game
      *
      * @param player Player that's left.
@@ -670,5 +628,28 @@ public class Game implements Runnable {
             new ProtocolExecutor().sendAll("ENDGM§Winner§" + winner.getName(), winner.getSBL());
         }
         new ProtocolExecutor().gameEnding(this);
+    }
+
+    /**
+     * Method for when a game gets interrupted, because people left.
+     */
+    public void terminateGame() {
+        this.gameRunning = false;
+        Player pLeft = this.players.get(0);
+
+        pLeft.getSBL().getPW().println("ENDGM§Terminated");
+        pLeft.changeGame(null);
+        pLeft.changeStatus(Status.WAITING);
+
+        for(Player player: players){
+            player.clearStockPile();
+            player.clearDiscardPiles();
+            player.clearHandCards();
+        }
+
+        for(int i = 0; i < 4; i++){
+            ArrayList<Card> bp = piles.buildPiles.get(i);
+            bp.clear();
+        }
     }
 }

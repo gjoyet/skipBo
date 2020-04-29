@@ -1,6 +1,7 @@
 Skip-Bro Highscores (score = turns to win / stockpile size; lower scores are better)
 
 2020-04-29 14:56 || Participants: Guillaume, Manuela, silvan, Rohan || FINISHED || WINNER: Manuela, SCORE: 2.33
+2020-04-29 20:58 || Participants: MMMMMMMMMMMMM2, MMMMMMMMMMMMM, MMMMMMMMMMMMM1 || FINISHED || WINNER: MMMMMMMMMMMMM1, SCORE: 2.33
 2020-04-29 14:53 || Participants: Guillaume, Manuela, silvan, Rohan || FINISHED || WINNER: silvan, SCORE: 2.67
 2020-04-26 17:08 || Participants: Guillaume, Gaylord88, Rohan || FINISHED || WINNER: Guillaume, SCORE: 3.30
 2020-04-26 20:27 || Participants: Manuela1, Manuela || FINISHED || WINNER: Manuela1, SCORE: 4.33

@@ -67,6 +67,8 @@ public class GameGraphic implements ActionListener {
 
     private int initialNumStockCards;
 
+    private JLabel yourTurnLabel;
+
     private final CardIcons cardIcons = new CardIcons(WIDTH_OP1, HEIGHT_OP1, 78, 120);
 
     private final Font DEFAULTFONT = UIManager.getDefaults().getFont("Label.font");
@@ -278,6 +280,14 @@ public class GameGraphic implements ActionListener {
             oppNumStockCards[i].setBounds(x_OP1 +(WIDTH_OP1/2)-7, y_OP1 +HEIGHT_OP1+4+i*140, 35, 15);
         }
 
+        //creates the label shown when it's your turn
+        yourTurnLabel = new JLabel("It's your turn!");
+        yourTurnLabel.setBounds(657, 10, 600,100);
+        yourTurnLabel.setFont(new Font(DEFAULTFONT.getName(), Font.BOLD, 35));
+        yourTurnLabel.setForeground(ChatGraphic.DARKGREEN);
+        layeredPane.add(yourTurnLabel);
+        yourTurnLabel.setVisible(false);
+
     }
 
     /**
@@ -291,6 +301,7 @@ public class GameGraphic implements ActionListener {
         int i = 0;
         if (names[i].equals(playerName)) {
             i++;
+            yourTurnLabel.setVisible(true); //if your own name is the first one -> it's your turn
         } else {
             e1.setForeground(ChatGraphic.DARKGREEN);
             e1.setFont(new Font(DEFAULTFONT.getName(), Font.BOLD, DEFAULTFONT.getSize()+5));
@@ -416,6 +427,8 @@ public class GameGraphic implements ActionListener {
             oppArray[playerIndex].setForeground(ChatGraphic.DARKGREEN);
             oppArray[playerIndex].setFont(new Font(DEFAULTFONT.getName(), Font.BOLD, DEFAULTFONT.getSize()+5));
 
+            yourTurnLabel.setVisible(false);
+
         } else {
             al = getEnemyArray(name, j);
             newDisCard = new CardButton();
@@ -430,9 +443,11 @@ public class GameGraphic implements ActionListener {
             oppArray[playerIndex].setForeground(Color.BLACK);
             oppArray[playerIndex].setFont(DEFAULTFONT);
             playerIndex = (playerIndex + 1) % oppArray.length;
-            if (oppArray[playerIndex] != null) { //if this is null, it means that it's this players turn
+            if (oppArray[playerIndex] != null) {
                 oppArray[playerIndex].setForeground(ChatGraphic.DARKGREEN);
                 oppArray[playerIndex].setFont(new Font(DEFAULTFONT.getName(), Font.BOLD, DEFAULTFONT.getSize()+5));
+            } else { //it's this players turn
+                yourTurnLabel.setVisible(true);
             }
         }
     }

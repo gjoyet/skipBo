@@ -216,15 +216,15 @@ public class GameGraphic implements ActionListener {
 
         //Labels of enemies
         e1 = new JLabel("Opponent 1");
-        e1.setBounds(x_OP1, y_OP1 -20, 120, 15);
+        e1.setBounds(x_OP1, y_OP1 -24, 250, 25); //y: -20, width: 120, height 15
         layeredPane.add(e1);
 
         e2 = new JLabel("Opponent 2");
-        e2.setBounds(x_OP1, y_OP2 -20, 120, 15);
+        e2.setBounds(x_OP1, y_OP2 -24, 250, 25);
         layeredPane.add(e2);
 
         e3 = new JLabel("Opponent 3");
-        e3.setBounds(x_OP1, y_OP3 -20, 120, 15);
+        e3.setBounds(x_OP1, y_OP3 -24, 250, 25);
         layeredPane.add(e3);
 
         //Stock piles of enemies

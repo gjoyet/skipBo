@@ -220,30 +220,36 @@ public class GameGraphic implements ActionListener {
         e1 = new JLabel("Opponent 1");
         e1.setBounds(x_OP1, y_OP1 -24, 250, 25); //y: -20, width: 120, height 15
         layeredPane.add(e1);
+        e1.setVisible(false);
 
         e2 = new JLabel("Opponent 2");
         e2.setBounds(x_OP1, y_OP2 -24, 250, 25);
         layeredPane.add(e2);
+        e2.setVisible(false);
 
         e3 = new JLabel("Opponent 3");
         e3.setBounds(x_OP1, y_OP3 -24, 250, 25);
         layeredPane.add(e3);
+        e3.setVisible(false);
 
         //Stock piles of enemies
         e1_stock = new CardButton();
         e1_stock.setBounds(x_OP1, y_OP1, WIDTH_OP1, HEIGHT_OP1);
         layeredPane.add(e1_stock);
         setNotClickable(e1_stock);
+        e1_stock.setVisible(false);
 
         e2_stock = new CardButton();
         e2_stock.setBounds(x_OP1, y_OP2, WIDTH_OP1, HEIGHT_OP1);
         layeredPane.add(e2_stock);
         setNotClickable(e2_stock);
+        e2_stock.setVisible(false);
 
         e3_stock = new CardButton();
         e3_stock.setBounds(x_OP1, y_OP3, WIDTH_OP1, HEIGHT_OP1);
         layeredPane.add(e3_stock);
         setNotClickable(e3_stock);
+        e3_stock.setVisible(false);
 
         //Discard piles of enemies
         for (int i = 0; i < e1_discard.length; i++) {
@@ -265,6 +271,9 @@ public class GameGraphic implements ActionListener {
             e1_discard[i].add(b1);
             e2_discard[i].add(b2);
             e3_discard[i].add(b3);
+            b1.setVisible(false);
+            b2.setVisible(false);
+            b3.setVisible(false);
         }
 
         //Displays number of own stock cards left. Name of label corresponds to the number of stock cards left.
@@ -272,12 +281,14 @@ public class GameGraphic implements ActionListener {
         numOfStockCards = new JLabel();
         numOfStockCards.setBounds(x_STOCK, y_STOCK + HEIGHT_STOCK +5, 100, 15);
         layeredPane.add(numOfStockCards);
+        numOfStockCards.setVisible(false);
 
         //creates JLabels for number of stock cards of opponents and sets their bounds. Further adjustments are done in
         //method setOpponentNames
         for (int i = 0; i < oppNumStockCards.length; i++) {
             oppNumStockCards[i] = new JLabel();
             oppNumStockCards[i].setBounds(x_OP1 +(WIDTH_OP1/2)-7, y_OP1 +HEIGHT_OP1+4+i*140, 35, 15);
+            oppNumStockCards[i].setVisible(false);
         }
 
         //creates the label shown when it's your turn
@@ -306,8 +317,9 @@ public class GameGraphic implements ActionListener {
             e1.setForeground(ChatGraphic.DARKGREEN);
             e1.setFont(new Font(DEFAULTFONT.getName(), Font.BOLD, DEFAULTFONT.getSize()+5));
         }
-        oppArray[i] = e1;
+        setOpponentVisible(0);
         e1.setText(names[i]);
+        oppArray[i] = e1;
         layeredPane.add(oppNumStockCards[0]);
         oppNumStockCards[0].setName(names[i]);
         i++;
@@ -315,6 +327,7 @@ public class GameGraphic implements ActionListener {
             if (names[i].equals(playerName)) {
                 i++;
             }
+            setOpponentVisible(1);
             e2.setText(names[i]);
             oppArray[i] = e2;
             layeredPane.add(oppNumStockCards[1]);
@@ -324,6 +337,7 @@ public class GameGraphic implements ActionListener {
                 if (names[i].equals(playerName)) {
                     i++;
                 }
+                setOpponentVisible(2);
                 e3.setText(names[i]);
                 oppArray[i] = e3;
                 layeredPane.add(oppNumStockCards[2]);
@@ -387,6 +401,39 @@ public class GameGraphic implements ActionListener {
                 return false;
             }
         };
+    }
+
+    /**
+     * Makes all components belonging to an opponent visible
+     * @param oppIndex Index of the opponent
+     */
+    void setOpponentVisible(int oppIndex) {
+        if (oppIndex == 0) {
+            e1.setVisible(true);
+            e1_stock.setVisible(true);
+            oppNumStockCards[0].setVisible(true);
+            for (int i = 0; i < 4; i++) {
+                e1_discard[i].get(0).setVisible(true);
+            }
+            return;
+        }
+        if (oppIndex == 1) {
+            e2.setVisible(true);
+            e2_stock.setVisible(true);
+            oppNumStockCards[1].setVisible(true);
+            for (int i = 0; i < 4; i++) {
+                e2_discard[i].get(0).setVisible(true);
+            }
+            return;
+        }
+        if (oppIndex == 2) {
+            e3.setVisible(true);
+            e3_stock.setVisible(true);
+            oppNumStockCards[2].setVisible(true);
+            for (int i = 0; i < 4; i++) {
+                e3_discard[i].get(0).setVisible(true);
+            }
+        }
     }
 
     /**

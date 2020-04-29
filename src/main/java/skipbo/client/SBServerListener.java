@@ -190,6 +190,7 @@ public class SBServerListener implements Runnable {
      * Terminates SBServerListener thread and sends status message to client
      */
     void logOut() {
+        isLoggedIn = false;
         try {
             br.close();
             socket.close();
@@ -197,7 +198,6 @@ public class SBServerListener implements Runnable {
         } catch (IOException e) {
             clientLog.warn("Error with closing BufferedReader or Socket");
         }
-        isLoggedIn = false;
     }
 
     public String getInput() { return this.input; }

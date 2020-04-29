@@ -503,6 +503,8 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         if (playerComboModel.getSelectedItem().equals(name)) {
             printInfoMessage("Your chat partner left. You are now chatting in the lobby chat.");
             updateNamesInComboBox("lobby");
+        } else {
+            updateNamesInComboBox((String) playerComboModel.getSelectedItem());
         }
         if (gameGraphic != null) {
             if (gameGraphic.getOpponentNames().contains(name)) {

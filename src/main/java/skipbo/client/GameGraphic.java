@@ -841,7 +841,7 @@ public class GameGraphic implements ActionListener {
         }
 
         //Paint names of opponents in the right colors
-        if (oppArray[playerIndex].getText().equals(name)) {
+        if (oppArray[playerIndex] != null && oppArray[playerIndex].getText().equals(name)) {
             oppArray[playerIndex].setFont(DEFAULTFONT);
             playerIndex = playerIndex % newOppArray.length;
             if (newOppArray[playerIndex] != null) {

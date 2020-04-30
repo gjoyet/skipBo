@@ -813,8 +813,46 @@ public class GameGraphic implements ActionListener {
      * @param name Player that quit the game
      */
     void removePlayer(String name) {
-        //TODO
         clientLog.debug("Got into removePlayer method in GameGraphic");
+
+        //disable discard piles
+        for (int i = 1; i < 5; i++) {
+            ArrayList<CardButton> al =  getEnemyArray(name, i);
+            for (CardButton cardButton : al) {
+                cardButton.setEnabled(false);
+            }
+        }
+        //disable stock related things
+        getEnemyButton(name).setEnabled(false);
+        getNumOfStockCardsLabel(name).setForeground(Color.GRAY);
+
+        //remove from oppArray
+        JLabel[] newOppArray = new JLabel[oppArray.length-1];
+        for (int i = 0, j = 0; i < oppArray.length; i++) {
+            if (oppArray[i] != null) {
+                if (!oppArray[i].getText().equals(name)) {
+                    newOppArray[j] = oppArray[i];
+                } else {
+                    oppArray[i].setForeground(Color.GRAY);
+                    j--;
+                }
+            }
+            j++;
+        }
+
+        //Paint names of opponents in the right colors
+        if (oppArray[playerIndex].getText().equals(name)) {
+            oppArray[playerIndex].setFont(DEFAULTFONT);
+            playerIndex = playerIndex % newOppArray.length;
+            if (newOppArray[playerIndex] != null) {
+                newOppArray[playerIndex].setForeground(ChatGraphic.DARKGREEN);
+                newOppArray[playerIndex].setFont(new Font(DEFAULTFONT.getName(), Font.BOLD, DEFAULTFONT.getSize()+5));
+            } else { //it's this players turn
+                yourTurnLabel.setVisible(true);
+            }
+        }
+
+        oppArray = newOppArray;
     }
 
     void setStockSize(int stockSize) {

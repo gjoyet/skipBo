@@ -449,8 +449,8 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         Document doc = chat.getDocument();
         try {
             doc.insertString(doc.getLength(), s, attributeSet);
-//            doc = chat.getDocument();
-//            chat.setCaretPosition(doc.getLength());
+            doc = chat.getDocument();
+            chat.setCaretPosition(doc.getLength());
         } catch (BadLocationException e) {
             clientLog.warn("Error with appending text to chat");
         }

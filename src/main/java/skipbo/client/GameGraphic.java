@@ -281,7 +281,6 @@ public class GameGraphic implements ActionListener {
         numOfStockCards = new JLabel();
         numOfStockCards.setBounds(x_STOCK, y_STOCK + HEIGHT_STOCK +5, 100, 15);
         layeredPane.add(numOfStockCards);
-        numOfStockCards.setVisible(false);
 
         //creates JLabels for number of stock cards of opponents and sets their bounds. Further adjustments are done in
         //method setOpponentNames
@@ -819,12 +818,15 @@ public class GameGraphic implements ActionListener {
         for (int i = 1; i < 5; i++) {
             ArrayList<CardButton> al =  getEnemyArray(name, i);
             for (CardButton cardButton : al) {
-                cardButton.setEnabled(false);
+                layeredPane.remove(cardButton);
+                //cardButton.setEnabled(false);
             }
         }
         //disable stock related things
-        getEnemyButton(name).setEnabled(false);
-        getNumOfStockCardsLabel(name).setForeground(Color.GRAY);
+        //getEnemyButton(name).setEnabled(false);
+        layeredPane.remove(getEnemyButton(name));
+        //getNumOfStockCardsLabel(name).setForeground(Color.GRAY);
+        layeredPane.remove(getNumOfStockCardsLabel(name));
 
         //remove from oppArray
         JLabel[] newOppArray = new JLabel[oppArray.length-1];
@@ -833,7 +835,8 @@ public class GameGraphic implements ActionListener {
                 if (!oppArray[i].getText().equals(name)) {
                     newOppArray[j] = oppArray[i];
                 } else {
-                    oppArray[i].setForeground(Color.GRAY);
+                    layeredPane.remove(oppArray[i]);
+                    //oppArray[i].setForeground(Color.GRAY);
                     j--;
                 }
             }
@@ -851,7 +854,7 @@ public class GameGraphic implements ActionListener {
                 yourTurnLabel.setVisible(true);
             }
         }
-
+        layeredPane.repaint();
         oppArray = newOppArray;
     }
 

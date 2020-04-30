@@ -162,6 +162,10 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         startB.addActionListener(this);
 
 
+        JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+        tabbedPane.setBounds(80, 330, 250, 340);
+        contentPane.add(tabbedPane);
+
         //Output textfield
         chat = new JTextPane();
         chat.setBounds(80, 330, 250, 340);
@@ -172,7 +176,9 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         chatScrollPane.setBounds(80, 330, 250, 340);
         chatScrollPane.setVisible(true);
         chatScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        contentPane.add(chatScrollPane);
+        chatScrollPane.setName("Chat");
+        tabbedPane.add(chatScrollPane);
+        //contentPane.add(chatScrollPane);
 
         DefaultCaret caret = (DefaultCaret) chat.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
@@ -206,6 +212,24 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         inputScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentPane.add(inputScrollPane);
 
+        JTextPane highScore = new JTextPane();
+        highScore.setBounds(80, 330, 250, 340);
+        highScore.setEditable(false);
+
+        JScrollPane ScoreScrollPane = new JScrollPane(highScore);
+        ScoreScrollPane.setBounds(80, 330, 250, 340);
+        ScoreScrollPane.setVisible(true);
+        ScoreScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        ScoreScrollPane.setName("High score");
+        tabbedPane.add(ScoreScrollPane);
+
+        //Testing purpose
+        String h = "Skip-Bro High scores\n\n" +
+                "2020-04-29 20:58\nMMMMMMMMMMMMM2, MMMMMMMMMMMMM, MMMMMMMMMMMMM1\nWINNER: MMMMMMMMMMMMM1, SCORE: 2.33\n\n" +
+                "2020-04-26 17:47\nGuillaume1, Guillaume\nWINNER: Guillaume, SCORE: 8.67\n\n" +
+                "2020-04-29 14:01\nRohan, Guillaume, TheLegend27, Manuela\nWINNER: TheLegend27, SCORE: 9.33\n\n" +
+                "2020-04-29 14:26\nRohan, Manuela, Guillaume, Janni\nWINNER: Rohan, SCORE: 10.33\n\n";
+        highScore.setText(h);
     }
 
 

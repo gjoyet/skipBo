@@ -109,7 +109,8 @@ public class Game implements Runnable {
         gameRunning = true;
 
         this.piles.gamePiles();   // Game gets complete set of cards
-
+        Random r = new Random(getDrawPile().size());
+        Collections.shuffle(piles.drawPile, r);
 
         for (Player tempPlayer : players) {     // Players getting their cards
             tempPlayer.getSBL().getPW().println("PRINT§Terminal§Game is starting...");

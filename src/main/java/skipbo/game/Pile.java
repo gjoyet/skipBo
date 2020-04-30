@@ -3,6 +3,7 @@ package skipbo.game;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 
 public class Pile {
@@ -75,7 +76,8 @@ public class Pile {
             Card card = new Card(colours.get(3));
             this.drawPile.add(card);
         }
-        Collections.shuffle(drawPile); //shuffles all draw pile cards after creating and adding them
+
+        Collections.shuffle(drawPile);  //shuffles all draw pile cards after creating and adding them
 
         for (int i = 0; i < 4; i++) {        // Add four empty card piles (buildPiles)
             ArrayList<Card> deck = new ArrayList<Card>();

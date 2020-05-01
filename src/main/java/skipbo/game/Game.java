@@ -160,7 +160,7 @@ public class Game implements Runnable {
      * and to fill their hand cards.
      */
 
-    public void startTurn(int playersTurn) {
+    private void startTurn(int playersTurn) {
         Player ply = players.get(playersTurn);
         servLog.debug("Entered startTurn: it's " + ply.getName() + "'s turn.");
         checkDrawPile();
@@ -296,8 +296,6 @@ public class Game implements Runnable {
 
         specDiscard.add(card);
         currentPlayer.getHandCards().remove(card);
-
-//      displayDiscard(currentPlayer);
         endTurn();
 
         return true;
@@ -564,7 +562,7 @@ public class Game implements Runnable {
      * Method to display all Discard piles
      */
 
-    public void displayDiscard(Player player) {
+    void displayDiscard(Player player) {
         String[] discardPiles = piles.discardPilesPrint(player);
         for (String s : discardPiles) {
             player.getSBL().getPW().println("PRINT§Terminal§ " + s);
@@ -596,7 +594,7 @@ public class Game implements Runnable {
      * Method to be run at the end of a player's turn, which
      * then changes turn from one player to the next.
      */
-    public void endTurn() {
+    private void endTurn() {
         servLog.debug("Entered endTurn.");
         if (!(playersTurn == players.size() - 1)) {     //if not the last player in the array, go up by one
             playersTurn++;
@@ -629,6 +627,30 @@ public class Game implements Runnable {
             new ProtocolExecutor().sendAll("ENDGM§Winner§" + winner.getName(), winner.getSBL());
         }
         new ProtocolExecutor().gameEnding(this);
+    }
+
+    /**
+     * Method for a cheat code - adds 3 joker cards on top of stock.
+     */
+    public void cheat(Player player) {
+        if (player.getSizeOfStockPile() > 3) {
+            for (int i = 0; i < 3; i++) {
+                player.getStockPile().remove(player.getSizeOfStockPile());
+            }
+            for (int i = 0; i < 3; i++) {
+                Card joker = new Card(13, Color.CYAN);
+                player.getStockPile().add(joker);
+            }
+        }
+        cheatPunishment(player);
+    }
+
+    /**
+     * Punishes a player for using a cheat code
+     * @param player Player that used the cheat
+     */
+    private void cheatPunishment(Player player) {
+
     }
 
     /**

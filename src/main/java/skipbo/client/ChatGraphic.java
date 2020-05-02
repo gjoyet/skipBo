@@ -14,6 +14,7 @@ import java.util.Objects;
 
 import static skipbo.client.SBClient.clientLog;
 import static skipbo.server.Protocol.NWGME;
+import static skipbo.server.Protocol.PLAYR;
 
 /**
  * GUI for Skip-Bo lobby
@@ -33,6 +34,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     private JButton gamesB;
     private JButton whosOnB;
     private JButton leaveB;
+    private JTextPane highScore;
     private GameGraphic gameGraphic = null;
     private String playerName = "";
     private DefaultComboBoxModel<String> playerComboModel;
@@ -142,10 +144,11 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         contentPane.add(whosOnB);
         whosOnB.addActionListener(this);
 
-        leaveB = new JButton("Quit");
+        leaveB = new JButton("Leave game");
         leaveB.setBounds(X_MENU_B_R2, Y_MENU_B+ 2*Y_DISTANCE_MENU_B, WIDTH_MENU_B, HEIGHT_MENU_B);
         contentPane.add(leaveB);
         leaveB.addActionListener(this);
+        leaveB.setEnabled(false);
 
         Color gameButtonColor = new Color (153,255,153);
 
@@ -212,7 +215,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         inputScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentPane.add(inputScrollPane);
 
-        JTextPane highScore = new JTextPane();
+        highScore = new JTextPane();
         highScore.setBounds(80, 330, 250, 340);
         highScore.setEditable(false);
 
@@ -287,6 +290,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         startB.setEnabled(false);
         readyB.setEnabled(false);
         changeNameB.setEnabled(false);
+        leaveB.setEnabled(true);
         readyB.setText("Ready");
     }
 
@@ -330,6 +334,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         setTitle("Skip-Bros CHAT");
         startB.setEnabled(true);
         readyB.setEnabled(true);
+        leaveB.setEnabled(false);
         changeNameB.setEnabled(true);
         gameGraphic = null;
     }
@@ -451,7 +456,16 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             }
 
         } else if (buttonPressed == leaveB) {
-            dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+            clientListener.pw.println(PLAYR + "§LeaveGame");
+            contentPane.remove(gameGraphic.getGameComponent());
+            setBounds(X_FRAME, Y_FRAME, WIDTH_FRAME, HEIGHT_FRAME);
+            setTitle("Skip-Bros CHAT");
+            startB.setEnabled(true);
+            readyB.setEnabled(true);
+            leaveB.setEnabled(false);
+            changeNameB.setEnabled(true);
+            gameGraphic = null;
+            //dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 
         } else if (buttonPressed == changeNameB) {
             String name = (String) JOptionPane.showInputDialog(contentPane, "Enter your new name:",
@@ -487,6 +501,14 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             }
         });*/
 
+    }
+
+    void setHighScore(String[] scores) {
+        String scoreString = "Skip-Bro High scores\n\n";
+        for (String score : scores) {
+            scoreString = scoreString + score + "\n\n";
+        }
+        highScore.setText(scoreString);
     }
 
 

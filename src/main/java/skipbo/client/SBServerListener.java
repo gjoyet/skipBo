@@ -84,6 +84,9 @@ public class SBServerListener implements Runnable {
             case PLAYR:
                 player(command);
                 break;
+            case DISPL:
+                chatGraphic.setHighScore(command[2].split("§"));
+                break;
             case ENDGM:
                 endGame(command);
                 break;
@@ -181,6 +184,8 @@ public class SBServerListener implements Runnable {
         } else if (command[1].equalsIgnoreCase("Change")) {
             String[] n = command[2].split("§");
             chatGraphic.changePlayerName(n[0], n[1]);
+        } else if (command[1].equalsIgnoreCase("LeaveGame")) {
+            chatGraphic.getGameGraphic().removePlayer(command[2]);
         } else {
             clientLog.error("PLAYR command sent by server differs from commands checked by client");
         }

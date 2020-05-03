@@ -91,6 +91,12 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
      */
     void setFrame() {
 
+        try {
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
+            clientLog.warn("Error with setting LookAndFeel");
+        }
+
         setTitle("Skip-Bros CHAT");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setBounds(X_FRAME, Y_FRAME, WIDTH_FRAME, HEIGHT_FRAME);
@@ -219,12 +225,15 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         highScore.setBounds(80, 330, 250, 340);
         highScore.setEditable(false);
 
-        JScrollPane ScoreScrollPane = new JScrollPane(highScore);
-        ScoreScrollPane.setBounds(80, 330, 250, 340);
-        ScoreScrollPane.setVisible(true);
-        ScoreScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        ScoreScrollPane.setName("High score");
-        tabbedPane.add(ScoreScrollPane);
+        JScrollPane scoreScrollPane = new JScrollPane(highScore);
+        scoreScrollPane.setBounds(80, 330, 250, 340);
+        scoreScrollPane.setVisible(true);
+        scoreScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scoreScrollPane.setName("High score");
+        tabbedPane.add(scoreScrollPane);
+
+        DefaultCaret scoreCaret = (DefaultCaret) highScore.getCaret();
+        scoreCaret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
 
         //Testing purpose
         String h = "Skip-Bro High scores\n\n" +
@@ -414,11 +423,11 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             JComboBox<Integer> playerBox = new JComboBox<>(new Integer[]{2, 3, 4});
             JComboBox<Integer> stockBox = new JComboBox<>(new Integer[]{3, 10, 20, 30});
 
-            JPanel startGamePanel = new JPanel(new GridLayout(2, 2));
+            JPanel startGamePanel = new JPanel(new GridLayout(2, 2, 10, 10));
             startGamePanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-            startGamePanel.add(new JLabel("Number of players:"));
+            startGamePanel.add(new JLabel("Number of players:", JLabel.LEADING));
             startGamePanel.add(playerBox);
-            startGamePanel.add(new JLabel("Number of stock cards:"));
+            startGamePanel.add(new JLabel("Number of stock cards:", JLabel.LEADING));
             startGamePanel.add(stockBox);
 
             int option = JOptionPane.showConfirmDialog(contentPane, startGamePanel, "Please select to start a game",

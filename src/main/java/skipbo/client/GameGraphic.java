@@ -33,16 +33,16 @@ public class GameGraphic implements ActionListener {
 
     //Opponents
     JLabel e1;
-    private JLabel e2;
-    private JLabel e3;
+    JLabel e2;
+    JLabel e3;
     //Array of JLabels e1, e2, e3 depending on how many players are playing
     private JLabel[] oppArray;
 
     private int playerIndex = 0;
 
     //Own piles
-    private final CardButton[] hand = new CardButton[5];
-    private CardButton stock;
+    final CardButton[] hand = new CardButton[5];
+    CardButton stock;
     private final ArrayList<CardButton>[] discard = new ArrayList[4];
 
     //Game piles
@@ -58,21 +58,21 @@ public class GameGraphic implements ActionListener {
     private final int DISTOPPDISCARD = 13;
 
     //Opponent stock piles
-    private CardButton e1_stock;
-    private CardButton e2_stock;
+    CardButton e1_stock;
+    CardButton e2_stock;
     private CardButton e3_stock;
 
     //Number of cards left on stock piles
-    private JLabel numOfStockCards;
-    private JLabel[] oppNumStockCards = new JLabel[3];
+    JLabel numOfStockCards;
+    JLabel[] oppNumStockCards = new JLabel[3];
 
-    private int initialNumStockCards;
+    int initialNumStockCards;
 
-    private JLabel yourTurnLabel;
+    JLabel yourTurnLabel;
 
-    private final CardIcons cardIcons = new CardIcons(WIDTH_OP1, HEIGHT_OP1, 78, 120);
+    final CardIcons cardIcons = new CardIcons(WIDTH_OP1, HEIGHT_OP1, 78, 120);
 
-    private final Font DEFAULTFONT = UIManager.getDefaults().getFont("Label.font");
+    final Font DEFAULTFONT = UIManager.getDefaults().getFont("Label.font");
 
     GameGraphic() {
         clientListener = null;
@@ -405,10 +405,10 @@ public class GameGraphic implements ActionListener {
             public boolean isArmed() {
                 return false;
             }
-
             public boolean isPressed() {
                 return false;
             }
+            public boolean isRollover() { return false;}
         };
     }
 

@@ -34,6 +34,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     private JButton gamesB;
     private JButton whosOnB;
     private JButton leaveB;
+    private JButton tutorialB;
     private JTextPane highScore;
     private GameGraphic gameGraphic = null;
     private String playerName = "";
@@ -170,6 +171,11 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         contentPane.add(startB);
         startB.addActionListener(this);
 
+        tutorialB = new JButton("Tutorial");
+        tutorialB.setBounds(10, 10, 120, 22);
+        contentPane.add(tutorialB);
+        tutorialB.addActionListener(this);
+
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
         tabbedPane.setBounds(80, 330, 250, 340);
@@ -289,8 +295,12 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     /**
      * Creates the game GUI
      */
-    void setGameGraphic() {
-        gameGraphic = new GameGraphic(clientListener, playerName, chat);
+    void setGameGraphic(Boolean isTutorial) {
+        if (isTutorial) {
+            gameGraphic = new Tutorial();
+        } else {
+            gameGraphic = new GameGraphic(clientListener, playerName, chat);
+        }
         contentPane.add(gameGraphic.getGameComponent());
         setTitle("Skip-Bros GAME");
         setBounds(100, 100, 1150, 800);
@@ -481,6 +491,11 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
                     "Change your name", JOptionPane.PLAIN_MESSAGE, null, null, playerName);
             if (name != null) {
                 clientListener.pw.println(Protocol.CHNGE + "§Nickname§" + name);
+            }
+        } else if (buttonPressed == tutorialB) {
+            if (tutorialB.getText().equals("Tutorial")) {
+                tutorialB.setText("Leave tutorial");
+                setGameGraphic(true);
             }
         }
     }

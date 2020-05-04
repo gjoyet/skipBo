@@ -138,7 +138,7 @@ public class SBServerListener implements Runnable {
 
     void newGame(String[] command) {
         if (command[1].equals("Names")) {
-            chatGraphic.setGameGraphic();
+            chatGraphic.setGameGraphic(false);
             String[] names = command[2].split("§",2);
             chatGraphic.getGameGraphic().setOpponentNames(names[1].split("§"));
             chatGraphic.getGameGraphic().setStockSize(Integer.parseInt(names[0]));

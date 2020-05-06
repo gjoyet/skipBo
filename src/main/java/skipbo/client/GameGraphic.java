@@ -22,7 +22,7 @@ public class GameGraphic implements ActionListener {
     private final DefaultButtonModel defaultButtonModel = new DefaultButtonModel();
     private CardButton button1Pressed = null;
     private final Border defaultBorder = UIManager.getBorder("Button.border");
-    private final Border clickedBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
+    final Border clickedBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
     private final String playerName;
     JLayeredPane layeredPane;
     ActionListener actionListener = this;

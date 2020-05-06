@@ -4,10 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import static skipbo.client.SBClient.clientLog;
 
 public class Tutorial extends GameGraphic implements ActionListener {
 
     int moveNumber = 0;
+    boolean allowMove = false;
     JTextArea instruction = new JTextArea();
     Font arrowFont = new Font(DEFAULTFONT.getName(), Font.BOLD, 35);
     Font tiltedArrowFont = new Font(DEFAULTFONT.getName(), Font.BOLD, 55);
@@ -25,11 +30,18 @@ public class Tutorial extends GameGraphic implements ActionListener {
         setArrowFonts();
         appendDecks();
         adjustGameGraphic();
-        firstMove();
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                firstMove();
+            }
+        };
+        timer.schedule(task,1000);
     }
 
     private void adjustGameGraphic() {
-        layeredPane.add(instruction);
+        layeredPane.add(instruction, Integer.valueOf(-1));
         e1.setText("Bob");
         e2.setText("Alice");
         setOpponentVisible(0);
@@ -60,16 +72,39 @@ public class Tutorial extends GameGraphic implements ActionListener {
     }
 
     private void firstMove() {
-        upArrow.setBounds(400, 495, 50, 50);
-        layeredPane.add(upArrow);
-        instruction.setBounds(440, 500, 300, 100);
-        instruction.setText("Your goal is to play all of\nyour stock cards on the build piles.");
+        try {
+            upArrow.setBounds(400, 495, 50, 50);
+            layeredPane.add(upArrow);
+            instruction.setBounds(440, 500, 300, 100);
+            instruction.setText("Your goal is to play all of\nyour stock cards on the build piles.");
+            Thread.sleep(5000);
+            layeredPane.remove(upArrow);
+            layeredPane.repaint();
+            downArrow.setBounds(655, 575, 50, 50);
+            layeredPane.add(downArrow, Integer.valueOf(-1));
+            instruction.setBounds(685, 580, 300, 100);
+            instruction.setText("Click on your hand card to grab it.");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        allowMove = true;
     }
 
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-
+        if (!allowMove) {
+            return;
+        }
+        CardButton buttonPressed = (CardButton) actionEvent.getSource();
+        if (moveNumber == 0 && buttonPressed != hand[1]) {
+            return;
+        } else {
+            clientLog.debug("Ready to display next instruction");
+            allowMove = false;
+            buttonPressed.setBorder(clickedBorder);
+            changeButtonStates(buttonPressed, false);
+        }
     }
 
     private void setArrowFonts() {

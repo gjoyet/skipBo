@@ -11,6 +11,7 @@ import static skipbo.client.SBClient.clientLog;
 
 public class Tutorial extends GameGraphic implements ActionListener {
 
+    ChatGraphic chatGraphic;
     int moveNumber = 0;
     boolean allowMove = false;
     JTextArea instruction = new JTextArea();
@@ -24,8 +25,9 @@ public class Tutorial extends GameGraphic implements ActionListener {
     JLabel southEast = new JLabel("\u2B0A");
     JLabel southWest = new JLabel("\u2B0B");
 
-    Tutorial() {
+    Tutorial(ChatGraphic chatGraphic) {
         super();
+        this.chatGraphic = chatGraphic;
         actionListener = this;
         setArrowFonts();
         appendDecks();
@@ -41,6 +43,7 @@ public class Tutorial extends GameGraphic implements ActionListener {
     }
 
     private void adjustGameGraphic() {
+        yourTurnLabel.setBounds(657, 0, 600,100);
         layeredPane.add(instruction, Integer.valueOf(-1));
         e1.setText("Bob");
         e2.setText("Alice");
@@ -90,6 +93,21 @@ public class Tutorial extends GameGraphic implements ActionListener {
         allowMove = true;
     }
 
+    private void secondMove() {
+        moveNumber++;
+        layeredPane.remove(downArrow);
+        layeredPane.repaint();
+        downArrow.setBounds(680, 75, 50, 50);
+        layeredPane.add(downArrow);
+        instruction.setBounds(710, 80, 400, 100);
+        instruction.setText("Click on any build pile to put play the one.");
+        allowMove = true;
+    }
+
+    private void thirdMove() {
+
+    }
+
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
@@ -99,12 +117,21 @@ public class Tutorial extends GameGraphic implements ActionListener {
         CardButton buttonPressed = (CardButton) actionEvent.getSource();
         if (moveNumber == 0 && buttonPressed != hand[1]) {
             return;
-        } else {
-            clientLog.debug("Ready to display next instruction");
+        } else if (moveNumber == 0) {
             allowMove = false;
             buttonPressed.setBorder(clickedBorder);
             changeButtonStates(buttonPressed, false);
+            secondMove();
         }
+        if (moveNumber == 1 && !isBuildButton(buttonPressed)) {
+            return;
+        } else {
+            allowMove = false;
+            hand[1].setBorder(defaultBorder);
+            changeButtonStates(hand[1], true);
+            thirdMove();
+        }
+        //chatGraphic.endGame("You");
     }
 
     private void setArrowFonts() {
@@ -123,5 +150,14 @@ public class Tutorial extends GameGraphic implements ActionListener {
         northWest.setForeground(ChatGraphic.DARKGREEN);
         southEast.setForeground(ChatGraphic.DARKGREEN);
         southWest.setForeground(ChatGraphic.DARKGREEN);
+    }
+
+    private boolean isBuildButton(CardButton button) {
+        for (int i = 0; i < build.length; i++) {
+            if (button == build[i]) {
+                return true;
+            }
+        }
+        return false;
     }
 }

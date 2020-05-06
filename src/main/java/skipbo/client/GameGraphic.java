@@ -21,7 +21,7 @@ public class GameGraphic implements ActionListener {
     private DefaultButtonModel notClickableModel;
     private final DefaultButtonModel defaultButtonModel = new DefaultButtonModel();
     private CardButton button1Pressed = null;
-    private final Border defaultBorder = UIManager.getBorder("Button.border");
+    final Border defaultBorder = UIManager.getBorder("Button.border");
     final Border clickedBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
     private final String playerName;
     JLayeredPane layeredPane;
@@ -46,7 +46,7 @@ public class GameGraphic implements ActionListener {
     private final ArrayList<CardButton>[] discard = new ArrayList[4];
 
     //Game piles
-    private final CardButton[] build = new CardButton[4];
+    final CardButton[] build = new CardButton[4];
 
     //Opponent discard piles
     private final ArrayList<CardButton>[] e1_discard = new ArrayList[4];

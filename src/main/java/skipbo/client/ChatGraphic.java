@@ -297,7 +297,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
      */
     void setGameGraphic(Boolean isTutorial) {
         if (isTutorial) {
-            gameGraphic = new Tutorial();
+            gameGraphic = new Tutorial(this);
         } else {
             gameGraphic = new GameGraphic(clientListener, playerName, chat);
         }
@@ -431,7 +431,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         } else if (buttonPressed == startB) {
 
             JComboBox<Integer> playerBox = new JComboBox<>(new Integer[]{2, 3, 4});
-            JComboBox<Integer> stockBox = new JComboBox<>(new Integer[]{3, 10, 20, 30});
+            JComboBox<Integer> stockBox = new JComboBox<>(new Integer[]{5, 10, 20, 30});
 
             JPanel startGamePanel = new JPanel(new GridLayout(2, 2, 10, 10));
             startGamePanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));

@@ -172,7 +172,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         startB.addActionListener(this);
 
         tutorialB = new JButton("Tutorial");
-        tutorialB.setBounds(10, 10, 120, 22);
+        tutorialB.setBounds(5, 5, 120, 22);
         contentPane.add(tutorialB);
         tutorialB.addActionListener(this);
 

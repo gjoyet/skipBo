@@ -437,7 +437,7 @@ public class Game implements Runnable {
                 discardPile.remove(card);
 
                 checkBuildPile(card, specBuildPile, currentPlayer);
-                displayDiscard(currentPlayer);
+//                displayDiscard(currentPlayer);
 
 //                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
 //                        + piles.handCardPrint(currentPlayer));
@@ -449,7 +449,7 @@ public class Game implements Runnable {
                 discardPile.remove(card);
 
                 checkBuildPile(card, specBuildPile, currentPlayer);
-                displayDiscard(currentPlayer);
+//                displayDiscard(currentPlayer);
 
 //                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
 //                        + piles.handCardPrint(currentPlayer));
@@ -468,7 +468,7 @@ public class Game implements Runnable {
                 discardPile.remove(card);
 
                 checkBuildPile(card, specBuildPile, currentPlayer);
-                displayDiscard(currentPlayer);
+//                displayDiscard(currentPlayer);
 
 //                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hands cards are now: "
 //                        + piles.handCardPrint(currentPlayer));
@@ -480,7 +480,7 @@ public class Game implements Runnable {
 
                 checkBuildPile(card, specBuildPile, currentPlayer);
 
-                displayDiscard(currentPlayer);
+//                displayDiscard(currentPlayer);
 
 //                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
 //                        + piles.handCardPrint(currentPlayer));

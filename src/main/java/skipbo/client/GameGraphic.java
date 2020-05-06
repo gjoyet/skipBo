@@ -22,26 +22,27 @@ public class GameGraphic implements ActionListener {
     private final DefaultButtonModel defaultButtonModel = new DefaultButtonModel();
     private CardButton button1Pressed = null;
     private final Border defaultBorder = UIManager.getBorder("Button.border");
-    private final Border clickedBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
+    final Border clickedBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
     private final String playerName;
-    private final JLayeredPane layeredPane;
+    JLayeredPane layeredPane;
+    ActionListener actionListener = this;
 
     // Layout of opponents
     private final int WIDTH_OP1 = 40; //30
     private final int HEIGHT_OP1 = 58; //50
 
     //Opponents
-    private JLabel e1;
-    private JLabel e2;
-    private JLabel e3;
+    JLabel e1;
+    JLabel e2;
+    JLabel e3;
     //Array of JLabels e1, e2, e3 depending on how many players are playing
     private JLabel[] oppArray;
 
     private int playerIndex = 0;
 
     //Own piles
-    private final CardButton[] hand = new CardButton[5];
-    private CardButton stock;
+    final CardButton[] hand = new CardButton[5];
+    CardButton stock;
     private final ArrayList<CardButton>[] discard = new ArrayList[4];
 
     //Game piles
@@ -57,21 +58,30 @@ public class GameGraphic implements ActionListener {
     private final int DISTOPPDISCARD = 13;
 
     //Opponent stock piles
-    private CardButton e1_stock;
-    private CardButton e2_stock;
+    CardButton e1_stock;
+    CardButton e2_stock;
     private CardButton e3_stock;
 
     //Number of cards left on stock piles
-    private JLabel numOfStockCards;
-    private JLabel[] oppNumStockCards = new JLabel[3];
+    JLabel numOfStockCards;
+    JLabel[] oppNumStockCards = new JLabel[3];
 
-    private int initialNumStockCards;
+    int initialNumStockCards;
 
-    private JLabel yourTurnLabel;
+    JLabel yourTurnLabel;
 
-    private final CardIcons cardIcons = new CardIcons(WIDTH_OP1, HEIGHT_OP1, 78, 120);
+    final CardIcons cardIcons = new CardIcons(WIDTH_OP1, HEIGHT_OP1, 78, 120);
 
-    private final Font DEFAULTFONT = UIManager.getDefaults().getFont("Label.font");
+    final Font DEFAULTFONT = UIManager.getDefaults().getFont("Label.font");
+
+    GameGraphic() {
+        clientListener = null;
+        playerName = null;
+        layeredPane = new JLayeredPane();
+        layeredPane.setBounds(0, 0, 1550, 870);
+        setButtonModel();
+
+    }
 
     GameGraphic(SBClientListener clientListener, String name, JTextPane chat) {
         this.clientListener = clientListener;
@@ -171,7 +181,7 @@ public class GameGraphic implements ActionListener {
             discard[i] = new ArrayList<>();
             CardButton b = new CardButton(CardButton.DISCARD);
             b.setBounds(x_DISCARD + i * x_DISCARD_DISTANCE, y_DISCARD, WIDTH_DISCARD, HEIGHT_DISCARD);
-            b.addActionListener(this);
+            b.addActionListener(actionListener);
             b.setName(" D " + j);
             layeredPane.add(b);
             discard[i].add(b);
@@ -181,7 +191,7 @@ public class GameGraphic implements ActionListener {
         for (int i = 0; i < hand.length; ) {
             hand[i] = new CardButton(CardButton.HAND);
             layeredPane.add(hand[i]);
-            hand[i].addActionListener(this);
+            hand[i].addActionListener(actionListener);
             hand[i].setName(" H " + ++i);
         }
         hand[0].setBounds(x_HAND, y_HAND, WIDTH_HAND, HEIGHT_HAND);
@@ -196,7 +206,7 @@ public class GameGraphic implements ActionListener {
         stock.setBounds(x_STOCK, y_STOCK, WIDTH_STOCK, HEIGHT_STOCK);
         layeredPane.add(stock);
         stock.setName(" S 1");
-        stock.addActionListener(this);
+        stock.addActionListener(actionListener);
 
 
         /*
@@ -395,10 +405,10 @@ public class GameGraphic implements ActionListener {
             public boolean isArmed() {
                 return false;
             }
-
             public boolean isPressed() {
                 return false;
             }
+            public boolean isRollover() { return false;}
         };
     }
 
@@ -459,8 +469,8 @@ public class GameGraphic implements ActionListener {
             al = discard[j - 1];
             CardButton oldDisCard = al.get(al.size() - 1);
             newDisCard = new CardButton(CardButton.DISCARD);
-            newDisCard.addActionListener(this);
-            oldDisCard.removeActionListener(this);
+            newDisCard.addActionListener(actionListener);
+            oldDisCard.removeActionListener(actionListener);
             newDisCard.setName(" D " + j);
             setBoundsOfDiscard(newDisCard, al, DISTDISCARD);
             newDisCard.setIcon(cardIcons.getIcon(col, num, CardIcons.LARGE));
@@ -638,7 +648,7 @@ public class GameGraphic implements ActionListener {
             }
             buildCard.addCard(col, num);
             buildCard.setIcon(cardIcons.getIcon(col, num, CardIcons.LARGE));
-            al.get(al.size() - 1).addActionListener(this);
+            al.get(al.size() - 1).addActionListener(actionListener);
             setBoundsOfDiscard(null, al, DISTDISCARD);
             layeredPane.repaint();
         } else {
@@ -768,9 +778,9 @@ public class GameGraphic implements ActionListener {
             stock.setEnabled(b);
             for (CardButton cardButton : build) {
                 if (b) {
-                    cardButton.removeActionListener(this);
+                    cardButton.removeActionListener(actionListener);
                 } else {
-                    cardButton.addActionListener(this);
+                    cardButton.addActionListener(actionListener);
                 }
             }
         } else if (button.getType() == CardButton.DISCARD) {
@@ -781,9 +791,9 @@ public class GameGraphic implements ActionListener {
                     }
                 }
                 if (b) {
-                    build[i].removeActionListener(this);
+                        build[i].removeActionListener(actionListener);
                 } else {
-                    build[i].addActionListener(this);
+                    build[i].addActionListener(actionListener);
                 }
             }
             for (CardButton cardButton : hand) {
@@ -796,9 +806,9 @@ public class GameGraphic implements ActionListener {
             }
             for (int i = 0; i < build.length; i++) {
                 if (b) {
-                    build[i].removeActionListener(this);
+                    build[i].removeActionListener(actionListener);
                 } else {
-                    build[i].addActionListener(this);
+                    build[i].addActionListener(actionListener);
                 }
                 for (CardButton cardButton : discard[i]) {
                     cardButton.setEnabled(b);

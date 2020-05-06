@@ -255,8 +255,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
      * Sends Information about valid commands to the client
      */
     void printCommandList() {
-        String listOfCommands = "Please use the dedicated buttons. By now the commands are not needed anymore and" +
-                " may cause problems/don't work properly";
+        String listOfCommands = "Please use the dedicated buttons. By now the commands are not needed anymore!";
         /*"\n***********\nCommands:\n/change name [name]\n/change status ready|waiting\n" +
                 "/msg [name] [message]\n/broadcast\n/new game\n/play [PlaceFrom] [n] [PlaceTo] [n]\n" +
                 "/list games|players\n/help\n/quit\n***********";*/

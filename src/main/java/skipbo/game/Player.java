@@ -137,7 +137,7 @@ public class Player {
      */
     public void clearDiscardPiles(){
         for(int i = 0; i <4; i++){
-            ArrayList<Card> discardPile = this.getDiscardPile().get(i);
+            ArrayList<Card> discardPile = this.getDiscardPiles().get(i);
             discardPile.clear();
         }
     }
@@ -155,7 +155,7 @@ public class Player {
      * @return The ArrayList object that contains the player's discard piles.
      */
 
-    public ArrayList<ArrayList<Card>> getDiscardPile() {
+    public ArrayList<ArrayList<Card>> getDiscardPiles() {
         return this.piles.discardPiles;
     }
 

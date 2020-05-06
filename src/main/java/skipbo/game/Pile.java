@@ -3,7 +3,6 @@ package skipbo.game;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 
 public class Pile {
@@ -157,7 +156,7 @@ public class Pile {
     public String[] discardPilesPrint(Player player) {
         StringBuilder str = new StringBuilder();
         for (int i = 0; i < 4; i++) {
-            ArrayList<Card> specDiscardPile = player.getDiscardPile().get(i);
+            ArrayList<Card> specDiscardPile = player.getDiscardPiles().get(i);
             int[] printArray = new int[specDiscardPile.size()];
             for (int j = 0; j < specDiscardPile.size(); j++) {
                 printArray[j] = specDiscardPile.get(j).number;

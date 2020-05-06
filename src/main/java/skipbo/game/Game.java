@@ -289,7 +289,7 @@ public class Game implements Runnable {
             return false;
         }
 
-        ArrayList<ArrayList<Card>> discardPiles = currentPlayer.getDiscardPile();
+        ArrayList<ArrayList<Card>> discardPiles = currentPlayer.getDiscardPiles();
         ArrayList<Card> specDiscard = discardPiles.get(discardPileIndex);
 
         Card card = currentPlayer.getHandCards().get(handCardIndex);
@@ -409,7 +409,7 @@ public class Game implements Runnable {
 
     public boolean playFromDiscardToMiddle(Player currentPlayer, int discardPileIndex, int buildPileIndex) {
         servLog.debug("Entered playFromDiscardToMiddle.");
-        ArrayList<Card> discardPile = currentPlayer.getDiscardPile().get(discardPileIndex);
+        ArrayList<Card> discardPile = currentPlayer.getDiscardPiles().get(discardPileIndex);
 
         if (buildPileIndex < 0 || buildPileIndex > 3) {       //if bp index is a false index that cannot be true
             currentPlayer.getSBL().getPW().println("PRINT§Terminal§Build Deck Index is invalid!");
@@ -437,10 +437,6 @@ public class Game implements Runnable {
                 discardPile.remove(card);
 
                 checkBuildPile(card, specBuildPile, currentPlayer);
-//                displayDiscard(currentPlayer);
-
-//                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
-//                        + piles.handCardPrint(currentPlayer));
 
                 return true;
             } else if (card.col == Color.cyan) {       //if Joker card, then make it 1 and add
@@ -449,10 +445,6 @@ public class Game implements Runnable {
                 discardPile.remove(card);
 
                 checkBuildPile(card, specBuildPile, currentPlayer);
-//                displayDiscard(currentPlayer);
-
-//                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
-//                        + piles.handCardPrint(currentPlayer));
 
                 return true;
             } else {            //invalid move
@@ -468,10 +460,7 @@ public class Game implements Runnable {
                 discardPile.remove(card);
 
                 checkBuildPile(card, specBuildPile, currentPlayer);
-//                displayDiscard(currentPlayer);
 
-//                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hands cards are now: "
-//                        + piles.handCardPrint(currentPlayer));
                 return true;
             } else if (card.col == Color.cyan) {       //if Joker card
                 card.number = (topCard.number + 1);
@@ -480,10 +469,6 @@ public class Game implements Runnable {
 
                 checkBuildPile(card, specBuildPile, currentPlayer);
 
-//                displayDiscard(currentPlayer);
-
-//                currentPlayer.getSBL().getPW().println("PRINT§Terminal§Your hand cards are now: "
-//                        + piles.handCardPrint(currentPlayer));
                 return true;
             } else {          //invalid move
                 currentPlayer.getSBL().getPW().println("PRINT§Terminal§This move is invalid! " +
@@ -580,7 +565,7 @@ public class Game implements Runnable {
         piles.emptyPile.addAll(handCards); // adds to empty pile
         player.clearHandCards();      //removes cards from the player's hand cards
 
-        for (ArrayList<Card> dPile : player.getDiscardPile()) {
+        for (ArrayList<Card> dPile : player.getDiscardPiles()) {
             piles.emptyPile.addAll(dPile);
             dPile.clear();      //removes cards from the player's discard pile
         }

@@ -399,7 +399,6 @@ public class ProtocolExecutorTest {
     /**
      * Tests the implementation of display with all options.
      */
-    @Ignore
     @Test
     public void testDisplay() {
         ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"CHNGE", "Status", "READY"}, Main.server.getSblList().get(0));

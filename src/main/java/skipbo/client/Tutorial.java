@@ -7,16 +7,17 @@ import java.awt.event.ActionListener;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static skipbo.client.SBClient.clientLog;
-
 public class Tutorial extends GameGraphic implements ActionListener {
 
     ChatGraphic chatGraphic;
-    int moveNumber = 0;
+    int moveNumber = 1;
     boolean allowMove = false;
     JTextArea instruction = new JTextArea();
+    CardButton chosenBuildButton;
+
     Font arrowFont = new Font(DEFAULTFONT.getName(), Font.BOLD, 35);
     Font tiltedArrowFont = new Font(DEFAULTFONT.getName(), Font.BOLD, 55);
+
     JLabel leftArrow = new JLabel("\u2B05");
     JLabel downArrow = new JLabel("\u2B07");
     JLabel upArrow = new JLabel("\u2B06");
@@ -50,7 +51,7 @@ public class Tutorial extends GameGraphic implements ActionListener {
         setOpponentVisible(0);
         setOpponentVisible(1);
         yourTurnLabel.setVisible(true);
-        initialNumStockCards = 3;
+        initialNumStockCards = 2;
         numOfStockCards.setText(initialNumStockCards + " cards left");
         oppNumStockCards[0].setText(String.valueOf(initialNumStockCards));
         oppNumStockCards[1].setText(String.valueOf(initialNumStockCards));
@@ -58,9 +59,9 @@ public class Tutorial extends GameGraphic implements ActionListener {
         layeredPane.add(oppNumStockCards[1]);
 
         hand[0].setIcon(cardIcons.getIcon("R",10, CardIcons.MEDIUM));
-        hand[1].setIcon(cardIcons.getIcon("B", 1, CardIcons.MEDIUM));
-        hand[2].setIcon(cardIcons.getIcon("B",7, CardIcons.MEDIUM));
-        hand[3].setIcon(cardIcons.getIcon("G", 10, CardIcons.MEDIUM));
+        hand[1].setIcon(cardIcons.getIcon("B",7, CardIcons.MEDIUM));
+        hand[2].setIcon(cardIcons.getIcon("G", 10, CardIcons.MEDIUM));
+        hand[3].setIcon(cardIcons.getIcon("B", 1, CardIcons.MEDIUM));
         hand[4].setIcon(cardIcons.getIcon("R",12, CardIcons.MEDIUM));
         stock.setIcon(cardIcons.getIcon("R",2, CardIcons.LARGE));
 
@@ -74,18 +75,21 @@ public class Tutorial extends GameGraphic implements ActionListener {
 
     }
 
+    /**
+     * Introduces the player to the game. Asks to click on hand card 2.
+     */
     private void firstMove() {
         try {
             upArrow.setBounds(400, 495, 50, 50);
             layeredPane.add(upArrow);
             instruction.setBounds(440, 500, 300, 100);
             instruction.setText("Your goal is to play all of\nyour stock cards on the build piles.");
-            Thread.sleep(5000);
+            Thread.sleep(1000); //5000
             layeredPane.remove(upArrow);
             layeredPane.repaint();
-            downArrow.setBounds(655, 575, 50, 50);
+            downArrow.setBounds(831, 575, 50, 50);
             layeredPane.add(downArrow, Integer.valueOf(-1));
-            instruction.setBounds(685, 580, 300, 100);
+            instruction.setBounds(861, 580, 300, 100);
             instruction.setText("Click on your hand card to grab it.");
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -93,8 +97,11 @@ public class Tutorial extends GameGraphic implements ActionListener {
         allowMove = true;
     }
 
+    /**
+     *Asks player to click on a build pile.
+     */
     private void secondMove() {
-        moveNumber++;
+        moveNumber = 2;
         layeredPane.remove(downArrow);
         layeredPane.repaint();
         downArrow.setBounds(680, 75, 50, 50);
@@ -104,8 +111,37 @@ public class Tutorial extends GameGraphic implements ActionListener {
         allowMove = true;
     }
 
+    /**
+     *Puts the one on the build pile and asks player to click on stock pile.
+     */
     private void thirdMove() {
+        moveNumber = 3;
+        chosenBuildButton.setIcon(cardIcons.getIcon("B", 1, CardIcons.LARGE));
+        hand[3].setIcon(hand[4].getIcon());
+        hand[4].setIcon(null);
+        layeredPane.remove(downArrow);
+        layeredPane.repaint();
+        upArrow.setBounds(400, 495, 50, 50);
+        layeredPane.add(upArrow);
+        instruction.setBounds(440, 500, 400, 100);
+        instruction.setText("Now you can play your first stock card\non the build pile.");
+        allowMove = true;
+    }
 
+    private void fourthMove() {
+        moveNumber = 4;
+        layeredPane.remove(upArrow);
+        layeredPane.repaint();
+        instruction.setText("Put the stock card on the build pile.");
+        if (chosenBuildButton == build[0]) {
+            downArrow.setBounds(chosenBuildButton.getX()+65,75,50,50);
+            instruction.setBounds(chosenBuildButton.getX()+95,80,400,100);
+        } else {
+            downArrow.setBounds(chosenBuildButton.getX()+20,75,50,50);
+            instruction.setBounds(chosenBuildButton.getX()+50,80,400,100);
+        }
+        layeredPane.add(downArrow);
+        allowMove = true;
     }
 
 
@@ -115,21 +151,30 @@ public class Tutorial extends GameGraphic implements ActionListener {
             return;
         }
         CardButton buttonPressed = (CardButton) actionEvent.getSource();
-        if (moveNumber == 0 && buttonPressed != hand[1]) {
+        if (moveNumber == 1 && buttonPressed != hand[3]) {
             return;
-        } else if (moveNumber == 0) {
+        } else if (moveNumber == 1) {
             allowMove = false;
             buttonPressed.setBorder(clickedBorder);
             changeButtonStates(buttonPressed, false);
             secondMove();
         }
-        if (moveNumber == 1 && !isBuildButton(buttonPressed)) {
+        if (moveNumber == 2 && !isBuildButton(buttonPressed)) {
             return;
-        } else {
+        } else if (moveNumber == 2) {
             allowMove = false;
-            hand[1].setBorder(defaultBorder);
-            changeButtonStates(hand[1], true);
+            chosenBuildButton = buttonPressed;
+            hand[3].setBorder(defaultBorder);
+            changeButtonStates(hand[3], true);
             thirdMove();
+        }
+        if (moveNumber == 3 && buttonPressed != stock) {
+            return;
+        } else if (moveNumber == 3) {
+            allowMove = false;
+            buttonPressed.setBorder(clickedBorder);
+            changeButtonStates(buttonPressed, false);
+            fourthMove();
         }
         //chatGraphic.endGame("You");
     }

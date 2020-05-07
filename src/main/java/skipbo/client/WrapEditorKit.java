@@ -4,6 +4,7 @@ import javax.swing.text.*;
 
 /**
  * An EditorKit that wraps the lines if there are no spaces in the line and the line is too long.
+ * Source: https://stackoverflow.com/questions/30590031/jtextpane-line-wrap-behavior
  */
 public class WrapEditorKit extends StyledEditorKit {
 

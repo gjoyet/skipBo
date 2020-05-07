@@ -13,8 +13,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 import static skipbo.client.SBClient.clientLog;
-import static skipbo.server.Protocol.NWGME;
-import static skipbo.server.Protocol.PLAYR;
+import static skipbo.server.Protocol.*;
 
 /**
  * GUI for Skip-Bo lobby
@@ -185,7 +184,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         chat = new JTextPane();
         chat.setBounds(80, 330, 250, 340);
         chat.setEditable(false);
-        //chat.setEditorKit(new WrapEditorKit());
+        chat.setEditorKit(new WrapEditorKit());
 
         chatScrollPane = new JScrollPane(chat);
         chatScrollPane.setBounds(80, 330, 250, 340);
@@ -294,11 +293,16 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     /**
      * Creates the game GUI
      */
-    void setGameGraphic(Boolean isTutorial) {
+    void setGameGraphic(boolean isTutorial) {
         if (isTutorial) {
             gameGraphic = new Tutorial(this);
+            leaveB.setEnabled(false);
+            System.out.println("set enable false leaveB");
         } else {
             gameGraphic = new GameGraphic(clientListener, playerName, chat);
+            tutorialB.setEnabled(false);
+            leaveB.setEnabled(true);
+            changeNameB.setEnabled(false);
         }
         contentPane.add(gameGraphic.getGameComponent());
         setTitle("Skip-Bros GAME");
@@ -307,8 +311,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         setLocationRelativeTo(null);
         startB.setEnabled(false);
         readyB.setEnabled(false);
-        changeNameB.setEnabled(false);
-        leaveB.setEnabled(true);
         readyB.setText("Ready");
     }
 
@@ -317,36 +319,42 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
      *
      * @param name Name of the winner of the game.
      */
-    void endGame(String name) {
-        String message;
-        if (name != null) {
-            message = "The winner is: " + name + "!";
-        } else {
-            message = "Game ended because everyone else left. There is no winner.";
+    void endGame(String name, boolean isTutorial) {
+        String message = null;
+        if (!isTutorial) {
+            if (name != null) {
+                message = "The winner is: " + name + "!";
+            } else {
+                message = "Game ended because everyone else left. There is no winner.";
+            }
+        } else if (name != null) {
+            message = "You won because you played all your stock cards! You are now ready to play a real game.";
         }
-        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo.png")));
 
-        int iconWidth = icon.getIconWidth();
-        int iconHeight = icon.getIconHeight();
+        if (message != null) {
+            ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo.png")));
 
-        JPanel endGamePanel = new JPanel(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
-        JLabel messageLabel = new JLabel(message);
-        JLabel iconLabel = new JLabel(icon);
-        c.insets = new Insets(15, 0, 0, 0);
-        c.gridx = 0;
-        c.gridy = 0;
-        endGamePanel.add(messageLabel, c);
-        c.gridy = 1;
-        endGamePanel.add(iconLabel, c);
+            int iconWidth = icon.getIconWidth();
+            int iconHeight = icon.getIconHeight();
 
-        JOptionPane optionPane = new JOptionPane(endGamePanel, JOptionPane.PLAIN_MESSAGE,
-                JOptionPane.DEFAULT_OPTION);
-        JDialog dialog = optionPane.createDialog(contentPane, "Game is finished");
-        dialog.setSize( iconWidth+270, iconHeight+140);
-        dialog.setLocationRelativeTo(null);
-        dialog.setVisible(true);
+            JPanel endGamePanel = new JPanel(new GridBagLayout());
+            GridBagConstraints c = new GridBagConstraints();
+            JLabel messageLabel = new JLabel(message);
+            JLabel iconLabel = new JLabel(icon);
+            c.insets = new Insets(15, 0, 0, 0);
+            c.gridx = 0;
+            c.gridy = 0;
+            endGamePanel.add(messageLabel, c);
+            c.gridy = 1;
+            endGamePanel.add(iconLabel, c);
 
+            JOptionPane optionPane = new JOptionPane(endGamePanel, JOptionPane.PLAIN_MESSAGE,
+                    JOptionPane.DEFAULT_OPTION);
+            JDialog dialog = optionPane.createDialog(contentPane, "Game is finished");
+            dialog.setSize( iconWidth+270, iconHeight+140);
+            dialog.setLocationRelativeTo(null);
+            dialog.setVisible(true);
+        }
         contentPane.remove(gameGraphic.getGameComponent());
         setBounds(X_FRAME, Y_FRAME, WIDTH_FRAME, HEIGHT_FRAME);
         setTitle("Skip-Bros CHAT");
@@ -354,6 +362,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         readyB.setEnabled(true);
         leaveB.setEnabled(false);
         changeNameB.setEnabled(true);
+        tutorialB.setEnabled(true);
         gameGraphic = null;
     }
 
@@ -373,7 +382,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         if (name == null) {
             name = "";
         }
-        clientListener.pw.println("SETTO§Nickname§" + name);
+        clientListener.pw.println(SETTO + "§Nickname§" + name);
     }
 
     @Override
@@ -493,8 +502,14 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             }
         } else if (buttonPressed == tutorialB) {
             if (tutorialB.getText().equals("Tutorial")) {
+                if (readyB.getText().equals("Waiting")) {
+                    clientListener.pw.println(CHNGE + "§Status§WAITING");
+                }
                 tutorialB.setText("Leave tutorial");
                 setGameGraphic(true);
+            } else {
+                tutorialB.setText("Tutorial");
+                endGame(null, true);
             }
         }
     }
@@ -527,9 +542,16 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     }
 
     void setHighScore(String[] scores) {
+        //Format:  "2020-04-26 17:47\nGuillaume1, Guillaume\nWINNER: Guillaume, SCORE: 8.67\n\n"
         String scoreString = "Skip-Bro High scores\n\n";
+        String winnerString = "WINNER: ";
         for (String score : scores) {
-            scoreString = scoreString + score + "\n\n";
+            StringBuffer buffer = new StringBuffer(score);
+            buffer.insert(16, '\n');
+            int i = buffer.indexOf(winnerString)-1;
+            buffer.insert(i, '\n');
+            buffer.append("\n\n");
+            scoreString = scoreString + buffer.toString();
         }
         highScore.setText(scoreString);
     }

@@ -43,7 +43,7 @@ public class GameGraphic implements ActionListener {
     //Own piles
     final CardButton[] hand = new CardButton[5];
     CardButton stock;
-    private final ArrayList<CardButton>[] discard = new ArrayList[4];
+    final ArrayList<CardButton>[] discard = new ArrayList[4];
 
     //Game piles
     final CardButton[] build = new CardButton[4];

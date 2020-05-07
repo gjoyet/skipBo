@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -14,6 +15,7 @@ public class Tutorial extends GameGraphic implements ActionListener {
     boolean allowMove = false;
     JTextArea instruction = new JTextArea();
     CardButton chosenBuildButton;
+    ArrayList<CardButton> chosenDiscardPile;
 
     Font arrowFont = new Font(DEFAULTFONT.getName(), Font.BOLD, 35);
     Font tiltedArrowFont = new Font(DEFAULTFONT.getName(), Font.BOLD, 55);
@@ -37,7 +39,7 @@ public class Tutorial extends GameGraphic implements ActionListener {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                firstMove();
+                moveOne();
             }
         };
         timer.schedule(task,1000);
@@ -65,8 +67,8 @@ public class Tutorial extends GameGraphic implements ActionListener {
         hand[4].setIcon(cardIcons.getIcon("R",12, CardIcons.MEDIUM));
         stock.setIcon(cardIcons.getIcon("R",2, CardIcons.LARGE));
 
-        e1_stock.setIcon(cardIcons.getIcon("B",12, CardIcons.SMALL));
-        e2_stock.setIcon(cardIcons.getIcon("G",8, CardIcons.SMALL));
+        e1_stock.setIcon(cardIcons.getIcon("B",8, CardIcons.SMALL));
+        e2_stock.setIcon(cardIcons.getIcon("G",4, CardIcons.SMALL));
 
         instruction.setBackground(Color.orange);
         instruction.setFont(new Font(DEFAULTFONT.getName(), Font.BOLD, DEFAULTFONT.getSize()+3));
@@ -78,7 +80,7 @@ public class Tutorial extends GameGraphic implements ActionListener {
     /**
      * Introduces the player to the game. Asks to click on hand card 2.
      */
-    private void firstMove() {
+    private void moveOne() {
         try {
             upArrow.setBounds(400, 495, 50, 50);
             layeredPane.add(upArrow);
@@ -100,7 +102,7 @@ public class Tutorial extends GameGraphic implements ActionListener {
     /**
      *Asks player to click on a build pile.
      */
-    private void secondMove() {
+    private void moveTwo() {
         moveNumber = 2;
         layeredPane.remove(downArrow);
         layeredPane.repaint();
@@ -114,7 +116,7 @@ public class Tutorial extends GameGraphic implements ActionListener {
     /**
      *Puts the one on the build pile and asks player to click on stock pile.
      */
-    private void thirdMove() {
+    private void moveThree() {
         moveNumber = 3;
         chosenBuildButton.setIcon(cardIcons.getIcon("B", 1, CardIcons.LARGE));
         hand[3].setIcon(hand[4].getIcon());
@@ -128,7 +130,10 @@ public class Tutorial extends GameGraphic implements ActionListener {
         allowMove = true;
     }
 
-    private void fourthMove() {
+    /**
+     * Asks the player to click on the build pile
+     */
+    private void moveFour() {
         moveNumber = 4;
         layeredPane.remove(upArrow);
         layeredPane.repaint();
@@ -144,6 +149,41 @@ public class Tutorial extends GameGraphic implements ActionListener {
         allowMove = true;
     }
 
+    /**
+     * Puts the stock card on the build pile and asks player to finish their turn.
+     */
+    private void moveFive() {
+        moveNumber = 5;
+        chosenBuildButton.setIcon(stock.getIcon());
+        stock.setIcon(cardIcons.getIcon("G", 5, CardIcons.LARGE));
+        numOfStockCards.setText("1 card left");
+        downArrow.setBounds(831, 575, 50, 50);
+        instruction.setBounds(865, 580, 400, 100);
+        instruction.setText("Play the 12 on a discard pile to end your turn.\nIn a normal game you could play any hand card.");
+        allowMove = true;
+    }
+
+    /**
+     * Asks the player to click on a discard pile
+     */
+    private void moveSix() {
+        moveNumber = 6;
+        layeredPane.remove(downArrow);
+        layeredPane.repaint();
+        upArrow.setBounds(700, 475, 50, 50);
+        layeredPane.add(upArrow);
+        instruction.setText("Play your hand card on any discard pile.");
+        instruction.setBounds(730, 500, 400, 100);
+        allowMove = true;
+    }
+
+    /**
+     * Puts the hand card on the discard pile and makes opponents turns
+     */
+    private void moveSeven() {
+        moveNumber = 7;
+    }
+
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
@@ -157,7 +197,7 @@ public class Tutorial extends GameGraphic implements ActionListener {
             allowMove = false;
             buttonPressed.setBorder(clickedBorder);
             changeButtonStates(buttonPressed, false);
-            secondMove();
+            moveTwo();
         }
         if (moveNumber == 2 && !isBuildButton(buttonPressed)) {
             return;
@@ -166,7 +206,7 @@ public class Tutorial extends GameGraphic implements ActionListener {
             chosenBuildButton = buttonPressed;
             hand[3].setBorder(defaultBorder);
             changeButtonStates(hand[3], true);
-            thirdMove();
+            moveThree();
         }
         if (moveNumber == 3 && buttonPressed != stock) {
             return;
@@ -174,7 +214,32 @@ public class Tutorial extends GameGraphic implements ActionListener {
             allowMove = false;
             buttonPressed.setBorder(clickedBorder);
             changeButtonStates(buttonPressed, false);
-            fourthMove();
+            moveFour();
+        }
+        if (moveNumber == 4 && buttonPressed != chosenBuildButton) {
+            return;
+        } else if (moveNumber == 4) {
+            allowMove = false;
+            stock.setBorder(defaultBorder);
+            changeButtonStates(stock, true);
+            moveFive();
+        }
+        if (moveNumber == 5 && buttonPressed != hand[3]) {
+            return;
+        } else if (moveNumber == 5) {
+            allowMove = false;
+            buttonPressed.setBorder(clickedBorder);
+            changeButtonStates(buttonPressed, false);
+            moveSix();
+        }
+        if (moveNumber == 6 && getDiscardPile(buttonPressed) == null) {
+            return;
+        } else if (moveNumber == 6) {
+            allowMove = false;
+            chosenDiscardPile = getDiscardPile(buttonPressed);
+            hand[3].setBorder(defaultBorder);
+            changeButtonStates(hand[3], true);
+            moveSeven();
         }
         //chatGraphic.endGame("You");
     }
@@ -204,5 +269,14 @@ public class Tutorial extends GameGraphic implements ActionListener {
             }
         }
         return false;
+    }
+
+    private ArrayList<CardButton> getDiscardPile(CardButton button) {
+        for (int i = 0; i < discard.length; i++) {
+            if (discard[i].contains(button)) {
+                return discard[i];
+            }
+        }
+        return null;
     }
 }

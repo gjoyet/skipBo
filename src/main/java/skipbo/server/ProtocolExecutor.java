@@ -392,6 +392,21 @@ public class ProtocolExecutor {
                         }
                     }
                     break;
+                case "highscore":
+                    BufferedReader br;
+                    try {
+                        File highscores = new File("skipBoLogs/Highscores.txt");
+                        br = new BufferedReader((new FileReader(highscores)));
+                        br.readLine(); br.readLine();
+                        for(int i=0; i < 5; i++) {
+                            sbL.getPW().println(Protocol.DISPL + "§highscore§" + br.readLine());
+                        }
+                    } catch (FileNotFoundException e) {
+                        servLog.error("File not found.");
+                    } catch (IOException e) {
+                        servLog.error("Problem with reading Highscores.txt file.");
+                    }
+
                 default:
                     throw new NoCommandException(input[0], input[1]);
             }

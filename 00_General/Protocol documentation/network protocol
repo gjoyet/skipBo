@@ -11,9 +11,9 @@ Lobby		SETTO		Nickname	String nickname				sets nickname of new player to ‚nick
 		CHNGE		Nickname	String nickname 			changes nickname of player sending the request to ‚nickname‘
 				Status 		PlayerStatus ps				sets senders PlayerStatus to ‚ps‘
 		LGOUT		-		-					from client: logout request to server; from server: logout confirmation to client
-		DISPL		players							lists all players currently connected to the server
-				games							lists all open, ongoing and finished games
-				highscore	Nx String HighScoreLine			Sends a list of N high score lines to the client containing participants names, winner, score etc.
+		DISPL		players		String playerList			lists all players currently connected to the server
+				games		String gameList				lists all open, ongoing and finished games
+				highscore	5x String highScoreLine		sends a list of the top 5 high score lines to the client containing participants names, winner, score etc.
 
 Player		PLAYR		List		String nicknames			Tells client which players are already connected to the server. (sent when client logs in and
 											own name should not be sent)

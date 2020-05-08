@@ -31,7 +31,7 @@ public class Player {
         this.name = name;
         this.sbListen = sbListen;
         this.piles = new Pile(id);
-        this.status = Status.valueOf("WAITING");
+        this.status = Status.WAITING;
 
     }
 

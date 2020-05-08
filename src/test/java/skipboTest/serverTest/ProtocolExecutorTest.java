@@ -41,7 +41,7 @@ public class ProtocolExecutorTest {
             Main.main(new String[]{"testClient", "localhost:"+portString, "Manuela"});
             Main.main(new String[]{"testClient", "localhost:"+portString, "Rohan"});
             Main.main(new String[]{"testClient", "localhost:"+portString, "Guillaume"});
-            sleep(3000);
+            sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -262,7 +262,7 @@ public class ProtocolExecutorTest {
             pe0.changeTo();
             sleep(200);
             pe1.newGame();
-            sleep(1000);
+            sleep(1500);
         } catch(NoCommandException nce) {
             servLog.debug("Error with testing framework");
         } catch (InterruptedException e) {
@@ -418,7 +418,7 @@ public class ProtocolExecutorTest {
         try {
             pe2.display();
             pe3.display();
-            sleep(550);
+            sleep(1000);
         } catch(NoCommandException nce) {
             servLog.debug("Error with testing framework.");
         } catch(InterruptedException e) {

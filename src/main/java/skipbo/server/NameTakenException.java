@@ -22,7 +22,7 @@ public class NameTakenException extends Exception {
             i++;
             nameWithNumber = name + i;
         }
-        this.sbL.getPW().println("PRINT§Terminal§" + name + " was taken. Your name was set to " + nameWithNumber + ".");
+        this.sbL.getPW().println(Protocol.PRINT + "§Terminal§" + name + " was taken. Your name was set to " + nameWithNumber + ".");
         return nameWithNumber;
     }
 }

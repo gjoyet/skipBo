@@ -53,7 +53,7 @@ public class ProtocolExecutor {
         try {
             if (input[1].equals("Nickname")) {
                 if (input.length == 2 || !sbL.getServer().serverLobby.nameIsValid(input[2])) {
-                    sbL.pw.println("PRINT§Terminal§Invalid name. Name set to " + name + ".");
+                    sbL.pw.println(Protocol.PRINT + "§Terminal§Invalid name. Name set to " + name + ".");
                     if (!sbL.getServer().serverLobby.nameIsTaken(name)) {
                         sbL.player = new Player(sbL.id, name, sbL);
                         sbL.getServer().serverLobby.addPlayer(sbL.player);
@@ -81,12 +81,12 @@ public class ProtocolExecutor {
      * @param name: Feeds all clients the needed information about the login of Player with 'name'
      */
     private void informLogin(String name) {
-        sbL.getPW().println("SETTO§Nickname§" + name);
-        sbL.getPW().println("PLAYR§List§" + sbL.getServer().getWholePlayerList(sbL.getPlayer()));
-        sendAllExceptOne("PLAYR§Joined§" + name, sbL);
+        sbL.getPW().println(Protocol.SETTO + "§Nickname§" + name);
+        sbL.getPW().println(Protocol.PLAYR + "§List§" + sbL.getServer().getWholePlayerList(sbL.getPlayer()));
+        sendAllExceptOne(Protocol.PLAYR + "§Joined§" + name, sbL);
         servLog.info(name + " logged in.");
-        sbL.pw.println("PRINT§Terminal§Welcome to Skip-Bo, " + name + "!");
-        sendAllExceptOne("PRINT§Terminal§" + name + " joined the room. Say hi!", sbL);
+        sbL.pw.println(Protocol.PRINT + "§Terminal§Welcome to Skip-Bo, " + name + "!");
+        sendAllExceptOne(Protocol.PRINT + "§Terminal§" + name + " joined the room. Say hi!", sbL);
         servLog.debug("Players connected: " + sbL.getServer().getWholePlayerList());
     }
 
@@ -105,16 +105,17 @@ public class ProtocolExecutor {
                 }
                 String name = input[2];
                 if (name.equals(sbL.player.getName())) {
-                    sbL.pw.println("PRINT§Terminal§Name is already " + name + ".");
+                    sbL.pw.println(Protocol.PRINT + "§Terminal§Name is already " + name + ".");
                 } else if (!sbL.getServer().serverLobby.nameIsTaken(name) && sbL.getServer().serverLobby.nameIsValid(name)) {
                     sbL.player.changeName(name);
-                    sbL.pw.println("PRINT§Terminal§Name changed to " + name + ".");
-                    sbL.pw.println("CHNGE§Nickname§" + name);
+                    sbL.pw.println(Protocol.PRINT + "§Terminal§Name changed to " + name + ".");
+                    sbL.pw.println(Protocol.CHNGE + "§Nickname§" + name);
                     servLog.info(formerName + " changed name to " + name + ".");
-                    sendAllExceptOne("PLAYR§Change§" + formerName + "§" + name, sbL);
-                    sendAllExceptOne("PRINT§Terminal§" + formerName + " changed name to " + name + ".", sbL);
+                    sendAllExceptOne(Protocol.PLAYR + "§Change§" + formerName + "§" + name, sbL);
+                    sendAllExceptOne(Protocol.PRINT + "§Terminal§" + formerName + " changed name to "
+                                                                                                + name + ".", sbL);
                 } else if (!sbL.getServer().serverLobby.nameIsValid(name)) {
-                    sbL.pw.println("PRINT§Terminal§Refused: Invalid name. Try again.");
+                    sbL.pw.println(Protocol.PRINT + "§Terminal§Refused: Invalid name. Try again.");
                 } else if (sbL.getServer().serverLobby.nameIsTaken(name)) {
                     servLog.debug(sbL.player.getName() + " tried to change name to a name already in use.");
                     throw new NameTakenException(name, sbL);
@@ -126,24 +127,24 @@ public class ProtocolExecutor {
                 }
                 String status = Status.valueOf(input[2]).toString();
                 if (status.equalsIgnoreCase("ingame")) {
-                    sbL.getPW().println("PRINT§Terminal§You cannot change your status to 'ingame' yourself.");
+                    sbL.getPW().println(Protocol.PRINT + "§Terminal§You cannot change your status to 'ingame' yourself.");
                 } else if (sbL.player.getStatus().equals(Status.valueOf(status))) {
-                    sbL.getPW().println("PRINT§Terminal§Status is already: " + status + ".");
+                    sbL.getPW().println(Protocol.PRINT + "§Terminal§Status is already: " + status + ".");
                     return;
                 } else {
                     sbL.player.changeStatus(Status.valueOf(input[2]));
-                    sbL.getPW().println("PRINT§Terminal§Status changed to " + status + ".");
-                    sendAllExceptOne("PRINT§Terminal§" + sbL.player.getName() + " is " + status + ".", sbL);
+                    sbL.getPW().println(Protocol.PRINT + "§Terminal§Status changed to " + status + ".");
+                    sendAllExceptOne(Protocol.PRINT + "§Terminal§" + sbL.player.getName() + " is " + status + ".", sbL);
                 }
             } else throw new NoCommandException(input[0], input[1]);
         } catch (NameTakenException nte) {
             String name = nte.findName();
             sbL.player.changeName(name);
-            sbL.pw.println("PRINT§Terminal§Name changed to " + name + ".");
-            sbL.pw.println("CHNGE§Nickname§" + name);
+            sbL.pw.println(Protocol.PRINT + "§Terminal§Name changed to " + name + ".");
+            sbL.pw.println(Protocol.CHNGE + "§Nickname§" + name);
             servLog.info(formerName + " changed name to " + name + ".");
-            sendAllExceptOne("PLAYR§Change§" + formerName + "§" + name, sbL);
-            sendAllExceptOne("PRINT§Terminal§" + formerName + " changed name to " + name + ".", sbL);
+            sendAllExceptOne(Protocol.PLAYR + "§Change§" + formerName + "§" + name, sbL);
+            sendAllExceptOne(Protocol.PRINT + "§Terminal§" + formerName + " changed name to " + name + ".", sbL);
         }
     }
 
@@ -156,22 +157,22 @@ public class ProtocolExecutor {
         if (input.length < 3) return;
         servLog.debug("Received '" + input[1] + "' chat message from " + sbL.player.getName() + ": " + input[2]);
         if (input[1].equals("Global")) {
-            sbL.getPW().println("CHATM§Global§You: " + input[2]);
-            sendAllExceptOne("CHATM§Global§" + sbL.player.getName() + ": " + input[2], sbL);
+            sbL.getPW().println(Protocol.CHATM + "§Global§You: " + input[2]);
+            sendAllExceptOne(Protocol.CHATM + "§Global§" + sbL.player.getName() + ": " + input[2], sbL);
         } else if (input[1].equals("Private")) {
             String[] nameAndMes = input[2].split("§", 2);
             if (sbL.getServer().getLobby().getPlayerByName(nameAndMes[0]) == null) {
-                sbL.getPW().println("PRINT§Terminal§This name does not exist.");
+                sbL.getPW().println(Protocol.PRINT + "§Terminal§This name does not exist.");
             } else if (nameAndMes[0].equals(sbL.player.getName())) {
-                sbL.getPW().println("PRINT§Terminal§You private messaged yourself, duh...");
+                sbL.getPW().println(Protocol.PRINT + "§Terminal§You private messaged yourself, duh...");
             } else {
-                sbL.getPW().println("CHATM§Private§(to " + nameAndMes[0] + "): " + nameAndMes[1]);
+                sbL.getPW().println(Protocol.CHATM + "§Private§(to " + nameAndMes[0] + "): " + nameAndMes[1]);
                 sbL.getServer().getLobby().getPlayerByName(nameAndMes[0]).getSBL().getPW().
-                        println("CHATM§Private§(from " + sbL.player.getName() + "): " + nameAndMes[1]);
+                        println(Protocol.CHATM + "§Private§(from " + sbL.player.getName() + "): " + nameAndMes[1]);
             }
         } else if (input[1].equals("Broadcast")) {
-            sbL.getPW().println("CHATM§Broadcast§(BC) You: " + input[2]);
-            broadcastExceptOne("CHATM§Broadcast§(BC) " + sbL.player.getName() + ": " + input[2], sbL);
+            sbL.getPW().println(Protocol.CHATM + "§Broadcast§(BC) You: " + input[2]);
+            broadcastExceptOne(Protocol.CHATM + "§Broadcast§(BC) " + sbL.player.getName() + ": " + input[2], sbL);
         } else throw new NoCommandException(input[0], input[1]);
 
     }
@@ -181,7 +182,7 @@ public class ProtocolExecutor {
      * closes socket and sends message to all other players on which player logged out.
      */
     public void logout() {
-        sbL.pw.println("LGOUT");
+        sbL.pw.println(Protocol.LGOUT + "");
         sbL.getServer().serverLobby.removePlayer(sbL.player);
         if (sbL.player.getGame() != null) {
             if (sbL.getPlayer().getGame().players.size() == 2) {
@@ -193,9 +194,9 @@ public class ProtocolExecutor {
             }
         }
         for (Player p : sbL.getServer().serverLobby.getPlayerLobby()) {
-            p.getSBL().getPW().println("PLAYR§Left§" + sbL.getPlayer().getName());
+            p.getSBL().getPW().println(Protocol.PLAYR + "§Left§" + sbL.getPlayer().getName());
         }
-        sendAll("PRINT§Terminal§" + sbL.player.getName() + " left the room.", sbL);
+        sendAll(Protocol.PRINT + "§Terminal§" + sbL.player.getName() + " left the room.", sbL);
         sbL.stopRunning();
         try {
             sbL.pw.close();
@@ -253,7 +254,7 @@ public class ProtocolExecutor {
                 servLog.debug("NWGME command with names: " + x + "§" + names);
                 for (Player p : newPlayers) {
                     p.changeGame(game);
-                    p.getSBL().getPW().println("NWGME§Names§" + x + "§" + names);
+                    p.getSBL().getPW().println(Protocol.NWGME + "§Names§" + x + "§" + names);
                     p.changeStatus(Status.INGAME);
                 }
                 Thread gameT = new Thread(game);
@@ -262,7 +263,7 @@ public class ProtocolExecutor {
                 servLog.debug("Size of gameList: " + sbL.getServer().serverLobby.getGames().size());
                 return;
             } else {
-                sbL.getPW().println("PRINT§Terminal§Not enough people are ready.");
+                sbL.getPW().println(Protocol.PRINT + "§Terminal§Not enough people are ready.");
                 servLog.debug(sbL.player.getName() + " tried to start game: not enough people were ready.");
             }
         } else throw new NoCommandException(input[0], input[1]);
@@ -276,7 +277,7 @@ public class ProtocolExecutor {
             if (input[1].equals("Card")) {
                 servLog.debug("Got into putTo method with input: " + input[2] + ".");
                 if (!sbL.getGameLobby().get(sbL.player.getGame().getPlayersTurn()).equals(sbL.player)) {
-                    sbL.getPW().println("PRINT§Terminal§Wait until it's your turn, you impatient little rascal!");
+                    sbL.getPW().println(Protocol.PRINT + "§Terminal§Wait until it's your turn, you impatient little rascal!");
                     return;
                 }
                 String[] arguments = input[2].split("§");
@@ -290,13 +291,13 @@ public class ProtocolExecutor {
                 int iT = Integer.parseInt(arguments[3]) - 1; // index to
                 if ((pF.equals("H") && (iF < 0 || iF > 4)) || (pF.equals("S") && iF != 0) ||
                         (pF.equals("D") && (iF < 0 || iF > 3)) || iT < 0 || iT > 3) {
-                    sbL.getPW().println("PRINT§Terminal§Invalid indexes in this move.");
+                    sbL.getPW().println(Protocol.PRINT + "§Terminal§Invalid indexes in this move.");
                     return;
                 }
                 switch (pF + pT) {
                     case "HB":
                         if (sbL.player.getGame().playToMiddle(sbL.player, iF, iT)) {
-                            sbL.getPW().println("PUTTO§Response§" + input[2] + "§" + sbL.player.getName());
+                            sbL.getPW().println(Protocol.PUTTO + "§Response§" + input[2] + "§" + sbL.player.getName());
                             this.check("HandCards");
                             sbL.player.getGame().checkHandCards(sbL.player);
                         }
@@ -304,24 +305,24 @@ public class ProtocolExecutor {
                     case "SB":
                         Card stockPileTopCard = sbL.player.getGame().playFromStockToMiddle(sbL.player, iT);
                         if (stockPileTopCard != null && stockPileTopCard.number != -1) {
-                            sbL.getPW().println("PUTTO§StockResponse§" + input[2] + "§" + sbL.player.getName()
+                            sbL.getPW().println(Protocol.PUTTO + "§StockResponse§" + input[2] + "§" + sbL.player.getName()
                                     + "§" + stockPileTopCard.getColString() + "§" + stockPileTopCard.number);
                             servLog.debug("Sending StockResponse command from server with arguments: " + input[2] + "§"
                                     + sbL.player.getName() + "§" + stockPileTopCard.getColString()
                                     + "§" + stockPileTopCard.number);
                         } else if (stockPileTopCard != null) {
-                            sbL.getPW().println("PUTTO§StockResponse§" + input[2] + "§" + sbL.player.getName()
+                            sbL.getPW().println(Protocol.PUTTO + "§StockResponse§" + input[2] + "§" + sbL.player.getName()
                                     + "§" + stockPileTopCard.getColString() + "§" + stockPileTopCard.number);
                         }
                         break;
                     case "DB":
                         if (sbL.player.getGame().playFromDiscardToMiddle(sbL.player, iF, iT)) {
-                            sbL.getPW().println("PUTTO§Response§" + input[2] + "§" + sbL.player.getName());
+                            sbL.getPW().println(Protocol.PUTTO + "§Response§" + input[2] + "§" + sbL.player.getName());
                         }
                         break;
                     case "HD":
                         if (sbL.player.getGame().playToDiscard(sbL.player, iF, iT)) {
-                            sbL.getPW().println("PUTTO§Response§" + input[2] + "§" + sbL.player.getName());
+                            sbL.getPW().println(Protocol.PUTTO + "§Response§" + input[2] + "§" + sbL.player.getName());
                             this.check("HandCards");
                             if (sbL.getGameLobby().get(sbL.player.getGame().getPlayersTurn()).equals(sbL.player)) {
                                 sbL.player.getGame().checkHandCards(sbL.player);
@@ -329,16 +330,16 @@ public class ProtocolExecutor {
                         }
                         break;
                     default:
-                        sbL.getPW().println("PRINT§Terminal§This move is not allowed.");
+                        sbL.getPW().println(Protocol.PRINT + "§Terminal§This move is not allowed.");
                 }
             } else if (input[1].equals("Update")) {
                 String[] arguments = input[2].split("§");
                 if (arguments[0].equals("S") && arguments[4].equals("-1")) {
-                    sendAllExceptOne("PUTTO§Update§" + input[2], sbL);
+                    sendAllExceptOne(Protocol.PUTTO + "§Update§" + input[2], sbL);
                     Player winner = sbL.getServer().serverLobby.getPlayerByName(arguments[2]);
                     winner.getGame().endGame(winner);
                 } else {
-                    sendAllExceptOne("PUTTO§Update§" + input[2], sbL);
+                    sendAllExceptOne(Protocol.PUTTO + "§Update§" + input[2], sbL);
                 }
             } else throw new NoCommandException(input[0], input[1]);
         } finally {
@@ -352,17 +353,17 @@ public class ProtocolExecutor {
                 case "HandCards":
                     cards = sbL.player.getGame().getPiles().getHandCardsForProtocol(sbL.player);
                     servLog.debug("Sending CHECK HandCards command with arguments = " + cards);
-                    sbL.getPW().println("CHECK§HandCards§" + cards);
+                    sbL.getPW().println(Protocol.CHECK + "§HandCards§" + cards);
                     break;
                 case "StockCard":
                     Card stockC = sbL.player.getStockPile().get(sbL.player.getStockPile().size() - 1);
                     servLog.debug("Sending CHECK StockCard command with arguments: "
                             + stockC.getColString() + "§" + stockC.number);
-                    sbL.getPW().println("CHECK§StockCard§" + stockC.getColString() + "§" + stockC.number);
+                    sbL.getPW().println(Protocol.CHECK + "§StockCard§" + stockC.getColString() + "§" + stockC.number);
                 case "AllCards":
                     cards = sbL.player.getGame().getPiles().getHandCardsForProtocol(sbL.player);
                     servLog.debug("Sending CHECK AllCards command with arguments = " + cards);
-                    sbL.getPW().println("CHECK§AllCards§" + cards);
+                    sbL.getPW().println(Protocol.CHECK + "§AllCards§" + cards);
                 default:
                     servLog.debug("Not a valid CHECK option.");
             }
@@ -378,16 +379,16 @@ public class ProtocolExecutor {
         try {
             switch (input[1]) {
                 case "players":
-                    sbL.getPW().println("PRINT§Terminal§Players list: " + sbL.getServer().getWholePlayerList());
+                    sbL.getPW().println(Protocol.PRINT + "§Terminal§Players list: " + sbL.getServer().getWholePlayerList());
                     break;
                 case "games":
                     String[] gamesList = sbL.getServer().getGamesList();
                     if (gamesList.length == 0) {
-                        sbL.getPW().println("PRINT§Terminal§No games have been started until now.");
+                        sbL.getPW().println(Protocol.PRINT + "§Terminal§No games have been started until now.");
                     } else {
-                        sbL.getPW().println("PRINT§Terminal§Games list:");
+                        sbL.getPW().println(Protocol.PRINT + "§Terminal§Games list:");
                         for (String s : gamesList) {
-                            if (s != null) sbL.getPW().println("PRINT§Terminal§" + s);
+                            if (s != null) sbL.getPW().println(Protocol.PRINT + "§Terminal§" + s);
                         }
                     }
                     break;

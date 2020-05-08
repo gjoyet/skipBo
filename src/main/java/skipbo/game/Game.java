@@ -566,8 +566,8 @@ public class Game implements Runnable {
      */
 
     public void playerLeaving(Player player) {
-        if (playersTurn == player.getId()){
-            playersTurn++;
+        if (players.get(playersTurn).equals(player)){
+            endTurn();
         }
 
         ArrayList<Card> handCards = player.getHandCards();

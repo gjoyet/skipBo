@@ -149,6 +149,18 @@ public class ProtocolExecutor {
     }
 
     /**
+     *  Method for command "PLAYR§LeaveGame". Removes target player from game lobby and informs all other players
+     *  in said lobby.
+     */
+    public void playerLeavingGame() throws NoCommandException {
+        if(input.length < 1) throw new NoCommandException();
+        if(input[1].equals("LeaveGame")) {
+            sendAllExceptOne(Protocol.PLAYR + "§LeaveGame§" + sbL.getPlayer().getName(), sbL);
+            sbL.getPlayer().getGame().playerLeaving(sbL.getPlayer());
+        } else throw new NoCommandException(input[0], input[1]);
+    }
+
+    /**
      * Method for command "CHATM". Sends received chat message to all
      * players except the one sending it.
      */

@@ -443,7 +443,7 @@ public class ProtocolExecutor {
 
         try {
             pw.println(br.readLine());
-            pw.println(br.readLine());
+            br.readLine();
             String line = br.readLine();
             String[] lineSplit;
             boolean gameAppended = false;

@@ -1,1 +1,3 @@
 Skip-Bro Highscores (score = turns to win / stockpile size; lower scores are better)
+
+2020-05-08 16:52 || Guillaume1, Guillaume || WINNER: Guillaume, SCORE: 1.60

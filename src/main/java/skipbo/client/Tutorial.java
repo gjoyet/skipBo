@@ -1,7 +1,5 @@
 package skipbo.client;
 
-import skipbo.game.Card;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -20,15 +18,15 @@ public class Tutorial extends GameGraphic implements ActionListener {
     ArrayList<CardButton> chosenDiscardPile;
 
     Font arrowFont = new Font(DEFAULTFONT.getName(), Font.BOLD, 35);
-    Font tiltedArrowFont = new Font(DEFAULTFONT.getName(), Font.BOLD, 55);
+    //Font tiltedArrowFont = new Font(DEFAULTFONT.getName(), Font.BOLD, 55);
 
-    JLabel leftArrow = new JLabel("\u2B05");
+    //JLabel leftArrow = new JLabel("\u2B05");
     JLabel downArrow = new JLabel("\u2B07");
     JLabel upArrow = new JLabel("\u2B06");
-    JLabel northEast = new JLabel("\u2B08");
+/*    JLabel northEast = new JLabel("\u2B08");
     JLabel northWest = new JLabel("\u2B09");
     JLabel southEast = new JLabel("\u2B0A");
-    JLabel southWest = new JLabel("\u2B0B");
+    JLabel southWest = new JLabel("\u2B0B");*/
 
     private int delay = 2000; //2000
 
@@ -397,21 +395,21 @@ public class Tutorial extends GameGraphic implements ActionListener {
     }
 
     private void setArrowFonts() {
-        leftArrow.setFont(arrowFont);
+        //leftArrow.setFont(arrowFont);
         upArrow.setFont(arrowFont);
         downArrow.setFont(arrowFont);
-        northEast.setFont(tiltedArrowFont);
+/*        northEast.setFont(tiltedArrowFont);
         northWest.setFont(tiltedArrowFont);
         southEast.setFont(tiltedArrowFont);
         southWest.setFont(tiltedArrowFont);
 
-        leftArrow.setForeground(ChatGraphic.DARKGREEN);
+        leftArrow.setForeground(ChatGraphic.DARKGREEN);*/
         upArrow.setForeground(ChatGraphic.DARKGREEN);
         downArrow.setForeground(ChatGraphic.DARKGREEN);
-        northEast.setForeground(ChatGraphic.DARKGREEN);
+/*        northEast.setForeground(ChatGraphic.DARKGREEN);
         northWest.setForeground(ChatGraphic.DARKGREEN);
         southEast.setForeground(ChatGraphic.DARKGREEN);
-        southWest.setForeground(ChatGraphic.DARKGREEN);
+        southWest.setForeground(ChatGraphic.DARKGREEN);*/
     }
 
     private boolean isBuildButton(CardButton button) {

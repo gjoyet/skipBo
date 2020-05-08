@@ -4,26 +4,31 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import static skipbo.client.SBClient.clientLog;
 
 public class Tutorial extends GameGraphic implements ActionListener {
 
     ChatGraphic chatGraphic;
-    int moveNumber = 0;
+    int moveNumber = 1;
     boolean allowMove = false;
     JTextArea instruction = new JTextArea();
+    CardButton chosenBuildButton;
+    ArrayList<CardButton> chosenDiscardPile;
+
     Font arrowFont = new Font(DEFAULTFONT.getName(), Font.BOLD, 35);
-    Font tiltedArrowFont = new Font(DEFAULTFONT.getName(), Font.BOLD, 55);
-    JLabel leftArrow = new JLabel("\u2B05");
+    //Font tiltedArrowFont = new Font(DEFAULTFONT.getName(), Font.BOLD, 55);
+
+    //JLabel leftArrow = new JLabel("\u2B05");
     JLabel downArrow = new JLabel("\u2B07");
     JLabel upArrow = new JLabel("\u2B06");
-    JLabel northEast = new JLabel("\u2B08");
+/*    JLabel northEast = new JLabel("\u2B08");
     JLabel northWest = new JLabel("\u2B09");
     JLabel southEast = new JLabel("\u2B0A");
-    JLabel southWest = new JLabel("\u2B0B");
+    JLabel southWest = new JLabel("\u2B0B");*/
+
+    private int delay = 2000; //2000
 
     Tutorial(ChatGraphic chatGraphic) {
         super();
@@ -36,7 +41,7 @@ public class Tutorial extends GameGraphic implements ActionListener {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                firstMove();
+                moveOne();
             }
         };
         timer.schedule(task,1000);
@@ -50,7 +55,7 @@ public class Tutorial extends GameGraphic implements ActionListener {
         setOpponentVisible(0);
         setOpponentVisible(1);
         yourTurnLabel.setVisible(true);
-        initialNumStockCards = 3;
+        initialNumStockCards = 2;
         numOfStockCards.setText(initialNumStockCards + " cards left");
         oppNumStockCards[0].setText(String.valueOf(initialNumStockCards));
         oppNumStockCards[1].setText(String.valueOf(initialNumStockCards));
@@ -58,14 +63,14 @@ public class Tutorial extends GameGraphic implements ActionListener {
         layeredPane.add(oppNumStockCards[1]);
 
         hand[0].setIcon(cardIcons.getIcon("R",10, CardIcons.MEDIUM));
-        hand[1].setIcon(cardIcons.getIcon("B", 1, CardIcons.MEDIUM));
-        hand[2].setIcon(cardIcons.getIcon("B",7, CardIcons.MEDIUM));
-        hand[3].setIcon(cardIcons.getIcon("G", 10, CardIcons.MEDIUM));
+        hand[1].setIcon(cardIcons.getIcon("B",7, CardIcons.MEDIUM));
+        hand[2].setIcon(cardIcons.getIcon("G", 10, CardIcons.MEDIUM));
+        hand[3].setIcon(cardIcons.getIcon("B", 1, CardIcons.MEDIUM));
         hand[4].setIcon(cardIcons.getIcon("R",12, CardIcons.MEDIUM));
         stock.setIcon(cardIcons.getIcon("R",2, CardIcons.LARGE));
 
-        e1_stock.setIcon(cardIcons.getIcon("B",12, CardIcons.SMALL));
-        e2_stock.setIcon(cardIcons.getIcon("G",8, CardIcons.SMALL));
+        e1_stock.setIcon(cardIcons.getIcon("B",8, CardIcons.SMALL));
+        e2_stock.setIcon(cardIcons.getIcon("G",4, CardIcons.SMALL));
 
         instruction.setBackground(Color.orange);
         instruction.setFont(new Font(DEFAULTFONT.getName(), Font.BOLD, DEFAULTFONT.getSize()+3));
@@ -74,18 +79,21 @@ public class Tutorial extends GameGraphic implements ActionListener {
 
     }
 
-    private void firstMove() {
+    /**
+     * Introduces the player to the game. Asks to click on hand card 2.
+     */
+    private void moveOne() {
         try {
             upArrow.setBounds(400, 495, 50, 50);
             layeredPane.add(upArrow);
             instruction.setBounds(440, 500, 300, 100);
             instruction.setText("Your goal is to play all of\nyour stock cards on the build piles.");
-            Thread.sleep(5000);
+            Thread.sleep(4500); //5000
             layeredPane.remove(upArrow);
             layeredPane.repaint();
-            downArrow.setBounds(655, 575, 50, 50);
+            downArrow.setBounds(831, 575, 50, 50);
             layeredPane.add(downArrow, Integer.valueOf(-1));
-            instruction.setBounds(685, 580, 300, 100);
+            instruction.setBounds(861, 580, 300, 100);
             instruction.setText("Click on your hand card to grab it.");
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -93,8 +101,11 @@ public class Tutorial extends GameGraphic implements ActionListener {
         allowMove = true;
     }
 
-    private void secondMove() {
-        moveNumber++;
+    /**
+     *Asks player to click on a build pile.
+     */
+    private void moveTwo() {
+        moveNumber = 2;
         layeredPane.remove(downArrow);
         layeredPane.repaint();
         downArrow.setBounds(680, 75, 50, 50);
@@ -104,8 +115,194 @@ public class Tutorial extends GameGraphic implements ActionListener {
         allowMove = true;
     }
 
-    private void thirdMove() {
+    /**
+     *Puts the one on the build pile and asks player to click on stock pile.
+     */
+    private void moveThree() {
+        moveNumber = 3;
+        chosenBuildButton.setIcon(cardIcons.getIcon("B", 1, CardIcons.LARGE));
+        hand[3].setIcon(hand[4].getIcon());
+        hand[4].setIcon(null);
+        layeredPane.remove(downArrow);
+        layeredPane.repaint();
+        upArrow.setBounds(400, 495, 50, 50);
+        layeredPane.add(upArrow);
+        instruction.setBounds(440, 500, 400, 100);
+        instruction.setText("Now you can play your first stock card\non the build pile.");
+        allowMove = true;
+    }
 
+    /**
+     * Asks the player to click on the build pile
+     */
+    private void moveFour() {
+        moveNumber = 4;
+        layeredPane.remove(upArrow);
+        layeredPane.repaint();
+        instruction.setText("Put the stock card on the build pile.");
+        if (chosenBuildButton == build[0]) {
+            downArrow.setBounds(chosenBuildButton.getX()+65,75,50,50);
+            instruction.setBounds(chosenBuildButton.getX()+95,80,400,100);
+        } else {
+            downArrow.setBounds(chosenBuildButton.getX()+20,75,50,50);
+            instruction.setBounds(chosenBuildButton.getX()+50,80,400,100);
+        }
+        layeredPane.add(downArrow);
+        allowMove = true;
+    }
+
+    /**
+     * Puts the stock card on the build pile and asks player to finish their turn.
+     */
+    private void moveFive() {
+        moveNumber = 5;
+        chosenBuildButton.setIcon(stock.getIcon());
+        stock.setIcon(cardIcons.getIcon("B", 6, CardIcons.LARGE));
+        numOfStockCards.setText("1 card left");
+        downArrow.setBounds(831, 575, 50, 50);
+        instruction.setBounds(865, 580, 400, 100);
+        instruction.setText("Play the 12 on a discard pile to end your turn.\nIn a normal game you could play any hand card.");
+        allowMove = true;
+    }
+
+    /**
+     * Asks the player to click on a discard pile
+     */
+    private void moveSix() {
+        moveNumber = 6;
+        layeredPane.remove(downArrow);
+        layeredPane.repaint();
+        upArrow.setBounds(700, 475, 50, 50);
+        layeredPane.add(upArrow);
+        instruction.setText("Play your hand card on any discard pile.");
+        instruction.setBounds(730, 500, 400, 100);
+        allowMove = true;
+    }
+
+    /**
+     * Puts the hand card on the discard pile, makes opponents turns and asks player to play the joker.
+     */
+    private void moveSeven() {
+        moveNumber = 7;
+        layeredPane.remove(upArrow);
+        instruction.setText("");
+        layeredPane.repaint();
+        hand[3].setIcon(null);
+        chosenDiscardPile.get(0).setIcon(cardIcons.getIcon("R",12, CardIcons.LARGE));
+        yourTurnLabel.setText("Please wait, it's Bob's turn.");
+        yourTurnLabel.setFont(new Font(DEFAULTFONT.getName(), Font.BOLD, 25));
+        e1.setForeground(ChatGraphic.DARKGREEN);
+        e1.setFont(new Font(DEFAULTFONT.getName(), Font.BOLD, DEFAULTFONT.getSize()+5));
+        TimerTask opponentTask = new TimerTask() {
+            @Override
+            public void run() {
+                try {
+                    chosenBuildButton.setIcon(cardIcons.getIcon("B", 3, CardIcons.LARGE));
+                    Thread.sleep(delay);
+                    e1_discard[3].get(0).setIcon(cardIcons.getIcon("R", 9, CardIcons.SMALL));
+                    yourTurnLabel.setText("Please wait, it's Alice's turn.");
+                    e1.setFont(DEFAULTFONT);
+                    e1.setForeground(Color.BLACK);
+                    e2.setFont(new Font(DEFAULTFONT.getName(), Font.BOLD, DEFAULTFONT.getSize()+5));
+                    e2.setForeground(ChatGraphic.DARKGREEN);
+                    Thread.sleep(delay);
+                    chosenBuildButton.setIcon(cardIcons.getIcon("G",4, CardIcons.LARGE));
+                    e2_stock.setIcon(cardIcons.getIcon("R", 11, CardIcons.SMALL));
+                    oppNumStockCards[1].setText("1");
+                    Thread.sleep(delay);
+                    if (build[1] == chosenBuildButton) {
+                        build[3].setIcon(cardIcons.getIcon("B", 1, CardIcons.LARGE));
+                    } else {
+                        build[1].setIcon(cardIcons.getIcon("B", 1, CardIcons.LARGE));
+                    }
+                    Thread.sleep(delay);
+                    e2_discard[1].get(0).setIcon(cardIcons.getIcon("B", 3, CardIcons.SMALL));
+                    e2.setFont(DEFAULTFONT);
+                    e2.setForeground(Color.BLACK);
+
+                    hand[3].setIcon(cardIcons.getIcon("G", 3, CardIcons.MEDIUM));
+                    hand[4].setIcon(cardIcons.getIcon("S", 13, CardIcons.MEDIUM));
+
+                    yourTurnLabel.setText("It's your turn!");
+                    yourTurnLabel.setFont(new Font(DEFAULTFONT.getName(), Font.BOLD, 35));
+                    downArrow.setBounds(919, 575, 50, 50);
+                    layeredPane.add(downArrow);
+                    instruction.setBounds(953, 580, 400, 100);
+                    instruction.setText("Play the joker on the build pile.");
+                    allowMove = true;
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        Timer timer = new Timer();
+        timer.schedule(opponentTask, delay);
+
+    }
+
+    /**
+     * Asks player to put the joker on the build pile.
+     */
+    private void moveEight() {
+        moveNumber = 8;
+        instruction.setText("Put the joker on the build pile.");
+        if (chosenBuildButton == build[0]) {
+            downArrow.setBounds(chosenBuildButton.getX()+65,75,50,50);
+            instruction.setBounds(chosenBuildButton.getX()+95,80,400,100);
+        } else {
+            downArrow.setBounds(chosenBuildButton.getX()+20,75,50,50);
+            instruction.setBounds(chosenBuildButton.getX()+50,80,400,100);
+        }
+        allowMove = true;
+    }
+
+    /**
+     * Asks player to play the last stock card.
+     */
+    private void moveNine() {
+        moveNumber = 9;
+        layeredPane.remove(downArrow);
+        layeredPane.repaint();
+        chosenBuildButton.setIcon(cardIcons.getIcon("S", 5, CardIcons.LARGE));
+        hand[4].setIcon(null);
+        upArrow.setBounds(400, 495, 50, 50);
+        layeredPane.add(upArrow);
+        instruction.setBounds(440, 500, 400, 100);
+        instruction.setText("Play your last stock card on the build pile\nto win the game.");
+        allowMove = true;
+    }
+
+    /**
+     * Asks player to put the stock card on the build pile.
+     */
+    private void moveTen() {
+        moveNumber = 10;
+        layeredPane.remove(upArrow);
+        layeredPane.repaint();
+        instruction.setText("Put the stock card on the build pile.");
+        if (chosenBuildButton == build[0]) {
+            downArrow.setBounds(chosenBuildButton.getX()+65,75,50,50);
+            instruction.setBounds(chosenBuildButton.getX()+95,80,400,100);
+        } else {
+            downArrow.setBounds(chosenBuildButton.getX()+20,75,50,50);
+            instruction.setBounds(chosenBuildButton.getX()+50,80,400,100);
+        }
+        layeredPane.add(downArrow);
+        allowMove = true;
+    }
+
+    /**
+     *Ends the tutorial.
+     */
+    private void endTutorial() {
+        chosenBuildButton.setIcon(cardIcons.getIcon("B", 6, CardIcons.LARGE));
+        stock.setIcon(null);
+        numOfStockCards.setText("0 cards left");
+        layeredPane.remove(instruction);
+        layeredPane.remove(downArrow);
+        layeredPane.repaint();
+        chatGraphic.endGame("you", true);
     }
 
 
@@ -115,41 +312,104 @@ public class Tutorial extends GameGraphic implements ActionListener {
             return;
         }
         CardButton buttonPressed = (CardButton) actionEvent.getSource();
-        if (moveNumber == 0 && buttonPressed != hand[1]) {
+        if (moveNumber == 1 && buttonPressed != hand[3]) {
             return;
-        } else if (moveNumber == 0) {
+        } else if (moveNumber == 1) {
             allowMove = false;
             buttonPressed.setBorder(clickedBorder);
             changeButtonStates(buttonPressed, false);
-            secondMove();
+            moveTwo();
         }
-        if (moveNumber == 1 && !isBuildButton(buttonPressed)) {
+        if (moveNumber == 2 && !isBuildButton(buttonPressed)) {
             return;
-        } else {
+        } else if (moveNumber == 2) {
             allowMove = false;
-            hand[1].setBorder(defaultBorder);
-            changeButtonStates(hand[1], true);
-            thirdMove();
+            chosenBuildButton = buttonPressed;
+            hand[3].setBorder(defaultBorder);
+            changeButtonStates(hand[3], true);
+            moveThree();
         }
-        //chatGraphic.endGame("You");
+        if (moveNumber == 3 && buttonPressed != stock) {
+            return;
+        } else if (moveNumber == 3) {
+            allowMove = false;
+            buttonPressed.setBorder(clickedBorder);
+            changeButtonStates(buttonPressed, false);
+            moveFour();
+        }
+        if (moveNumber == 4 && buttonPressed != chosenBuildButton) {
+            return;
+        } else if (moveNumber == 4) {
+            allowMove = false;
+            stock.setBorder(defaultBorder);
+            changeButtonStates(stock, true);
+            moveFive();
+        }
+        if (moveNumber == 5 && buttonPressed != hand[3]) {
+            return;
+        } else if (moveNumber == 5) {
+            allowMove = false;
+            buttonPressed.setBorder(clickedBorder);
+            changeButtonStates(buttonPressed, false);
+            moveSix();
+        }
+        if (moveNumber == 6 && getDiscardPile(buttonPressed) == null) {
+            return;
+        } else if (moveNumber == 6) {
+            allowMove = false;
+            chosenDiscardPile = getDiscardPile(buttonPressed);
+            hand[3].setBorder(defaultBorder);
+            changeButtonStates(hand[3], true);
+            moveSeven();
+        }
+        if (moveNumber == 7 && buttonPressed != hand[4]) {
+            return;
+        } else if (moveNumber == 7) {
+            allowMove = false;
+            buttonPressed.setBorder(clickedBorder);
+            changeButtonStates(buttonPressed, false);
+            moveEight();
+        }
+        if (moveNumber == 8 && buttonPressed != chosenBuildButton) {
+            return;
+        } else if (moveNumber == 8) {
+            allowMove = false;
+            hand[4].setBorder(defaultBorder);
+            changeButtonStates(hand[4], true);
+            moveNine();
+        }
+        if (moveNumber == 9 && buttonPressed !=stock) {
+            return;
+        } else if (moveNumber == 9) {
+            allowMove = false;
+            stock.setBorder(clickedBorder);
+            changeButtonStates(stock, false);
+            moveTen();
+        }
+        if (moveNumber == 10 && buttonPressed == chosenBuildButton) {
+            allowMove = false;
+            stock.setBorder(defaultBorder);
+            changeButtonStates(stock, true);
+            endTutorial();
+        }
     }
 
     private void setArrowFonts() {
-        leftArrow.setFont(arrowFont);
+        //leftArrow.setFont(arrowFont);
         upArrow.setFont(arrowFont);
         downArrow.setFont(arrowFont);
-        northEast.setFont(tiltedArrowFont);
+/*        northEast.setFont(tiltedArrowFont);
         northWest.setFont(tiltedArrowFont);
         southEast.setFont(tiltedArrowFont);
         southWest.setFont(tiltedArrowFont);
 
-        leftArrow.setForeground(ChatGraphic.DARKGREEN);
+        leftArrow.setForeground(ChatGraphic.DARKGREEN);*/
         upArrow.setForeground(ChatGraphic.DARKGREEN);
         downArrow.setForeground(ChatGraphic.DARKGREEN);
-        northEast.setForeground(ChatGraphic.DARKGREEN);
+/*        northEast.setForeground(ChatGraphic.DARKGREEN);
         northWest.setForeground(ChatGraphic.DARKGREEN);
         southEast.setForeground(ChatGraphic.DARKGREEN);
-        southWest.setForeground(ChatGraphic.DARKGREEN);
+        southWest.setForeground(ChatGraphic.DARKGREEN);*/
     }
 
     private boolean isBuildButton(CardButton button) {
@@ -159,5 +419,14 @@ public class Tutorial extends GameGraphic implements ActionListener {
             }
         }
         return false;
+    }
+
+    private ArrayList<CardButton> getDiscardPile(CardButton button) {
+        for (int i = 0; i < discard.length; i++) {
+            if (discard[i].contains(button)) {
+                return discard[i];
+            }
+        }
+        return null;
     }
 }

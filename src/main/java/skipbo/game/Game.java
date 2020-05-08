@@ -566,6 +566,10 @@ public class Game implements Runnable {
      */
 
     public void playerLeaving(Player player) {
+        if (playersTurn == player.getId()){
+            playersTurn++;
+        }
+
         ArrayList<Card> handCards = player.getHandCards();
         piles.emptyPile.addAll(handCards); // adds to empty pile
         player.clearHandCards();      //removes cards from the player's hand cards

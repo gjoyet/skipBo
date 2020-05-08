@@ -410,8 +410,11 @@ public class ProtocolExecutor {
                         File highscores = new File("skipBoLogs/Highscores.txt");
                         br = new BufferedReader((new FileReader(highscores)));
                         br.readLine(); br.readLine();
+                        String line;
                         for(int i=0; i < 5; i++) {
-                            sbL.getPW().println(Protocol.DISPL + "§highscore§" + br.readLine());
+                            line = br.readLine();
+                            if(line == null) break;
+                            sbL.getPW().println(Protocol.DISPL + "§highscore§" + line);
                         }
                     } catch (FileNotFoundException e) {
                         servLog.error("File not found.");

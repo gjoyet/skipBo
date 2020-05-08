@@ -49,9 +49,9 @@ public class GameGraphic implements ActionListener {
     final CardButton[] build = new CardButton[4];
 
     //Opponent discard piles
-    private final ArrayList<CardButton>[] e1_discard = new ArrayList[4];
-    private final ArrayList<CardButton>[] e2_discard = new ArrayList[4];
-    private final ArrayList<CardButton>[] e3_discard = new ArrayList[4];
+    final ArrayList<CardButton>[] e1_discard = new ArrayList[4];
+    final ArrayList<CardButton>[] e2_discard = new ArrayList[4];
+    final ArrayList<CardButton>[] e3_discard = new ArrayList[4];
 
     //Distances between discard cards on same discard pile
     private final int DISTDISCARD = 30;

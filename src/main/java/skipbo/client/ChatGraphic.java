@@ -297,7 +297,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         if (isTutorial) {
             gameGraphic = new Tutorial(this);
             leaveB.setEnabled(false);
-            System.out.println("set enable false leaveB");
         } else {
             gameGraphic = new GameGraphic(clientListener, playerName, chat);
             tutorialB.setEnabled(false);
@@ -362,6 +361,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         readyB.setEnabled(true);
         leaveB.setEnabled(false);
         changeNameB.setEnabled(true);
+        tutorialB.setText("Tutorial");
         tutorialB.setEnabled(true);
         gameGraphic = null;
     }
@@ -597,7 +597,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         } else {
             updateNamesInComboBox((String) playerComboModel.getSelectedItem());
         }
-        if (gameGraphic != null) {
+        if (gameGraphic != null && !(gameGraphic instanceof Tutorial)) {
             if (gameGraphic.getOpponentNames().contains(name)) {
                 gameGraphic.removePlayer(name);
             }

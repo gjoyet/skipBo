@@ -501,6 +501,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             printCommandList();
 
         } else if (buttonPressed == gamesB) {
+
             try {
                 clientListener.forward("/list games");
             } catch (NotACommandException e) {
@@ -510,7 +511,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         } else if (buttonPressed == whosOnB) {
             playTrailer();
             MusicPlayer music = new MusicPlayer();
-            if(MusicPlayer.loadFile("src/main/resources/buttonclick2.mp3")){
+            if(music.loadFile("src/main/resources/buttonclick2.mp3")){
                 music.run();
                 music.play();
             }

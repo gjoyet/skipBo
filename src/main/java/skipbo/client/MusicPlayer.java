@@ -65,7 +65,7 @@ public class MusicPlayer implements Runnable{
      * @param filePath Path to the file.
      * @return If the file is loaded or not.
      */
-    public static boolean loadFile(String filePath){
+    public boolean loadFile(String filePath){
         file = new File(filePath);
         if(file.exists() && file.getName().toLowerCase().endsWith(".mp3") && !running){
             return true;
@@ -192,7 +192,7 @@ public class MusicPlayer implements Runnable{
                 stream(decodedFormat, din);
                 in.close();
             }while((loop || restart) && running);
-            running = false;
+//            running = false;
         }catch(Exception e){
             System.err.println("Problem getting audio stream!");
             e.printStackTrace();
@@ -271,11 +271,7 @@ public class MusicPlayer implements Runnable{
      * @return Byte array of all zeros.
      */
     private byte[] setMuteData(){
-        byte[] x = new byte[byteChunkSize];
-        for(int i = 0; i < x.length; i++){
-            x[i] = 0;
-        }
 
-        return x;
+        return new byte[byteChunkSize];
     }
 }

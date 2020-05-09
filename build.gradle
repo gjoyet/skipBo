@@ -36,17 +36,24 @@ dependencies {
      */
     implementation 'org.apache.logging.log4j:log4j-api:2.+'
     implementation 'org.apache.logging.log4j:log4j-core:2.+'
+    // https://mvnrepository.com/artifact/com.sun/tools
+
 
     /*
     This is another example - it imports the javafx-controls dependency
      */
     implementation 'org.openjfx:javafx-controls:11.0.2'
-	
+
 	// https://mvnrepository.com/artifact/net.sf.fmj/fmj-nojmf
 	// compile group: 'net.sf.fmj', name: 'fmj-nojmf', version: '2009-04-16'
 	
 	// https://mvnrepository.com/artifact/com.googlecode.soundlibs/mp3spi
 	compile group: 'com.googlecode.soundlibs', name: 'mp3spi', version: '1.9.5.4'
+    // https://mvnrepository.com/artifact/com.googlecode.soundlibs/jlayer
+    compile group: 'com.googlecode.soundlibs', name: 'jlayer', version: '1.0.1.4'
+    // https://mvnrepository.com/artifact/com.googlecode.soundlibs/tritonus-share
+    compile group: 'com.googlecode.soundlibs', name: 'tritonus-share', version: '0.3.7.4'
+
 
 
     // JUNIT

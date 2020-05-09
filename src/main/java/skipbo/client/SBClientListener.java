@@ -1,12 +1,11 @@
 package skipbo.client;
 
-import skipbo.server.Protocol;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 
 import static skipbo.client.SBClient.clientLog;
+import static skipbo.server.Protocol.*;
 
 /**
  * Handles user input by forwarding correct network protocol command to the Server
@@ -41,7 +40,7 @@ class SBClientListener {
 
         //It's a chat message
         if (!(input.startsWith("/"))) {
-            protocolString = Protocol.CHATM + "§Global§" + input;
+            protocolString = CHATM + "§Global§" + input;
             pw.println(protocolString);
             return;
         }
@@ -69,7 +68,7 @@ class SBClientListener {
                 protocolString = getListString(input);
                 break;
             case "/quit":
-                protocolString = Protocol.LGOUT + "";
+                protocolString = LGOUT + "";
                 pw.println(protocolString);
                 logOut();
                 return;
@@ -96,11 +95,11 @@ class SBClientListener {
         String argument = line[2];
 
         if (option.equalsIgnoreCase("name")) {
-            return Protocol.CHNGE + "§Nickname§" + argument;
+            return CHNGE + "§Nickname§" + argument;
 
         } else if (option.equalsIgnoreCase("status")) {
             if (argument.equalsIgnoreCase("ready") || argument.equalsIgnoreCase("waiting")) {
-                return Protocol.CHNGE + "§Status§" + argument.toUpperCase();
+                return CHNGE + "§Status§" + argument.toUpperCase();
             }
         }
         throw new NotACommandException("Please enter a valid command");
@@ -120,7 +119,7 @@ class SBClientListener {
         }
         String name = line[1];
         String message = line[2];
-        return Protocol.CHATM + "§Private§" + name + "§" + message;
+        return CHATM + "§Private§" + name + "§" + message;
     }
 
     /**
@@ -136,7 +135,7 @@ class SBClientListener {
             throw new NotACommandException("Please add a message");
         }
         String message = line[1];
-        return Protocol.CHATM + "§Broadcast§" + message;
+        return CHATM + "§Broadcast§" + message;
     }
 
     /**
@@ -152,7 +151,7 @@ class SBClientListener {
             throw new NotACommandException("Please enter a valid command");
         }
         if (line[1].equalsIgnoreCase("game")) {
-            return Protocol.NWGME + "§New";
+            return NWGME + "§New";
         }
         throw new NotACommandException("Please enter a valid command");
     }
@@ -175,8 +174,8 @@ class SBClientListener {
         String placeTo = line[3];
         String toNumber = line[4];
 
-        clientLog.debug("Command: " + Protocol.PUTTO + "§Card§" + placeFrom + "§" + fromNumber + "§" + placeTo + "§" + toNumber);
-        return Protocol.PUTTO + "§Card§" + placeFrom + "§" + fromNumber + "§" + placeTo + "§" + toNumber;
+        clientLog.debug("Command: " + PUTTO + "§Card§" + placeFrom + "§" + fromNumber + "§" + placeTo + "§" + toNumber);
+        return PUTTO + "§Card§" + placeFrom + "§" + fromNumber + "§" + placeTo + "§" + toNumber;
     }
 
     /**
@@ -195,7 +194,7 @@ class SBClientListener {
         if (!(option.equals("games") || option.equals("players"))) {
             throw new NotACommandException("Please add a valid option to your command");
         }
-        return Protocol.DISPL + "§" + option;
+        return DISPL + "§" + option;
     }
 
     /**

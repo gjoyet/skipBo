@@ -86,6 +86,27 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         printCommandList();
     }
 
+    void playTrailer() {
+
+
+/*        component = new EmbeddedMediaListPlayerComponent();
+        setContentPane(component);
+        setBounds(100, 100, 1150, 800);
+        setVisible(true);
+        component.mediaPlayer().media().play("file://src/main/resources/Vid.mp4");*/
+/*        setBounds(100, 100, 1150, 800);
+        try {
+            Player mediaPlayer = Manager.createRealizedPlayer(new File("src/main/resources/TestVideo.avi").toURI().toURL());
+            Component videoComponent = mediaPlayer.getVisualComponent();
+            contentPane.add(videoComponent);
+            mediaPlayer.start();
+        } catch (IOException | NoPlayerException | CannotRealizeException e) {
+            e.printStackTrace();
+        }*/
+
+
+    }
+
     /**
      * Creates the chat window with buttons
      */
@@ -318,11 +339,11 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
      *
      * @param name Name of the winner of the game.
      */
-    void endGame(String name, boolean isTutorial) {
+    void endGame(String name, boolean isTutorial, String score) {
         String message = null;
         if (!isTutorial) {
             if (name != null) {
-                message = "The winner is: " + name + "!";
+                message = "The winner is: " + name + "! Score: " + score;
             } else {
                 message = "Game ended because everyone else left. There is no winner.";
             }
@@ -476,6 +497,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             }
 
         } else if (buttonPressed == whosOnB) {
+            playTrailer();
             try {
                 clientListener.forward("/list players");
             } catch (NotACommandException e) {
@@ -509,7 +531,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
                 setGameGraphic(true);
             } else {
                 tutorialB.setText("Tutorial");
-                endGame(null, true);
+                endGame(null, true, null);
             }
         }
     }

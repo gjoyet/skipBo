@@ -150,9 +150,10 @@ public class SBServerListener implements Runnable {
 
     private void endGame(String[] command) {
         if (command.length < 3) { //No winner
-            chatGraphic.endGame(null, false);
+            chatGraphic.endGame(null, false, null);
         } else { //winner
-            chatGraphic.endGame(command[2], false);
+            String[] s = command[2].split("§", 2);
+            chatGraphic.endGame(s[0], false, s[1]);
         }
     }
 

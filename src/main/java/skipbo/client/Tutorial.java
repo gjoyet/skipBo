@@ -302,7 +302,7 @@ public class Tutorial extends GameGraphic implements ActionListener {
         layeredPane.remove(instruction);
         layeredPane.remove(downArrow);
         layeredPane.repaint();
-        chatGraphic.endGame("you", true);
+        chatGraphic.endGame("you", true, null);
     }
 
 

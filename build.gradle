@@ -44,6 +44,9 @@ dependencies {
 	
 	// https://mvnrepository.com/artifact/net.sf.fmj/fmj-nojmf
 	// compile group: 'net.sf.fmj', name: 'fmj-nojmf', version: '2009-04-16'
+	
+	// https://mvnrepository.com/artifact/com.googlecode.soundlibs/mp3spi
+	compile group: 'com.googlecode.soundlibs', name: 'mp3spi', version: '1.9.5.4'
 
 
     // JUNIT

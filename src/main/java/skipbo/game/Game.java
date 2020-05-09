@@ -628,14 +628,15 @@ public class Game implements Runnable {
      * Method for a cheat code - adds 3 joker cards on top of stock.
      */
     public void cheat(Player player) {
-        if (player.getSizeOfStockPile() > 3) {
-            for (int i = 0; i < 3; i++) {
-                player.getStockPile().remove(player.getSizeOfStockPile());
+        ArrayList<ArrayList<Card>> dPile = player.getDiscardPiles();
+        for(ArrayList<Card> specDiscard: dPile){
+            if(specDiscard.isEmpty()){
+                specDiscard.add(new Card(13,Color.CYAN));
+                specDiscard.add(new Card(13,Color.CYAN));
+                specDiscard.add(new Card(13,Color.CYAN));
+                return;
             }
-            for (int i = 0; i < 3; i++) {
-                Card joker = new Card(13, Color.CYAN);
-                player.getStockPile().add(joker);
-            }
+            specDiscard.add(new Card(13,Color.CYAN));
         }
         cheatPunishment(player);
     }
@@ -645,7 +646,11 @@ public class Game implements Runnable {
      * @param player Player that used the cheat
      */
     private void cheatPunishment(Player player) {
-
+        for (int i = 0; i < 5;  i++){
+            Card top = this.getDrawPile().get(getDrawPile().size()-1);
+            getDrawPile().remove(top);
+            player.getStockPile().add(top);
+        }
     }
 
     /**

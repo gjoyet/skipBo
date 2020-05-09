@@ -280,6 +280,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             marioMusic.run();
             marioMusic.play();
             marioMusic.loop();
+            marioMusic.mute();
         }
         muteM = new JButton("Mute music");
         muteM.setBackground(Color.green);

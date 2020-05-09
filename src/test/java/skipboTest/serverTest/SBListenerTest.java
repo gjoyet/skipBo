@@ -19,7 +19,6 @@ public class SBListenerTest {
 
         BufferedReader br;
         String trigger;
-        boolean analyzed = false;
         boolean running;
 
         public testingSBL(PipedInputStream pis) {
@@ -37,7 +36,6 @@ public class SBListenerTest {
                 String[] input = null;
                 try {
                     input = this.br.readLine().split("§", 3);
-                    analyzed = false;
                     servLog.debug("testingSBL input[0] = " + input[0]);
                 } catch (IOException e) {
                     servLog.warn("Error with reading input.");
@@ -51,9 +49,8 @@ public class SBListenerTest {
         @Override
         public void analyze(String[] input) {
             servLog.debug("Got into analyze method.");
-            analyzed = true;
-            Protocol protocol = Protocol.valueOf(input[0]);
             try {
+                Protocol protocol = Protocol.valueOf(input[0]);
                 switch (protocol) {
                     case SETTO:
                         trigger = "setTo()";
@@ -137,18 +134,44 @@ public class SBListenerTest {
         }
     }
 
+    /**
+     * Tests case where input[0] is not a valid command. This should throw an IllegalArgumentException
+     * in the analyze method when trying to convert input[0] to a Protocol object.
+     */
     @Test
     public void notACommand() {
         try {
             pw.println("SETO§Nickname§Marc");
             sleep(100);
-            assertEquals(false, tSBL.analyzed);
-            assertEquals(null, tSBL.trigger);
+            assertEquals("SETO: not a command.", tSBL.trigger);
             pw.println("CHANGE§Status§READY");
             sleep(100);
-            assertEquals(false, tSBL.analyzed);
-            assertEquals(null, tSBL.trigger);
+            assertEquals("CHANGE: not a command.", tSBL.trigger);
             pw.println("chatm§Global§Hi");
+            sleep(100);
+            assertEquals("chatm: not a command.", tSBL.trigger);
+            pw.println("GUTZI§Schoggi§20");
+            sleep(100);
+            assertEquals("GUTZI: not a command.", tSBL.trigger);
+        } catch (InterruptedException ie) {
+            servLog.error("Sleep time interrupted.");
+        }
+    }
+
+    /**
+     * Tests case where input[1] is not a valid option. This should not be a problem since the option is
+     * only processed by the ProtocolExecutor, not the SBListener.
+     */
+    @Test
+    public void notAnOption() {
+        try {
+            pw.println("SETTO§Nickname§Marc");
+            sleep(100);
+            assertEquals("setTo()", tSBL.trigger);
+            pw.println("CHNGE§Status§READY");
+            sleep(100);
+            assertEquals("changeTo()", tSBL.trigger);
+            pw.println("CHATM§Global§Hi");
             sleep(100);
             assertEquals("chatMessage()", tSBL.trigger);
             pw.println("NWGME§New§2§20");
@@ -160,10 +183,6 @@ public class SBListenerTest {
         } catch (InterruptedException ie) {
             servLog.error("Sleep time interrupted.");
         }
-    }
-
-    @Test
-    public void notAnOption() {
     }
 
     @Test

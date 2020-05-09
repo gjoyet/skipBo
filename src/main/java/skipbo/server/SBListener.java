@@ -58,8 +58,8 @@ public class SBListener implements NWPListener {
      * @param input: Sliced input String from client.
      */
     public void analyze(String[] input) {
-        Protocol protocol = Protocol.valueOf(input[0]);
         try {
+            Protocol protocol = Protocol.valueOf(input[0]);
             switch (protocol) {
                 case SETTO:
                     new ProtocolExecutor(input, this).setTo();

@@ -40,7 +40,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     private String playerName = "";
     private DefaultComboBoxModel<String> playerComboModel;
     private ArrayList<String> playerArray = new ArrayList<>();
-    MusicPlayer marioMusic;
+    MusicPlayer backgroundMusic;
 
     static final Color DARKGREEN = new Color(0x0AB222);
 
@@ -252,14 +252,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         DefaultCaret scoreCaret = (DefaultCaret) highScore.getCaret();
         scoreCaret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
 
-        //Testing purpose
-        String h = "Skip-Bro High scores\n\n" +
-                "2020-04-29 20:58\nMMMMMMMMMMMMM2, MMMMMMMMMMMMM, MMMMMMMMMMMMM1\nWINNER: MMMMMMMMMMMMM1, SCORE: 2.33\n\n" +
-                "2020-04-26 17:47\nGuillaume1, Guillaume\nWINNER: Guillaume, SCORE: 8.67\n\n" +
-                "2020-04-29 14:01\nRohan, Guillaume, TheLegend27, Manuela\nWINNER: TheLegend27, SCORE: 9.33\n\n" +
-                "2020-04-29 14:26\nRohan, Manuela, Guillaume, Janni\nWINNER: Rohan, SCORE: 10.33\n\n";
-        highScore.setText(h);
-
     }
 
 
@@ -470,7 +462,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
         } else if (buttonPressed == pause) {
             if (pause.getText().equals("Mute")) {
-                marioMusic.stop();
+                backgroundMusic.stop();
                 pause.setText("Unmute");
             } else {
                 playMusic();
@@ -651,11 +643,11 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     }
 
     void playMusic() {
-        marioMusic = new MusicPlayer();
-        if(marioMusic.loadFile("src/main/resources/mario.mp3")){
-            marioMusic.play();
-            marioMusic.loop();
-            clientLog.info(marioMusic.isPlaying());
+        backgroundMusic = new MusicPlayer();
+        if(backgroundMusic.loadFile("src/main/resources/background.mp3")){
+            backgroundMusic.play();
+            backgroundMusic.loop();
+            clientLog.info(backgroundMusic.isPlaying());
         }
     }
 

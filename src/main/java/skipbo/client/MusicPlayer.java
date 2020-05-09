@@ -124,7 +124,12 @@ public class MusicPlayer implements Runnable{
      */
     public void loop(){
         if(file != null){
-            loop = !loop;
+            if(loop){
+                loop = false;
+            }
+            else{
+                loop = true;
+            }
         }
     }
     /**
@@ -174,7 +179,7 @@ public class MusicPlayer implements Runnable{
      * checks to see if it should loop and start again.
      */
     public void run() {
-        clientLog.info("Got into run of sound file");
+        clientLog.error("Got into run of sound file");
         try{
             do{
                 restart = false;
@@ -192,7 +197,7 @@ public class MusicPlayer implements Runnable{
                 stream(decodedFormat, din);
                 in.close();
             }while((loop || restart) && running);
-//            running = false;
+//              running = false;
         }catch(Exception e){
             System.err.println("Problem getting audio stream!");
             e.printStackTrace();

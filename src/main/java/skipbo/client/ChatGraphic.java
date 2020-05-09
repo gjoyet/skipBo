@@ -453,6 +453,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     //Handles button events
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
+        MusicPlayer music = new MusicPlayer();
         JButton buttonPressed = (JButton) actionEvent.getSource();
         if (buttonPressed == readyB) {
             try {
@@ -510,7 +511,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
         } else if (buttonPressed == whosOnB) {
             playTrailer();
-            MusicPlayer music = new MusicPlayer();
+
             if(music.loadFile("src/main/resources/buttonclick2.mp3")){
                 music.run();
                 music.play();

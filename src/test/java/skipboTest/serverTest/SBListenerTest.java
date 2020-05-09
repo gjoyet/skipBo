@@ -1,29 +1,29 @@
 package skipboTest.serverTest;
 
 import org.junit.Before;
+import org.junit.Test;
 import skipbo.server.NWPListener;
 import skipbo.server.NoCommandException;
 import skipbo.server.Protocol;
 import skipbo.server.ProtocolExecutor;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 
+import static org.junit.Assert.assertEquals;
 import static skipbo.server.SBServer.servLog;
 
 public class SBListenerTest {
 
     public class testingSBL implements NWPListener {
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader br;
         String[] input;
         String trigger;
         boolean running;
 
-        public testingSBL() {
-            running = true;
+        public testingSBL(PipedInputStream pis) {
+            this.br = new BufferedReader(new InputStreamReader(pis));
+            this.running = true;
             Thread testingSBLT = new Thread(this); testingSBLT.start();
         }
 
@@ -47,32 +47,32 @@ public class SBListenerTest {
             try {
                 switch (protocol) {
                     case SETTO:
-                        trigger = "SETTO";
+                        trigger = "setTo()";
                         break;
                     case CHNGE:
-                        trigger = "CHNGE";
+                        trigger = "changeTo()";
                         break;
                     case CHATM:
-                        trigger = "CHATM";
+                        trigger = "chatMessage()";
                         break;
                     case LGOUT:
-                        trigger = "LGOUT";
+                        trigger = "logout()";
                         break;
                     case NWGME:
-                        trigger = "NWGME";
+                        trigger = "newGame()";
                         break;
                     case PUTTO:
-                        trigger = "PUTTO";
+                        trigger = "putTo()";
                         break;
                     case DISPL:
-                        trigger = "DISPL";
+                        trigger = "display()";
                         break;
                     case PLAYR:
-                        trigger = "PLAYR";
+                        trigger = "playerLeavingGame()";
                         break;
                 }
             } catch(IllegalArgumentException iae) {
-                servLog.warn(input[0] + ": not a command.");
+                trigger = input[0] + ": not a command.";
             }
         }
 
@@ -82,10 +82,40 @@ public class SBListenerTest {
         }
     }
 
-    PrintWriter pw = new PrintWriter(System.out);
+    PipedOutputStream pos;
+    PipedInputStream pis;
+    PrintWriter pw;
+    testingSBL tSBL;
 
     @Before
     public void initialize() {
+        pos = new PipedOutputStream();
+        pis = new PipedInputStream();
+        pw = new PrintWriter(pos);
 
+        try {
+            pis.connect(pos);
+        } catch (IOException e) {
+            servLog.error("Problem with connecting pis and pos.");
+        }
+
+        tSBL = new testingSBL(pis);
+    }
+
+    /**
+     * Tests what happens in the case of a normal command.
+     */
+    @Test
+    public void testNormalCommand() {
+        pw.println("SETTO§Nickname§Marc");
+        assertEquals(tSBL.trigger, ("setTo()"));
+        pw.println("CHNGE§Status§READY");
+        assertEquals(tSBL.trigger, ("changeTo()"));
+        pw.println("CHATM§Global§Hi");
+        assertEquals(tSBL.trigger, ("chatMessage()"));
+        pw.println("NWGME§New§2§20");
+        assertEquals(tSBL.trigger, ("newGame()"));
+        pw.println("DISPL§players");
+        assertEquals(tSBL.trigger, ("display()"));
     }
 }

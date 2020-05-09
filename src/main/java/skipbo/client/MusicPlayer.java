@@ -10,36 +10,16 @@ import static skipbo.client.SBClient.clientLog;
 
 /**
  *
- * @author Connor Mahaffey
+ * @author Connor Mahaffey (taken from https://github.com/CMahaff/Java-Music-Example/blob/master/src/com/connormahaffey/JavaMusicExample/Music.java)
  *
+ * We have slightly optimized this class for use in this project, but it is largely the same as the link above.
+ * The author has given his permission for this code to be used.
  * This class is a rewrite of the example from: http://www.javazoom.net/mp3spi/documents.html
- *
- * This class needs the following libraries:
- * JLayer - http://www.javazoom.net/javalayer/javalayer.html
- * MP3 SPI - http://www.javazoom.net/mp3spi/mp3spi.html
- * Tritonus Share (tritonus_share-0.3.6.jar) - http://www.tritonus.org/plugins.html
- *
- * All credit goes to the creators of JLayer, MP3 SPI, and Tritonus.
- *
- * This simple re-write adds loop, mute, pause, restart, and stop methods to the example mentioned above.
- *
- * This code is completely free to use for any purpose whatsoever. JLayer, MP3 SPI, and Tritonus are
- * all released under the LGPL.
- *
- *
- * Known Issues:
- *
- * - Though using .stop() and then .play() *technically* works for restarting the audio, doing this too fast
- *   causes problems because the old audio stream is never stopped (writing to the audio line takes a bit,
- *   and it can't be stopped once it's started).
- * - Distorted audio (rarely? Problem with code or with audio APIs?)
- * - General Efficiency
  *
  */
 public class MusicPlayer implements Runnable{
 
     private static File file;
-    //private File file;
     private static boolean running, mute, pause, loop, restart;
     private final int byteChunkSize = 1024;//number of bytes to read at one time
     private byte[] muteData;
@@ -124,7 +104,10 @@ public class MusicPlayer implements Runnable{
      */
     public void loop(){
         if(file != null){
-            loop = !loop;
+            if(loop) loop = false;
+            else{
+                loop = true;
+            }
         }
     }
     /**
@@ -174,7 +157,7 @@ public class MusicPlayer implements Runnable{
      * checks to see if it should loop and start again.
      */
     public void run() {
-        clientLog.info("Got into run of sound file");
+        clientLog.error("Got into run of sound file");
         try{
             do{
                 restart = false;
@@ -192,7 +175,7 @@ public class MusicPlayer implements Runnable{
                 stream(decodedFormat, din);
                 in.close();
             }while((loop || restart) && running);
-//            running = false;
+//              running = false;
         }catch(Exception e){
             System.err.println("Problem getting audio stream!");
             e.printStackTrace();

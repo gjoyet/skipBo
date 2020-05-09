@@ -23,7 +23,6 @@ public class SBListener implements NWPListener {
     int id;
     Player player;
 
-
     public SBListener(SBServer server, Socket sock, int id) throws IOException {
         this.server = server;
         this.sock = sock;

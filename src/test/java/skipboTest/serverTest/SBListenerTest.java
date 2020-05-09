@@ -3,9 +3,7 @@ package skipboTest.serverTest;
 import org.junit.Before;
 import org.junit.Test;
 import skipbo.server.NWPListener;
-import skipbo.server.NoCommandException;
 import skipbo.server.Protocol;
-import skipbo.server.ProtocolExecutor;
 
 import java.io.*;
 
@@ -18,6 +16,7 @@ public class SBListenerTest {
     public class testingSBL implements NWPListener {
 
         BufferedReader br;
+        String[] analyzedInput;
         String trigger;
         boolean running;
 
@@ -49,6 +48,7 @@ public class SBListenerTest {
         @Override
         public void analyze(String[] input) {
             servLog.debug("Got into analyze method.");
+            analyzedInput = input;
             try {
                 Protocol protocol = Protocol.valueOf(input[0]);
                 switch (protocol) {
@@ -159,25 +159,25 @@ public class SBListenerTest {
     }
 
     /**
-     * Tests case where input[1] is not a valid option. This should not be a problem since the option is
-     * only processed by the ProtocolExecutor, not the SBListener.
+     * Tests case where input[1] is not a valid option or null. This should not be a problem
+     * since the option is only processed by the ProtocolExecutor, not the SBListener.
      */
     @Test
     public void notAnOption() {
         try {
-            pw.println("SETTO§Nickname§Marc");
+            pw.println("SETTO§Name§Marc");
             sleep(100);
             assertEquals("setTo()", tSBL.trigger);
-            pw.println("CHNGE§Status§READY");
-            sleep(100);
-            assertEquals("changeTo()", tSBL.trigger);
-            pw.println("CHATM§Global§Hi");
+            pw.println("CHATM§.-*#§Hi");
             sleep(100);
             assertEquals("chatMessage()", tSBL.trigger);
-            pw.println("NWGME§New§2§20");
+            pw.println("NWGME§2§20");
             sleep(100);
             assertEquals("newGame()", tSBL.trigger);
-            pw.println("DISPL§players");
+            pw.println("LGOUT§Status§READY");
+            sleep(100);
+            assertEquals("logout()", tSBL.trigger);
+            pw.println("DISPL");
             sleep(100);
             assertEquals("display()", tSBL.trigger);
         } catch (InterruptedException ie) {
@@ -185,25 +185,84 @@ public class SBListenerTest {
         }
     }
 
+    /**
+     * Tests case where the arguments are not fitting the command (list is too long / short, invalid arguments).
+     * This should not be a problem since the arguments are not handled by the SBListener.
+     */
     @Test
     public void notFittingArguments() {
+        try {
+            pw.println("SETTO§Nickname§Ma-rc");
+            sleep(100);
+            assertEquals("setTo()", tSBL.trigger);
+            pw.println("CHNGE§Status");
+            sleep(100);
+            assertEquals("changeTo()", tSBL.trigger);
+            pw.println("NWGME§New§ThisNotAnArgument§2§20");
+            sleep(100);
+            assertEquals("newGame()", tSBL.trigger);
+            pw.println("PUTTO§Card§Hi");
+            sleep(100);
+            assertEquals("putTo()", tSBL.trigger);
+            pw.println("DISPL§players§All");
+            sleep(100);
+            assertEquals("display()", tSBL.trigger);
+        } catch (InterruptedException ie) {
+            servLog.error("Sleep time interrupted.");
+        }
     }
 
+    /**
+     * Tests case where option and command are switched. This should give the same result as an invalid command.
+     */
     @Test
     public void comAndOpSwitch() {
+        try {
+            pw.println("Nickname§SETTO§Marc");
+            sleep(100);
+            assertEquals("Nickname: not a command.", tSBL.trigger);
+            pw.println("Status§CHNGE§READY");
+            sleep(100);
+            assertEquals("Status: not a command.", tSBL.trigger);
+            pw.println("Global§CHATM§Hi");
+            sleep(100);
+            assertEquals("Global: not a command.", tSBL.trigger);
+            pw.println("New§NWGME§2§20");
+            sleep(100);
+            assertEquals("New: not a command.", tSBL.trigger);
+            pw.println("players§DISPL");
+            sleep(100);
+            assertEquals("players: not a command.", tSBL.trigger);
+        } catch (InterruptedException ie) {
+            servLog.error("Sleep time interrupted.");
+        }
     }
 
+    /**
+     * Tests if the input is split the right way, meaning with a maximum of 3 resulting parts, no empty Strings in
+     * input, but no information lost.
+     */
     @Test
     public void rightSplit() {
-
+        try {
+            pw.println("CHATM§Global§Hi§this§is§a§chat§message.");
+            sleep(100);
+            assertEquals("Hi§this§is§a§chat§message.", tSBL.analyzedInput[2]);
+        } catch (InterruptedException ie) {
+            servLog.error("Sleep time interrupted.");
+        }
     }
 
     @Test
-    public void tooManyParagraphs() {
-    }
-
-    @Test
-    public void paragraphAtStart() {
+    public void stopSBL() {
+        tSBL.stopRunning();
+        pw.println("SETTO§Nickname§Marc");
+        try {
+            sleep(100);
+        } catch (InterruptedException e) {
+            servLog.error("Sleep time interrupted.");
+        }
+        assertEquals(null, tSBL.trigger);
     }
 
 

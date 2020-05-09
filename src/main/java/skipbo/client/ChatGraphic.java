@@ -268,6 +268,14 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
                 "2020-04-29 14:01\nRohan, Guillaume, TheLegend27, Manuela\nWINNER: TheLegend27, SCORE: 9.33\n\n" +
                 "2020-04-29 14:26\nRohan, Manuela, Guillaume, Janni\nWINNER: Rohan, SCORE: 10.33\n\n";
         highScore.setText(h);
+
+        //music starts
+        MusicPlayer marioMusic = new MusicPlayer();
+        if(marioMusic.loadFile("src/main/resources/mario.mp3")){
+            marioMusic.run();
+            marioMusic.play();
+            marioMusic.loop();
+        }
     }
 
 
@@ -498,6 +506,11 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
         } else if (buttonPressed == whosOnB) {
             playTrailer();
+            MusicPlayer music = new MusicPlayer();
+            if(MusicPlayer.loadFile("src/main/resources/buttonclick2.mp3")){
+                music.run();
+                music.play();
+            }
             try {
                 clientListener.forward("/list players");
             } catch (NotACommandException e) {

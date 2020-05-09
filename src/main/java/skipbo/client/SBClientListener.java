@@ -68,9 +68,8 @@ class SBClientListener {
                 protocolString = getListString(input);
                 break;
             case "/quit":
-                protocolString = LGOUT + "";
-                pw.println(protocolString);
-                logOut();
+                pw.println(LGOUT + "");
+                //logOut();
                 return;
             default:
                 throw new NotACommandException("Please enter a valid command");
@@ -207,6 +206,7 @@ class SBClientListener {
         } catch (IOException e) {
             clientLog.warn("Issue with closing the socket");
         }
+        clientLog.debug("logged out");
     }
 
 }

@@ -163,7 +163,7 @@ public class MusicPlayer implements Runnable{
      * checks to see if it should loop and start again.
      */
     public void run() {
-        clientLog.error("Got into run of sound file");
+        clientLog.info("Got into run of sound file");
         try{
             do{
                 restart = false;

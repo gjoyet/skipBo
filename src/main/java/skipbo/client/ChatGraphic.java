@@ -8,9 +8,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
+import java.util.*;
+import java.util.Timer;
 
 import static skipbo.client.SBClient.clientLog;
 import static skipbo.server.Protocol.*;
@@ -41,6 +40,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     private DefaultComboBoxModel<String> playerComboModel;
     private ArrayList<String> playerArray = new ArrayList<>();
     MusicPlayer backgroundMusic;
+    private boolean unmuteIsBlocked = false;
 
     static final Color DARKGREEN = new Color(0x0AB222);
 
@@ -184,7 +184,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         pause = new JButton();
         pause.setName("Mute");
         pause.setIcon(new ImageIcon("src/main/resources/not_muted.png"));
-        pause.setBounds(X_MENU_B_R2+99, Y_MENU_B+ 4*Y_DISTANCE_MENU_B+8, 24, 24);
+        pause.setBounds(X_MENU_B_R2+96, Y_MENU_B+ 4*Y_DISTANCE_MENU_B+8, 24, 24);
         contentPane.add(pause);
         pause.addActionListener(this);
 
@@ -469,14 +469,26 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             }
 
         } else if (buttonPressed == pause) {
+            if (unmuteIsBlocked) {
+                return;
+            }
             if (pause.getName().equals("Mute")) {
                 backgroundMusic.stop();
                 pause.setIcon(new ImageIcon("src/main/resources/muted.png"));
                 pause.setName("Unmute");
             } else {
+                unmuteIsBlocked = true;
                 playMusic();
                 pause.setIcon(new ImageIcon("src/main/resources/not_muted.png"));
                 pause.setName("Mute");
+                Timer timer = new Timer();
+                TimerTask task = new TimerTask() {
+                    @Override
+                    public void run() {
+                        unmuteIsBlocked = false;
+                    }
+                };
+                timer.schedule(task, 500);
             }
 
             //marioMusic.pause();

@@ -278,6 +278,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             marioMusic.run();
             marioMusic.play();
             marioMusic.loop();
+            marioMusic.mute();
         }
     }
 

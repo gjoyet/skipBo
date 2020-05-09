@@ -96,11 +96,13 @@ public class ProtocolExecutor {
             br = new BufferedReader((new FileReader(highscores)));
             br.readLine(); br.readLine();
             String line;
+            String string = "";
             for(int i=0; i < 5; i++) {
                 line = br.readLine();
                 if(line == null) break;
-                sbL.getPW().println(Protocol.DISPL + "§highscore§" + line);
+                string = string + line + "§";
             }
+            sbL.getPW().println(Protocol.DISPL + "§highscore§" + string);
         } catch (FileNotFoundException e) {
             servLog.error("File not found.");
         } catch (IOException e) {
@@ -513,11 +515,13 @@ public class ProtocolExecutor {
                 br.readLine();
                 br.readLine();
                 String line;
-                for (int i = 0; i < 5; i++) {
+                String string = "";
+                for(int i=0; i < 5; i++) {
                     line = br.readLine();
                     if (line == null) break;
-                    sendAll(Protocol.DISPL + "§highscore§" + line, sbL);
+                    string = string + line + "§";
                 }
+                sendAll(Protocol.DISPL + "§highscore§" + string, sbL);
             } catch (FileNotFoundException e) {
                 servLog.error("File not found.");
             } catch (IOException e) {

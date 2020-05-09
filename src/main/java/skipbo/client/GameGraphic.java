@@ -13,7 +13,7 @@ import java.util.Objects;
 import static skipbo.client.SBClient.clientLog;
 
 /**
- * Will be class for the Game GUI in the future
+ * Class for the graphical representation of the game.
  */
 public class GameGraphic implements ActionListener {
 
@@ -361,6 +361,7 @@ public class GameGraphic implements ActionListener {
      * @param colAndNum Array of colours and numbers of hand cards (5x alternating) and colour and number of stock card.
      */
     void setInitialCards(String[] colAndNum) {
+
         for (int i = 0, j = 0; i < hand.length; i++) {
             hand[i].setIcon(cardIcons.getIcon(colAndNum[j], Integer.parseInt(colAndNum[j + 1]), CardIcons.MEDIUM));
             hand[i].addCard(colAndNum[j++], Integer.parseInt(colAndNum[j++]));
@@ -455,6 +456,7 @@ public class GameGraphic implements ActionListener {
      * @param number Number of hand card being moved
      */
     void handToDiscard(int i, int j, String name, String colour, int number) {
+        playCardSound();
         ArrayList<CardButton> al;
         CardButton newDisCard;
 
@@ -545,6 +547,7 @@ public class GameGraphic implements ActionListener {
      * @param number Number of hand card being moved
      */
     void handToBuild(int i, int j, String name, String colour, int number) {
+        playCardSound();
         if (name.equals(playerName)) {
             CardButton handCard = hand[i - 1];
             CardButton buildCard = build[j - 1];
@@ -580,7 +583,9 @@ public class GameGraphic implements ActionListener {
      * @param number2 Number of the stock card being moved to build pile
      */
     void stockToBuild(int j, String name, String colour1, int number1, String colour2, int number2) {
-        //clientLog.debug("(GameGraphic) entered stock to build method");
+
+        //clientLog.debug("(GameGraphic) entered stock to build method");.
+        playCardSound();
         if (name.equals(playerName)) {
             CardButton buildCard = build[j - 1];
             String col = stock.removeColour();
@@ -614,6 +619,7 @@ public class GameGraphic implements ActionListener {
 
             //Update label with number of stock cards left
             JLabel l = getNumOfStockCardsLabel(name);
+            assert l != null;
             l.setText(String.valueOf(Integer.parseInt(l.getText())-1));
         }
         if (number2 == 12) {
@@ -630,6 +636,7 @@ public class GameGraphic implements ActionListener {
      * @param name Player name of player who made the move
      */
     void discardToBuild(int i, int j, String name) {
+        playCardSound();
         CardButton buildCard = build[j - 1];
         CardButton oldDisCard;
         ArrayList<CardButton> al;
@@ -650,7 +657,6 @@ public class GameGraphic implements ActionListener {
             buildCard.setIcon(cardIcons.getIcon(col, num, CardIcons.LARGE));
             al.get(al.size() - 1).addActionListener(actionListener);
             setBoundsOfDiscard(null, al, DISTDISCARD);
-            layeredPane.repaint();
         } else {
             al = getEnemyArray(name, i);
             oldDisCard = al.remove(al.size() - 1);
@@ -663,16 +669,21 @@ public class GameGraphic implements ActionListener {
             buildCard.addCard(col, num);
             buildCard.setIcon(cardIcons.getIcon(col, num, CardIcons.LARGE));
             setBoundsOfDiscard(null, al, DISTOPPDISCARD);
-            layeredPane.repaint();
         }
+        layeredPane.repaint();
         if (num == 12) {
             resetBuildPile(j - 1);
         }
     }
 
+    /**
+     * Refreshes player's hand cards to the correct ones.
+     * @param colours Colors of player's cards
+     * @param numbers Numbers of player's cards
+     */
 
     void updateHandCards(String[] colours, int[] numbers) {
-/*        clientLog.debug("(Graphic) length of colours = " + colours.length);
+/*      clientLog.debug("(Graphic) length of colours = " + colours.length);
         clientLog.debug("(Graphic) length of numbers = " + numbers.length);*/
         for (int i = 0; i < colours.length; i++) {
             hand[i].setIcon(cardIcons.getIcon(colours[i], numbers[i], CardIcons.MEDIUM));
@@ -725,7 +736,12 @@ public class GameGraphic implements ActionListener {
         }
     }
 
-    //returns discard pile array of enemy
+    /**
+     * Method to return discard pile array of enemy
+     * @param name  name of enemy
+     * @param index index of array
+     * @return ArrayList discard pile
+     */
     private ArrayList<CardButton> getEnemyArray(String name, int index) {
         ArrayList<CardButton> array = null;
         if (e1.getText().equals(name)) {
@@ -880,6 +896,17 @@ public class GameGraphic implements ActionListener {
             }
         }
         return al;
+    }
+
+    /**
+     * Method to play the card playing sound byte.
+     */
+    void playCardSound(){
+        // For card playing sounds
+        MusicPlayer cardSound = new MusicPlayer();
+        if(cardSound.loadFile("src/main/resources/cardsound.mp3")){
+            cardSound.play();
+        }
     }
 
     JLayeredPane getGameComponent() {

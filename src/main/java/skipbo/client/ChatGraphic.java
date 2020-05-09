@@ -1,7 +1,9 @@
 package skipbo.client;
 
+import jdk.jfr.SettingControl;
 import skipbo.server.Protocol;
 
+import javax.sound.sampled.FloatControl;
 import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;
@@ -423,6 +425,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     public void keyReleased(KeyEvent keyEvent) {
 
     }
+
 
     //Handles button events
     @Override

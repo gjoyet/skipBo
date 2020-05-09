@@ -17,6 +17,7 @@ public class SBListenerTest {
 
         BufferedReader br;
         String[] analyzedInput;
+        boolean analyzed = false;
         String trigger;
         boolean running;
 
@@ -36,11 +37,12 @@ public class SBListenerTest {
                 try {
                     input = this.br.readLine().split("§", 3);
                     servLog.debug("testingSBL input[0] = " + input[0]);
+                    analyzed = false;
                 } catch (IOException e) {
                     servLog.warn("Error with reading input.");
                 }
 
-                if (input != null) this.analyze(input);
+                if (input != null && input[0].length() > 0) this.analyze(input);
                 servLog.debug("End of testingSBL while loop.");
             }
         }
@@ -48,6 +50,7 @@ public class SBListenerTest {
         @Override
         public void analyze(String[] input) {
             servLog.debug("Got into analyze method.");
+            analyzed = true;
             analyzedInput = input;
             try {
                 Protocol protocol = Protocol.valueOf(input[0]);
@@ -153,6 +156,9 @@ public class SBListenerTest {
             pw.println("GUTZI§Schoggi§20");
             sleep(100);
             assertEquals("GUTZI: not a command.", tSBL.trigger);
+            pw.println("SET");
+            sleep(100);
+            assertEquals("SET: not a command.", tSBL.trigger);
         } catch (InterruptedException ie) {
             servLog.error("Sleep time interrupted.");
         }
@@ -239,6 +245,21 @@ public class SBListenerTest {
     }
 
     /**
+     * Tests case where the input is an empty String.
+     */
+    @Test
+    public void emptyInput() {
+        try {
+            pw.println("");
+            sleep(100);
+            assertEquals(false, tSBL.analyzed);
+            assertEquals(null, tSBL.trigger);
+        } catch (InterruptedException ie) {
+            servLog.error("Sleep time interrupted.");
+        }
+    }
+
+    /**
      * Tests if the input is split the right way, meaning with a maximum of 3 resulting parts, no empty Strings in
      * input, but no information lost.
      */
@@ -262,9 +283,9 @@ public class SBListenerTest {
         } catch (InterruptedException e) {
             servLog.error("Sleep time interrupted.");
         }
+        assertEquals(false, tSBL.running);
         assertEquals(null, tSBL.trigger);
     }
-
 
 }
 

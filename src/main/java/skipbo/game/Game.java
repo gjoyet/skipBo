@@ -646,7 +646,11 @@ public class Game implements Runnable {
      * @param player Player that used the cheat
      */
     private void cheatPunishment(Player player) {
-
+        for (int i = 0; i < 5;  i++){
+            Card top = this.getDrawPile().get(getDrawPile().size()-1);
+            getDrawPile().remove(top);
+            player.getStockPile().add(top);
+        }
     }
 
     /**

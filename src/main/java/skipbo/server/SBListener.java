@@ -47,7 +47,7 @@ public class SBListener implements NWPListener {
                 servLog.warn("Error with reading input from client.");
             }
 
-            if(input != null) this.analyze(input);
+            if(input != null && input[0].length() > 0) this.analyze(input);
         }
 
     }

@@ -214,6 +214,7 @@ public class MusicPlayer implements Runnable{
                     }
 
                     while(pause && running){
+                        System.out.
                         wait(15);
                     }
                 }

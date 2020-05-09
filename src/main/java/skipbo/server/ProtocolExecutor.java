@@ -88,6 +88,24 @@ public class ProtocolExecutor {
         sbL.pw.println(Protocol.PRINT + "§Terminal§Welcome to Skip-Bo, " + name + "!");
         sendAllExceptOne(Protocol.PRINT + "§Terminal§" + name + " joined the room. Say hi!", sbL);
         servLog.debug("Players connected: " + sbL.getServer().getWholePlayerList());
+
+        // Passing on high scores
+        BufferedReader br;
+        try {
+            File highscores = new File("skipBoLogs/Highscores.txt");
+            br = new BufferedReader((new FileReader(highscores)));
+            br.readLine(); br.readLine();
+            String line;
+            for(int i=0; i < 5; i++) {
+                line = br.readLine();
+                if(line == null) break;
+                sbL.getPW().println(Protocol.DISPL + "§highscore§" + line);
+            }
+        } catch (FileNotFoundException e) {
+            servLog.error("File not found.");
+        } catch (IOException e) {
+            servLog.error("Problem with reading Highscores.txt file.");
+        }
     }
 
     /**
@@ -404,24 +422,6 @@ public class ProtocolExecutor {
                         }
                     }
                     break;
-                case "highscore":
-                    BufferedReader br;
-                    try {
-                        File highscores = new File("skipBoLogs/Highscores.txt");
-                        br = new BufferedReader((new FileReader(highscores)));
-                        br.readLine(); br.readLine();
-                        String line;
-                        for(int i=0; i < 5; i++) {
-                            line = br.readLine();
-                            if(line == null) break;
-                            sbL.getPW().println(Protocol.DISPL + "§highscore§" + line);
-                        }
-                    } catch (FileNotFoundException e) {
-                        servLog.error("File not found.");
-                    } catch (IOException e) {
-                        servLog.error("Problem with reading Highscores.txt file.");
-                    }
-
                 default:
                     throw new NoCommandException(input[0], input[1]);
             }
@@ -498,6 +498,8 @@ public class ProtocolExecutor {
         } catch (IOException e) {
             servLog.debug("Problem with closing br and pw after writing in highscores.txt");
         }
+
+        broadcast(Protocol.DISPL + "§highscore§" + game.toString(true));
     }
 
     /**

@@ -408,31 +408,4 @@ public class ProtocolExecutorTest {
         assertEquals(false, Main.server.getLobby().getGames().get(0).gameIsRunning());
         // Test: Server recognised game to have only one player left and terminated it
     }
-
-    /**
-     * Tests the implementation of display with all options.
-     */
-    @Ignore
-    @Test
-    public void testDisplay() {
-
-    }
-
-    /**
-     * Tests the case where the option given to the DISPL command is not valid.
-     */
-    @Ignore
-    @Test(expected = NoCommandException.class)
-    public void testDisplayException1() throws NoCommandException {
-        new ProtocolExecutor(new String[]{"DISPL", "NotAnOption"}, Main.server.getSblList().get(0)).changeTo();
-    }
-
-    /**
-     * Tests the case where the option given to the DISPL command equals null.
-     */
-    @Ignore
-    @Test(expected = NoCommandException.class)
-    public void testDisplayException2() throws NoCommandException {
-        new ProtocolExecutor(new String[]{"DISPL"}, Main.server.getSblList().get(0)).changeTo();
-    }
 }

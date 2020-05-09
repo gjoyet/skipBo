@@ -19,28 +19,31 @@ public class SBListenerTest {
 
         BufferedReader br;
         String trigger;
+        boolean analyzed = false;
         boolean running;
 
         public testingSBL(PipedInputStream pis) {
             servLog.debug("Constructing testingSBL.");
             this.br = new BufferedReader(new InputStreamReader(pis));
             this.running = true;
-            Thread testingSBLT = new Thread(this); testingSBLT.start();
+            Thread testingSBLT = new Thread(this);
+            testingSBLT.start();
         }
 
         @Override
         public void run() {
-            while(running) {
+            while (running) {
                 servLog.debug("Start of testingSBL while loop.");
                 String[] input = null;
                 try {
                     input = this.br.readLine().split("§", 3);
+                    analyzed = false;
                     servLog.debug("testingSBL input[0] = " + input[0]);
                 } catch (IOException e) {
                     servLog.warn("Error with reading input.");
                 }
 
-                if(input != null) this.analyze(input);
+                if (input != null) this.analyze(input);
                 servLog.debug("End of testingSBL while loop.");
             }
         }
@@ -48,6 +51,7 @@ public class SBListenerTest {
         @Override
         public void analyze(String[] input) {
             servLog.debug("Got into analyze method.");
+            analyzed = true;
             Protocol protocol = Protocol.valueOf(input[0]);
             try {
                 switch (protocol) {
@@ -76,7 +80,7 @@ public class SBListenerTest {
                         trigger = "playerLeavingGame()";
                         break;
                 }
-            } catch(IllegalArgumentException iae) {
+            } catch (IllegalArgumentException iae) {
                 trigger = input[0] + ": not a command.";
             }
         }
@@ -111,7 +115,7 @@ public class SBListenerTest {
      * Tests what happens in the case of a normal command.
      */
     @Test
-    public void testNormalCommand() {
+    public void normalCommand() {
         try {
             pw.println("SETTO§Nickname§Marc");
             sleep(100);
@@ -132,4 +136,58 @@ public class SBListenerTest {
             servLog.error("Sleep time interrupted.");
         }
     }
+
+    @Test
+    public void notACommand() {
+        try {
+            pw.println("SETO§Nickname§Marc");
+            sleep(100);
+            assertEquals(false, tSBL.analyzed);
+            assertEquals(null, tSBL.trigger);
+            pw.println("CHANGE§Status§READY");
+            sleep(100);
+            assertEquals(false, tSBL.analyzed);
+            assertEquals(null, tSBL.trigger);
+            pw.println("chatm§Global§Hi");
+            sleep(100);
+            assertEquals("chatMessage()", tSBL.trigger);
+            pw.println("NWGME§New§2§20");
+            sleep(100);
+            assertEquals("newGame()", tSBL.trigger);
+            pw.println("DISPL§players");
+            sleep(100);
+            assertEquals("display()", tSBL.trigger);
+        } catch (InterruptedException ie) {
+            servLog.error("Sleep time interrupted.");
+        }
+    }
+
+    @Test
+    public void notAnOption() {
+    }
+
+    @Test
+    public void notFittingArguments() {
+    }
+
+    @Test
+    public void comAndOpSwitch() {
+    }
+
+    @Test
+    public void rightSplit() {
+
+    }
+
+    @Test
+    public void tooManyParagraphs() {
+    }
+
+    @Test
+    public void paragraphAtStart() {
+    }
+
+
 }
+
+

@@ -9,6 +9,7 @@ import skipbo.server.ProtocolExecutor;
 
 import java.io.*;
 
+import static java.lang.Thread.sleep;
 import static org.junit.Assert.assertEquals;
 import static skipbo.server.SBServer.servLog;
 
@@ -17,11 +18,11 @@ public class SBListenerTest {
     public class testingSBL implements NWPListener {
 
         BufferedReader br;
-        String[] input;
         String trigger;
         boolean running;
 
         public testingSBL(PipedInputStream pis) {
+            servLog.debug("Constructing testingSBL.");
             this.br = new BufferedReader(new InputStreamReader(pis));
             this.running = true;
             Thread testingSBLT = new Thread(this); testingSBLT.start();
@@ -30,19 +31,23 @@ public class SBListenerTest {
         @Override
         public void run() {
             while(running) {
-                input = null;
+                servLog.debug("Start of testingSBL while loop.");
+                String[] input = null;
                 try {
                     input = this.br.readLine().split("§", 3);
+                    servLog.debug("testingSBL input[0] = " + input[0]);
                 } catch (IOException e) {
                     servLog.warn("Error with reading input.");
                 }
 
                 if(input != null) this.analyze(input);
+                servLog.debug("End of testingSBL while loop.");
             }
         }
 
         @Override
         public void analyze(String[] input) {
+            servLog.debug("Got into analyze method.");
             Protocol protocol = Protocol.valueOf(input[0]);
             try {
                 switch (protocol) {
@@ -91,7 +96,7 @@ public class SBListenerTest {
     public void initialize() {
         pos = new PipedOutputStream();
         pis = new PipedInputStream();
-        pw = new PrintWriter(pos);
+        pw = new PrintWriter(pos, true);
 
         try {
             pis.connect(pos);
@@ -107,15 +112,24 @@ public class SBListenerTest {
      */
     @Test
     public void testNormalCommand() {
-        pw.println("SETTO§Nickname§Marc");
-        assertEquals(tSBL.trigger, ("setTo()"));
-        pw.println("CHNGE§Status§READY");
-        assertEquals(tSBL.trigger, ("changeTo()"));
-        pw.println("CHATM§Global§Hi");
-        assertEquals(tSBL.trigger, ("chatMessage()"));
-        pw.println("NWGME§New§2§20");
-        assertEquals(tSBL.trigger, ("newGame()"));
-        pw.println("DISPL§players");
-        assertEquals(tSBL.trigger, ("display()"));
+        try {
+            pw.println("SETTO§Nickname§Marc");
+            sleep(100);
+            assertEquals("setTo()", tSBL.trigger);
+            pw.println("CHNGE§Status§READY");
+            sleep(100);
+            assertEquals("changeTo()", tSBL.trigger);
+            pw.println("CHATM§Global§Hi");
+            sleep(100);
+            assertEquals("chatMessage()", tSBL.trigger);
+            pw.println("NWGME§New§2§20");
+            sleep(100);
+            assertEquals("newGame()", tSBL.trigger);
+            pw.println("DISPL§players");
+            sleep(100);
+            assertEquals("display()", tSBL.trigger);
+        } catch (InterruptedException ie) {
+            servLog.error("Sleep time interrupted.");
+        }
     }
 }

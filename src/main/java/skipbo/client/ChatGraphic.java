@@ -181,9 +181,10 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         contentPane.add(tutorialB);
         tutorialB.addActionListener(this);
 
-        pause = new JButton("Mute");
-        pause.setBackground(Color.green);
-        pause.setBounds(132, 5, 100, 22);
+        pause = new JButton();
+        pause.setName("Mute");
+        pause.setIcon(new ImageIcon("src/main/resources/not_muted.png"));
+        pause.setBounds(X_MENU_B_R2+99, Y_MENU_B+ 4*Y_DISTANCE_MENU_B+8, 24, 24);
         contentPane.add(pause);
         pause.addActionListener(this);
 
@@ -461,12 +462,14 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             }
 
         } else if (buttonPressed == pause) {
-            if (pause.getText().equals("Mute")) {
+            if (pause.getName().equals("Mute")) {
                 backgroundMusic.stop();
-                pause.setText("Unmute");
+                pause.setIcon(new ImageIcon("src/main/resources/muted.png"));
+                pause.setName("Unmute");
             } else {
                 playMusic();
-                pause.setText("Mute");
+                pause.setIcon(new ImageIcon("src/main/resources/not_muted.png"));
+                pause.setName("Mute");
             }
 
             //marioMusic.pause();

@@ -14,7 +14,7 @@ import static skipbo.server.SBServer.servLog;
 /**
  * Thread waiting for any action from client.
  */
-public class SBListener implements Runnable {
+public class SBListener implements NWPListener {
     SBServer server;
     Socket sock;
     PrintWriter pw;
@@ -57,7 +57,7 @@ public class SBListener implements Runnable {
      * First branching out for protocol execution. Triggers required method depending on input protocol command.
      * @param input: Sliced input String from client.
      */
-    private void analyze(String[] input) {
+    public void analyze(String[] input) {
         Protocol protocol = Protocol.valueOf(input[0]);
         try {
             switch (protocol) {

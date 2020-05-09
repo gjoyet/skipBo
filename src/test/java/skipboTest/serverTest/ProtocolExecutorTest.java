@@ -8,8 +8,7 @@ import skipbo.server.*;
 
 import static java.lang.Thread.sleep;
 import static org.junit.Assert.assertEquals;
-
-import static skipbo.server.SBServer.*;
+import static skipbo.server.SBServer.servLog;
 
 /**
  * Tests the execution of the ProtocolExecutor class. Therefore, it will test cases for most protocol commands but

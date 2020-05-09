@@ -76,7 +76,12 @@ public class MusicPlayer implements Runnable{
      */
     public void pause(){
         if(file != null){
-            pause = !pause;
+            if(pause) {
+                pause = false;
+            }
+            else{
+                pause = true;
+            }
         }
     }
     /**
@@ -94,7 +99,12 @@ public class MusicPlayer implements Runnable{
      */
     public void mute(){
         if(file != null){
-            mute = !mute;
+            if(mute){
+                mute = false;
+            }
+            else{
+                mute = true;
+            }
         }
     }
     /**
@@ -134,8 +144,7 @@ public class MusicPlayer implements Runnable{
     /**
      * Returns if the audio is paused or not.
      * @return Status of pause variable.
-     */
-    public boolean isPaused(){
+     */ public boolean isPaused(){
         return pause;
     }
     /**
@@ -205,6 +214,7 @@ public class MusicPlayer implements Runnable{
                     }
 
                     while(pause && running){
+                        System.out.
                         wait(15);
                     }
                 }
@@ -254,7 +264,10 @@ public class MusicPlayer implements Runnable{
      * @return Byte array of all zeros.
      */
     private byte[] setMuteData(){
-
-        return new byte[byteChunkSize];
+        byte[] x = new byte[byteChunkSize];
+        for(int i = 0; i < x.length; i++){
+            x[i] = 0;
+        }
+        return x;
     }
 }

@@ -31,6 +31,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     private JButton startB;
     private JButton infoB;
     private JButton gamesB;
+    private JButton pause;
     private JButton whosOnB;
     private JButton leaveB;
     private JButton tutorialB;
@@ -39,6 +40,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     private String playerName = "";
     private DefaultComboBoxModel<String> playerComboModel;
     private ArrayList<String> playerArray = new ArrayList<>();
+    MusicPlayer marioMusic;
 
     static final Color DARKGREEN = new Color(0x0AB222);
 
@@ -48,7 +50,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     private final int HEIGHT_FRAME = 830;
 
     private boolean isTesting = false;
-
 
     /**
      * Constructor for ChatGraphic without player name. Lets client choose their name.
@@ -61,6 +62,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         setName();
         printInfoMessage("Connection successful");
         printCommandList();
+        playMusic();
     }
 
     /**
@@ -87,27 +89,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         clientListener.pw.println("SETTO§Nickname§" + name);
         printInfoMessage("Connection successful");
         printCommandList();
-    }
-
-    void playTrailer() {
-
-
-/*        component = new EmbeddedMediaListPlayerComponent();
-        setContentPane(component);
-        setBounds(100, 100, 1150, 800);
-        setVisible(true);
-        component.mediaPlayer().media().play("file://src/main/resources/Vid.mp4");*/
-/*        setBounds(100, 100, 1150, 800);
-        try {
-            Player mediaPlayer = Manager.createRealizedPlayer(new File("src/main/resources/TestVideo.avi").toURI().toURL());
-            Component videoComponent = mediaPlayer.getVisualComponent();
-            contentPane.add(videoComponent);
-            mediaPlayer.start();
-        } catch (IOException | NoPlayerException | CannotRealizeException e) {
-            e.printStackTrace();
-        }*/
-
-
+        playMusic();
     }
 
     /**
@@ -199,6 +181,12 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         contentPane.add(tutorialB);
         tutorialB.addActionListener(this);
 
+        pause = new JButton("Mute");
+        pause.setBackground(Color.green);
+        pause.setBounds(132, 5, 100, 22);
+        contentPane.add(pause);
+        pause.addActionListener(this);
+
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
         tabbedPane.setBounds(80, 330, 250, 340);
@@ -272,14 +260,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
                 "2020-04-29 14:26\nRohan, Manuela, Guillaume, Janni\nWINNER: Rohan, SCORE: 10.33\n\n";
         highScore.setText(h);
 
-        //music starts
-        MusicPlayer marioMusic = new MusicPlayer();
-        if(marioMusic.loadFile("src/main/resources/mario.mp3")){
-            marioMusic.run();
-            marioMusic.play();
-            marioMusic.loop();
-            marioMusic.mute();
-        }
     }
 
 
@@ -488,6 +468,31 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
                 clientListener.pw.println(NWGME + "§New§" + playerBox.getSelectedItem() + "§" + stockBox.getSelectedItem());
             }
 
+        } else if (buttonPressed == pause) {
+            if (pause.getText().equals("Mute")) {
+                marioMusic.stop();
+                pause.setText("Unmute");
+            } else {
+                playMusic();
+                pause.setText("Mute");
+            }
+
+            //marioMusic.pause();
+/*                if (marioMusic.isPaused()){
+                    clientLog.info("in isMuted method");
+                    marioMusic.pause();
+                    clientLog.info((marioMusic.isMuted()));
+                    pause.setBackground(Color.green);
+                    pause.setText("Playing");
+                }
+                else {
+                    clientLog.info("in notPause method");
+                    marioMusic.pause();
+                    clientLog.info((marioMusic.isMuted()));
+                    pause.setBackground(Color.red);
+                    pause.setText("Paused");
+                }*/
+
         } else if (buttonPressed == manualB) {
             if (Desktop.isDesktopSupported()) {
                 try {
@@ -511,12 +516,11 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             }
 
         } else if (buttonPressed == whosOnB) {
-            playTrailer();
 
-            if(music.loadFile("src/main/resources/buttonclick2.mp3")){
+ /*           if(music.loadFile("src/main/resources/buttonclick2.mp3")){
                 music.run();
                 music.play();
-            }
+            }*/
             try {
                 clientListener.forward("/list players");
             } catch (NotACommandException e) {
@@ -644,6 +648,15 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             }
         }
 
+    }
+
+    void playMusic() {
+        marioMusic = new MusicPlayer();
+        if(marioMusic.loadFile("src/main/resources/mario.mp3")){
+            marioMusic.play();
+            marioMusic.loop();
+            clientLog.info(marioMusic.isPlaying());
+        }
     }
 
     /**

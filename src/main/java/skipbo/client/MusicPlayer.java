@@ -16,8 +16,8 @@ import static skipbo.client.SBClient.clientLog;
  */
 public class MusicPlayer implements Runnable{
 
-    private static File file;
-    private static boolean running, mute, pause, loop, restart;
+    private File file;
+    private boolean running, mute, pause, loop, restart;
     private final int byteChunkSize = 1024;//number of bytes to read at one time
     private byte[] muteData;
 

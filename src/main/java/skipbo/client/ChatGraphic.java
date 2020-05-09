@@ -428,6 +428,13 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
 
+        //Button sounds
+        MusicPlayer buttonSound = new MusicPlayer();
+        if (buttonSound.loadFile("src/main/resources/buttonclick2.mp3")) {
+            buttonSound.run();
+            buttonSound.play();
+        }
+
         JButton buttonPressed = (JButton) actionEvent.getSource();
         if (buttonPressed == readyB) {
             try {

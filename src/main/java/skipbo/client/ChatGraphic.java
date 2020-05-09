@@ -47,6 +47,8 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     private final int WIDTH_FRAME = 420;
     private final int HEIGHT_FRAME = 830;
 
+    private boolean isTesting = false;
+
 
     /**
      * Constructor for ChatGraphic without player name. Lets client choose their name.
@@ -65,6 +67,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
      * Only for testing purposes.
      */
     ChatGraphic(SBClientListener clientListener, boolean testing) {
+        isTesting = testing;
         this.clientListener = clientListener;
         setFrame();
         if(!testing) setName();
@@ -268,6 +271,14 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
                 "2020-04-29 14:01\nRohan, Guillaume, TheLegend27, Manuela\nWINNER: TheLegend27, SCORE: 9.33\n\n" +
                 "2020-04-29 14:26\nRohan, Manuela, Guillaume, Janni\nWINNER: Rohan, SCORE: 10.33\n\n";
         highScore.setText(h);
+
+        //music starts
+        MusicPlayer marioMusic = new MusicPlayer();
+        if(marioMusic.loadFile("src/main/resources/mario.mp3")){
+            marioMusic.run();
+            marioMusic.play();
+            marioMusic.loop();
+        }
     }
 
 
@@ -351,7 +362,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             message = "You won because you played all your stock cards! You are now ready to play a real game.";
         }
 
-        if (message != null) {
+        if (message != null && !isTesting) {
             ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo.png")));
 
             int iconWidth = icon.getIconWidth();
@@ -490,6 +501,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             printCommandList();
 
         } else if (buttonPressed == gamesB) {
+
             try {
                 clientListener.forward("/list games");
             } catch (NotACommandException e) {
@@ -498,6 +510,11 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
         } else if (buttonPressed == whosOnB) {
             playTrailer();
+            MusicPlayer music = new MusicPlayer();
+            if(music.loadFile("src/main/resources/buttonclick2.mp3")){
+                music.run();
+                music.play();
+            }
             try {
                 clientListener.forward("/list players");
             } catch (NotACommandException e) {

@@ -31,7 +31,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     private JButton startB;
     private JButton infoB;
     private JButton gamesB;
-    private JButton muteM;
+    private JButton pause;
     private JButton whosOnB;
     private JButton leaveB;
     private JButton tutorialB;
@@ -277,16 +277,16 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         //music starts
         marioMusic = new MusicPlayer();
         if(marioMusic.loadFile("src/main/resources/mario.mp3")){
-            marioMusic.run();
             marioMusic.play();
             marioMusic.loop();
-            marioMusic.mute();
+//          marioMusic.mute();
+            clientLog.info(marioMusic.isPlaying());
         }
-        muteM = new JButton("Mute music");
-        muteM.setBackground(Color.green);
-        muteM.setBounds(132, 5, 100, 22);
-        contentPane.add(muteM);
-        muteM.addActionListener(this);
+        pause = new JButton("Play | Pause");
+        pause.setBackground(Color.green);
+        pause.setBounds(132, 5, 100, 22);
+        contentPane.add(pause);
+        pause.addActionListener(this);
 
     }
 
@@ -496,16 +496,20 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
                 clientListener.pw.println(NWGME + "§New§" + playerBox.getSelectedItem() + "§" + stockBox.getSelectedItem());
             }
 
-        } else if (buttonPressed == muteM){
-                if (marioMusic.isMuted() == true){
-                    marioMusic.mute();
-                    muteM.setBackground(Color.green);
-                    muteM.setText("Mute music");
+        } else if (buttonPressed == pause){
+                if (marioMusic.isPaused()){
+                    clientLog.info("in isMuted method");
+                    marioMusic.pause();
+                    clientLog.info((marioMusic.isMuted()));
+                    pause.setBackground(Color.green);
+                    pause.setText("Playing");
                 }
                 else {
-                    marioMusic.mute();
-                    muteM.setBackground(Color.red);
-                    muteM.setText("Muted");
+                    clientLog.info("in notPause method");
+                    marioMusic.pause();
+                    clientLog.info((marioMusic.isMuted()));
+                    pause.setBackground(Color.red);
+                    pause.setText("Paused");
                 }
 
         } else if (buttonPressed == manualB) {

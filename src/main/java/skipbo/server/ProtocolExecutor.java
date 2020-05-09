@@ -456,6 +456,7 @@ public class ProtocolExecutor {
             servLog.error("Problem with tempFile.");
         }
 
+        int inserted = 0;
         try {
             pw.println(br.readLine());
             br.readLine();
@@ -463,6 +464,8 @@ public class ProtocolExecutor {
             String line = br.readLine();
             String[] lineSplit;
             boolean gameAppended = false;
+            int counter = 0;
+
             while (line != null) {
                 lineSplit = line.split("SCORE: ");
                 servLog.debug("lineSplit[1] = " + lineSplit[1]);
@@ -472,17 +475,20 @@ public class ProtocolExecutor {
                 if (scoreInLine <= game.score || gameAppended) {
                     servLog.debug("Writing from file.");
                     pw.println(line);
+                    counter++;
                 } else {
                     servLog.debug("Writing game.");
                     pw.println(game.toString(true));
                     pw.println(line);
                     gameAppended = true;
+                    inserted = counter;
                 }
                 line = br.readLine();
             }
             if (!gameAppended) {
                 servLog.debug("Worst score: writing game at the end of file.");
                 pw.println(game.toString(true));
+                inserted = counter;
             }
         } catch (IOException ioe) {
             servLog.error("Problem with reading from Highscores.txt file.");
@@ -499,7 +505,25 @@ public class ProtocolExecutor {
             servLog.debug("Problem with closing br and pw after writing in highscores.txt");
         }
 
-        broadcast(Protocol.DISPL + "§highscore§" + game.toString(true));
+        if(inserted < 5) {
+            // Passing new highscore list to clients.
+            try {
+                File highscores = new File("skipBoLogs/Highscores.txt");
+                br = new BufferedReader((new FileReader(highscores)));
+                br.readLine();
+                br.readLine();
+                String line;
+                for (int i = 0; i < 5; i++) {
+                    line = br.readLine();
+                    if (line == null) break;
+                    sendAll(Protocol.DISPL + "§highscore§" + line, sbL);
+                }
+            } catch (FileNotFoundException e) {
+                servLog.error("File not found.");
+            } catch (IOException e) {
+                servLog.error("Problem with reading Highscores.txt file.");
+            }
+        }
     }
 
     /**

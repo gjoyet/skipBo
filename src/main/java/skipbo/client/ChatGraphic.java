@@ -47,6 +47,8 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     private final int WIDTH_FRAME = 420;
     private final int HEIGHT_FRAME = 830;
 
+    private boolean isTesting = false;
+
 
     /**
      * Constructor for ChatGraphic without player name. Lets client choose their name.
@@ -65,6 +67,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
      * Only for testing purposes.
      */
     ChatGraphic(SBClientListener clientListener, boolean testing) {
+        isTesting = testing;
         this.clientListener = clientListener;
         setFrame();
         if(!testing) setName();
@@ -359,7 +362,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             message = "You won because you played all your stock cards! You are now ready to play a real game.";
         }
 
-        if (message != null) {
+        if (message != null && !isTesting) {
             ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo.png")));
 
             int iconWidth = icon.getIconWidth();

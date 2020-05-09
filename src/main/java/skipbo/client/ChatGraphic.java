@@ -51,7 +51,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
     private boolean isTesting = false;
 
-
     /**
      * Constructor for ChatGraphic without player name. Lets client choose their name.
      *
@@ -89,27 +88,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         clientListener.pw.println("SETTO§Nickname§" + name);
         printInfoMessage("Connection successful");
         printCommandList();
-    }
-
-    void playTrailer() {
-
-
-/*        component = new EmbeddedMediaListPlayerComponent();
-        setContentPane(component);
-        setBounds(100, 100, 1150, 800);
-        setVisible(true);
-        component.mediaPlayer().media().play("file://src/main/resources/Vid.mp4");*/
-/*        setBounds(100, 100, 1150, 800);
-        try {
-            Player mediaPlayer = Manager.createRealizedPlayer(new File("src/main/resources/TestVideo.avi").toURI().toURL());
-            Component videoComponent = mediaPlayer.getVisualComponent();
-            contentPane.add(videoComponent);
-            mediaPlayer.start();
-        } catch (IOException | NoPlayerException | CannotRealizeException e) {
-            e.printStackTrace();
-        }*/
-
-
     }
 
     /**
@@ -535,7 +513,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             }
 
         } else if (buttonPressed == whosOnB) {
-            playTrailer();
 
             if(music.loadFile("src/main/resources/buttonclick2.mp3")){
                 music.run();

@@ -31,6 +31,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     private JButton startB;
     private JButton infoB;
     private JButton gamesB;
+    private JButton muteM;
     private JButton whosOnB;
     private JButton leaveB;
     private JButton tutorialB;
@@ -39,6 +40,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     private String playerName = "";
     private DefaultComboBoxModel<String> playerComboModel;
     private ArrayList<String> playerArray = new ArrayList<>();
+    MusicPlayer marioMusic;
 
     static final Color DARKGREEN = new Color(0x0AB222);
 
@@ -273,12 +275,18 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         highScore.setText(h);
 
         //music starts
-        MusicPlayer marioMusic = new MusicPlayer();
+        marioMusic = new MusicPlayer();
         if(marioMusic.loadFile("src/main/resources/mario.mp3")){
             marioMusic.run();
             marioMusic.play();
             marioMusic.loop();
         }
+        muteM = new JButton("Mute music");
+        muteM.setBackground(Color.green);
+        muteM.setBounds(132, 5, 100, 22);
+        contentPane.add(muteM);
+        muteM.addActionListener(this);
+
     }
 
 
@@ -486,6 +494,18 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             if (option == JOptionPane.OK_OPTION) {
                 clientListener.pw.println(NWGME + "§New§" + playerBox.getSelectedItem() + "§" + stockBox.getSelectedItem());
             }
+
+        } else if (buttonPressed == muteM){
+                if (marioMusic.isMuted() == true){
+                    marioMusic.mute();
+                    muteM.setBackground(Color.green);
+                    muteM.setText("Mute music");
+                }
+                else {
+                    marioMusic.mute();
+                    muteM.setBackground(Color.red);
+                    muteM.setText("Muted");
+                }
 
         } else if (buttonPressed == manualB) {
             if (Desktop.isDesktopSupported()) {

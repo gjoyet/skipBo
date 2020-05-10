@@ -54,7 +54,11 @@ public class SBClient {
         //GUI
         ChatGraphic frame;
         if (args.length == 3) {
-            frame = new ChatGraphic(clientListener, args[2]);
+            if(args[0].equalsIgnoreCase("client")) {
+                frame = new ChatGraphic(clientListener, args[2], false);
+            } else {
+                frame = new ChatGraphic(clientListener, args[2], true);
+            }
         } else {
             if(args[0].equalsIgnoreCase("client")) {
                 frame = new ChatGraphic(clientListener);

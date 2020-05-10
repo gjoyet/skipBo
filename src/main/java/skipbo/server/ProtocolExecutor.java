@@ -181,9 +181,13 @@ public class ProtocolExecutor {
                 sbL.getPlayer().getGame().terminateGame();
             } else {
                 sendAllExceptOne(Protocol.PLAYR + "§LeaveGame§" + sbL.getPlayer().getName(), sbL);
-                sbL.getPlayer().getGame().playerLeaving(sbL.getPlayer());
+                boolean isTurn = sbL.getPlayer().getGame().playerLeaving(sbL.getPlayer());
                 sbL.getPlayer().getGame().players.remove(sbL.getPlayer());
+                if(isTurn) {
+                    sbL.player.getGame().endTurn();
+                }
             }
+            sbL.getPlayer().changeGame(null);
             sbL.getPlayer().changeStatus(Status.WAITING);
         } else throw new NoCommandException(input[0], input[1]);
     }
@@ -229,8 +233,11 @@ public class ProtocolExecutor {
                 sbL.player.getGame().players.remove(sbL.player);
                 sbL.getPlayer().getGame().terminateGame();
             } else {
-                sbL.getPlayer().getGame().playerLeaving(sbL.player);
+                boolean isTurn = sbL.getPlayer().getGame().playerLeaving(sbL.player);
                 sbL.player.getGame().players.remove(sbL.player);
+                if(isTurn) {
+                    sbL.player.getGame().endTurn();
+                }
             }
         }
         for (Player p : sbL.getServer().serverLobby.getPlayerLobby()) {

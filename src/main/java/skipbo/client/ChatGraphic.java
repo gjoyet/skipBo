@@ -400,6 +400,9 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     public void keyTyped(KeyEvent keyEvent) {
         if (keyEvent.getKeyChar() == KeyEvent.VK_ENTER) {
             String input = inputMes.getText().replaceAll("\n", " ");
+            if (input.isEmpty()) {
+                return;
+            }
             inputMes.replaceRange("", 0, input.length());
             input = input.substring(0, input.length() - 1);
             if (!input.startsWith("/")) {
@@ -593,7 +596,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
     void setHighScore(String[] scores) {
 
-        String scoreString = "Skip-Bro High scores Top 5\n\n";
+        String scoreString = "Skip-Bro High scores Top 10\n\n";
         String winnerString = " WINNER: ";
         for (String score : scores) {
             StringBuffer buffer = new StringBuffer(score);

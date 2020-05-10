@@ -111,7 +111,7 @@ public class Tutorial extends GameGraphic implements ActionListener {
         downArrow.setBounds(680, 75, 50, 50);
         layeredPane.add(downArrow);
         instruction.setBounds(710, 80, 400, 100);
-        instruction.setText("Click on any build pile to put play the one.");
+        instruction.setText("Click on any build pile to play the one.");
         allowMove = true;
     }
 

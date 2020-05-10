@@ -76,7 +76,7 @@ public class Game implements Runnable {
         if (forHighscore) {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             LocalDateTime now = LocalDateTime.now();
-            gToString.append(dtf.format(now)).append(" || ");
+            gToString.append(dtf.format(now)).append("; ");
         }
 
         for (int i = 0; i < players.size(); i++) {
@@ -85,16 +85,16 @@ public class Game implements Runnable {
         }
         if(!forHighscore) {
             if (gameRunning) {
-                gToString.append(" || RUNNING.");
+                gToString.append("; RUNNING.");
             } else {
                 if (winner == null) {
-                    gToString.append(" || TERMINATED.");
+                    gToString.append("; TERMINATED.");
                 } else {
-                    gToString.append(" || FINISHED.");
+                    gToString.append("; FINISHED.");
                 }
             }
         } else {
-            gToString.append(" || WINNER: ").append(this.winner.getName()).append(", ");
+            gToString.append("; WINNER: ").append(this.winner.getName()).append(", ");
             gToString.append("SCORE: ").append(String.format("%.2f", score));
         }
 
@@ -621,7 +621,7 @@ public class Game implements Runnable {
             new ProtocolExecutor().sendAll(Protocol.ENDGM + "§Winner§" + winner.getName() + "§" +
                     this.score, winner.getSBL());
         }
-        new ProtocolExecutor().gameEnding(this);
+        new ProtocolExecutor(new String[]{""}, winner.getSBL()).gameEnding(this);
     }
 
     /**

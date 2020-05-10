@@ -102,6 +102,7 @@ public class ProtocolExecutor {
                 if(line == null) break;
                 string = string + line + "§";
             }
+            servLog.debug("Sending DISPL§highscore with arguments: " + string);
             sbL.getPW().println(Protocol.DISPL + "§highscore§" + string);
         } catch (FileNotFoundException e) {
             servLog.error("File not found.");
@@ -521,7 +522,7 @@ public class ProtocolExecutor {
                     if (line == null) break;
                     string = string + line + "§";
                 }
-                sendAll(Protocol.DISPL + "§highscore§" + string, sbL);
+                broadcast(Protocol.DISPL + "§highscore§" + string);
             } catch (FileNotFoundException e) {
                 servLog.error("File not found.");
             } catch (IOException e) {

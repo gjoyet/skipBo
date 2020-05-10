@@ -184,7 +184,7 @@ public class ProtocolExecutor {
                 boolean isTurn = sbL.getPlayer().getGame().playerLeaving(sbL.getPlayer());
                 sbL.getPlayer().getGame().players.remove(sbL.getPlayer());
                 if(isTurn) {
-                    sbL.player.getGame().endTurn();
+                    sbL.player.getGame().endTurnAfterLeaving();
                 }
             }
             sbL.getPlayer().changeGame(null);
@@ -236,7 +236,7 @@ public class ProtocolExecutor {
                 boolean isTurn = sbL.getPlayer().getGame().playerLeaving(sbL.player);
                 sbL.player.getGame().players.remove(sbL.player);
                 if(isTurn) {
-                    sbL.player.getGame().endTurn();
+                    sbL.player.getGame().endTurnAfterLeaving();
                 }
             }
         }

@@ -1,4 +1,4 @@
-package skipbo.client;//package com.connormahaffey.JavaMusicExample;
+package skipbo.client;
 
 import javax.sound.sampled.*;
 import java.io.File;
@@ -262,7 +262,8 @@ public class MusicPlayer implements Runnable{
      */
     private byte[] setMuteData(){
         byte[] x = new byte[byteChunkSize];
-        for(int i = 0; i < x.length; i++){
+        int i;
+        for(i = 0; i < x.length; i++){
             x[i] = 0;
         }
         return x;

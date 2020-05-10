@@ -28,6 +28,7 @@ public class Game implements Runnable {
     int playersTurn = 0;
     private Player winner;
     private boolean gameRunning;
+//    boolean cheat;
 
     /**
      * Constructor for Object Game, where the main Game and Game rules
@@ -611,6 +612,7 @@ public class Game implements Runnable {
      * @param winner (The player that has won the game)
      */
     public void endGame(Player winner) {
+
         servLog.info("Game ending.");
         gameRunning = false;
         this.winner = winner;
@@ -628,6 +630,7 @@ public class Game implements Runnable {
         }
         new ProtocolExecutor(new String[]{""}, winner.getSBL()).gameEnding(this);
     }
+
 
     public void endGameCheat(Player winner) {
         servLog.info("Game ending.");
@@ -671,13 +674,14 @@ public class Game implements Runnable {
     private void cheatPunishment(Player player) {
         for (int i = 0; i < 5;  i++){
             Card top = this.getDrawPile().get(getDrawPile().size()-1);
-            getDrawPile().remove(top);
             player.getStockPile().add(top);
+            getDrawPile().remove(top);
         }
     }
 
     /**
-     * Method for when a game gets interrupted, because people left.
+     * Method for when a game gets interrupted because people left.
+     * Clears all game cards.
      */
     public void terminateGame() {
         this.gameRunning = false;
@@ -687,13 +691,13 @@ public class Game implements Runnable {
         pLeft.changeGame(null);
         pLeft.changeStatus(Status.WAITING);
 
-        for(Player player: players){
+        for(Player player: players){    //Clear all player cards
             player.clearStockPile();
             player.clearDiscardPiles();
             player.clearHandCards();
         }
 
-        for(int i = 0; i < 4; i++){
+        for(int i = 0; i < 4; i++){     //Clears all build piles
             ArrayList<Card> bp = piles.buildPiles.get(i);
             bp.clear();
         }

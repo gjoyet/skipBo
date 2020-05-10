@@ -610,7 +610,7 @@ public class Game implements Runnable {
 
     public void endTurnAfterLeaving() {
         servLog.debug("Entered endTurnAfterLeaving.");
-        if ((playersTurn == players.size() - 1)) {     //if not the last player in the array, go up by one
+        if ((playersTurn == players.size())) {     //if not the last player in the array, go up by one
             playersTurn = 0;        //otherwise start over from first player
             turnCounter++;
         }

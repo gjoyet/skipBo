@@ -97,7 +97,7 @@ public class ProtocolExecutor {
             br.readLine(); br.readLine();
             String line;
             String string = "";
-            for(int i=0; i < 5; i++) {
+            for(int i=0; i < 10; i++) {
                 line = br.readLine();
                 if(line == null) break;
                 string = string + line + "§";
@@ -508,7 +508,7 @@ public class ProtocolExecutor {
             servLog.debug("Problem with closing br and pw after writing in highscores.txt");
         }
 
-        if(inserted < 5) {
+        if(inserted < 10) {
             // Passing new highscore list to clients.
             try {
                 File highscores = new File("skipBoLogs/Highscores.txt");
@@ -517,7 +517,7 @@ public class ProtocolExecutor {
                 br.readLine();
                 String line;
                 String string = "";
-                for(int i=0; i < 5; i++) {
+                for(int i=0; i < 10; i++) {
                     line = br.readLine();
                     if (line == null) break;
                     string = string + line + "§";

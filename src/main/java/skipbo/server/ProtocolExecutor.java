@@ -420,8 +420,7 @@ public class ProtocolExecutor {
                 break;
             case "Win":
                 String oldName = sbL.player.getName();
-                sbL.player.changeName("CHEATER");
-                broadcast(Protocol.CHNGE + "§Nickname§" + oldName + "§CHEATER");
+                new ProtocolExecutor(new String[]{"CHNGE", "Nickname", "CHEATER"}, sbL).changeTo();
                 sbL.player.getGame().endGameCheat(sbL.player);
                 break;
             default:

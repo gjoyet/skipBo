@@ -476,12 +476,13 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
                 return;
             }
             if (pause.getName().equals("Mute")) {
-                backgroundMusic.stop();
+                backgroundMusic.mute();
                 pause.setIcon(new ImageIcon("src/main/resources/muted.png"));
                 pause.setName("Unmute");
             } else {
                 unmuteIsBlocked = true;
-                playMusic();
+                backgroundMusic.mute();
+                //playMusic();
                 pause.setIcon(new ImageIcon("src/main/resources/not_muted.png"));
                 pause.setName("Mute");
                 Timer timer = new Timer();
@@ -506,7 +507,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
         } else if (buttonPressed == infoB) {
             printCommandList();
-//            backgroundMusic.mute();
 
         } else if (buttonPressed == gamesB) {
 

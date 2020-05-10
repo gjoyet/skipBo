@@ -47,5 +47,4 @@ Game		NWGME		New		int n, int x				starts new game with n players and a stockpile
 				StockCard	Colour c, int number			tells client what its top card of the stockpile is
 
 		CHEAT		Joker		String name				client wants to use the Joker-cheat (gets 3 jokers on a discard pile and 5 stock cards are added
-											no name from client to server
 				Win							client wants to use the win-cheat (wins game instantly)

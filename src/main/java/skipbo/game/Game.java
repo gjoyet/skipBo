@@ -571,9 +571,10 @@ public class Game implements Runnable {
      * @param player Player that's left.
      */
 
-    public void playerLeaving(Player player) {
+    public boolean playerLeaving(Player player) {
+        boolean isTurn = false;
         if (players.get(playersTurn).equals(player)){
-            endTurn();
+            isTurn = true;
         }
 
         ArrayList<Card> handCards = player.getHandCards();
@@ -588,13 +589,15 @@ public class Game implements Runnable {
         ArrayList<Card> stockPile = player.getStockPile();
         piles.emptyPile.addAll(stockPile);  //adds to empty pile
         stockPile.clear();      //removes cards from the player's stock pile
+
+        return isTurn;
     }
 
     /**
      * Method to be run at the end of a player's turn, which
      * then changes turn from one player to the next.
      */
-    private void endTurn() {
+    public void endTurn() {
         servLog.debug("Entered endTurn.");
         if (!(playersTurn == players.size() - 1)) {     //if not the last player in the array, go up by one
             playersTurn++;

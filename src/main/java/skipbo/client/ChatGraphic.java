@@ -615,8 +615,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             buffer.append("\n\n");
             scoreString = scoreString + buffer.toString();
         }
-        scoreString.replaceAll(" ||", "");
-        highScore.setText(scoreString);
+        highScore.setText(scoreString.replaceAll(" ;", ""));
     }
 
 

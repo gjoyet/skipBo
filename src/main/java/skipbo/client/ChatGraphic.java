@@ -1,9 +1,7 @@
 package skipbo.client;
 
-import jdk.jfr.SettingControl;
 import skipbo.server.Protocol;
 
-import javax.sound.sampled.FloatControl;
 import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;
@@ -33,6 +31,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     private JButton infoB;
     private JButton gamesB;
     private JButton pause;
+    private JButton soundB;
     private JButton whosOnB;
     private JButton leaveB;
     private JButton tutorialB;
@@ -43,6 +42,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     private ArrayList<String> playerArray = new ArrayList<>();
     MusicPlayer backgroundMusic;
     private boolean unmuteIsBlocked = false;
+    boolean soundMuted = false;
 
     static final Color DARKGREEN = new Color(0x0AB222);
 
@@ -196,6 +196,12 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         contentPane.add(pause);
         pause.addActionListener(this);
 
+        soundB = new JButton();
+        soundB.setBounds(X_MENU_B_R2+68, Y_MENU_B+ 4*Y_DISTANCE_MENU_B+8, 24, 24); //x:72
+        soundB.setBackground(DARKGREEN);
+        contentPane.add(soundB);
+        soundB.addActionListener(this);
+
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
         tabbedPane.setBounds(80, 330, 250, 340);
@@ -317,6 +323,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             leaveB.setEnabled(true);
             changeNameB.setEnabled(false);
         }
+        gameGraphic.setSoundMuted(soundMuted);
         contentPane.add(gameGraphic.getGameComponent());
         setTitle("Skip-Bros GAME");
         setBounds(100, 100, 1150, 800);
@@ -441,10 +448,12 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
 
         //Button sounds
-        MusicPlayer buttonSound = new MusicPlayer();
-        if (buttonSound.loadFile("src/main/resources/buttonclick2.mp3")) {
-            buttonSound.run();
-            buttonSound.play();
+        if (!soundMuted) {
+            MusicPlayer buttonSound = new MusicPlayer();
+            if (buttonSound.loadFile("src/main/resources/buttonclick2.mp3")) {
+                //buttonSound.run();
+                buttonSound.play();
+            }
         }
 
         JButton buttonPressed = (JButton) actionEvent.getSource();
@@ -502,6 +511,16 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
                     }
                 };
                 timer.schedule(task, 100);
+            }
+        } else if (buttonPressed == soundB) {
+            soundMuted = !soundMuted;
+            if (gameGraphic != null) {
+                gameGraphic.setSoundMuted(soundMuted);
+            }
+            if (soundMuted) {
+                soundB.setBackground(Color.red);
+            } else {
+                soundB.setBackground(DARKGREEN);
             }
         } else if (buttonPressed == manualB) {
             if (Desktop.isDesktopSupported()) {

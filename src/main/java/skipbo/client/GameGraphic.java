@@ -26,6 +26,8 @@ public class GameGraphic implements ActionListener {
     private final String playerName;
     JLayeredPane layeredPane;
     ActionListener actionListener = this;
+    private boolean soundMuted = false;
+
 
     // Layout of opponents
     private final int WIDTH_OP1 = 40; //30
@@ -80,7 +82,6 @@ public class GameGraphic implements ActionListener {
         layeredPane = new JLayeredPane();
         layeredPane.setBounds(0, 0, 1550, 870);
         setButtonModel();
-
     }
 
     GameGraphic(SBClientListener clientListener, String name, JTextPane chat) {
@@ -88,7 +89,6 @@ public class GameGraphic implements ActionListener {
         playerName = name;
         layeredPane = new JLayeredPane();
         layeredPane.setBounds(0, 0, 1550, 870);
-
         setButtonModel();
         appendDecks();
     }
@@ -456,7 +456,9 @@ public class GameGraphic implements ActionListener {
      * @param number Number of hand card being moved
      */
     void handToDiscard(int i, int j, String name, String colour, int number) {
-        playCardSound();
+        if (!soundMuted) {
+            playCardSound();
+        }
         ArrayList<CardButton> al;
         CardButton newDisCard;
 
@@ -547,7 +549,9 @@ public class GameGraphic implements ActionListener {
      * @param number Number of hand card being moved
      */
     void handToBuild(int i, int j, String name, String colour, int number) {
-        playCardSound();
+        if (!soundMuted) {
+            playCardSound();
+        }
         if (name.equals(playerName)) {
             CardButton handCard = hand[i - 1];
             CardButton buildCard = build[j - 1];
@@ -583,9 +587,10 @@ public class GameGraphic implements ActionListener {
      * @param number2 Number of the stock card being moved to build pile
      */
     void stockToBuild(int j, String name, String colour1, int number1, String colour2, int number2) {
-
+        if (!soundMuted) {
+            playCardSound();
+        }
         //clientLog.debug("(GameGraphic) entered stock to build method");.
-        playCardSound();
         if (name.equals(playerName)) {
             CardButton buildCard = build[j - 1];
             String col = stock.removeColour();
@@ -636,7 +641,9 @@ public class GameGraphic implements ActionListener {
      * @param name Player name of player who made the move
      */
     void discardToBuild(int i, int j, String name) {
-        playCardSound();
+        if (!soundMuted) {
+            playCardSound();
+        }
         CardButton buildCard = build[j - 1];
         CardButton oldDisCard;
         ArrayList<CardButton> al;
@@ -947,6 +954,10 @@ public class GameGraphic implements ActionListener {
         if(cardSound.loadFile("src/main/resources/cardsound.mp3")){
             cardSound.play();
         }
+    }
+
+    void setSoundMuted(boolean soundMuted) {
+        this.soundMuted = soundMuted;
     }
 
     JLayeredPane getGameComponent() {

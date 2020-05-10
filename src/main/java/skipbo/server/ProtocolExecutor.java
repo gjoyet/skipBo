@@ -175,7 +175,6 @@ public class ProtocolExecutor {
      */
     public void playerLeavingGame() throws NoCommandException {
         if(input.length < 1) throw new NoCommandException();
-        sbL.getPlayer().changeStatus(Status.WAITING);
         if(input[1].equals("LeaveGame")) {
             if (sbL.getPlayer().getGame().players.size() == 2) {
                 sbL.player.getGame().players.remove(sbL.player);
@@ -185,6 +184,7 @@ public class ProtocolExecutor {
                 sbL.getPlayer().getGame().playerLeaving(sbL.getPlayer());
                 sbL.getPlayer().getGame().players.remove(sbL.getPlayer());
             }
+            sbL.getPlayer().changeStatus(Status.WAITING);
         } else throw new NoCommandException(input[0], input[1]);
     }
 

@@ -506,6 +506,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
         } else if (buttonPressed == infoB) {
             printCommandList();
+//            backgroundMusic.mute();
 
         } else if (buttonPressed == gamesB) {
 

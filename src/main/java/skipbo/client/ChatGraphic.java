@@ -606,7 +606,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
     void setHighScore(String[] scores) {
         //Format:  "2020-04-26 17:47\nGuillaume1, Guillaume\nWINNER: Guillaume, SCORE: 8.67\n\n"
         String scoreString = "Skip-Bro High scores Top 5\n\n";
-        String winnerString = "WINNER: ";
+        String winnerString = " WINNER: ";
         for (String score : scores) {
             StringBuffer buffer = new StringBuffer(score);
             buffer.insert(16, '\n');
@@ -615,7 +615,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             buffer.append("\n\n");
             scoreString = scoreString + buffer.toString();
         }
-        highScore.setText(scoreString.replaceAll(" ;", ""));
+        highScore.setText(scoreString.replaceAll("; ", ""));
     }
 
 

@@ -65,6 +65,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         printInfoMessage("Connection successful");
         printCommandList();
         playMusic();
+        clientListener.setChatGraphic(this);
     }
 
     /**
@@ -77,6 +78,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         if(!testing) setName();
         printInfoMessage("Connection successful");
         printCommandList();
+        clientListener.setChatGraphic(this);
     }
 
     /**
@@ -95,6 +97,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         if (!testing) {
             playMusic();
         }
+        clientListener.setChatGraphic(this);
     }
 
     /**
@@ -682,5 +685,9 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
     SBClientListener getClientListener() {
         return clientListener;
+    }
+
+    String getPlayerName() {
+        return playerName;
     }
 }

@@ -834,6 +834,46 @@ public class GameGraphic implements ActionListener {
     }
 
     /**
+     * Executes the joker-cheat. Adds a joker to every discard pile and adds 5 stock cards.
+     */
+    void cheatJoker(String name) {
+        ArrayList<CardButton> al;
+        CardButton newDisCard;
+        if (name.equals(playerName)) {
+            numOfStockCards.setName(String.valueOf(Integer.parseInt(numOfStockCards.getName())+5));
+            numOfStockCards.setText(Integer.parseInt(numOfStockCards.getName()) + " cards left");
+            for (int i = 0; i < 4; i++) {
+                al = discard[i];
+                CardButton oldDisCard = al.get(al.size() - 1);
+                newDisCard = new CardButton(CardButton.DISCARD);
+                newDisCard.addActionListener(actionListener);
+                oldDisCard.removeActionListener(actionListener);
+                newDisCard.setName(" D " + i);
+                setBoundsOfDiscard(newDisCard, al, DISTDISCARD);
+                newDisCard.setIcon(cardIcons.getIcon("S", 13, CardIcons.LARGE));
+                newDisCard.addCard("S", 13);
+                layeredPane.add(newDisCard, Integer.valueOf(al.size()));
+                al.add(newDisCard);
+            }
+
+        } else {
+            JLabel l = getNumOfStockCardsLabel(name);
+            assert l != null;
+            l.setText(String.valueOf(Integer.parseInt(l.getText())+5));
+            for (int i = 1; i < 5; i++) {
+                al = getEnemyArray(name, i);
+                newDisCard = new CardButton();
+                setNotClickable(newDisCard);
+                setBoundsOfDiscard(newDisCard, al, DISTOPPDISCARD);
+                newDisCard.setIcon(cardIcons.getIcon("S", 13, CardIcons.SMALL));
+                newDisCard.addCard("S", 13);
+                layeredPane.add(newDisCard, Integer.valueOf(al.size()));
+                al.add(newDisCard);
+            }
+        }
+    }
+
+    /**
      * Removes a player that quits the game
      * @param name Player that quit the game
      */

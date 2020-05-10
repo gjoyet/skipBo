@@ -36,7 +36,7 @@ public class SBServerListener implements Runnable {
         while (isLoggedIn) {
             try {
                 input = br.readLine();
-                //clientLog.debug(input);
+                clientLog.debug(input);
                 executeCommand(input);
             } catch (IOException e) {
                 clientLog.warn("Error with reading input from server");
@@ -86,6 +86,9 @@ public class SBServerListener implements Runnable {
                 break;
             case DISPL:
                 chatGraphic.setHighScore(command[2].split("§"));
+                break;
+            case CHEAT:
+                chatGraphic.getGameGraphic().cheatJoker(command[2]);
                 break;
             case ENDGM:
                 endGame(command);

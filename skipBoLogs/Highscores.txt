@@ -9,3 +9,4 @@ Skip-Bro Highscores (score = turns to win / stockpile size; lower scores are bet
 2020-05-10 10:45; Janni, DiniMueter; WINNER: DiniMueter, SCORE: 7.00
 2020-05-08 17:17; Janni, gaylord88; WINNER: Janni, SCORE: 7.40
 2020-05-08 17:09; Luusbueb98, Janni; WINNER: Luusbueb98, SCORE: 9.20
+2020-05-10 23:13; Manuela1, Manuela; WINNER: Manuela1, SCORE: 100.00

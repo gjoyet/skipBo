@@ -13,6 +13,7 @@ import static skipbo.server.Protocol.*;
 class SBClientListener {
     Socket sock;
     PrintWriter pw;
+    ChatGraphic chatGraphic;
 
     /**
      * Creates a Skip-Bo client listener
@@ -66,6 +67,9 @@ class SBClientListener {
                 break;
             case "/list":
                 protocolString = getListString(input);
+                break;
+            case "/cheat":
+                protocolString = getCheatString(command);
                 break;
             case "/quit":
                 pw.println(LGOUT + "");
@@ -196,6 +200,22 @@ class SBClientListener {
         return DISPL + "§" + option;
     }
 
+    String getCheatString(String[] command) throws NotACommandException {
+        if (chatGraphic.getGameGraphic() == null) {
+            throw new NotACommandException("You can only use cheats in a game");
+        }
+        if (command.length < 2) {
+            throw new NotACommandException("Please specify the cheat that you wan't to use");
+        }
+        if (command[1].equalsIgnoreCase("joker")) {
+            chatGraphic.getGameGraphic().cheatJoker(chatGraphic.getPlayerName());
+            return CHEAT + "§Joker";
+        } else if (command[1].equalsIgnoreCase("win")) {
+            return CHEAT + "§Win";
+        }
+        throw new NotACommandException("Valid cheats: /cheat Joker || /cheat Win");
+    }
+
     /**
      * Terminates SBClientListener thread
      */
@@ -207,6 +227,10 @@ class SBClientListener {
             clientLog.warn("Issue with closing the socket");
         }
         clientLog.debug("logged out");
+    }
+
+    void setChatGraphic(ChatGraphic chatGraphic) {
+        this.chatGraphic = chatGraphic;
     }
 
 }

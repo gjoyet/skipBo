@@ -411,6 +411,24 @@ public class ProtocolExecutor {
         }
     }
 
+    public void cheat() throws NoCommandException {
+        if(input.length < 2) throw new NoCommandException();
+        switch(input[1]) {
+            case "Joker":
+                sbL.getPlayer().getGame().cheat(sbL.getPlayer());
+                sendAllExceptOne(Protocol.CHEAT + "§Joker§" + sbL.getPlayer().getName(), sbL);
+                break;
+            case "Win":
+                String oldName = sbL.player.getName();
+                sbL.player.changeName("CHEATER");
+                broadcast(Protocol.CHNGE + "§Nickname§" + oldName + "§CHEATER");
+                sbL.player.getGame().endGameCheat(sbL.player);
+                break;
+            default:
+                throw new NoCommandException(input[0], input[1]);
+        }
+    }
+
     /**
      * Method for command DISPL. Displays certain elements (players, games,...) to client.
      */

@@ -50,5 +50,9 @@ public enum Protocol {
      * Tells the client that a player joined or left the server or changed its name.
      */
     PLAYR,
+    /**
+     * Tells receiver that a cheat code has been activated.
+     */
+    CHEAT;
 
 }

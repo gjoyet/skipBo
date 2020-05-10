@@ -84,6 +84,9 @@ public class SBListener implements NWPListener {
                 case PLAYR:
                     new ProtocolExecutor(input, this).playerLeavingGame();
                     break;
+                case CHEAT:
+                    new ProtocolExecutor(input, this).cheat();
+                    break;
             }
         } catch(IllegalArgumentException iae) {
             servLog.warn(input[0] + ": not a command.");

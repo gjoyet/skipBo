@@ -629,6 +629,24 @@ public class Game implements Runnable {
         new ProtocolExecutor(new String[]{""}, winner.getSBL()).gameEnding(this);
     }
 
+    public void endGameCheat(Player winner) {
+        servLog.info("Game ending.");
+        gameRunning = false;
+        this.winner = winner;
+
+        for(int i = 0; i < 4; i++){
+            ArrayList<Card> bp = piles.buildPiles.get(i);
+            bp.clear();
+        }
+
+        score = 100.00;
+        if (winner != null) {
+            new ProtocolExecutor().sendAll(Protocol.ENDGM + "§Winner§" + winner.getName() + "§" +
+                    this.score, winner.getSBL());
+        }
+        new ProtocolExecutor(new String[]{""}, winner.getSBL()).gameEnding(this);
+    }
+
     /**
      * Method for a cheat code - adds 3 joker cards on top of stock.
      */

@@ -493,23 +493,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
                 };
                 timer.schedule(task, 500);
             }
-
-            //marioMusic.pause();
-/*                if (marioMusic.isPaused()){
-                    clientLog.info("in isMuted method");
-                    marioMusic.pause();
-                    clientLog.info((marioMusic.isMuted()));
-                    pause.setBackground(Color.green);
-                    pause.setText("Playing");
-                }
-                else {
-                    clientLog.info("in notPause method");
-                    marioMusic.pause();
-                    clientLog.info((marioMusic.isMuted()));
-                    pause.setBackground(Color.red);
-                    pause.setText("Paused");
-                }*/
-
         } else if (buttonPressed == manualB) {
             if (Desktop.isDesktopSupported()) {
                 try {
@@ -533,11 +516,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             }
 
         } else if (buttonPressed == whosOnB) {
-
- /*           if(music.loadFile("src/main/resources/buttonclick2.mp3")){
-                music.run();
-                music.play();
-            }*/
             try {
                 clientListener.forward("/list players");
             } catch (NotACommandException e) {
@@ -603,8 +581,14 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
     }
 
+    /**
+     * Method to display High Score in following format:
+     * Format:  "2020-04-26 17:47\nGuillaume1, Guillaume\nWINNER: Guillaume, SCORE: 8.67\n\n"
+     * @param scores String array with the scores
+     */
+
     void setHighScore(String[] scores) {
-        //Format:  "2020-04-26 17:47\nGuillaume1, Guillaume\nWINNER: Guillaume, SCORE: 8.67\n\n"
+
         String scoreString = "Skip-Bro High scores Top 5\n\n";
         String winnerString = " WINNER: ";
         for (String score : scores) {

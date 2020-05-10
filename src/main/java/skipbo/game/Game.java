@@ -13,13 +13,18 @@ import java.util.Random;
 
 import static skipbo.server.SBServer.servLog;
 
+/**
+ * Class for the implementation of the game Skip Bo, with all hand operation methods
+ * and other essential in game methods.
+ */
+
 public class Game implements Runnable {
 
     public ArrayList<Player> players;
     public int turnCounter = 0;
     public double score = -1.0;
     Pile piles;
-    int sizeOfStockPile;    //3 for DEMO purposes, actually 20
+    int sizeOfStockPile;
     int playersTurn = 0;
     private Player winner;
     private boolean gameRunning;
@@ -70,10 +75,10 @@ public class Game implements Runnable {
     /**
      * Gets a game with its players and status (all in one line).
      */
-    public String toString(boolean forHighscore) {
+    public String toString(boolean forHighScore) {
         StringBuilder gToString = new StringBuilder();
 
-        if (forHighscore) {
+        if (forHighScore) {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             LocalDateTime now = LocalDateTime.now();
             gToString.append(dtf.format(now)).append("; ");
@@ -83,7 +88,7 @@ public class Game implements Runnable {
             gToString.append(players.get(i).getName());
             if (!(i == players.size() - 1)) gToString.append(", ");
         }
-        if(!forHighscore) {
+        if(!forHighScore) {
             if (gameRunning) {
                 gToString.append("; RUNNING.");
             } else {

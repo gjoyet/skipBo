@@ -2,6 +2,7 @@ Skip-Bro Highscores (score = turns to win / stockpile size; lower scores are bet
 
 2020-05-10 10:53; Guillaume, Guillaume1; WINNER: Guillaume1, SCORE: 1.00
 2020-05-08 17:11; Luusbueb98, Janni; WINNER: Janni, SCORE: 1.60
+2020-05-10 21:04; Nope, Rohan, Manuela, DigBick; WINNER: DigBick, SCORE: 2.80
 2020-05-08 16:59; Guillaume, Haludri; WINNER: Guillaume, SCORE: 4.40
 2020-05-10 10:30; Guillaume, Guillaume1; WINNER: Guillaume, SCORE: 4.40
 2020-05-10 10:56; Guillaume, Guillaume1; WINNER: Guillaume1, SCORE: 5.20

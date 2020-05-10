@@ -449,11 +449,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
         //Button sounds
         if (!soundMuted) {
-            MusicPlayer buttonSound = new MusicPlayer();
-            if (buttonSound.loadFile("src/main/resources/buttonclick2.mp3")) {
-                //buttonSound.run();
-                buttonSound.play();
-            }
+            playButtonSound();
         }
 
         JButton buttonPressed = (JButton) actionEvent.getSource();
@@ -485,6 +481,9 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
             int option = JOptionPane.showConfirmDialog(contentPane, startGamePanel, "Please select to start a game",
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+            if (!soundMuted) {
+                playButtonSound();
+            }
             if (option == JOptionPane.OK_OPTION) {
                 clientListener.pw.println(NWGME + "§New§" + playerBox.getSelectedItem() + "§" + stockBox.getSelectedItem());
             }
@@ -566,6 +565,9 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         } else if (buttonPressed == changeNameB) {
             String name = (String) JOptionPane.showInputDialog(contentPane, "Enter your new name:",
                     "Change your name", JOptionPane.PLAIN_MESSAGE, null, null, playerName);
+            if (!soundMuted) {
+                playButtonSound();
+            }
             if (name != null) {
                 clientListener.pw.println(Protocol.CHNGE + "§Nickname§" + name);
             }
@@ -686,6 +688,13 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             backgroundMusic.play();
             backgroundMusic.loop();
             clientLog.info(backgroundMusic.isPlaying());
+        }
+    }
+
+    void playButtonSound() {
+        MusicPlayer buttonSound = new MusicPlayer();
+        if (buttonSound.loadFile("src/main/resources/buttonclick2.mp3")) {
+            buttonSound.play();
         }
     }
 

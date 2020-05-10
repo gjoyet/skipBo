@@ -26,7 +26,7 @@ public class GameGraphic implements ActionListener {
     private final String playerName;
     JLayeredPane layeredPane;
     ActionListener actionListener = this;
-    private boolean soundMuted = false;
+    boolean soundMuted = false;
 
 
     // Layout of opponents

@@ -120,6 +120,9 @@ public class Tutorial extends GameGraphic implements ActionListener {
      */
     private void moveThree() {
         moveNumber = 3;
+        if (!soundMuted) {
+            playCardSound();
+        }
         chosenBuildButton.setIcon(cardIcons.getIcon("B", 1, CardIcons.LARGE));
         hand[3].setIcon(hand[4].getIcon());
         hand[4].setIcon(null);
@@ -156,6 +159,9 @@ public class Tutorial extends GameGraphic implements ActionListener {
      */
     private void moveFive() {
         moveNumber = 5;
+        if (!soundMuted) {
+            playCardSound();
+        }
         chosenBuildButton.setIcon(stock.getIcon());
         stock.setIcon(cardIcons.getIcon("B", 6, CardIcons.LARGE));
         numOfStockCards.setText("1 card left");
@@ -184,6 +190,9 @@ public class Tutorial extends GameGraphic implements ActionListener {
      */
     private void moveSeven() {
         moveNumber = 7;
+        if (!soundMuted) {
+            playCardSound();
+        }
         layeredPane.remove(upArrow);
         instruction.setText("");
         layeredPane.repaint();
@@ -262,6 +271,9 @@ public class Tutorial extends GameGraphic implements ActionListener {
      */
     private void moveNine() {
         moveNumber = 9;
+        if (!soundMuted) {
+            playCardSound();
+        }
         layeredPane.remove(downArrow);
         layeredPane.repaint();
         chosenBuildButton.setIcon(cardIcons.getIcon("S", 5, CardIcons.LARGE));
@@ -296,6 +308,9 @@ public class Tutorial extends GameGraphic implements ActionListener {
      *Ends the tutorial.
      */
     private void endTutorial() {
+        if (!soundMuted) {
+            playCardSound();
+        }
         chosenBuildButton.setIcon(cardIcons.getIcon("B", 6, CardIcons.LARGE));
         stock.setIcon(null);
         numOfStockCards.setText("0 cards left");

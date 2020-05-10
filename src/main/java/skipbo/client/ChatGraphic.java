@@ -85,13 +85,16 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
      * @param clientListener A SBClientListener
      * @param name           The player name that was initially chosen when starting the program
      */
-    ChatGraphic(SBClientListener clientListener, String name) {
+    ChatGraphic(SBClientListener clientListener, String name, boolean testing) {
+        isTesting = testing;
         this.clientListener = clientListener;
         setFrame();
         clientListener.pw.println("SETTO§Nickname§" + name);
         printInfoMessage("Connection successful");
         printCommandList();
-        playMusic();
+        if (!testing) {
+            playMusic();
+        }
     }
 
     /**
@@ -492,7 +495,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
                         unmuteIsBlocked = false;
                     }
                 };
-                timer.schedule(task, 500);
+                timer.schedule(task, 100);
             }
         } else if (buttonPressed == manualB) {
             if (Desktop.isDesktopSupported()) {

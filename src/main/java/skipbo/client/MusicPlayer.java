@@ -95,7 +95,7 @@ public class MusicPlayer implements Runnable{
      * calling it again unmutes the audio stream.
      */
     public void mute(){
-        if(file != null){
+        if(file != null) {
             if(mute){
                 mute = false;
             }

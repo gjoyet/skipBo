@@ -83,7 +83,7 @@ public class ProtocolExecutor {
     private void informLogin(String name) {
         sbL.getPW().println(Protocol.SETTO + "§Nickname§" + name);
         sbL.getPW().println(Protocol.PLAYR + "§List§" + sbL.getServer().getWholePlayerList(sbL.getPlayer()));
-        sendAllExceptOne(Protocol.PLAYR + "§Joined§" + name, sbL);
+        broadcastExceptOne(Protocol.PLAYR + "§Joined§" + name, sbL);
         servLog.info(name + " logged in.");
         sbL.pw.println(Protocol.PRINT + "§Terminal§Welcome to Skip-Bo, " + name + "!");
         sendAllExceptOne(Protocol.PRINT + "§Terminal§" + name + " joined the room. Say hi!", sbL);
@@ -125,11 +125,12 @@ public class ProtocolExecutor {
             if (input[1].equals("Nickname")) {
                 String name = input[2];
                 if (!fromServer && sbL.player.getStatus().equals(Status.INGAME)) {
-                    sbL.getPW().println("You cannot change your name during a game.");
+                    sbL.getPW().println(Protocol.PRINT + "§Terminal§You cannot change your name during a game.");
                     return;
                 }
                 if (sbL.player.isCheater()) {
-                    sbL.getPW().println("You cannot change your name anymore, you cheating cretin!");
+                    sbL.getPW().println(Protocol.PRINT + "§Terminal§" +
+                            "You cannot change your name anymore, you cheating cretin!");
                     return;
                 }
                 if (name.equals(sbL.player.getName())) {

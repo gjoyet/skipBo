@@ -74,7 +74,9 @@ public class Game implements Runnable {
     }
 
     /**
-     * Gets a game with its players and status (all in one line).
+     * Gets a String of a game with its players and status (all in one line). If forHighScore is true,
+     * the date and time are put in front of the game and the state of the game (which would always be
+     * "FINISHED") is dropped.
      */
     public String toString(boolean forHighScore) {
         StringBuilder gToString = new StringBuilder();
@@ -608,6 +610,9 @@ public class Game implements Runnable {
         startTurn(playersTurn);     //starts next turn
     }
 
+    /**
+     * Ends the current turn after the player who's turn it was left the game.
+     */
     public void endTurnAfterLeaving() {
         servLog.debug("Entered endTurnAfterLeaving.");
         if ((playersTurn == players.size())) {     //if not the last player in the array, go up by one
@@ -642,7 +647,10 @@ public class Game implements Runnable {
         new ProtocolExecutor(new String[]{""}, winner.getSBL()).gameEnding(this);
     }
 
-
+    /**
+     * Ends game after someone used the cheat "Win". The score is set to 100.
+     * @param winner
+     */
     public void endGameCheat(Player winner) {
         servLog.info("Game ending.");
         gameRunning = false;
@@ -662,7 +670,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * Method for a cheat code - adds 3 joker cards on top of stock.
+     * Method for the cheat code "Joker" - adds 3 joker cards on top of stock.
      */
     public void cheat(Player player) {
         ArrayList<ArrayList<Card>> dPile = player.getDiscardPiles();
@@ -679,7 +687,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * Punishes a player for using a cheat code
+     * Punishes a player for using the cheat code "Joker".
      * @param player Player that used the cheat
      */
     private void cheatPunishment(Player player) {
@@ -691,8 +699,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * Method for when a game gets interrupted because people left.
-     * Clears all game cards.
+     * Method for when a game gets interrupted because people left. Clears all game cards.
      */
     public void terminateGame() {
         this.gameRunning = false;

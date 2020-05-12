@@ -40,16 +40,16 @@ public class SBServer implements Runnable {
      */
     public void run() {
 
-        File highscores = new File("/skipBoLogs/Highscores.txt");
+        File highscores = new File("skipBoLogs/Highscores.txt");
         if (!highscores.exists()) {
             try {
                 if (highscores.createNewFile()) {
                     PrintWriter pw = new PrintWriter(new FileOutputStream(highscores), true);
-                    pw.println("Skip-Bro Highscores (score = turns to win / stockpile size; lower scores are better");
+                    pw.println("Skip-Bro Highscores (score = turns to win / stockpile size; lower scores are better)");
                     pw.println();
                 }
             } catch (IOException ioe) {
-                 servLog.error("Problem with opening or writing in new highscore file.");
+                 ioe.printStackTrace();
             }
         }
 

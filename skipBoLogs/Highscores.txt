@@ -1,0 +1,1 @@
+Skip-Bro Highscores (score = turns to win / stockpile size; lower scores are better)

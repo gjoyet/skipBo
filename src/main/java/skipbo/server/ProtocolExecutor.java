@@ -99,11 +99,13 @@ public class ProtocolExecutor {
             String string = "";
             for(int i=0; i < 10; i++) {
                 line = br.readLine();
-                if(line == null || line == "") break;
+                if(line == null) break;
                 string = string + line + "§";
             }
-            servLog.debug("Sending DISPL§highscore with arguments: " + string);
-            sbL.getPW().println(Protocol.DISPL + "§highscore§" + string);
+            if(!string.equals("")) {
+                servLog.debug("Sending DISPL§highscore with arguments: " + string);
+                sbL.getPW().println(Protocol.DISPL + "§highscore§" + string);
+            }
         } catch (FileNotFoundException e) {
             servLog.error("File not found.");
         } catch (IOException e) {

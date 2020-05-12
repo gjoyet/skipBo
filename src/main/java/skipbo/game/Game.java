@@ -162,7 +162,7 @@ public class Game implements Runnable {
     void startFirstTurn(int playersTurn) {
         servLog.debug("Entered first turn.");
         Player ply = players.get(playersTurn);
-        new ProtocolExecutor().sendAll(Protocol.PRINT + "Terminal§DP Size: " + piles.drawPile.size(), ply.getSBL());
+        new ProtocolExecutor().sendAll(Protocol.PRINT + "§Terminal§DP Size: " + piles.drawPile.size(), ply.getSBL());
         Player player = players.get(playersTurn);
         player.getSBL().getPW().println(Protocol.PRINT +
                 "§Terminal§It's your first turn! Your first set of hand cards are shown now!");
@@ -705,7 +705,7 @@ public class Game implements Runnable {
     private void cheatPunishment(Player player) {
         for (int i = 0; i < 5;  i++){
             Card top = this.getDrawPile().get(getDrawPile().size()-1);
-            player.getStockPile().add(top);
+            player.getStockPile().add(0,top);
             getDrawPile().remove(top);
         }
     }

@@ -470,11 +470,10 @@ public class ProtocolExecutor {
                 sbL.getPlayer().getGame().terminateGame();
             } else {
                 sendAllExceptOne(Protocol.PLAYR + "§LeaveGame§" + sbL.getPlayer().getName(), sbL);
-                boolean changeTurn = sbL.getPlayer().getGame().playerLeaving(sbL.getPlayer());
+                boolean[] changeTurn = sbL.getPlayer().getGame().playerLeaving(sbL.getPlayer());
                 sbL.getPlayer().getGame().players.remove(sbL.getPlayer());
-                if(changeTurn) {
-                    sbL.player.getGame().endTurnAfterLeaving();
-                }
+                sbL.player.getGame().endTurnAfterLeaving(changeTurn);
+
             }
             sbL.getPlayer().changeGame(null);
             sbL.getPlayer().changeStatus(Status.WAITING);

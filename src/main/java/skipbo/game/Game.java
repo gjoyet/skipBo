@@ -188,10 +188,10 @@ public class Game implements Runnable {
         fillHandCards(ply);
         turnCounter++;
 
-//        ply.getSBL().getPW().println(Protocol.PRINT + "§Terminal§It's your turn!");
+       ply.getSBL().getPW().println(Protocol.PRINT + "§Terminal§It's your turn!");
 
-//        new ProtocolExecutor().sendAllExceptOne(Protocol.PRINT + "§Terminal§It's " + ply.getName()
-//                + "'s turn!", ply.getSBL());
+       new ProtocolExecutor().sendAllExceptOne(Protocol.PRINT + "§Terminal§It's " + ply.getName()
+               + "'s turn!", ply.getSBL());
     }
 
     /**
@@ -582,10 +582,12 @@ public class Game implements Runnable {
      * @param player Player that's left.
      */
 
-    public boolean playerLeaving(Player player) {
-        boolean isTurn = false;
-        if (players.get(playersTurn).equals(player) || players.indexOf(player) < playersTurn){
-            isTurn = true;
+    public boolean[] playerLeaving(Player player) {
+        boolean[] changeTurn = new boolean[]{false, false};
+        if (players.get(playersTurn).equals(player)) {
+            changeTurn[0] = true;
+        } else if (players.indexOf(player) < playersTurn) {
+            changeTurn[1] = true;
         }
 
         ArrayList<Card> handCards = player.getHandCards();
@@ -601,7 +603,7 @@ public class Game implements Runnable {
         piles.emptyPile.addAll(stockPile);  //adds to empty pile
         stockPile.clear();      //removes cards from the player's stock pile
 
-        return isTurn;
+        return changeTurn;
     }
 
     /**
@@ -622,13 +624,13 @@ public class Game implements Runnable {
     /**
      * Ends the current turn after the player who's turn it was left the game.
      */
-    public void endTurnAfterLeaving() {
+    public void endTurnAfterLeaving(boolean[] changeTurn) {
         servLog.debug("Entered endTurnAfterLeaving.");
-        if ((playersTurn == players.size())) {     //if not the last player in the array, go up by one
+        if (changeTurn[0]) {     //if not the last player in the array, go up by one
             playersTurn = 0;        //otherwise start over from first player
             turnCounter++;
             startTurn(playersTurn);
-        } else {
+        } else if (changeTurn[1]){
             playersTurn--;
         }
     }

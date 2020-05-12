@@ -17,6 +17,7 @@ public class Player {
     private Game game;
     private final Pile piles;
     private Status status;
+    private boolean cheater;
 
     /**
      * Player constructor to build a Player object with
@@ -32,7 +33,7 @@ public class Player {
         this.sbListen = sbListen;
         this.piles = new Pile(id);
         this.status = Status.WAITING;
-
+        this.cheater = false;
     }
 
     /**
@@ -44,6 +45,7 @@ public class Player {
         this.sbListen = null;
         this.piles = new Pile(id);
         this.status = Status.INGAME;
+        this.cheater = false;
     }
 
     /**
@@ -90,6 +92,10 @@ public class Player {
         this.status = ps;
         servLog.info(this.name + " status set to: " + ps + ".");
     }
+
+    public void cheated() { this.cheater = true; }
+
+    public boolean isCheater() { return this.cheater; }
 
     /**
      * returns the current game

@@ -66,7 +66,7 @@ public class SBListener implements NWPListener {
                     new ProtocolExecutor(input, this).setTo();
                     break;
                 case CHNGE:
-                    new ProtocolExecutor(input, this).changeTo();
+                    new ProtocolExecutor(input, this).changeTo(false);
                     break;
                 case CHATM:
                     new ProtocolExecutor(input, this).chatMessage();

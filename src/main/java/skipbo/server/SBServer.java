@@ -6,7 +6,7 @@ import skipbo.game.Game;
 import skipbo.game.Player;
 import skipbo.game.Status;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -35,9 +35,24 @@ public class SBServer implements Runnable {
     public ArrayList<SBListener> getSblList() { return sbListenerList; }
 
     /**
-     * This method opens a ServerSocket and then waits for clients to connect.
+     * This method opens a ServerSocket and then waits for clients to connect. If there is no Highscores.txt file on
+     * the computer where the server is run yet, it makes a new one.
      */
     public void run() {
+
+        File highscores = new File("/skipBoLogs/Highscores.txt");
+        if (!highscores.exists()) {
+            try {
+                if (highscores.createNewFile()) {
+                    PrintWriter pw = new PrintWriter(new FileOutputStream(highscores), true);
+                    pw.println("Skip-Bro Highscores (score = turns to win / stockpile size; lower scores are better");
+                    pw.println();
+                }
+            } catch (IOException ioe) {
+                 servLog.error("Problem with opening or writing in new highscore file.");
+            }
+        }
+
         ServerSocket sbServerSocket = null;
 
         try {

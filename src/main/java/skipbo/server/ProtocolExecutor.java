@@ -209,7 +209,7 @@ public class ProtocolExecutor {
                     sbL.getPW().println(Protocol.PRINT + "§Terminal§Players list: " + sbL.getServer().getWholePlayerList());
                     break;
                 case "games":
-                    String[] gamesList = sbL.getServer().getGamesList();
+                    String[] gamesList = sbL.getServer().getGamesListString();
                     if (gamesList.length == 0) {
                         sbL.getPW().println(Protocol.PRINT + "§Terminal§No games have been started until now.");
                     } else {
@@ -314,7 +314,7 @@ public class ProtocolExecutor {
                 Thread gameT = new Thread(game);
                 gameT.start();
                 servLog.info("Game started.");
-                servLog.debug("Size of gameList: " + sbL.getServer().serverLobby.getGames().size());
+                servLog.debug("Size of gameList: " + sbL.getServer().serverLobby.getGamesList().size());
                 return;
             } else {
                 sbL.getPW().println(Protocol.PRINT + "§Terminal§Not enough people are ready.");

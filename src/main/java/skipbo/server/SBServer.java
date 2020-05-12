@@ -115,15 +115,15 @@ public class SBServer implements Runnable {
     /**
      * @return a String with all games, running and finished.
      */
-    public synchronized String[] getGamesList() {
-        String[] allGames = new String[serverLobby.getGames().size()];
+    public synchronized String[] getGamesListString() {
+        String[] allGames = new String[serverLobby.getGamesList().size()];
         int counter = 0;
-        for(Game g : serverLobby.getGames()) {
+        for(Game g : serverLobby.getGamesList()) {
             if(g.gameIsRunning()) {
                 allGames[counter++] = counter + ": " + g.toString(false);
             }
         }
-        for(Game g : serverLobby.getGames()) {
+        for(Game g : serverLobby.getGamesList()) {
             if(!g.gameIsRunning()) {
                 allGames[counter++] = counter + ": " + g.toString(false);
             }

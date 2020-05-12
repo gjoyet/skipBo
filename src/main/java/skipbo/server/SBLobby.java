@@ -21,32 +21,37 @@ public class SBLobby {
         return this.playerLobby;
     }
 
-    public ArrayList<Game> getGames() {
+    public ArrayList<Game> getGamesList() {
         return this.gameList;
-    }
-
-    int getSize() {
-        return playerLobby.size();
-    }
-
-    SBListener getSBL(int index) {
-        return playerLobby.get(index).getSBL();
     }
 
     Player getPlayer(int index) {
         return playerLobby.get(index);
     }
 
-    public void clearLobby() { this.playerLobby.clear(); }
-
     /**
-     * Returns the player in the Lobby with the name given as argument. If the player does not exists, the method return null.
+     * Returns the player in the Lobby with the name given as argument.
+     * If the player does not exists, the method return null.
      */
     Player getPlayerByName(String name) {
         for (Player p : this.playerLobby) {
             if (p.getName().equals(name)) return p;
         }
         return null;
+    }
+
+    /**
+     * @return the sbL of the player with 'index'.
+     */
+    SBListener getSBL(int index) {
+        return playerLobby.get(index).getSBL();
+    }
+
+    /**
+     * @return the size of the playerLobby
+     */
+    int getSize() {
+        return playerLobby.size();
     }
 
     void addPlayer(Player p) {

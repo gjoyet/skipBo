@@ -1,7 +1,6 @@
 package skipboTest.serverTest;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import skipbo.game.Status;
 import skipbo.server.*;
@@ -221,12 +220,12 @@ public class ProtocolExecutorTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        assertEquals(1, Main.server.getLobby().getGames().size());
+        assertEquals(1, Main.server.getLobby().getGamesList().size());
         // Test: First game was started, second one did not (not enough people ready)
-        assertEquals("Manuela\nJanni", Main.server.getLobby().getGames().get(0).getPlayerList());
+        assertEquals("Manuela\nJanni", Main.server.getLobby().getGamesList().get(0).getPlayerList());
         // Test: Client 0 (Guillaume1) and 1 (Manuela) – the only one that was ready and the one that started the game,
         // even though the client was not ready – are the ones in the game, client 1 comes first since it started game
-        assertEquals(30, Main.server.getLobby().getGames().get(0).players.get(0).getStockPile().size());
+        assertEquals(30, Main.server.getLobby().getGamesList().get(0).players.get(0).getStockPile().size());
         // Test: Stockpile of the game is 30 cards high
         assertEquals("Rohan, Guillaume",
                 Main.server.getPlayerNotIngameList());
@@ -389,9 +388,9 @@ public class ProtocolExecutorTest {
 
         assertEquals(3, Main.server.getLobby().getPlayerLobby().size());
         // Test: Player got removed from main lobby
-        assertEquals(1, Main.server.getLobby().getGames().get(0).players.size());
+        assertEquals(1, Main.server.getLobby().getGamesList().get(0).players.size());
         // Test: Player was removed from game lobby
-        assertEquals(false, Main.server.getLobby().getGames().get(0).gameIsRunning());
+        assertEquals(false, Main.server.getLobby().getGamesList().get(0).gameIsRunning());
         // Test: Server recognised game to have only one player left and terminated it
     }
 }

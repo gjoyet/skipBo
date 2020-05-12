@@ -140,7 +140,7 @@ public class ProtocolExecutor {
                     sbL.pw.println(Protocol.PRINT + "§Terminal§Name changed to " + name + ".");
                     sbL.pw.println(Protocol.CHNGE + "§Nickname§" + name);
                     servLog.info(formerName + " changed name to " + name + ".");
-                    sendAllExceptOne(Protocol.PLAYR + "§Change§" + formerName + "§" + name, sbL);
+                    broadcastExceptOne(Protocol.PLAYR + "§Change§" + formerName + "§" + name, sbL);
                     sendAllExceptOne(Protocol.PRINT + "§Terminal§" + formerName + " changed name to "
                                                                                                 + name + ".", sbL);
                 } else if (!sbL.getServer().serverLobby.nameIsValid(name)) {
@@ -172,7 +172,7 @@ public class ProtocolExecutor {
             sbL.pw.println(Protocol.PRINT + "§Terminal§Name changed to " + name + ".");
             sbL.pw.println(Protocol.CHNGE + "§Nickname§" + name);
             servLog.info(formerName + " changed name to " + name + ".");
-            sendAllExceptOne(Protocol.PLAYR + "§Change§" + formerName + "§" + name, sbL);
+            broadcastExceptOne(Protocol.PLAYR + "§Change§" + formerName + "§" + name, sbL);
             sendAllExceptOne(Protocol.PRINT + "§Terminal§" + formerName + " changed name to " + name + ".", sbL);
         }
     }

@@ -173,7 +173,16 @@ public class Game implements Runnable {
      */
 
     private void startTurn(int playersTurn) {
+        int joker =0;
         Player ply = players.get(playersTurn);
+        new ProtocolExecutor().sendAll(Protocol.PRINT + "Terminal§DP Size: " + piles.drawPile.size(),ply.getSBL());
+        for(Card card: piles.drawPile){
+            if(card.number == 13){
+                joker++;
+            }
+        }
+        new ProtocolExecutor().sendAll(Protocol.PRINT+"§Terminal§Number of jokers: " + joker, ply.getSBL());
+
         servLog.debug("Entered startTurn: it's " + ply.getName() + "'s turn.");
         checkDrawPile();
         fillHandCards(ply);

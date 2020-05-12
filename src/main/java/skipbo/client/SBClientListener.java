@@ -15,6 +15,8 @@ class SBClientListener {
     PrintWriter pw;
     ChatGraphic chatGraphic;
 
+    boolean usedJokerCheat = false;
+
     /**
      * Creates a Skip-Bo client listener
      *
@@ -209,6 +211,10 @@ class SBClientListener {
         }
         if (command[1].equalsIgnoreCase("joker")) {
             chatGraphic.getGameGraphic().cheatJoker(chatGraphic.getPlayerName());
+            if (usedJokerCheat) {
+                throw new NotACommandException("You can only cheat once!");
+            }
+            usedJokerCheat = true;
             return CHEAT + "§Joker";
         } else if (command[1].equalsIgnoreCase("win")) {
             return CHEAT + "§Win";

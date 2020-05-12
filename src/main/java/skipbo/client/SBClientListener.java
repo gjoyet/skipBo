@@ -210,11 +210,11 @@ class SBClientListener {
             throw new NotACommandException("Please specify the cheat that you wan't to use");
         }
         if (command[1].equalsIgnoreCase("joker")) {
-            chatGraphic.getGameGraphic().cheatJoker(chatGraphic.getPlayerName());
             if (usedJokerCheat) {
                 throw new NotACommandException("You can only cheat once!");
             }
             usedJokerCheat = true;
+            chatGraphic.getGameGraphic().cheatJoker(chatGraphic.getPlayerName());
             return CHEAT + "§Joker";
         } else if (command[1].equalsIgnoreCase("win")) {
             return CHEAT + "§Win";

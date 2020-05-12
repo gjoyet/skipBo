@@ -46,7 +46,6 @@ public class SBServer implements Runnable {
                 if (highscores.createNewFile()) {
                     PrintWriter pw = new PrintWriter(new FileOutputStream(highscores), true);
                     pw.println("Skip-Bro Highscores (score = turns to win / stockpile size; lower scores are better)");
-                    pw.println();
                 }
             } catch (IOException ioe) {
                  ioe.printStackTrace();

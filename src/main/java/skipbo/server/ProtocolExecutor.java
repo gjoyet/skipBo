@@ -99,7 +99,7 @@ public class ProtocolExecutor {
             String string = "";
             for(int i=0; i < 10; i++) {
                 line = br.readLine();
-                if(line == null) break;
+                if(line == null || line == "") break;
                 string = string + line + "§";
             }
             servLog.debug("Sending DISPL§highscore with arguments: " + string);

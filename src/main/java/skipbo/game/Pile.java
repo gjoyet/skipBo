@@ -62,7 +62,7 @@ public class Pile {
         colours.add(Color.red);         // Color index Nr. 2
         colours.add(Color.cyan);        // Color index Nr. 3
 
-        for (int j = 0; j < 12; j++) {        // Add Normal Cards (144 pcs.)
+        for (int j = 0; j < 6; j++) {        // Add Normal Cards (144 pcs.)
             for (int i = 0; i < 12; i++) {
                 Card card = new Card(i + 1, colours.get(colourCount));
                 this.drawPile.add(card);

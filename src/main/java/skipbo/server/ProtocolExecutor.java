@@ -195,13 +195,13 @@ public class ProtocolExecutor {
             } else if (nameAndMes[0].equals(sbL.player.getName())) {
                 sbL.getPW().println(Protocol.PRINT + "§Terminal§You private messaged yourself, duh...");
             } else {
-                sbL.getPW().println(Protocol.CHATM + "§Private§(to " + nameAndMes[0] + "): " + nameAndMes[1]);
+                sbL.getPW().println(Protocol.CHATM + "§Private§[to " + nameAndMes[0] + "]: " + nameAndMes[1]);
                 sbL.getServer().getLobby().getPlayerByName(nameAndMes[0]).getSBL().getPW().
-                        println(Protocol.CHATM + "§Private§(from " + sbL.player.getName() + "): " + nameAndMes[1]);
+                        println(Protocol.CHATM + "§Private§[from " + sbL.player.getName() + "]: " + nameAndMes[1]);
             }
         } else if (input[1].equals("Broadcast")) {
-            sbL.getPW().println(Protocol.CHATM + "§Broadcast§(BC) You: " + input[2]);
-            broadcastExceptOne(Protocol.CHATM + "§Broadcast§(BC) " + sbL.player.getName() + ": " + input[2], sbL);
+            sbL.getPW().println(Protocol.CHATM + "§Broadcast§[BC] You: " + input[2]);
+            broadcastExceptOne(Protocol.CHATM + "§Broadcast§[BC] " + sbL.player.getName() + ": " + input[2], sbL);
         } else throw new NoCommandException(input[0], input[1]);
 
     }

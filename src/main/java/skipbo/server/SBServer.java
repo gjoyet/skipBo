@@ -26,14 +26,17 @@ public class SBServer implements Runnable {
 
     int port;
 
-    /**
-     * Creates new SBServer Object.
-     * @param port: port on which ServerSocket will be based on.
-     */
     public SBServer(int port) {
         this.port = port;
     }
 
+    public SBLobby getLobby() { return serverLobby;}
+
+    public ArrayList<SBListener> getSblList() { return sbListenerList; }
+
+    /**
+     * This method opens a ServerSocket and then waits for clients to connect.
+     */
     public void run() {
         ServerSocket sbServerSocket = null;
 
@@ -68,10 +71,6 @@ public class SBServer implements Runnable {
         } finally {}
     }
 
-    public SBLobby getLobby() { return serverLobby;}
-
-    public ArrayList<SBListener> getSblList() { return sbListenerList; }
-
     /**
      * @return a String containing all players currently connected.
      */
@@ -85,7 +84,7 @@ public class SBServer implements Runnable {
     }
 
     /**
-     * @return a String containing all players currently connected except Player 'p'.
+     * @return a String containing all players currently connected except Player 'except'.
      */
     public String getWholePlayerList(Player except) {
         StringBuilder allNames = new StringBuilder();

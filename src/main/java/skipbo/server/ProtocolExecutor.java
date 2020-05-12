@@ -270,6 +270,7 @@ public class ProtocolExecutor {
      */
     public void newGame() throws NoCommandException {
         if (input.length < 2) throw new NoCommandException();
+        if (sbL.player.getStatus().equals(Status.INGAME)) return;
         if (input[1].equals("New")) {
             int n = 2;
             int x = 20;

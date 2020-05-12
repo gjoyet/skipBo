@@ -464,6 +464,7 @@ public class ProtocolExecutor {
         if(input.length < 1) throw new NoCommandException();
         if(input[1].equals("LeaveGame")) {
             if (sbL.getPlayer().getGame().players.size() == 2) {
+                sbL.getPlayer().getGame().playerLeaving(sbL.getPlayer());
                 sbL.player.getGame().players.remove(sbL.player);
                 sbL.getPlayer().getGame().terminateGame();
             } else {

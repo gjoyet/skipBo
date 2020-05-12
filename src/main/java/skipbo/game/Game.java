@@ -584,7 +584,7 @@ public class Game implements Runnable {
 
     public boolean playerLeaving(Player player) {
         boolean isTurn = false;
-        if (players.get(playersTurn).equals(player)){
+        if (players.get(playersTurn).equals(player) || players.indexOf(player) < playersTurn){
             isTurn = true;
         }
 
@@ -627,8 +627,10 @@ public class Game implements Runnable {
         if ((playersTurn == players.size())) {     //if not the last player in the array, go up by one
             playersTurn = 0;        //otherwise start over from first player
             turnCounter++;
+            startTurn(playersTurn);
+        } else {
+            playersTurn--;
         }
-        startTurn(playersTurn);     //starts next turn
     }
 
     /**

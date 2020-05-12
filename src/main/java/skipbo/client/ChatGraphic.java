@@ -197,8 +197,9 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         pause.addActionListener(this);
 
         soundB = new JButton();
+        soundB.setName("on");
         soundB.setBounds(X_MENU_B_R2+68, Y_MENU_B+ 4*Y_DISTANCE_MENU_B+8, 24, 24); //x:72
-        soundB.setBackground(DARKGREEN);
+        soundB.setIcon(new ImageIcon("src/main/resources/fx_on.png"));
         contentPane.add(soundB);
         soundB.addActionListener(this);
 
@@ -517,9 +518,9 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
                 gameGraphic.setSoundMuted(soundMuted);
             }
             if (soundMuted) {
-                soundB.setBackground(Color.red);
+                soundB.setIcon(new ImageIcon("src/main/resources/fx_off.png"));
             } else {
-                soundB.setBackground(DARKGREEN);
+                soundB.setIcon(new ImageIcon("src/main/resources/fx_on.png"));
             }
         } else if (buttonPressed == manualB) {
             if (Desktop.isDesktopSupported()) {

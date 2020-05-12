@@ -73,6 +73,9 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
      */
     ChatGraphic(SBClientListener clientListener, boolean testing) {
         isTesting = testing;
+        if (testing) {
+            soundMuted = true;
+        }
         this.clientListener = clientListener;
         setFrame();
         if(!testing) setName();
@@ -96,6 +99,8 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         printCommandList();
         if (!testing) {
             playMusic();
+        } else {
+            soundMuted = true;
         }
         clientListener.setChatGraphic(this);
     }

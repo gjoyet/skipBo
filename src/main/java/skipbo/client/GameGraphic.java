@@ -849,8 +849,8 @@ public class GameGraphic implements ActionListener {
         if (name.equals(playerName)) {
             numOfStockCards.setName(String.valueOf(Integer.parseInt(numOfStockCards.getName())+5));
             numOfStockCards.setText(Integer.parseInt(numOfStockCards.getName()) + " cards left");
-            for (int i = 0; i < 4; i++) {
-                al = discard[i];
+            for (int i = 1; i < 5; i++) {
+                al = discard[i-1];
                 CardButton oldDisCard = al.get(al.size() - 1);
                 newDisCard = new CardButton(CardButton.DISCARD);
                 newDisCard.addActionListener(actionListener);

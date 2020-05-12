@@ -246,11 +246,9 @@ public class ProtocolExecutor {
                 sbL.player.getGame().players.remove(sbL.player);
                 sbL.getPlayer().getGame().terminateGame();
             } else {
-                boolean isTurn = sbL.getPlayer().getGame().playerLeaving(sbL.player);
+                boolean[] changeTurn = sbL.getPlayer().getGame().playerLeaving(sbL.player);
                 sbL.player.getGame().players.remove(sbL.player);
-                if(isTurn) {
-                    sbL.player.getGame().endTurnAfterLeaving();
-                }
+                sbL.player.getGame().endTurnAfterLeaving(changeTurn);
             }
         }
         for (Player p : sbL.getServer().serverLobby.getPlayerLobby()) {

@@ -687,13 +687,7 @@ public class Game implements Runnable {
     public void cheat(Player player) {
         ArrayList<ArrayList<Card>> dPile = player.getDiscardPiles();
         for(ArrayList<Card> specDiscard: dPile){
-            if(specDiscard.isEmpty()){
-                specDiscard.add(new Card(13,Color.CYAN));
-                specDiscard.add(new Card(13,Color.CYAN));
-                specDiscard.add(new Card(13,Color.CYAN));
-                return;
-            }
-            specDiscard.add(new Card(13,Color.CYAN));
+            specDiscard.add(new Card(13,Color.cyan));
         }
         cheatPunishment(player);
     }

@@ -322,6 +322,9 @@ public class GameGraphic implements ActionListener {
         if (names[i].equals(playerName)) {
             i++;
             yourTurnLabel.setVisible(true); //if your own name is the first one -> it's your turn
+            if (!soundMuted) {
+                playTurnSound();
+            }
         } else {
             e1.setForeground(ChatGraphic.DARKGREEN);
             e1.setFont(new Font(DEFAULTFONT.getName(), Font.BOLD, DEFAULTFONT.getSize()+5));
@@ -508,7 +511,9 @@ public class GameGraphic implements ActionListener {
                 oppArray[playerIndex].setFont(new Font(DEFAULTFONT.getName(), Font.BOLD, DEFAULTFONT.getSize()+5));
             } else { //it's this players turn
                 yourTurnLabel.setVisible(true);
-                playTurnSound();
+                if (!soundMuted) {
+                    playTurnSound();
+                }
             }
         }
     }

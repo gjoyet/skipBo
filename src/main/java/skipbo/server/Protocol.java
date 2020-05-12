@@ -11,10 +11,6 @@ public enum Protocol {
      */
     PRINT,
     /**
-     * For server: sends all clients the received chat message; For client: prints chat message (options: Global, Private).
-     */
-    CHATM,
-    /**
      * Sets a parameter given as option to the value given as argument.
      */
     SETTO,
@@ -22,6 +18,18 @@ public enum Protocol {
      * Changes an already existing parameter given as option to the value given as argument.
      */
     CHNGE,
+    /**
+     * For server: sends all clients the received chat message; For client: prints chat message (options: Global, Private).
+     */
+    CHATM,
+    /**
+     * Displays information on chat window.
+     */
+    DISPL,
+    /**
+     * Tells the client that a player joined or left the server or changed its name.
+     */
+    PLAYR,
     /**
      * For server: client wants to log ut; For Client: confirmation that logout was successful.
      */
@@ -39,20 +47,12 @@ public enum Protocol {
      */
     CHECK,
     /**
-     * Displays information on chat window.
+     * Tells receiver that a cheat code has been activated.
      */
-    DISPL,
+    CHEAT,
     /**
      * Tells the client that the game is finished and who the winner is
      */
-    ENDGM,
-    /**
-     * Tells the client that a player joined or left the server or changed its name.
-     */
-    PLAYR,
-    /**
-     * Tells receiver that a cheat code has been activated.
-     */
-    CHEAT;
+    ENDGM
 
 }

@@ -6,6 +6,9 @@ import skipbo.client.SBClient;
 
 import java.util.ArrayList;
 
+/**
+ * Main class of the program. Triggers a server or a client, according to command line arguments.
+ */
 public class Main {
 
     static Logger mainLog = LogManager.getLogger(Main.class);

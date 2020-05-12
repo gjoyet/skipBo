@@ -73,12 +73,7 @@ public class MusicPlayer implements Runnable{
      */
     public void pause(){
         if(file != null){
-            if(pause) {
-                pause = false;
-            }
-            else{
-                pause = true;
-            }
+            pause = !pause;
         }
     }
     /**
@@ -96,12 +91,7 @@ public class MusicPlayer implements Runnable{
      */
     public void mute(){
         if(file != null) {
-            if(mute){
-                mute = false;
-            }
-            else{
-                mute = true;
-            }
+            mute = !mute;
         }
     }
     /**
@@ -111,10 +101,7 @@ public class MusicPlayer implements Runnable{
      */
     public void loop(){
         if(file != null){
-            if(loop) loop = false;
-            else{
-                loop = true;
-            }
+            loop = !loop;
         }
     }
     /**

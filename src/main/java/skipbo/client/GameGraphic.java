@@ -508,6 +508,7 @@ public class GameGraphic implements ActionListener {
                 oppArray[playerIndex].setFont(new Font(DEFAULTFONT.getName(), Font.BOLD, DEFAULTFONT.getSize()+5));
             } else { //it's this players turn
                 yourTurnLabel.setVisible(true);
+                playTurnSound();
             }
         }
     }
@@ -953,6 +954,13 @@ public class GameGraphic implements ActionListener {
         MusicPlayer cardSound = new MusicPlayer();
         if(cardSound.loadFile("src/main/resources/cardsound.mp3")){
             cardSound.play();
+        }
+    }
+
+    void playTurnSound() {
+        MusicPlayer turnSound = new MusicPlayer();
+        if (turnSound.loadFile("src/main/resources/turnsound.mp3")) {
+            turnSound.play();
         }
     }
 

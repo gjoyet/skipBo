@@ -32,15 +32,15 @@ public class ProtocolExecutor {
         return this.input;
     }
 
+    public SBListener getSBL() {
+        return this.sbL;
+    }
+
     /**
      * Only for testing purposes.
      */
     public void setInput(String[] input) {
         this.input = input;
-    }
-
-    public SBListener getSBL() {
-        return this.sbL;
     }
 
     /**
@@ -170,29 +170,6 @@ public class ProtocolExecutor {
     }
 
     /**
-     *  Method for command "PLAYR§LeaveGame". Removes target player from game lobby and informs all other players
-     *  in said lobby.
-     */
-    public void playerLeavingGame() throws NoCommandException {
-        if(input.length < 1) throw new NoCommandException();
-        if(input[1].equals("LeaveGame")) {
-            if (sbL.getPlayer().getGame().players.size() == 2) {
-                sbL.player.getGame().players.remove(sbL.player);
-                sbL.getPlayer().getGame().terminateGame();
-            } else {
-                sendAllExceptOne(Protocol.PLAYR + "§LeaveGame§" + sbL.getPlayer().getName(), sbL);
-                boolean isTurn = sbL.getPlayer().getGame().playerLeaving(sbL.getPlayer());
-                sbL.getPlayer().getGame().players.remove(sbL.getPlayer());
-                if(isTurn) {
-                    sbL.player.getGame().endTurnAfterLeaving();
-                }
-            }
-            sbL.getPlayer().changeGame(null);
-            sbL.getPlayer().changeStatus(Status.WAITING);
-        } else throw new NoCommandException(input[0], input[1]);
-    }
-
-    /**
      * Method for command "CHATM". Sends received chat message to all
      * players except the one sending it.
      */
@@ -219,6 +196,34 @@ public class ProtocolExecutor {
             broadcastExceptOne(Protocol.CHATM + "§Broadcast§(BC) " + sbL.player.getName() + ": " + input[2], sbL);
         } else throw new NoCommandException(input[0], input[1]);
 
+    }
+
+    /**
+     * Method for command DISPL. Displays certain elements (players, games, high scores) to client.
+     */
+    public void display() throws NoCommandException {
+        if (input.length < 2) throw new NoCommandException();
+        try {
+            switch (input[1]) {
+                case "players":
+                    sbL.getPW().println(Protocol.PRINT + "§Terminal§Players list: " + sbL.getServer().getWholePlayerList());
+                    break;
+                case "games":
+                    String[] gamesList = sbL.getServer().getGamesList();
+                    if (gamesList.length == 0) {
+                        sbL.getPW().println(Protocol.PRINT + "§Terminal§No games have been started until now.");
+                    } else {
+                        sbL.getPW().println(Protocol.PRINT + "§Terminal§Games list:");
+                        for (String s : gamesList) {
+                            if (s != null) sbL.getPW().println(Protocol.PRINT + "§Terminal§" + s);
+                        }
+                    }
+                    break;
+                default:
+                    throw new NoCommandException(input[0], input[1]);
+            }
+        } finally {
+        }
     }
 
     /**
@@ -266,7 +271,8 @@ public class ProtocolExecutor {
     }
 
     /**
-     * Method for command "NWGME". Starts a new game with the first 4 players found with PlayerStatus 'READY'.
+     * Method for command "NWGME". Number of players n and size of stockpile x are passed as arguments.
+     * Starts a new game with the first n players found with PlayerStatus 'READY'.
      */
     public void newGame() throws NoCommandException {
         if (input.length < 2) throw new NoCommandException();
@@ -394,6 +400,10 @@ public class ProtocolExecutor {
         }
     }
 
+    /**
+     * Sends client information about the cards of its player. Since the client does not store any information about
+     * the game state, this method tells it what cards to display on the GUI.
+     */
     public void check(String option) {
         String cards;
         try {
@@ -419,6 +429,9 @@ public class ProtocolExecutor {
         }
     }
 
+    /**
+     * Method for command "CHEAT". Activates cheat codes while punishing the player for it.
+     */
     public void cheat() throws NoCommandException {
         if(input.length < 2) throw new NoCommandException();
         switch(input[1]) {
@@ -436,34 +449,35 @@ public class ProtocolExecutor {
         }
     }
 
+
     /**
-     * Method for command DISPL. Displays certain elements (players, games,...) to client.
+     *  Method for command "PLAYR§LeaveGame". Removes target player from game lobby and informs all other players
+     *  in said lobby.
      */
-    public void display() throws NoCommandException {
-        if (input.length < 2) throw new NoCommandException();
-        try {
-            switch (input[1]) {
-                case "players":
-                    sbL.getPW().println(Protocol.PRINT + "§Terminal§Players list: " + sbL.getServer().getWholePlayerList());
-                    break;
-                case "games":
-                    String[] gamesList = sbL.getServer().getGamesList();
-                    if (gamesList.length == 0) {
-                        sbL.getPW().println(Protocol.PRINT + "§Terminal§No games have been started until now.");
-                    } else {
-                        sbL.getPW().println(Protocol.PRINT + "§Terminal§Games list:");
-                        for (String s : gamesList) {
-                            if (s != null) sbL.getPW().println(Protocol.PRINT + "§Terminal§" + s);
-                        }
-                    }
-                    break;
-                default:
-                    throw new NoCommandException(input[0], input[1]);
+    public void playerLeavingGame() throws NoCommandException {
+        if(input.length < 1) throw new NoCommandException();
+        if(input[1].equals("LeaveGame")) {
+            if (sbL.getPlayer().getGame().players.size() == 2) {
+                sbL.player.getGame().players.remove(sbL.player);
+                sbL.getPlayer().getGame().terminateGame();
+            } else {
+                sendAllExceptOne(Protocol.PLAYR + "§LeaveGame§" + sbL.getPlayer().getName(), sbL);
+                boolean isTurn = sbL.getPlayer().getGame().playerLeaving(sbL.getPlayer());
+                sbL.getPlayer().getGame().players.remove(sbL.getPlayer());
+                if(isTurn) {
+                    sbL.player.getGame().endTurnAfterLeaving();
+                }
             }
-        } finally {
-        }
+            sbL.getPlayer().changeGame(null);
+            sbL.getPlayer().changeStatus(Status.WAITING);
+        } else throw new NoCommandException(input[0], input[1]);
     }
 
+    /**
+     * Method for command "ENDGM". Ends the game, returns all players to main lobby with status "WAITING" and
+     * writes the new score into the Highscores.txt file.
+     * @param game: the game that is ended.
+     */
     public void gameEnding(Game game) {
         // Ending game
         for (Player p : game.players) {

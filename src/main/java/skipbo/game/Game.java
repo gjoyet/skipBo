@@ -161,6 +161,8 @@ public class Game implements Runnable {
 
     void startFirstTurn(int playersTurn) {
         servLog.debug("Entered first turn.");
+        Player ply = players.get(playersTurn);
+        new ProtocolExecutor().sendAll(Protocol.PRINT + "Terminal§DP Size: " + piles.drawPile.size(), ply.getSBL());
         Player player = players.get(playersTurn);
         player.getSBL().getPW().println(Protocol.PRINT +
                 "§Terminal§It's your first turn! Your first set of hand cards are shown now!");
@@ -175,14 +177,12 @@ public class Game implements Runnable {
     private void startTurn(int playersTurn) {
         int joker =0;
         Player ply = players.get(playersTurn);
-        new ProtocolExecutor().sendAll(Protocol.PRINT + "Terminal§DP Size: " + piles.drawPile.size(),ply.getSBL());
         for(Card card: piles.drawPile){
             if(card.number == 13){
                 joker++;
             }
         }
-        new ProtocolExecutor().sendAll(Protocol.PRINT+"§Terminal§Number of jokers: " + joker, ply.getSBL());
-
+//        new ProtocolExecutor().sendAll(Protocol.PRINT+"§Terminal§Number of jokers: " + joker, ply.getSBL());
         servLog.debug("Entered startTurn: it's " + ply.getName() + "'s turn.");
         checkDrawPile();
         fillHandCards(ply);

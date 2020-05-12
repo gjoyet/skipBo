@@ -907,6 +907,7 @@ public class GameGraphic implements ActionListener {
         //getNumOfStockCardsLabel(name).setForeground(Color.GRAY);
         layeredPane.remove(getNumOfStockCardsLabel(name));
 
+        int indexOfPlayerLeft = -1;
         //remove from oppArray
         JLabel[] newOppArray = new JLabel[oppArray.length-1];
         for (int i = 0, j = 0; i < oppArray.length; i++) {
@@ -914,6 +915,7 @@ public class GameGraphic implements ActionListener {
                 if (!oppArray[i].getText().equals(name)) {
                     newOppArray[j] = oppArray[i];
                 } else {
+                    indexOfPlayerLeft = i;
                     layeredPane.remove(oppArray[i]);
                     //oppArray[i].setForeground(Color.GRAY);
                     j--;
@@ -932,6 +934,10 @@ public class GameGraphic implements ActionListener {
             } else { //it's this players turn
                 yourTurnLabel.setVisible(true);
             }
+        }
+
+        if (indexOfPlayerLeft < playerIndex) {
+            playerIndex--;
         }
         layeredPane.repaint();
         oppArray = newOppArray;

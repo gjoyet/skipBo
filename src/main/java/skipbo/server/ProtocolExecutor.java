@@ -471,8 +471,9 @@ public class ProtocolExecutor {
                 sendAllExceptOne(Protocol.PLAYR + "§LeaveGame§" + sbL.getPlayer().getName(), sbL);
                 boolean[] changeTurn = sbL.getPlayer().getGame().playerLeaving(sbL.getPlayer());
                 sbL.getPlayer().getGame().players.remove(sbL.getPlayer());
+                new ProtocolExecutor().sendAllExceptOne(Protocol.PRINT + "§Terminal§"
+                        + sbL.getPlayer().getName() + " left the game.", sbL);
                 sbL.player.getGame().endTurnAfterLeaving(changeTurn);
-
             }
             sbL.getPlayer().changeGame(null);
             sbL.getPlayer().changeStatus(Status.WAITING);

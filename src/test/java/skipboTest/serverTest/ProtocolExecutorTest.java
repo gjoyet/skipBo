@@ -121,10 +121,10 @@ public class ProtocolExecutorTest {
         ProtocolExecutor pe2 = new ProtocolExecutor(new String[]{"CHNGE", "Nickname", "Marc"}, Main.server.getSblList().get(2));
         ProtocolExecutor pe3 = new ProtocolExecutor(new String[]{"CHNGE", "Nickname", "Guillaume"}, Main.server.getSblList().get(3));
         try {
-           pe0.changeTo();
-           pe1.changeTo();
-           pe2.changeTo();
-           pe3.changeTo();
+           pe0.changeTo(false);
+           pe1.changeTo(false);
+           pe2.changeTo(false);
+           pe3.changeTo(false);
            sleep(1000);
         } catch(NoCommandException nce) {
             System.out.println("Error with testing framework.");
@@ -155,9 +155,9 @@ public class ProtocolExecutorTest {
         ProtocolExecutor pe1 = new ProtocolExecutor(new String[]{"CHNGE", "Status", "WAITING"}, Main.server.getSblList().get(1));
         ProtocolExecutor pe2 = new ProtocolExecutor(new String[]{"CHNGE", "Status", "INGAME"}, Main.server.getSblList().get(2));
         try {
-            pe0.changeTo();
-            pe1.changeTo();
-            pe2.changeTo();
+            pe0.changeTo(false);
+            pe1.changeTo(false);
+            pe2.changeTo(false);
             sleep(200);
         } catch(NoCommandException nce) {
             System.out.println("Error with testing framework.");
@@ -172,7 +172,7 @@ public class ProtocolExecutorTest {
 
         pe0.setInput(new String[]{"CHNGE", "Status", "WAITING"});
         try {
-            pe0.changeTo();
+            pe0.changeTo(false);
             sleep(400);
         } catch(NoCommandException nce) {
             System.out.println("Error with testing framework.");
@@ -188,7 +188,7 @@ public class ProtocolExecutorTest {
      */
     @Test(expected = NoCommandException.class)
     public void testChangeToException1() throws NoCommandException {
-        new ProtocolExecutor(new String[]{"CHNGE", "NotAnOption"}, Main.server.getSblList().get(0)).changeTo();
+        new ProtocolExecutor(new String[]{"CHNGE", "NotAnOption"}, Main.server.getSblList().get(0)).changeTo(false);
     }
 
     /**
@@ -196,7 +196,7 @@ public class ProtocolExecutorTest {
      */
     @Test(expected = NoCommandException.class)
     public void testChangeToException2() throws NoCommandException {
-        new ProtocolExecutor(new String[]{"CHNGE"}, Main.server.getSblList().get(0)).changeTo();
+        new ProtocolExecutor(new String[]{"CHNGE"}, Main.server.getSblList().get(0)).changeTo(false);
     }
 
     /**
@@ -209,7 +209,7 @@ public class ProtocolExecutorTest {
         ProtocolExecutor pe1 = new ProtocolExecutor(new String[]{"NWGME", "New", "2§30"}, Main.server.getSblList().get(1));
         ProtocolExecutor pe2 = new ProtocolExecutor(new String[]{"NWGME", "New", "2§30"}, Main.server.getSblList().get(2));
         try {
-            pe0.changeTo();
+            pe0.changeTo(false);
             sleep(200);
             pe1.newGame();
             sleep(200);
@@ -237,7 +237,7 @@ public class ProtocolExecutorTest {
      */
     @Test(expected = NoCommandException.class)
     public void testNewGameException1() throws NoCommandException {
-        new ProtocolExecutor(new String[]{"NWGME", "NotAnOption"}, Main.server.getSblList().get(0)).changeTo();
+        new ProtocolExecutor(new String[]{"NWGME", "NotAnOption"}, Main.server.getSblList().get(0)).changeTo(false);
     }
 
     /**
@@ -245,7 +245,7 @@ public class ProtocolExecutorTest {
      */
     @Test(expected = NoCommandException.class)
     public void testNewGameException2() throws NoCommandException {
-        new ProtocolExecutor(new String[]{"NWGME"}, Main.server.getSblList().get(0)).changeTo();
+        new ProtocolExecutor(new String[]{"NWGME"}, Main.server.getSblList().get(0)).changeTo(false);
     }
 
     /**
@@ -257,7 +257,7 @@ public class ProtocolExecutorTest {
         ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"CHNGE", "Status", "READY"}, Main.server.getSblList().get(0));
         ProtocolExecutor pe1 = new ProtocolExecutor(new String[]{"NWGME", "New", "2§30"}, Main.server.getSblList().get(1));
         try {
-            pe0.changeTo();
+            pe0.changeTo(false);
             sleep(200);
             pe1.newGame();
             sleep(1500);
@@ -350,7 +350,7 @@ public class ProtocolExecutorTest {
      */
     @Test(expected = NoCommandException.class)
     public void testChatMessageException1() throws NoCommandException {
-        new ProtocolExecutor(new String[]{"CHATM", "NotAnOption"}, Main.server.getSblList().get(0)).changeTo();
+        new ProtocolExecutor(new String[]{"CHATM", "NotAnOption"}, Main.server.getSblList().get(0)).changeTo(false);
     }
 
     /**
@@ -358,7 +358,7 @@ public class ProtocolExecutorTest {
      */
     @Test(expected = NoCommandException.class)
     public void testChatMessageException2() throws NoCommandException {
-        new ProtocolExecutor(new String[]{"CHATM"}, Main.server.getSblList().get(0)).changeTo();
+        new ProtocolExecutor(new String[]{"CHATM"}, Main.server.getSblList().get(0)).changeTo(false);
     }
 
     /**
@@ -369,7 +369,7 @@ public class ProtocolExecutorTest {
         ProtocolExecutor pe0 = new ProtocolExecutor(new String[]{"CHNGE", "Status", "READY"}, Main.server.getSblList().get(0));
         ProtocolExecutor pe1 = new ProtocolExecutor(new String[]{"NWGME", "New", "2§30"}, Main.server.getSblList().get(1));
         try {
-            pe0.changeTo();
+            pe0.changeTo(false);
             sleep(200);
             pe1.newGame();
             sleep(400);

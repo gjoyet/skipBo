@@ -1,1 +1,3 @@
 Skip-Bro Highscores (score = turns to win / stockpile size; lower scores are better)
+
+2020-05-12 15:21; Rohan, Guillaume, Manuela, MrDigBick; WINNER: Guillaume, SCORE: 100.00

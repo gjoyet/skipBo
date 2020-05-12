@@ -117,16 +117,21 @@ public class ProtocolExecutor {
      * Method for command "CHNGE". This command sets a parameter
      * given as option to the value given as argument.
      */
-    public void changeTo() throws NoCommandException {
+    public void changeTo(boolean fromServer) throws NoCommandException {
         String formerName = sbL.player.getName();
         if (input.length < 2) throw new NoCommandException();
+        if (input.length < 3) throw new NoCommandException(input[0], input[1]);
         try {
             if (input[1].equals("Nickname")) {
-                if (sbL.player.getStatus().equals(Status.INGAME)) {
+                String name = input[2];
+                if (!fromServer && sbL.player.getStatus().equals(Status.INGAME)) {
                     sbL.getPW().println("You cannot change your name during a game.");
                     return;
                 }
-                String name = input[2];
+                if (sbL.player.isCheater()) {
+                    sbL.getPW().println("You cannot change your name anymore, you cheating cretin!");
+                    return;
+                }
                 if (name.equals(sbL.player.getName())) {
                     sbL.pw.println(Protocol.PRINT + "§Terminal§Name is already " + name + ".");
                 } else if (!sbL.getServer().serverLobby.nameIsTaken(name) && sbL.getServer().serverLobby.nameIsValid(name)) {
@@ -442,8 +447,8 @@ public class ProtocolExecutor {
                 sendAllExceptOne(Protocol.CHEAT + "§Joker§" + sbL.getPlayer().getName(), sbL);
                 break;
             case "Win":
-                String oldName = sbL.player.getName();
-                new ProtocolExecutor(new String[]{"CHNGE", "Nickname", "CHEATER"}, sbL).changeTo();
+                new ProtocolExecutor(new String[]{"CHNGE", "Nickname", "CHEATER"}, sbL).changeTo(true);
+                sbL.player.cheated();
                 sbL.player.getGame().endGameCheat(sbL.player);
                 break;
             default:

@@ -648,9 +648,10 @@ public class Game implements Runnable {
         new ProtocolExecutor(new String[]{""}, winner.getSBL()).gameEnding(this);
     }
 
+
     /**
      * Ends game after someone used the cheat "Win". The score is set to 100.
-     * @param winner
+     * @param winner The player that wins
      */
     public void endGameCheat(Player winner) {
         servLog.info("Game ending.");
@@ -669,6 +670,7 @@ public class Game implements Runnable {
         }
         new ProtocolExecutor(new String[]{""}, winner.getSBL()).gameEnding(this);
     }
+
 
     /**
      * Method for the cheat code "Joker" - adds 3 joker cards on top of stock.

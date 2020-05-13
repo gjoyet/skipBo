@@ -225,7 +225,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         chatScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         chatScrollPane.setName("Chat");
         tabbedPane.add(chatScrollPane);
-        //contentPane.add(chatScrollPane);
 
         DefaultCaret caret = (DefaultCaret) chat.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
@@ -530,10 +529,9 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         } else if (buttonPressed == manualB) {
             if (Desktop.isDesktopSupported()) {
                 try {
-                    File manual = new File(Objects.requireNonNull(getClass().getClassLoader().getResource("Instruction_manual_v2.pdf")).getPath());
+                    File manual = new File("src/main/resources/Instruction_manual.pdf");
                     Desktop.getDesktop().open(manual);
                 } catch (NullPointerException | IOException npe) {
-                    npe.printStackTrace();
                     clientLog.warn("Cannot open manual PDF");
                     printInfoMessage("Could not open PDF file");
                 }

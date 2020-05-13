@@ -188,10 +188,11 @@ public class Game implements Runnable {
         fillHandCards(ply);
         turnCounter++;
 
-       ply.getSBL().getPW().println(Protocol.PRINT + "§Terminal§It's your turn!");
+//       ply.getSBL().getPW().println(Protocol.PRINT + "§Terminal§It's your turn!");
 
-       new ProtocolExecutor().sendAllExceptOne(Protocol.PRINT + "§Terminal§It's " + ply.getName()
+       /*new ProtocolExecutor().sendAllExceptOne(Protocol.PRINT + "§Terminal§It's " + ply.getName()
                + "'s turn!", ply.getSBL());
+        */
     }
 
     /**

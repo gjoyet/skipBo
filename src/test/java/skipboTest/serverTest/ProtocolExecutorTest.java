@@ -309,11 +309,11 @@ public class ProtocolExecutorTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        assertEquals("CHATM§Broadcast§(BC) Rohan: Broadcast.", Main.clientList.get(0).getServerListener().getInput());
+        assertEquals("CHATM§Broadcast§[BC] Rohan: Broadcast.", Main.clientList.get(0).getServerListener().getInput());
         // Test: ingame player receive broadcast
-        assertEquals("CHATM§Broadcast§(BC) You: Broadcast.", Main.clientList.get(2).getServerListener().getInput());
+        assertEquals("CHATM§Broadcast§[BC] You: Broadcast.", Main.clientList.get(2).getServerListener().getInput());
         // Test: player sending message receives it itself
-        assertEquals("CHATM§Broadcast§(BC) Rohan: Broadcast.", Main.clientList.get(3).getServerListener().getInput());
+        assertEquals("CHATM§Broadcast§[BC] Rohan: Broadcast.", Main.clientList.get(3).getServerListener().getInput());
         // Test: not ingame players receive broadcast
 
         pe2.setInput(new String[]{"CHATM", "Private", "Janni§Private message."});
@@ -325,11 +325,11 @@ public class ProtocolExecutorTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        assertEquals("CHATM§Private§(from Rohan): Private message.", Main.clientList.get(0).getServerListener().getInput());
+        assertEquals("CHATM§Private§[from Rohan]: Private message.", Main.clientList.get(0).getServerListener().getInput());
         // Test: client receives private message
-        assertEquals("CHATM§Private§(to Janni): Private message.", Main.clientList.get(2).getServerListener().getInput());
+        assertEquals("CHATM§Private§[to Janni]: Private message.", Main.clientList.get(2).getServerListener().getInput());
         // Test: player sending message receives it itself
-        assertEquals("CHATM§Broadcast§(BC) Rohan: Broadcast.", Main.clientList.get(3).getServerListener().getInput());
+        assertEquals("CHATM§Broadcast§[BC] Rohan: Broadcast.", Main.clientList.get(3).getServerListener().getInput());
         // Test: other players don't get message (still has old input in 'input')
 
         pe2.setInput(new String[]{"CHATM", "Private", "Rohan§Private message."});

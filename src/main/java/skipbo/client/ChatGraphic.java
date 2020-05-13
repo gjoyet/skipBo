@@ -693,7 +693,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
     void playMusic() {
         backgroundMusic = new MusicPlayer();
-        if(backgroundMusic.loadFile(Objects.requireNonNull(getClass().getClassLoader().getResource("background.mp3")).getPath())){
+        if(backgroundMusic.loadFile("src/main/resources/background.mp3")) {
             backgroundMusic.play();
             backgroundMusic.loop();
             clientLog.info(backgroundMusic.isPlaying());
@@ -702,7 +702,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
     void playButtonSound() {
         MusicPlayer buttonSound = new MusicPlayer();
-        if (buttonSound.loadFile(Objects.requireNonNull(getClass().getClassLoader().getResource("buttonclick2.mp3")).getPath())) {
+        if (buttonSound.loadFile("src/main/resources/buttonclick2.mp3")) {
             buttonSound.play();
         }
     }

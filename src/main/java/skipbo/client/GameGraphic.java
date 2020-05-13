@@ -963,14 +963,14 @@ public class GameGraphic implements ActionListener {
     void playCardSound(){
         // For card playing sounds
         MusicPlayer cardSound = new MusicPlayer();
-        if(cardSound.loadFile(Objects.requireNonNull(getClass().getClassLoader().getResource("cardsound.mp3")).getPath())){
+        if(cardSound.loadFile("src/main/resources/cardsound.mp3")){
             cardSound.play();
         }
     }
 
     void playTurnSound() {
         MusicPlayer turnSound = new MusicPlayer();
-        if (turnSound.loadFile(Objects.requireNonNull(getClass().getClassLoader().getResource("turnsound.mp3")).getPath())) {
+        if (turnSound.loadFile("src/main/resources/turnsound.mp3")) {
             turnSound.play();
         }
     }

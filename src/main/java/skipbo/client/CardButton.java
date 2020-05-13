@@ -48,13 +48,6 @@ public class CardButton extends JButton {
         }
     }
 
-    String getTopColour() {
-        if (colors.size() > 0) {
-            return colors.get(colors.size() - 1);
-        } else {
-            return null;
-        }
-    }
 
     String removeColour() {
         return colors.remove(0);

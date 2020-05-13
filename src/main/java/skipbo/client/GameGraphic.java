@@ -696,8 +696,6 @@ public class GameGraphic implements ActionListener {
      */
 
     void updateHandCards(String[] colours, int[] numbers) {
-/*      clientLog.debug("(Graphic) length of colours = " + colours.length);
-        clientLog.debug("(Graphic) length of numbers = " + numbers.length);*/
         for (int i = 0; i < colours.length; i++) {
             hand[i].setIcon(cardIcons.getIcon(colours[i], numbers[i], CardIcons.MEDIUM));
             hand[i].resetCards();
@@ -901,11 +899,9 @@ public class GameGraphic implements ActionListener {
                 //cardButton.setEnabled(false);
             }
         }
-        //disable stock related things
-        //getEnemyButton(name).setEnabled(false);
+
         layeredPane.remove(getEnemyButton(name));
-        //getNumOfStockCardsLabel(name).setForeground(Color.GRAY);
-        layeredPane.remove(getNumOfStockCardsLabel(name));
+        layeredPane.remove(Objects.requireNonNull(getNumOfStockCardsLabel(name)));
 
         int indexOfPlayerLeft = -1;
         //remove from oppArray
@@ -961,7 +957,6 @@ public class GameGraphic implements ActionListener {
      * Method to play the card playing sound byte.
      */
     void playCardSound(){
-        // For card playing sounds
         MusicPlayer cardSound = new MusicPlayer();
         if(cardSound.loadFile("src/main/resources/cardsound.mp3")){
             cardSound.play();

@@ -202,6 +202,12 @@ class SBClientListener {
         return DISPL + "§" + option;
     }
 
+    /**
+     * Builds network protocol string for the "cheat" command and makes sure that the client can only cheat once
+     * @param command Split input from client
+     * @return The netwrok protocol string for the "cheat" command
+     * @throws NotACommandException If the input doesn't match any command or the client cheated already
+     */
     String getCheatString(String[] command) throws NotACommandException {
         if (chatGraphic.getGameGraphic() == null) {
             throw new NotACommandException("You can only use cheats in a game");

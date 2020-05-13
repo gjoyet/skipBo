@@ -139,6 +139,10 @@ public class SBServerListener implements Runnable {
         }
     }
 
+    /**
+     * Handels the NWGME command
+     * @param command Input from server split into command, option and argument
+     */
     void newGame(String[] command) {
         if (command[1].equals("Names")) {
             chatGraphic.setGameGraphic(false);
@@ -151,6 +155,10 @@ public class SBServerListener implements Runnable {
         }
     }
 
+    /**
+     * Handels the ENDGM command
+     * @param command Input from server split into command, option and argument
+     */
     private void endGame(String[] command) {
         if (command.length < 3) { //No winner
             chatGraphic.endGame(null, false, null);
@@ -160,7 +168,10 @@ public class SBServerListener implements Runnable {
         }
     }
 
-
+    /**
+     * Handels the CHECK command
+     * @param command Input from server split into command, option and argument
+     */
     private void check(String[] command) {
         clientLog.debug("got into check method");
         if (command[1].equalsIgnoreCase("HandCards")) {
@@ -175,6 +186,10 @@ public class SBServerListener implements Runnable {
         }
     }
 
+    /**
+     * Handels the PLAYR command
+     * @param command Input from server split into command, option and argument
+     */
     private void player(String[] command) {
         if (command[1].equalsIgnoreCase("List")) {
             String[] n = command[2].split(", ");

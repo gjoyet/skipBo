@@ -280,9 +280,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
      */
     void printCommandList() {
         String infoCreators = "This game was developed by Manuela, Janni, Guillaume and Rohan for cs-108 in 2020!";
-        /*"\n***********\nCommands:\n/change name [name]\n/change status ready|waiting\n" +
-                "/msg [name] [message]\n/broadcast\n/new game\n/play [PlaceFrom] [n] [PlaceTo] [n]\n" +
-                "/list games|players\n/help\n/quit\n***********";*/
         printInfoMessage(infoCreators);
     }
 
@@ -341,7 +338,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
     /**
      * Ends the game. Removes the game graphic from the frame and displays the winners name. Sends player back to main lobby.
-     *
      * @param name Name of the winner of the game.
      */
     void endGame(String name, boolean isTutorial, String score) {
@@ -504,7 +500,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             } else {
                 unmuteIsBlocked = true;
                 backgroundMusic.mute();
-                //playMusic();
                 pause.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("not_muted.png"))));
                 pause.setName("Mute");
                 Timer timer = new Timer();
@@ -539,8 +534,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
         } else if (buttonPressed == infoB) {
             printCommandList();
-//            appendToChat("[Info]",Color.green);
-//            appendToChat("This was game was made by Group 15 - Manuela, Janni, Guillaume and Rohan for cs-108!", Color.black);
+
 
         } else if (buttonPressed == gamesB) {
 
@@ -567,7 +561,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             leaveB.setEnabled(false);
             changeNameB.setEnabled(true);
             gameGraphic = null;
-            //dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 
         } else if (buttonPressed == changeNameB) {
             String name = (String) JOptionPane.showInputDialog(contentPane, "Enter your new name:",
@@ -608,14 +601,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         } catch (BadLocationException e) {
             clientLog.warn("Error with appending text to chat");
         }
-        /*SwingUtilities.invokeLater(() -> {
-            try {
-                JScrollBar bar = chatScrollPane.getVerticalScrollBar();
-                bar.setValue(bar.getMaximum());
-            } catch (Exception e) {
-                clientLog.warn("Exception while trying to adjust the scrollbar");
-            }
-        });*/
 
     }
 
@@ -624,7 +609,6 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
      * Format:  "2020-04-26 17:47\nGuillaume1, Guillaume\nWINNER: Guillaume, SCORE: 8.67\n\n"
      * @param scores String array with the scores
      */
-
     void setHighScore(String[] scores) {
 
         String scoreString = "Skip-Bro High scores Top 10\n\n";
@@ -689,6 +673,9 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
     }
 
+    /**
+     * Starts playing the background music and loops it.
+     */
     void playMusic() {
         backgroundMusic = new MusicPlayer();
         if(backgroundMusic.loadFile("src/main/resources/background.mp3")) {

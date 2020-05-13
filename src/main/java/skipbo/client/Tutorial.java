@@ -79,6 +79,7 @@ public class Tutorial extends GameGraphic implements ActionListener {
      */
     private void moveOne() {
         try {
+            playTurnSound();
             upArrow.setBounds(400, 495, 50, 50);
             layeredPane.add(upArrow);
             instruction.setBounds(440, 500, 300, 100);
@@ -228,6 +229,7 @@ public class Tutorial extends GameGraphic implements ActionListener {
                     hand[4].setIcon(cardIcons.getIcon("S", 13, CardIcons.MEDIUM));
 
                     yourTurnLabel.setText("It's your turn!");
+                    playTurnSound();
                     yourTurnLabel.setFont(new Font(DEFAULTFONT.getName(), Font.BOLD, 35));
                     downArrow.setBounds(919, 575, 50, 50);
                     layeredPane.add(downArrow);

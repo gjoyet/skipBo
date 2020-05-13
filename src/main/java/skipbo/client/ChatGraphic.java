@@ -530,7 +530,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         } else if (buttonPressed == manualB) {
             if (Desktop.isDesktopSupported()) {
                 try {
-                    File manual = new File(Objects.requireNonNull(getClass().getClassLoader().getResource("Instruction_manual_v2.pdf")).getPath());
+                    File manual = new File(Objects.requireNonNull(getClass().getClassLoader().getResource("/Instruction_manual_.pdf")).getPath());
                     Desktop.getDesktop().open(manual);
                 } catch (NullPointerException | IOException npe) {
                     npe.printStackTrace();

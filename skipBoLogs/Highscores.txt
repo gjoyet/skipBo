@@ -8,3 +8,4 @@ Skip-Bro Highscores (score = turns to win / stockpile size; lower scores are bet
 2020-05-12 16:19; CHEATER, ISagNitStern; WINNER: CHEATER, SCORE: 100.00
 2020-05-12 21:59; Manuela, CHEATER, Rohan, Janni; WINNER: CHEATER, SCORE: 100.00
 2020-05-12 22:00; CHEATER1, CHEATER, Rohan, DMX; WINNER: CHEATER1, SCORE: 100.00
+2020-05-13 15:28; CHEATER, Manuela; WINNER: CHEATER, SCORE: 100.00

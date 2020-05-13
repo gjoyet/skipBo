@@ -196,7 +196,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
         pause = new JButton();
         pause.setName("Mute");
-        pause.setIcon(new ImageIcon("src/main/resources/not_muted.png"));
+        pause.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("not_muted.png"))));
         pause.setBounds(X_MENU_B_R2+96, Y_MENU_B+ 4*Y_DISTANCE_MENU_B+8, 24, 24);
         contentPane.add(pause);
         pause.addActionListener(this);
@@ -204,7 +204,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         soundB = new JButton();
         soundB.setName("on");
         soundB.setBounds(X_MENU_B_R2+68, Y_MENU_B+ 4*Y_DISTANCE_MENU_B+8, 24, 24); //x:72
-        soundB.setIcon(new ImageIcon("src/main/resources/fx_on.png"));
+        soundB.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("fx_on.png"))));
         contentPane.add(soundB);
         soundB.addActionListener(this);
 
@@ -500,13 +500,13 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
             }
             if (pause.getName().equals("Mute")) {
                 backgroundMusic.mute();
-                pause.setIcon(new ImageIcon("src/main/resources/muted.png"));
+                pause.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("muted.png"))));
                 pause.setName("Unmute");
             } else {
                 unmuteIsBlocked = true;
                 backgroundMusic.mute();
                 //playMusic();
-                pause.setIcon(new ImageIcon("src/main/resources/not_muted.png"));
+                pause.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("not_muted.png"))));
                 pause.setName("Mute");
                 Timer timer = new Timer();
                 TimerTask task = new TimerTask() {
@@ -523,18 +523,19 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
                 gameGraphic.setSoundMuted(soundMuted);
             }
             if (soundMuted) {
-                soundB.setIcon(new ImageIcon("src/main/resources/fx_off.png"));
+                soundB.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("fx_off.png"))));
             } else {
-                soundB.setIcon(new ImageIcon("src/main/resources/fx_on.png"));
+                soundB.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("fx_on.png"))));
             }
         } else if (buttonPressed == manualB) {
             if (Desktop.isDesktopSupported()) {
                 try {
-                    File manual = new File("src/main/resources/Instruction_manual_v2.pdf");
+                    File manual = new File(Objects.requireNonNull(getClass().getClassLoader().getResource("Instruction_manual_v2.pdf")).getPath());
                     Desktop.getDesktop().open(manual);
                 } catch (NullPointerException | IOException npe) {
                     npe.printStackTrace();
                     clientLog.warn("Cannot open manual PDF");
+                    printInfoMessage("Could not open PDF file");
                 }
             }
 
@@ -631,7 +632,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
         String scoreString = "Skip-Bro High scores Top 10\n\n";
         String winnerString = " WINNER: ";
         for (String score : scores) {
-            StringBuffer buffer = new StringBuffer(score);
+            StringBuilder buffer = new StringBuilder(score);
             buffer.insert(16, '\n');
             int i = buffer.indexOf(winnerString)-1;
             buffer.insert(i, '\n');
@@ -692,7 +693,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
     void playMusic() {
         backgroundMusic = new MusicPlayer();
-        if(backgroundMusic.loadFile("src/main/resources/background.mp3")){
+        if(backgroundMusic.loadFile(Objects.requireNonNull(getClass().getClassLoader().getResource("background.mp3")).getPath())){
             backgroundMusic.play();
             backgroundMusic.loop();
             clientLog.info(backgroundMusic.isPlaying());
@@ -701,7 +702,7 @@ public class ChatGraphic extends JFrame implements KeyListener, ActionListener {
 
     void playButtonSound() {
         MusicPlayer buttonSound = new MusicPlayer();
-        if (buttonSound.loadFile("src/main/resources/buttonclick2.mp3")) {
+        if (buttonSound.loadFile(Objects.requireNonNull(getClass().getClassLoader().getResource("buttonclick2.mp3")).getPath())) {
             buttonSound.play();
         }
     }
